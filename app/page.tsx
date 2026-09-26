@@ -512,188 +512,171 @@ export default function HomePage() {
         />
 
         {/* ========================================================================= */}
-        {/* 5. Features Section — Asymmetric Editorial Bento Grid Layout             */}
+        {/* ========================================================================= */}
+        {/* 5. Why Mindkit: Features Bento & AI Bullet Enhancer Live Demo            */}
         {/* ========================================================================= */}
         <section
           id="features"
-          className="scroll-mt-20 sm:scroll-mt-24 bg-slate-50/70 text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative"
+          className="scroll-mt-20 sm:scroll-mt-24 bg-slate-50/70 text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative border-b border-slate-200/80"
         >
           <DotPattern size={28} dotOpacity={0.035} dotColor="#0F172A" />
 
-          <div className="max-w-container mx-auto px-4 sm:px-6 relative z-10">
+          <div className="max-w-container mx-auto px-4 sm:px-6 relative z-10 space-y-12">
+            {/* Section Header */}
             <Reveal variant="fade-up">
-              <div className="text-center max-w-3xl mx-auto mb-section-mb-mob md:mb-12 lg:mb-section-mb">
-                <span className="font-body text-eyebrow uppercase tracking-[1.2px] text-blue-800 bg-white border border-blue-200/80 px-3 py-1 rounded-full inline-block mb-3 font-semibold shadow-2xs">
-                  Built to Real Standards
+              <div className="text-center max-w-3xl mx-auto">
+                <span className="font-body text-eyebrow uppercase tracking-[1.2px] text-blue-800 bg-white border border-blue-200/80 px-3.5 py-1 rounded-full inline-block mb-3 font-semibold shadow-2xs">
+                  Why Mindkit
                 </span>
                 <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900">
-                  Not a template wrapper. Engineered for real careers.
+                  Engineered for real careers. Backed by client-side intelligence.
                 </h2>
                 <p className="font-body text-subtitle text-slate-600 mt-3">
-                  Mindkit Resume Builder combines native vector PDF compilation, client-side
-                  data isolation, and strict applicant tracking system standards into one
-                  seamless tool.
+                  Native vector PDF compilation, client-side data isolation, strict ATS compliance, and instant AI bullet point polishing—completely private on your device.
                 </p>
               </div>
             </Reveal>
 
-            {/* Bento Grid: Row 1 (Asymmetric 7 / 5 split) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 text-left mb-6">
-              {/* Large Anchor Feature: Vector PDF Engine (7 Cols) */}
-              <div className="lg:col-span-7">
-                <Reveal variant="fade-up" delay={100} className="h-full">
-                  <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between h-full">
-                    <div className="space-y-4">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
-                        <Cpu className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <span className="text-xs font-headings font-bold text-blue-600 tracking-tight">
-                          Core Architecture
-                        </span>
-                        <h3 className="font-headings text-xl sm:text-2xl font-bold text-slate-900 mt-1">
-                          In-Browser Vector PDF Compilation Engine
-                        </h3>
-                      </div>
-                      <p className="font-body text-body text-slate-600 leading-relaxed">
-                        Unlike standard web tools that take low-res HTML screenshots,
-                        Mindkit compiles true vector PDF documents directly
-                        inside your browser. Text glyphs, rules, and margins stay
-                        pin-sharp at any zoom level on standard A4 paper.
-                      </p>
+            {/* Part A: 4 Core Feature Bento Blocks */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+              {/* Block 1: Vector PDF Engine */}
+              <Reveal variant="fade-up" delay={100} className="h-full">
+                <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:shadow-md transition-all flex flex-col justify-between h-full">
+                  <div className="space-y-3.5">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
+                      <Cpu className="h-5 w-5" />
                     </div>
-
-                    {/* Technical Architecture Pills */}
-                    <div className="pt-6 mt-6 border-t border-slate-100 grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs font-semibold text-slate-700">
-                      <div className="bg-slate-50 border border-slate-200/80 rounded-lg p-2">
-                        <span className="block text-blue-600 font-headings text-sm font-bold tracking-tight">
-                          0 ms
-                        </span>
-                        Server Wait
-                      </div>
-                      <div className="bg-slate-50 border border-slate-200/80 rounded-lg p-2">
-                        <span className="block text-blue-600 font-headings text-sm font-bold tracking-tight">
-                          300 DPI
-                        </span>
-                        Vector Resolution
-                      </div>
-                      <div className="bg-slate-50 border border-slate-200/80 rounded-lg p-2">
-                        <span className="block text-blue-600 font-headings text-sm font-bold tracking-tight">
-                          A4 Standard
-                        </span>
-                        Print Sizing
-                      </div>
-                      <div className="bg-slate-50 border border-slate-200/80 rounded-lg p-2">
-                        <span className="block text-blue-600 font-headings text-sm font-bold tracking-tight">
-                          Embedded
-                        </span>
-                        Web Fonts
-                      </div>
-                    </div>
-                  </div>
-                </Reveal>
-              </div>
-
-              {/* Secondary Anchor Feature: Client-Side Privacy (5 Cols) */}
-              <div className="lg:col-span-5">
-                <Reveal variant="fade-up" delay={200} className="h-full">
-                  <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between h-full">
-                    <div className="space-y-4">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
-                        <ShieldCheck className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <span className="text-xs font-headings font-bold text-blue-600 tracking-tight">
-                          Zero Cloud Footprint
-                        </span>
-                        <h3 className="font-headings text-xl sm:text-2xl font-bold text-slate-900 mt-1">
-                          100% Privacy by Default
-                        </h3>
-                      </div>
-                      <p className="font-body text-body text-slate-600 leading-relaxed">
-                        Your personal contact info, career achievements, and salary history
-                        live solely in your browser's private local storage. We have no
-                        servers storing your resume, zero analytics tracking your identity,
-                        and no marketing emails.
-                      </p>
-                    </div>
-
-                    <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                      <span className="inline-flex items-center gap-1.5 text-blue-700 font-semibold">
-                        <CheckCircle2 className="h-4 w-4" />
-                        No Cloud Storage Required
+                    <div>
+                      <span className="text-[11px] font-headings font-bold text-blue-600 uppercase tracking-wider">
+                        Core Architecture
                       </span>
-                      <span className="font-body text-[11px] font-medium text-slate-500">Local Sandbox</span>
+                      <h3 className="font-headings text-xl font-bold text-slate-900 mt-0.5">
+                        In-Browser Vector PDF Compilation Engine
+                      </h3>
+                    </div>
+                    <p className="font-body text-sm text-slate-600 leading-relaxed">
+                      Compiles true vector PDF documents directly inside your browser memory. Text glyphs, rules, and margins stay pin-sharp at any zoom level on standard A4 paper.
+                    </p>
+                  </div>
+
+                  <div className="pt-5 mt-5 border-t border-slate-100 grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs font-semibold text-slate-700">
+                    <div className="bg-slate-50 border border-slate-200/80 rounded-lg p-2">
+                      <span className="block text-blue-600 font-headings text-sm font-bold">0 ms</span>
+                      Server Wait
+                    </div>
+                    <div className="bg-slate-50 border border-slate-200/80 rounded-lg p-2">
+                      <span className="block text-blue-600 font-headings text-sm font-bold">300 DPI</span>
+                      Resolution
+                    </div>
+                    <div className="bg-slate-50 border border-slate-200/80 rounded-lg p-2">
+                      <span className="block text-blue-600 font-headings text-sm font-bold">A4</span>
+                      Print Standard
+                    </div>
+                    <div className="bg-slate-50 border border-slate-200/80 rounded-lg p-2">
+                      <span className="block text-blue-600 font-headings text-sm font-bold">Embedded</span>
+                      Web Fonts
                     </div>
                   </div>
-                </Reveal>
-              </div>
+                </div>
+              </Reveal>
+
+              {/* Block 2: 100% Privacy by Default */}
+              <Reveal variant="fade-up" delay={150} className="h-full">
+                <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:shadow-md transition-all flex flex-col justify-between h-full">
+                  <div className="space-y-3.5">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
+                      <ShieldCheck className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <span className="text-[11px] font-headings font-bold text-blue-600 uppercase tracking-wider">
+                        Client-Side Isolation
+                      </span>
+                      <h3 className="font-headings text-xl font-bold text-slate-900 mt-0.5">
+                        100% Privacy by Default
+                      </h3>
+                    </div>
+                    <p className="font-body text-sm text-slate-600 leading-relaxed">
+                      0 Bytes Uploaded. Your personal contact info, achievements, and drafts stay exclusively inside your browser memory and private local storage. No tracking, no marketing emails, and zero external databases.
+                    </p>
+                  </div>
+
+                  <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                    <span className="inline-flex items-center gap-1.5 text-blue-700 font-semibold bg-blue-50/80 border border-blue-200/80 px-2.5 py-1 rounded-md">
+                      <CheckCircle2 className="h-3.5 w-3.5" />
+                      0 Bytes Uploaded
+                    </span>
+                    <span className="font-body text-[11px] font-medium text-slate-500">Local Sandbox Architecture</span>
+                  </div>
+                </div>
+              </Reveal>
+
+              {/* Block 3: PDF & DOCX Multi-Format */}
+              <Reveal variant="fade-up" delay={200} className="h-full">
+                <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:shadow-md transition-all flex flex-col justify-between h-full">
+                  <div className="space-y-3.5">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
+                      <FileUp className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <span className="text-[11px] font-headings font-bold text-blue-600 uppercase tracking-wider">
+                        Document Interoperability
+                      </span>
+                      <h3 className="font-headings text-xl font-bold text-slate-900 mt-0.5">
+                        PDF & DOCX Export & Import
+                      </h3>
+                    </div>
+                    <p className="font-body text-sm text-slate-600 leading-relaxed">
+                      Import existing resumes directly from PDF or Word (.docx). Export vector-clean PDFs or editable Word documents anytime with zero formatting distortion.
+                    </p>
+                  </div>
+
+                  <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                    <span className="inline-flex items-center gap-1.5 text-blue-700 font-semibold bg-blue-50/80 border border-blue-200/80 px-2.5 py-1 rounded-md">
+                      <CheckCircle2 className="h-3.5 w-3.5" />
+                      Bi-Directional DOCX & PDF
+                    </span>
+                    <span className="font-body text-[11px] font-medium text-slate-500">Lossless Formatting</span>
+                  </div>
+                </div>
+              </Reveal>
+
+              {/* Block 4: Custom Sections & ATS Verification */}
+              <Reveal variant="fade-up" delay={250} className="h-full">
+                <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:shadow-md transition-all flex flex-col justify-between h-full">
+                  <div className="space-y-3.5">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
+                      <Layers className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <span className="text-[11px] font-headings font-bold text-blue-600 uppercase tracking-wider">
+                        Applicant Tracking
+                      </span>
+                      <h3 className="font-headings text-xl font-bold text-slate-900 mt-0.5">
+                        Custom Sections & ATS Verification
+                      </h3>
+                    </div>
+                    <p className="font-body text-sm text-slate-600 leading-relaxed">
+                      Every template uses standardized semantic heading tags and linear reading order tested against Workday, Greenhouse, and Taleo. Add certifications, publications, or custom sections freely.
+                    </p>
+                  </div>
+
+                  <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                    <span className="inline-flex items-center gap-1.5 text-blue-700 font-semibold bg-blue-50/80 border border-blue-200/80 px-2.5 py-1 rounded-md">
+                      <CheckCircle2 className="h-3.5 w-3.5" />
+                      100% Parser Safe
+                    </span>
+                    <span className="font-body text-[11px] font-medium text-slate-500">Custom Category Builder</span>
+                  </div>
+                </div>
+              </Reveal>
             </div>
 
-            {/* Bento Grid: Row 2 (3 Balanced Supporting Pillars) */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-              <Reveal variant="fade-up" delay={100}>
-                <div className="rounded-xl border border-slate-200/90 bg-white p-6 shadow-sm hover:shadow-md transition-all space-y-3 h-full">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 border border-blue-100 text-blue-600">
-                    <FileUp className="h-5 w-5" />
-                  </div>
-                  <h4 className="font-headings text-h4 text-slate-900 font-bold">
-                    PDF & DOCX Multi-Format
-                  </h4>
-                  <p className="font-body text-small text-slate-600 leading-relaxed">
-                    Import existing resumes directly from PDF or Word (.docx). Export
-                    vector-clean PDFs or editable Word documents anytime with zero
-                    formatting loss.
-                  </p>
-                </div>
-              </Reveal>
-
-              <Reveal variant="fade-up" delay={200}>
-                <div className="rounded-xl border border-slate-200/90 bg-white p-6 shadow-sm hover:shadow-md transition-all space-y-3 h-full">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 border border-blue-100 text-blue-600">
-                    <CheckCircle2 className="h-5 w-5" />
-                  </div>
-                  <h4 className="font-headings text-h4 text-slate-900 font-bold">
-                    ATS-Parser Verification
-                  </h4>
-                  <p className="font-body text-small text-slate-600 leading-relaxed">
-                    Every template is crafted with standardized semantic tags, linear DOM
-                    reading flow, and standard date ranges tested against Workday,
-                    Greenhouse, and Taleo algorithms.
-                  </p>
-                </div>
-              </Reveal>
-
-              <Reveal variant="fade-up" delay={300}>
-                <div className="rounded-xl border border-slate-200/90 bg-white p-6 shadow-sm hover:shadow-md transition-all space-y-3 h-full">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 border border-blue-100 text-blue-600">
-                    <Layers className="h-5 w-5" />
-                  </div>
-                  <h4 className="font-headings text-h4 text-slate-900 font-bold">
-                    Zero Paywall Guarantee
-                  </h4>
-                  <p className="font-body text-small text-slate-600 leading-relaxed">
-                    Every template, color accent, typography pairing, and export format
-                    is unrestricted. We will never ask for a credit card or demand a
-                    subscription fee.
-                  </p>
-                </div>
+            {/* Part B: Live AI Bullet Point Enhancer Demo */}
+            <div className="pt-8 border-t border-slate-200/80">
+              <Reveal variant="fade-up">
+                <AiAssistantShowcase />
               </Reveal>
             </div>
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* 6. AI Assistant Section — Pure Blue Modern Technical Identity             */}
-        {/* ========================================================================= */}
-        <section className="relative bg-gradient-to-b from-blue-50/35 via-slate-50/25 to-white py-section-py-mob md:py-section-py-tab lg:py-section-py border-b border-slate-200/80 overflow-hidden">
-          <Glow color="blue" size="lg" className="-top-32 -right-32 opacity-50" />
-          <Glow color="blue" size="md" className="bottom-0 -left-20 opacity-40" />
-
-          <div className="max-w-container mx-auto px-4 sm:px-6 relative z-10">
-            <Reveal variant="fade-up">
-              <AiAssistantShowcase />
-            </Reveal>
           </div>
         </section>
 
