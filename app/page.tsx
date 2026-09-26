@@ -8,6 +8,7 @@ import { HeroToolSearch } from "@/components/landing/HeroToolSearch";
 import { RotatingWord } from "@/components/landing/RotatingWord";
 import { ToolsMegaSection } from "@/components/landing/ToolsMegaSection";
 import { LandingTemplatesSection } from "@/components/landing/LandingTemplatesSection";
+import { LandingFaq, RESUME_FAQS, TOOLS_FAQS } from "@/components/landing/LandingFaq";
 import { AiAssistantShowcase } from "@/components/landing/AiAssistantShowcase";
 import { AtsAnalyzerPreview } from "@/components/landing/AtsAnalyzerPreview";
 import { AnimatedBannerBackground } from "@/components/landing/AnimatedBannerBackground";
@@ -793,7 +794,7 @@ export default function HomePage() {
                   Frequently Asked Questions
                 </span>
                 <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 [&>span]:text-blue-600">
-                  Everything you need to know about <span>Mindkit Resume Builder</span>
+                  Everything you need to know about <span>Mindkit</span>
                 </h2>
                 <p className="font-body text-body text-slate-600 leading-relaxed">
                   Clear, transparent answers. No hidden terms, no bait-and-switch billing,
@@ -802,65 +803,8 @@ export default function HomePage() {
               </div>
             </Reveal>
 
-            {/* FAQ Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-              {[
-                {
-                  num: "01",
-                  q: "Is Mindkit Resume Builder truly 100% free with no hidden paywalls or watermarks?",
-                  a: "Yes, unconditionally. Unlike services that let you craft a resume only to demand a credit card on the final download step, Mindkit is free forever. All 20 templates, all styling tools, and every vector PDF download are 100% unrestricted.",
-                },
-                {
-                  num: "02",
-                  q: "Are these resume templates optimized and tested for Applicant Tracking Systems (ATS)?",
-                  a: "Yes. Every template is strictly formatted with semantic heading tags, standard date formats, standard section keys, and linear text hierarchies tested against enterprise ATS parsers including Workday, Greenhouse, Taleo, iCIMS, and Lever.",
-                },
-                {
-                  num: "03",
-                  q: "Do I need to sign up, create an account, or enter a credit card?",
-                  a: "No sign-up and no credit card required. You can start creating your resume right now without entering an email address or password. Jump directly into the builder and start editing immediately.",
-                },
-                {
-                  num: "04",
-                  q: "How does Mindkit protect my personal privacy and resume details?",
-                  a: "Mindkit is built on a 100% client-side privacy architecture. Your resume data, contact info, and work history live exclusively in your browser's private local storage. We do not transmit or store your resume on external servers, and we never sell user data.",
-                },
-                {
-                  num: "05",
-                  q: "Can I download my resume as a high-resolution vector PDF?",
-                  a: "Yes. Mindkit utilizes an in-browser vector PDF compilation engine that produces crystal-clear, print-ready documents with selectable text and embedded fonts on standard A4 dimensions. You can also print directly from your browser.",
-                },
-                {
-                  num: "06",
-                  q: "Will my resume data be preserved if I close my browser tab?",
-                  a: "Yes. As you type, changes are automatically saved to your browser's local memory. When you return on the same computer and browser, your draft will be waiting for you.",
-                },
-                {
-                  num: "07",
-                  q: "How does Mindkit compare to other resume builders?",
-                  a: "Design-first, drag-and-drop graphic builders often produce multi-layered layouts that ATS parsers struggle to read. Meanwhile, many subscription-based builders require paid upgrades or apply watermarks at download. Mindkit focuses on clean, parser-friendly code structure, high-resolution vector PDF export, and a commitment to keeping every feature and template 100% free with zero paywalls.",
-                },
-                {
-                  num: "08",
-                  q: "Can I customize colors, fonts, and add custom sections?",
-                  a: "Yes! Choose from curated color accents, professional typography pairings (Inter, Poppins, Lora, Playfair, JetBrains Mono), and add custom sections such as Certifications, Languages, Awards, Projects, or Publications.",
-                },
-              ].map((faq, idx) => (
-                <Reveal key={faq.num} variant="fade-up" delay={idx * 50}>
-                  <div className="rounded-xl border border-slate-200/90 bg-white p-6 shadow-sm hover:shadow-md hover:border-slate-300 transition-all space-y-2.5 h-full">
-                    <h3 className="font-headings text-base sm:text-lg font-bold text-slate-900 flex items-start gap-2.5">
-                      <span className="text-blue-600 font-headings text-sm shrink-0 mt-0.5 font-bold">
-                        {faq.num}
-                      </span>
-                      {faq.q}
-                    </h3>
-                    <p className="font-body text-small text-slate-600 leading-relaxed pl-6">
-                      {faq.a}
-                    </p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
+            {/* Interactive Tabbed FAQ Component */}
+            <LandingFaq />
           </div>
         </section>
 
@@ -1170,78 +1114,22 @@ export default function HomePage() {
               {
                 "@type": "FAQPage",
                 "mainEntity": [
-                  {
+                  ...RESUME_FAQS.map((faq) => ({
                     "@type": "Question",
-                    "name": "Is Mindkit Resume Builder truly 100% free with no hidden paywalls or watermarks?",
+                    "name": faq.q,
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text":
-                        "Yes, unconditionally. Unlike services that let you craft a resume only to demand a credit card on the final download step, Mindkit is free forever. All 20 templates, all styling tools, and every vector PDF download are 100% unrestricted.",
+                      "text": faq.a,
                     },
-                  },
-                  {
+                  })),
+                  ...TOOLS_FAQS.map((faq) => ({
                     "@type": "Question",
-                    "name": "Are these resume templates optimized and tested for Applicant Tracking Systems (ATS)?",
+                    "name": faq.q,
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text":
-                        "Yes. Every template is strictly formatted with semantic heading tags, standard date formats, standard section keys, and linear text hierarchies tested against enterprise ATS parsers including Workday, Greenhouse, Taleo, iCIMS, and Lever.",
+                      "text": faq.a,
                     },
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "Do I need to sign up, create an account, or enter a credit card?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text":
-                        "No sign-up and no credit card required. You can start creating your resume right now without entering an email address or password. Jump directly into the builder and start editing immediately.",
-                    },
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "How does Mindkit protect my personal privacy and resume details?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text":
-                        "Mindkit is built on a 100% client-side privacy architecture. Your resume data, contact info, and work history live exclusively in your browser's private local storage. We do not transmit or store your resume on external servers, and we never sell user data.",
-                    },
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "Can I download my resume as a high-resolution vector PDF?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text":
-                        "Yes. Mindkit utilizes an in-browser vector PDF compilation engine that produces crystal-clear, print-ready documents with selectable text and embedded fonts on standard A4 dimensions. You can also print directly from your browser.",
-                    },
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "Will my resume data be preserved if I close my browser tab?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text":
-                        "Yes. As you type, changes are automatically saved to your browser's local memory. When you return on the same computer and browser, your draft will be waiting for you.",
-                    },
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "How does Mindkit compare to other resume builders?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text":
-                        "Design-first, drag-and-drop graphic builders often produce multi-layered layouts that ATS parsers struggle to read. Meanwhile, many subscription-based builders require paid upgrades or apply watermarks at download. Mindkit focuses on clean, parser-friendly code structure, high-resolution vector PDF export, and a commitment to keeping every feature and template 100% free with zero paywalls.",
-                    },
-                  },
-                  {
-                    "@type": "Question",
-                    "name": "Can I customize colors, fonts, and add custom sections?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text":
-                        "Yes! Choose from curated color accents, professional typography pairings (Inter, Poppins, Lora, Playfair, JetBrains Mono), and add custom sections such as Certifications, Languages, Awards, Projects, or Publications.",
-                    },
-                  },
+                  })),
                 ],
               },
             ],
