@@ -35,10 +35,6 @@ import {
   Layers,
   HardDrive,
   FileUp,
-  FileText,
-  Image as ImageIcon,
-  Calculator,
-  KeyRound,
 } from "lucide-react";
 
 export default function HomePage() {
@@ -809,175 +805,6 @@ export default function HomePage() {
         </section>
 
         {/* ========================================================================= */}
-        {/* 9.5 Tools Showcase Bento Grid — 111+ Live In-Browser Utilities          */}
-        {/* ========================================================================= */}
-        <section
-          id="tools-showcase"
-          className="py-section-py-mob md:py-section-py-tab lg:py-section-py bg-slate-50 border-b border-slate-200/80 relative overflow-hidden"
-        >
-          <div className="max-w-container mx-auto px-4 sm:px-6 space-y-12 relative z-10">
-            {/* Header */}
-            <Reveal variant="fade-up">
-              <div className="text-center space-y-4 max-w-3xl mx-auto">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-100/80 border border-blue-200 px-3.5 py-1 font-body text-xs uppercase tracking-[1.5px] text-blue-800 font-bold">
-                  <Sparkles className="h-3.5 w-3.5 text-blue-600" />
-                  Phase 2 Live • 111 In-Browser Tools
-                </span>
-                <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 [&>span]:text-blue-600">
-                  Beyond Resumes: <span>111+ Free Privacy-First</span> Utilities
-                </h2>
-                <p className="font-body text-body text-slate-600 leading-relaxed">
-                  Mindkit provides an entire ecosystem of PDF editors, media converters, cryptographic tools,
-                  and technical calculators. All running 100% locally in your browser sandbox with zero network uploads.
-                </p>
-              </div>
-            </Reveal>
-
-            {/* Bento Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {/* Card 1: PDF & Documents */}
-              <Reveal variant="fade-up" delay={50}>
-                <Link
-                  href="/tools/document-pdf"
-                  className="group flex flex-col justify-between p-6 rounded-2xl bg-white border border-slate-200/90 hover:border-slate-300 hover:shadow-lg transition-all h-full"
-                >
-                  <div className="space-y-4">
-                    <div className="h-12 w-12 rounded-xl bg-red-50 border border-red-100 flex items-center justify-center text-red-600 group-hover:scale-110 transition-transform">
-                      <FileText className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <span className="text-[10px] font-bold text-red-700 bg-red-50 border border-red-200 px-2 py-0.5 rounded-md">
-                        20+ Live Utilities
-                      </span>
-                      <h3 className="font-headings font-bold text-slate-900 text-lg mt-2 group-hover:text-slate-700 transition-colors">
-                        PDF & Documents
-                      </h3>
-                      <p className="font-body text-xs text-slate-600 mt-2 leading-relaxed">
-                        Merge, split, compress, watermark, rotate, and reorder PDFs. Convert Word and Markdown, sign documents with zero server uploads.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-red-600">
-                    <span>Explore PDF Suite</span>
-                    <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </Link>
-              </Reveal>
-
-              {/* Card 2: Image & Media */}
-              <Reveal variant="fade-up" delay={100}>
-                <Link
-                  href="/tools/image"
-                  className="group flex flex-col justify-between p-6 rounded-2xl bg-white border border-slate-200/90 hover:border-slate-300 hover:shadow-lg transition-all h-full"
-                >
-                  <div className="space-y-4">
-                    <div className="h-12 w-12 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center text-orange-600 group-hover:scale-110 transition-transform">
-                      <ImageIcon className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <span className="text-[10px] font-bold text-orange-700 bg-orange-50 border border-orange-200 px-2 py-0.5 rounded-md">
-                        25+ Live Utilities
-                      </span>
-                      <h3 className="font-headings font-bold text-slate-900 text-lg mt-2 group-hover:text-slate-700 transition-colors">
-                        Image & Media
-                      </h3>
-                      <p className="font-body text-xs text-slate-600 mt-2 leading-relaxed">
-                        Convert WebP, AVIF, PNG, JPG, and SVG. Remove EXIF metadata, extract color palettes, crop, resize, and compress images client-side.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-orange-600">
-                    <span>Explore Image Tools</span>
-                    <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </Link>
-              </Reveal>
-
-              {/* Card 3: Security & Cryptography */}
-              <Reveal variant="fade-up" delay={150}>
-                <Link
-                  href="/tools/security"
-                  className="group flex flex-col justify-between p-6 rounded-2xl bg-white border border-slate-200/90 hover:border-slate-300 hover:shadow-lg transition-all h-full"
-                >
-                  <div className="space-y-4">
-                    <div className="h-12 w-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-700 group-hover:scale-110 transition-transform">
-                      <KeyRound className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <span className="text-[10px] font-bold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-md">
-                        15+ Live Utilities
-                      </span>
-                      <h3 className="font-headings font-bold text-slate-900 text-lg mt-2 group-hover:text-slate-700 transition-colors">
-                        Security & Privacy
-                      </h3>
-                      <p className="font-body text-xs text-slate-600 mt-2 leading-relaxed">
-                        Generate SHA-256, SHA-512, MD5 hashes, HMAC signatures, test password entropy, inspect JWTs, and generate secure UUIDs offline.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-blue-700">
-                    <span>Explore Security Suite</span>
-                    <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </Link>
-              </Reveal>
-
-              {/* Card 4: Calculators & Developer */}
-              <Reveal variant="fade-up" delay={200}>
-                <Link
-                  href="/tools/calculators"
-                  className="group flex flex-col justify-between p-6 rounded-2xl bg-white border border-slate-200/90 hover:border-slate-300 hover:shadow-lg transition-all h-full"
-                >
-                  <div className="space-y-4">
-                    <div className="h-12 w-12 rounded-xl bg-violet-50 border border-violet-100 flex items-center justify-center text-violet-700 group-hover:scale-110 transition-transform">
-                      <Calculator className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <span className="text-[10px] font-bold text-violet-700 bg-violet-50 border border-violet-200 px-2 py-0.5 rounded-md">
-                        30+ Live Utilities
-                      </span>
-                      <h3 className="font-headings font-bold text-slate-900 text-lg mt-2 group-hover:text-slate-700 transition-colors">
-                        Calculators & Dev
-                      </h3>
-                      <p className="font-body text-xs text-slate-600 mt-2 leading-relaxed">
-                        JSON formatter, regex tester, CSS minifiers, mortgage, loan, BMI, and calorie calculators. Instant, responsive, and completely private.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-violet-700">
-                    <span>Explore Calculators</span>
-                    <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </Link>
-              </Reveal>
-            </div>
-
-            {/* Bottom Directory Banner */}
-            <Reveal variant="fade-up" delay={250}>
-              <div className="rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
-                <div className="space-y-1.5 text-center sm:text-left">
-                  <h4 className="font-headings text-lg font-bold text-slate-900">
-                    Need a specific tool? Browse our searchable directory.
-                  </h4>
-                  <p className="font-body text-xs sm:text-sm text-slate-600">
-                    Filter across 111 utilities by category, search by keywords, and run everything instantly in your browser.
-                  </p>
-                </div>
-                <Link href="/tools" className="shrink-0">
-                  <Button
-                    size="lg"
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-xl shadow-xs gap-2"
-                  >
-                    <span>Browse All 111 Tools</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
         {/* 10. Bottom CTA Banner — High-Impact Layered Finish                       */}
         {/* ========================================================================= */}
         <section className="bg-gradient-to-b from-blue-50/50 via-slate-50 to-white text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py border-b border-slate-200/80 text-center relative overflow-hidden">
@@ -1012,7 +839,7 @@ export default function HomePage() {
                     size="lg"
                     className="bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 px-8 py-3.5 rounded-lg min-h-[48px] text-base font-bold shadow-md hover:shadow-xl transition-all"
                   >
-                    Launch Free Resume Builder <ArrowRight className="h-4 w-4 ml-2" />
+                    Build Your Resume Free <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>
                 </Link>
                 <Link href="/tools">
@@ -1022,7 +849,7 @@ export default function HomePage() {
                     className="bg-white text-slate-800 border-slate-200 hover:bg-slate-50 px-7 py-3.5 rounded-lg min-h-[48px] text-base font-semibold shadow-2xs gap-2"
                   >
                     <Sparkles className="h-4 w-4 text-blue-600" />
-                    Browse 111+ Free Tools
+                    Explore 111+ Tools
                   </Button>
                 </Link>
                 <a href="#templates">
