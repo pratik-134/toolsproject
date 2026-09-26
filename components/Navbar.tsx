@@ -114,23 +114,32 @@ export const Navbar: React.FC = () => {
         </span>
       </div>
 
-      {/* Desktop Navigation Links (>= 768px) */}
       <nav
         aria-label="Main Navigation"
-        className="hidden md:flex items-center gap-3.5 lg:gap-6 xl:gap-7 font-body text-xs lg:text-small font-medium text-slate-600 shrink-0"
+        className="hidden md:flex items-center gap-3 lg:gap-5 xl:gap-6 font-body text-xs lg:text-small font-medium text-slate-600 shrink-0"
       >
         <Link
           href="/tools"
-          className="hover:text-blue-600 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group font-semibold text-blue-600"
+          className="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-md bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200/80 text-emerald-800 hover:text-emerald-900 font-semibold transition-all whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 shadow-2xs group"
         >
-          All Tools
-          <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transition-all duration-300" />
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+          <span>All Tools</span>
+          <span className="font-mono text-[10px] font-bold px-1.5 py-0.2 rounded bg-white text-emerald-700 border border-emerald-200/90 shadow-2xs">
+            111
+          </span>
         </Link>
         <Link
           href="/#templates"
           className="hover:text-blue-600 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group"
         >
-          Resume Templates
+          Templates
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+        </Link>
+        <Link
+          href="/#comparison"
+          className="hover:text-blue-600 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group hidden lg:inline-block"
+        >
+          Comparison
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full" />
         </Link>
         <Link
@@ -203,14 +212,14 @@ export const Navbar: React.FC = () => {
         <Link
           href="/tools"
           onClick={handleLinkClick}
-          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-bold text-blue-600 bg-blue-50/70 hover:bg-blue-100/70 transition-colors"
+          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-bold text-emerald-800 bg-emerald-50/80 hover:bg-emerald-100/70 border border-emerald-200/80 transition-colors"
         >
-          <span className="flex items-center gap-2.5">
-            <Sparkles className="h-4 w-4 text-blue-600" />
-            <span>All Tools Hub</span>
+          <span className="flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+            <span>All Tools (In-Browser Suite)</span>
           </span>
-          <span className="font-mono text-[10px] font-bold text-blue-700 bg-white border border-blue-200 px-2 py-0.5 rounded-md">
-            111 Live Tools
+          <span className="font-mono text-[10px] font-bold text-emerald-700 bg-white border border-emerald-200 px-2 py-0.5 rounded-md shadow-2xs">
+            111 Live
           </span>
         </Link>
 
