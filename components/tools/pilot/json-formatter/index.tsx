@@ -1,0 +1,200 @@
+"use client";
+
+import React, { useState, useMemo } from "react";
+import { formatJson, JsonFormatOptions } from "./logic";
+import { Copy, Check, Download, Trash2, FileJson, Sparkles, AlertCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const SAMPLE_JSON = `{
+  "platform": "Mindkit",
+  "privacy": "100% Client-Side",
+  "toolsCount": 175,
+  "features": [
+    "No server file upload",
+    "Zero registration required",
+    "Completely free forever"
+  ],
+  "author": {
+    "name": "Mindkit Engineering",
+    "verified": true
+  }
+}`;
+
+export default function JsonFormatterTool() {
+  const [input, setInput] = useState<string>(SAMPLE_JSON);
+  const [indent, setIndent] = useState<JsonFormatOptions["indent"]>(2);
+  const [sortKeys, setSortKeys] = useState<boolean>(false);
+  const [copied, setCopied] = useState<boolean>(false);
+
+  const result = useMemo(() => {
+    return formatJson(input, { indent, sortKeys });
+  }, [input, indent, sortKeys]);
+
+  const handleCopy = async () => {
+    if (!result.output) return;
+    await navigator.clipboard.writeText(result.output);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleDownload = () => {
+    if (!result.output) return;
+    const blob = new Blob([result.output], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "formatted.json";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  return (
+    <div className="space-y-4">
+      {/* Control Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-50 border border-slate-200/80 rounded-xl p-3">
+        <div className="flex items-center gap-2">
+          <label className="text-xs font-semibold text-slate-700">Indent:</label>
+          <select
+            value={String(indent)}
+            onChange={(e) => {
+              const v = e.target.value;
+              if (v === "minify" || v === "tab") setIndent(v);
+              else setIndent(Number(v));
+            }}
+            className="text-xs rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="2">2 Spaces</option>
+            <option value="4">4 Spaces</option>
+            <option value="tab">Tab</option>
+            <option value="minify">Minify (Compact)</option>
+          </select>
+
+          <label className="inline-flex items-center gap-1.5 ml-3 cursor-pointer text-xs font-medium text-slate-700 select-none">
+            <input
+              type="checkbox"
+              checked={sortKeys}
+              onChange={(e) => setSortKeys(e.target.checked)}
+              className="rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+            />
+            <span>Sort Keys</span>
+          </label>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => setInput(SAMPLE_JSON)}
+            className="text-xs h-8 gap-1.5"
+          >
+            <Sparkles className="h-3.5 w-3.5 text-blue-600" />
+            <span>Sample</span>
+          </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => setInput("")}
+            className="text-xs h-8 gap-1.5 text-slate-600 hover:text-red-600"
+          >
+            <Trash2 className="h-3.5 w-3.5" />
+            <span>Clear</span>
+          </Button>
+        </div>
+      </div>
+
+      {/* Editor & Preview Panels */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* Input Panel */}
+        <div className="flex flex-col rounded-xl border border-slate-200 bg-white overflow-hidden shadow-xs">
+          <div className="flex items-center justify-between px-3.5 py-2.5 border-b border-slate-100 bg-slate-50/60">
+            <span className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+              <FileJson className="h-4 w-4 text-blue-600" />
+              Input JSON
+            </span>
+            <span className="text-[11px] text-slate-400 font-mono">
+              {input.length} chars
+            </span>
+          </div>
+          <textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Paste your raw JSON here..."
+            rows={16}
+            spellCheck={false}
+            className="w-full p-4 font-mono text-xs sm:text-sm text-slate-800 bg-transparent resize-y focus:outline-none min-h-[320px]"
+          />
+        </div>
+
+        {/* Output Panel */}
+        <div className="flex flex-col rounded-xl border border-slate-200 bg-white overflow-hidden shadow-xs">
+          <div className="flex items-center justify-between px-3.5 py-2 border-b border-slate-100 bg-slate-50/60">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                Formatted Output
+              </span>
+              {result.success && result.stats && (
+                <span className="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md font-semibold">
+                  Valid JSON ({result.stats.keysCount} keys, depth {result.stats.depth})
+                </span>
+              )}
+            </div>
+
+            <div className="flex items-center gap-1.5">
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={handleCopy}
+                disabled={!result.success || !result.output}
+                className="text-xs h-7 px-2.5 gap-1"
+              >
+                {copied ? (
+                  <>
+                    <Check className="h-3 w-3 text-emerald-600" />
+                    <span>Copied</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-3 w-3" />
+                    <span>Copy</span>
+                  </>
+                )}
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={handleDownload}
+                disabled={!result.success || !result.output}
+                className="text-xs h-7 px-2.5 gap-1"
+              >
+                <Download className="h-3 w-3" />
+                <span>Save</span>
+              </Button>
+            </div>
+          </div>
+
+          {result.success ? (
+            <textarea
+              readOnly
+              value={result.output}
+              placeholder="Formatted output will appear here..."
+              rows={16}
+              spellCheck={false}
+              className="w-full p-4 font-mono text-xs sm:text-sm text-slate-800 bg-slate-50/30 resize-y focus:outline-none min-h-[320px]"
+            />
+          ) : (
+            <div className="p-4 bg-red-50/60 text-red-700 border-l-4 border-red-500 font-mono text-xs space-y-2 min-h-[320px]">
+              <div className="font-bold flex items-center gap-1.5">
+                <AlertCircle className="h-4 w-4 text-red-600 shrink-0" strokeWidth={1.75} aria-hidden="true" />
+                <span>Syntax Error in JSON:</span>
+              </div>
+              <p className="whitespace-pre-wrap">{result.error}</p>
+              <p className="text-[11px] text-red-500 font-sans mt-3">
+                Check for missing quotes, trailing commas, or unmatched brackets in the left input.
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

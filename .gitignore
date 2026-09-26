@@ -1,0 +1,49 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Testing & Cache
+/coverage
+tsconfig.tsbuildinfo
+.eslintcache
+
+# Next.js build output
+/.next/
+/out/
+/build
+/dist
+
+# Temporary & Edge profiles
+.edge-temp-profile
+.vercel
+
+# Environment variables & secrets
+.env
+.env*.local
+!.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Database & SQLite / Prisma
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# OS metadata & Editor
+.DS_Store
+*.pem
+Thumbs.db
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea

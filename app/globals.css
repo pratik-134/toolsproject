@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Brand Color Palette */
+    --brand-primary: #2563EB;
+    --brand-hover: #1D4ED8;
+    --brand-dark: #1E3A8A;
+
+    --brand-mint: #93C5FD;
+    --brand-surface: #EFF6FF;
+    --brand-border: #BFDBFE;
+
+    --surface-white: #FFFFFF;
+    --canvas-slate: #F8FAFC;
+    --border-slate: #E2E8F0;
+    --dark-slate: #0F172A;
+
+    --background: 0 0% 100%; /* Pure white (#FFFFFF) */
+    --foreground: 222.2 47.4% 11.2%; /* Dark slate (#0F172A) */
+
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 222.2 47.4% 11.2%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+
+    /* Brand Primary Blue #2563EB */
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Dark Slate #0F172A */
+    --secondary: 222.2 47.4% 11.2%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Canvas Slate #F8FAFC & Text Muted #64748B */
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    /* Brand Surface Tint #EFF6FF */
+    --accent: 214.3 100% 96.9%;
+    --accent-foreground: 221.2 83.2% 53.3%;
+
+    /* Status Alert #DC2626 */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Border Slate #E2E8F0 */
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+
+    --radius: 8px;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-surface-white text-text-primary font-body antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Background Grids with Crisp Clean Accents */
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+}
+
+.bg-grid-blueprint {
+  background-size: 48px 48px;
+  background-image: 
+    linear-gradient(to right, rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+}
+
+.bg-grid-dark {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+/* A4 Sheet Paper Elevation */
+.a4-paper-shadow {
+  box-shadow: 
+    0 1px 3px 0 rgba(0, 0, 0, 0.05),
+    0 8px 24px -4px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
+/* ========================================================================= */
+/* Animated Banner Keyframes (Hardware Accelerated translate3d)              */
+/* ========================================================================= */
+@keyframes orb-float-1 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(45px, 25px, 0) scale(1.1);
+  }
+  66% {
+    transform: translate3d(-30px, 45px, 0) scale(0.95);
+  }
+}
+
+@keyframes orb-float-2 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(-40px, -35px, 0) scale(1.15);
+  }
+  66% {
+    transform: translate3d(35px, 20px, 0) scale(0.9);
+  }
+}
+
+@keyframes orb-float-3 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate3d(25px, -25px, 0) scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+@keyframes beam-sweep {
+  0% {
+    transform: translateY(-100%) rotate(45deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(300%) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes particle-float-1 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(8px, -18px, 0) rotate(90deg);
+  }
+}
+
+@keyframes particle-float-2 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-12px, 14px, 0) scale(1.25);
+  }
+}
+
+@keyframes particle-float-3 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(14px, 12px, 0);
+  }
+}
+
+.animate-orb-1 {
+  animation: orb-float-1 18s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-orb-2 {
+  animation: orb-float-2 22s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-orb-3 {
+  animation: orb-float-3 15s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-beam-sweep {
+  animation: beam-sweep 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform, opacity;
+}
+
+.animate-particle-1 {
+  animation: particle-float-1 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-particle-2 {
+  animation: particle-float-2 11s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-particle-3 {
+  animation: particle-float-3 9s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Reduced Motion Override for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2563EB;
+}
+
+/* Print Optimization */
+@media print {
+  body {
+    background: transparent !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print\:shadow-none {
+    box-shadow: none !important;
+  }
+  .print\:p-0 {
+    padding: 0 !important;
+  }
+  .print\:min-h-0 {
+    min-height: 0 !important;
+  }
+}

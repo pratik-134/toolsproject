@@ -1,0 +1,187 @@
+"use client";
+
+import React, { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useResumeStore } from "@/lib/store/use-resume-store";
+import { useResumeIndexStore } from "@/lib/store/use-resume-index-store";
+import { NewResumeModal } from "@/components/dashboard/NewResumeModal";
+import {
+  ChevronDown,
+  Check,
+  Plus,
+  LayoutGrid,
+  FileText,
+  Edit3,
+} from "lucide-react";
+
+export const ResumeSwitcherDropdown: React.FC = () => {
+  const router = useRouter();
+  const { resumeData, updateTitle, activeResumeId, loadResume } = useResumeStore();
+  const { resumes, loadIndex } = useResumeIndexStore();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [titleInput, setTitleInput] = useState(resumeData.title);
+  const [isNewModalOpen, setIsNewModalOpen] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setTitleInput(resumeData.title);
+  }, [resumeData.title]);
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen]);
+
+  const handleSaveTitle = () => {
+    const trimmed = titleInput.trim();
+    if (trimmed && trimmed !== resumeData.title) {
+      updateTitle(trimmed);
+    } else {
+      setTitleInput(resumeData.title);
+    }
+    setIsEditingTitle(false);
+  };
+
+  const handleSwitch = (targetId: string) => {
+    if (targetId === activeResumeId) {
+      setIsOpen(false);
+      return;
+    }
+    const success = loadResume(targetId);
+    if (success) {
+      router.push(`/editor?id=${targetId}`);
+    }
+    setIsOpen(false);
+  };
+
+  return (
+    <>
+      <div ref={containerRef} className="relative flex items-center min-w-0">
+        {isEditingTitle ? (
+          <input
+            type="text"
+            value={titleInput}
+            onChange={(e) => setTitleInput(e.target.value)}
+            onBlur={handleSaveTitle}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleSaveTitle();
+              if (e.key === "Escape") {
+                setTitleInput(resumeData.title);
+                setIsEditingTitle(false);
+              }
+            }}
+            autoFocus
+            className="rounded-md border border-blue-300 bg-white px-2 py-1 text-xs sm:text-sm font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 max-w-[85px] xs:max-w-[130px] sm:max-w-[200px]"
+          />
+        ) : (
+          <div className="flex items-center gap-1 rounded-md hover:bg-slate-100 p-0.5 transition-colors">
+            <button
+              type="button"
+              onClick={() => setIsEditingTitle(true)}
+              className="text-xs sm:text-sm font-bold text-slate-900 truncate max-w-[85px] xs:max-w-[130px] sm:max-w-[170px] md:max-w-[220px] px-1.5 py-1 text-left"
+              title="Click to rename"
+            >
+              {resumeData.title || "Untitled Resume"}
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-1 text-slate-400 hover:text-slate-700 rounded-md transition-colors"
+              title="Switch resume"
+              aria-label="Switch resume"
+            >
+              <ChevronDown className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        )}
+
+        {/* Dropdown Menu */}
+        {isOpen && (
+          <div className="absolute left-0 top-11 z-50 w-64 rounded-lg border border-slate-200 bg-white p-1.5 shadow-xl animate-fade-in text-xs">
+            <div className="px-2.5 py-2 border-b border-slate-100 flex items-center justify-between">
+              <span className="font-bold text-[11px] uppercase tracking-wider text-slate-400">
+                Switch Resume ({resumes.length})
+              </span>
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  setIsEditingTitle(true);
+                }}
+                className="text-[11px] font-semibold text-blue-600 hover:underline flex items-center gap-1"
+              >
+                <Edit3 className="h-3 w-3" /> Rename
+              </button>
+            </div>
+
+            {/* List of resumes */}
+            <div className="max-h-56 overflow-y-auto py-1 space-y-0.5">
+              {resumes.map((r) => {
+                const isActive = r.id === activeResumeId;
+                return (
+                  <button
+                    key={r.id}
+                    onClick={() => handleSwitch(r.id)}
+                    className={`w-full flex items-center justify-between px-2.5 py-2 rounded-md text-left transition-colors ${
+                      isActive
+                        ? "bg-blue-50 text-blue-900 font-bold"
+                        : "text-slate-700 hover:bg-slate-100 font-medium"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 min-w-0">
+                      <FileText className={`h-3.5 w-3.5 shrink-0 ${isActive ? "text-blue-600" : "text-slate-400"}`} />
+                      <span className="truncate">{r.title}</span>
+                    </div>
+                    {isActive && <Check className="h-3.5 w-3.5 text-blue-600 shrink-0 ml-1" />}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Bottom Actions */}
+            <div className="border-t border-slate-100 pt-1 mt-1 space-y-0.5">
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  setIsNewModalOpen(true);
+                }}
+                className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-md text-slate-700 hover:bg-slate-100 font-semibold"
+              >
+                <Plus className="h-3.5 w-3.5 text-blue-600" />
+                <span>Create New Resume</span>
+              </button>
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  router.push("/dashboard");
+                }}
+                className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-md text-slate-700 hover:bg-slate-100 font-semibold"
+              >
+                <LayoutGrid className="h-3.5 w-3.5 text-slate-500" />
+                <span>Go to My Resumes Dashboard</span>
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <NewResumeModal
+        isOpen={isNewModalOpen}
+        onClose={() => {
+          setIsNewModalOpen(false);
+          loadIndex();
+        }}
+      />
+    </>
+  );
+};
