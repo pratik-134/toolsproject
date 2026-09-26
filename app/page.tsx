@@ -6,7 +6,7 @@ import { MindkitLogo } from "@/components/BrandLogo";
 import { LandingHeroActions } from "@/components/landing/LandingHeroActions";
 import { HeroToolSearch } from "@/components/landing/HeroToolSearch";
 import { RotatingWord } from "@/components/landing/RotatingWord";
-import { TemplateSliderSection } from "@/components/landing/TemplateSliderSection";
+import { ToolsMegaSection } from "@/components/landing/ToolsMegaSection";
 import { LandingTemplatesSection } from "@/components/landing/LandingTemplatesSection";
 import { AiAssistantShowcase } from "@/components/landing/AiAssistantShowcase";
 import { AtsAnalyzerPreview } from "@/components/landing/AtsAnalyzerPreview";
@@ -268,11 +268,51 @@ export default function HomePage() {
         </section>
 
         {/* ========================================================================= */}
-        {/* 2. Automatically Playing Template Slider Section                          */}
+        {/* 2. In-Browser Tools Mega-Section (111+ Client-Side Tools)                 */}
         {/* ========================================================================= */}
-        <TemplateSliderSection />
+        <ToolsMegaSection />
 
-        {/* Diagonal Geometric Transition: Template Slider -> Comparison */}
+        {/* ========================================================================= */}
+        {/* 3. Template Showcase Section — Crisp White Canvas with Category Filters   */}
+        {/* ========================================================================= */}
+        <section
+          id="templates"
+          className="scroll-mt-20 sm:scroll-mt-24 bg-white py-section-py-mob md:py-section-py-tab lg:py-section-py relative"
+        >
+          <GridPattern size={56} strokeOpacity={0.02} strokeColor="#0F172A" />
+
+          <div className="max-w-container mx-auto px-4 sm:px-6 relative z-10">
+            <Reveal variant="fade-up">
+              <div className="flex flex-col md:flex-row md:items-end justify-between mb-section-mb-mob md:mb-12 lg:mb-section-mb gap-6">
+                <div>
+                  <span className="font-body text-eyebrow uppercase tracking-[1.2px] text-blue-800 bg-blue-50 border border-blue-200/80 px-3 py-1 rounded-full inline-block mb-2 font-semibold">
+                    20 Free Production Templates
+                  </span>
+                  <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900">
+                    Designed for recruiters, tested against ATS parsers.
+                  </h2>
+                  <p className="font-body text-subtitle text-slate-600 mt-2 max-w-2xl">
+                    Choose from 20 distinct design styles. Switch templates at any point
+                    without losing a single word of your data.
+                  </p>
+                </div>
+
+                <Link href="/editor">
+                  <Button className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-lg px-6 py-3 font-bold gap-2 shadow-xs hover:shadow-md shrink-0 transition-all">
+                    Open All in Editor <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            </Reveal>
+
+            {/* Interactive Template Filter Pills & Live Grid */}
+            <Reveal variant="fade-up" delay={100}>
+              <LandingTemplatesSection />
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Diagonal Geometric Transition: Templates -> Comparison */}
         <DiagonalDivider
           direction="left-to-right"
           fillColor="text-slate-50/80"
@@ -281,7 +321,7 @@ export default function HomePage() {
         />
 
         {/* ========================================================================= */}
-        {/* 3. Comparison Section — Slate Tinted Backdrop with Elevated Column        */}
+        {/* 4. Comparison Section — Slate Tinted Backdrop with Elevated Column        */}
         {/* ========================================================================= */}
         <section
           id="comparison"
@@ -455,7 +495,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Diagonal Geometric Transition: Comparison -> Templates */}
+        {/* Diagonal Geometric Transition: Comparison -> Features */}
         <DiagonalDivider
           direction="right-to-left"
           fillColor="text-white"
@@ -464,60 +504,11 @@ export default function HomePage() {
         />
 
         {/* ========================================================================= */}
-        {/* 4. Template Showcase Section — Crisp White Canvas with Category Filters   */}
-        {/* ========================================================================= */}
-        <section
-          id="templates"
-          className="scroll-mt-20 sm:scroll-mt-24 bg-white py-section-py-mob md:py-section-py-tab lg:py-section-py relative"
-        >
-          <GridPattern size={56} strokeOpacity={0.02} strokeColor="#0F172A" />
-
-          <div className="max-w-container mx-auto px-4 sm:px-6 relative z-10">
-            <Reveal variant="fade-up">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-section-mb-mob md:mb-12 lg:mb-section-mb gap-6">
-                <div>
-                  <span className="font-body text-eyebrow uppercase tracking-[1.2px] text-blue-800 bg-blue-50 border border-blue-200/80 px-3 py-1 rounded-full inline-block mb-2 font-semibold">
-                    20 Free Production Templates
-                  </span>
-                  <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900">
-                    Designed for recruiters, tested against ATS parsers.
-                  </h2>
-                  <p className="font-body text-subtitle text-slate-600 mt-2 max-w-2xl">
-                    Choose from 20 distinct design styles. Switch templates at any point
-                    without losing a single word of your data.
-                  </p>
-                </div>
-
-                <Link href="/editor">
-                  <Button className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-lg px-6 py-3 font-bold gap-2 shadow-xs hover:shadow-md shrink-0 transition-all">
-                    Open All in Editor <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
-              </div>
-            </Reveal>
-
-            {/* Interactive Template Filter Pills & Live Grid */}
-            <Reveal variant="fade-up" delay={100}>
-              <LandingTemplatesSection />
-            </Reveal>
-          </div>
-        </section>
-
-        {/* Diagonal Geometric Transition: Templates -> Features */}
-        <DiagonalDivider
-          direction="left-to-right"
-          fillColor="text-slate-50/70"
-          accentTint="slate"
-          heightClass="h-6 sm:h-10 lg:h-12"
-        />
-
-        {/* ========================================================================= */}
-        {/* ========================================================================= */}
         {/* 5. Why Mindkit: Features Bento & AI Bullet Enhancer Live Demo            */}
         {/* ========================================================================= */}
         <section
           id="features"
-          className="scroll-mt-20 sm:scroll-mt-24 bg-slate-50/70 text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative border-b border-slate-200/80"
+          className="scroll-mt-20 sm:scroll-mt-24 bg-white text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative border-b border-slate-200/80"
         >
           <DotPattern size={28} dotOpacity={0.035} dotColor="#0F172A" />
 
