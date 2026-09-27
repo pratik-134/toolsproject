@@ -15,6 +15,7 @@ import {
   CheckCircle2,
   Rocket,
 } from "lucide-react";
+import { TOOLS } from "@/lib/registry/tools";
 
 const ANNOUNCEMENT_STORAGE_KEY = "ct_announcement_dismissed_v1";
 
@@ -120,13 +121,10 @@ export const Navbar: React.FC = () => {
       >
         <Link
           href="/tools"
-          className="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-md bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200/80 text-emerald-800 hover:text-emerald-900 font-semibold transition-all whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 shadow-2xs group"
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 text-white text-xs font-semibold hover:bg-blue-600 transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 shadow-2xs group"
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-          <span>All Tools</span>
-          <span className="font-mono text-[10px] font-bold px-1.5 py-0.2 rounded bg-white text-emerald-700 border border-emerald-200/90 shadow-2xs">
-            111
-          </span>
+          <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse shrink-0" />
+          <span>Explore {TOOLS.length} Tools</span>
         </Link>
         <Link
           href="/#templates"
@@ -212,14 +210,14 @@ export const Navbar: React.FC = () => {
         <Link
           href="/tools"
           onClick={handleLinkClick}
-          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-bold text-emerald-800 bg-emerald-50/80 hover:bg-emerald-100/70 border border-emerald-200/80 transition-colors"
+          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-bold text-white bg-slate-900 hover:bg-blue-600 transition-colors"
         >
           <span className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-            <span>All Tools (In-Browser Suite)</span>
+            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse shrink-0" />
+            <span>Explore Tools (In-Browser Suite)</span>
           </span>
-          <span className="font-mono text-[10px] font-bold text-emerald-700 bg-white border border-emerald-200 px-2 py-0.5 rounded-md shadow-2xs">
-            111 Live
+          <span className="font-mono text-[10px] font-bold text-cyan-300 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded-md shadow-2xs">
+            {TOOLS.length} Live
           </span>
         </Link>
 
