@@ -1,6 +1,7 @@
 import React from "react";
 import { XCircle } from "lucide-react";
 import { getCategoryTheme } from "@/lib/category-theme";
+import { useToolContext } from "@/lib/tool-context";
 
 export interface ProgressBarProps {
   /** 0–100 */
@@ -15,12 +16,15 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   progress,
   label = "Processing locally...",
   onCancel,
-  categoryId,
+  categoryId: categoryIdProp,
 }) => {
   const clamped = Math.min(100, Math.max(0, progress));
-  const theme = categoryId ? getCategoryTheme(categoryId) : null;
+  // Resolve: explicit prop wins; fallback to ToolContext
+  const { categoryId: ctxCategoryId } = useToolContext();
+  const resolvedId = categoryIdProp ?? ctxCategoryId ?? null;
+  const theme = resolvedId ? getCategoryTheme(resolvedId) : null;
 
-  // Inline style for progress fill so we hit the exact spec hex
+  // Solid accent fill — no glow
   const fillColor = theme ? theme.primary : "#1D4ED8";
 
   return (

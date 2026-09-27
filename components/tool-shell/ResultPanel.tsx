@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Download, Copy, Check, RotateCcw } from "lucide-react";
 import { getCategoryTheme } from "@/lib/category-theme";
+import { useToolContext } from "@/lib/tool-context";
 
 export interface ResultPanelProps {
   title?: string;
@@ -20,10 +21,13 @@ export const ResultPanel: React.FC<ResultPanelProps> = ({
   onCopy,
   onReset,
   children,
-  categoryId,
+  categoryId: categoryIdProp,
 }) => {
   const [copied, setCopied] = useState(false);
-  const theme = categoryId ? getCategoryTheme(categoryId) : null;
+  // Resolve: explicit prop wins; fallback to ToolContext
+  const { categoryId: ctxCategoryId } = useToolContext();
+  const resolvedId = categoryIdProp ?? ctxCategoryId ?? null;
+  const theme = resolvedId ? getCategoryTheme(resolvedId) : null;
 
   const handleCopy = () => {
     if (onCopy) {

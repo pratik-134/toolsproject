@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import { UploadCloud, AlertCircle } from "lucide-react";
 import { getCategoryTheme } from "@/lib/category-theme";
+import { useToolContext } from "@/lib/tool-context";
 
 export interface UploadBoxProps {
   onFileSelect: (file: File) => void;
@@ -23,14 +24,17 @@ export const UploadBox: React.FC<UploadBoxProps> = ({
   maxSizeBytes = 5 * 1024 * 1024,
   title = "Choose files or drop here",
   subtitle = "Processed 100% locally in your browser. Max 5 MB.",
-  categoryId,
+  categoryId: categoryIdProp,
   multiple = false,
   onFilesSelect,
 }) => {
   const [isDragOver, setIsDragOver] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const theme = categoryId ? getCategoryTheme(categoryId) : null;
+  // Resolve: explicit prop wins; fallback to ToolContext (set by ToolLayout)
+  const { categoryId: ctxCategoryId } = useToolContext();
+  const resolvedId = categoryIdProp ?? ctxCategoryId ?? null;
+  const theme = resolvedId ? getCategoryTheme(resolvedId) : null;
 
   const handleFile = (file: File) => {
     setError(null);

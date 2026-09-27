@@ -6,6 +6,7 @@ import { ToolMetadata } from "@/lib/registry/types";
 import { getCategoryById } from "@/lib/registry/categories";
 import { getRelatedTools } from "@/lib/registry/tools";
 import { getCategoryTheme } from "@/lib/category-theme";
+import { ToolContextProvider } from "@/lib/tool-context";
 import {
   ShieldCheck,
   ChevronRight,
@@ -153,13 +154,15 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
 
         {/* ── Workspace ────────────────────────────────────────── */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8">
-          {/* Level 1 card */}
-          <div
-            className="bg-white rounded-xl border border-[#E2E8F0]
-              shadow-[0_1px_3px_rgba(15,23,42,0.05)] p-4 sm:p-6"
-          >
-            {children}
-          </div>
+          {/* Level 1 card — wrapped in context so shell components auto-theme */}
+          <ToolContextProvider categoryId={tool.category}>
+            <div
+              className="bg-white rounded-xl border border-[#E2E8F0]
+                shadow-[0_1px_3px_rgba(15,23,42,0.05)] p-4 sm:p-6"
+            >
+              {children}
+            </div>
+          </ToolContextProvider>
 
           {/* Disclaimer */}
           {tool.disclaimer && (
