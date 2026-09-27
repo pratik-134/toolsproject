@@ -62,6 +62,7 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
   const allTools = useMemo(() => getLiveTools(), []);
@@ -81,6 +82,19 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
       })
       .slice(0, 5);
   }, [allTools, query]);
+
+  // Global Cmd+K / Ctrl+K shortcut to focus search input
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        inputRef.current?.focus();
+        inputRef.current?.select();
+      }
+    };
+    window.addEventListener("keydown", handleGlobalKeyDown);
+    return () => window.removeEventListener("keydown", handleGlobalKeyDown);
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -150,6 +164,7 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
           <Search className={isLarge ? "h-5 w-5 text-blue-600" : "h-4 w-4"} />
         </div>
         <input
+          ref={inputRef}
           type="text"
           value={query}
           onChange={(e) => {
@@ -164,14 +179,14 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
           placeholder={placeholder}
           className={`w-full bg-white text-slate-800 placeholder:text-slate-400 transition-all font-body ${
             isLarge
-              ? "pl-12 sm:pl-14 pr-11 py-3.5 sm:py-4 rounded-[14px] border-2 border-slate-200/90 shadow-sm text-sm sm:text-base focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500/10"
-              : "pl-10 pr-9 py-2 rounded-xl border border-slate-200 bg-white/90 backdrop-blur-xs text-xs sm:text-sm shadow-2xs hover:border-slate-300 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              ? "pl-12 sm:pl-14 pr-16 py-3.5 sm:py-4 rounded-[14px] border-2 border-slate-200/90 shadow-sm text-sm sm:text-base focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500/10"
+              : "pl-10 pr-14 py-2 rounded-xl border border-slate-200 bg-white/90 backdrop-blur-xs text-xs sm:text-sm shadow-2xs hover:border-slate-300 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20"
           }`}
           aria-label="Search tools"
           aria-expanded={isOpen && results.length > 0}
           aria-haspopup="listbox"
         />
-        {query && (
+        {query ? (
           <button
             type="button"
             onClick={() => {
@@ -185,6 +200,16 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
           >
             ×
           </button>
+        ) : (
+          <div
+            className={`absolute top-1/2 -translate-y-1/2 pointer-events-none hidden sm:flex items-center ${
+              isLarge ? "right-4" : "right-3"
+            }`}
+          >
+            <kbd className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono font-medium text-slate-400 bg-slate-100 border border-slate-200/80 rounded shadow-2xs">
+              <span className="text-[11px]">⌘</span>K
+            </kbd>
+          </div>
         )}
       </div>
 
