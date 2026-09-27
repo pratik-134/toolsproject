@@ -11,7 +11,7 @@ export async function runTests(): Promise<boolean> {
   if (slides.length !== 3) {
     throw new Error(`Expected 3 presentation slides, got ${slides.length}`);
   }
-  if (slides[0]?.title !== "Mindkit Platform Overview") {
+  if (slides[0]?.title !== "Cleartrix Platform Overview") {
     throw new Error(`Slide 1 title mismatch: ${slides[0]?.title}`);
   }
   if (slides[0]?.bullets.length !== 3) {

@@ -41,7 +41,7 @@ export default function PdfEncryptorTool() {
     try {
       const doc = await PDFDocument.create();
       const page = doc.addPage([600, 400]);
-      page.drawText("Confidential Mindkit Financial & Architectural Brief", {
+      page.drawText("Confidential Cleartrix Financial & Architectural Brief", {
         x: 50,
         y: 350,
         size: 16,
@@ -50,7 +50,7 @@ export default function PdfEncryptorTool() {
         "This document contains proprietary information protected by military-grade AES-256.",
         { x: 50, y: 310, size: 10 }
       );
-      page.drawText("Protected with Mindkit In-Browser PDF Locker.", { x: 50, y: 280, size: 10 });
+      page.drawText("Protected with Cleartrix In-Browser PDF Locker.", { x: 50, y: 280, size: 10 });
       const bytes = await doc.save();
       setFileData(bytes);
       setFileName("confidential-sample.pdf");

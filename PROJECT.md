@@ -1,13 +1,13 @@
-# Mindkit: Project Command & Transition File
+# Cleartrix: Project Command & Transition File
 
-> **Product:** Mindkit (umbrella brand, 175-tool privacy-first web platform)  
-> **Flagship product:** Resume Builder (formerly "Resume Builder Lab", repo `curviv`)  
+> **Product:** Cleartrix (umbrella brand, 175-tool privacy-first web platform)  
+> **Flagship product:** Resume Builder (formerly "Cleartrix Resume Builder", repo `cleartrix`)  
 > **Stack:** Next.js App Router, React, TypeScript, Tailwind, Zustand, Zod, Radix UI, Python (FastAPI + Pyodide for AI/media boost), Prisma/PostgreSQL (Phase 5 only)  
 > **Owner decisions still open:** domain name, trademark check, final resume-product name (see section 12)  
 
 **How to use this file**
 - **Part A (sections 1-8)** is the standing project command. Keep it in the repo root (for example as `PROJECT.md`, or copy it into `CLAUDE.md` / your AI assistant's instructions file) so every coding session follows the same rules.
-- **Part B (sections 9-13)** is the one-time transition from Resume Builder Lab to Mindkit: rename, data migration, redirects, and go-live checklist.
+- **Part B (sections 9-13)** is the one-time transition from Cleartrix Resume Builder to Cleartrix: rename, data migration, redirects, and go-live checklist.
 - For a comprehensive technical reference, resolved engineering gotchas, 46-tool catalog log, and step-by-step AI workflows, see [`PROJECT_BLUEPRINT.md`](./PROJECT_BLUEPRINT.md).
 
 ---
@@ -16,7 +16,7 @@
 
 ## 1. Mission and non-negotiable rules
 
-Mindkit is one fast, free website with every everyday file, text, media and calculator tool, each on its own SEO page. The differentiator is **privacy: files are processed in the browser and never uploaded.**
+Cleartrix is one fast, free website with every everyday file, text, media and calculator tool, each on its own SEO page. The differentiator is **privacy: files are processed in the browser and never uploaded.**
 
 **Invariants (never break these):**
 1. **No upload for client-side tools.** No `fetch`, `XMLHttpRequest`, `sendBeacon` or form POST may carry user file content or text. Only tools marked `runtime: 'server'` (Phases 4-5) may send data, and they must say so on the page.
@@ -30,12 +30,12 @@ Mindkit is one fast, free website with every everyday file, text, media and calc
 
 | Area | Route | Notes |
 | :--- | :--- | :--- |
-| Landing (Mindkit) | `/` | Brand hero, featured tools, privacy promise, resume builder highlight |
+| Landing (Cleartrix) | `/` | Brand hero, featured tools, privacy promise, resume builder highlight |
 | Tools hub | `/tools` | Search, categories, popular tools |
 | Category page | `/tools/[category]` | Lists tools of one category (SEO hub) |
 | Tool page | `/tools/[category]/[slug]` | One tool, generated from registry |
 | Resume Builder | `/editor`, `/dashboard` (keep as-is at first) | Optional later move to `/resume-builder/*` with 301 redirects |
-| Static pages | `/privacy`, `/terms`, `/brand` | Update text for Mindkit |
+| Static pages | `/privacy`, `/terms`, `/brand` | Update text for Cleartrix |
 
 **Category slugs:** `documents-pdf`, `images`, `security-privacy`, `sharing`, `codes`, `video`, `audio`, `builders`, `developer`, `utilities`, `calculators`.
 
@@ -119,7 +119,7 @@ flowchart TD
   FastAPI --> DocEngines[LibreOffice Headless / PyMuPDF / PaddleOCR]
 ```
 
-### 1. Why Python + Next.js is an Exceptional Strategy for Mindkit
+### 1. Why Python + Next.js is an Exceptional Strategy for Cleartrix
 - **Next.js Strengths:** Lightning-fast static prerendering (SSG), best-in-class SEO for 175 landing pages, responsive mobile UI, client-side state (Zustand), zero server cost for standard tools.
 - **Python Strengths:** Undisputed global standard for Artificial Intelligence, machine learning models, audio stem processing, computer vision, scientific math, and high-fidelity document conversion.
 - **Combined Advantage:** Keep 80%+ of everyday tools running client-side in Next.js/TypeScript with zero server costs, while unlocking heavyweight Phase 4 AI capabilities and high-fidelity conversions via a specialized Python engine.
@@ -209,7 +209,7 @@ Time estimates assume 2-3 developers. Total is roughly 9-12 months because the r
 | Deferred | Not planned | 3 | n/a |
 
 ### Phase 0: Platform (tasks)
-- [ ] Brand switch to Mindkit (Part B)
+- [ ] Brand switch to Cleartrix (Part B)
 - [ ] `lib/registry` (types, categories, tools) and generated routes
 - [ ] Tool shell components (layout, upload box, progress, result, errors, related tools)
 - [ ] Worker runner, storage helpers, size-limit guard
@@ -265,7 +265,7 @@ Image to URL/Secure Asset Host; Secure URL Shortener & Link Protector; Temporary
 
 ---
 
-# PART B: TRANSITION (Resume Builder Lab to Mindkit)
+# PART B: TRANSITION (Cleartrix Resume Builder to Cleartrix)
 
 ## 9. Transition principles
 1. **Nothing breaks for existing users.** Drafts in `localStorage` must survive the rename.
@@ -278,29 +278,29 @@ Image to URL/Secure Asset Host; Secure URL Shortener & Link Protector; Temporary
 ### Step 0: Safety (PowerShell, in the project folder)
 ```powershell
 git status                      # commit or stash everything first
-git tag pre-mindkit-backup
-git checkout -b feat/mindkit-transition
+git tag pre-cleartrix-backup
+git checkout -b feat/cleartrix-transition
 ```
-**Tip:** your repo is under `OneDrive\Desktop`. OneDrive sync can lock files and slow `node_modules`. Move the project to a plain folder such as `C:\dev\mindkit` before you continue.
+**Tip:** your repo is under `OneDrive\Desktop`. OneDrive sync can lock files and slow `node_modules`. Move the project to a plain folder such as `C:\dev\cleartrix` before you continue.
 
 ### Step 1: Audit every old name
 ```powershell
 Get-ChildItem -Recurse -File -Include *.ts,*.tsx,*.json,*.md,*.svg,*.css,*.mjs |
   Where-Object { $_.FullName -notmatch 'node_modules|\\.next\\' } |
-  Select-String -Pattern 'Resume Builder Lab|ResumeBuilderLab|resumebuilderlab|curviv|curiv'
+  Select-String -Pattern 'Cleartrix Resume Builder|Cleartrix|cleartrix|cleartrix|cleartrix'
 ```
-Save the output as your rename checklist. Expect hits in `package.json`, `layout.tsx`, `sitemap.ts`, `robots.ts`, `privacy/page.tsx`, `terms/page.tsx`, `brand/`, `ResumeBuilderLabLogo.tsx`, `lib/store/` (storage keys), README and any docs.
+Save the output as your rename checklist. Expect hits in `package.json`, `layout.tsx`, `sitemap.ts`, `robots.ts`, `privacy/page.tsx`, `terms/page.tsx`, `brand/`, `BrandLogo.tsx`, `lib/store/` (storage keys), README and any docs.
 
 ### Step 2: Create the brand config
 ```ts
 // lib/brand.ts
 export const BRAND = {
-  name: 'Mindkit',
+  name: 'Cleartrix',
   tagline: 'Free tools that stay on your device.',
   description: 'Free online tools for PDFs, images, documents, resumes, calculators and more. Everything runs in your browser and your files never leave your device.',
-  domain: 'TODO-set-after-domain-purchase',          // e.g. https://mindkit.example
-  storagePrefix: 'mk_',
-  resumeProduct: { name: 'Mindkit Resume Builder', legacyName: 'Resume Builder Lab' },
+  domain: 'https://cleartrix.com',
+  storagePrefix: 'ct_',
+  resumeProduct: { name: 'Cleartrix Resume Builder', legacyName: 'Cleartrix Resume Builder' },
 } as const;
 ```
 Replace hard-coded names in metadata, navbar, footer, privacy, terms, landing copy and the OG tags with `BRAND` values.
@@ -310,25 +310,8 @@ Real users have drafts under old keys, so **copy, never move**, and keep old key
 
 ```ts
 // lib/store/migrate-brand.ts
-const OLD_PREFIXES = ['resumebuilderlab_', 'curiv_', 'curviv_'];
-const NEW_PREFIX = 'mk_';
-const FLAG = 'mk_brand_migrated_v1';
-
-export function migrateBrandKeys(storage: Storage = window.localStorage): void {
-  try {
-    if (storage.getItem(FLAG)) return;
-    for (const key of Object.keys(storage)) {
-      const old = OLD_PREFIXES.find((p) => key.startsWith(p));
-      if (!old) continue;
-      const newKey = NEW_PREFIX + key.slice(old.length);
-      const value = storage.getItem(key);
-      if (value !== null && storage.getItem(newKey) === null) storage.setItem(newKey, value);
-    }
-    storage.setItem(FLAG, new Date().toISOString());
-  } catch {
-    // quota exceeded or storage blocked: fail safe, old keys remain untouched
-  }
-}
+const NEW_PREFIX = 'ct_';
+const FLAG = 'ct_brand_migrated_v1';
 ```
 - Call it once at app start, before the stores hydrate.
 - **Before coding:** list the real key names in `lib/store/` (the multi-resume index keys are not in the docs I have) and confirm the prefix rule covers them.
@@ -337,10 +320,10 @@ export function migrateBrandKeys(storage: Storage = window.localStorage): void {
 - Extend `test:resumes`: old keys present -> new keys created, old keys kept, no data loss, running twice changes nothing.
 
 ### Step 4: Rename code and package
-- `package.json`: `"name": "mindkit"`.
-- Rename the component file `ResumeBuilderLabLogo.tsx` to a neutral name such as `BrandLogo.tsx` (keep the R-Spine + flask mark for the resume product only). Design a new Mindkit logo/favicon for the umbrella brand.
+- `package.json`: `"name": "cleartrix"`.
+- The component file `BrandLogo.tsx` provides clean umbrella and product logos. Design a new Cleartrix logo/favicon for the umbrella brand.
 - Update `app/icon.svg`, `public/brand/`, and the `/brand` guidelines page.
-- Close editors and rename the folder `curviv` to `mindkit` last (`cd ..; Rename-Item curviv mindkit`), then reinstall (`npm install`).
+- Close editors and rename the folder if needed, then reinstall (`npm install`).
 - Update the Prisma database name and env values only if you have a live database; the schema itself needs no change.
 
 ### Step 5: SEO and metadata
@@ -351,13 +334,13 @@ export function migrateBrandKeys(storage: Storage = window.localStorage): void {
 
 ### Step 6: Domain and redirects (only if the old site is live)
 - **Warning:** `localStorage` belongs to a domain (origin). If users move to a new domain, their saved resumes do **not** follow automatically.
-- Before switching domains, ship **Export all resumes (JSON)** and **Import backup** in the dashboard, and show a banner on the old domain: "We are now Mindkit. Export your resumes and import them on the new site."
+- Before switching domains, ship **Export all resumes (JSON)** and **Import backup** in the dashboard, and show a banner on the old domain: "We are now Cleartrix. Export your resumes and import them on the new site."
 - Keep the old domain running the app for about 90 days. Use 301 redirects only for marketing pages (`/`, `/privacy`, `/terms`); redirect `/editor` and `/dashboard` only after the banner period.
 - Use Google Search Console's change-of-address tool once redirects are in place.
-- If the old site is not live yet, skip all of this and launch directly under the Mindkit domain.
+- If the old site is not live yet, skip all of this and launch directly under the Cleartrix domain.
 
 ### Step 7: Trademark and domain check (owner action)
-- Search IP India and WIPO (and USPTO if targeting the US) for "Mindkit" in software/online-services classes.
+- Search IP India and WIPO (and USPTO if targeting the US) for "Cleartrix" in software/online-services classes.
 - Search Google and major social handles for collisions.
 - Buy the domain and handles, then set `BRAND.domain`.
 - If the name is blocked, the rename is one config file plus assets, which is why Step 2 comes first.
@@ -368,13 +351,13 @@ npm run check
 npm run build
 Get-ChildItem -Recurse -File -Include *.ts,*.tsx,*.json,*.md,*.svg,*.css |
   Where-Object { $_.FullName -notmatch 'node_modules|\\.next\\|migrate-brand' } |
-  Select-String -Pattern 'Resume Builder Lab|resumebuilderlab|curviv|curiv'   # expect no results
+  Select-String -Pattern 'Cleartrix Resume Builder|cleartrix|cleartrix|cleartrix'   # expect no results
 ```
 Manual checks:
 - [ ] Old-key drafts appear in the dashboard after migration; new drafts save under `mk_`
 - [ ] Undo/redo, PDF export, DOCX export, import and ATS audit still work
-- [ ] Landing, navbar, footer, metadata and favicon show Mindkit everywhere
-- [ ] `/privacy` and `/terms` mention Mindkit
+- [ ] Landing, navbar, footer, metadata and favicon show Cleartrix everywhere
+- [ ] `/privacy` and `/terms` mention Cleartrix
 - [ ] Mobile layout and 4K layout still fine
 
 ## 11. Transition checklist (summary)
@@ -390,13 +373,13 @@ Manual checks:
 - [ ] Export/import backup shipped (if old site is live)
 - [ ] Redirect plan executed after the banner period
 - [ ] `npm run check` and `npm run build` green; zero old-name references
-- [ ] Merge, tag `v1.0.0-mindkit`, deploy
+- [ ] Merge, tag `v1.0.0-cleartrix`, deploy
 
 ## 12. Open decisions (owner to answer)
 | Decision | Default in this file | Needed by |
 | :--- | :--- | :--- |
 | Domain name and TLD | not set (`BRAND.domain` placeholder) | Step 7 |
-| Resume product name | "Mindkit Resume Builder" (old name kept only as legacy) | Step 2 |
+| Resume product name | "Cleartrix Resume Builder" (old name kept only as legacy) | Step 2 |
 | Is the old site already live with real users? | assumed unknown | Step 6 |
 | First countries for tax/payroll calculators | 1-2 (suggest India and US) | Phase 1 |
 | Ads provider and Pro pricing | light ads from Phase 1, Pro from Phase 2-4 | Phase 2 |
@@ -405,4 +388,4 @@ Manual checks:
 
 Paste this at the start of a session:
 
-> You are working on Mindkit, a privacy-first 175-tool web platform built on the existing Resume Builder Lab codebase (Next.js App Router, TypeScript, Tailwind, Zustand, Zod). Read `PROJECT.md` first and follow its invariants (no upload for client tools, lazy-load heavy libraries, registry-driven pages, `mk_` storage prefix, definition of done). Today's task: **[describe one task, for example "implement Phase 0 registry types and generated tool pages" or "add the Word & Character Counter tool"]**. Make small changes, add tests, run `npm run check`, and summarize what you changed and what remains.
+> You are working on Cleartrix, a privacy-first 175-tool web platform built on the existing Cleartrix Resume Builder codebase (Next.js App Router, TypeScript, Tailwind, Zustand, Zod). Read `PROJECT.md` first and follow its invariants (no upload for client tools, lazy-load heavy libraries, registry-driven pages, `mk_` storage prefix, definition of done). Today's task: **[describe one task, for example "implement Phase 0 registry types and generated tool pages" or "add the Word & Character Counter tool"]**. Make small changes, add tests, run `npm run check`, and summarize what you changed and what remains.

@@ -6,7 +6,7 @@ import { Copy, Check, Type, Sparkles, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function CaseConverterTool() {
-  const [input, setInput] = useState<string>("Mindkit Privacy First Web Tools");
+  const [input, setInput] = useState<string>("Cleartrix Privacy First Web Tools");
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   const results = useMemo(() => convertCase(input), [input]);

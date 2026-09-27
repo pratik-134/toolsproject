@@ -34,7 +34,7 @@ const PRESETS: SamplePreset[] = [
   {
     name: "Code 128 Product Tag",
     format: "CODE128",
-    text: "MINDKIT-PRO-2026",
+    text: "CLEARTRIX-PRO-2026",
     description: "High-density alphanumeric logistics barcode",
   },
   {

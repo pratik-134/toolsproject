@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
   description: BRAND.description,
   keywords: [
-    "mindkit",
+    "cleartrix",
     "free online tools",
     "privacy-first tools",
     "client-side pdf tools",

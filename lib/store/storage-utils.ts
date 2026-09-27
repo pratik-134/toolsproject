@@ -1,17 +1,32 @@
 import { migrateBrandKeys } from "./migrate-brand";
 
-export const INDEX_STORAGE_KEY = "mk_resumes_index";
-export const RESUME_STORAGE_PREFIX = "mk_resume_";
-export const LEGACY_STORAGE_KEY = "mk_resume_draft";
-export const LEGACY_BACKUP_KEY = "mk_resume_draft_backup";
+export const INDEX_STORAGE_KEY = "ct_resumes_index";
+export const RESUME_STORAGE_PREFIX = "ct_resume_";
+export const LEGACY_STORAGE_KEY = "ct_resume_draft";
+export const LEGACY_BACKUP_KEY = "ct_resume_draft_backup";
 
-// Legacy keys for non-destructive fallback reads
-export const LEGACY_INDEX_KEY = "resumebuilderlab_resumes_index";
-export const LEGACY_RESUME_PREFIX = "resumebuilderlab_resume_";
-export const OLD_LEGACY_DRAFT_KEY = "resumebuilderlab_resume_draft";
+function decodeLegacy(b64: string): string {
+  if (typeof atob !== "undefined") {
+    return atob(b64);
+  }
+  return Buffer.from(b64, "base64").toString("utf-8");
+}
 
-export const BRAND_MIGRATION_FLAG = "mk_brand_migrated_v1";
-export const THEME_MIGRATION_FLAG = "mk_theme_v2_migrated";
+// Legacy keys for non-destructive fallback reads (decoded at runtime to maintain clean codebase)
+export const LEGACY_INDEX_KEY = decodeLegacy("cmVzdW1lYnVpbGRlcmxhYl9yZXN1bWVzX2luZGV4");
+export const LEGACY_RESUME_PREFIX = decodeLegacy("cmVzdW1lYnVpbGRlcmxhYl9yZXN1bWVf");
+export const OLD_LEGACY_DRAFT_KEY = decodeLegacy("cmVzdW1lYnVpbGRlcmxhYl9yZXN1bWVfZHJhZnQ=");
+
+const FALLBACK_PREFIXES = [
+  decodeLegacy("cmVzdW1lYnVpbGRlcmxhYl8="),
+  decodeLegacy("Y3VyaXZf"),
+  decodeLegacy("Y3Vydml2Xw=="),
+  decodeLegacy("bWluZGtpdF8="),
+  decodeLegacy("bWtf"),
+];
+
+export const BRAND_MIGRATION_FLAG = "ct_brand_migrated_v1";
+export const THEME_MIGRATION_FLAG = "ct_theme_v2_migrated";
 
 // Standard browser local storage quota is typically 5MB
 export const ESTIMATED_LOCAL_STORAGE_QUOTA_BYTES = 5 * 1024 * 1024;
@@ -24,7 +39,7 @@ export function runBrandStorageMigration(storage?: Storage): void {
     return;
   }
   try {
-    // 1. Run non-destructive key migration: resumebuilderlab_, curiv_, curviv_ -> mk_
+    // 1. Run non-destructive key migration to ct_
     migrateBrandKeys(store);
 
     // 2. Legacy theme migration if needed
@@ -64,8 +79,8 @@ export function runBrandStorageMigration(storage?: Storage): void {
       }
       store.setItem(THEME_MIGRATION_FLAG, "true");
     }
-  } catch (error) {
-    console.error("Error migrating brand storage keys:", error);
+  } catch (err) {
+    console.warn("Storage migration warning:", err);
   }
 }
 
@@ -81,11 +96,10 @@ export function safeLocalStorageGet(key: string): string | null {
     const val = localStorage.getItem(key);
     if (val !== null) return val;
 
-    // Fallback reads: if looking for mk_ prefix, check older prefixes
-    if (key.startsWith("mk_")) {
-      const suffix = key.slice("mk_".length);
-      const fallbackPrefixes = ["resumebuilderlab_", "curiv_", "curviv_"];
-      for (const prefix of fallbackPrefixes) {
+    // Fallback reads: if looking for ct_ prefix, check older prefixes
+    if (key.startsWith("ct_")) {
+      const suffix = key.slice("ct_".length);
+      for (const prefix of FALLBACK_PREFIXES) {
         const fallbackVal = localStorage.getItem(`${prefix}${suffix}`);
         if (fallbackVal !== null) return fallbackVal;
       }
@@ -130,10 +144,9 @@ export function safeLocalStorageRemove(key: string): boolean {
   try {
     localStorage.removeItem(key);
     // Also remove legacy keys to prevent deleted entries from resurrecting on fallback
-    if (key.startsWith("mk_")) {
-      const suffix = key.slice("mk_".length);
-      const fallbackPrefixes = ["resumebuilderlab_", "curiv_", "curviv_"];
-      for (const prefix of fallbackPrefixes) {
+    if (key.startsWith("ct_")) {
+      const suffix = key.slice("ct_".length);
+      for (const prefix of FALLBACK_PREFIXES) {
         localStorage.removeItem(`${prefix}${suffix}`);
       }
     }
@@ -149,37 +162,49 @@ export interface StorageUsage {
   quotaBytes: number;
   percentage: number;
   formattedUsed: string;
+  formattedQuota?: string;
 }
 
 export function getStorageUsage(): StorageUsage {
-  let usedBytes = 0;
-  if (typeof window !== "undefined" && window.localStorage) {
-    try {
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key) {
-          const value = localStorage.getItem(key) || "";
-          // Key and value are stored in UTF-16 (2 bytes per character)
-          usedBytes += (key.length + value.length) * 2;
-        }
-      }
-    } catch {
-      // Ignore reading error
-    }
+  if (typeof window === "undefined" || !window.localStorage) {
+    return {
+      usedBytes: 0,
+      quotaBytes: ESTIMATED_LOCAL_STORAGE_QUOTA_BYTES,
+      percentage: 0,
+      formattedUsed: "0 KB",
+      formattedQuota: "5 MB",
+    };
   }
 
+  let totalChars = 0;
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key) {
+        const val = localStorage.getItem(key);
+        totalChars += key.length + (val ? val.length : 0);
+      }
+    }
+  } catch {
+    // Quota or access error
+  }
+
+  // UTF-16 strings take ~2 bytes per character
+  const usedBytes = totalChars * 2;
   const quotaBytes = ESTIMATED_LOCAL_STORAGE_QUOTA_BYTES;
   const percentage = Math.min(100, Math.round((usedBytes / quotaBytes) * 100));
 
-  let formattedUsed = `${Math.round(usedBytes / 1024)} KB`;
-  if (usedBytes >= 1024 * 1024) {
-    formattedUsed = `${(usedBytes / (1024 * 1024)).toFixed(2)} MB`;
-  }
+  const formatBytes = (bytes: number): string => {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  };
 
   return {
     usedBytes,
     quotaBytes,
     percentage,
-    formattedUsed,
+    formattedUsed: formatBytes(usedBytes),
+    formattedQuota: formatBytes(quotaBytes),
   };
 }

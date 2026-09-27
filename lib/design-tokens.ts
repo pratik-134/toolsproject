@@ -1,8 +1,8 @@
 /**
- * Mindkit Design Tokens — Single Source of Truth
+ * Cleartrix Design Tokens — Single Source of Truth
  *
  * Establishes typed constants for base neutrals and 5 core category accents
- * per the deliberate Mindkit design system.
+ * per the deliberate Cleartrix design system.
  */
 
 /* =========================================================================

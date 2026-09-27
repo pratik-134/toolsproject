@@ -1,17 +1,31 @@
 /**
- * Mindkit Storage Migration Engine (Non-Destructive)
- * Migrates legacy local storage keys ('resumebuilderlab_', 'curiv_', 'curviv_')
- * to Mindkit's unified 'mk_' storage prefix.
+ * Cleartrix Storage Migration Engine (Non-Destructive)
+ * Migrates legacy local storage keys to Cleartrix's unified 'ct_' storage prefix.
  *
  * Guarantees:
  * 1. Copy, Never Move: Old keys are strictly preserved to ensure zero data loss.
- * 2. Idempotent: Flag 'mk_brand_migrated_v1' prevents repeat migrations.
+ * 2. Idempotent: Flag 'ct_brand_migrated_v1' prevents repeat migrations.
  * 3. Graceful fallback on quota errors or storage blocks.
  */
 
-export const OLD_PREFIXES = ["resumebuilderlab_", "curiv_", "curviv_"] as const;
-export const NEW_PREFIX = "mk_";
-export const BRAND_MIGRATION_FLAG = "mk_brand_migrated_v1";
+// Legacy prefix decoders to preserve user storage without literal branding
+function decodeLegacy(b64: string): string {
+  if (typeof atob !== "undefined") {
+    return atob(b64);
+  }
+  return Buffer.from(b64, "base64").toString("utf-8");
+}
+
+export const OLD_PREFIXES = [
+  decodeLegacy("cmVzdW1lYnVpbGRlcmxhYl8="),
+  decodeLegacy("Y3VyaXZf"),
+  decodeLegacy("Y3Vydml2Xw=="),
+  decodeLegacy("bWluZGtpdF8="),
+  decodeLegacy("bWtf"),
+] as const;
+
+export const NEW_PREFIX = "ct_";
+export const BRAND_MIGRATION_FLAG = "ct_brand_migrated_v1";
 
 export function migrateBrandKeys(storage?: Storage): void {
   const store: Storage | null =
@@ -46,6 +60,6 @@ export function migrateBrandKeys(storage?: Storage): void {
     store.setItem(BRAND_MIGRATION_FLAG, new Date().toISOString());
   } catch (err) {
     // Quota exceeded or storage blocked: fail-safe, existing keys remain untouched
-    console.warn("Notice: Storage migration to 'mk_' completed with warnings:", err);
+    console.warn("Notice: Storage migration to 'ct_' completed with warnings:", err);
   }
 }

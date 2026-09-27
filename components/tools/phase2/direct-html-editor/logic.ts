@@ -19,7 +19,7 @@ export const HTML_TEMPLATES: Record<
     title: "Product Landing Card",
     html: `<div class="card">
   <div class="badge">Privacy First</div>
-  <h1>Mindkit Document Engine</h1>
+  <h1>Cleartrix Document Engine</h1>
   <p>Run all your document conversions, vector graphics synthesis, and text formatting in local browser memory.</p>
   <div class="actions">
     <button id="cta-btn" class="btn primary">Get Started</button>
@@ -109,7 +109,7 @@ p {
 });
 
 document.getElementById('learn-btn').addEventListener('click', () => {
-  document.getElementById('output').textContent = 'Mindkit runs with zero cloud uploads and total privacy.';
+  document.getElementById('output').textContent = 'Cleartrix runs with zero cloud uploads and total privacy.';
 });`,
   },
 
@@ -253,7 +253,7 @@ export function bundleHtmlDocument(
   html: string,
   css: string,
   js: string,
-  title: string = "Mindkit Web Sandbox"
+  title: string = "Cleartrix Web Sandbox"
 ): string {
   // If the user already provided a full <!DOCTYPE html> document in the HTML pane, inject CSS/JS into it
   const isFullDoc = /<!doctype\s+html>/i.test(html) || /<html\b/i.test(html);
@@ -285,7 +285,7 @@ export function bundleHtmlDocument(
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${title || "Mindkit Web Sandbox"}</title>
+  <title>${title || "Cleartrix Web Sandbox"}</title>
   <style>
 ${css}
   </style>

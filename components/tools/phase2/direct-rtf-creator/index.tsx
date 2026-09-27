@@ -23,7 +23,7 @@ import {
 
 export default function DirectRtfCreatorTool() {
   const [title, setTitle] = useState<string>("Executive Summary");
-  const [author, setAuthor] = useState<string>("Mindkit Author");
+  const [author, setAuthor] = useState<string>("Cleartrix Author");
   const [body, setBody] = useState<string>(RTF_TEMPLATES["Business Proposal"]?.body ?? "");
   const [fontFamily, setFontFamily] = useState<"Arial" | "Calibri" | "Times New Roman">("Calibri");
   const [fontSizePt, setFontSizePt] = useState<number>(12);

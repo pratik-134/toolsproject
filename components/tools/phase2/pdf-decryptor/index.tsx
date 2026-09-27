@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import {
   decryptAndUnlockPdf,
   createDemoEncryptedPdf,
-  isMindkitEncryptedPdf,
+  isCleartrixEncryptedPdf,
   DecryptResult,
 } from "./logic";
 import {
@@ -37,13 +37,13 @@ export default function PdfDecryptorTool() {
     setIsProcessing(true);
     setStatusMessage("Generating demo AES-256 encrypted PDF in RAM...");
     try {
-      const demoPass = "Mindkit2026!";
+      const demoPass = "Cleartrix2026!";
       const bytes = await createDemoEncryptedPdf(demoPass);
       setFileData(bytes);
       setFileName("demo-encrypted.encpdf");
       setPassword(demoPass);
       setUnlockedResult(null);
-      setStatusMessage("Demo encrypted file ready! Password autofilled: Mindkit2026!");
+      setStatusMessage("Demo encrypted file ready! Password autofilled: Cleartrix2026!");
     } finally {
       setIsProcessing(false);
     }
@@ -58,10 +58,10 @@ export default function PdfDecryptorTool() {
       setFileData(u8);
       setFileName(file.name);
       setUnlockedResult(null);
-      const isMk = isMindkitEncryptedPdf(u8);
+      const isMk = isCleartrixEncryptedPdf(u8);
       setStatusMessage(
         `Loaded "${file.name}" (${(file.size / 1024).toFixed(1)} KB) — Format: ${
-          isMk ? "Mindkit AES-256 Container" : "Standard Encrypted PDF"
+          isMk ? "Cleartrix AES-256 Container" : "Standard Encrypted PDF"
         }`
       );
     } catch {
@@ -183,7 +183,7 @@ export default function PdfDecryptorTool() {
               </div>
               {fileData && (
                 <span className="px-2 py-0.5 bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300 text-[10px] font-semibold rounded">
-                  {isMindkitEncryptedPdf(fileData) ? "AES-256 Vault" : "Encrypted PDF"}
+                  {isCleartrixEncryptedPdf(fileData) ? "AES-256 Vault" : "Encrypted PDF"}
                 </span>
               )}
             </div>

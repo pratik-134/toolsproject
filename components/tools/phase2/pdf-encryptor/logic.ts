@@ -177,7 +177,7 @@ export async function decryptPdfContainer(
   // Check magic bytes
   for (let i = 0; i < 6; i++) {
     if (containerBytes[i] !== PDF_MAGIC_BYTES[i]) {
-      throw new Error("File is not a valid Mindkit encrypted PDF (MKPDF1)");
+      throw new Error("File is not a valid Cleartrix encrypted PDF (MKPDF1)");
     }
   }
 

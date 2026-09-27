@@ -29,7 +29,7 @@ export async function runTests(): Promise<boolean> {
     pageSize: "letter",
     fontSize: 11,
     lineHeight: 1.4,
-    headerTitle: "Mindkit Document Conversion",
+    headerTitle: "Cleartrix Document Conversion",
     includePageNumbers: true,
     accentColorHex: "2563EB",
   });

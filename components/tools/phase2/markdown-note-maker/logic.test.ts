@@ -13,7 +13,7 @@ export function runTests(): boolean {
     throw new Error("Empty note stats should be 0");
   }
 
-  const sampleStats = computeNoteStats("Hello world from Mindkit!\nThis is line two.");
+  const sampleStats = computeNoteStats("Hello world from Cleartrix!\nThis is line two.");
   if (sampleStats.words !== 8 || sampleStats.lines !== 2) {
     throw new Error(`Word/line count mismatch: got ${sampleStats.words} words, ${sampleStats.lines} lines`);
   }

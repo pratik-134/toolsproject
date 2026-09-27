@@ -16,7 +16,7 @@ import {
   Rocket,
 } from "lucide-react";
 
-const ANNOUNCEMENT_STORAGE_KEY = "mk_announcement_dismissed_v1";
+const ANNOUNCEMENT_STORAGE_KEY = "ct_announcement_dismissed_v1";
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -104,7 +104,7 @@ export const Navbar: React.FC = () => {
           onClick={handleLinkClick}
           className="flex items-center gap-2 sm:gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg py-0.5"
         >
-          <BrandLogo product="mindkit" size={30} isLight={false} />
+          <BrandLogo product="cleartrix" size={30} isLight={false} />
         </Link>
 
         {/* Premium Trust Pill (Hidden on Mobile < 1024px) */}
@@ -258,7 +258,7 @@ export const Navbar: React.FC = () => {
         >
           <span className="flex items-center gap-2.5">
             <CheckCircle2 className="h-4 w-4 text-blue-600" />
-            <span>Why Mindkit Resume Builder? (Comparison)</span>
+            <span>Why Cleartrix Resume Builder? (Comparison)</span>
           </span>
           <span className="text-[10px] font-bold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-md">
             Zero Paywall

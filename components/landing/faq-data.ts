@@ -7,8 +7,8 @@ export interface FaqItem {
 export const RESUME_FAQS: FaqItem[] = [
   {
     num: "01",
-    q: "Is Mindkit Resume Builder truly 100% free with no hidden paywalls or watermarks?",
-    a: "Yes, unconditionally. Unlike services that let you craft a resume only to demand a credit card on the final download step, Mindkit is free forever. All 20 templates, all styling tools, and every vector PDF download are 100% unrestricted.",
+    q: "Is Cleartrix Resume Builder truly 100% free with no hidden paywalls or watermarks?",
+    a: "Yes, unconditionally. Unlike services that let you craft a resume only to demand a credit card on the final download step, Cleartrix is free forever. All 20 templates, all styling tools, and every vector PDF download are 100% unrestricted.",
   },
   {
     num: "02",
@@ -22,13 +22,13 @@ export const RESUME_FAQS: FaqItem[] = [
   },
   {
     num: "04",
-    q: "How does Mindkit protect my personal privacy and resume details?",
-    a: "Mindkit is built on a 100% client-side privacy architecture. Your resume data, contact info, and work history live exclusively in your browser's private local storage. We do not transmit or store your resume on external servers, and we never sell user data.",
+    q: "How does Cleartrix protect my personal privacy and resume details?",
+    a: "Cleartrix is built on a 100% client-side privacy architecture. Your resume data, contact info, and work history live exclusively in your browser's private local storage. We do not transmit or store your resume on external servers, and we never sell user data.",
   },
   {
     num: "05",
     q: "Can I download my resume as a high-resolution vector PDF?",
-    a: "Yes. Mindkit utilizes an in-browser vector PDF compilation engine that produces crystal-clear, print-ready documents with selectable text and embedded fonts on standard A4 dimensions. You can also print directly from your browser.",
+    a: "Yes. Cleartrix utilizes an in-browser vector PDF compilation engine that produces crystal-clear, print-ready documents with selectable text and embedded fonts on standard A4 dimensions. You can also print directly from your browser.",
   },
   {
     num: "06",
@@ -37,8 +37,8 @@ export const RESUME_FAQS: FaqItem[] = [
   },
   {
     num: "07",
-    q: "How does Mindkit compare to other resume builders?",
-    a: "Design-first, drag-and-drop graphic builders often produce multi-layered layouts that ATS parsers struggle to read. Meanwhile, many subscription-based builders require paid upgrades or apply watermarks at download. Mindkit focuses on clean, parser-friendly code structure, high-resolution vector PDF export, and a commitment to keeping every feature and template 100% free with zero paywalls.",
+    q: "How does Cleartrix compare to other resume builders?",
+    a: "Design-first, drag-and-drop graphic builders often produce multi-layered layouts that ATS parsers struggle to read. Meanwhile, many subscription-based builders require paid upgrades or apply watermarks at download. Cleartrix focuses on clean, parser-friendly code structure, high-resolution vector PDF export, and a commitment to keeping every feature and template 100% free with zero paywalls.",
   },
   {
     num: "08",
@@ -50,7 +50,7 @@ export const RESUME_FAQS: FaqItem[] = [
 export const TOOLS_FAQS: FaqItem[] = [
   {
     num: "01",
-    q: "How can Mindkit tools run with zero server uploads?",
+    q: "How can Cleartrix tools run with zero server uploads?",
     a: "All tools execute directly within your browser sandbox using modern web standards—including WebAssembly, Web Workers, Canvas, and client-side JavaScript. When you merge a PDF, convert an image, or run a calculation, your files are processed entirely in your device's memory without transferring even a single byte to an external server.",
   },
   {
@@ -76,7 +76,7 @@ export const TOOLS_FAQS: FaqItem[] = [
   {
     num: "06",
     q: "How do you make money if everything is free?",
-    a: "Mindkit is built with an ultra-lean architecture: because all computation happens on the client side, our server hosting costs are negligible compared to traditional cloud platforms. We sustain operations through non-intrusive affiliate partnerships, developer sponsorships, and future optional enterprise team features—never by gating basic consumer tools or selling user data.",
+    a: "Cleartrix is built with an ultra-lean architecture: because all computation happens on the client side, our server hosting costs are negligible compared to traditional cloud platforms. We sustain operations through non-intrusive affiliate partnerships, developer sponsorships, and future optional enterprise team features—never by gating basic consumer tools or selling user data.",
   },
   {
     num: "07",

@@ -1,18 +1,18 @@
 /**
- * Mindkit Brand Configuration — Single Source of Truth
+ * Cleartrix Brand Configuration — Single Source of Truth
  * All product names, taglines, domain references, and storage prefixes are defined here.
  */
 
 export const BRAND = {
-  name: "Mindkit",
+  name: "Cleartrix",
   tagline: "Free tools that stay on your device.",
   description:
     "Free online tools for PDFs, images, documents, resumes, calculators and more. Everything runs in your browser and your files never leave your device.",
-  domain: "https://mindkit.dev", // Owner to update once production domain is finalized
-  storagePrefix: "mk_",
+  domain: "https://cleartrix.com", // Owner to update once production domain is finalized
+  storagePrefix: "ct_",
   resumeProduct: {
-    name: "Mindkit Resume Builder",
-    legacyName: "Resume Builder Lab",
+    name: "Cleartrix Resume Builder",
+    legacyName: "Cleartrix Resume Builder",
   },
   colors: {
     primary: "#2563EB", // Brand Blue

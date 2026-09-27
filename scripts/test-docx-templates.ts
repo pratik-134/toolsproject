@@ -3,7 +3,7 @@ import { initialResumeData } from "../lib/schema";
 import { DOCX_TEMPLATES_REGISTRY, getDocxTemplateBuilder } from "../lib/docx/registry";
 
 async function verifyAllDocxTemplates() {
-  console.log("=== MINDKIT WORD (.DOCX) TEMPLATES COMPREHENSIVE VERIFICATION ===");
+  console.log("=== CLEARTRIX WORD (.DOCX) TEMPLATES COMPREHENSIVE VERIFICATION ===");
   const templateIds = Object.keys(DOCX_TEMPLATES_REGISTRY);
   console.log(`Found ${templateIds.length} registered DOCX templates.`);
 

@@ -18,7 +18,7 @@ export function runTests(): boolean {
   }
 
   // Test 2: Case-insensitive deduplication
-  const raw2 = "Hello\nworld\nhello\nWORLD\nMindkit";
+  const raw2 = "Hello\nworld\nhello\nWORLD\nCleartrix";
   const res2 = deduplicateLines(raw2, {
     caseSensitive: false,
     trimWhitespace: true,

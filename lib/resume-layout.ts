@@ -1,5 +1,5 @@
 /**
- * Mindkit Single Source of Truth Layout Engine
+ * Cleartrix Single Source of Truth Layout Engine
  *
  * Unifies layout dimensions, margins, typography, line-heights, density,
  * bullet formatting, and page-break rules between:

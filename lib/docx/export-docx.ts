@@ -2,7 +2,7 @@ import { ResumeData } from "../schema";
 
 /**
  * Generates a native, fully editable Word (.docx) document directly from
- * Mindkit Resume Builder's ResumeData model and triggers a client-side download in the browser.
+ * Cleartrix Resume Builder's ResumeData model and triggers a client-side download in the browser.
  * Entirely client-side and memory-only — zero server dependencies.
  */
 export async function exportResumeToDocx(data: ResumeData): Promise<void> {
@@ -20,7 +20,7 @@ export async function exportResumeToDocx(data: ResumeData): Promise<void> {
 
     const sanitizedName =
       data.personalInfo.fullName.trim().replace(/[^a-zA-Z0-9_-]/g, "_") || "Resume";
-    const fileName = `${sanitizedName}_Mindkit.docx`;
+    const fileName = `${sanitizedName}_Cleartrix.docx`;
 
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");

@@ -6,7 +6,7 @@ import { Download, QrCode, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function QrGeneratorTool() {
-  const [text, setText] = useState<string>("https://mindkit.dev");
+  const [text, setText] = useState<string>("https://cleartrix.com");
   const [fgColor, setFgColor] = useState<string>("#0B1229");
   const [bgColor, setBgColor] = useState<string>("#FFFFFF");
   const [size, setSize] = useState<number>(256);
@@ -27,7 +27,7 @@ export default function QrGeneratorTool() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "mindkit-qrcode.svg";
+    a.download = "cleartrix-qrcode.svg";
     a.click();
     URL.revokeObjectURL(url);
   };

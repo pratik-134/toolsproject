@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { MindkitLogo } from "@/components/BrandLogo";
+import { CleartrixLogo } from "@/components/BrandLogo";
 import { BRAND } from "@/lib/brand";
 import { Lock, ShieldCheck, ArrowRight, Sparkles } from "lucide-react";
 import { CATEGORY_COLORS } from "@/lib/design-tokens";
@@ -13,7 +13,7 @@ export const Footer: React.FC = () => {
           {/* Column 1: Brand & Privacy Commitment */}
           <div className="space-y-4 sm:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-block">
-              <MindkitLogo size={32} isLight={false} />
+              <CleartrixLogo size={32} isLight={false} />
             </Link>
             <p className="text-xs text-slate-600 leading-relaxed">
               {BRAND.description}
@@ -231,7 +231,7 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="border-t border-slate-200 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p>
-            © {new Date().getFullYear()} Mindkit. All 111 web tools execute 100% in-browser with zero server tracking.
+            © {new Date().getFullYear()} Cleartrix. All 111 web tools execute 100% in-browser with zero server tracking.
           </p>
           <div className="flex items-center gap-6">
             <Link href="/tools" className="hover:text-blue-600 transition-colors font-semibold text-blue-600">

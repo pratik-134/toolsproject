@@ -405,7 +405,7 @@ export default function ResumeImportViewerTool() {
           className="flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold rounded-xl shadow-sm transition-colors shrink-0"
         >
           <Sparkles className="h-3.5 w-3.5" />
-          Edit in Mindkit Resume Builder
+          Edit in Cleartrix Resume Builder
         </Link>
       </div>
 
@@ -555,7 +555,7 @@ export default function ResumeImportViewerTool() {
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-xs text-slate-500 font-mono">
-              Mindkit Standard Resume Schema v1.0
+              Cleartrix Standard Resume Schema v1.0
             </span>
             <div className="flex items-center gap-2">
               <button

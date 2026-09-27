@@ -20,7 +20,7 @@ import {
 
 const SAMPLE_MARKDOWN = `# Executive Summary & Project Brief
 
-This document outlines the strategic roadmap for the **Mindkit Privacy-First Web Platform**.
+This document outlines the strategic roadmap for the **Cleartrix Privacy-First Web Platform**.
 
 ## Key Objectives
 - Complete client-side sandboxing for all user documents
@@ -42,7 +42,7 @@ const pdfBytes = await compileMarkdownToPdf(markdownText);
 3. Phase 3: Screen capture and media generation
 
 ---
-*Generated privately with Mindkit Document Engine.*
+*Generated privately with Cleartrix Document Engine.*
 `;
 
 export default function MarkdownToPdfTool() {

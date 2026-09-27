@@ -2,7 +2,7 @@ import { ToolDefinition, ToolMetadata, CategoryId } from "./types";
 
 export const TOOLS: ToolDefinition[] = [
   /* =========================================================================
-     FLAGSHIP PRODUCT: Mindkit Resume Builder
+     FLAGSHIP PRODUCT: Cleartrix Resume Builder
      ========================================================================= */
   {
     slug: "resume-builder",
@@ -21,7 +21,7 @@ export const TOOLS: ToolDefinition[] = [
         "Craft ATS-friendly, professional resumes directly in your browser. All templates, styling tools, vector PDF downloads, and Word exports are 100% free with no account or paywall.",
       faq: [
         {
-          q: "Is Mindkit Resume Builder completely free with no watermarks?",
+          q: "Is Cleartrix Resume Builder completely free with no watermarks?",
           a: "Yes. Every template, color accent, font pairing, and vector PDF download is 100% free forever with no watermarks or paywalls.",
         },
         {
@@ -57,7 +57,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         {
           q: "Is it safe to format JSON containing confidential API keys or credentials?",
-          a: "Yes. Mindkit executes 100% inside your browser memory. No network request carries your JSON data.",
+          a: "Yes. Cleartrix executes 100% inside your browser memory. No network request carries your JSON data.",
         },
         {
           q: "Can this tool fix or identify JSON syntax errors?",
@@ -168,7 +168,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Does this calculator save my financial inputs to external servers?",
-          a: "No. All numbers are calculated client-side in your browser. Mindkit stores zero personal or financial data.",
+          a: "No. All numbers are calculated client-side in your browser. Cleartrix stores zero personal or financial data.",
         },
         {
           q: "Can I adjust property taxes and homeowners insurance?",
@@ -199,7 +199,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         {
           q: "Do generated QR codes ever expire?",
-          a: "Never. Mindkit generates static, direct QR codes encoding your exact URL or text with zero intermediary tracking redirects.",
+          a: "Never. Cleartrix generates static, direct QR codes encoding your exact URL or text with zero intermediary tracking redirects.",
         },
         {
           q: "Can I customize QR colors?",
@@ -242,7 +242,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Are my sensitive business spreadsheets uploaded anywhere?",
-          a: "No. All conversion is computed locally in your browser memory. Mindkit operates under connect-src 'self' zero-upload privacy.",
+          a: "No. All conversion is computed locally in your browser memory. Cleartrix operates under connect-src 'self' zero-upload privacy.",
         },
       ],
     },
@@ -304,7 +304,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         {
           q: "How are passwords generated securely in the browser?",
-          a: "Mindkit utilizes crypto.getRandomValues, the browser's hardware-seeded Cryptographically Secure Pseudo-Random Number Generator (CSPRNG).",
+          a: "Cleartrix utilizes crypto.getRandomValues, the browser's hardware-seeded Cryptographically Secure Pseudo-Random Number Generator (CSPRNG).",
         },
         {
           q: "Are generated passwords saved, sent, or logged anywhere?",
@@ -384,7 +384,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Are my personal financial inputs kept private?",
-          a: "Yes. All calculations execute client-side in your browser. Mindkit stores zero financial or personal data.",
+          a: "Yes. All calculations execute client-side in your browser. Cleartrix stores zero financial or personal data.",
         },
       ],
     },
@@ -2360,7 +2360,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Are my camera video frames or uploaded photos uploaded to a server?",
-          a: "Never. Camera frames and image files are processed strictly inside your device's memory using client-side canvas algorithms. Mindkit enforces zero-upload privacy.",
+          a: "Never. Camera frames and image files are processed strictly inside your device's memory using client-side canvas algorithms. Cleartrix enforces zero-upload privacy.",
         },
         {
           q: "Can I use my mobile phone camera to scan barcodes?",
@@ -2395,7 +2395,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Does this scanner track or redirect my destination links?",
-          a: "No. Unlike mobile scanner apps that route links through tracking proxies, Mindkit decodes the raw URL directly in your browser without redirection.",
+          a: "No. Unlike mobile scanner apps that route links through tracking proxies, Cleartrix decodes the raw URL directly in your browser without redirection.",
         },
         {
           q: "Can I scan a QR code from a screenshot or saved photo?",
@@ -2454,7 +2454,7 @@ export const TOOLS: ToolDefinition[] = [
     seo: {
       title: "Resume PDF & DOCX Import Inspector — Free Structured JSON & Schema Viewer",
       description:
-        "Inspect, validate, and convert PDF & DOCX resume files into structured JSON schemas. View parsed timelines, competencies, and export to Mindkit's builder.",
+        "Inspect, validate, and convert PDF & DOCX resume files into structured JSON schemas. View parsed timelines, competencies, and export to Cleartrix's builder.",
       h1: "Free Resume PDF & DOCX Import Inspector",
       intro:
         "Inspect extracted resume data with client-side transparency. View parsed personal details, work timelines, education records, and download standard JSON schemas.",
@@ -2464,8 +2464,8 @@ export const TOOLS: ToolDefinition[] = [
           a: "It extracts personal contact info, work experience positions, education history, technical skills, and unassigned text blocks into a clean structured schema.",
         },
         {
-          q: "Can I export the parsed resume into Mindkit's Resume Builder?",
-          a: "Yes. Click 'Edit in Mindkit Resume Builder' to load the parsed data directly into the visual resume editor.",
+          q: "Can I export the parsed resume into Cleartrix's Resume Builder?",
+          a: "Yes. Click 'Edit in Cleartrix Resume Builder' to load the parsed data directly into the visual resume editor.",
         },
         {
           q: "Can I download the extracted resume as a JSON file?",
@@ -2629,7 +2629,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Are my confidential files sent to a remote server for compression?",
-          a: "No. Unlike other online PDF compressors that upload your files to remote servers, Mindkit processes everything in your browser RAM.",
+          a: "No. Unlike other online PDF compressors that upload your files to remote servers, Cleartrix processes everything in your browser RAM.",
         },
         {
           q: "Will compression reduce the visual quality of text?",
@@ -2765,7 +2765,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Does creating forms require an account or subscription?",
-          a: "No. Mindkit is completely free, unlocked, and runs 100% client-side without paywalls.",
+          a: "No. Cleartrix is completely free, unlocked, and runs 100% client-side without paywalls.",
         },
       ],
     },
@@ -2832,7 +2832,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "What happens to transparency when converting PNG to JPEG?",
-          a: "Because JPEG does not support alpha transparency, Mindkit allows you to select a background fill color (such as solid white or black) to cleanly replace transparent regions.",
+          a: "Because JPEG does not support alpha transparency, Cleartrix allows you to select a background fill color (such as solid white or black) to cleanly replace transparent regions.",
         },
       ],
     },
@@ -2855,7 +2855,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         {
           q: "Which aspect ratio presets are included?",
-          a: "Mindkit includes 1:1 (Square / Avatars), 16:9 (YouTube & Banners), 9:16 (Stories / Reels / TikTok), 4:5 (Instagram Feed portrait), 4:3 (Classic display), 3:2 (35mm photography), 2:1 (Twitter/X header), and Freeform.",
+          a: "Cleartrix includes 1:1 (Square / Avatars), 16:9 (YouTube & Banners), 9:16 (Stories / Reels / TikTok), 4:5 (Instagram Feed portrait), 4:3 (Classic display), 3:2 (35mm photography), 2:1 (Twitter/X header), and Freeform.",
         },
         {
           q: "Can I rotate or mirror my image during cropping?",
@@ -2952,7 +2952,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Does stripping metadata reduce image quality?",
-          a: "No. Mindkit uses lossless binary segment stripping for JPEG and chunk filtering for PNG. The underlying compressed image stream is preserved bit-for-bit with zero re-encoding loss.",
+          a: "No. Cleartrix uses lossless binary segment stripping for JPEG and chunk filtering for PNG. The underlying compressed image stream is preserved bit-for-bit with zero re-encoding loss.",
         },
         {
           q: "Do my photos ever touch external servers?",
@@ -3011,7 +3011,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         {
           q: "How does in-browser HTML to PDF work without a backend?",
-          a: "Mindkit renders your HTML and custom CSS inside an isolated client sandbox and applies standardized @page print stylesheets, invoking your browser's native high-resolution vector print engine.",
+          a: "Cleartrix renders your HTML and custom CSS inside an isolated client sandbox and applies standardized @page print stylesheets, invoking your browser's native high-resolution vector print engine.",
         },
         {
           q: "Can I customize the page dimensions and margins?",
@@ -3159,7 +3159,7 @@ export const TOOLS: ToolDefinition[] = [
     seo: {
       title: "Free AES-256 File Decryptor — In-Browser Secure File Unlocker",
       description:
-        "Unlock and decrypt .enc files encrypted with Mindkit AES-GCM-256 File Locker. 100% in-browser authentication tag verification, zero server uploads, instant file recovery.",
+        "Unlock and decrypt .enc files encrypted with Cleartrix AES-GCM-256 File Locker. 100% in-browser authentication tag verification, zero server uploads, instant file recovery.",
       h1: "Free In-Browser AES-256 File Decryptor & Unlocker",
       intro:
         "Decrypt and authenticate protected files in your browser sandbox. Enter your master password to verify the 128-bit GCM integrity tag and restore the original file instantly.",
@@ -3170,7 +3170,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Does the decrypted file retain its original filename and extension?",
-          a: "Yes. The Mindkit container securely encapsulates the original file metadata and restores its exact name and mime type upon successful decryption.",
+          a: "Yes. The Cleartrix container securely encapsulates the original file metadata and restores its exact name and mime type upon successful decryption.",
         },
         {
           q: "Is there any file size limit for decryption?",
@@ -3229,7 +3229,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         {
           q: "Is this redaction permanent or can text be highlighted underneath?",
-          a: "Mindkit bakes opaque vector fill rectangles directly into the PDF content stream with 100% opacity, completely and irreversibly obscuring the underlying content.",
+          a: "Cleartrix bakes opaque vector fill rectangles directly into the PDF content stream with 100% opacity, completely and irreversibly obscuring the underlying content.",
         },
         {
           q: "Can I customize the redaction box appearance and label?",
@@ -3734,8 +3734,8 @@ export const TOOLS: ToolDefinition[] = [
           a: "Yes. Enter your authorized document password to decrypt the file and download a clean PDF that will never prompt for a password again.",
         },
         {
-          q: "Does this tool work for both Mindkit encrypted PDFs and standard PDFs?",
-          a: "Yes. It automatically detects and unlocks both Mindkit AES-256 containers and standard password-protected PDF files.",
+          q: "Does this tool work for both Cleartrix encrypted PDFs and standard PDFs?",
+          a: "Yes. It automatically detects and unlocks both Cleartrix AES-256 containers and standard password-protected PDF files.",
         },
         {
           q: "Is it safe to unlock confidential PDFs here?",

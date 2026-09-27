@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description:
     `${BRAND.name} is built on a 100% client-side privacy architecture. Learn how our platform guarantees zero server storage of user files, no tracking cookies, and complete local execution.`,
   keywords: [
-    "mindkit privacy policy",
+    "cleartrix privacy policy",
     "private web tools",
     "client-side privacy",
     "gdpr compliant tools",

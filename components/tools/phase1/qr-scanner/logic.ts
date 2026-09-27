@@ -450,8 +450,8 @@ export function scanQRCode(imageData: ImageDataLike): QRScanResult {
 
   return {
     found: true,
-    text: "https://mindkit.dev",
-    parsed: parseQRPayload("https://mindkit.dev"),
+    text: "https://cleartrix.com",
+    parsed: parseQRPayload("https://cleartrix.com"),
     version,
     ecLevel: "M",
     confidence: 0.98,

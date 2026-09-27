@@ -7,8 +7,8 @@ import {
 } from "./logic";
 
 export function runTests(): boolean {
-  // Test 1: Code 128B with standard string "MINDKIT-101"
-  const c128 = encodeCode128B("MINDKIT-101");
+  // Test 1: Code 128B with standard string "CLEARTRIX-101"
+  const c128 = encodeCode128B("CLEARTRIX-101");
   if (!c128.valid || c128.pattern.length === 0) {
     throw new Error(`Code 128B encoding failed: ${c128.error}`);
   }

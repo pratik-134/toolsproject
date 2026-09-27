@@ -283,7 +283,7 @@ export default function FaviconGeneratorTool() {
                     value={appName}
                     onChange={(e) => setAppName(e.target.value)}
                     className="w-full px-2.5 py-1.5 bg-muted/40 border border-border rounded-lg text-foreground font-medium text-xs focus:ring-1 focus:ring-primary focus:outline-none"
-                    placeholder="e.g. Mindkit Platform"
+                    placeholder="e.g. Cleartrix Platform"
                   />
                 </div>
 
@@ -294,7 +294,7 @@ export default function FaviconGeneratorTool() {
                     value={shortName}
                     onChange={(e) => setShortName(e.target.value)}
                     className="w-full px-2.5 py-1.5 bg-muted/40 border border-border rounded-lg text-foreground font-medium text-xs focus:ring-1 focus:ring-primary focus:outline-none"
-                    placeholder="e.g. Mindkit"
+                    placeholder="e.g. Cleartrix"
                   />
                 </div>
 

@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 
-console.log("=== MINDKIT PRIVACY ENFORCEMENT SCANNER ===");
+console.log("=== CLEARTRIX PRIVACY ENFORCEMENT SCANNER ===");
 
 const TOOLS_DIR = path.resolve(__dirname, "../components/tools");
 

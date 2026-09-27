@@ -1,25 +1,25 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: resumebuilderlab-postgres
+    container_name: cleartrix-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: resumebuilderlab_user
-      POSTGRES_PASSWORD: resumebuilderlab_password
-      POSTGRES_DB: resumebuilderlab_db
+      POSTGRES_USER: cleartrix_user
+      POSTGRES_PASSWORD: cleartrix_password
+      POSTGRES_DB: cleartrix_db
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U resumebuilderlab_user -d resumebuilderlab_db"]
+      test: ["CMD-SHELL", "pg_isready -U cleartrix_user -d cleartrix_db"]
       interval: 5s
       timeout: 5s
       retries: 5
 
   redis:
     image: redis:7-alpine
-    container_name: resumebuilderlab-redis
+    container_name: cleartrix-redis
     restart: unless-stopped
     ports:
       - "6379:6379"
@@ -33,6 +33,6 @@ services:
 
 volumes:
   postgres_data:
-    name: resumebuilderlab_postgres_data
+    name: cleartrix_postgres_data
   redis_data:
-    name: resumebuilderlab_redis_data
+    name: cleartrix_redis_data

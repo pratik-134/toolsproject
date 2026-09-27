@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { MindkitLogo } from "@/components/BrandLogo";
+import { CleartrixLogo } from "@/components/BrandLogo";
 import { LandingHeroActions } from "@/components/landing/LandingHeroActions";
 import { HeroToolSearch } from "@/components/landing/HeroToolSearch";
 import { RotatingWord } from "@/components/landing/RotatingWord";
@@ -169,7 +169,7 @@ export default function HomePage() {
                         <div className="h-2.5 w-2.5 rounded-full bg-blue-400" />
                       </div>
                       <div className="flex items-center gap-1.5 rounded-md bg-white px-3 py-0.5 text-[11px] font-sans font-medium text-slate-700 border border-slate-200 shadow-2xs">
-                        <span>mindkit.dev/editor</span>
+                        <span>cleartrix.com/editor</span>
                       </div>
                       <div className="flex items-center gap-1.5 text-[11px] font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-md border border-blue-200">
                         <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse" />
@@ -339,7 +339,7 @@ export default function HomePage() {
                 <p className="font-body text-subtitle text-slate-600 mt-3">
                   Most resume tools lure you with "free" templates, only to demand credit
                   cards, subscriptions, or slap huge watermarks when you try to download.
-                  Mindkit Resume Builder is genuinely 100% free.
+                  Cleartrix Resume Builder is genuinely 100% free.
                 </p>
               </div>
             </Reveal>
@@ -352,32 +352,32 @@ export default function HomePage() {
                   {[
                     {
                       feature: "PDF Download",
-                      mindkit: "Free & Unlimited Vector PDF",
+                      cleartrix: "Free & Unlimited Vector PDF",
                       others: "Paywalled or recurring subscription ($24/mo)",
                     },
                     {
                       feature: "Template Access",
-                      mindkit: "All 20+ Templates Unlocked",
+                      cleartrix: "All 20+ Templates Unlocked",
                       others: "Most designs locked behind pro paywall",
                     },
                     {
                       feature: "Watermarks",
-                      mindkit: "Zero watermarks on any export",
+                      cleartrix: "Zero watermarks on any export",
                       others: "Branding watermarks on free tier",
                     },
                     {
                       feature: "Account Required",
-                      mindkit: "None. Open & build immediately",
+                      cleartrix: "None. Open & build immediately",
                       others: "Mandatory email registration & tracking",
                     },
                     {
                       feature: "Data Privacy",
-                      mindkit: "Saved privately on your device",
+                      cleartrix: "Saved privately on your device",
                       others: "Resume data stored on external servers",
                     },
                     {
                       feature: "ATS Compliance",
-                      mindkit: "100% Parser-Tested Single Column & Layouts",
+                      cleartrix: "100% Parser-Tested Single Column & Layouts",
                       others: "Complex multi-column layouts can fail ATS parsers",
                     },
                   ].map((row, idx) => (
@@ -389,8 +389,8 @@ export default function HomePage() {
                         <div className="flex items-start gap-2 bg-blue-50/70 border border-blue-200/60 rounded-lg p-2.5">
                           <Check className="h-4 w-4 text-blue-600 shrink-0 stroke-[3] mt-0.5" />
                           <div className="text-xs">
-                            <span className="font-bold text-blue-900 block mb-0.5">Mindkit</span>
-                            <span className="text-slate-800 font-medium">{row.mindkit}</span>
+                            <span className="font-bold text-blue-900 block mb-0.5">Cleartrix</span>
+                            <span className="text-slate-800 font-medium">{row.cleartrix}</span>
                           </div>
                         </div>
                         <div className="flex items-start gap-2 bg-slate-50 border border-slate-200/60 rounded-lg p-2.5">
@@ -412,7 +412,7 @@ export default function HomePage() {
                     <div className="grid grid-cols-12 bg-slate-100 text-slate-900 border-b border-slate-200 p-4 font-headings text-xs font-bold uppercase tracking-wider">
                       <div className="col-span-4">Feature</div>
                       <div className="col-span-4 text-blue-800 font-extrabold flex items-center gap-2 bg-blue-50/80 -my-4 py-4 px-3 border-x border-blue-200">
-                        <span>Mindkit</span>
+                        <span>Cleartrix</span>
                         <span className="rounded-md bg-blue-600 text-white px-2 py-0.5 text-[10px] font-bold">
                           100% Free
                         </span>
@@ -426,32 +426,32 @@ export default function HomePage() {
                     {[
                       {
                         feature: "PDF Download",
-                        mindkit: "Free & Unlimited Vector PDF",
+                        cleartrix: "Free & Unlimited Vector PDF",
                         others: "Paywalled or recurring subscription ($24/mo)",
                       },
                       {
                         feature: "Template Access",
-                        mindkit: "All 20+ Templates Unlocked",
+                        cleartrix: "All 20+ Templates Unlocked",
                         others: "Most designs locked behind pro paywall",
                       },
                       {
                         feature: "Watermarks",
-                        mindkit: "Zero watermarks on any export",
+                        cleartrix: "Zero watermarks on any export",
                         others: "Branding watermarks on free tier",
                       },
                       {
                         feature: "Account Required",
-                        mindkit: "None. Open & build immediately",
+                        cleartrix: "None. Open & build immediately",
                         others: "Mandatory email registration & tracking",
                       },
                       {
                         feature: "Data Privacy",
-                        mindkit: "Saved privately on your device",
+                        cleartrix: "Saved privately on your device",
                         others: "Resume data stored on external servers",
                       },
                       {
                         feature: "ATS Compliance",
-                        mindkit: "100% Parser-Tested Single Column & Layouts",
+                        cleartrix: "100% Parser-Tested Single Column & Layouts",
                         others: "Complex multi-column layouts can fail ATS parsers",
                       },
                     ].map((row, idx) => (
@@ -466,7 +466,7 @@ export default function HomePage() {
                         </div>
                         <div className="col-span-4 font-body font-bold text-slate-900 flex items-center gap-2 bg-blue-50/30 -my-4 py-4 px-3 border-x border-blue-100">
                           <Check className="h-4 w-4 text-blue-600 shrink-0 stroke-[3]" />
-                          <span>{row.mindkit}</span>
+                          <span>{row.cleartrix}</span>
                         </div>
                         <div className="col-span-4 font-body text-xs text-slate-500 flex items-center gap-2 pl-3">
                           <X className="h-4 w-4 text-red-500 shrink-0 stroke-[2.5]" />
@@ -485,7 +485,7 @@ export default function HomePage() {
                   </span>
                   <span className="inline-flex items-center gap-1.5 font-bold text-blue-700 bg-blue-50 border border-blue-200 px-3 py-1 rounded-md">
                     <CheckCircle2 className="h-3.5 w-3.5 text-blue-600" />
-                    Mindkit: $0.00 forever
+                    Cleartrix: $0.00 forever
                   </span>
                 </div>
               </div>
@@ -502,7 +502,7 @@ export default function HomePage() {
         />
 
         {/* ========================================================================= */}
-        {/* 5. Why Mindkit: Features Bento & AI Bullet Enhancer Live Demo            */}
+        {/* 5. Why Cleartrix: Features Bento & AI Bullet Enhancer Live Demo            */}
         {/* ========================================================================= */}
         <section
           id="features"
@@ -515,7 +515,7 @@ export default function HomePage() {
             <Reveal variant="fade-up">
               <div className="text-center max-w-3xl mx-auto">
                 <span className="font-body text-eyebrow uppercase tracking-[1.2px] text-blue-800 bg-white border border-blue-200/80 px-3.5 py-1 rounded-full inline-block mb-3 font-semibold shadow-2xs">
-                  Why Mindkit
+                  Why Cleartrix
                 </span>
                 <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900">
                   Engineered for real careers. Backed by client-side intelligence.
@@ -791,7 +791,7 @@ export default function HomePage() {
                   Frequently Asked Questions
                 </span>
                 <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 [&>span]:text-blue-600">
-                  Everything you need to know about <span>Mindkit</span>
+                  Everything you need to know about <span>Cleartrix</span>
                 </h2>
                 <p className="font-body text-body text-slate-600 leading-relaxed">
                   Clear, transparent answers. No hidden terms, no bait-and-switch billing,
@@ -888,7 +888,7 @@ export default function HomePage() {
         <div className="flex items-center gap-2">
           <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
           <span className="font-body text-small font-bold text-slate-900">
-            Mindkit Resume Builder 100% Free
+            Cleartrix Resume Builder 100% Free
           </span>
         </div>
         <div className="h-4 w-[1px] bg-slate-200" />
@@ -916,7 +916,7 @@ export default function HomePage() {
         </Link>
       </div>
 
-      {/* Global Mindkit Footer */}
+      {/* Global Cleartrix Footer */}
       <Footer />
 
       {/* Google Structured Data / JSON-LD for SEO */}
@@ -928,7 +928,7 @@ export default function HomePage() {
             "@graph": [
               {
                 "@type": "SoftwareApplication",
-                "name": "Mindkit Resume Builder",
+                "name": "Cleartrix Resume Builder",
                 "applicationCategory": "BusinessApplication",
                 "operatingSystem": "Web browser",
                 "offers": {

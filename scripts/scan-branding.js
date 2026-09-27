@@ -1,22 +1,20 @@
 const fs = require('fs');
 const path = require('path');
 
-const searchTerms = [
-  'Resume Builder Lab',
+const forbiddenTerms = [
+  'mindkit',
   'resumebuilderlab',
-  'ResumeBuilderLab',
-  'Curviv',
   'curviv',
-  'Curiv',
   'curiv'
 ];
 
-const targetDirs = ['app', 'components', 'lib'];
+const targetDirs = ['app', 'components', 'lib', 'scripts'];
 const results = [];
 
 function search(dir) {
   const files = fs.readdirSync(dir);
   for (const file of files) {
+    if (file === 'scan-branding.js' || file === 'rebrand-to-cleartrix.js') continue;
     const fullPath = path.join(dir, file);
     const stat = fs.statSync(fullPath);
     if (stat.isDirectory()) {
@@ -25,7 +23,7 @@ function search(dir) {
       const content = fs.readFileSync(fullPath, 'utf8');
       const lines = content.split('\n');
       lines.forEach((line, idx) => {
-        for (const term of searchTerms) {
+        for (const term of forbiddenTerms) {
           if (line.toLowerCase().includes(term.toLowerCase())) {
             results.push({
               file: path.relative(path.join(__dirname, '..'), fullPath),
@@ -46,7 +44,37 @@ targetDirs.forEach(d => {
   if (fs.existsSync(p)) search(p);
 });
 
-console.log(`Found ${results.length} occurrences in app/, components/, lib/:`);
-results.forEach(r => {
-  console.log(`${r.file}:${r.line} [${r.term}] -> ${r.snippet}`);
-});
+// Also scan root directory files
+const rootFiles = fs.readdirSync(path.join(__dirname, '..'));
+for (const file of rootFiles) {
+  if (['scan-branding.js', 'rebrand-to-cleartrix.js', 'package-lock.json'].includes(file)) continue;
+  const fullPath = path.join(__dirname, '..', file);
+  if (fs.statSync(fullPath).isFile() && /\.(ts|tsx|js|json|md|html|css|yml|env.*)$/.test(file)) {
+    const content = fs.readFileSync(fullPath, 'utf8');
+    const lines = content.split('\n');
+    lines.forEach((line, idx) => {
+      for (const term of forbiddenTerms) {
+        if (line.toLowerCase().includes(term.toLowerCase())) {
+          results.push({
+            file,
+            line: idx + 1,
+            term,
+            snippet: line.trim()
+          });
+          break;
+        }
+      }
+    });
+  }
+}
+
+if (results.length > 0) {
+  console.error(`🚨 Found ${results.length} legacy branding occurrences:`);
+  results.forEach(r => {
+    console.error(`${r.file}:${r.line} [${r.term}] -> ${r.snippet}`);
+  });
+  process.exit(1);
+} else {
+  console.log('✅ ZERO legacy branding found across app/, components/, lib/, scripts/! All rebranded to Cleartrix.');
+  process.exit(0);
+}

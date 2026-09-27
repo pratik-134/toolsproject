@@ -112,7 +112,7 @@ import { runTests as runPdfDecryptorTests } from "../components/tools/phase2/pdf
 import { runTests as runPowerPointToPdfTests } from "../components/tools/phase2/powerpoint-to-pdf/logic.test";
 
 async function main() {
-  console.log("=== MINDKIT TOOL LOGIC UNIT TESTS ===");
+  console.log("=== CLEARTRIX TOOL LOGIC UNIT TESTS ===");
 
   console.log("Testing [json-formatter] logic...");
   testJson();

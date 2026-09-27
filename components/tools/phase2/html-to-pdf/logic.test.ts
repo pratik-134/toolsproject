@@ -29,7 +29,7 @@ export async function runHtmlToPdfTests() {
     margin: "narrow",
   });
 
-  if (!styledWithHead.includes("id=\"mindkit-print-styles\"")) {
+  if (!styledWithHead.includes("id=\"cleartrix-print-styles\"")) {
     throw new Error("injectPrintStyles failed to inject style tag into head");
   }
   if (!styledWithHead.includes("size: A4")) {

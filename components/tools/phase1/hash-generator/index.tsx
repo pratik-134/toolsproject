@@ -6,7 +6,7 @@ import { Copy, Check, Hash, Sparkles, Trash2, KeyRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function HashGeneratorTool() {
-  const [input, setInput] = useState<string>("Mindkit Privacy First");
+  const [input, setInput] = useState<string>("Cleartrix Privacy First");
   const [hashes, setHashes] = useState<HashResults>({
     md5: "",
     sha1: "",

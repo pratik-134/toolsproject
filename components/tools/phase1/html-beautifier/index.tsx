@@ -5,9 +5,9 @@ import { Copy, Check, Download, Wand2, Minimize2, FileCode, Code, Sparkles } fro
 import { processCode, CodeLanguage } from "./logic";
 
 const SAMPLES: Record<CodeLanguage, string> = {
-  html: '<!DOCTYPE html><html><head><title>Mindkit</title></head><body><header><h1>Welcome</h1><nav><ul><li><a href="/">Home</a></li><li><a href="/tools">Tools</a></li></ul></nav></header><main><p>Zero-upload privacy first platform.</p></main></body></html>',
+  html: '<!DOCTYPE html><html><head><title>Cleartrix</title></head><body><header><h1>Welcome</h1><nav><ul><li><a href="/">Home</a></li><li><a href="/tools">Tools</a></li></ul></nav></header><main><p>Zero-upload privacy first platform.</p></main></body></html>',
   css: 'body{margin:0;font-family:sans-serif;background-color:#f8fafc;color:#0f172a;}.container{max-width:1200px;margin:0 auto;padding:1rem;}.btn{display:inline-flex;align-items:center;padding:0.5rem 1rem;background-color:#2563eb;color:#ffffff;border-radius:0.5rem;}',
-  javascript: '{"name":"mindkit","version":"1.0.0","private":true,"scripts":{"build":"next build","check":"npm run check"},"features":["100% Client-Side","Zero Trackers","Instant Local Execution"]}',
+  javascript: '{"name":"cleartrix","version":"1.0.0","private":true,"scripts":{"build":"next build","check":"npm run check"},"features":["100% Client-Side","Zero Trackers","Instant Local Execution"]}',
 };
 
 export default function HtmlBeautifierTool() {

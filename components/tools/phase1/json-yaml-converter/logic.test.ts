@@ -17,7 +17,7 @@ export function runTests(): boolean {
 
   // Test 2: YAML to JSON parsing
   const yamlInput = `
-name: mindkit
+name: cleartrix
 version: 1.0
 enabled: true
 services:
@@ -28,7 +28,7 @@ services:
   const jsonStr = yamlToJson(yamlInput);
   const parsed = JSON.parse(jsonStr);
 
-  if (parsed.name !== "mindkit" || parsed.version !== 1 || parsed.enabled !== true) {
+  if (parsed.name !== "cleartrix" || parsed.version !== 1 || parsed.enabled !== true) {
     throw new Error(`Test 2 YAML to JSON failed: ${jsonStr}`);
   }
   if (!Array.isArray(parsed.services) || parsed.services[0] !== "web") {

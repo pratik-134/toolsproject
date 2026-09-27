@@ -11,7 +11,7 @@ export default function ChecksumVerifierTool() {
   const [sourceType, setSourceType] = useState<"file" | "text">("file");
   const [fileName, setFileName] = useState<string | null>(null);
   const [fileSize, setFileSize] = useState<string | null>(null);
-  const [textInput, setTextInput] = useState<string>("Mindkit Privacy-First Web Platform");
+  const [textInput, setTextInput] = useState<string>("Cleartrix Privacy-First Web Platform");
   const [computedHash, setComputedHash] = useState<string>("");
   const [expectedHash, setExpectedHash] = useState<string>("");
   const [isComputing, setIsComputing] = useState<boolean>(false);

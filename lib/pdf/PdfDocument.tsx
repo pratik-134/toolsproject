@@ -13,12 +13,12 @@ export const PdfDocument: React.FC<PdfDocumentProps> = ({ data }) => {
 
   return (
     <Document
-      title={`${personalInfo?.fullName || "Resume"} - Mindkit Resume Builder`}
-      author={personalInfo?.fullName || "Mindkit User"}
-      subject="Professional Resume created with Mindkit Resume Builder"
-      keywords="Resume, CV, Mindkit, Career"
-      creator="Mindkit (mindkit.dev)"
-      producer="Mindkit Client-Side PDF Engine"
+      title={`${personalInfo?.fullName || "Resume"} - Cleartrix Resume Builder`}
+      author={personalInfo?.fullName || "Cleartrix User"}
+      subject="Professional Resume created with Cleartrix Resume Builder"
+      keywords="Resume, CV, Cleartrix, Career"
+      creator="Cleartrix (cleartrix.com)"
+      producer="Cleartrix Client-Side PDF Engine"
     >
       <TemplateComponent data={data} />
     </Document>

@@ -11,7 +11,7 @@ export async function exportResumeToPdf(data: ResumeData): Promise<void> {
 
     const fileName = `${
       data.personalInfo.fullName.trim().replace(/[^a-zA-Z0-9_-]/g, "_") || "Resume"
-    }_Mindkit.pdf`;
+    }_Cleartrix.pdf`;
 
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");

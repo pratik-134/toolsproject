@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description:
     `Review the Terms of Service for ${BRAND.name}. Learn about our 100% free web utilities, user content ownership, client-side architecture, and privacy-first commitments.`,
   keywords: [
-    "Mindkit terms of service",
+    "Cleartrix terms of service",
     "free web tools terms",
     "content ownership",
     "client-side privacy terms",

@@ -39,22 +39,22 @@ interface QRPreset {
 
 const PRESETS: QRPreset[] = [
   {
-    name: "Mindkit Web Platform",
+    name: "Cleartrix Web Platform",
     type: "URL",
-    payload: "https://mindkit.dev/tools",
+    payload: "https://cleartrix.com/tools",
     description: "Standard web URL link",
   },
   {
     name: "Home Wi-Fi Network",
     type: "Wi-Fi",
-    payload: "WIFI:S:Mindkit_Office_5G;T:WPA;P:FastSecurePass2026;H:false;;",
+    payload: "WIFI:S:Cleartrix_Office_5G;T:WPA;P:FastSecurePass2026;H:false;;",
     description: "Instant Wi-Fi login configuration",
   },
   {
     name: "Executive vCard",
     type: "Contact",
     payload:
-      "BEGIN:VCARD\nVERSION:3.0\nFN:Alex Mercer\nTITLE:Chief Technology Officer\nORG:Mindkit Systems\nTEL:+1-555-839-2041\nEMAIL:alex@mindkit.dev\nURL:https://mindkit.dev\nEND:VCARD",
+      "BEGIN:VCARD\nVERSION:3.0\nFN:Alex Mercer\nTITLE:Chief Technology Officer\nORG:Cleartrix Systems\nTEL:+1-555-839-2041\nEMAIL:alex@cleartrix.com\nURL:https://cleartrix.com\nEND:VCARD",
     description: "Digital business contact card",
   },
   {
@@ -674,7 +674,7 @@ export default function QRScannerTool() {
           Smart Payload Recognition
         </h3>
         <p className="text-xs text-slate-500 dark:text-slate-400">
-          Mindkit automatically interprets QR code payload schemas on your device:
+          Cleartrix automatically interprets QR code payload schemas on your device:
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
           <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">

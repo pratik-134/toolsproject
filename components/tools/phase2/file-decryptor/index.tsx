@@ -50,7 +50,7 @@ export default function FileDecryptorTool() {
         if (inspection.valid) {
           setHeaderInfo({ filename: inspection.filename, mimeType: inspection.mimeType });
         } else {
-          setError(inspection.error || "Selected file is not a valid Mindkit encrypted container.");
+          setError(inspection.error || "Selected file is not a valid Cleartrix encrypted container.");
         }
       }
     };
@@ -150,7 +150,7 @@ export default function FileDecryptorTool() {
               Select or Drop an Encrypted (.enc) File
             </p>
             <p className="text-xs text-muted-foreground mt-1">
-              Supports files encrypted with Mindkit AES-GCM-256 File Locker
+              Supports files encrypted with Cleartrix AES-GCM-256 File Locker
             </p>
           </div>
         ) : (

@@ -26,7 +26,7 @@ import {
   Minimize2,
 } from "lucide-react";
 
-const SAMPLE_TEXT = `Welcome to Mindkit Direct TXT Editor!
+const SAMPLE_TEXT = `Welcome to Cleartrix Direct TXT Editor!
 
 This is a distraction-free, zero-upload notepad built for fast plain text drafting, formatting, and file preparation.
 

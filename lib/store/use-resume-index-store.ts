@@ -281,7 +281,7 @@ export const useResumeIndexStore = create<ResumeIndexState>((set, get) => ({
     const payload = {
       version: 1,
       exportedAt: new Date().toISOString(),
-      source: "mindkit",
+      source: "cleartrix",
       resumesCount: backupList.length,
       resumes: backupList,
     };

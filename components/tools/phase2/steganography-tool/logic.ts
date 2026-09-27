@@ -186,7 +186,7 @@ export function decodeStegoMessage(
     if (headerBytes[m] !== STEGO_MAGIC[m]) {
       return {
         success: false,
-        error: "No hidden Mindkit steganographic message detected in this image.",
+        error: "No hidden Cleartrix steganographic message detected in this image.",
       };
     }
   }

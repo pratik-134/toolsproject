@@ -161,7 +161,7 @@ export function insertMarkdownFormat(
       };
     }
     case "link": {
-      const replacement = `[${selected || "Link title"}](https://mindkit.dev)`;
+      const replacement = `[${selected || "Link title"}](https://cleartrix.com)`;
       return {
         newText: before + replacement + after,
         newCursor: start + replacement.length,

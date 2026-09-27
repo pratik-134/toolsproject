@@ -17,14 +17,14 @@ export function runTests(): boolean {
 
   // Test 2: Web Manifest JSON generation
   const manifestRaw = generateWebManifest({
-    name: "Mindkit App",
-    shortName: "Mindkit",
+    name: "Cleartrix App",
+    shortName: "Cleartrix",
     themeColor: "#6366f1",
     backgroundColor: "#ffffff",
   });
 
   const parsed = JSON.parse(manifestRaw);
-  if (parsed.name !== "Mindkit App" || parsed.short_name !== "Mindkit") {
+  if (parsed.name !== "Cleartrix App" || parsed.short_name !== "Cleartrix") {
     throw new Error("Web manifest properties mismatch");
   }
   if (parsed.theme_color !== "#6366f1") {

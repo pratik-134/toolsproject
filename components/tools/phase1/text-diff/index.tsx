@@ -4,17 +4,17 @@ import React, { useState, useMemo } from "react";
 import { GitCompare, Plus, Minus, ArrowRightLeft, RefreshCw, Copy, Check } from "lucide-react";
 import { computeDiff, DiffResult } from "./logic";
 
-const SAMPLE_ORIGINAL = `// Mindkit Analytics Config
+const SAMPLE_ORIGINAL = `// Cleartrix Analytics Config
 export const config = {
-  platform: "Mindkit",
+  platform: "Cleartrix",
   clientSide: true,
   trackingCookies: true,
   storageQuotaMb: 5,
 };`;
 
-const SAMPLE_MODIFIED = `// Mindkit Privacy-First Config
+const SAMPLE_MODIFIED = `// Cleartrix Privacy-First Config
 export const config = {
-  platform: "Mindkit",
+  platform: "Cleartrix",
   clientSide: true,
   trackingCookies: false, // Zero tracking policy
   storageQuotaMb: 10,

@@ -43,7 +43,7 @@ const SAMPLE_SVGS: Record<string, string> = {
     <polygon class="st0" points="50.12345,5.67891 63.98765,33.54321 95.12345,38.12345 72.54321,60.12345 77.87654,91.23456 50.12345,76.54321 22.34567,91.23456 27.67891,60.12345 5.12345,38.12345 36.23456,33.54321" />
   </g>
 </svg>`,
-  "Badge Vector": `<!-- Mindkit SVG Badge Vector -->
+  "Badge Vector": `<!-- Cleartrix SVG Badge Vector -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
   <g id="emptyWrapper">
   </g>

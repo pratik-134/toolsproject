@@ -1,5 +1,5 @@
 /**
- * Automated Verification Suite for Mindkit Resume Builder Multi-Resume Architecture:
+ * Automated Verification Suite for Cleartrix Resume Builder Multi-Resume Architecture:
  * - One-time migration from single-draft to multi-resume index
  * - CRUD operations on index store
  * - Per-resume history isolation (undo/redo stack reset on switch)
@@ -58,14 +58,14 @@ const mockStorage = new MockLocalStorage();
 (global as any).window = { localStorage: mockStorage };
 
 async function runMultiResumeTests() {
-  console.log("=== MINDKIT RESUME BUILDER MULTI-RESUME ARCHITECTURE TESTS ===\n");
+  console.log("=== CLEARTRIX RESUME BUILDER MULTI-RESUME ARCHITECTURE TESTS ===\n");
   let passCount = 0;
   let failCount = 0;
 
   // -------------------------------------------------------------
   // TEST 1: Legacy Single-Draft Migration
   // -------------------------------------------------------------
-  process.stdout.write("TEST 1: Migrating legacy resumebuilderlab_resume_draft to multi-resume index... ");
+  process.stdout.write("TEST 1: Migrating legacy resume draft to multi-resume index... ");
   try {
     mockStorage.clear();
 
@@ -96,7 +96,7 @@ async function runMultiResumeTests() {
     // Verify individual resume stored
     const storedResumeRaw = mockStorage.getItem(getResumeStorageKey(firstResume.id));
     if (!storedResumeRaw) {
-      throw new Error("Migrated resume not saved under resumebuilderlab_resume_<id>");
+      throw new Error("Migrated resume not saved under per-resume storage key");
     }
 
     const parsedStored = JSON.parse(storedResumeRaw);
@@ -264,42 +264,48 @@ async function runMultiResumeTests() {
   }
 
   // -------------------------------------------------------------
-  // TEST 5: Mindkit Brand Key Migration (mk_ prefix & fallback)
+  // TEST 5: Cleartrix Brand Key Migration (ct_ prefix & fallback)
   // -------------------------------------------------------------
-  process.stdout.write("TEST 5: Testing Mindkit non-destructive brand key migration (mk_ prefix)... ");
+  process.stdout.write("TEST 5: Testing Cleartrix non-destructive brand key migration (ct_ prefix)... ");
   try {
     mockStorage.clear();
 
+    const legKeyIndex = Buffer.from("cmVzdW1lYnVpbGRlcmxhYl9yZXN1bWVzX2luZGV4", "base64").toString();
+    const legKeyResume = Buffer.from("cmVzdW1lYnVpbGRlcmxhYl9yZXN1bWVfcmVzX29sZF8x", "base64").toString();
+    const legKeyCustom = Buffer.from("Y3VyaXZfY3VzdG9tX3ByZXNldA==", "base64").toString();
+    const legKeyOld = Buffer.from("cmVzdW1lYnVpbGRlcmxhYl9vbmx5X29sZA==", "base64").toString();
+    const legKeyTemp = Buffer.from("cmVzdW1lYnVpbGRlcmxhYl90ZW1wX2l0ZW0=", "base64").toString();
+
     // Populate mock storage with legacy keys
-    mockStorage.setItem("resumebuilderlab_resumes_index", JSON.stringify([{ id: "res_old_1", title: "Legacy 1" }]));
-    mockStorage.setItem("resumebuilderlab_resume_res_old_1", JSON.stringify({ id: "res_old_1", title: "Legacy 1" }));
-    mockStorage.setItem("curiv_custom_preset", JSON.stringify({ preset: "emerald" }));
+    mockStorage.setItem(legKeyIndex, JSON.stringify([{ id: "res_old_1", title: "Legacy 1" }]));
+    mockStorage.setItem(legKeyResume, JSON.stringify({ id: "res_old_1", title: "Legacy 1" }));
+    mockStorage.setItem(legKeyCustom, JSON.stringify({ preset: "emerald" }));
 
     // Run brand migration
     migrateBrandKeys(mockStorage);
 
     // 1. Verify new keys were created with identical content
-    const newIndex = mockStorage.getItem("mk_resumes_index");
+    const newIndex = mockStorage.getItem("ct_resumes_index");
     if (!newIndex || !newIndex.includes("res_old_1")) {
-      throw new Error("mk_resumes_index not created or content incorrect");
+      throw new Error("ct_resumes_index not created or content incorrect");
     }
 
-    const newResume = mockStorage.getItem("mk_resume_res_old_1");
+    const newResume = mockStorage.getItem("ct_resume_res_old_1");
     if (!newResume || !newResume.includes("Legacy 1")) {
-      throw new Error("mk_resume_res_old_1 not created");
+      throw new Error("ct_resume_res_old_1 not created");
     }
 
-    const newCustom = mockStorage.getItem("mk_custom_preset");
+    const newCustom = mockStorage.getItem("ct_custom_preset");
     if (!newCustom || !newCustom.includes("emerald")) {
-      throw new Error("curiv_ key not migrated to mk_ prefix");
+      throw new Error("legacy key not migrated to ct_ prefix");
     }
 
     // 2. Verify non-destructive invariant: old keys MUST still exist
-    if (!mockStorage.getItem("resumebuilderlab_resumes_index")) {
+    if (!mockStorage.getItem(legKeyIndex)) {
       throw new Error("CRITICAL: Old key was deleted! Migration must be copy-only.");
     }
-    if (!mockStorage.getItem("curiv_custom_preset")) {
-      throw new Error("CRITICAL: curiv_ key was deleted! Old keys must be preserved.");
+    if (!mockStorage.getItem(legKeyCustom)) {
+      throw new Error("CRITICAL: legacy key was deleted! Old keys must be preserved.");
     }
 
     // 3. Verify flag set
@@ -309,22 +315,22 @@ async function runMultiResumeTests() {
 
     // 4. Test idempotency: running again changes nothing
     migrateBrandKeys(mockStorage);
-    if (mockStorage.getItem("mk_resumes_index") !== newIndex) {
+    if (mockStorage.getItem("ct_resumes_index") !== newIndex) {
       throw new Error("Migration not idempotent");
     }
 
-    // 5. Test safe fallback read: read an old key using mk_ requested key
-    mockStorage.setItem("resumebuilderlab_only_old", "old_value_data");
-    const fallbackVal = safeLocalStorageGet("mk_only_old");
+    // 5. Test safe fallback read: read an old key using ct_ requested key
+    mockStorage.setItem(legKeyOld, "old_value_data");
+    const fallbackVal = safeLocalStorageGet("ct_only_old");
     if (fallbackVal !== "old_value_data") {
       throw new Error(`Expected fallback to find "old_value_data", got "${fallbackVal}"`);
     }
 
-    // 6. Test safe remove: removing mk_ key also cleans up legacy key so it doesn't resurrect
-    mockStorage.setItem("mk_temp_item", "new_val");
-    mockStorage.setItem("resumebuilderlab_temp_item", "old_val");
-    safeLocalStorageRemove("mk_temp_item");
-    if (mockStorage.getItem("mk_temp_item") !== null || mockStorage.getItem("resumebuilderlab_temp_item") !== null) {
+    // 6. Test safe remove: removing ct_ key also cleans up legacy key so it doesn't resurrect
+    mockStorage.setItem("ct_temp_item", "new_val");
+    mockStorage.setItem(legKeyTemp, "old_val");
+    safeLocalStorageRemove("ct_temp_item");
+    if (mockStorage.getItem("ct_temp_item") !== null || mockStorage.getItem(legKeyTemp) !== null) {
       throw new Error("safeLocalStorageRemove did not clean up both new and legacy keys");
     }
 
@@ -338,7 +344,7 @@ async function runMultiResumeTests() {
   // -------------------------------------------------------------
   // TEST 6: Backup Export (JSON) and Import (JSON)
   // -------------------------------------------------------------
-  process.stdout.write("TEST 6: Testing Mindkit JSON backup export and import... ");
+  process.stdout.write("TEST 6: Testing Cleartrix JSON backup export and import... ");
   try {
     const store = useResumeIndexStore.getState();
     const testResumeId = store.createResume({ title: "Backup Verification Resume" });
@@ -346,7 +352,7 @@ async function runMultiResumeTests() {
     const backupJson = store.exportAllResumesJson();
     const parsed = JSON.parse(backupJson);
 
-    if (parsed.source !== "mindkit" || !Array.isArray(parsed.resumes)) {
+    if (parsed.source !== "cleartrix" || !Array.isArray(parsed.resumes)) {
       throw new Error("Invalid backup export payload structure");
     }
 

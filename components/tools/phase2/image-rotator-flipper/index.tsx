@@ -64,7 +64,7 @@ export default function ImageRotatorFlipperTool() {
     // Text & arrow to see orientation clearly
     ctx.fillStyle = "#ffffff";
     ctx.font = "bold 32px sans-serif";
-    ctx.fillText("MINDKIT ROTATE & FLIP", 50, 180);
+    ctx.fillText("CLEARTRIX ROTATE & FLIP", 50, 180);
 
     ctx.font = "20px sans-serif";
     ctx.fillStyle = "#e0e7ff";

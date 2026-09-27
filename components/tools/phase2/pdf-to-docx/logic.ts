@@ -234,11 +234,11 @@ export async function convertPdfToDocx(
 }
 
 export const SAMPLE_PDF_PARAGRAPHS: ExtractedPdfBlock[] = [
-  { type: "heading1", text: "MINDKIT ENTERPRISE ARCHITECTURE", pageNumber: 1 },
+  { type: "heading1", text: "CLEARTRIX ENTERPRISE ARCHITECTURE", pageNumber: 1 },
   { type: "heading2", text: "Section 1: In-Browser Execution", pageNumber: 1 },
   {
     type: "paragraph",
-    text: "Mindkit processes all binary documents, PDFs, and spreadsheets locally inside your browser memory sandbox.",
+    text: "Cleartrix processes all binary documents, PDFs, and spreadsheets locally inside your browser memory sandbox.",
     pageNumber: 1,
   },
   { type: "bullet", text: "Zero network telemetry or document transmission.", pageNumber: 1 },

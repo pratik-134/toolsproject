@@ -42,7 +42,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
     <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between bg-white px-3 sm:px-8 select-none shadow-md">
       {/* Left: Brand & Dashboard Title */}
       <div className="flex items-center gap-3">
-        <Link href="/" className="group" title="Mindkit Resume Builder Home">
+        <Link href="/" className="group" title="Cleartrix Resume Builder Home">
           <BrandLogo product="resume-builder" size={32} subtitle="My Resumes" />
         </Link>
         <Link
@@ -64,7 +64,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
               ? "bg-amber-50 text-amber-700 border-amber-200 animate-pulse"
               : "bg-slate-50 text-slate-600 border-slate-200"
           }`}
-          title="Mindkit stores all your resume data exclusively in your browser memory and local storage. Zero data leaves your machine."
+          title="Cleartrix stores all your resume data exclusively in your browser memory and local storage. Zero data leaves your machine."
         >
           <HardDrive className="h-3.5 w-3.5 text-slate-500" />
           <span>Storage: {storageUsage.formattedUsed} used</span>

@@ -30,7 +30,7 @@ const THEMES: { id: SlideTheme; label: string; bgClass: string; textClass: strin
 ];
 
 export default function PowerPointToPdfTool() {
-  const [deckTitle, setDeckTitle] = useState<string>("Mindkit Strategic Deck");
+  const [deckTitle, setDeckTitle] = useState<string>("Cleartrix Strategic Deck");
   const [markdownInput, setMarkdownInput] = useState<string>(SAMPLE_PRESENTATION_MARKDOWN);
   const [theme, setTheme] = useState<SlideTheme>("modern-dark");
   const [includeSlideNumbers, setIncludeSlideNumbers] = useState<boolean>(true);
@@ -150,7 +150,7 @@ export default function PowerPointToPdfTool() {
                   className="text-xs h-7 text-muted-foreground"
                   onClick={() => {
                     setMarkdownInput(SAMPLE_PRESENTATION_MARKDOWN);
-                    setDeckTitle("Mindkit Strategic Deck");
+                    setDeckTitle("Cleartrix Strategic Deck");
                     setStatusMessage("");
                   }}
                 >

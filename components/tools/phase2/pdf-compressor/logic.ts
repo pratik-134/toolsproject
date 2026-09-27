@@ -21,11 +21,11 @@ export async function createSampleCompressPdf(): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
   const font = await doc.embedFont(StandardFonts.Helvetica);
 
-  doc.setTitle("Mindkit Uncompressed Document Example with Heavy Metadata");
-  doc.setAuthor("Mindkit Enterprise Authoring Suite - Department of Digital Systems");
+  doc.setTitle("Cleartrix Uncompressed Document Example with Heavy Metadata");
+  doc.setAuthor("Cleartrix Enterprise Authoring Suite - Department of Digital Systems");
   doc.setSubject("Client-Side In-Browser PDF Compression Benchmarks and Analysis");
   doc.setKeywords([
-    "mindkit",
+    "cleartrix",
     "pdf",
     "compression",
     "privacy",
@@ -34,8 +34,8 @@ export async function createSampleCompressPdf(): Promise<Uint8Array> {
     "stream",
     "objects",
   ]);
-  doc.setProducer("Mindkit Engine v1.0.0");
-  doc.setCreator("Mindkit Test Document Generator");
+  doc.setProducer("Cleartrix Engine v1.0.0");
+  doc.setCreator("Cleartrix Test Document Generator");
 
   for (let i = 1; i <= 3; i++) {
     const page = doc.addPage([595.28, 841.89]);

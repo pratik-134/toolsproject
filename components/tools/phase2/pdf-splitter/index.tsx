@@ -75,7 +75,7 @@ export default function PdfSplitterTool() {
       const sample = await createSampleSplitPdf(6);
       const doc = await PDFDocument.load(sample);
       setFileBuffer(sample);
-      setFileName("Mindkit_Product_Guide_6Pages.pdf");
+      setFileName("Cleartrix_Product_Guide_6Pages.pdf");
       setFileSize(sample.length);
       setPageCount(doc.getPageCount());
       setRangeInput("1-3, 5");

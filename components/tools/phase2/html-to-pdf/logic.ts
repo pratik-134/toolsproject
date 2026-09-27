@@ -189,7 +189,7 @@ export function injectPrintStyles(html: string, options: PrintOptions): string {
       : "20mm";
 
   const printStyleTag = `
-  <style id="mindkit-print-styles">
+  <style id="cleartrix-print-styles">
     @page {
       size: ${options.pageSize};
       margin: ${marginCss};

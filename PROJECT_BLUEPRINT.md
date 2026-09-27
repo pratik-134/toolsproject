@@ -1,7 +1,7 @@
-# Mindkit: Master Project Architecture, Coding Blueprint & AI Guide
+# Cleartrix: Master Project Architecture, Coding Blueprint & AI Guide
 
-> **Product:** Mindkit (`https://mindkit.dev`)  
-> **Flagship Tool:** Mindkit Resume Builder (formerly "Resume Builder Lab")  
+> **Product:** Cleartrix (`https://cleartrix.com`)  
+> **Flagship Tool:** Cleartrix Resume Builder (formerly "Cleartrix Resume Builder")  
 > **Current Platform State:** **104 Tools Live**, **113 Prerendered Static Routes**, **103 Unit Tests**, **311 Privacy-Scanned Files**, **100% Green CI (`npm run check` & `npm run build`)**.  
 > **Primary Stack:** Next.js 15.5 (App Router, React 18, TypeScript 5.7, Tailwind CSS 3.4), Zustand 4.5, Zod 3.23, Radix UI primitives.  
 > **AI / Heavy Processing Stack:** Python (FastAPI asynchronous microservice + in-browser Pyodide WebAssembly).  
@@ -11,7 +11,7 @@
 
 ## 1. Core Mission & Non-Negotiable Invariants
 
-Mindkit is one unified, lightning-fast web platform hosting 175 everyday utilities across developer tools, calculators, documents, media, and design.
+Cleartrix is one unified, lightning-fast web platform hosting 175 everyday utilities across developer tools, calculators, documents, media, and design.
 
 ### The 5 Non-Negotiable Invariants:
 1. **Privacy-First (Zero Server Uploads by Default):**
@@ -34,11 +34,11 @@ Mindkit is one unified, lightning-fast web platform hosting 175 everyday utiliti
 ## 2. Codebase Directory Structure
 
 ```
-curviv/ (mindkit)
+cleartrix/ (cleartrix)
 ├── app/                                    # Next.js 15 App Router
 │   ├── layout.tsx                          # Root layout with Brand metadata, ThemeProvider, Toast
-│   ├── page.tsx                            # Mindkit platform homepage
-│   ├── brand/page.tsx                      # Mindkit Brand & Design Guidelines
+│   ├── page.tsx                            # Cleartrix platform homepage
+│   ├── brand/page.tsx                      # Cleartrix Brand & Design Guidelines
 │   ├── dashboard/page.tsx                  # Multi-resume dashboard & management
 │   ├── editor/page.tsx                     # Flagship ATS Resume Builder editor
 │   ├── privacy/page.tsx                    # Privacy Policy & local-first guarantees
@@ -48,7 +48,7 @@ curviv/ (mindkit)
 │       ├── [category]/page.tsx             # Category Hub (all tools in category)
 │       └── [category]/[slug]/page.tsx      # Dynamic SSG Tool Page
 ├── components/
-│   ├── BrandLogo.tsx                       # Mindkit Hex-M logo + ResumeBuilderLab legacy icons
+│   ├── BrandLogo.tsx                       # Cleartrix Hex-M logo + Cleartrix legacy icons
 │   ├── header.tsx                          # Universal Navbar with Tools menu & search
 │   ├── footer.tsx                          # Universal Footer with legal links & category tree
 │   ├── tool-shell/                         # Reusable tool container components
@@ -96,7 +96,7 @@ curviv/ (mindkit)
 
 ## 3. The 4-File Tool Module Pattern
 
-Every single tool in Mindkit follows a strict, modular 4-file pattern. Never deviate from this pattern:
+Every single tool in Cleartrix follows a strict, modular 4-file pattern. Never deviate from this pattern:
 
 ### File 1: `components/tools/<phase>/<slug>/logic.ts`
 - **Rule:** Contains **only pure TypeScript functions**. Zero React hooks, zero JSX, zero DOM manipulation, zero `window` or `document` calls.
@@ -158,13 +158,13 @@ Any AI or developer working on this codebase must adhere to these resolved gotch
    - **Always use arrow functions:** `const helper = () => {};`.
 4. **Webpack 5 Server Prerender Stub (`empty-module.js`):**
    - Certain optional peer dependencies (like `canvas` or `encoding`) fail during Next.js server-side static page generation (`next build`).
-   - We alias them in [`next.config.mjs`](file:///c:/Users/abc/OneDrive/Desktop/curviv/next.config.mjs) to a physical stub file [`lib/empty-module.js`](file:///c:/Users/abc/OneDrive/Desktop/curviv/lib/empty-module.js) (`module.exports = {};`).
+   - We alias them in [`next.config.mjs`](file:///c:/Users/abc/OneDrive/Desktop/cleartrix/next.config.mjs) to a physical stub file [`lib/empty-module.js`](file:///c:/Users/abc/OneDrive/Desktop/cleartrix/lib/empty-module.js) (`module.exports = {};`).
 5. **RSC Serialization Boundary:**
-   - Keep [`lib/registry/tools.ts`](file:///c:/Users/abc/OneDrive/Desktop/curviv/lib/registry/tools.ts) strictly serializable data (no React functions or JSX). All dynamic imports live in [`components/tools/ToolView.tsx`](file:///c:/Users/abc/OneDrive/Desktop/curviv/components/tools/ToolView.tsx).
-6. **Non-Destructive Brand Storage Migration (`mk_` prefix):**
-   - Real users store drafts under `resumebuilderlab_`, `curiv_`, and `curviv_`.
-   - [`lib/store/migrate-brand.ts`](file:///c:/Users/abc/OneDrive/Desktop/curviv/lib/store/migrate-brand.ts) **copies** old keys to `mk_` keys upon boot without deleting the old keys.
-   - `safeLocalStorageGet` transparently falls back to old keys if the new key is missing.
+   - Keep [`lib/registry/tools.ts`](file:///c:/Users/abc/OneDrive/Desktop/cleartrix/lib/registry/tools.ts) strictly serializable data (no React functions or JSX). All dynamic imports live in [`components/tools/ToolView.tsx`](file:///c:/Users/abc/OneDrive/Desktop/cleartrix/components/tools/ToolView.tsx).
+6. **Non-Destructive Brand Storage Migration (`ct_` prefix):**
+   - Users may have had drafts stored under previous iterations.
+   - [`lib/store/migrate-brand.ts`](file:///c:/Users/abc/OneDrive/Desktop/cleartrix/lib/store/migrate-brand.ts) **copies** old keys to `ct_` keys upon boot without deleting old keys.
+   - `safeLocalStorageGet` transparently falls back to older keys if the new key is missing.
 
 ---
 
@@ -224,7 +224,7 @@ When a user explicitly invokes a heavyweight Phase 4 AI tool that exceeds browse
 
 ```mermaid
 gantt
-    title Mindkit Platform Development Roadmap
+    title Cleartrix Platform Development Roadmap
     dateFormat  YYYY-MM
     section Phase 0 & Transition
     Foundation & Brand Switch (100% Done) :done, p0, 2026-08, 2026-09
@@ -270,4 +270,4 @@ When instructed to add new tools or modify the codebase, follow these exact step
    - Run `npm run check` (TypeScript, ESLint, privacy scanner, all template tests).
    - Run `npm run build` (Next.js must generate all SSG routes cleanly).
 5. **Step 5: Document & Report**
-   - Update `mindkit_phase0_transition_walkthrough.md` and `PROJECT_BLUEPRINT.md`.
+   - Update project walkthrough documentation and `PROJECT_BLUEPRINT.md`.

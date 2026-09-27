@@ -68,7 +68,7 @@ export default function CsvJsonConverterTool() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `mindkit-converted.${ext}`;
+    a.download = `cleartrix-converted.${ext}`;
     a.click();
     URL.revokeObjectURL(url);
   };

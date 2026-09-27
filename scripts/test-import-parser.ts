@@ -13,7 +13,7 @@ function assert(condition: boolean, message: string) {
 }
 
 function runImportTests() {
-  console.log("=== MINDKIT CLIENT-SIDE RESUME IMPORT ENGINE TESTS ===\n");
+  console.log("=== CLEARTRIX CLIENT-SIDE RESUME IMPORT ENGINE TESTS ===\n");
 
   // TEST 1: Chronological Software Engineer Resume
   console.log("TEST 1: Parsing Chronological Tech Resume...");

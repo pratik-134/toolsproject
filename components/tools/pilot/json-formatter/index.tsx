@@ -6,7 +6,7 @@ import { Copy, Check, Download, Trash2, FileJson, Sparkles, AlertCircle } from "
 import { Button } from "@/components/ui/button";
 
 const SAMPLE_JSON = `{
-  "platform": "Mindkit",
+  "platform": "Cleartrix",
   "privacy": "100% Client-Side",
   "toolsCount": 175,
   "features": [
@@ -15,7 +15,7 @@ const SAMPLE_JSON = `{
     "Completely free forever"
   ],
   "author": {
-    "name": "Mindkit Engineering",
+    "name": "Cleartrix Engineering",
     "verified": true
   }
 }`;

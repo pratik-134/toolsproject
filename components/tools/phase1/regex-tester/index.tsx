@@ -24,7 +24,7 @@ export default function RegexTesterTool() {
   const [pattern, setPattern] = useState<string>("([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})");
   const [flags, setFlags] = useState<string>("g");
   const [testString, setTestString] = useState<string>(
-    "Welcome to Mindkit! You can contact our support team at support@mindkit.dev or sales team at team@mindkit.dev anytime."
+    "Welcome to Cleartrix! You can contact our support team at support@cleartrix.com or sales team at team@cleartrix.com anytime."
   );
   const [replacePattern, setReplacePattern] = useState<string>("[REDACTED_EMAIL]");
   const [showReplace, setShowReplace] = useState<boolean>(false);

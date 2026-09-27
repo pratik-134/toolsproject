@@ -46,7 +46,7 @@ export const DeleteResumeModal: React.FC<DeleteResumeModalProps> = ({
             <strong className="text-slate-900">&ldquo;{resumeTitle}&rdquo;</strong>?
           </p>
           <p className="text-red-700 font-medium">
-            Because Mindkit runs 100% client-side in your browser, deleted resumes cannot be restored from a server backup.
+            Because Cleartrix runs 100% client-side in your browser, deleted resumes cannot be restored from a server backup.
           </p>
         </div>
 

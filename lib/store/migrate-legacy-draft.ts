@@ -11,12 +11,12 @@ import {
 
 /**
  * Performs a safe, non-destructive one-time migration from single-draft
- * `resumebuilderlab_resume_draft` to multi-resume `resumebuilderlab_resumes_index` + `resumebuilderlab_resume_<id>`.
+ * storage to multi-resume index and per-resume storage.
  *
  * Guarantees:
  * 1. Zero data loss: Preserves existing work as the user's first resume ("My Resume").
  * 2. Idempotent: Subsequent calls do nothing if the index already exists.
- * 3. Safe fallback: Legacy draft is backed up in `resumebuilderlab_resume_draft_backup`.
+ * 3. Safe fallback: Legacy draft is backed up safely.
  */
 export function migrateLegacyDraft(): ResumeIndexItem[] {
   if (typeof window === "undefined" || !window.localStorage) {
@@ -70,7 +70,7 @@ export function migrateLegacyDraft(): ResumeIndexItem[] {
           resumeData.title = "My Resume";
         }
 
-        // Save migrated resume under resumebuilderlab_resume_<id>
+        // Save migrated resume under per-resume key
         const resumeKey = getResumeStorageKey(resumeId);
         safeLocalStorageSet(resumeKey, JSON.stringify(resumeData));
 

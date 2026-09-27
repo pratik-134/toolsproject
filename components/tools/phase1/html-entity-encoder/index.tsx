@@ -12,11 +12,11 @@ import {
 const PRESETS = [
   {
     name: "HTML Snippet",
-    text: `<div class="card">\n  <h2>Mindkit &amp; Co.</h2>\n  <p>Price: $49.99 &lt; 50</p>\n</div>`,
+    text: `<div class="card">\n  <h2>Cleartrix &amp; Co.</h2>\n  <p>Price: $49.99 &lt; 50</p>\n</div>`,
   },
   {
     name: "Symbols & Accents",
-    text: `© Mindkit™ 2026 — All Rights Reserved. Special: €100 / £80 / ¥1000 • café & résumé`,
+    text: `© Cleartrix™ 2026 — All Rights Reserved. Special: €100 / £80 / ¥1000 • café & résumé`,
   },
   {
     name: "Math & Logic",
@@ -29,7 +29,7 @@ export default function HtmlEntityEncoderTool() {
   const [format, setFormat] = useState<EntityFormat>("named");
   const [scope, setScope] = useState<EncodeScope>("special");
   const [input, setInput] = useState<string>(
-    `<div class="banner">\n  <h1>Welcome to Mindkit & Co.</h1>\n  <p>Price: "Only $19.99" & 100% Free!</p>\n</div>`
+    `<div class="banner">\n  <h1>Welcome to Cleartrix & Co.</h1>\n  <p>Price: "Only $19.99" & 100% Free!</p>\n</div>`
   );
   const [copied, setCopied] = useState<boolean>(false);
 

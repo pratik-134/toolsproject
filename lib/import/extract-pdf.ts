@@ -134,7 +134,7 @@ export async function extractTextFromPdf(file: File): Promise<ExtractionResult> 
     // Check for scanned / image-only PDFs
     if (!fullText || fullText.length < 50) {
       throw new Error(
-        "This PDF appears to be a scanned image or contains no selectable text. Mindkit requires a text-based PDF or DOCX file."
+        "This PDF appears to be a scanned image or contains no selectable text. Cleartrix requires a text-based PDF or DOCX file."
       );
     }
 

@@ -81,7 +81,7 @@ export function validatePasswordStrength(password: string): {
 }
 
 /**
- * Encrypt arbitrary file bytes into a portable Mindkit MKENC1 container
+ * Encrypt arbitrary file bytes into a portable Cleartrix MKENC1 container
  */
 export async function encryptFileBuffer(
   fileBytes: Uint8Array,

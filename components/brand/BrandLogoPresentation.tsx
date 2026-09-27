@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import { Check, Copy, Sparkles, Layers, ShieldCheck, Box } from "lucide-react";
 import {
-  MindkitIcon,
-  MindkitLogo,
+  CleartrixIcon,
+  CleartrixLogo,
   ResumeBuilderIcon,
   ResumeBuilderLogo,
 } from "@/components/BrandLogo";
@@ -65,13 +65,13 @@ export const BrandLogoPresentation: React.FC = () => {
         {/* Header Title */}
         <div className="text-center space-y-3">
           <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200 px-3.5 py-1 text-xs font-semibold text-blue-800">
-            <Sparkles className="h-3.5 w-3.5 text-blue-600" /> Mindkit Identity System
+            <Sparkles className="h-3.5 w-3.5 text-blue-600" /> Cleartrix Identity System
           </div>
           <h1 className="font-headings text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
             Mind<span className="text-blue-600">kit</span> Brand Guidelines
           </h1>
           <p className="font-body text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
-            Official vector logo marks, color tokens, and visual standards for the Mindkit privacy-first web platform.
+            Official vector logo marks, color tokens, and visual standards for the Cleartrix privacy-first web platform.
           </p>
         </div>
 
@@ -82,18 +82,18 @@ export const BrandLogoPresentation: React.FC = () => {
               Symbol Geometry & Architecture
             </span>
             <h2 className="font-headings text-2xl font-bold text-slate-900 mt-1">
-              The Hex-M Modular Toolkit Prism
+              The Cleartrix Modular Prism
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="bg-slate-50 rounded-xl p-8 flex items-center justify-center border border-slate-100">
-              <MindkitIcon size={120} />
+              <CleartrixIcon size={120} />
             </div>
 
             <div className="space-y-4 text-sm text-slate-600 leading-relaxed">
               <p>
-                The <strong>Mindkit Hex-M</strong> is engineered around a precision hexagonal prism. Its dual pillars in royal indigo and brand blue represent foundational computing strength and reliability.
+                The <strong>Cleartrix Prism</strong> is engineered around precision matrix geometry. Its foundational royal indigo and brand blue represent computing strength and reliability.
               </p>
               <p>
                 The central facet culminates in an <strong>Electric Cyan Node (#00D2FF)</strong>, symbolizing 100% client-side execution, browser memory processing, and the seamless integration of 111+ productivity tools.
@@ -110,11 +110,11 @@ export const BrandLogoPresentation: React.FC = () => {
           </div>
         </div>
 
-        {/* 2. Logo Variations (Mindkit Umbrella) */}
+        {/* 2. Logo Variations (Cleartrix Umbrella) */}
         <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-sm space-y-6">
           <div className="border-b border-slate-100 pb-4">
             <h3 className="font-headings text-xl font-bold text-slate-900">
-              Mindkit Umbrella Logo Variations
+              Cleartrix Umbrella Logo Variations
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">
               Horizontal, stacked, and icon-only lockups for light and dark backgrounds.
@@ -123,22 +123,22 @@ export const BrandLogoPresentation: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="p-6 bg-slate-50 rounded-xl border border-slate-200 flex flex-col items-center justify-center gap-4">
-              <MindkitLogo size={36} variant="horizontal" />
+              <CleartrixLogo size={36} variant="horizontal" />
               <span className="text-xs text-slate-500 font-mono">Horizontal (Light Background)</span>
             </div>
 
             <div className="p-6 bg-slate-900 rounded-xl border border-slate-800 flex flex-col items-center justify-center gap-4">
-              <MindkitLogo size={36} variant="horizontal" isLight />
+              <CleartrixLogo size={36} variant="horizontal" isLight />
               <span className="text-xs text-slate-400 font-mono">Horizontal (Dark Background)</span>
             </div>
           </div>
         </div>
 
-        {/* 3. Sub-Brand: Mindkit Resume Builder */}
+        {/* 3. Sub-Brand: Cleartrix Resume Builder */}
         <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-8 shadow-sm space-y-6">
           <div className="border-b border-slate-100 pb-4">
             <h3 className="font-headings text-xl font-bold text-slate-900">
-              Flagship Sub-Brand: Mindkit Resume Builder
+              Flagship Sub-Brand: Cleartrix Resume Builder
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">
               Dedicated lockup and ATS document spine mark for the flagship resume editor.

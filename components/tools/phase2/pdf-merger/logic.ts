@@ -28,7 +28,7 @@ export async function createSamplePdf(
       y: height - 80,
       size: 24,
       font,
-      color: rgb(0.12, 0.23, 0.54), // Mindkit navy
+      color: rgb(0.12, 0.23, 0.54), // Cleartrix navy
     });
 
     page.drawText(`Page ${i} of ${pageCount}`, {
@@ -40,7 +40,7 @@ export async function createSamplePdf(
     });
 
     page.drawText(
-      "Generated securely inside your browser using Mindkit's 100% client-side PDF engine.",
+      "Generated securely inside your browser using Cleartrix's 100% client-side PDF engine.",
       {
         x: 50,
         y: 60,
