@@ -80,14 +80,14 @@ export default function HomePage() {
                   </p>
                 </Reveal>
 
-                {/* Main Action Buttons */}
-                <Reveal variant="fade-up" delay={350}>
-                  <LandingHeroActions />
+                {/* Commanding In-Browser Tool Search with Quick Popular Pills */}
+                <Reveal variant="fade-up" delay={320}>
+                  <HeroToolSearch />
                 </Reveal>
 
-                {/* Commanding In-Browser Tool Search with Quick Popular Pills */}
-                <Reveal variant="fade-up" delay={400}>
-                  <HeroToolSearch />
+                {/* Main Action Buttons */}
+                <Reveal variant="fade-up" delay={380}>
+                  <LandingHeroActions />
                 </Reveal>
 
                 {/* Proof Pills */}
