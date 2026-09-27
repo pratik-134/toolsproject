@@ -82,15 +82,15 @@ export const ToolsMegaSection: React.FC = () => {
         {/* 3a. Section Header */}
         <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1 font-body text-xs font-semibold text-emerald-800 shadow-2xs mb-4">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-          <span>111 Live In-Browser Tools</span>
+          <span><span className="font-mono">111</span> Live In-Browser Tools</span>
         </div>
 
         <h2 className="font-headings text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-          One platform. 111+ free tools.
+          One platform. <span className="font-mono">111+</span> free tools.
         </h2>
 
         <p className="font-body text-slate-600 text-sm sm:text-base max-w-2xl mx-auto mt-3 leading-relaxed">
-          Every tool runs 100% in your browser. Zero file uploads, zero accounts required, zero limits.
+          Every tool runs <span className="font-mono">100%</span> in your browser. Zero file uploads, zero accounts required, zero limits.
         </p>
 
         {/* 3b. Prominent Centered Search Bar */}
@@ -173,22 +173,22 @@ export const ToolsMegaSection: React.FC = () => {
         <div className="mt-10 sm:mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs sm:text-sm font-medium text-slate-500 font-body">
           <span className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            <strong className="font-semibold text-slate-800">111 Tools</strong> Live
+            <strong className="font-semibold text-slate-800"><span className="font-mono">111</span> Tools</strong> Live
           </span>
           <span className="text-slate-300 hidden sm:inline">•</span>
           <span className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
-            <strong className="font-semibold text-slate-800">0 Bytes</strong> Uploaded to Servers
+            <strong className="font-semibold text-slate-800"><span className="font-mono">0 Bytes</span></strong> Uploaded to Servers
           </span>
           <span className="text-slate-300 hidden sm:inline">•</span>
           <span className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-purple-500" />
-            <strong className="font-semibold text-slate-800">100% Free</strong> Forever
+            <strong className="font-semibold text-slate-800"><span className="font-mono">100%</span> Free</strong> Forever
           </span>
           <span className="text-slate-300 hidden sm:inline">•</span>
           <span className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
-            <strong className="font-semibold text-slate-800">5 Categories</strong>
+            <strong className="font-semibold text-slate-800"><span className="font-mono">5</span> Categories</strong>
           </span>
         </div>
 
@@ -199,7 +199,7 @@ export const ToolsMegaSection: React.FC = () => {
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 text-slate-700 font-semibold text-xs sm:text-sm shadow-2xs hover:shadow-xs transition-all"
           >
             <Sparkles className="h-4 w-4 text-blue-600" />
-            <span>Browse Complete 111 In-Browser Tools Directory</span>
+            <span>Browse Complete <span className="font-mono">111</span> In-Browser Tools Directory</span>
             <ArrowRight className="h-3.5 w-3.5 text-slate-400" />
           </Link>
         </div>
