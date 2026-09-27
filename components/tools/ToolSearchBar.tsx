@@ -179,7 +179,7 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
           placeholder={placeholder}
           className={`w-full bg-white text-slate-800 placeholder:text-slate-400 transition-all font-body ${
             isLarge
-              ? "pl-12 sm:pl-14 pr-16 py-3.5 sm:py-4 rounded-[14px] border-2 border-slate-200/90 shadow-sm text-sm sm:text-base focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500/10"
+              ? "pl-12 sm:pl-14 pr-16 py-3.5 sm:py-4 rounded-2xl border-2 border-slate-200/90 shadow-xs hover:border-slate-300 hover:shadow-sm text-sm sm:text-base focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500/10"
               : "pl-10 pr-14 py-2 rounded-xl border border-slate-200 bg-white/90 backdrop-blur-xs text-xs sm:text-sm shadow-2xs hover:border-slate-300 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20"
           }`}
           aria-label="Search tools"
@@ -206,8 +206,10 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
               isLarge ? "right-4" : "right-3"
             }`}
           >
-            <kbd className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono font-medium text-slate-400 bg-slate-100 border border-slate-200/80 rounded shadow-2xs">
-              <span className="text-[11px]">⌘</span>K
+            <kbd className={`inline-flex items-center gap-0.5 font-mono font-medium text-slate-400 bg-slate-100 border border-slate-200/80 rounded shadow-2xs ${
+              isLarge ? "px-2 py-1 text-xs" : "px-1.5 py-0.5 text-[10px]"
+            }`}>
+              <span className={isLarge ? "text-xs" : "text-[11px]"}>⌘</span>K
             </kbd>
           </div>
         )}

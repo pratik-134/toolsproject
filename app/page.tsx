@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { CleartrixLogo } from "@/components/BrandLogo";
 import { LandingHeroActions } from "@/components/landing/LandingHeroActions";
 import { HeroToolSearch } from "@/components/landing/HeroToolSearch";
-import { RotatingWord } from "@/components/landing/RotatingWord";
+import { HeroHeadlineTicker } from "@/components/landing/HeroHeadlineTicker";
 import { ToolsMegaSection } from "@/components/landing/ToolsMegaSection";
 import { LandingTemplatesSection } from "@/components/landing/LandingTemplatesSection";
 import { LandingFaq } from "@/components/landing/LandingFaq";
@@ -62,45 +62,22 @@ export default function HomePage() {
                   <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-blue-200 bg-blue-50/90 px-3 sm:px-3.5 py-1 sm:py-1.5 font-body text-[11px] sm:text-xs font-semibold text-blue-800 shadow-xs backdrop-blur-xs max-w-full">
                     <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse shrink-0" />
                     <ShieldCheck className="h-3.5 w-3.5 text-blue-600 shrink-0" />
-                    <span className="truncate sm:whitespace-normal">Zero Paywalls • <span className="font-mono">100%</span> Free Vector PDF • No Account Required</span>
+                    <span className="truncate sm:whitespace-normal">
+                      <span className="font-mono">100%</span> Client-Side Platform • Free Resume Builder & 111+ In-Browser Tools
+                    </span>
                   </div>
                 </Reveal>
 
-                {/* H1 Headline */}
+                {/* H1 Headline with Integrated Scroll-Up Ticker */}
                 <Reveal variant="fade-up" delay={150}>
-                  <h1 className="font-headings text-[28px] xs:text-[34px] sm:text-hero-mobile md:text-hero-tablet lg:text-hero text-slate-900 leading-[1.14] break-words">
-                    The resume builder that{" "}
-                    <span className="relative inline-block text-blue-600">
-                      never
-                      <svg
-                        className="absolute -bottom-1.5 left-0 w-full text-blue-400/50"
-                        height="6"
-                        viewBox="0 0 100 6"
-                        preserveAspectRatio="none"
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M0 5 Q 50 0 100 5"
-                          stroke="currentColor"
-                          strokeWidth="2.5"
-                          fill="none"
-                        />
-                      </svg>
-                    </span>{" "}
-                    traps your download.
-                  </h1>
+                  <HeroHeadlineTicker />
                 </Reveal>
 
-                {/* Subtitle & Category Breadth Rotation */}
+                {/* Subtitle */}
                 <Reveal variant="fade-up" delay={250}>
-                  <div className="space-y-3 max-w-xl">
-                    <p className="font-body text-sm sm:text-subtitle text-slate-600 leading-relaxed">
-                      Build an executive-grade, ATS-optimized resume in minutes. Every
-                      template, every export, and every feature is completely free—no trial
-                      billing, no fake countdowns, and no paywalls when you hit download.
-                    </p>
-                    <RotatingWord />
-                  </div>
+                  <p className="font-body text-sm sm:text-subtitle text-slate-600 leading-relaxed max-w-xl">
+                    Create ATS-optimized resumes with 20 professional templates, or run 111+ client-side tools for PDFs, images, code, and security. Zero server uploads, zero watermarks, and zero paywalls—ever.
+                  </p>
                 </Reveal>
 
                 {/* Main Action Buttons */}
@@ -108,9 +85,14 @@ export default function HomePage() {
                   <LandingHeroActions />
                 </Reveal>
 
+                {/* Commanding In-Browser Tool Search with Quick Popular Pills */}
+                <Reveal variant="fade-up" delay={400}>
+                  <HeroToolSearch />
+                </Reveal>
+
                 {/* Proof Pills */}
                 <Reveal variant="fade-up" delay={450}>
-                  <div className="pt-6 flex flex-wrap items-center gap-x-5 sm:gap-x-6 gap-y-2.5 sm:gap-y-3 font-body text-xs sm:text-small text-slate-600 border-t border-slate-200/80">
+                  <div className="pt-4 flex flex-wrap items-center gap-x-5 sm:gap-x-6 gap-y-2.5 sm:gap-y-3 font-body text-xs sm:text-small text-slate-600 border-t border-slate-200/80">
                     <div className="flex items-center gap-1.5 sm:gap-2 text-slate-800 font-medium">
                       <CheckCircle2 className="h-4 w-4 text-blue-600 shrink-0" />
                       <span>Instant High-Res Vector PDF</span>
@@ -121,12 +103,9 @@ export default function HomePage() {
                     </div>
                     <div className="flex items-center gap-1.5 sm:gap-2 text-slate-800 font-medium">
                       <CheckCircle2 className="h-4 w-4 text-blue-600 shrink-0" />
-                      <span>Private Local Storage</span>
+                      <span>Private In-Browser Sandbox</span>
                     </div>
                   </div>
-
-                  {/* Secondary Quick In-Browser Tool Search */}
-                  <HeroToolSearch />
                 </Reveal>
               </div>
 
