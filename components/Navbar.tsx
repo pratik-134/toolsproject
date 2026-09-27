@@ -14,6 +14,7 @@ import {
   FileText,
   CheckCircle2,
   Rocket,
+  Wrench,
 } from "lucide-react";
 import { TOOLS } from "@/lib/registry/tools";
 
@@ -46,11 +47,10 @@ export const Navbar: React.FC = () => {
     }
   };
 
-  // Detect scroll to trigger the sticky slide-down header
+  // Detect scroll to trigger elevated navbar styling
   useEffect(() => {
     const handleScroll = () => {
-      // Trigger sticky slide-down when scrolled past 80px
-      setIsScrolled(window.scrollY > 80);
+      setIsScrolled(window.scrollY > 20);
     };
 
     handleScroll();
@@ -97,8 +97,8 @@ export const Navbar: React.FC = () => {
   };
 
   const renderNavContent = () => (
-    <div className="px-3 sm:px-6 flex h-12 sm:h-14 items-center justify-between gap-1.5 sm:gap-4">
-      {/* Brand Logo & Premium Trust Tagline */}
+    <div className="flex h-14 sm:h-16 items-center justify-between gap-2 sm:gap-4">
+      {/* Brand Logo & Trust Tagline */}
       <div className="flex items-center gap-2 sm:gap-3.5 shrink min-w-0">
         <Link
           href="/"
@@ -108,23 +108,27 @@ export const Navbar: React.FC = () => {
           <BrandLogo product="cleartrix" size={30} isLight={false} />
         </Link>
 
-        {/* Premium Trust Pill (Hidden on Mobile < 1024px) */}
+        {/* Trust Pill (Desktop only) */}
         <span className="hidden xl:inline-flex items-center gap-1.5 rounded-md bg-blue-50 border border-blue-200 px-2.5 py-0.5 font-body text-[11px] font-semibold text-blue-800 shrink-0">
           <Sparkles className="h-2.5 w-2.5 text-blue-600" />
           100% Free & Private
         </span>
       </div>
 
+      {/* Center Navigation Links */}
       <nav
         aria-label="Main Navigation"
-        className="hidden md:flex items-center gap-3 lg:gap-5 xl:gap-6 font-body text-xs lg:text-small font-medium text-slate-600 shrink-0"
+        className="hidden md:flex items-center gap-4 lg:gap-6 font-body text-xs lg:text-sm font-medium text-slate-600 shrink-0"
       >
         <Link
           href="/tools"
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 text-white text-xs font-semibold hover:bg-blue-600 transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 shadow-2xs group"
+          className="inline-flex items-center gap-1.5 hover:text-blue-600 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group font-medium text-slate-600"
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse shrink-0" />
-          <span>Explore {TOOLS.length} Tools</span>
+          <span>Tools</span>
+          <span className="font-mono text-[10px] font-semibold text-blue-700 bg-blue-50 border border-blue-200/70 px-1.5 py-0.5 rounded-full">
+            {TOOLS.length}
+          </span>
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full" />
         </Link>
         <Link
           href="/#templates"
@@ -200,23 +204,23 @@ export const Navbar: React.FC = () => {
     <div
       id="mobile-navigation-drawer"
       ref={menuRef}
-      className={`md:hidden pointer-events-auto w-full mt-2 rounded-lg overflow-y-auto transition-all duration-300 ease-in-out ${
+      className={`md:hidden absolute top-full left-0 right-0 z-50 bg-white border-b border-slate-200 shadow-xl overflow-hidden transition-all duration-300 ease-in-out ${
         isOpen
-          ? "max-h-[85vh] opacity-100 bg-white shadow-xl p-4 space-y-3"
-          : "max-h-0 opacity-0 pointer-events-none p-0"
+          ? "max-h-[85vh] opacity-100 p-4 space-y-3 overflow-y-auto"
+          : "max-h-0 opacity-0 pointer-events-none p-0 border-transparent"
       }`}
     >
       <nav className="flex flex-col space-y-1">
         <Link
           href="/tools"
           onClick={handleLinkClick}
-          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-bold text-white bg-slate-900 hover:bg-blue-600 transition-colors"
+          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-blue-50/50 transition-colors"
         >
-          <span className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse shrink-0" />
-            <span>Explore Tools (In-Browser Suite)</span>
+          <span className="flex items-center gap-2.5">
+            <Wrench className="h-4 w-4 text-blue-600" />
+            <span>Tools & Utilities</span>
           </span>
-          <span className="font-mono text-[10px] font-bold text-cyan-300 bg-slate-800 border border-slate-700 px-2 py-0.5 rounded-md shadow-2xs">
+          <span className="font-mono text-[10px] font-bold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-md">
             {TOOLS.length} Live
           </span>
         </Link>
@@ -256,7 +260,7 @@ export const Navbar: React.FC = () => {
         >
           <span className="flex items-center gap-2.5">
             <CheckCircle2 className="h-4 w-4 text-blue-600" />
-            <span>Why Cleartrix Resume Builder? (Comparison)</span>
+            <span>Why Cleartrix? (Comparison)</span>
           </span>
           <span className="text-[10px] font-bold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-md">
             Zero Paywall
@@ -287,7 +291,7 @@ export const Navbar: React.FC = () => {
             <span>Frequently Asked Questions</span>
           </span>
           <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded-md">
-            Help & Info
+            FAQ
           </span>
         </Link>
       </nav>
@@ -318,24 +322,54 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      {/* Platform Announcement Banner */}
+      {/* 1. Platform Announcement Banner — Clean, responsive, zero mobile wrapping */}
       {!isBannerDismissed && (
-        <div className="w-full bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-800 text-white text-xs py-2 px-3 sm:px-4 shadow-xs relative z-30 animate-fade-in">
-          <div className="max-w-container mx-auto flex items-center justify-between gap-2">
-            <div className="flex-1 flex items-center justify-center gap-2 flex-wrap text-center">
-              <span className="inline-flex items-center gap-1.5 font-semibold">
-                <span className="px-1.5 py-0.5 rounded bg-white/20 text-[10px] tracking-wider uppercase font-bold text-white shrink-0">
-                  Phase 2 Live
+        <aside
+          aria-label="Platform Announcement"
+          className="w-full bg-slate-900 text-white text-xs relative z-30 transition-all border-b border-slate-800"
+        >
+          <div className="max-w-container mx-auto flex items-center justify-between px-3 sm:px-6 py-1.5 sm:py-2 gap-2">
+            {/* Mobile compact single-line view (< 640px) */}
+            <div className="flex sm:hidden items-center justify-between w-full min-w-0 gap-2">
+              <div className="flex items-center gap-1.5 min-w-0 truncate">
+                <Rocket className="h-3 w-3 text-cyan-400 shrink-0" strokeWidth={2} aria-hidden="true" />
+                <span className="text-[11px] font-medium text-slate-200 truncate">
+                  <span className="font-mono font-bold text-white">{TOOLS.length}+</span> Free Privacy Tools
                 </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <Rocket className="h-3.5 w-3.5 shrink-0" strokeWidth={1.75} aria-hidden="true" />
-                  <span>111+ In-Browser Privacy Tools Available</span>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <Link
+                  href="/tools"
+                  className="text-[11px] font-semibold text-cyan-300 hover:text-cyan-200 underline underline-offset-2 transition-colors whitespace-nowrap"
+                >
+                  Explore →
+                </Link>
+                <button
+                  type="button"
+                  onClick={handleDismissBanner}
+                  aria-label="Dismiss banner"
+                  className="p-0.5 text-slate-400 hover:text-white transition-colors"
+                >
+                  <X className="h-3.5 w-3.5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Tablet & Desktop full view (>= 640px) */}
+            <div className="hidden sm:flex flex-1 items-center justify-center gap-2.5 text-center text-xs">
+              <span className="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] tracking-wider uppercase font-bold shrink-0">
+                Phase 2 Live
+              </span>
+              <span className="inline-flex items-center gap-1.5 font-medium text-slate-200">
+                <Rocket className="h-3.5 w-3.5 text-cyan-400 shrink-0" strokeWidth={1.75} aria-hidden="true" />
+                <span>
+                  <span className="font-mono font-bold text-white">{TOOLS.length}+</span> In-Browser Privacy Tools Available
                 </span>
               </span>
-              <span className="hidden md:inline text-blue-200">• 100% Free, Zero Uploads & Zero Server Storage</span>
+              <span className="text-slate-400 text-xs hidden lg:inline">• 100% Free, Zero Uploads & Zero Server Storage</span>
               <Link
                 href="/tools"
-                className="shrink-0 inline-flex items-center gap-1 font-bold underline underline-offset-2 hover:text-blue-100 transition-colors ml-1 sm:ml-2"
+                className="shrink-0 inline-flex items-center gap-1 font-semibold text-cyan-300 hover:text-cyan-200 underline underline-offset-2 transition-colors ml-1"
               >
                 <span>Explore Tools</span>
                 <ArrowRight className="h-3 w-3" />
@@ -346,44 +380,37 @@ export const Navbar: React.FC = () => {
               onClick={handleDismissBanner}
               aria-label="Dismiss announcement banner"
               title="Dismiss banner"
-              className="shrink-0 p-1 rounded-md text-blue-200 hover:text-white hover:bg-white/20 transition-colors focus:outline-none focus:ring-1 focus:ring-white/40"
+              className="hidden sm:flex shrink-0 p-1 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 transition-colors focus:outline-none"
             >
               <X className="h-3.5 w-3.5" />
             </button>
           </div>
-        </div>
+        </aside>
       )}
 
-      {/* 1. Static Initial Header at the top of the page */}
-      <div className="w-full max-w-container mx-auto px-4 sm:px-6 pt-3 sm:pt-4">
-        <header className="w-full rounded-lg shadow-md bg-white py-1.5 sm:py-2 transition-all duration-200">
-          {renderNavContent()}
-        </header>
-        {!isScrolled && renderMobileDrawer()}
-      </div>
-
-      {/* 2. Fixed Sticky Header Island — Smoothly Slides Down from Top when Scrolling */}
-      <div
-        className={`fixed top-3 sm:top-4 left-0 right-0 z-50 w-full max-w-container mx-auto px-4 sm:px-6 pointer-events-none transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      {/* 2. Full-Width Sticky Navbar */}
+      <header
+        className={`sticky top-0 z-50 w-full transition-all duration-200 bg-white/95 backdrop-blur-md ${
           isScrolled
-            ? "translate-y-0 opacity-100"
-            : "-translate-y-24 opacity-0 pointer-events-none"
+            ? "border-b border-slate-200/60 shadow-xs"
+            : "border-b border-transparent"
         }`}
       >
-        <header className="w-full pointer-events-auto rounded-lg shadow-md bg-white py-1 sm:py-1.5 transition-all duration-200">
+        <div className="max-w-container mx-auto px-4 sm:px-6">
           {renderNavContent()}
-        </header>
-        {isScrolled && renderMobileDrawer()}
-      </div>
+        </div>
+        {renderMobileDrawer()}
+      </header>
 
-      {/* Backdrop overlay when mobile menu is open */}
+      {/* 3. Backdrop overlay when mobile menu is open (z-40 so it stays BEHIND the z-50 sticky header & drawer) */}
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
-          className="fixed inset-0 bg-black/60 backdrop-blur-xs z-40 md:hidden animate-fade-in"
+          className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40 md:hidden animate-fade-in"
           aria-hidden="true"
         />
       )}
     </>
   );
 };
+

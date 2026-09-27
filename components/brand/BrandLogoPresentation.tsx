@@ -68,7 +68,7 @@ export const BrandLogoPresentation: React.FC = () => {
             <Sparkles className="h-3.5 w-3.5 text-blue-600" /> Cleartrix Identity System
           </div>
           <h1 className="font-headings text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
-            Mind<span className="text-blue-600">kit</span> Brand Guidelines
+            Clear<span className="text-blue-600">trix</span> Brand Guidelines
           </h1>
           <p className="font-body text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
             Official vector logo marks, color tokens, and visual standards for the Cleartrix privacy-first web platform.

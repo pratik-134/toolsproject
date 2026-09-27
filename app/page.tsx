@@ -50,9 +50,6 @@ export default function HomePage() {
         {/* 2. Hero Section — Light Neutral Canvas + Technical Grid + Soft Glow      */}
         {/* ========================================================================= */}
         <section className="relative overflow-hidden pt-section-py-mob md:pt-section-py-tab lg:pt-section-py pb-12 sm:pb-20 bg-[radial-gradient(130%_90%_at_50%_-5%,#EEF5FF_0%,#F8FAFC_50%,#FFFFFF_100%)]">
-          {/* Luminous Top Accent Hairline */}
-          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/35 to-transparent pointer-events-none z-20" />
-
           {/* Animated Background: Bespoke Topographic Career Elevation Waves and Ambient Glow */}
           <AnimatedBannerBackground variant="hero" />
 
