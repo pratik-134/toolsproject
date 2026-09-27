@@ -204,16 +204,21 @@ export const ToolsDirectoryClient: React.FC<ToolsDirectoryClientProps> = ({ tool
                         {tool.category}
                       </span>
                     </div>
-                    {isLive ? (
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-[6px] border border-emerald-200">
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                        Live
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-mono text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
+                        CLIENT-SIDE
                       </span>
-                    ) : (
-                      <span className="text-[10px] font-medium text-slate-400 bg-slate-100 px-2 py-0.5 rounded-[6px] border border-slate-200">
-                        Phase {tool.phase}
-                      </span>
-                    )}
+                      {isLive ? (
+                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-[6px] border border-emerald-200">
+                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          Live
+                        </span>
+                      ) : (
+                        <span className="text-[10px] font-medium text-slate-400 bg-slate-100 px-2 py-0.5 rounded-[6px] border border-slate-200">
+                          Phase {tool.phase}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   <h3 className="font-headings font-bold text-slate-900 text-sm mt-2.5 group-hover:text-slate-700 transition-colors">

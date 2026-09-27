@@ -184,9 +184,14 @@ export default async function CategoryHubPage({ params }: CategoryPageProps) {
                       >
                         <CategoryIcon className="h-3.5 w-3.5" strokeWidth={1.75} aria-hidden="true" />
                       </div>
-                      <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-[6px]">
-                        Live
-                      </span>
+                      <div className="flex items-center gap-1.5">
+                        <span className="font-mono text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
+                          CLIENT-SIDE
+                        </span>
+                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-[6px]">
+                          Live
+                        </span>
+                      </div>
                     </div>
                     <h3 className="font-headings font-bold text-slate-900 text-base mt-2.5 group-hover:text-slate-700 transition-colors">
                       {tool.name}

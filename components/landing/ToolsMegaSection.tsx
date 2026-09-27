@@ -136,16 +136,21 @@ export const ToolsMegaSection: React.FC = () => {
                     >
                       <Icon className="h-5 w-5" strokeWidth={2} />
                     </div>
-                    <span
-                      className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-[6px] border"
-                      style={{
-                        backgroundColor: color.tint,
-                        borderColor: color.border,
-                        color: color.primary,
-                      }}
-                    >
-                      {card.count}
-                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-mono text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
+                        CLIENT-SIDE
+                      </span>
+                      <span
+                        className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-[6px] border"
+                        style={{
+                          backgroundColor: color.tint,
+                          borderColor: color.border,
+                          color: color.primary,
+                        }}
+                      >
+                        {card.count}
+                      </span>
+                    </div>
                   </div>
 
                   <h3 className="font-headings text-base font-bold text-slate-900 group-hover:text-slate-800 transition-colors">
