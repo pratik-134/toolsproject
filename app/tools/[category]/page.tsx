@@ -170,7 +170,7 @@ export default async function CategoryHubPage({ params }: CategoryPageProps) {
                       ? "/editor"
                       : `/tools/${tool.category}/${tool.slug}`
                   }
-                  className="group flex flex-col justify-between p-4 rounded-[12px] border border-slate-200 bg-white hover:border-slate-300 shadow-[0_1px_3px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_12px_rgba(15,23,42,0.07)] transition-all"
+                  className="group flex flex-col justify-between p-4 rounded-[12px] border border-slate-200 bg-white hover:border-blue-500/50 hover:shadow-md transition-all duration-200 ease-in-out"
                 >
                   <div>
                     <div className="flex items-center justify-between">

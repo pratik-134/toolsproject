@@ -92,7 +92,7 @@ export default function ToolsHubPage() {
                 <Link
                   key={cat.id}
                   href={`/tools/${cat.id}`}
-                  className="group relative flex flex-col justify-between p-5 rounded-[12px] border border-slate-200 bg-white hover:border-slate-300 shadow-[0_1px_3px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_12px_rgba(15,23,42,0.07)] transition-all duration-150"
+                  className="group relative flex flex-col justify-between p-5 rounded-[12px] border border-slate-200 bg-white hover:border-blue-500/50 hover:shadow-md transition-all duration-200 ease-in-out"
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">

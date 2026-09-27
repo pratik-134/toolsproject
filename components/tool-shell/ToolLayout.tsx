@@ -270,12 +270,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                           ? "/editor"
                           : `/tools/${rel.category}/${rel.slug}`
                       }
-                      className="group flex flex-col justify-between p-4 rounded-[12px]
-                        border border-[#E2E8F0] bg-white
-                        shadow-[0_1px_3px_rgba(15,23,42,0.05)]
-                        hover:border-[#CBD5E1] hover:shadow-[0_4px_12px_rgba(15,23,42,0.08)]
-                        hover:-translate-y-0.5
-                        transition-all duration-200"
+                      className="group flex flex-col justify-between p-4 rounded-[12px] border border-slate-200 bg-white hover:border-blue-500/50 hover:shadow-md transition-all duration-200 ease-in-out"
                     >
                       <div>
                         <div className="flex items-center justify-between mb-2">

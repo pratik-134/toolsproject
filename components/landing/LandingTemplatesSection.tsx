@@ -238,7 +238,7 @@ export const LandingTemplatesSection: React.FC = () => {
                   className="shrink-0 px-2"
                   style={{ width: `${slideWidthPercent}%` }}
                 >
-                  <div className="h-full rounded-xl bg-white border border-slate-200/90 shadow-xs hover:border-blue-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between text-left overflow-hidden">
+                  <div className="h-full rounded-xl bg-white border border-slate-200 shadow-xs hover:border-blue-500/50 hover:shadow-md transition-all duration-200 ease-in-out group flex flex-col justify-between text-left overflow-hidden">
                     <div>
                       {/* Live Scaled A4 Template Box */}
                       <div className="relative overflow-hidden bg-slate-50 border-b border-slate-100">
@@ -359,7 +359,7 @@ export const LandingTemplatesSection: React.FC = () => {
           {filteredTemplates.map((t) => (
             <div
               key={t.id}
-              className="rounded-xl bg-white border border-slate-200/90 shadow-xs hover:border-blue-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between text-left overflow-hidden"
+              className="rounded-xl bg-white border border-slate-200 shadow-xs hover:border-blue-500/50 hover:shadow-md transition-all duration-200 ease-in-out group flex flex-col justify-between text-left overflow-hidden"
             >
               <div>
                 <div className="relative overflow-hidden bg-slate-50 border-b border-slate-100">

@@ -111,17 +111,10 @@ export const ToolsMegaSection: React.FC = () => {
               <Link
                 key={card.key}
                 href={`/tools/${card.categoryId}`}
-                className="group relative flex flex-col justify-between p-5 rounded-[12px] bg-white border border-slate-200 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md"
+                className="group relative flex flex-col justify-between p-5 rounded-[12px] bg-white border border-slate-200 hover:border-blue-500/50 hover:shadow-md transition-all duration-200 ease-in-out"
                 style={{
                   borderTopWidth: "4px",
                   borderTopColor: color.primary,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = color.primary;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "#E2E8F0";
-                  e.currentTarget.style.borderTopColor = color.primary;
                 }}
               >
                 <div className="space-y-3">

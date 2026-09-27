@@ -174,9 +174,9 @@ export const ToolsDirectoryClient: React.FC<ToolsDirectoryClientProps> = ({ tool
               <Link
                 key={tool.slug}
                 href={isLive ? targetHref : `/tools/${tool.category}`}
-                className={`group flex flex-col justify-between p-4 rounded-[12px] border transition-all ${
+                className={`group flex flex-col justify-between p-4 rounded-[12px] border transition-all duration-200 ease-in-out ${
                   isLive
-                    ? "border-slate-200 bg-white hover:border-slate-300 shadow-[0_1px_3px_rgba(15,23,42,0.04)] hover:shadow-[0_4px_12px_rgba(15,23,42,0.07)] cursor-pointer"
+                    ? "border-slate-200 bg-white hover:border-blue-500/50 hover:shadow-md cursor-pointer"
                     : "border-slate-200/60 bg-slate-50/50 opacity-80"
                 }`}
               >
