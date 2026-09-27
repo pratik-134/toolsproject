@@ -135,3 +135,38 @@ model ShareAnalytics {
 
   @@map("share_analytics")
 }
+
+// ─── Blog & Admin ──────────────────────────────────────────────────────────
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+
+  @@map("admin_users")
+}
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model BlogPost {
+  id             String     @id @default(cuid())
+  title          String
+  slug           String     @unique
+  content        String     @db.Text
+  excerpt        String?
+  coverImageUrl  String?
+  seoTitle       String?
+  seoDescription String?
+  status         PostStatus @default(DRAFT)
+  publishedAt    DateTime?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  @@index([status])
+  @@index([publishedAt])
+  @@map("blog_posts")
+}

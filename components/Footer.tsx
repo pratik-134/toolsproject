@@ -202,6 +202,11 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/blog" className="hover:text-slate-900 hover:underline transition-colors">
+                  Blog & Articles
+                </Link>
+              </li>
+              <li>
                 <Link href="/tools/document-pdf/ats-resume-checker" className="hover:text-slate-900 hover:underline transition-colors">
                   ATS Scanner & Auditor
                 </Link>
@@ -236,6 +241,9 @@ export const Footer: React.FC = () => {
           <div className="flex items-center gap-6">
             <Link href="/tools" className="hover:text-blue-600 transition-colors font-semibold text-blue-600">
               All 111 Tools
+            </Link>
+            <Link href="/blog" className="hover:text-blue-600 transition-colors">
+              Blog
             </Link>
             <Link href="/privacy" className="hover:text-blue-600 transition-colors">
               Privacy

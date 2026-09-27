@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { BRAND } from "@/lib/brand";
 import { CATEGORY_LIST } from "@/lib/registry/categories";
 import { getAllTools } from "@/lib/registry/tools";
+import { prisma } from "@/lib/db";
 
 const TEMPLATE_IDS = [
   "modern",
@@ -26,7 +27,7 @@ const TEMPLATE_IDS = [
   "hybrid",
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || BRAND.domain;
   const currentDate = new Date();
 
@@ -54,6 +55,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: "weekly",
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: currentDate,
+      changeFrequency: "daily",
+      priority: 0.85,
     },
     {
       url: `${baseUrl}/privacy`,
@@ -96,5 +103,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...coreRoutes, ...categoryRoutes, ...toolRoutes, ...templateRoutes];
+  // Blog posts — only PUBLISHED
+  let blogRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const publishedPosts = await prisma.blogPost.findMany({
+      where: { status: "PUBLISHED" },
+      select: { slug: true, updatedAt: true },
+    });
+    blogRoutes = publishedPosts.map((post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: post.updatedAt,
+      changeFrequency: "weekly" as const,
+      priority: 0.75,
+    }));
+  } catch {
+    // DB not available at build time — blog routes will be omitted from sitemap
+  }
+
+  return [...coreRoutes, ...categoryRoutes, ...toolRoutes, ...templateRoutes, ...blogRoutes];
 }

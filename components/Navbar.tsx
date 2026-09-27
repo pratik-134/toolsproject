@@ -163,6 +163,13 @@ export const Navbar: React.FC = () => {
           FAQ
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full" />
         </Link>
+        <Link
+          href="/blog"
+          className="hover:text-blue-600 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group"
+        >
+          Blog
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full" />
+        </Link>
       </nav>
 
       {/* Right Area: Action CTA & Mobile Hamburger Button */}
@@ -290,6 +297,17 @@ export const Navbar: React.FC = () => {
           </span>
           <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded-md">
             Help & Info
+          </span>
+        </Link>
+
+        <Link
+          href="/blog"
+          onClick={handleLinkClick}
+          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-blue-50/50 transition-colors"
+        >
+          <span className="flex items-center gap-2.5">
+            <FileText className="h-4 w-4 text-blue-600" />
+            <span>Blog</span>
           </span>
         </Link>
       </nav>
