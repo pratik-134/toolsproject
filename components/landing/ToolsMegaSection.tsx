@@ -90,7 +90,7 @@ export const ToolsMegaSection: React.FC = () => {
         </h2>
 
         <p className="font-body text-slate-600 text-sm sm:text-base max-w-2xl mx-auto mt-3 leading-relaxed">
-          Every tool runs <span className="font-mono">100%</span> in your browser. Zero file uploads, zero accounts required, zero limits.
+          Runs <span className="font-mono">100%</span> inside your browser sandbox. Zero file uploads, zero accounts required, and zero usage limits.
         </p>
 
         {/* 3b. Prominent Centered Search Bar */}

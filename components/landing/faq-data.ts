@@ -8,7 +8,7 @@ export const RESUME_FAQS: FaqItem[] = [
   {
     num: "01",
     q: "Is Cleartrix Resume Builder truly 100% free with no hidden paywalls or watermarks?",
-    a: "Yes, unconditionally. Unlike services that let you craft a resume only to demand a credit card on the final download step, Cleartrix is free forever. All 20 templates, all styling tools, and every vector PDF download are 100% unrestricted.",
+    a: "Yes, unconditionally. Unlike services that lure you in only to demand a credit card at the final download step, Cleartrix is completely free. All 20 templates, all styling tools, and every vector PDF export are 100% unrestricted.",
   },
   {
     num: "02",
@@ -23,7 +23,7 @@ export const RESUME_FAQS: FaqItem[] = [
   {
     num: "04",
     q: "How does Cleartrix protect my personal privacy and resume details?",
-    a: "Cleartrix is built on a 100% client-side privacy architecture. Your resume data, contact info, and work history live exclusively in your browser's private local storage. We do not transmit or store your resume on external servers, and we never sell user data.",
+    a: "Cleartrix runs on a strict client-side sandbox architecture. Your resume data, contact info, and work history remain in your browser's private local storage—never transmitted to external servers, logged in databases, or sold to third parties.",
   },
   {
     num: "05",
@@ -38,7 +38,7 @@ export const RESUME_FAQS: FaqItem[] = [
   {
     num: "07",
     q: "How does Cleartrix compare to other resume builders?",
-    a: "Design-first, drag-and-drop graphic builders often produce multi-layered layouts that ATS parsers struggle to read. Meanwhile, many subscription-based builders require paid upgrades or apply watermarks at download. Cleartrix focuses on clean, parser-friendly code structure, high-resolution vector PDF export, and a commitment to keeping every feature and template 100% free with zero paywalls.",
+    a: "Traditional graphic builders often produce complex layers that choke ATS parsers, while subscription builders demand credit cards at download. Cleartrix provides clean, parser-verified semantic code structure, pin-sharp vector PDF exports, and complete feature access with zero paywalls.",
   },
   {
     num: "08",
@@ -51,7 +51,7 @@ export const TOOLS_FAQS: FaqItem[] = [
   {
     num: "01",
     q: "How can Cleartrix tools run with zero server uploads?",
-    a: "All tools execute directly within your browser sandbox using modern web standards—including WebAssembly, Web Workers, Canvas, and client-side JavaScript. When you merge a PDF, convert an image, or run a calculation, your files are processed entirely in your device's memory without transferring even a single byte to an external server.",
+    a: "Every tool executes directly inside your browser sandbox via WebAssembly, Web Workers, Canvas, and client-side JavaScript. When you process files or calculate data, computation happens in device memory—never transmitting a single byte across the internet.",
   },
   {
     num: "02",

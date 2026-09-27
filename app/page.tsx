@@ -544,7 +544,7 @@ export default function HomePage() {
                       </h3>
                     </div>
                     <p className="font-body text-sm text-slate-600 leading-relaxed">
-                      Compiles true vector PDF documents directly inside your browser memory. Text glyphs, rules, and margins stay pin-sharp at any zoom level on standard A4 paper.
+                      Compiles print-ready vector PDF documents directly inside browser memory with pin-sharp typography and zero server latency.
                     </p>
                   </div>
 
@@ -585,7 +585,7 @@ export default function HomePage() {
                       </h3>
                     </div>
                     <p className="font-body text-sm text-slate-600 leading-relaxed">
-                      <span className="font-mono">0 Bytes</span> Uploaded. Your personal contact info, achievements, and drafts stay exclusively inside your browser memory and private local storage. No tracking, no marketing emails, and zero external databases.
+                      Your personal contact info, achievements, and drafts remain isolated in local device storage—never uploaded to external servers.
                     </p>
                   </div>
 
@@ -615,7 +615,7 @@ export default function HomePage() {
                       </h3>
                     </div>
                     <p className="font-body text-sm text-slate-600 leading-relaxed">
-                      Import existing resumes directly from PDF or Word (.docx). Export vector-clean PDFs or editable Word documents anytime with zero formatting distortion.
+                      Import and export between vector-clean PDF and editable Word (.docx) formats with lossless layout fidelity.
                     </p>
                   </div>
 
@@ -645,7 +645,7 @@ export default function HomePage() {
                       </h3>
                     </div>
                     <p className="font-body text-sm text-slate-600 leading-relaxed">
-                      Every template uses standardized semantic heading tags and linear reading order tested against Workday, Greenhouse, and Taleo. Add certifications, publications, or custom sections freely.
+                      Every layout adheres to standardized semantic heading hierarchies and linear text flows verified against major enterprise ATS parsers.
                     </p>
                   </div>
 
