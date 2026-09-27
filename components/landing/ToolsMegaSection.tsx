@@ -94,7 +94,7 @@ export const ToolsMegaSection: React.FC = () => {
         </p>
 
         {/* 3b. Prominent Centered Search Bar */}
-        <div className="max-w-2xl mx-auto mt-8 mb-10 sm:mb-12">
+        <div className="max-w-2xl mx-auto mt-8 mb-10 sm:mb-12 relative z-30">
           <ToolSearchBar
             size="large"
             placeholder="Search 111+ tools... (e.g. PDF merge, image compress, BMI calculator)"

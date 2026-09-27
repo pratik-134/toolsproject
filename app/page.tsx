@@ -81,12 +81,12 @@ export default function HomePage() {
                 </Reveal>
 
                 {/* Commanding In-Browser Tool Search with Quick Popular Pills */}
-                <Reveal variant="fade-up" delay={320}>
+                <Reveal variant="fade-up" delay={320} className="relative z-30">
                   <HeroToolSearch />
                 </Reveal>
 
                 {/* Main Action Buttons */}
-                <Reveal variant="fade-up" delay={380}>
+                <Reveal variant="fade-up" delay={380} className="relative z-10">
                   <LandingHeroActions />
                 </Reveal>
 
