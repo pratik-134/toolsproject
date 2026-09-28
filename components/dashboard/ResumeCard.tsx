@@ -146,9 +146,9 @@ export const ResumeCard: React.FC<ResumeCardProps> = ({ resume, onDelete }) => {
       : "text-slate-600 bg-slate-100 border-slate-200";
 
   return (
-    <div className="group relative rounded-lg border border-slate-200 bg-white shadow-xs hover:shadow-md hover:border-blue-300 transition-all flex flex-col">
+    <div className="group relative rounded-2xl border border-slate-100/90 bg-white shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-md hover:border-blue-400/60 transition-all flex flex-col overflow-hidden">
       {/* Thumbnail Area with Click-to-Open Overlay */}
-      <div className="relative w-full h-[220px] bg-white border-b border-slate-100 overflow-hidden cursor-pointer rounded-t-[7px]">
+      <div className="relative w-full h-[220px] bg-white border-b border-slate-100 overflow-hidden cursor-pointer">
         {resumeData ? (
           <TemplateThumbnail templateId={resume.templateId} data={resumeData} />
         ) : (
@@ -164,10 +164,10 @@ export const ResumeCard: React.FC<ResumeCardProps> = ({ resume, onDelete }) => {
         >
           <Button
             size="sm"
-            className="rounded-lg bg-white text-slate-900 hover:bg-slate-50 font-bold text-xs gap-1.5 shadow-md"
+            className="rounded-xl bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-extrabold text-xs gap-1.5 shadow-lg border border-blue-500/30"
           >
-            <Edit3 className="h-3.5 w-3.5 text-blue-600" />
-            Open in Editor
+            <Edit3 className="h-3.5 w-3.5 text-white" />
+            <span className="text-white">Open in Editor</span>
           </Button>
         </div>
       </div>

@@ -85,7 +85,7 @@ export default function DashboardPage() {
       />
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex flex-col">
+      <main className="flex-1 max-w-container w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex flex-col">
         {/* Storage Quota Warning Banner (if near or exceeding browser storage limits) */}
         {isStorageQuotaExceeded && (
           <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 p-4 flex items-start gap-3 text-amber-800 text-xs sm:text-sm animate-fade-in">

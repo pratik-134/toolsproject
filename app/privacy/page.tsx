@@ -26,16 +26,16 @@ export default function PrivacyPage() {
 
       <main className="flex-1">
         {/* Page Header */}
-        <section className="bg-slate-50 text-slate-900 py-14 sm:py-18 border-b border-slate-200 relative overflow-hidden bg-grid-light">
+        <section className="bg-gradient-to-b from-blue-50/40 via-slate-50/60 to-white py-14 sm:py-18 relative overflow-hidden">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-4 relative z-10">
-            <div className="inline-flex items-center gap-2 rounded-md bg-blue-50 border border-blue-200 px-3.5 py-1 text-xs font-semibold text-blue-700 shadow-xs">
+            <div className="inline-flex items-center gap-2 rounded-full bg-slate-100/90 border-0 px-3.5 py-1 text-xs font-semibold text-slate-700 shadow-2xs">
               <Lock className="h-3.5 w-3.5 text-blue-600" />
               <span>100% Client-Side Privacy Architecture</span>
             </div>
             <h1 className="font-headings text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-900">
               Privacy Policy
             </h1>
-            <p className="font-body text-slate-600 text-sm sm:text-base max-w-xl mx-auto">
+            <p className="font-body text-slate-600 text-sm sm:text-base max-w-xl mx-auto font-medium">
               Effective Date: September 2026 • Privacy by Architecture, Not Just by Policy
             </p>
           </div>
@@ -45,7 +45,7 @@ export default function PrivacyPage() {
         <section className="py-12 sm:py-16 bg-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 space-y-10 font-body text-slate-900 text-sm sm:text-base leading-relaxed">
             {/* Quick Summary Box */}
-            <div className="rounded-lg border border-blue-200 bg-blue-50/50 p-5 sm:p-6 space-y-2">
+            <div className="rounded-2xl border border-blue-100 bg-blue-50/40 p-5 sm:p-6 space-y-2 shadow-xs">
               <div className="flex items-center gap-2 text-blue-700 font-bold text-base">
                 <ShieldCheck className="h-5 w-5 text-blue-600" />
                 <span>Our Privacy Promise</span>

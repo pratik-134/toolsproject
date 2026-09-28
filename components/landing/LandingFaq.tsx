@@ -16,13 +16,13 @@ export const LandingFaq: React.FC = () => {
     <div className="space-y-10">
       {/* Tab Switcher */}
       <div className="flex justify-center">
-        <div className="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 shadow-2xs font-body">
+        <div className="inline-flex p-1 bg-slate-100/80 rounded-xl border-0 shadow-2xs font-body">
           <button
             type="button"
             onClick={() => setActiveTab("resume")}
             className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
               activeTab === "resume"
-                ? "bg-white text-slate-900 shadow-xs border border-slate-200/80"
+                ? "bg-white text-slate-900 shadow-xs border-0"
                 : "text-slate-600 hover:text-slate-900"
             }`}
           >
@@ -35,7 +35,7 @@ export const LandingFaq: React.FC = () => {
             onClick={() => setActiveTab("tools")}
             className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
               activeTab === "tools"
-                ? "bg-white text-slate-900 shadow-xs border border-slate-200/80"
+                ? "bg-white text-slate-900 shadow-xs border-0"
                 : "text-slate-600 hover:text-slate-900"
             }`}
           >
@@ -49,7 +49,7 @@ export const LandingFaq: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
         {currentFaqs.map((faq, idx) => (
           <Reveal key={`${activeTab}-${faq.num}`} variant="fade-up" delay={idx * 40}>
-            <div className="rounded-xl border border-slate-200/90 bg-white p-6 shadow-sm hover:shadow-md hover:border-slate-300 transition-all space-y-2.5 h-full">
+            <div className="rounded-xl border border-slate-100/80 bg-white p-6 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-md hover:border-blue-200/60 transition-all space-y-2.5 h-full">
               <h3 className="font-headings text-base sm:text-lg font-bold text-slate-900 flex items-start gap-2.5">
                 <span
                   className={`font-headings text-sm shrink-0 mt-0.5 font-bold ${

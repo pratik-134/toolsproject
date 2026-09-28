@@ -59,7 +59,7 @@ export const BrandLogoPresentation: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] py-12 px-4 sm:px-6 lg:px-8 font-body">
-      <div className="max-w-6xl mx-auto space-y-12">
+      <div className="max-w-container mx-auto space-y-12">
         {/* Header Title */}
         <div className="text-center space-y-3">
           <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200 px-3.5 py-1 text-xs font-semibold text-blue-700">

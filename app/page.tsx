@@ -3,9 +3,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { CleartrixLogo } from "@/components/BrandLogo";
-import { LandingHeroActions } from "@/components/landing/LandingHeroActions";
-import { HeroToolSearch } from "@/components/landing/HeroToolSearch";
-import { HeroHeadlineTicker } from "@/components/landing/HeroHeadlineTicker";
+import { BrandNewHeroBanner } from "@/components/landing/BrandNewHeroBanner";
 import { ToolsMegaSection } from "@/components/landing/ToolsMegaSection";
 import { LandingTemplatesSection } from "@/components/landing/LandingTemplatesSection";
 import { LandingFaq } from "@/components/landing/LandingFaq";
@@ -13,6 +11,7 @@ import { RESUME_FAQS, TOOLS_FAQS } from "@/components/landing/faq-data";
 import { AiAssistantShowcase } from "@/components/landing/AiAssistantShowcase";
 import { AtsAnalyzerPreview } from "@/components/landing/AtsAnalyzerPreview";
 import { AnimatedBannerBackground } from "@/components/landing/AnimatedBannerBackground";
+import { ModernWaveDivider } from "@/components/ui/ModernWaveDivider";
 import { Reveal } from "@/components/ui/reveal";
 import {
   GridPattern,
@@ -37,206 +36,31 @@ import {
   FileUp,
 } from "lucide-react";
 
+import { generateWebApplicationSchema, generateFAQPageSchema } from "@/lib/seo/jsonld";
+
 export default function HomePage() {
+  const webAppSchema = generateWebApplicationSchema();
+  const faqSchema = generateFAQPageSchema([...RESUME_FAQS, ...TOOLS_FAQS]);
+
   return (
     <div className="flex min-h-screen flex-col bg-white text-text-primary selection:bg-blue-500/20 selection:text-slate-900">
+      {/* Structured Data JSON-LD for Search Engines */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       {/* 1. Navigation Header — Floating Rounded Sticky Menu */}
       <Navbar />
 
       {/* Main Content */}
       <main className="flex-1">
-        {/* ========================================================================= */}
-        {/* 2. Hero Section — Light Neutral Canvas + Technical Grid + Soft Glow      */}
-        {/* ========================================================================= */}
-        <section className="relative pt-section-py-mob md:pt-section-py-tab lg:pt-section-py pb-12 sm:pb-20 bg-[radial-gradient(130%_90%_at_50%_-5%,#EEF5FF_0%,#F8FAFC_50%,#FFFFFF_100%)]">
-          {/* Animated Background: Bespoke Topographic Career Elevation Waves and Ambient Glow */}
-          <AnimatedBannerBackground variant="hero" />
-
-          <div className="max-w-container mx-auto px-4 sm:px-6 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              {/* Left Column: Value Prop & CTAs with Staggered Entrance Animations */}
-              <div className="lg:col-span-6 space-y-6 text-left">
-                {/* Trust Eyebrow Badge */}
-                <Reveal variant="fade-up" delay={50}>
-                  <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-slate-200 bg-white/90 px-3 sm:px-3.5 py-1 sm:py-1.5 font-body text-[11px] sm:text-xs font-medium text-slate-700 shadow-xs backdrop-blur-xs max-w-full">
-                    <span className="truncate sm:whitespace-normal">
-                      ✦ Crafted for privacy · Free ATS resume engine & 111+ in-browser tools
-                    </span>
-                  </div>
-                </Reveal>
-
-                {/* H1 Headline with Integrated Scroll-Up Ticker */}
-                <Reveal variant="fade-up" delay={150}>
-                  <HeroHeadlineTicker />
-                </Reveal>
-
-                {/* Subtitle */}
-                <Reveal variant="fade-up" delay={250}>
-                  <p className="font-body text-sm sm:text-subtitle text-slate-600 leading-relaxed max-w-xl">
-                    Create ATS-optimized resumes with 20 professional templates, or run 111+ client-side tools for PDFs, images, code, and security. Zero server uploads, zero watermarks, and zero paywalls—ever.
-                  </p>
-                </Reveal>
-
-                {/* Commanding In-Browser Tool Search with Quick Popular Pills */}
-                <Reveal variant="fade-up" delay={320} className="relative z-30">
-                  <HeroToolSearch />
-                </Reveal>
-
-                {/* Main Action Buttons */}
-                <Reveal variant="fade-up" delay={380} className="relative z-10">
-                  <LandingHeroActions />
-                </Reveal>
-
-                {/* Proof Pills */}
-                <Reveal variant="fade-up" delay={450}>
-                  <div className="pt-4 flex flex-wrap items-center gap-x-5 sm:gap-x-6 gap-y-2.5 sm:gap-y-3 font-body text-xs sm:text-small text-slate-600 border-t border-slate-200/80">
-                    <div className="flex items-center gap-1.5 sm:gap-2 text-slate-800 font-medium">
-                      <CheckCircle2 className="h-4 w-4 text-blue-600 shrink-0" />
-                      <span>Instant High-Res Vector PDF</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 sm:gap-2 text-slate-800 font-medium">
-                      <CheckCircle2 className="h-4 w-4 text-blue-600 shrink-0" />
-                      <span><span className="font-mono">100%</span> ATS Parser Safe</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 sm:gap-2 text-slate-800 font-medium">
-                      <CheckCircle2 className="h-4 w-4 text-blue-600 shrink-0" />
-                      <span>Private In-Browser Sandbox</span>
-                    </div>
-                  </div>
-                </Reveal>
-              </div>
-
-              {/* Right Column: High-Fidelity Interactive Mockup with Floating Badges */}
-              <div className="lg:col-span-6 relative">
-                {/* Atmospheric Ambient Glow behind Mockup */}
-                <div className="pointer-events-none absolute -inset-4 sm:-inset-8 rounded-3xl bg-gradient-to-tr from-blue-500/20 via-sky-400/15 to-transparent blur-2xl -z-10" />
-
-                <Reveal variant="zoom-in" delay={200}>
-                  {/* Floating Badge Top-Right */}
-                  <div className="absolute -top-4 sm:-top-5 -right-1 sm:-right-4 z-30 hidden xs:block">
-                    <FloatingBadge
-                      delay="slow"
-                      icon={<ShieldCheck className="h-4 w-4 text-blue-600" />}
-                      title={<>ATS Score: <span className="font-mono">98/100</span></>}
-                      subtitle="Workday & Greenhouse verified"
-                    />
-                  </div>
-
-                  {/* Floating Badge Bottom-Left */}
-                  <div className="absolute -bottom-4 sm:-bottom-5 -left-1 sm:-left-4 z-30 hidden xs:block">
-                    <FloatingBadge
-                      delay="delayed"
-                      icon={<Download className="h-4 w-4 text-blue-600" />}
-                      title="Vector PDF Ready"
-                      subtitle={<><span className="font-mono">100%</span> Free • Zero Watermarks</>}
-                    />
-                  </div>
-
-                  {/* Main Window Mockup */}
-                  <div className="rounded-2xl border border-slate-200/90 bg-white p-3 shadow-[0_25px_60px_-15px_rgba(37,99,235,0.15),0_0_0_1px_rgba(226,232,240,0.8)] hover:shadow-[0_30px_70px_-12px_rgba(37,99,235,0.22)] transition-all duration-500">
-                    {/* Window Chrome */}
-                    <div className="flex items-center justify-between border-b border-slate-200 px-3.5 py-2.5 bg-slate-100/90 rounded-t-lg">
-                      <div className="flex items-center gap-1.5">
-                        <div className="h-2.5 w-2.5 rounded-full bg-slate-300" />
-                        <div className="h-2.5 w-2.5 rounded-full bg-slate-300" />
-                        <div className="h-2.5 w-2.5 rounded-full bg-blue-400" />
-                      </div>
-                      <div className="flex items-center gap-1.5 rounded-md bg-white px-3 py-0.5 text-[11px] font-sans font-medium text-slate-700 border border-slate-200 shadow-2xs">
-                        <span>cleartrix.com/editor</span>
-                      </div>
-                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-md border border-blue-200">
-                        <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse" />
-                        <span>Ready</span>
-                      </div>
-                    </div>
-
-                    {/* Split Inside Mockup */}
-                    <div className="p-3 sm:p-4 grid grid-cols-1 sm:grid-cols-12 gap-3 sm:gap-4 bg-slate-50/70 rounded-b-lg">
-                      {/* Mockup Form Inputs (Hidden on small mobile < 640px) */}
-                      <div className="hidden sm:block sm:col-span-5 space-y-2.5 text-left text-xs">
-                        <div className="rounded-lg border border-slate-200 bg-white p-2.5 shadow-2xs">
-                          <span className="font-body text-eyebrow uppercase tracking-[1px] text-slate-500 block mb-0.5">
-                            Position
-                          </span>
-                          <p className="font-headings text-h5 text-slate-900 font-bold">
-                            Staff Software Engineer
-                          </p>
-                          <p className="font-body text-small text-slate-500">
-                            Acme Platforms • 2021–Present
-                          </p>
-                        </div>
-                        <div className="rounded-lg border border-slate-200 bg-white p-2.5 shadow-2xs space-y-1">
-                          <span className="font-body text-eyebrow uppercase tracking-[1px] text-slate-500 block mb-0.5">
-                            Key Highlights
-                          </span>
-                          <p className="font-body text-[11px] text-slate-800 leading-snug">
-                            • Architected microservices handling 45k req/sec.
-                          </p>
-                          <p className="font-body text-[11px] text-slate-800 leading-snug">
-                            • Mentored team of 12 engineers across 4 time zones.
-                          </p>
-                        </div>
-                        <div className="rounded-lg border border-slate-200 bg-white p-2.5 shadow-2xs">
-                          <span className="font-body text-eyebrow uppercase tracking-[1px] text-slate-500 block mb-1">
-                            Core Proficiencies
-                          </span>
-                          <div className="flex flex-wrap gap-1">
-                            <span className="bg-white text-slate-700 px-2 py-0.5 rounded-[4px] font-medium text-[10px] border border-slate-200">
-                              TypeScript
-                            </span>
-                            <span className="bg-white text-slate-700 px-2 py-0.5 rounded-[4px] font-medium text-[10px] border border-slate-200">
-                              Next.js
-                            </span>
-                            <span className="bg-white text-slate-700 px-2 py-0.5 rounded-[4px] font-medium text-[10px] border border-slate-200">
-                              PostgreSQL
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Mockup A4 Preview Sheet */}
-                      <div className="col-span-1 sm:col-span-7 bg-white rounded-lg border border-slate-200 p-3.5 sm:p-4 a4-paper-shadow text-left space-y-2.5 text-[10px]">
-                        <div className="border-b-2 border-blue-600 pb-2">
-                          <h4 className="font-headings text-h4 font-bold text-slate-900 leading-none">
-                            Alex Rivera
-                          </h4>
-                          <p className="font-body text-[11px] font-semibold text-slate-600 mt-1">
-                            Staff Software Engineer
-                          </p>
-                          <p className="font-body text-[9.5px] text-slate-500 mt-0.5">
-                            alex@rivera.dev • San Francisco, CA • linkedin.com/in/alex
-                          </p>
-                        </div>
-                        <div>
-                          <span className="font-body text-[9px] font-bold text-slate-900 uppercase tracking-wider block border-b border-slate-200 pb-0.5 mb-1">
-                            Experience
-                          </span>
-                          <div className="flex justify-between font-bold text-slate-900 text-[10px]">
-                            <span>Staff Software Engineer — Acme</span>
-                            <span className="text-slate-500 font-normal">2021–Present</span>
-                          </div>
-                          <p className="font-body text-[9.5px] text-slate-600 leading-snug mt-0.5">
-                            Led core platform infrastructure team. Reduced P99 response times
-                            by 42% through distributed caching and query indexing.
-                          </p>
-                        </div>
-                        <div>
-                          <span className="font-body text-[9px] font-bold text-slate-900 uppercase tracking-wider block border-b border-slate-200 pb-0.5 mb-1">
-                            Education
-                          </span>
-                          <div className="flex justify-between font-bold text-slate-900 text-[10px]">
-                            <span>B.S. in Computer Science — Stanford</span>
-                            <span className="text-slate-500 font-normal">GPA 3.9</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Reveal>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* 2. Fully Brand New Centered Modern SaaS Hero Banner */}
+        <BrandNewHeroBanner />
 
         {/* ========================================================================= */}
         {/* 2. In-Browser Tools Mega-Section (111+ Client-Side Tools)                 */}
@@ -248,15 +72,18 @@ export default function HomePage() {
         {/* ========================================================================= */}
         <section
           id="templates"
-          className="scroll-mt-20 sm:scroll-mt-24 bg-white py-section-py-mob md:py-section-py-tab lg:py-section-py relative"
+          className="scroll-mt-20 sm:scroll-mt-24 bg-gradient-to-b from-blue-50/40 via-slate-50/60 to-white py-section-py-mob md:py-section-py-tab lg:py-section-py relative overflow-hidden"
         >
-          <GridPattern size={56} strokeOpacity={0.02} strokeColor="#0F172A" />
+          <GridPattern size={56} strokeOpacity={0.025} strokeColor="#3B82F6" />
+
+          {/* Ambient Glow Pool */}
+          <div className="pointer-events-none absolute -top-20 -right-20 w-96 h-96 rounded-full bg-blue-500/10 blur-3xl" />
 
           <div className="max-w-container mx-auto px-4 sm:px-6 relative z-10">
             <Reveal variant="fade-up">
               <div className="flex flex-col md:flex-row md:items-end justify-between mb-section-mb-mob md:mb-12 lg:mb-section-mb gap-6">
                 <div>
-                  <span className="font-body text-xs font-medium text-slate-600 bg-white border border-slate-200/80 px-3 py-1 rounded-full inline-block mb-2">
+                  <span className="font-body text-xs font-medium text-slate-700 bg-slate-100/90 px-3 py-1 rounded-full inline-block mb-2">
                     ✦ 20 hand-crafted styles · Recruiter-tested & ATS-safe
                   </span>
                   <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900">
@@ -283,26 +110,31 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Dynamic Zig-Zag Section Wave Divider */}
+        <ModernWaveDivider variant="zigzag" fillColor="fill-slate-50/70" />
 
         {/* ========================================================================= */}
-        {/* 4. Comparison Section — Slate Tinted Backdrop with Elevated Column        */}
+        {/* 4. Comparison Section — High-Impact Dark Navy & Vibrant Accent Feature    */}
         {/* ========================================================================= */}
         <section
           id="comparison"
-          className="scroll-mt-20 sm:scroll-mt-24 bg-white text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative border-t border-slate-200/80"
+          className="scroll-mt-20 sm:scroll-mt-24 bg-[#0F172A] text-white py-section-py-mob md:py-section-py-tab lg:py-section-py relative overflow-hidden"
         >
-          <DotPattern size={24} dotOpacity={0.035} dotColor="#64748B" />
+          <DotPattern size={24} dotOpacity={0.08} dotColor="#38BDF8" />
+
+          {/* Luminous Mesh Glow Behind Table */}
+          <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full bg-gradient-to-r from-blue-600/25 via-teal-500/15 to-sky-400/20 blur-3xl" />
 
           <div className="max-w-container mx-auto px-4 sm:px-6 text-center relative z-10">
             <Reveal variant="fade-up">
-              <div className="mb-section-mb-mob md:mb-12 lg:mb-section-mb max-w-3xl mx-auto">
-                <span className="font-body text-xs font-medium text-slate-600 bg-white border border-slate-200/80 px-3 py-1 rounded-full inline-block mb-3">
+              <div className="mb-section-mb-mob md:mb-12 lg:mb-section-mb max-w-3xl mx-auto space-y-3">
+                <span className="font-body text-xs font-semibold text-cyan-300 bg-blue-500/20 border border-blue-500/30 px-3.5 py-1 rounded-full inline-block shadow-xs">
                   ✦ The honest truth · Why job seekers leave traditional builders
                 </span>
-                <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900">
+                <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-white font-black tracking-tight">
                   Why job seekers are ditching traditional resume builders.
                 </h2>
-                <p className="font-body text-subtitle text-slate-600 mt-3">
+                <p className="font-body text-subtitle text-slate-300 leading-relaxed max-w-2xl mx-auto">
                   Most resume tools lure you with "free" templates, only to demand credit
                   cards, subscriptions, or slap huge watermarks when you try to download.
                   Cleartrix Resume Builder is genuinely 100% free.
@@ -312,9 +144,9 @@ export default function HomePage() {
 
             {/* Comparison Table Card */}
             <Reveal variant="fade-up" delay={150}>
-              <div className="max-w-4xl mx-auto overflow-hidden rounded-xl border border-slate-200/90 bg-white shadow-lg text-left">
+              <div className="max-w-4xl mx-auto overflow-hidden rounded-2xl border border-slate-700/80 bg-slate-900/90 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] text-left backdrop-blur-md">
                 {/* Mobile Card-Based Comparison (< sm) */}
-                <div className="block sm:hidden divide-y divide-slate-100">
+                <div className="block sm:hidden divide-y divide-slate-800">
                   {[
                     {
                       feature: "PDF Download",
@@ -347,23 +179,23 @@ export default function HomePage() {
                       others: "Complex multi-column layouts can fail ATS parsers",
                     },
                   ].map((row, idx) => (
-                    <div key={idx} className="p-4 space-y-2.5 bg-white">
-                      <div className="font-headings text-sm font-bold text-slate-900">
+                    <div key={idx} className="p-4 space-y-2.5 bg-slate-900/90">
+                      <div className="font-headings text-sm font-bold text-white">
                         {row.feature}
                       </div>
                       <div className="space-y-1.5">
-                        <div className="flex items-start gap-2 bg-blue-50/70 border border-blue-200/60 rounded-lg p-2.5">
-                          <Check className="h-4 w-4 text-blue-600 shrink-0 stroke-[3] mt-0.5" />
+                        <div className="flex items-start gap-2 bg-blue-500/15 border border-blue-500/30 rounded-lg p-2.5">
+                          <Check className="h-4 w-4 text-emerald-400 shrink-0 stroke-[3] mt-0.5" />
                           <div className="text-xs">
-                            <span className="font-bold text-blue-900 block mb-0.5">Cleartrix</span>
-                            <span className="text-slate-800 font-medium">{row.cleartrix}</span>
+                            <span className="font-bold text-cyan-300 block mb-0.5">Cleartrix</span>
+                            <span className="text-slate-200 font-medium">{row.cleartrix}</span>
                           </div>
                         </div>
-                        <div className="flex items-start gap-2 bg-slate-50 border border-slate-200/60 rounded-lg p-2.5">
-                          <X className="h-4 w-4 text-red-500 shrink-0 stroke-[2.5] mt-0.5" />
+                        <div className="flex items-start gap-2 bg-slate-800/60 border border-slate-700/60 rounded-lg p-2.5">
+                          <X className="h-4 w-4 text-red-400 shrink-0 stroke-[2.5] mt-0.5" />
                           <div className="text-xs">
-                            <span className="font-medium text-slate-500 block mb-0.5">Others</span>
-                            <span className="text-slate-600">{row.others}</span>
+                            <span className="font-medium text-slate-400 block mb-0.5">Others</span>
+                            <span className="text-slate-400">{row.others}</span>
                           </div>
                         </div>
                       </div>
@@ -375,15 +207,15 @@ export default function HomePage() {
                 <div className="hidden sm:block overflow-x-auto">
                   <div className="min-w-full">
                     {/* Table Header */}
-                    <div className="grid grid-cols-12 bg-slate-100 text-slate-900 border-b border-slate-200 p-4 font-headings text-xs font-bold uppercase tracking-wider">
-                      <div className="col-span-4">Feature</div>
-                      <div className="col-span-4 text-blue-800 font-extrabold flex items-center gap-2 bg-blue-50/80 -my-4 py-4 px-3 border-x border-blue-200">
+                    <div className="grid grid-cols-12 bg-slate-800/90 text-white border-b border-slate-700/80 p-4 font-headings text-xs font-bold uppercase tracking-wider">
+                      <div className="col-span-4 text-slate-300">Feature</div>
+                      <div className="col-span-4 text-cyan-300 font-extrabold flex items-center gap-2 bg-blue-600/20 -my-4 py-4 px-3 border-x border-blue-500/30">
                         <span>Cleartrix</span>
-                        <span className="rounded-md bg-blue-600 text-white px-2 py-0.5 text-[10px] font-bold">
+                        <span className="rounded-md bg-emerald-500 text-slate-950 px-2 py-0.5 text-[10px] font-black uppercase">
                           100% Free
                         </span>
                       </div>
-                      <div className="col-span-4 text-slate-500 pl-3">
+                      <div className="col-span-4 text-slate-400 pl-3">
                         Subscription-Based Builders
                       </div>
                     </div>
@@ -423,19 +255,19 @@ export default function HomePage() {
                     ].map((row, idx) => (
                       <div
                         key={idx}
-                        className={`grid grid-cols-12 p-4 items-center text-sm border-b border-slate-100 last:border-0 ${
-                          idx % 2 === 0 ? "bg-white" : "bg-slate-50/50"
+                        className={`grid grid-cols-12 p-4 items-center text-sm border-b border-slate-800/60 last:border-0 ${
+                          idx % 2 === 0 ? "bg-slate-900/90" : "bg-slate-800/40"
                         }`}
                       >
-                        <div className="col-span-4 font-headings text-sm font-semibold text-slate-900">
+                        <div className="col-span-4 font-headings text-sm font-semibold text-white">
                           {row.feature}
                         </div>
-                        <div className="col-span-4 font-body font-bold text-slate-900 flex items-center gap-2 bg-blue-50/30 -my-4 py-4 px-3 border-x border-blue-100">
-                          <Check className="h-4 w-4 text-blue-600 shrink-0 stroke-[3]" />
-                          <span>{row.cleartrix}</span>
+                        <div className="col-span-4 font-body font-bold text-white flex items-center gap-2 bg-blue-600/15 -my-4 py-4 px-3 border-x border-blue-500/20">
+                          <Check className="h-4 w-4 text-emerald-400 shrink-0 stroke-[3]" />
+                          <span className="text-slate-100">{row.cleartrix}</span>
                         </div>
-                        <div className="col-span-4 font-body text-xs text-slate-500 flex items-center gap-2 pl-3">
-                          <X className="h-4 w-4 text-red-500 shrink-0 stroke-[2.5]" />
+                        <div className="col-span-4 font-body text-xs text-slate-400 flex items-center gap-2 pl-3">
+                          <X className="h-4 w-4 text-red-400 shrink-0 stroke-[2.5]" />
                           <span>{row.others}</span>
                         </div>
                       </div>
@@ -444,12 +276,12 @@ export default function HomePage() {
                 </div>
 
                 {/* Bottom Cost Contrast Callout */}
-                <div className="p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-                  <span className="text-slate-600 font-medium text-center sm:text-left">
+                <div className="p-4 bg-slate-800/80 border-t border-slate-700/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                  <span className="text-slate-300 font-medium text-center sm:text-left">
                     Average competitor subscription:{" "}
-                    <strong className="text-slate-900">$24.95 / month</strong>
+                    <strong className="text-red-400">$24.95 / month</strong>
                   </span>
-                  <span className="inline-flex items-center gap-1.5 font-medium text-slate-700 bg-white border border-slate-200 px-3 py-1 rounded-full text-xs">
+                  <span className="inline-flex items-center gap-1.5 font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-3 py-1 rounded-full text-xs">
                     Cleartrix: $0.00 forever
                   </span>
                 </div>
@@ -465,15 +297,18 @@ export default function HomePage() {
         {/* ========================================================================= */}
         <section
           id="features"
-          className="scroll-mt-20 sm:scroll-mt-24 bg-white text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative border-t border-b border-slate-200/80"
+          className="scroll-mt-20 sm:scroll-mt-24 bg-gradient-to-b from-white via-slate-50/70 to-blue-50/20 text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative overflow-hidden"
         >
           <DotPattern size={28} dotOpacity={0.035} dotColor="#0F172A" />
+
+          {/* Ambient Glow */}
+          <div className="pointer-events-none absolute bottom-0 left-10 w-96 h-96 rounded-full bg-teal-400/10 blur-3xl" />
 
           <div className="max-w-container mx-auto px-4 sm:px-6 relative z-10 space-y-12">
             {/* Section Header */}
             <Reveal variant="fade-up">
               <div className="text-center max-w-3xl mx-auto">
-                <span className="font-body text-xs font-medium text-slate-600 bg-white border border-slate-200/80 px-3.5 py-1 rounded-full inline-block mb-3">
+                <span className="font-body text-xs font-medium text-slate-700 bg-slate-100/90 px-3.5 py-1 rounded-full inline-block mb-3">
                   ✦ Under the hood · Built for applicants, not data brokers
                 </span>
                 <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900">
@@ -489,7 +324,7 @@ export default function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
               {/* Block 1: Vector PDF Engine */}
               <Reveal variant="fade-up" delay={100} className="h-full">
-                <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:shadow-md transition-all flex flex-col justify-between h-full">
+                <div className="rounded-2xl border border-slate-100/80 bg-white p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-md hover:border-blue-200/60 transition-all flex flex-col justify-between h-full">
                   <div className="space-y-3.5">
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
                       <Cpu className="h-5 w-5" />
@@ -530,7 +365,7 @@ export default function HomePage() {
 
               {/* Block 2: 100% Privacy by Default */}
               <Reveal variant="fade-up" delay={150} className="h-full">
-                <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:shadow-md transition-all flex flex-col justify-between h-full">
+                <div className="rounded-2xl border border-slate-100/80 bg-white p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-md hover:border-blue-200/60 transition-all flex flex-col justify-between h-full">
                   <div className="space-y-3.5">
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
                       <ShieldCheck className="h-5 w-5" />
@@ -559,7 +394,7 @@ export default function HomePage() {
 
               {/* Block 3: PDF & DOCX Multi-Format */}
               <Reveal variant="fade-up" delay={200} className="h-full">
-                <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:shadow-md transition-all flex flex-col justify-between h-full">
+                <div className="rounded-2xl border border-slate-100/80 bg-white p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-md hover:border-blue-200/60 transition-all flex flex-col justify-between h-full">
                   <div className="space-y-3.5">
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
                       <FileUp className="h-5 w-5" />
@@ -588,7 +423,7 @@ export default function HomePage() {
 
               {/* Block 4: Custom Sections & ATS Verification */}
               <Reveal variant="fade-up" delay={250} className="h-full">
-                <div className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-7 shadow-xs hover:shadow-md transition-all flex flex-col justify-between h-full">
+                <div className="rounded-2xl border border-slate-100/80 bg-white p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-md hover:border-blue-200/60 transition-all flex flex-col justify-between h-full">
                   <div className="space-y-3.5">
                     <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
                       <Layers className="h-5 w-5" />
@@ -628,7 +463,7 @@ export default function HomePage() {
         {/* ========================================================================= */}
         {/* 7. ATS Analyzer Section — Analytical Dashboard View with Heuristics       */}
         {/* ========================================================================= */}
-        <section className="bg-slate-50/80 text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative">
+        <section className="bg-gradient-to-b from-blue-50/20 via-slate-50 to-emerald-50/20 text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative overflow-hidden">
           <GridPattern size={40} strokeOpacity={0.025} strokeColor="#0F172A" />
 
           <div className="max-w-container mx-auto px-4 sm:px-6 relative z-10">
@@ -638,18 +473,19 @@ export default function HomePage() {
           </div>
         </section>
 
-
+        {/* Curved Section Wave Divider */}
+        <ModernWaveDivider variant="curved" fillColor="fill-sky-50/40" />
 
         {/* ========================================================================= */}
         {/* 8. Privacy Section — Light Canvas, Privacy-First Trust Pillars            */}
         {/* ========================================================================= */}
-        <section className="bg-slate-50/60 text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative border-t border-b border-slate-200/80">
+        <section className="bg-gradient-to-br from-sky-50/40 via-white to-teal-50/30 text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative overflow-hidden">
           <DotPattern size={28} dotOpacity={0.03} dotColor="#0F172A" />
 
           <div className="max-w-container mx-auto px-4 sm:px-6 relative z-10 text-center space-y-12">
             <Reveal variant="fade-up">
               <div className="max-w-3xl mx-auto space-y-4">
-                <span className="font-body text-xs font-medium text-slate-600 bg-white border border-slate-200/80 px-3.5 py-1 rounded-full inline-block">
+                <span className="font-body text-xs font-medium text-slate-700 bg-slate-100/90 px-3.5 py-1 rounded-full inline-block">
                   ✦ Privacy by architecture · Zero servers, zero cookies
                 </span>
                 <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 font-bold">
@@ -666,7 +502,7 @@ export default function HomePage() {
             {/* 3 Light Privacy Pillars */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left max-w-5xl mx-auto">
               <Reveal variant="fade-up" delay={100}>
-                <div className="rounded-xl border border-slate-200/90 bg-white p-6 hover:border-blue-300/60 hover:shadow-md transition-all space-y-3 h-full">
+                <div className="rounded-xl border border-slate-100/80 bg-white p-6 hover:border-blue-200/60 hover:shadow-md shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] transition-all space-y-3 h-full">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 border border-blue-100 text-blue-600">
                     <HardDrive className="h-5 w-5" />
                   </div>
@@ -682,7 +518,7 @@ export default function HomePage() {
               </Reveal>
 
               <Reveal variant="fade-up" delay={200}>
-                <div className="rounded-xl border border-slate-200/90 bg-white p-6 hover:border-blue-300/60 hover:shadow-md transition-all space-y-3 h-full">
+                <div className="rounded-xl border border-slate-100/80 bg-white p-6 hover:border-blue-200/60 hover:shadow-md shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] transition-all space-y-3 h-full">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 border border-blue-100 text-blue-600">
                     <Lock className="h-5 w-5" />
                   </div>
@@ -697,7 +533,7 @@ export default function HomePage() {
               </Reveal>
 
               <Reveal variant="fade-up" delay={300}>
-                <div className="rounded-xl border border-slate-200/90 bg-white p-6 hover:border-blue-300/60 hover:shadow-md transition-all space-y-3 h-full">
+                <div className="rounded-xl border border-slate-100/80 bg-white p-6 hover:border-blue-200/60 hover:shadow-md shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] transition-all space-y-3 h-full">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 border border-blue-100 text-blue-600">
                     <ShieldCheck className="h-5 w-5" />
                   </div>
@@ -714,20 +550,18 @@ export default function HomePage() {
           </div>
         </section>
 
-
-
         {/* ========================================================================= */}
         {/* 9. FAQ Section — SEO & Trust Optimized Editorial Layout                  */}
         {/* ========================================================================= */}
         <section
           id="faq"
-          className="scroll-mt-20 sm:scroll-mt-24 py-section-py-mob md:py-section-py-tab lg:py-section-py bg-white border-b border-slate-200/80"
+          className="scroll-mt-20 sm:scroll-mt-24 py-section-py-mob md:py-section-py-tab lg:py-section-py bg-gradient-to-b from-slate-50/80 via-white to-blue-50/20 relative overflow-hidden"
         >
           <div className="max-w-container mx-auto px-4 sm:px-6 space-y-12">
             {/* Header */}
             <Reveal variant="fade-up">
               <div className="text-center space-y-4 max-w-2xl mx-auto">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200/80 px-3.5 py-1 font-body text-xs font-medium text-slate-600">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-100/80 border-0 px-3.5 py-1 font-body text-xs font-medium text-slate-600">
                   ✦ Common questions · Clear, straight answers
                 </span>
                 <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 [&>span]:text-blue-600">
@@ -746,27 +580,27 @@ export default function HomePage() {
         </section>
 
         {/* ========================================================================= */}
-        {/* 10. Bottom CTA Banner — High-Impact Layered Finish                       */}
+        {/* 10. Bottom CTA Banner — Sleek High-Impact Canvas                          */}
         {/* ========================================================================= */}
-        <section className="bg-gradient-to-b from-blue-50/50 via-slate-50 to-white text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py border-b border-slate-200/80 text-center relative overflow-hidden">
-          {/* Animated Background: Radiant Sunburst Glow, Grid Shimmer Beam, and Particles */}
-          <AnimatedBannerBackground variant="cta" />
+        <section className="bg-[#0F172A] text-white py-16 sm:py-24 text-center relative overflow-hidden">
+          {/* Subtle Ambient Mesh Glow */}
+          <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] rounded-full bg-gradient-to-r from-blue-600/20 via-sky-500/15 to-teal-400/15 blur-3xl" />
 
           <div className="max-w-container mx-auto px-4 sm:px-6 space-y-6 relative z-10">
             <Reveal variant="fade-up">
-              <div className="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200/80 px-3.5 py-1 text-xs font-medium text-slate-600 shadow-2xs">
+              <div className="inline-flex items-center gap-2 rounded-full bg-blue-500/15 border border-blue-500/30 px-4 py-1.5 font-body text-xs font-semibold text-cyan-300 shadow-xs">
                 ✦ Start in seconds · No account or payment needed
               </div>
             </Reveal>
 
             <Reveal variant="fade-up" delay={100}>
-              <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 [&>span]:text-blue-600 font-bold max-w-2xl mx-auto">
+              <h2 className="font-headings text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white [&>span]:text-wordmark-grad tracking-tight max-w-2xl mx-auto">
                 Ready to create your <span>job-winning</span> resume?
               </h2>
             </Reveal>
 
             <Reveal variant="fade-up" delay={200}>
-              <p className="font-body text-subtitle text-slate-600 max-w-xl mx-auto">
+              <p className="font-body text-sm sm:text-base text-slate-300 max-w-xl mx-auto font-medium leading-relaxed">
                 No credit card. No paywall. Jump straight into the editor and download
                 your free vector PDF in minutes.
               </p>
@@ -777,18 +611,18 @@ export default function HomePage() {
                 <Link href="/editor">
                   <Button
                     size="lg"
-                    className="bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 px-8 py-3.5 rounded-lg min-h-[48px] text-base font-bold shadow-md hover:shadow-xl transition-all"
+                    className="bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white px-8 py-3.5 rounded-xl min-h-[48px] text-base font-bold shadow-lg hover:shadow-blue-500/25 transition-all gap-2"
                   >
-                    Build Your Resume Free <ArrowRight className="h-4 w-4 ml-2" />
+                    Build Your Resume Free <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
                 <Link href="/tools">
                   <Button
                     variant="outline"
                     size="lg"
-                    className="bg-white text-slate-800 border-slate-200 hover:bg-slate-50 px-7 py-3.5 rounded-lg min-h-[48px] text-base font-semibold shadow-2xs gap-2"
+                    className="bg-slate-800/80 hover:bg-slate-800 text-slate-200 border-slate-700 px-7 py-3.5 rounded-xl min-h-[48px] text-base font-semibold shadow-xs gap-2"
                   >
-                    <Sparkles className="h-4 w-4 text-blue-600" />
+                    <Sparkles className="h-4 w-4 text-cyan-300" />
                     Explore 111+ Tools
                   </Button>
                 </Link>
@@ -796,7 +630,7 @@ export default function HomePage() {
                   <Button
                     variant="ghost"
                     size="lg"
-                    className="text-slate-600 hover:text-slate-900 hover:bg-slate-100 px-6 py-3.5 rounded-lg min-h-[48px] text-base font-medium"
+                    className="text-slate-400 hover:text-white px-6 py-3.5 rounded-xl min-h-[48px] text-base font-medium"
                   >
                     Browse 20+ Templates
                   </Button>
@@ -806,53 +640,21 @@ export default function HomePage() {
 
             {/* Bottom Proof Tagline */}
             <Reveal variant="fade-up" delay={400}>
-              <div className="pt-4 flex items-center justify-center gap-6 text-xs text-slate-500 font-medium">
+              <div className="pt-4 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400 font-medium">
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-blue-600" /> 100% Free Forever
+                  <CheckCircle2 className="h-4 w-4 text-emerald-400" /> 100% Free Forever
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-blue-600" /> No Registration
+                  <CheckCircle2 className="h-4 w-4 text-emerald-400" /> No Registration
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-blue-600" /> Instant Download
+                  <CheckCircle2 className="h-4 w-4 text-emerald-400" /> Instant Vector PDF
                 </span>
               </div>
             </Reveal>
           </div>
         </section>
       </main>
-
-      {/* Floating Bottom Dock (Sticky Bar) */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/90 shadow-xl px-5 py-2 rounded-full hidden md:flex items-center gap-6">
-        <div className="flex items-center gap-2">
-          <span className="font-body text-small font-bold text-slate-900">
-            Cleartrix Resume Builder 100% Free
-          </span>
-        </div>
-        <div className="h-4 w-[1px] bg-slate-200" />
-        <div className="flex items-center gap-4 font-body text-small text-slate-600 font-medium">
-          <Link href="/tools" className="hover:text-blue-600 font-semibold text-blue-600 transition-colors">
-            All Tools
-          </Link>
-          <a href="#templates" className="hover:text-blue-600 transition-colors">
-            Templates
-          </a>
-          <a href="#comparison" className="hover:text-blue-600 transition-colors">
-            Why Us?
-          </a>
-          <a href="#faq" className="hover:text-blue-600 transition-colors">
-            FAQ
-          </a>
-        </div>
-        <Link href="/editor">
-          <Button
-            size="sm"
-            className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-full px-4 py-1.5 text-xs font-bold shadow-xs transition-all"
-          >
-            Start Free
-          </Button>
-        </Link>
-      </div>
 
       {/* Global Cleartrix Footer */}
       <Footer />

@@ -50,7 +50,7 @@ export const Navbar: React.FC = () => {
   // Detect scroll to trigger elevated navbar styling
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 10);
     };
 
     handleScroll();
@@ -97,19 +97,19 @@ export const Navbar: React.FC = () => {
   };
 
   const renderNavContent = () => (
-    <div className="flex h-14 sm:h-16 items-center justify-between gap-2 sm:gap-4">
+    <div className="flex h-16 sm:h-20 items-center justify-between gap-3 sm:gap-6">
       {/* Brand Logo & Trust Tagline */}
-      <div className="flex items-center gap-2 sm:gap-3.5 shrink min-w-0">
+      <div className="flex items-center gap-3 sm:gap-4 shrink min-w-0">
         <Link
           href="/"
           onClick={handleLinkClick}
-          className="flex items-center gap-2 sm:gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg py-0.5"
+          className="flex items-center gap-2 sm:gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-xl py-1"
         >
-          <BrandLogo product="cleartrix" size={30} isLight={false} />
+          <BrandLogo product="cleartrix" size={34} isLight={false} />
         </Link>
 
         {/* Trust Pill (Desktop only) */}
-        <span className="hidden xl:inline-flex items-center gap-1.5 rounded-md bg-slate-50 border border-slate-200 px-2.5 py-0.5 font-body text-[11px] font-medium text-slate-600 shrink-0">
+        <span className="hidden xl:inline-flex items-center gap-1.5 rounded-full bg-blue-50/80 border border-blue-100 px-3 py-1 font-body text-xs font-semibold text-blue-700 shrink-0 shadow-2xs">
           ✦ Open & private · zero paywalls
         </span>
       </div>
@@ -117,14 +117,14 @@ export const Navbar: React.FC = () => {
       {/* Center Navigation Links */}
       <nav
         aria-label="Main Navigation"
-        className="hidden md:flex items-center gap-4 lg:gap-6 font-body text-xs lg:text-sm font-medium text-slate-600 shrink-0"
+        className="hidden md:flex items-center gap-5 lg:gap-8 font-body text-xs lg:text-sm font-semibold text-slate-700 shrink-0"
       >
         <Link
           href="/tools"
-          className="inline-flex items-center gap-1.5 hover:text-blue-600 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group font-medium text-slate-600"
+          className="inline-flex items-center gap-1.5 hover:text-blue-600 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group font-semibold text-slate-700"
         >
           <span>Tools</span>
-          <span className="text-[10px] font-semibold text-slate-500 bg-slate-100 border border-slate-200/70 px-1.5 py-0.5 rounded-full">
+          <span className="text-[10px] font-bold text-blue-600 bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-full">
             {TOOLS.length}
           </span>
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full" />
@@ -167,16 +167,16 @@ export const Navbar: React.FC = () => {
       </nav>
 
       {/* Right Area: Action CTA & Mobile Hamburger Button */}
-      <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+      <div className="flex items-center gap-2 sm:gap-3 shrink-0">
         <Link href="/editor" onClick={handleLinkClick}>
           <Button
             size="sm"
-            className="gap-1 font-bold bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white shadow-xs hover:shadow-sm rounded-lg h-8 sm:h-9 px-2.5 sm:px-4 text-xs whitespace-nowrap transition-all shrink-0"
+            className="gap-1.5 font-extrabold bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white shadow-md hover:shadow-lg rounded-xl h-9 sm:h-10.5 px-3.5 sm:px-5 text-xs sm:text-sm whitespace-nowrap transition-all shrink-0"
           >
-            <Sparkles className="h-3 w-3 text-white/95" />
+            <Sparkles className="h-3.5 w-3.5 text-white/95" />
             <span className="hidden xs:inline">Open Builder</span>
             <span className="xs:hidden">Build</span>
-            <ArrowRight className="h-3 w-3 shrink-0 ml-0.5 hidden xs:inline" />
+            <ArrowRight className="h-3.5 w-3.5 shrink-0 ml-0.5 hidden xs:inline" />
           </Button>
         </Link>
 
@@ -187,7 +187,7 @@ export const Navbar: React.FC = () => {
           aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isOpen}
           aria-controls="mobile-navigation-drawer"
-          className="md:hidden flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-700 hover:text-blue-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 active:scale-95 transition-all shrink-0"
+          className="md:hidden flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/90 bg-slate-50 text-slate-700 hover:text-blue-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 active:scale-95 transition-all shrink-0"
         >
           {isOpen ? (
             <X className="h-4 w-4 text-slate-900" />
@@ -356,7 +356,7 @@ export const Navbar: React.FC = () => {
             {/* Tablet & Desktop full view (>= 640px) */}
             <div className="hidden sm:flex flex-1 items-center justify-center gap-2.5 text-center text-xs">
               <span className="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] tracking-wider uppercase font-bold shrink-0">
-                Phase 2 Live
+                100% Free & Private
               </span>
               <span className="inline-flex items-center gap-1.5 font-medium text-slate-200">
                 <Rocket className="h-3.5 w-3.5 text-cyan-400 shrink-0" strokeWidth={1.75} aria-hidden="true" />
@@ -388,10 +388,10 @@ export const Navbar: React.FC = () => {
 
       {/* 2. Full-Width Sticky Navbar */}
       <header
-        className={`sticky top-0 z-50 w-full transition-all duration-200 bg-white/95 backdrop-blur-md ${
+        className={`sticky top-0 z-50 w-full bg-white transition-all duration-300 ${
           isScrolled
-            ? "border-b border-slate-200/60 shadow-xs"
-            : "border-b border-transparent"
+            ? "border-b border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.08)]"
+            : "border-b border-transparent shadow-none"
         }`}
       >
         <div className="max-w-container mx-auto px-4 sm:px-6">

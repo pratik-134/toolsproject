@@ -79,13 +79,13 @@ export const ToolsMegaSection: React.FC = () => {
       className="scroll-mt-20 py-16 sm:py-24 bg-gradient-to-b from-white via-slate-50/70 to-white relative"
     >
       {/* Subtle top & bottom boundary lines */}
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200/80 to-transparent pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-slate-200/80 to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-100/50 to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-slate-100/50 to-transparent pointer-events-none" />
 
       {/* Consistent max-w-container matching Hero and other landing sections */}
       <div className="max-w-container mx-auto px-4 sm:px-6 text-center relative z-10">
         {/* 3a. Eyebrow Badge */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1 font-body text-xs font-medium text-slate-600 shadow-2xs mb-4">
+        <div className="inline-flex items-center gap-2 rounded-full bg-slate-100/80 border-0 px-3.5 py-1 font-body text-xs font-medium text-slate-600 shadow-2xs mb-4">
           <span>✦ Privacy utility suite · 111 tools running right in your browser</span>
         </div>
 
@@ -117,16 +117,16 @@ export const ToolsMegaSection: React.FC = () => {
               <Link
                 key={card.key}
                 href={`/tools/${card.categoryId}`}
-                className="group relative flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-white border border-slate-200/90 hover:border-blue-400/60 hover:shadow-lg transition-all duration-300 ease-out"
+                className="group relative flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-white border border-slate-100/90 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:border-blue-400/60 hover:shadow-[0_12px_30px_-6px_rgba(37,99,235,0.15)] transition-all duration-300 ease-out overflow-hidden"
+                style={{ borderTop: `3px solid ${color.primary}` }}
               >
                 <div>
                   {/* Card Header Row: Icon + Count Badge */}
                   <div className="flex items-center justify-between">
                     <div
-                      className="h-11 w-11 rounded-xl flex items-center justify-center shrink-0 border shadow-2xs group-hover:scale-105 transition-transform"
+                      className="h-11 w-11 rounded-xl flex items-center justify-center shrink-0 border-0 shadow-2xs group-hover:scale-105 transition-transform"
                       style={{
                         backgroundColor: color.tint,
-                        borderColor: color.border,
                         color: color.primary,
                       }}
                     >
@@ -134,10 +134,9 @@ export const ToolsMegaSection: React.FC = () => {
                     </div>
 
                     <span
-                      className="text-xs font-mono font-bold px-2.5 py-1 rounded-full border shadow-2xs"
+                      className="text-xs font-mono font-bold px-2.5 py-1 rounded-full border-0 shadow-2xs"
                       style={{
                         backgroundColor: color.tint,
-                        borderColor: color.border,
                         color: color.primary,
                       }}
                     >
@@ -162,7 +161,10 @@ export const ToolsMegaSection: React.FC = () => {
                   <span className="truncate pr-1 text-slate-500">
                     Featured: <strong className="text-slate-800 font-semibold">{card.featured}</strong>
                   </span>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-medium text-slate-500 bg-slate-50 border border-slate-200/70 px-2 py-0.5 rounded-full shrink-0">
+                  <span
+                    className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full shrink-0"
+                    style={{ backgroundColor: color.tint, color: color.primary }}
+                  >
                     Runs locally
                   </span>
                 </div>
@@ -172,7 +174,7 @@ export const ToolsMegaSection: React.FC = () => {
         </div>
 
         {/* 3d. Modern Floating Metrics Strip */}
-        <div className="mt-12 sm:mt-14 inline-flex flex-wrap items-center justify-center gap-3 sm:gap-6 px-5 sm:px-7 py-3 rounded-2xl bg-white border border-slate-200/90 shadow-2xs text-xs sm:text-sm font-medium text-slate-600 font-body">
+        <div className="mt-12 sm:mt-14 inline-flex flex-wrap items-center justify-center gap-3 sm:gap-6 px-5 sm:px-7 py-3 rounded-2xl bg-white/90 backdrop-blur-xs border border-slate-100/80 shadow-xs text-xs sm:text-sm font-medium text-slate-600 font-body">
           <span className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-emerald-500" />
             <span className="text-slate-800"><strong className="font-mono font-bold">111</strong> Tools Live</span>

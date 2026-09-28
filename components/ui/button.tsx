@@ -4,16 +4,16 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30 focus-visible:border-blue-500 disabled:pointer-events-none disabled:opacity-50 select-none",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B82F6]/30 focus-visible:border-[#3B82F6] disabled:pointer-events-none disabled:opacity-50 select-none",
   {
     variants: {
       variant: {
         default:
-          "bg-blue-600 text-white shadow-xs hover:bg-blue-700 hover:shadow-sm active:bg-blue-800",
+          "bg-gradient-to-r from-[#3B82F6] to-[#0EA5E9] text-white shadow-xs hover:opacity-95 hover:shadow-sm active:scale-[0.99]",
         secondary:
-          "bg-slate-900 text-white shadow-xs hover:bg-slate-800 active:bg-slate-950",
+          "bg-[#0F172A] text-white shadow-xs hover:bg-[#1E293B] active:bg-[#0F172A]",
         outline:
-          "bg-white text-slate-800 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 active:bg-slate-100 shadow-2xs",
+          "bg-white text-slate-800 border border-slate-200 hover:bg-[#F8FAFC] hover:text-slate-900 active:bg-slate-100 shadow-2xs",
         glass:
           "bg-white/90 backdrop-blur-md text-slate-800 border border-slate-200 hover:bg-white active:bg-slate-50",
         destructive:
@@ -21,7 +21,7 @@ const buttonVariants = cva(
         ghost:
           "text-slate-600 hover:text-slate-900 hover:bg-slate-100 active:bg-slate-200/70",
         link:
-          "text-blue-600 underline-offset-4 hover:underline hover:text-blue-700 font-semibold",
+          "text-[#3B82F6] underline-offset-4 hover:underline hover:text-[#2563EB] font-semibold",
       },
       size: {
         default: "h-10 px-5 py-2.5",

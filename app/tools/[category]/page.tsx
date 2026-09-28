@@ -87,7 +87,7 @@ export default async function CategoryHubPage({ params }: CategoryPageProps) {
       <main className="flex-1 pb-16">
         {/* Category Header */}
         <section className="bg-white border-b border-slate-200/80 py-8 sm:py-12">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-4">
+          <div className="max-w-container mx-auto px-4 sm:px-6 space-y-4">
             <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-slate-500">
               <Link href="/" className="hover:text-slate-900 transition-colors">
                 Home
@@ -142,7 +142,7 @@ export default async function CategoryHubPage({ params }: CategoryPageProps) {
         </section>
 
         {/* Live Tools Section */}
-        <section className="max-w-5xl mx-auto px-4 sm:px-6 pt-10">
+        <section className="max-w-container mx-auto px-4 sm:px-6 pt-10">
           <div className="flex items-center gap-2 mb-6">
             <Sparkles className="h-5 w-5" style={{ color: theme.primary }} />
             <h2 className="font-headings text-xl sm:text-2xl font-bold text-slate-900">
@@ -161,7 +161,7 @@ export default async function CategoryHubPage({ params }: CategoryPageProps) {
           </div>
 
           {liveTools.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {liveTools.map((tool) => (
                 <Link
                   key={tool.slug}
@@ -170,27 +170,30 @@ export default async function CategoryHubPage({ params }: CategoryPageProps) {
                       ? "/editor"
                       : `/tools/${tool.category}/${tool.slug}`
                   }
-                  className="group flex flex-col justify-between p-4 rounded-[12px] border border-slate-200 bg-white hover:border-blue-500/50 hover:shadow-md transition-all duration-200 ease-in-out"
+                  className="group flex flex-col justify-between p-5 rounded-2xl border border-slate-100/90 bg-white shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:border-blue-400/60 hover:shadow-[0_10px_30px_-5px_rgba(37,99,235,0.12)] transition-all duration-300 ease-out overflow-hidden"
+                  style={{ borderTop: `3px solid ${theme.primary}` }}
                 >
                   <div>
                     <div className="flex items-center justify-between">
                       <div
-                        className="h-6 w-6 rounded-[6px] border flex items-center justify-center shrink-0"
+                        className="h-8 w-8 rounded-xl border-0 flex items-center justify-center shrink-0 shadow-2xs"
                         style={{
                           backgroundColor: theme.tint,
-                          borderColor: theme.border,
                           color: theme.primary,
                         }}
                       >
-                        <CategoryIcon className="h-3.5 w-3.5" strokeWidth={1.75} aria-hidden="true" />
+                        <CategoryIcon className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <span className="inline-flex items-center gap-1 text-[10px] font-medium text-slate-500 bg-slate-50 border border-slate-200/70 px-2 py-0.5 rounded-full">
+                        <span
+                          className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full"
+                          style={{ backgroundColor: theme.tint, color: theme.primary }}
+                        >
                           <span className="text-emerald-500 text-[9px]">●</span> Runs locally
                         </span>
                       </div>
                     </div>
-                    <h3 className="font-headings font-bold text-slate-900 text-base mt-2.5 group-hover:text-slate-700 transition-colors">
+                    <h3 className="font-headings font-bold text-slate-900 text-base mt-3 group-hover:text-blue-600 transition-colors">
                       {tool.name}
                     </h3>
                     <p className="font-body text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">

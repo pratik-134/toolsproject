@@ -8,21 +8,29 @@ interface TickerItem {
 }
 
 const BASE_ITEMS: TickerItem[] = [
-  { text: "ATS Resumes", colorClass: "text-blue-600" },
-  { text: "PDF Documents", colorClass: "text-red-600" },
-  { text: "Image Conversion", colorClass: "text-orange-600" },
-  { text: "Document Tools", colorClass: "text-emerald-600" },
-  { text: "Security Utilities", colorClass: "text-blue-700" },
-  { text: "Web Converters", colorClass: "text-purple-600" },
+  { text: "ATS Resumes", colorClass: "bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-sky-500 font-extrabold" },
+  { text: "PDF Documents", colorClass: "bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 font-extrabold" },
+  { text: "Image Converters", colorClass: "bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 via-teal-500 to-emerald-500 font-extrabold" },
+  { text: "Document Tools", colorClass: "bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-sky-500 to-emerald-500 font-extrabold" },
+  { text: "Security Utilities", colorClass: "bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-blue-800 to-indigo-900 font-extrabold" },
+  { text: "Web Converters", colorClass: "bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 font-extrabold" },
 ];
 
 // Append clone of the first item to enable seamless infinite scroll-up loop with zero rewind
 const TICKER_ITEMS: TickerItem[] = [
   ...BASE_ITEMS,
-  { text: "ATS Resumes", colorClass: "text-blue-600" },
+  { text: "ATS Resumes", colorClass: "bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-sky-500 font-extrabold" },
 ];
 
-export const HeroHeadlineTicker: React.FC = () => {
+export interface HeroHeadlineTickerProps {
+  centered?: boolean;
+  className?: string;
+}
+
+export const HeroHeadlineTicker: React.FC<HeroHeadlineTickerProps> = ({
+  centered = true,
+  className = "",
+}) => {
   const [index, setIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -80,9 +88,13 @@ export const HeroHeadlineTicker: React.FC = () => {
   };
 
   return (
-    <h1 className="font-headings text-[28px] xs:text-[34px] sm:text-hero-mobile md:text-hero-tablet lg:text-hero text-slate-900 leading-[1.14] tracking-tight">
+    <h1
+      className={`font-headings text-[24px] xs:text-3xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 leading-[1.18] tracking-tight ${
+        centered ? "text-center" : "text-left"
+      } ${className}`}
+    >
       The free privacy engine for{" "}
-      <span className="inline-flex flex-col h-[1.28em] overflow-hidden align-top relative font-black">
+      <span className="inline-flex flex-col h-[1.28em] overflow-hidden align-top relative font-black max-w-full">
         <span
           onTransitionEnd={handleTransitionEnd}
           className={
@@ -97,7 +109,9 @@ export const HeroHeadlineTicker: React.FC = () => {
           {TICKER_ITEMS.map((item, i) => (
             <span
               key={`${item.text}-${i}`}
-              className={`h-[1.28em] flex items-center whitespace-nowrap px-0.5 ${item.colorClass}`}
+              className={`h-[1.28em] flex items-center ${
+                centered ? "justify-center" : "justify-start"
+              } whitespace-nowrap px-1 ${item.colorClass}`}
               aria-hidden={index % BASE_ITEMS.length !== i % BASE_ITEMS.length}
             >
               {item.text}
@@ -105,8 +119,8 @@ export const HeroHeadlineTicker: React.FC = () => {
           ))}
         </span>
       </span>
-      <br />
-      that never traps your data.
+      <br className="hidden sm:inline" />
+      {" "}that never traps your data.
     </h1>
   );
 };

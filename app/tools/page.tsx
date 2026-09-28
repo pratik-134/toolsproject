@@ -53,9 +53,9 @@ export default function ToolsHubPage() {
 
       <main className="flex-1 pb-16">
         {/* Hub Header */}
-        <section className="bg-white border-b border-slate-200/80 py-10 sm:py-14">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center space-y-4">
-            <div className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 shadow-xs">
+        <section className="bg-gradient-to-b from-blue-50/40 via-slate-50/60 to-white py-12 sm:py-16">
+          <div className="max-w-container mx-auto px-4 sm:px-6 text-center space-y-4">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-100/90 border-0 px-3.5 py-1 text-xs font-medium text-slate-700 shadow-2xs">
               <span>✦ 111 tools · all running right in your browser</span>
             </div>
 
@@ -63,7 +63,7 @@ export default function ToolsHubPage() {
               All {BRAND.name} Tools
             </h1>
 
-            <p className="font-body text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            <p className="font-body text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-medium">
               Every tool executes completely inside your browser memory.
               No uploads, no watermarks, no registration traps.
             </p>
@@ -71,7 +71,7 @@ export default function ToolsHubPage() {
         </section>
 
         {/* Categories Grid */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-10">
+        <section className="max-w-container mx-auto px-4 sm:px-6 pt-10">
           <div className="flex items-center justify-between mb-6">
             <h2 className="font-headings text-xl sm:text-2xl font-bold text-slate-900">
               Browse by Category
@@ -91,25 +91,24 @@ export default function ToolsHubPage() {
                 <Link
                   key={cat.id}
                   href={`/tools/${cat.id}`}
-                  className="group relative flex flex-col justify-between p-5 rounded-[12px] border border-slate-200 bg-white hover:border-blue-500/50 hover:shadow-md transition-all duration-200 ease-in-out"
+                  className="group relative flex flex-col justify-between p-5 sm:p-6 rounded-2xl border border-slate-100/90 bg-white shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:border-blue-400/60 hover:shadow-[0_10px_30px_-5px_rgba(37,99,235,0.12)] transition-all duration-300 ease-out overflow-hidden"
+                  style={{ borderTop: `3px solid ${theme.primary}` }}
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <div
-                        className="h-10 w-10 rounded-[8px] border flex items-center justify-center transition-all"
+                        className="h-10 w-10 rounded-xl border-0 flex items-center justify-center transition-all shadow-2xs group-hover:scale-105"
                         style={{
                           backgroundColor: theme.tint,
-                          borderColor: theme.border,
                           color: theme.primary,
                         }}
                       >
                         <IconComp className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
                       </div>
                       <span
-                        className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-[6px] border"
+                        className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full border-0 shadow-2xs"
                         style={{
                           backgroundColor: theme.tint,
-                          borderColor: theme.border,
                           color: theme.primary,
                         }}
                       >
@@ -117,7 +116,7 @@ export default function ToolsHubPage() {
                       </span>
                     </div>
 
-                    <h3 className="font-headings text-base font-bold text-slate-900 group-hover:text-slate-700 transition-colors">
+                    <h3 className="font-headings text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
                       {cat.name}
                     </h3>
 
@@ -144,7 +143,7 @@ export default function ToolsHubPage() {
         </section>
 
         {/* Interactive Directory Search & Live Tools */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-12">
+        <section className="max-w-container mx-auto px-4 sm:px-6 pt-12">
           <div className="flex items-center gap-2 mb-6">
             <Sparkles className="h-5 w-5 text-blue-600" />
             <h2 className="font-headings text-xl sm:text-2xl font-bold text-slate-900">

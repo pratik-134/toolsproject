@@ -27,11 +27,11 @@ export const LandingHeroActions: React.FC = () => {
 
   return (
     <>
-      <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3.5 pt-2">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 pt-2">
         <Link href={hasExistingResumes ? "/dashboard" : "/editor"} className="w-full sm:w-auto">
           <Button
             size="lg"
-            className="w-full sm:w-auto justify-center gap-2 text-sm sm:text-base px-5 sm:px-7 py-3 sm:py-3.5 rounded-lg min-h-[46px] sm:min-h-[48px] bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold transition-all duration-200 shadow-md hover:shadow-xl hover:shadow-blue-600/20 active:scale-[0.98]"
+            className="w-full sm:w-auto justify-center gap-2 text-sm sm:text-base px-6 py-3.5 rounded-xl min-h-[50px] bg-gradient-to-r from-blue-600 via-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-extrabold transition-all duration-300 shadow-[0_10px_25px_-5px_rgba(59,130,246,0.35)] hover:shadow-[0_15px_30px_-5px_rgba(59,130,246,0.45)] hover:scale-[1.02] active:scale-[0.98]"
           >
             {hasExistingResumes ? (
               <>
@@ -39,7 +39,7 @@ export const LandingHeroActions: React.FC = () => {
               </>
             ) : (
               <>
-                <FileText className="h-4 w-4" /> Start Building Free
+                <FileText className="h-4 w-4 text-white/90" /> Start Building Free
               </>
             )}
           </Button>
@@ -49,7 +49,7 @@ export const LandingHeroActions: React.FC = () => {
           variant="outline"
           size="lg"
           onClick={() => setIsImportModalOpen(true)}
-          className="w-full sm:w-auto justify-center gap-2 text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-3.5 rounded-lg min-h-[46px] sm:min-h-[48px] bg-white text-slate-800 border-slate-200/90 hover:bg-blue-50/70 hover:text-blue-600 hover:border-blue-300 font-semibold transition-all duration-200 shadow-2xs hover:shadow-sm active:scale-[0.98]"
+          className="w-full sm:w-auto justify-center gap-2 text-sm sm:text-base px-5 py-3.5 rounded-xl min-h-[50px] bg-white/90 backdrop-blur-md text-slate-800 border-slate-200/90 hover:bg-blue-50/80 hover:text-blue-600 hover:border-blue-300 font-bold transition-all duration-200 shadow-2xs hover:shadow-md active:scale-[0.98]"
         >
           <FileUp className="h-4 w-4 text-blue-600" /> Import Resume (PDF / DOCX)
         </Button>
@@ -57,7 +57,7 @@ export const LandingHeroActions: React.FC = () => {
           <Button
             variant="ghost"
             size="lg"
-            className="w-full sm:w-auto justify-center gap-2 text-sm sm:text-base px-4 sm:px-5 py-3 sm:py-3.5 rounded-lg min-h-[46px] sm:min-h-[48px] text-slate-600 hover:text-slate-900 hover:bg-slate-100/80 font-semibold transition-all duration-200 active:scale-[0.98]"
+            className="w-full sm:w-auto justify-center gap-2 text-sm sm:text-base px-4 py-3.5 rounded-xl min-h-[50px] text-slate-600 hover:text-slate-900 hover:bg-slate-100/80 font-bold transition-all duration-200 active:scale-[0.98]"
           >
             Browse 20+ Templates
           </Button>

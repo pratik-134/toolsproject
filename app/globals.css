@@ -4,64 +4,110 @@
 
 @layer base {
   :root {
-    /* Brand Color Palette */
-    --brand-primary: #2563EB;
-    --brand-hover: #1D4ED8;
-    --brand-dark: #1E3A8A;
-
-    --brand-mint: #93C5FD;
-    --brand-surface: #EFF6FF;
-    --brand-border: #BFDBFE;
+    /* Brand Color Palette (Official ClearTrix Guidelines) */
+    --brand-primary: #3B82F6;     /* Primary Blue */
+    --brand-accent-teal: #06D6A0; /* Accent Teal */
+    --brand-dark-navy: #0F172A;   /* Dark Navy */
+    --brand-gray: #94A3B8;        /* Brand Gray */
+    --brand-canvas: #F8FAFC;      /* Light Canvas */
+    --brand-dark-surface: #1E293B;/* Dark Surface */
 
     --surface-white: #FFFFFF;
     --canvas-slate: #F8FAFC;
     --border-slate: #E2E8F0;
     --dark-slate: #0F172A;
 
-    --background: 0 0% 100%; /* Pure white (#FFFFFF) */
-    --foreground: 222.2 47.4% 11.2%; /* Dark slate (#0F172A) */
+    --background: 210 40% 98%;      /* #F8FAFC Light Canvas */
+    --foreground: 222.2 47.4% 11.2%; /* #0F172A Dark Navy */
 
-    --card: 0 0% 100%; /* #FFFFFF */
+    --card: 0 0% 100%;               /* #FFFFFF Surface White */
     --card-foreground: 222.2 47.4% 11.2%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 47.4% 11.2%;
 
-    /* Brand Primary Blue #2563EB */
-    --primary: 221.2 83.2% 53.3%;
+    /* Brand Primary Blue #3B82F6 */
+    --primary: 217.2 91.2% 59.8%;
     --primary-foreground: 0 0% 100%;
 
-    /* Dark Slate #0F172A */
+    /* Dark Navy #0F172A */
     --secondary: 222.2 47.4% 11.2%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Canvas Slate #F8FAFC & Text Muted #64748B */
+    /* Muted Text #94A3B8 & Surface #F8FAFC */
     --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted-foreground: 215.4 16.3% 65.1%;
 
-    /* Brand Surface Tint #EFF6FF */
-    --accent: 214.3 100% 96.9%;
-    --accent-foreground: 221.2 83.2% 53.3%;
+    /* Accent Teal #06D6A0 */
+    --accent: 163.6 93.7% 41.4%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
-    /* Status Alert #DC2626 */
+    /* Destructive Alert #DC2626 */
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
     /* Border Slate #E2E8F0 */
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
+    --ring: 217.2 91.2% 59.8%;
 
     --radius: 8px;
+  }
+
+  .dark {
+    --background: 222.2 47.4% 11.2%; /* #0F172A Dark Navy */
+    --foreground: 210 40% 98%;       /* #F8FAFC Light Canvas */
+
+    --card: 215 27.9% 16.9%;          /* #1E293B Dark Surface */
+    --card-foreground: 210 40% 98%;
+
+    --popover: 215 27.9% 16.9%;       /* #1E293B Dark Surface */
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;    /* #3B82F6 Primary Blue */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 163.6 93.7% 41.4%;     /* #06D6A0 Accent Teal */
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 22.5%;
+    --input: 217.2 32.6% 22.5%;
+    --ring: 217.2 91.2% 59.8%;
   }
 
   * {
     @apply border-border;
   }
   body {
-    @apply bg-surface-white text-text-primary font-body antialiased;
+    @apply bg-background text-foreground font-body antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
+}
+
+/* ClearTrix Brand Custom Utilities */
+.text-wordmark-grad {
+  background: linear-gradient(90deg, #0EA5E9 0%, #06D6A0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-button-card-grad {
+  background: linear-gradient(135deg, #3B82F6 0%, #0EA5E9 100%);
+}
+
+.bg-ambient-glow {
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 45%),
+    radial-gradient(circle at 95% 80%, rgba(6, 214, 160, 0.12) 0%, transparent 40%);
 }
 
 /* Background Grids with Crisp Clean Accents */

@@ -7,8 +7,8 @@ import { CATEGORY_COLORS } from "@/lib/design-tokens";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-white text-slate-600 border-t border-slate-200/80 pt-16 pb-12 font-body text-xs sm:text-small">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-12">
+    <footer className="bg-white text-slate-600 border-t border-slate-100/60 pt-16 pb-12 font-body text-xs sm:text-small">
+      <div className="max-w-container mx-auto px-4 sm:px-6 space-y-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-8">
           {/* Column 1: Brand & Privacy Commitment */}
           <div className="space-y-4 sm:col-span-2 lg:col-span-1">
@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
             <p className="text-xs text-slate-600 leading-relaxed">
               {BRAND.description}
             </p>
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] text-slate-600 font-medium">
+            <div className="inline-flex items-center gap-2 rounded-full bg-slate-100/80 border-0 px-3 py-1.5 text-[11px] text-slate-600 font-medium">
               <span>Zero uploads · runs in your browser</span>
             </div>
             <div className="pt-1">

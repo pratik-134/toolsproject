@@ -32,49 +32,55 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          primary: "#2563EB",
-          primaryHover: "#1D4ED8",
-          primaryDark: "#1E3A8A",
+          primary: "#3B82F6",      // Primary Blue
+          accentTeal: "#06D6A0",   // Accent Teal
+          darkNavy: "#0F172A",     // Dark Navy
+          brandGray: "#94A3B8",    // Brand Gray
+          lightCanvas: "#F8FAFC",  // Light Canvas
+          darkSurface: "#1E293B",   // Dark Surface
+          primaryHover: "#2563EB",
+          primaryDark: "#0F172A",
           mint: "#93C5FD",
           surface: "#EFF6FF",
-          border: "#BFDBFE",
+          border: "#E2E8F0",
           // Backwards compatibility mappings
-          green: "#2563EB",
-          greenDark: "#1E3A8A",
-          greenHover: "#1D4ED8",
+          green: "#3B82F6",
+          greenDark: "#0F172A",
+          greenHover: "#2563EB",
           greenLight: "#EFF6FF",
           greenBorder: "#BFDBFE",
-          indigo: "#2563EB",
-          indigoDark: "#1D4ED8",
+          indigo: "#3B82F6",
+          indigoDark: "#0F172A",
           indigoLight: "#EFF6FF",
           indigoBorder: "#BFDBFE",
-          emerald: "#2563EB",
-          blue: "#2563EB",
+          emerald: "#06D6A0",
+          blue: "#3B82F6",
           amber: "#D97706",
           red: "#DC2626",
           redDark: "#B91C1C",
           redLight: "#FEF2F2",
           redBorder: "#FECACA",
           navy: "#0F172A",
-          midnight: "#18181B",
+          midnight: "#1E293B",
         },
         "surface-white": "var(--surface-white, #FFFFFF)",
         "canvas-slate": "var(--canvas-slate, #F8FAFC)",
         "border-slate": "var(--border-slate, #E2E8F0)",
         "dark-slate": "var(--dark-slate, #0F172A)",
         surface: {
-          light: "#F5F5F5",      // Neutral light card fills & alternating section backgrounds
+          light: "#F8FAFC",
           white: "#FFFFFF",
           black: "#0F172A",
+          dark: "#1E293B",
         },
         text: {
-          primary: "#1A1A1A",    // High-contrast charcoal text for light surfaces
-          muted: "#555555",      // Descriptive text, subtitles, secondary labels
+          primary: "#0F172A",
+          muted: "#94A3B8",
         },
         status: {
-          active: "#28A745",     // Live / In Stock badge
-          alert: "#DC3545",      // Sold out / Urgent badge
-          gold: "#FFB800",       // Star ratings
+          active: "#06D6A0",
+          alert: "#DC2626",
+          gold: "#FFB800",
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -110,8 +116,12 @@ const config: Config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      backgroundImage: {
+        'wordmark-grad': 'linear-gradient(90deg, #0EA5E9 0%, #06D6A0 100%)',
+        'button-card-grad': 'linear-gradient(135deg, #3B82F6 0%, #0EA5E9 100%)',
+      },
       fontFamily: {
-        headings: ['var(--font-inter)', "Inter", "sans-serif"],
+        headings: ['var(--font-poppins)', "Poppins", "sans-serif"],
         body: ['var(--font-inter)', "Inter", "sans-serif"],
         sans: ['var(--font-inter)', "Inter", "sans-serif"],
       },

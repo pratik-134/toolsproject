@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 
 export const fontInter = Inter({
   subsets: ["latin"],
@@ -6,4 +6,11 @@ export const fontInter = Inter({
   display: "swap",
 });
 
-export const fontClassNames = fontInter.variable;
+export const fontPoppins = Poppins({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-poppins",
+  display: "swap",
+});
+
+export const fontClassNames = `${fontInter.variable} ${fontPoppins.variable}`;

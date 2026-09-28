@@ -201,9 +201,13 @@ export const AnimatedBannerBackground: React.FC<AnimatedBannerBackgroundProps> =
         />
       )}
 
-      {/* 5. Edge Feathering Masks (Zero harsh cuts at section edges) */}
-      <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-white/90 to-transparent pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none" />
+      {/* 5. Edge Feathering Masks (Only for Hero section on light canvas) */}
+      {variant === "hero" && (
+        <>
+          <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-white/90 to-transparent pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none" />
+        </>
+      )}
     </div>
   );
 };

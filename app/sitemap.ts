@@ -27,7 +27,8 @@ const TEMPLATE_IDS = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || BRAND.domain;
+  const rawDomain = process.env.NEXT_PUBLIC_SITE_URL || BRAND.domain || "https://cleartrix.com";
+  const baseUrl = rawDomain.startsWith("http") ? rawDomain : `https://${rawDomain}`;
   const currentDate = new Date();
 
   const coreRoutes: MetadataRoute.Sitemap = [
@@ -69,7 +70,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Category pages
+  // Category suite pages
   const categoryRoutes: MetadataRoute.Sitemap = CATEGORY_LIST.map((cat) => ({
     url: `${baseUrl}/tools/${cat.id}`,
     lastModified: currentDate,
@@ -77,7 +78,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  // Tool dynamic pages
+  // Tool dynamic pages (111+ routes)
   const liveTools = getAllTools().filter(
     (t) => t.status === "live" && t.slug !== "resume-builder"
   );
