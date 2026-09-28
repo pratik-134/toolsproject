@@ -224,9 +224,12 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
               ? "pl-12 sm:pl-14 pr-16 py-3.5 sm:py-4 rounded-2xl border-2 border-slate-200/90 shadow-xs hover:border-slate-300 hover:shadow-sm text-sm sm:text-base focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500/10"
               : "pl-10 pr-14 py-2 rounded-xl border border-slate-200 bg-white/90 backdrop-blur-xs text-xs sm:text-sm shadow-2xs hover:border-slate-300 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20"
           }`}
-          aria-label="Search tools"
+          role="combobox"
+          aria-autocomplete="list"
           aria-expanded={isOpen && results.length > 0}
+          aria-controls="tool-search-results-listbox"
           aria-haspopup="listbox"
+          aria-label="Search tools"
         />
         {query ? (
           <button
@@ -261,7 +264,11 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
 
       {/* Dropdown Results — Layered z-50, touch-safe, responsive max-height */}
       {isOpen && query.trim().length > 0 && (
-        <div className="absolute left-0 right-0 top-full mt-2 bg-white rounded-2xl border border-slate-200/90 shadow-2xl overflow-hidden z-50 animate-fade-in font-body max-h-[75vh] sm:max-h-[440px] overflow-y-auto overscroll-contain">
+        <div
+          id="tool-search-results-listbox"
+          role="listbox"
+          className="absolute left-0 right-0 top-full mt-2 bg-white rounded-2xl border border-slate-200/90 shadow-2xl overflow-hidden z-50 animate-fade-in font-body max-h-[75vh] sm:max-h-[440px] overflow-y-auto overscroll-contain"
+        >
           {results.length > 0 ? (
             <div className="py-1 divide-y divide-slate-100">
               <div className="px-3.5 sm:px-4 py-2 bg-slate-50/80 text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center justify-between">

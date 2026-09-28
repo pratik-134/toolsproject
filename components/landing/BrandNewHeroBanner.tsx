@@ -208,9 +208,9 @@ export const BrandNewHeroBanner: React.FC = () => {
                     <ShieldCheck className="h-3.5 w-3.5" />
                     <span>ATS Score: 98/100 Verified</span>
                   </div>
-                  <h3 className="font-headings text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+                  <h2 className="font-headings text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
                     Create Workday & Greenhouse Safe Resumes
-                  </h3>
+                  </h2>
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                     20 pixel-perfect A4 templates formatted with clean single-column hierarchy, standard typography, and 100% vector text export.
                   </p>
@@ -242,7 +242,7 @@ export const BrandNewHeroBanner: React.FC = () => {
                 <div className="md:col-span-6 bg-white rounded-xl border border-slate-200 p-4 sm:p-5 shadow-[0_4px_20px_rgba(15,23,42,0.06)] text-xs space-y-3 text-slate-800">
                   <div className="border-b-2 border-blue-600 pb-2.5">
                     <div className="flex items-center justify-between">
-                      <h4 className="font-headings text-lg font-bold text-slate-900">Alex Rivera</h4>
+                      <h3 className="font-headings text-lg font-bold text-slate-900">Alex Rivera</h3>
                       <span className="text-[10px] font-mono font-bold bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-200">
                         Senior Template #01
                       </span>
@@ -276,9 +276,9 @@ export const BrandNewHeroBanner: React.FC = () => {
               <div className="bg-slate-50/70 p-4 sm:p-6 rounded-xl border border-slate-200/70 text-left space-y-4 relative z-10">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
-                    <h3 className="font-headings text-lg sm:text-xl font-bold text-slate-900">
+                    <h2 className="font-headings text-lg sm:text-xl font-bold text-slate-900">
                       In-Browser PDF & Document Utilities
-                    </h3>
+                    </h2>
                     <p className="text-xs sm:text-sm text-slate-600">
                       Merge, split, compress, and edit PDF documents with 100% client-side privacy.
                     </p>
@@ -297,7 +297,7 @@ export const BrandNewHeroBanner: React.FC = () => {
                       <div className="h-8 w-8 rounded-lg bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center mb-2">
                         <Layers className="h-4 w-4" />
                       </div>
-                      <h4 className="font-bold text-sm text-slate-900 group-hover:text-blue-600 transition-colors">PDF Merge</h4>
+                      <h3 className="font-bold text-sm text-slate-900 group-hover:text-blue-600 transition-colors">PDF Merge</h3>
                       <p className="text-xs text-slate-500 mt-1">Combine multiple PDF documents into one seamless file.</p>
                     </div>
                   </Link>
@@ -307,7 +307,7 @@ export const BrandNewHeroBanner: React.FC = () => {
                       <div className="h-8 w-8 rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center mb-2">
                         <Zap className="h-4 w-4" />
                       </div>
-                      <h4 className="font-bold text-sm text-slate-900 group-hover:text-blue-600 transition-colors">PDF Compress</h4>
+                      <h3 className="font-bold text-sm text-slate-900 group-hover:text-blue-600 transition-colors">PDF Compress</h3>
                       <p className="text-xs text-slate-500 mt-1">Reduce PDF file size up to 80% without losing text quality.</p>
                     </div>
                   </Link>
@@ -317,7 +317,7 @@ export const BrandNewHeroBanner: React.FC = () => {
                       <div className="h-8 w-8 rounded-lg bg-purple-50 text-purple-600 border border-purple-100 flex items-center justify-center mb-2">
                         <FileText className="h-4 w-4" />
                       </div>
-                      <h4 className="font-bold text-sm text-slate-900 group-hover:text-blue-600 transition-colors">PDF Split</h4>
+                      <h3 className="font-bold text-sm text-slate-900 group-hover:text-blue-600 transition-colors">PDF Split</h3>
                       <p className="text-xs text-slate-500 mt-1">Extract specific page ranges or split PDFs into individual files.</p>
                     </div>
                   </Link>
@@ -329,9 +329,9 @@ export const BrandNewHeroBanner: React.FC = () => {
               <div className="bg-slate-50/70 p-4 sm:p-6 rounded-xl border border-slate-200/70 text-left space-y-4 relative z-10">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
-                    <h3 className="font-headings text-lg sm:text-xl font-bold text-slate-900">
+                    <h2 className="font-headings text-lg sm:text-xl font-bold text-slate-900">
                       111+ In-Browser Privacy Utilities
-                    </h3>
+                    </h2>
                     <p className="text-xs sm:text-sm text-slate-600">
                       Images, Security, Developer Formatters, Calculators, and QR Code Generators.
                     </p>

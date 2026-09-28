@@ -64,11 +64,11 @@ export const metadata: Metadata = {
     apple: "/apple-icon.png",
   },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
     googleBot: {
-      index: false,
-      follow: false,
+      index: true,
+      follow: true,
       "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
