@@ -194,7 +194,7 @@ export const ToolsDirectoryClient: React.FC<ToolsDirectoryClientProps> = ({ tool
                         <IconComp className="h-3.5 w-3.5" strokeWidth={1.75} aria-hidden="true" />
                       </div>
                       <span
-                        className="text-[10px] font-bold px-2 py-0.5 rounded-[6px] uppercase tracking-wider border"
+                        className="text-[10px] font-semibold px-2 py-0.5 rounded-full border"
                         style={{
                           backgroundColor: theme.tint,
                           borderColor: theme.border,
@@ -205,16 +205,12 @@ export const ToolsDirectoryClient: React.FC<ToolsDirectoryClientProps> = ({ tool
                       </span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-mono text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
-                        CLIENT-SIDE
-                      </span>
                       {isLive ? (
-                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-[6px] border border-emerald-200">
-                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                          Live
+                        <span className="inline-flex items-center gap-1 text-[10px] font-medium text-slate-500 bg-slate-50 border border-slate-200/70 px-2 py-0.5 rounded-full">
+                          Runs locally
                         </span>
                       ) : (
-                        <span className="text-[10px] font-medium text-slate-400 bg-slate-100 px-2 py-0.5 rounded-[6px] border border-slate-200">
+                        <span className="text-[10px] font-medium text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200">
                           Phase {tool.phase}
                         </span>
                       )}

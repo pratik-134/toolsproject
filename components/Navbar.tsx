@@ -109,9 +109,8 @@ export const Navbar: React.FC = () => {
         </Link>
 
         {/* Trust Pill (Desktop only) */}
-        <span className="hidden xl:inline-flex items-center gap-1.5 rounded-md bg-blue-50 border border-blue-200 px-2.5 py-0.5 font-body text-[11px] font-semibold text-blue-800 shrink-0">
-          <Sparkles className="h-2.5 w-2.5 text-blue-600" />
-          100% Free & Private
+        <span className="hidden xl:inline-flex items-center gap-1.5 rounded-md bg-slate-50 border border-slate-200 px-2.5 py-0.5 font-body text-[11px] font-medium text-slate-600 shrink-0">
+          ✦ Open & private · zero paywalls
         </span>
       </div>
 
@@ -125,7 +124,7 @@ export const Navbar: React.FC = () => {
           className="inline-flex items-center gap-1.5 hover:text-blue-600 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group font-medium text-slate-600"
         >
           <span>Tools</span>
-          <span className="font-mono text-[10px] font-semibold text-blue-700 bg-blue-50 border border-blue-200/70 px-1.5 py-0.5 rounded-full">
+          <span className="text-[10px] font-semibold text-slate-500 bg-slate-100 border border-slate-200/70 px-1.5 py-0.5 rounded-full">
             {TOOLS.length}
           </span>
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full" />
@@ -220,8 +219,8 @@ export const Navbar: React.FC = () => {
             <Wrench className="h-4 w-4 text-blue-600" />
             <span>Tools & Utilities</span>
           </span>
-          <span className="font-mono text-[10px] font-bold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-md">
-            {TOOLS.length} Live
+          <span className="text-[10px] font-medium text-slate-500 bg-slate-100 border border-slate-200/70 px-2 py-0.5 rounded-full">
+            {TOOLS.length} tools
           </span>
         </Link>
 
@@ -234,8 +233,8 @@ export const Navbar: React.FC = () => {
             <LayoutTemplate className="h-4 w-4 text-blue-600" />
             <span>Resume Templates</span>
           </span>
-          <span className="font-mono text-[10px] font-bold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-md">
-            20 Styles
+          <span className="text-[10px] font-medium text-slate-500 bg-slate-100 border border-slate-200/70 px-2 py-0.5 rounded-full">
+            20 styles
           </span>
         </Link>
 
@@ -248,7 +247,7 @@ export const Navbar: React.FC = () => {
             <Sparkles className="h-4 w-4 text-blue-600" />
             <span>Features & PDF Engine</span>
           </span>
-          <span className="text-[10px] font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md">
+          <span className="text-[10px] font-medium text-slate-500 bg-slate-100 border border-slate-200/70 px-2 py-0.5 rounded-full">
             Vector A4
           </span>
         </Link>
@@ -262,8 +261,8 @@ export const Navbar: React.FC = () => {
             <CheckCircle2 className="h-4 w-4 text-blue-600" />
             <span>Why Cleartrix? (Comparison)</span>
           </span>
-          <span className="text-[10px] font-bold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-md">
-            Zero Paywall
+          <span className="text-[10px] font-medium text-slate-500 bg-slate-100 border border-slate-200/70 px-2 py-0.5 rounded-full">
+            Zero paywall
           </span>
         </Link>
 
@@ -276,7 +275,7 @@ export const Navbar: React.FC = () => {
             <FileText className="h-4 w-4 text-blue-600" />
             <span>My Resumes</span>
           </span>
-          <span className="text-[10px] font-bold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-md">
+          <span className="text-[10px] font-medium text-slate-500 bg-slate-100 border border-slate-200/70 px-2 py-0.5 rounded-full">
             Dashboard
           </span>
         </Link>
@@ -290,18 +289,17 @@ export const Navbar: React.FC = () => {
             <FileText className="h-4 w-4 text-blue-600" />
             <span>Frequently Asked Questions</span>
           </span>
-          <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded-md">
+          <span className="text-[10px] font-medium text-slate-500 bg-slate-100 border border-slate-200/70 px-2 py-0.5 rounded-full">
             FAQ
           </span>
         </Link>
       </nav>
 
-      <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 flex items-start gap-2.5">
-        <ShieldCheck className="h-4 w-4 text-blue-600 shrink-0 mt-0.5" />
+      <div className="rounded-xl border border-slate-200 bg-slate-50/80 p-3 flex items-start gap-2.5">
         <div className="text-[11px] text-slate-700 leading-relaxed">
-          <p className="font-bold text-slate-900">100% Free Forever & Private</p>
+          <p className="font-semibold text-slate-800">Free forever · no account needed</p>
           <p className="text-[10px] text-slate-500 mt-0.5">
-            Client-side architecture. No paywalls, watermarks, credit cards, or tracking cookies.
+            Runs in your browser. No paywalls, watermarks, or tracking cookies.
           </p>
         </div>
       </div>

@@ -18,9 +18,8 @@ export const Footer: React.FC = () => {
             <p className="text-xs text-slate-600 leading-relaxed">
               {BRAND.description}
             </p>
-            <div className="inline-flex items-center gap-2 rounded-lg bg-blue-50 border border-blue-200 px-3 py-1.5 text-[11px] text-blue-900 font-semibold">
-              <ShieldCheck className="h-3.5 w-3.5 text-blue-600 shrink-0" />
-              <span>100% Client-Side Sandbox</span>
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] text-slate-600 font-medium">
+              <span>Zero uploads · runs in your browser</span>
             </div>
             <div className="pt-1">
               <Link

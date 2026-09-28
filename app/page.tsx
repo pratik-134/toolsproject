@@ -19,7 +19,6 @@ import {
   DotPattern,
   Glow,
   FloatingBadge,
-  DiagonalDivider,
   DiagonalDecoration,
 } from "@/components/ui/patterns";
 import {
@@ -40,16 +39,16 @@ import {
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col bg-white text-text-primary selection:bg-blue-500/20 selection:text-slate-900 overflow-x-hidden">
+    <div className="flex min-h-screen flex-col bg-white text-text-primary selection:bg-blue-500/20 selection:text-slate-900">
       {/* 1. Navigation Header — Floating Rounded Sticky Menu */}
       <Navbar />
 
       {/* Main Content */}
-      <main className="flex-1 overflow-x-hidden">
+      <main className="flex-1">
         {/* ========================================================================= */}
         {/* 2. Hero Section — Light Neutral Canvas + Technical Grid + Soft Glow      */}
         {/* ========================================================================= */}
-        <section className="relative overflow-hidden pt-section-py-mob md:pt-section-py-tab lg:pt-section-py pb-12 sm:pb-20 bg-[radial-gradient(130%_90%_at_50%_-5%,#EEF5FF_0%,#F8FAFC_50%,#FFFFFF_100%)]">
+        <section className="relative pt-section-py-mob md:pt-section-py-tab lg:pt-section-py pb-12 sm:pb-20 bg-[radial-gradient(130%_90%_at_50%_-5%,#EEF5FF_0%,#F8FAFC_50%,#FFFFFF_100%)]">
           {/* Animated Background: Bespoke Topographic Career Elevation Waves and Ambient Glow */}
           <AnimatedBannerBackground variant="hero" />
 
@@ -59,11 +58,9 @@ export default function HomePage() {
               <div className="lg:col-span-6 space-y-6 text-left">
                 {/* Trust Eyebrow Badge */}
                 <Reveal variant="fade-up" delay={50}>
-                  <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-blue-200 bg-blue-50/90 px-3 sm:px-3.5 py-1 sm:py-1.5 font-body text-[11px] sm:text-xs font-semibold text-blue-800 shadow-xs backdrop-blur-xs max-w-full">
-                    <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse shrink-0" />
-                    <ShieldCheck className="h-3.5 w-3.5 text-blue-600 shrink-0" />
+                  <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-slate-200 bg-white/90 px-3 sm:px-3.5 py-1 sm:py-1.5 font-body text-[11px] sm:text-xs font-medium text-slate-700 shadow-xs backdrop-blur-xs max-w-full">
                     <span className="truncate sm:whitespace-normal">
-                      <span className="font-mono">100%</span> Client-Side Platform • Free Resume Builder & 111+ In-Browser Tools
+                      ✦ Crafted for privacy · Free ATS resume engine & 111+ in-browser tools
                     </span>
                   </div>
                 </Reveal>
@@ -259,8 +256,8 @@ export default function HomePage() {
             <Reveal variant="fade-up">
               <div className="flex flex-col md:flex-row md:items-end justify-between mb-section-mb-mob md:mb-12 lg:mb-section-mb gap-6">
                 <div>
-                  <span className="font-body text-eyebrow uppercase tracking-[1.2px] text-blue-800 bg-blue-50 border border-blue-200/80 px-3 py-1 rounded-full inline-block mb-2 font-semibold">
-                    20 Free Production Templates
+                  <span className="font-body text-xs font-medium text-slate-600 bg-white border border-slate-200/80 px-3 py-1 rounded-full inline-block mb-2">
+                    ✦ 20 hand-crafted styles · Recruiter-tested & ATS-safe
                   </span>
                   <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900">
                     Designed for recruiters, tested against ATS parsers.
@@ -286,28 +283,21 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Diagonal Geometric Transition: Templates -> Comparison */}
-        <DiagonalDivider
-          direction="left-to-right"
-          fillColor="text-slate-50/80"
-          accentTint="blue"
-          heightClass="h-6 sm:h-10 lg:h-12"
-        />
 
         {/* ========================================================================= */}
         {/* 4. Comparison Section — Slate Tinted Backdrop with Elevated Column        */}
         {/* ========================================================================= */}
         <section
           id="comparison"
-          className="scroll-mt-20 sm:scroll-mt-24 bg-slate-50/80 text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative"
+          className="scroll-mt-20 sm:scroll-mt-24 bg-white text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative border-t border-slate-200/80"
         >
           <DotPattern size={24} dotOpacity={0.035} dotColor="#64748B" />
 
           <div className="max-w-container mx-auto px-4 sm:px-6 text-center relative z-10">
             <Reveal variant="fade-up">
               <div className="mb-section-mb-mob md:mb-12 lg:mb-section-mb max-w-3xl mx-auto">
-                <span className="font-body text-eyebrow uppercase tracking-[1.2px] text-blue-800 bg-blue-50 border border-blue-200/80 px-3 py-1 rounded-full inline-block mb-3 font-semibold shadow-2xs">
-                  Transparent By Design
+                <span className="font-body text-xs font-medium text-slate-600 bg-white border border-slate-200/80 px-3 py-1 rounded-full inline-block mb-3">
+                  ✦ The honest truth · Why job seekers leave traditional builders
                 </span>
                 <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900">
                   Why job seekers are ditching traditional resume builders.
@@ -459,8 +449,7 @@ export default function HomePage() {
                     Average competitor subscription:{" "}
                     <strong className="text-slate-900">$24.95 / month</strong>
                   </span>
-                  <span className="inline-flex items-center gap-1.5 font-bold text-blue-700 bg-blue-50 border border-blue-200 px-3 py-1 rounded-md">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-blue-600" />
+                  <span className="inline-flex items-center gap-1.5 font-medium text-slate-700 bg-white border border-slate-200 px-3 py-1 rounded-full text-xs">
                     Cleartrix: $0.00 forever
                   </span>
                 </div>
@@ -469,20 +458,14 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Diagonal Geometric Transition: Comparison -> Features */}
-        <DiagonalDivider
-          direction="right-to-left"
-          fillColor="text-white"
-          accentTint="blue"
-          heightClass="h-6 sm:h-10 lg:h-12"
-        />
+
 
         {/* ========================================================================= */}
         {/* 5. Why Cleartrix: Features Bento & AI Bullet Enhancer Live Demo            */}
         {/* ========================================================================= */}
         <section
           id="features"
-          className="scroll-mt-20 sm:scroll-mt-24 bg-white text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative border-b border-slate-200/80"
+          className="scroll-mt-20 sm:scroll-mt-24 bg-white text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative border-t border-b border-slate-200/80"
         >
           <DotPattern size={28} dotOpacity={0.035} dotColor="#0F172A" />
 
@@ -490,8 +473,8 @@ export default function HomePage() {
             {/* Section Header */}
             <Reveal variant="fade-up">
               <div className="text-center max-w-3xl mx-auto">
-                <span className="font-body text-eyebrow uppercase tracking-[1.2px] text-blue-800 bg-white border border-blue-200/80 px-3.5 py-1 rounded-full inline-block mb-3 font-semibold shadow-2xs">
-                  Why Cleartrix
+                <span className="font-body text-xs font-medium text-slate-600 bg-white border border-slate-200/80 px-3.5 py-1 rounded-full inline-block mb-3">
+                  ✦ Under the hood · Built for applicants, not data brokers
                 </span>
                 <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900">
                   Engineered for real careers. Backed by client-side intelligence.
@@ -566,9 +549,8 @@ export default function HomePage() {
                   </div>
 
                   <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                    <span className="inline-flex items-center gap-1.5 text-blue-700 font-semibold bg-blue-50/80 border border-blue-200/80 px-2.5 py-1 rounded-md">
-                      <CheckCircle2 className="h-3.5 w-3.5" />
-                      <span className="font-mono">0 Bytes</span> Uploaded
+                    <span className="inline-flex items-center gap-1.5 text-slate-600 font-medium bg-slate-50 border border-slate-200/80 px-2.5 py-1 rounded-full text-[11px]">
+                      <span className="font-mono">0 Bytes</span> uploaded
                     </span>
                     <span className="font-body text-[11px] font-medium text-slate-500">Local Sandbox Architecture</span>
                   </div>
@@ -596,9 +578,8 @@ export default function HomePage() {
                   </div>
 
                   <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                    <span className="inline-flex items-center gap-1.5 text-blue-700 font-semibold bg-blue-50/80 border border-blue-200/80 px-2.5 py-1 rounded-md">
-                      <CheckCircle2 className="h-3.5 w-3.5" />
-                      Bi-Directional DOCX & PDF
+                    <span className="inline-flex items-center gap-1.5 text-slate-600 font-medium bg-slate-50 border border-slate-200/80 px-2.5 py-1 rounded-full text-[11px]">
+                      Bi-directional DOCX & PDF
                     </span>
                     <span className="font-body text-[11px] font-medium text-slate-500">Lossless Formatting</span>
                   </div>
@@ -626,9 +607,8 @@ export default function HomePage() {
                   </div>
 
                   <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                    <span className="inline-flex items-center gap-1.5 text-blue-700 font-semibold bg-blue-50/80 border border-blue-200/80 px-2.5 py-1 rounded-md">
-                      <CheckCircle2 className="h-3.5 w-3.5" />
-                      <span className="font-mono">100%</span> Parser Safe
+                    <span className="inline-flex items-center gap-1.5 text-slate-600 font-medium bg-slate-50 border border-slate-200/80 px-2.5 py-1 rounded-full text-[11px]">
+                      <span className="font-mono">100%</span> parser safe
                     </span>
                     <span className="font-body text-[11px] font-medium text-slate-500">Custom Category Builder</span>
                   </div>
@@ -658,33 +638,24 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Diagonal Geometric Transition: ATS (Light) -> Privacy (Dark Slate #0F172A) */}
-        <DiagonalDivider
-          direction="right-to-left"
-          fillColor="text-slate-900"
-          accentTint="blue"
-          heightClass="h-8 sm:h-12 lg:h-16"
-        />
+
 
         {/* ========================================================================= */}
-        {/* 8. Privacy Section — Deep Slate Canvas (#0F172A) & High-Contrast Security */}
+        {/* 8. Privacy Section — Light Canvas, Privacy-First Trust Pillars            */}
         {/* ========================================================================= */}
-        <section className="bg-slate-900 text-white py-section-py-mob md:py-section-py-tab lg:py-section-py relative overflow-hidden">
-          <GridPattern size={36} strokeOpacity={0.04} strokeColor="#FFFFFF" />
-          <Glow color="blue" size="md" className="-top-24 -left-24 opacity-20" />
-          <Glow color="blue" size="md" className="bottom-0 right-0 opacity-20" />
+        <section className="bg-slate-50/60 text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative border-t border-b border-slate-200/80">
+          <DotPattern size={28} dotOpacity={0.03} dotColor="#0F172A" />
 
           <div className="max-w-container mx-auto px-4 sm:px-6 relative z-10 text-center space-y-12">
             <Reveal variant="fade-up">
               <div className="max-w-3xl mx-auto space-y-4">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 px-3.5 py-1 text-xs font-semibold text-blue-400">
-                  <ShieldCheck className="h-4 w-4" />
-                  Client-Side Sandbox Architecture
+                <span className="font-body text-xs font-medium text-slate-600 bg-white border border-slate-200/80 px-3.5 py-1 rounded-full inline-block">
+                  ✦ Privacy by architecture · Zero servers, zero cookies
                 </span>
-                <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-white font-bold">
+                <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 font-bold">
                   Your career data belongs solely to you.
                 </h2>
-                <p className="font-body text-subtitle text-slate-400 leading-relaxed max-w-2xl mx-auto">
+                <p className="font-body text-subtitle text-slate-600 leading-relaxed max-w-2xl mx-auto">
                   A resume contains your home address, personal phone number, employment
                   dates, and career history. We believe that data should never sit in an
                   unnecessary cloud database.
@@ -692,17 +663,17 @@ export default function HomePage() {
               </div>
             </Reveal>
 
-            {/* 3 Dark Security Pillars */}
+            {/* 3 Light Privacy Pillars */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left max-w-5xl mx-auto">
               <Reveal variant="fade-up" delay={100}>
-                <div className="rounded-xl border border-slate-800 bg-slate-800/60 p-6 hover:border-slate-700 transition-all space-y-3 h-full">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400">
+                <div className="rounded-xl border border-slate-200/90 bg-white p-6 hover:border-blue-300/60 hover:shadow-md transition-all space-y-3 h-full">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 border border-blue-100 text-blue-600">
                     <HardDrive className="h-5 w-5" />
                   </div>
-                  <h4 className="font-headings text-lg font-bold text-white">
+                  <h4 className="font-headings text-lg font-bold text-slate-900">
                     100% Local Storage
                   </h4>
-                  <p className="font-body text-small text-slate-400 leading-relaxed">
+                  <p className="font-body text-small text-slate-500 leading-relaxed">
                     Your resume data is stored exclusively inside your own browser's
                     indexed storage. When you close the tab, your draft stays on your
                     computer.
@@ -711,14 +682,14 @@ export default function HomePage() {
               </Reveal>
 
               <Reveal variant="fade-up" delay={200}>
-                <div className="rounded-xl border border-slate-800 bg-slate-800/60 p-6 hover:border-slate-700 transition-all space-y-3 h-full">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400">
+                <div className="rounded-xl border border-slate-200/90 bg-white p-6 hover:border-blue-300/60 hover:shadow-md transition-all space-y-3 h-full">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 border border-blue-100 text-blue-600">
                     <Lock className="h-5 w-5" />
                   </div>
-                  <h4 className="font-headings text-lg font-bold text-white">
+                  <h4 className="font-headings text-lg font-bold text-slate-900">
                     Zero Account Registration
                   </h4>
-                  <p className="font-body text-small text-slate-400 leading-relaxed">
+                  <p className="font-body text-small text-slate-500 leading-relaxed">
                     No passwords to create or leak. No mandatory email submissions, and
                     no promotional newsletters flooding your personal inbox.
                   </p>
@@ -726,14 +697,14 @@ export default function HomePage() {
               </Reveal>
 
               <Reveal variant="fade-up" delay={300}>
-                <div className="rounded-xl border border-slate-800 bg-slate-800/60 p-6 hover:border-slate-700 transition-all space-y-3 h-full">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400">
+                <div className="rounded-xl border border-slate-200/90 bg-white p-6 hover:border-blue-300/60 hover:shadow-md transition-all space-y-3 h-full">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 border border-blue-100 text-blue-600">
                     <ShieldCheck className="h-5 w-5" />
                   </div>
-                  <h4 className="font-headings text-lg font-bold text-white">
+                  <h4 className="font-headings text-lg font-bold text-slate-900">
                     Zero Data Brokerage
                   </h4>
-                  <p className="font-body text-small text-slate-400 leading-relaxed">
+                  <p className="font-body text-small text-slate-500 leading-relaxed">
                     We never scrape, analyze, or sell your professional information to
                     recruiters, third-party advertisers, or external AI models.
                   </p>
@@ -743,13 +714,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Diagonal Geometric Transition: Privacy (Dark) -> FAQ (White) */}
-        <DiagonalDivider
-          direction="left-to-right"
-          fillColor="text-white"
-          accentTint="slate"
-          heightClass="h-8 sm:h-12 lg:h-16"
-        />
+
 
         {/* ========================================================================= */}
         {/* 9. FAQ Section — SEO & Trust Optimized Editorial Layout                  */}
@@ -762,9 +727,8 @@ export default function HomePage() {
             {/* Header */}
             <Reveal variant="fade-up">
               <div className="text-center space-y-4 max-w-2xl mx-auto">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 border border-blue-200/80 px-3.5 py-1 font-body text-xs uppercase tracking-[1.5px] text-blue-800 font-bold">
-                  <HelpCircle className="h-3.5 w-3.5 text-blue-600" />
-                  Frequently Asked Questions
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200/80 px-3.5 py-1 font-body text-xs font-medium text-slate-600">
+                  ✦ Common questions · Clear, straight answers
                 </span>
                 <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 [&>span]:text-blue-600">
                   Everything you need to know about <span>Cleartrix</span>
@@ -790,9 +754,8 @@ export default function HomePage() {
 
           <div className="max-w-container mx-auto px-4 sm:px-6 space-y-6 relative z-10">
             <Reveal variant="fade-up">
-              <div className="inline-flex items-center gap-1.5 rounded-full bg-white border border-blue-200/80 px-3.5 py-1 text-xs font-semibold text-blue-800 shadow-2xs">
-                <Sparkles className="h-3.5 w-3.5 text-blue-600" />
-                Start In 30 Seconds • No Credit Card
+              <div className="inline-flex items-center gap-1.5 rounded-full bg-white border border-slate-200/80 px-3.5 py-1 text-xs font-medium text-slate-600 shadow-2xs">
+                ✦ Start in seconds · No account or payment needed
               </div>
             </Reveal>
 
@@ -862,7 +825,6 @@ export default function HomePage() {
       {/* Floating Bottom Dock (Sticky Bar) */}
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/90 shadow-xl px-5 py-2 rounded-full hidden md:flex items-center gap-6">
         <div className="flex items-center gap-2">
-          <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
           <span className="font-body text-small font-bold text-slate-900">
             Cleartrix Resume Builder 100% Free
           </span>

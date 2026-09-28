@@ -1,24 +1,26 @@
 /**
- * Cleartrix Brand Configuration — Single Source of Truth
- * All product names, taglines, domain references, and storage prefixes are defined here.
+ * ClearTrix Brand Configuration — Single Source of Truth
+ * All product names, taglines, domain references, and brand colors are defined here.
+ * Aligned with official ClearTrix Brand Guidelines asset specs.
  */
 
 export const BRAND = {
-  name: "Cleartrix",
-  tagline: "Free tools that stay on your device.",
+  name: "ClearTrix",
+  tagline: "Tools for a Smarter You",
   description:
-    "Free online tools for PDFs, images, documents, resumes, calculators and more. Everything runs in your browser and your files never leave your device.",
-  domain: "https://cleartrix.com", // Owner to update once production domain is finalized
+    "Free online privacy-first tools for PDFs, images, documents, resumes, calculators and developer tools. 100% in-browser execution.",
+  domain: "https://cleartrix.com",
   storagePrefix: "ct_",
   resumeProduct: {
-    name: "Cleartrix Resume Builder",
-    legacyName: "Cleartrix Resume Builder",
+    name: "ClearTrix Resume Builder",
+    legacyName: "ClearTrix Resume Builder",
   },
   colors: {
-    primary: "#2563EB", // Brand Blue
-    primaryDark: "#1E3A8A", // Deep Navy
-    cyanAccent: "#00D2FF",
-    canvas: "#F8FAFC",
+    primary: "#3B82F6",     // Primary Blue (#3B82F6)
+    accentTeal: "#06D6A0",  // Accent Teal (#06D6A0)
+    primaryDark: "#0F172A", // Dark Navy (#0F172A)
+    gray: "#94A3B8",       // Gray (#94A3B8)
+    canvas: "#F8FAFC",     // Light (#F8FAFC)
   },
 } as const;
 

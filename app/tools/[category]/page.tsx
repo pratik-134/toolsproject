@@ -128,10 +128,10 @@ export default async function CategoryHubPage({ params }: CategoryPageProps) {
 
               {/* Uniform Security Privacy Badge */}
               <div
-                className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 font-body text-xs font-semibold text-blue-800 shadow-xs shrink-0 self-start sm:self-auto"
+                className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 font-body text-xs font-medium text-slate-600 shadow-xs shrink-0 self-start sm:self-auto"
               >
-                <ShieldCheck className="h-3.5 w-3.5 text-blue-600" />
-                <span>100% Client-Side Privacy</span>
+                <span className="text-emerald-500 text-[10px] leading-none">●</span>
+                <span>Runs locally · zero uploads</span>
               </div>
             </div>
 
@@ -185,11 +185,8 @@ export default async function CategoryHubPage({ params }: CategoryPageProps) {
                         <CategoryIcon className="h-3.5 w-3.5" strokeWidth={1.75} aria-hidden="true" />
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <span className="font-mono text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">
-                          CLIENT-SIDE
-                        </span>
-                        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-[6px]">
-                          Live
+                        <span className="inline-flex items-center gap-1 text-[10px] font-medium text-slate-500 bg-slate-50 border border-slate-200/70 px-2 py-0.5 rounded-full">
+                          <span className="text-emerald-500 text-[9px]">●</span> Runs locally
                         </span>
                       </div>
                     </div>

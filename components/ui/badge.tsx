@@ -22,9 +22,9 @@ const badgeVariants = cva(
         outline:
           "border border-blue-200 text-blue-700 bg-blue-50 hover:bg-blue-100 hover:border-blue-300",
         pill:
-          "bg-slate-100 text-slate-700 hover:text-blue-600 px-2 py-0.5 rounded-md border border-slate-200",
+          "bg-slate-100 text-slate-700 hover:text-blue-600 px-2 py-0.5 rounded-full border border-slate-200",
         eyebrow:
-          "font-body text-eyebrow uppercase tracking-[1.2px] text-blue-700 bg-blue-50 border border-blue-200 rounded-md px-2.5 py-1",
+          "font-body text-xs font-medium text-slate-600 bg-white border border-slate-200/80 rounded-full px-3 py-1",
         ai:
           "bg-sky-50 text-sky-700 border border-sky-200 font-medium",
         success:
