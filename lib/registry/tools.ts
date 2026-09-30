@@ -4363,7 +4363,7 @@ export const TOOLS: ToolDefinition[] = [
     phase: 2,
     status: "live",
     runtime: "client",
-    heavyDeps: ["tesseract.js"],
+    heavyDeps: ["tesseract"],
     seo: {
       title: "Image to Text OCR Converter — Free In-Browser Extractor",
       description: "Extract text from PNG, JPG, and WebP images using client-side OCR in browser memory. 100% private with zero server uploads.",
