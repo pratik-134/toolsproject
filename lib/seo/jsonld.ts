@@ -1,4 +1,5 @@
 import { getBaseUrl } from "./metadata";
+import { BRAND } from "@/lib/brand";
 
 export interface FAQItemInput {
   question?: string;
@@ -17,7 +18,7 @@ export function generateWebApplicationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "ClearTrix ATS Resume Builder & In-Browser Privacy Tools",
+    "name": `${BRAND.name} ${BRAND.resumeProduct.shortName} & In-Browser Privacy Tools`,
     "url": baseUrl,
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Any (Browser Based)",

@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { CleartrixLogo } from "@/components/BrandLogo";
-import { BRAND } from "@/lib/brand";
+import { BRAND, getFooterCopyright } from "@/lib/brand";
 import { Lock, ShieldCheck, ArrowRight, Sparkles } from "lucide-react";
 import { CATEGORY_COLORS } from "@/lib/design-tokens";
 import { getAllTools } from "@/lib/registry/tools";
@@ -233,7 +233,7 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="border-t border-slate-200 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p>
-            © {new Date().getFullYear()} Cleartrix. All {toolCount} web tools execute 100% in-browser with zero server tracking.
+            {getFooterCopyright(toolCount)}
           </p>
           <div className="flex items-center gap-6">
             <Link href="/tools" className="hover:text-blue-600 transition-colors font-semibold text-blue-600">

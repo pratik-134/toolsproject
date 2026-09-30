@@ -37,7 +37,7 @@ export function constructToolMetadata({
   }
 
   const canonicalUrl = `${baseUrl}${path}`;
-  const fullTitle = title.includes("ClearTrix") ? title : `${title} | ClearTrix`;
+  const fullTitle = title.includes(BRAND.name) ? title : `${title} | ${BRAND.name}`;
 
   return {
     title: fullTitle,
@@ -50,9 +50,9 @@ export function constructToolMetadata({
       "free pdf tools online",
       ...keywords,
     ],
-    authors: [{ name: "ClearTrix", url: baseUrl }],
-    creator: "ClearTrix",
-    publisher: "ClearTrix",
+    authors: [{ name: BRAND.name, url: baseUrl }],
+    creator: BRAND.name,
+    publisher: BRAND.name,
     alternates: {
       canonical: canonicalUrl,
     },
@@ -60,13 +60,13 @@ export function constructToolMetadata({
       title: fullTitle,
       description,
       url: canonicalUrl,
-      siteName: "ClearTrix",
+      siteName: BRAND.name,
       images: [
         {
           url: ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`,
           width: 1200,
           height: 630,
-          alt: `${title} - ClearTrix`,
+          alt: `${title} - ${BRAND.name}`,
         },
       ],
       locale: "en_US",
@@ -77,7 +77,7 @@ export function constructToolMetadata({
       title: fullTitle,
       description,
       images: [ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`],
-      creator: "@cleartrix",
+      creator: BRAND.twitterHandle,
     },
     robots: noIndex
       ? { index: false, follow: false }

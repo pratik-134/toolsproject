@@ -74,9 +74,9 @@ export const CleartrixLogo: React.FC<CleartrixLogoProps> = ({
         <CleartrixIcon size={Math.round(size * 1.5)} />
         <div className="flex flex-col items-center">
           <div className="flex items-baseline font-headings font-bold tracking-[-0.02em] text-2xl sm:text-3xl leading-none">
-            <span className={clearTextColor}>Clear</span>
+            <span className={clearTextColor}>{BRAND.brandPrefix}</span>
             <span className="bg-gradient-to-r from-[#0EA5E9] to-[#06D6A0] bg-clip-text text-transparent">
-              Trix
+              {BRAND.brandSuffix}
             </span>
           </div>
           <span className="mt-1 text-[9px] sm:text-[10px] font-medium font-body uppercase tracking-[0.22em] text-[#94A3B8]">
@@ -98,9 +98,9 @@ export const CleartrixLogo: React.FC<CleartrixLogoProps> = ({
         <CleartrixIcon size={size} />
         <div className="flex flex-col text-left justify-center">
           <div className="flex items-baseline font-headings text-base sm:text-lg font-bold tracking-[-0.02em] leading-none">
-            <span className={clearTextColor}>Clear</span>
+            <span className={clearTextColor}>{BRAND.brandPrefix}</span>
             <span className="bg-gradient-to-r from-[#0EA5E9] to-[#06D6A0] bg-clip-text text-transparent">
-              Trix
+              {BRAND.brandSuffix}
             </span>
           </div>
           <span className="text-[9.5px] font-body font-medium tracking-[0.22em] uppercase text-[#94A3B8] mt-0.5">
@@ -118,9 +118,9 @@ export const CleartrixLogo: React.FC<CleartrixLogoProps> = ({
 
       <div className="flex flex-col text-left justify-center">
         <div className="flex items-baseline font-headings text-lg sm:text-xl font-bold tracking-[-0.02em] leading-none">
-          <span className={clearTextColor}>Clear</span>
+          <span className={clearTextColor}>{BRAND.brandPrefix}</span>
           <span className="bg-gradient-to-r from-[#0EA5E9] to-[#06D6A0] bg-clip-text text-transparent">
-            Trix
+            {BRAND.brandSuffix}
           </span>
 
           {productTag && (
