@@ -43,6 +43,21 @@ const nextConfig = {
         destination: '/tools',
         permanent: true,
       },
+      {
+        source: '/tools/document-pdf/pdf-protect',
+        destination: '/tools/document-pdf/pdf-encryptor',
+        permanent: true,
+      },
+      {
+        source: '/tools/document-pdf/pdf-unlock',
+        destination: '/tools/document-pdf/pdf-decryptor',
+        permanent: true,
+      },
+      {
+        source: '/tools/document-pdf/markdown-note-maker',
+        destination: '/tools/document-pdf/direct-markdown-editor',
+        permanent: true,
+      },
     ];
   },
   webpack: (config) => {

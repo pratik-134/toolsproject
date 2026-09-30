@@ -72,6 +72,30 @@ Object.keys(CONVERTER_PRESETS).forEach((slug) => {
   }
 });
 
+// 7. No Redirect Destination Collisions
+const liveToolUrls = new Set(TOOLS.map((t) => `/tools/${t.category}/${t.slug}`));
+const validHubUrls = new Set([...Object.keys(CATEGORIES).map((c) => `/tools/${c}`), "/tools"]);
+// Check that live tools don't collide with redirect sources
+const redirects = [
+  { source: '/tools/document-pdf/pdf-to-image', destination: '/tools/document-pdf/pdf-to-jpg' },
+  { source: '/tools/calculators/chmod-calculator', destination: '/tools/developer/chmod-calculator' },
+  { source: '/tools/calculators/base-converter', destination: '/tools/developer/base-converter' },
+  { source: '/tools/calculators/roman-numeral-converter', destination: '/tools/utilities/roman-numeral-converter' },
+  { source: '/tools/url-cloud', destination: '/tools' },
+  { source: '/tools/document-pdf/pdf-protect', destination: '/tools/document-pdf/pdf-encryptor' },
+  { source: '/tools/document-pdf/pdf-unlock', destination: '/tools/document-pdf/pdf-decryptor' },
+  { source: '/tools/document-pdf/markdown-note-maker', destination: '/tools/document-pdf/direct-markdown-editor' },
+];
+
+redirects.forEach((r) => {
+  if (liveToolUrls.has(r.source)) {
+    reportError(`Redirect source "${r.source}" collides with an active live tool URL!`);
+  }
+  if (!liveToolUrls.has(r.destination) && !validHubUrls.has(r.destination)) {
+    reportError(`Redirect destination "${r.destination}" is not a valid live tool or hub URL!`);
+  }
+});
+
 if (errorsCount > 0) {
   console.error(`\n💥 Registry validation FAILED with ${errorsCount} error(s).`);
   process.exit(1);

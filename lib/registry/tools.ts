@@ -934,7 +934,7 @@ export const TOOLS: ToolDefinition[] = [
   {
     slug: "base-converter",
     name: "Number Base Converter (Binary, Hex, Octal, Decimal)",
-    category: "calculators",
+    category: "developer",
     phase: 1,
     status: "live",
     runtime: "client",
@@ -3450,36 +3450,6 @@ export const TOOLS: ToolDefinition[] = [
       ],
     },
     related: ["pdf-redaction-tool", "pdf-digital-signer", "pdf-flattener"],
-  },
-  {
-    slug: "markdown-note-maker",
-    name: "Markdown Note Maker & Organizer",
-    category: "document-pdf",
-    phase: 2,
-    status: "live",
-    runtime: "client",
-    seo: {
-      title: "Free In-Browser Markdown Note Maker — Split Editor & Local",
-      description: "Take, organize, and export Markdown notes with split-pane live preview and instant auto-save to browser storage. Export as Markdown or HTML with zero.",
-      h1: "Free Client-Side Markdown Note Maker & Notebook",
-      intro:
-        "A dedicated Markdown note-taking workspace featuring split-pane live preview, tag filtering, word count analytics, and 100% private local storage persistence.",
-      faq: [
-        {
-          q: "Where are my notes saved?",
-          a: "All notes and tags are stored strictly in your browser's private local storage sandbox. No notes are uploaded to or stored on any external server.",
-        },
-        {
-          q: "Can I export my notes to different file formats?",
-          a: "Yes. You can export any note as a standard .md file, a formatted .html document, or copy the raw markdown text directly to your clipboard.",
-        },
-        {
-          q: "Does this markdown editor support code blocks and task lists?",
-          a: "Yes. It supports headers, blockquotes, bold/italic, inline code blocks, and interactive checklist items (- [ ] / - [x]).",
-        },
-      ],
-    },
-    related: ["direct-markdown-editor", "direct-txt-editor", "markdown-to-pdf"],
   },
   {
     slug: "excel-to-pdf",
