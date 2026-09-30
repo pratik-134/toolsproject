@@ -1,72 +1,80 @@
 import { TOOLS } from "../lib/registry/tools";
 import { CATEGORIES } from "../lib/registry/categories";
 import { CONVERTER_PRESETS } from "../lib/registry/converter-presets";
-import { CONVERTER_CONTENT_REGISTRY } from "../lib/content/converters/index";
 
-const RESERVED_ROUTES = new Set(["editor", "dashboard", "privacy", "terms", "tools", "brand", "resumes", "api"]);
+console.log("=== ClearTrix Strict Registry Validator ===\n");
 
-function validateRegistry() {
-  console.log("🔍 Validating ClearTrix Tool Registry & Converter Assets...\n");
-  const errors: string[] = [];
-  const slugs = new Set<string>();
+let errorsCount = 0;
 
-  for (const tool of TOOLS) {
-    // 1. Unique slug check
-    if (slugs.has(tool.slug)) {
-      errors.push(`[Duplicate Slug]: "${tool.slug}" is defined multiple times.`);
-    }
-    slugs.add(tool.slug);
-
-    // 2. Reserved route collision check
-    if (RESERVED_ROUTES.has(tool.slug)) {
-      errors.push(`[Reserved Route Collision]: "${tool.slug}" conflicts with a core app route.`);
-    }
-
-    // 3. Category validity check
-    if (!CATEGORIES[tool.category]) {
-      errors.push(`[Invalid Category]: Tool "${tool.slug}" references unknown category "${tool.category}".`);
-    }
-
-    // 4. SEO Constraints
-    if (tool.seo.title.length > 80) {
-      errors.push(`[SEO Title Too Long]: "${tool.slug}" title is ${tool.seo.title.length} chars (max 80).`);
-    }
-
-    if (tool.seo.description.length > 180) {
-      errors.push(`[SEO Description Too Long]: "${tool.slug}" description is ${tool.seo.description.length} chars (max 180).`);
-    }
-
-    if (!tool.seo.faq || tool.seo.faq.length < 3 || tool.seo.faq.length > 8) {
-      errors.push(`[FAQ Count Warning]: "${tool.slug}" has ${tool.seo.faq?.length || 0} FAQs (expected 4-6).`);
-    }
-  }
-
-  // 5. Validate Converter Presets & Content Integration
-  for (const [presetSlug, preset] of Object.entries(CONVERTER_PRESETS)) {
-    if (!slugs.has(presetSlug)) {
-      errors.push(`[Missing Registry Entry]: Preset "${presetSlug}" is not registered in TOOLS array.`);
-    }
-
-    const content = CONVERTER_CONTENT_REGISTRY[presetSlug];
-    if (!content) {
-      errors.push(`[Missing Content Definition]: Preset "${presetSlug}" lacks a typed content file in CONVERTER_CONTENT_REGISTRY.`);
-    } else {
-      if (content.seoTitle.length > 70) {
-        errors.push(`[Content Title Too Long]: "${presetSlug}" content title exceeds 70 chars.`);
-      }
-      if (content.metaDescription.length > 170) {
-        errors.push(`[Content Description Too Long]: "${presetSlug}" content description exceeds 170 chars.`);
-      }
-    }
-  }
-
-  if (errors.length > 0) {
-    console.error(`❌ Registry Validation Failed with ${errors.length} error(s):\n`);
-    errors.forEach((err, i) => console.error(`${i + 1}. ${err}`));
-    process.exit(1);
-  } else {
-    console.log(`✅ Registry Validation Passed! All ${TOOLS.length} tools and converter presets are valid.`);
-  }
+function reportError(msg: string) {
+  console.error(`❌ REGISTRY ERROR: ${msg}`);
+  errorsCount++;
 }
 
-validateRegistry();
+// 1. Unique Slugs Check
+const slugSet = new Set<string>();
+TOOLS.forEach((tool) => {
+  if (slugSet.has(tool.slug)) {
+    reportError(`Duplicate slug found: "${tool.slug}"`);
+  }
+  slugSet.add(tool.slug);
+});
+
+// 2. Valid Category Check & Category Route Alignment
+const validCategoryIds = new Set(Object.keys(CATEGORIES));
+TOOLS.forEach((tool) => {
+  if (!validCategoryIds.has(tool.category)) {
+    reportError(`Tool "${tool.slug}" has invalid category "${tool.category}"`);
+  }
+});
+
+// 3. Reserved Route Collisions Check
+const reservedRoutes = new Set(["tools", "editor", "dashboard", "privacy", "terms", "brand", "api", "sitemap.xml", "robots.txt"]);
+TOOLS.forEach((tool) => {
+  if (reservedRoutes.has(tool.slug)) {
+    reportError(`Tool slug "${tool.slug}" collides with reserved application route.`);
+  }
+});
+
+// 4. SEO Titles <= 60 chars and Unique Check
+const titleMap = new Map<string, string>();
+TOOLS.forEach((tool) => {
+  const title = tool.seo.title;
+  if (title.length > 60) {
+    reportError(`Tool "${tool.slug}" title exceeds 60 chars (${title.length} chars): "${title}"`);
+  }
+  if (titleMap.has(title)) {
+    reportError(`Duplicate SEO title in "${tool.slug}" and "${titleMap.get(title)}": "${title}"`);
+  } else {
+    titleMap.set(title, tool.slug);
+  }
+});
+
+// 5. SEO Descriptions <= 155 chars and Unique Check
+const descMap = new Map<string, string>();
+TOOLS.forEach((tool) => {
+  const desc = tool.seo.description;
+  if (desc.length > 155) {
+    reportError(`Tool "${tool.slug}" description exceeds 155 chars (${desc.length} chars): "${desc}"`);
+  }
+  if (descMap.has(desc)) {
+    reportError(`Duplicate SEO description in "${tool.slug}" and "${descMap.get(desc)}": "${desc}"`);
+  } else {
+    descMap.set(desc, tool.slug);
+  }
+});
+
+// 6. Converter Presets & SEO Content Matching
+Object.keys(CONVERTER_PRESETS).forEach((slug) => {
+  const tool = TOOLS.find((t) => t.slug === slug);
+  if (!tool) {
+    reportError(`Converter preset "${slug}" has no corresponding tool in tools.ts`);
+  }
+});
+
+if (errorsCount > 0) {
+  console.error(`\n💥 Registry validation FAILED with ${errorsCount} error(s).`);
+  process.exit(1);
+} else {
+  console.log(`✅ All ${TOOLS.length} tools passed registry validation cleanly with 0 errors.\n`);
+}

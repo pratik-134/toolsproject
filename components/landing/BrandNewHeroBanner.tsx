@@ -26,8 +26,10 @@ import {
 } from "lucide-react";
 import { AnimatedBannerBackground } from "./AnimatedBannerBackground";
 import { HeroHeadlineTicker } from "./HeroHeadlineTicker";
+import { getAllTools } from "@/lib/registry/tools";
 
 export const BrandNewHeroBanner: React.FC = () => {
+  const toolCount = getAllTools().length;
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"resume" | "pdf" | "tools">("resume");
   const [hasExistingResumes, setHasExistingResumes] = useState(false);
@@ -65,7 +67,7 @@ export const BrandNewHeroBanner: React.FC = () => {
             </span>
             <span className="text-slate-300 shrink-0 hidden xs:inline">•</span>
             <span className="text-slate-700 truncate hidden xs:inline">
-              Free ATS Resume Engine & 111+ Client-Side Tools
+              Free ATS Resume Engine & {toolCount} Client-Side Tools
             </span>
           </div>
 
@@ -74,14 +76,14 @@ export const BrandNewHeroBanner: React.FC = () => {
 
           {/* 3. Subtitle Description */}
           <p className="font-body text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-normal">
-            Create ATS-optimized resumes with 20 professional templates, or run 111+ client-side privacy tools for PDFs, images, code, and security. Zero server uploads, zero watermarks, and zero paywalls—ever.
+            Create ATS-optimized resumes with 20 professional templates, or run {toolCount} client-side privacy tools for PDFs, images, code, and security. Zero server uploads, zero watermarks, and zero paywalls—ever.
           </p>
 
           {/* 4. Commanding Search Bar */}
           <div className="max-w-xl mx-auto text-left relative z-30 pt-1">
             <ToolSearchBar
               size="large"
-              placeholder="Search 111+ tools & ATS templates... (e.g. PDF merge, resume, compress)"
+              placeholder={`Search ${toolCount} tools & ATS templates... (e.g. PDF merge, resume, compress)`}
             />
           </div>
 
@@ -115,7 +117,7 @@ export const BrandNewHeroBanner: React.FC = () => {
                 size="lg"
                 className="w-full sm:w-auto justify-center gap-2 text-sm sm:text-base px-5 py-3.5 rounded-xl min-h-[52px] text-slate-600 hover:text-slate-900 hover:bg-slate-100/80 font-bold transition-all duration-200 active:scale-[0.98]"
               >
-                <span>Browse 111+ Tools</span>
+                <span>Browse {toolCount} Tools</span>
               </Button>
             </a>
           </div>

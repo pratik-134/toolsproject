@@ -31,18 +31,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     iconName: "ShieldCheck",
     expectedToolCount: 8,
     colorKey: "security",
-  },
-  "url-cloud": {
-    id: "url-cloud",
-    name: "URL & Cloud Tools",
-    shortName: "URL & Cloud",
-    description:
-      "Protected links, burn-after-read secret sharing, and temporary client-side encrypted text vaults.",
-    iconName: "Cloud",
-    expectedToolCount: 4,
-    colorKey: "utility",
-  },
-  codes: {
+  },  codes: {
     id: "codes",
     name: "QR & Barcode Utilities",
     shortName: "Codes & QR",

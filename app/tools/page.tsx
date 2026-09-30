@@ -56,7 +56,7 @@ export default function ToolsHubPage() {
         <section className="bg-gradient-to-b from-blue-50/40 via-slate-50/60 to-white py-12 sm:py-16">
           <div className="max-w-container mx-auto px-4 sm:px-6 text-center space-y-4">
             <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-100/90 border-0 px-3.5 py-1 text-xs font-medium text-slate-700 shadow-2xs">
-              <span>✦ 111 tools · all running right in your browser</span>
+              <span>✦ {allTools.length} tools · all running right in your browser</span>
             </div>
 
             <h1 className="font-headings text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">

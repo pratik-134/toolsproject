@@ -13,66 +13,64 @@ import {
 } from "lucide-react";
 import { ToolSearchBar } from "@/components/tools/ToolSearchBar";
 import { CATEGORY_COLORS } from "@/lib/design-tokens";
-
-interface CategoryCardItem {
-  key: keyof typeof CATEGORY_COLORS;
-  name: string;
-  categoryId: string;
-  count: string;
-  icon: React.ElementType;
-  description: string;
-  featured: string;
-}
-
-const CATEGORY_CARDS: CategoryCardItem[] = [
-  {
-    key: "pdf",
-    name: "PDF Suite",
-    categoryId: "document-pdf",
-    count: "28 tools",
-    icon: FileText,
-    description: "Merge, split, compress, flatten, and convert PDFs 100% inside your browser sandbox.",
-    featured: "PDF Merger",
-  },
-  {
-    key: "image",
-    name: "Image & Media",
-    categoryId: "image",
-    count: "18 tools",
-    icon: ImageIcon,
-    description: "Convert, compress, crop, remove EXIF metadata, and resize with zero server uploads.",
-    featured: "Batch Compressor",
-  },
-  {
-    key: "document",
-    name: "Document & Builders",
-    categoryId: "builders",
-    count: "21 tools",
-    icon: Layers,
-    description: "ATS resume builder, invoices, cover letters, and markdown tools with live vector export.",
-    featured: "ATS Resume Builder",
-  },
-  {
-    key: "security",
-    name: "Security & Privacy",
-    categoryId: "security",
-    count: "8 tools",
-    icon: ShieldCheck,
-    description: "AES-256 client-side file locker, metadata scrubbing, steganography, and privacy verification.",
-    featured: "File Locker (AES-256)",
-  },
-  {
-    key: "utility",
-    name: "Calculators & Dev",
-    categoryId: "calculators",
-    count: "45 tools",
-    icon: Calculator,
-    description: "Financial and health calculators, JSON formatter, regex tester, and daily unit converters.",
-    featured: "JSON Formatter",
-  },
-];
+import { getAllTools, getToolsByCategory } from "@/lib/registry/tools";
 
 export const ToolsMegaSection: React.FC = () => {
+  const allTools = getAllTools();
+  const totalCount = allTools.length;
+
+  const getCatCount = (catId: string) => {
+    return getToolsByCategory(catId as any).length;
+  };
+
+  const categoryCards = [
+    {
+      key: "pdf" as const,
+      name: "PDF Suite",
+      categoryId: "document-pdf",
+      count: `${getCatCount("document-pdf")} tools`,
+      icon: FileText,
+      description: "Merge, split, compress, flatten, and convert PDFs 100% inside your browser sandbox.",
+      featured: "PDF Merger",
+    },
+    {
+      key: "image" as const,
+      name: "Image & Media",
+      categoryId: "image",
+      count: `${getCatCount("image")} tools`,
+      icon: ImageIcon,
+      description: "Convert, compress, crop, remove EXIF metadata, and resize with zero server uploads.",
+      featured: "Batch Compressor",
+    },
+    {
+      key: "document" as const,
+      name: "Document & Builders",
+      categoryId: "builders",
+      count: `${getCatCount("builders")} tools`,
+      icon: Layers,
+      description: "ATS resume builder, invoices, cover letters, and markdown tools with live vector export.",
+      featured: "ATS Resume Builder",
+    },
+    {
+      key: "security" as const,
+      name: "Security & Privacy",
+      categoryId: "security",
+      count: `${getCatCount("security")} tools`,
+      icon: ShieldCheck,
+      description: "AES-256 client-side file locker, metadata scrubbing, steganography, and privacy verification.",
+      featured: "File Locker (AES-256)",
+    },
+    {
+      key: "utility" as const,
+      name: "Calculators & Dev",
+      categoryId: "calculators",
+      count: `${getCatCount("calculators") + getCatCount("developer")} tools`,
+      icon: Calculator,
+      description: "Financial and health calculators, JSON formatter, regex tester, and daily unit converters.",
+      featured: "JSON Formatter",
+    },
+  ];
+
   return (
     <section
       id="tools-suite"
@@ -86,12 +84,12 @@ export const ToolsMegaSection: React.FC = () => {
       <div className="max-w-container mx-auto px-4 sm:px-6 text-center relative z-10">
         {/* 3a. Eyebrow Badge */}
         <div className="inline-flex items-center gap-2 rounded-full bg-slate-100/80 border-0 px-3.5 py-1 font-body text-xs font-medium text-slate-600 shadow-2xs mb-4">
-          <span>✦ Privacy utility suite · 111 tools running right in your browser</span>
+          <span>✦ Privacy utility suite · {totalCount} tools running right in your browser</span>
         </div>
 
         {/* Section Heading */}
         <h2 className="font-headings text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-          One platform. <span className="font-mono text-blue-600">111+</span> free tools.
+          One platform. <span className="font-mono text-blue-600">{totalCount}</span> free tools.
         </h2>
 
         {/* Section Subtitle */}
@@ -103,13 +101,13 @@ export const ToolsMegaSection: React.FC = () => {
         <div className="max-w-xl mx-auto mt-8 mb-10 sm:mb-12 relative z-30">
           <ToolSearchBar
             size="large"
-            placeholder="Search 111+ tools... (e.g. PDF merge, image compress, BMI calculator)"
+            placeholder={`Search ${totalCount} tools... (e.g. PDF merge, image compress, BMI calculator)`}
           />
         </div>
 
         {/* 3c. 5 Spacious, Elegant Category Suite Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 text-left">
-          {CATEGORY_CARDS.map((card) => {
+          {categoryCards.map((card) => {
             const color = CATEGORY_COLORS[card.key];
             const Icon = card.icon;
 

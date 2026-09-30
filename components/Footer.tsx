@@ -4,8 +4,11 @@ import { CleartrixLogo } from "@/components/BrandLogo";
 import { BRAND } from "@/lib/brand";
 import { Lock, ShieldCheck, ArrowRight, Sparkles } from "lucide-react";
 import { CATEGORY_COLORS } from "@/lib/design-tokens";
+import { getAllTools } from "@/lib/registry/tools";
 
 export const Footer: React.FC = () => {
+  const toolCount = getAllTools().length;
+
   return (
     <footer className="bg-white text-slate-600 border-t border-slate-100/60 pt-16 pb-12 font-body text-xs sm:text-small">
       <div className="max-w-container mx-auto px-4 sm:px-6 space-y-12">
@@ -26,7 +29,7 @@ export const Footer: React.FC = () => {
                 href="/tools"
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-700"
               >
-                <span>Browse All 111 Tools</span>
+                <span>Browse All {toolCount} Tools</span>
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
@@ -230,11 +233,11 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="border-t border-slate-200 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p>
-            © {new Date().getFullYear()} Cleartrix. All 111 web tools execute 100% in-browser with zero server tracking.
+            © {new Date().getFullYear()} Cleartrix. All {toolCount} web tools execute 100% in-browser with zero server tracking.
           </p>
           <div className="flex items-center gap-6">
             <Link href="/tools" className="hover:text-blue-600 transition-colors font-semibold text-blue-600">
-              All 111 Tools
+              All {toolCount} Tools
             </Link>
             <Link href="/privacy" className="hover:text-blue-600 transition-colors">
               Privacy

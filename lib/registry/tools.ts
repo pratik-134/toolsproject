@@ -14,8 +14,7 @@ export const TOOLS: ToolDefinition[] = [
     heavyDeps: ["react-pdf", "docx", "pdfjs"],
     seo: {
       title: "Free ATS Resume Builder — 100% Client-Side Vector PDF & Word",
-      description:
-        "Build executive-grade, ATS-optimized resumes with 20+ professional templates. Zero paywalls, client-side privacy, vector PDF, and native Word export.",
+      description: "Build executive-grade, ATS-optimized resumes with 20+ professional templates. Zero paywalls, client-side privacy, vector PDF, and native Word export.",
       h1: "Free ATS Resume & CV Builder",
       intro:
         "Craft ATS-friendly, professional resumes directly in your browser. All templates, styling tools, vector PDF downloads, and Word exports are 100% free with no account or paywall.",
@@ -49,8 +48,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "JSON Formatter & Validator — Free Client-Side Pretty Print",
-      description:
-        "Format, validate, beautify, and minify raw JSON with zero server upload. Client-side syntax error detection, key sorting, and instant download.",
+      description: "Format, validate, beautify, and minify raw JSON with zero server upload. Client-side syntax error detection, key sorting, and instant download.",
       h1: "Free Client-Side JSON Formatter & Validator",
       intro:
         "Format, prettify, sort keys, and validate JSON data instantly in your browser sandbox. Confidential tokens, credentials, and API responses never touch external servers.",
@@ -84,8 +82,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "Base64 Encoder & Decoder — Free Private In-Browser Tool",
-      description:
-        "Encode and decode text and files to Base64 in your browser memory. UTF-8 multi-byte support, Data URI generation, and zero server transmission.",
+      description: "Encode and decode text and files to Base64 in your browser memory. UTF-8 multi-byte support, Data URI generation, and zero server transmission.",
       h1: "Free Client-Side Base64 Encoder & Decoder",
       intro:
         "Convert UTF-8 text and binary files to Base64 and decode Base64 strings back to readable plain text. Everything processes locally on your device.",
@@ -119,8 +116,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "Word & Character Counter — Real-Time Text Analysis & Density",
-      description:
-        "Free in-browser word counter, character counter, sentence counter, reading time estimator, and keyword density analyzer. 100% private.",
+      description: "Free in-browser word counter, character counter, sentence counter, reading time estimator, and keyword density analyzer. 100% private.",
       h1: "Free Word & Character Counter",
       intro:
         "Count words, characters with and without spaces, sentences, and paragraphs in real time. Inspect keyword density and estimated reading/speaking time with zero tracking.",
@@ -156,8 +152,7 @@ export const TOOLS: ToolDefinition[] = [
       "This calculator is provided for informational and estimation purposes only and does not constitute financial advice or an offer to lend.",
     seo: {
       title: "Mortgage Calculator — Free Home Loan Amortization & Payment",
-      description:
-        "Calculate monthly mortgage payments, interest paid, and total loan cost with custom interest rates, down payments, taxes, and insurance.",
+      description: "Calculate monthly mortgage payments, interest paid, and total loan cost with custom interest rates, down payments, taxes, and insurance.",
       h1: "Free Mortgage & Home Loan Calculator",
       intro:
         "Estimate your monthly mortgage payments including principal, interest, property taxes, homeowners insurance, and HOA dues with real-time calculations.",
@@ -191,8 +186,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "Custom QR Code Generator — Free Vector SVG & High-Res Export",
-      description:
-        "Create custom QR codes for URLs, text, Wi-Fi, and contact details with custom colors. 100% private, client-side vector SVG generation.",
+      description: "Create custom QR codes for URLs, text, Wi-Fi, and contact details with custom colors. 100% private, client-side vector SVG generation.",
       h1: "Free Custom QR Code Generator",
       intro:
         "Generate crisp, high-contrast QR codes for websites, links, Wi-Fi, and text directly on your device. Export as vector SVG or copy instantly without tracking redirects.",
@@ -226,8 +220,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "CSV to JSON & JSON to CSV Converter — Free Client-Side Tool",
-      description:
-        "Convert CSV files to JSON arrays and JSON to CSV spreadsheets in your browser. Handles quotes, custom delimiters, and type auto-detection.",
+      description: "Convert CSV files to JSON arrays and JSON to CSV spreadsheets in your browser. Handles quotes, custom delimiters, and type auto-detection.",
       h1: "Free Client-Side CSV to JSON & JSON to CSV Converter",
       intro:
         "Seamlessly convert tabular data between CSV and JSON formats. Everything processes in local browser memory with zero file uploads or server leaks.",
@@ -261,8 +254,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "Cryptographic Hash Generator — SHA-256, MD5, SHA-1, SHA-512",
-      description:
-        "Generate cryptographic hashes (SHA-256, MD5, SHA-1, SHA-384, SHA-512) in your browser using the native Web Cryptography API. 100% private.",
+      description: "Generate cryptographic hashes (SHA-256, MD5, SHA-1, SHA-384, SHA-512) in your browser using the native Web Cryptography API. 100% private.",
       h1: "Free Client-Side Cryptographic Hash Generator",
       intro:
         "Calculate SHA-256, MD5, SHA-1, and SHA-512 cryptographic digests directly on your device. Ideal for password hashing, file checksums, and token verification.",
@@ -296,8 +288,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "Strong Password & Passphrase Generator — Secure CSPRNG Tool",
-      description:
-        "Generate random high-entropy passwords and memorable multi-word passphrases using crypto.getRandomValues. 100% private, zero server logging.",
+      description: "Generate random high-entropy passwords and memorable multi-word passphrases using crypto.getRandomValues. 100% private, zero server logging.",
       h1: "Free Strong Password & Passphrase Generator",
       intro:
         "Create high-entropy, crack-resistant passwords and memorable Diceware-style passphrases using your browser's cryptographically secure random number generator.",
@@ -330,9 +321,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Case Converter — camelCase, snake_case, PascalCase, Title Case",
-      description:
-        "Convert text and code variables between camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, and Title Case with instant one-click copy.",
+      title: "Case Converter — camelCase, snake_case, PascalCase, Title",
+      description: "Convert text and code variables between camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, and Title Case with instant one-click copy.",
       h1: "Free Text & Code Case Converter",
       intro:
         "Instantly transform text, code identifiers, database columns, and document titles between camelCase, snake_case, PascalCase, kebab-case, and grammatical sentence case.",
@@ -367,9 +357,8 @@ export const TOOLS: ToolDefinition[] = [
     disclaimer:
       "This compound interest calculator is for educational estimation only and does not constitute financial, investment, or tax advice.",
     seo: {
-      title: "Compound Interest Calculator — Investment Growth & Amortization",
-      description:
-        "Calculate compound interest growth with regular monthly deposits, annual returns, and compounding frequencies. Includes visual growth breakdown.",
+      title: "Compound Interest Calculator — Investment Growth &",
+      description: "Calculate compound interest growth with regular monthly deposits, annual returns, and compounding frequencies. Includes visual growth breakdown.",
       h1: "Free Compound Interest & Savings Calculator",
       intro:
         "Project the future growth of your investments and savings with compound interest, regular monthly contributions, and custom investment horizons.",
@@ -403,8 +392,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "URL Encoder & Decoder — Free Query Parameter Parser",
-      description:
-        "Encode and decode URLs, query strings, and URI components in your browser. Inspect and modify query parameters in a live visual table.",
+      description: "Encode and decode URLs, query strings, and URI components in your browser. Inspect and modify query parameters in a live visual table.",
       h1: "Free Client-Side URL Encoder & Query Parameter Parser",
       intro:
         "Safely encode and decode percent-encoded URLs, path segments, and query parameters. Parse, edit, and reconstruct query key-value pairs with instant preview.",
@@ -438,8 +426,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "Lorem Ipsum Generator — Free Placeholder Text & HTML Markup",
-      description:
-        "Generate custom dummy text by paragraphs, sentences, words, or lists. Includes HTML tag formatting options, word count stats, and instant copy.",
+      description: "Generate custom dummy text by paragraphs, sentences, words, or lists. Includes HTML tag formatting options, word count stats, and instant copy.",
       h1: "Free Lorem Ipsum & Placeholder Text Generator",
       intro:
         "Generate authentic Latin placeholder text for mockups, prototypes, and layout designs. Customize quantity, format as HTML tags, and copy instantly.",
@@ -472,9 +459,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Percentage Calculator — 4-in-1 Increase, Difference & Fraction",
-      description:
-        "Free multi-mode percentage calculator: calculate percent of a number, percentage differences, rate of increase/decrease, and reverse fractions.",
+      title: "Percentage Calculator — 4-in-1 Increase, Difference &",
+      description: "Free multi-mode percentage calculator: calculate percent of a number, percentage differences, rate of increase/decrease, and reverse fractions.",
       h1: "Free 4-in-1 Percentage Calculator",
       intro:
         "Quickly solve everyday percentage calculations: find percentages of numbers, calculate percentage increases or decreases, and reverse-calculate totals with step-by-step formulas.",
@@ -509,9 +495,8 @@ export const TOOLS: ToolDefinition[] = [
     disclaimer:
       "This calculator is provided for informational and educational purposes only and is not intended as medical diagnosis, advice, or clinical guidance.",
     seo: {
-      title: "BMI Calculator — Free Body Mass Index & Healthy Weight Target",
-      description:
-        "Calculate your Body Mass Index (BMI) and WHO classification with metric and imperial units. Includes healthy weight target range and visual scale.",
+      title: "BMI Calculator",
+      description: "Calculate your Body Mass Index (BMI) and WHO classification with metric and imperial units. Includes healthy weight target range and visual scale.",
       h1: "Free Body Mass Index (BMI) Calculator",
       intro:
         "Evaluate your Body Mass Index with official World Health Organization weight categories. Toggle between metric and imperial measurements with instant target weight guidance.",
@@ -545,8 +530,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "Barcode Generator — Free Code 128, EAN-13, UPC-A Vector SVG",
-      description:
-        "Generate retail and shipping barcodes (Code 128, EAN-13, UPC-A) in your browser. Automatic check digit calculation, high-contrast canvas, and SVG download.",
+      description: "Generate retail and shipping barcodes (Code 128, EAN-13, UPC-A) in your browser. Automatic check digit calculation, high-contrast canvas, and SVG download.",
       h1: "Free Client-Side Barcode Generator",
       intro:
         "Create standard retail, inventory, and logistics barcodes directly on your computer. Supports Code 128 alphanumeric, EAN-13 European standard, and UPC-A American retail formats.",
@@ -580,8 +564,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "Duplicate Line Remover — Free List Deduplication & Sorter",
-      description:
-        "Instantly clean, deduplicate, and sort lists of text or data. Case-sensitive options, empty line removal, alphabetical and length sorting.",
+      description: "Instantly clean, deduplicate, and sort lists of text or data. Case-sensitive options, empty line removal, alphabetical and length sorting.",
       h1: "Free Duplicate Line Remover & Text Sorter",
       intro:
         "Purge duplicate lines, remove blank spaces, and organize text lists alphabetically or by line length. Runs 100% locally in your browser memory.",
@@ -615,8 +598,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "HTML, CSS & JS Beautifier — Free In-Browser Code Formatter",
-      description:
-        "Format, beautify, and minify HTML, CSS, JavaScript, and JSON in your browser. Configurable indentation, syntax highlighting, and zero server upload.",
+      description: "Format, beautify, and minify HTML, CSS, JavaScript, and JSON in your browser. Configurable indentation, syntax highlighting, and zero server upload.",
       h1: "Free HTML, CSS & JavaScript Beautifier & Minifier",
       intro:
         "Clean up messy markup, stylesheets, and scripts with customizable 2-space, 4-space, or tab indentation. Alternatively, minify code to minimize payload size.",
@@ -649,9 +631,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Text & Code Diff Comparator — Free Visual File Difference Tool",
-      description:
-        "Compare two text files or code snippets side-by-side with color-coded line additions, removals, and modifications. 100% private.",
+      title: "Text & Code Diff Comparator",
+      description: "Compare two text files or code snippets side-by-side with color-coded line additions, removals, and modifications. 100% private.",
       h1: "Free Client-Side Text & Code Diff Comparator",
       intro:
         "Quickly identify changes, insertions, and deletions between two versions of text or code. Line numbers, unified diff view, and whitespace options included.",
@@ -684,9 +665,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Date Difference & Day Counter — Free Duration & Workdays Tool",
-      description:
-        "Calculate exact days between two dates, business working days, weekend count, and add or subtract days/weeks/years from any calendar date.",
+      title: "Date Difference & Day Counter",
+      description: "Calculate exact days between two dates, business working days, weekend count, and add or subtract days/weeks/years from any calendar date.",
       h1: "Free Date Difference & Day Counter",
       intro:
         "Calculate calendar days, workdays (Mon–Fri), weekend days, and full year/month breakdowns between dates. Add or subtract time from any date with instant weekday resolution.",
@@ -719,9 +699,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Universal Unit Converter — Length, Mass, Temp, Data, Area & Speed",
-      description:
-        "Convert between metric, imperial, and digital units: meters to feet, kg to lbs, Celsius to Fahrenheit, GB to MB, acres to square meters.",
+      title: "Universal Unit Converter — Length, Mass, Temp, Data, Area &",
+      description: "Convert between metric, imperial, and digital units: meters to feet, kg to lbs, Celsius to Fahrenheit, GB to MB, acres to square meters.",
       h1: "Free Universal Unit Converter",
       intro:
         "Convert measurements across Length, Mass, Temperature, Digital Data, Area, and Speed. Inspect all unit equivalents simultaneously with live conversion tables.",
@@ -754,9 +733,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Regex Tester & Debugger — Free JavaScript Regular Expression Tool",
-      description:
-        "Test and debug JavaScript regular expressions in real time. Highlights matches, extracts captured groups, and previews string substitutions.",
+      title: "Regex Tester & Debugger",
+      description: "Test and debug JavaScript regular expressions in real time. Highlights matches, extracts captured groups, and previews string substitutions.",
       h1: "Free Client-Side Regex Tester & Debugger",
       intro:
         "Evaluate regular expressions instantly in your browser. Inspect full matches, numbered and named capture groups, execution latency, and preview string replacements without remote servers.",
@@ -789,9 +767,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "HTML Entity Encoder & Decoder — Free Named & Numeric Entity Tool",
-      description:
-        "Convert special characters and symbols to HTML entities (&amp;, &lt;, &#60;) and decode HTML entity entities back to plain text.",
+      title: "HTML Entity Encoder & Decoder",
+      description: "Convert special characters and symbols to HTML entities (&amp;, &lt;, &#60;) and decode HTML entity entities back to plain text.",
       h1: "Free HTML Entity Encoder & Decoder",
       intro:
         "Safely encode HTML tags, quotes, ampersands, and unicode symbols for web publishing. Switch seamlessly between named entities, decimal codes, and hexadecimal notations.",
@@ -824,9 +801,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Age Calculator — Free Exact Age, Birthday Countdown & Milestones",
-      description:
-        "Calculate your exact chronological age in years, months, days, hours, and seconds. View next birthday countdown and astrological zodiac sign.",
+      title: "Age Calculator",
+      description: "Calculate your exact chronological age in years, months, days, hours, and seconds. View next birthday countdown and astrological zodiac sign.",
       h1: "Free Chronological Age Calculator",
       intro:
         "Find your exact age down to the day, calculate time remaining until your next birthday, and explore lifetime milestones (total days, hours, and minutes lived).",
@@ -861,9 +837,8 @@ export const TOOLS: ToolDefinition[] = [
     disclaimer:
       "Disclaimer: Sales tax and discount calculations are estimations based on user-provided values. Actual register totals may vary depending on local tax policies and retailer rounding.",
     seo: {
-      title: "Discount Calculator — Free Sale Price, Extra Off & Tax Calculator",
-      description:
-        "Calculate discounted prices, stacked promotional discounts, dollar savings, and estimated sales tax. Visual savings breakdown and itemized receipt.",
+      title: "Discount Calculator",
+      description: "Calculate discounted prices, stacked promotional discounts, dollar savings, and estimated sales tax. Visual savings breakdown and itemized receipt.",
       h1: "Free Discount & Sale Savings Calculator",
       intro:
         "Quickly figure out the final checkout price after single or stacked store discounts. Includes sales tax calculation, percentage savings breakdown, and receipt summary.",
@@ -897,8 +872,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "JSON to XML Converter — Free Bidirectional XML & JSON Tool",
-      description:
-        "Convert JSON data to XML and XML documents to JSON in your browser. Configurable root tags, formatting indentation, and file download.",
+      description: "Convert JSON data to XML and XML documents to JSON in your browser. Configurable root tags, formatting indentation, and file download.",
       h1: "Free JSON <-> XML Bidirectional Converter",
       intro:
         "Transform structured data between JSON and XML representations with zero server uploads. Customize root elements, indentations, and XML declarations.",
@@ -932,8 +906,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "Epoch Converter — Free Unix Timestamp to Date & Live Clock",
-      description:
-        "Convert Unix timestamps (seconds & milliseconds) to human-readable UTC/Local date, and convert calendar dates to epoch timestamps. Live clock included.",
+      description: "Convert Unix timestamps (seconds & milliseconds) to human-readable UTC/Local date, and convert calendar dates to epoch timestamps. Live clock included.",
       h1: "Free Unix Epoch & Timestamp Converter",
       intro:
         "Translate machine-level POSIX/Unix timestamps into human-readable calendar dates and back again. Includes live timestamp ticker, relative time calculations, and leap year checks.",
@@ -966,9 +939,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Number Base Converter — Free Binary, Hex, Decimal & Radix Tool",
-      description:
-        "Convert numbers instantly between Decimal (10), Binary (2), Hexadecimal (16), Octal (8), and custom radices 2-36. 8-bit grouped bytes and BigInt support.",
+      title: "Number Base Converter",
+      description: "Convert numbers instantly between Decimal (10), Binary (2), Hexadecimal (16), Octal (8), and custom radices 2-36. 8-bit grouped bytes and BigInt support.",
       h1: "Free Binary, Hex, Octal & Decimal Base Converter",
       intro:
         "Convert positive integers across computer number systems. Inspect bit groupings, byte lengths, ASCII character representations, and arbitrary radices up to Base 36.",
@@ -1003,9 +975,8 @@ export const TOOLS: ToolDefinition[] = [
     disclaimer:
       "Disclaimer: Sales tax rates and exemptions vary by state, county, and local jurisdiction. This calculator provides estimates for informational purposes only. Consult a certified tax advisor for official filings.",
     seo: {
-      title: "Sales Tax & VAT Calculator — Free Tax Add & Reverse Calculation",
-      description:
-        "Calculate sales tax, VAT, or GST with country presets (US, UK, EU, India, Australia, Canada). Add tax to net price or reverse calculate tax from total.",
+      title: "Sales Tax & VAT Calculator",
+      description: "Calculate sales tax, VAT, or GST with country presets (US, UK, EU, India, Australia, Canada). Add tax to net price or reverse calculate tax from total.",
       h1: "Free Sales Tax, VAT & GST Calculator",
       intro:
         "Calculate tax-inclusive and tax-exclusive pricing for invoices, receipts, and retail purchases. Includes presets for United States, UK VAT, European Union, and Indian GST.",
@@ -1040,9 +1011,8 @@ export const TOOLS: ToolDefinition[] = [
     disclaimer:
       "Disclaimer: Freelance rate calculations provide a mathematical baseline for revenue targeting. Market pricing, client budgets, and tax structures vary. Consult a professional financial advisor.",
     seo: {
-      title: "Freelance Rate Calculator — Free Hourly, Day & Revenue Target Tool",
-      description:
-        "Calculate your ideal freelance hourly rate and day rate based on target income, business expenses, billable hours, vacation time, and taxes.",
+      title: "Freelance Rate Calculator",
+      description: "Calculate your ideal freelance hourly rate and day rate based on target income, business expenses, billable hours, vacation time, and taxes.",
       h1: "Free Freelance Hourly & Day Rate Calculator",
       intro:
         "Determine the exact hourly and daily rates you need to charge to hit your annual net take-home goal after factoring in unpaid admin hours, business expenses, taxes, and vacation time.",
@@ -1075,9 +1045,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Unicode Normalizer — Free NFC, NFD, NFKC, NFKD & Codepoint Tool",
-      description:
-        "Normalize Unicode strings across NFC, NFD, NFKC, and NFKD forms in your browser. Inspect code points (U+XXXX), UTF-8 bytes, and HTML entities.",
+      title: "Unicode Normalizer",
+      description: "Normalize Unicode strings across NFC, NFD, NFKC, and NFKD forms in your browser. Inspect code points (U+XXXX), UTF-8 bytes, and HTML entities.",
       h1: "Free Client-Side Unicode Normalizer & Inspector",
       intro:
         "Eliminate character rendering bugs, invisible diacritic mismatches, and ligature anomalies with standard Unicode normalization and deep code point inspection.",
@@ -1111,8 +1080,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "SQL Formatter & Minifier — Free In-Browser SQL Beautifier",
-      description:
-        "Format, beautify, and minify SQL queries in your browser. Automatic clause alignment, uppercase keyword options, and custom indentation.",
+      description: "Format, beautify, and minify SQL queries in your browser. Automatic clause alignment, uppercase keyword options, and custom indentation.",
       h1: "Free Client-Side SQL Formatter & Minifier",
       intro:
         "Transform unformatted or minified SQL queries into clean, readable SQL scripts. Supports JOIN clauses, subqueries, customizable indentation, and comment-stripping minification.",
@@ -1145,9 +1113,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "HMAC Generator — Free SHA-256, SHA-512 Keyed Hash & Signature",
-      description:
-        "Generate cryptographic HMAC signatures using SHA-256, SHA-512, SHA-384, and SHA-1 in your browser. Web Crypto API hardware security.",
+      title: "HMAC Generator",
+      description: "Generate cryptographic HMAC signatures using SHA-256, SHA-512, SHA-384, and SHA-1 in your browser. Web Crypto API hardware security.",
       h1: "Free Client-Side HMAC Keyed-Hash Generator",
       intro:
         "Compute cryptographic Keyed-Hash Message Authentication Codes (HMAC) for webhook verification, API security, and message signing using native Web Crypto hardware APIs.",
@@ -1182,9 +1149,8 @@ export const TOOLS: ToolDefinition[] = [
     disclaimer:
       "Disclaimer: Calorie expenditure and macronutrient recommendations are estimations based on population averages. They are not intended as clinical dietetics or medical advice. Consult a healthcare professional before altering your nutritional intake.",
     seo: {
-      title: "Calorie Calculator — Free Daily Calorie Target, BMR & Macro Split",
-      description:
-        "Calculate daily calorie needs, Basal Metabolic Rate (BMR), and Total Daily Energy Expenditure (TDEE). Includes protein, carb, and fat macro splits.",
+      title: "Calorie Calculator",
+      description: "Calculate daily calorie needs, Basal Metabolic Rate (BMR), and Total Daily Energy Expenditure (TDEE). Includes protein, carb, and fat macro splits.",
       h1: "Free Calorie & Macronutrient Calculator",
       intro:
         "Determine your daily calorie requirements for weight maintenance, fat loss, or muscle gain using the Mifflin-St Jeor equation. Customize macronutrient ratios for balanced, high-protein, or keto diets.",
@@ -1219,9 +1185,8 @@ export const TOOLS: ToolDefinition[] = [
     disclaimer:
       "Disclaimer: Hydration guidelines provide generalized estimations. Individual fluid requirements vary with specific health conditions, renal function, heart health, and medications. Individuals on fluid restriction must follow physician instructions.",
     seo: {
-      title: "Water Intake Calculator — Free Daily Hydration & Drinking Schedule",
-      description:
-        "Calculate your ideal daily water intake based on body weight, exercise duration, and climate. Hourly hydration schedule and 8-ounce glass counter.",
+      title: "Water Intake Calculator",
+      description: "Calculate your ideal daily water intake based on body weight, exercise duration, and climate. Hourly hydration schedule and 8-ounce glass counter.",
       h1: "Free Daily Water Intake & Hydration Calculator",
       intro:
         "Find out how many liters, ounces, or glasses of water your body needs each day. Factors in vigorous workout duration, climate temperatures, and physiological needs with a structured drinking timeline.",
@@ -1255,8 +1220,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "JSON to YAML Converter — Free Bidirectional YAML & JSON Tool",
-      description:
-        "Convert JSON to clean YAML and YAML documents to JSON in your browser. Configurable indentation, sequence formatting, and file download.",
+      description: "Convert JSON to clean YAML and YAML documents to JSON in your browser. Configurable indentation, sequence formatting, and file download.",
       h1: "Free JSON <-> YAML Bidirectional Converter",
       intro:
         "Translate configuration files, Kubernetes manifests, and application configs between JSON and YAML. Works 100% offline in your browser memory.",
@@ -1289,9 +1253,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Checksum Verifier — Free File Hash Comparison & Integrity Checker",
-      description:
-        "Verify file integrity with SHA-256, SHA-512, SHA-384, and SHA-1 in your browser. Drag-and-drop comparison against expected hashes with zero server upload.",
+      title: "Checksum Verifier",
+      description: "Verify file integrity with SHA-256, SHA-512, SHA-384, and SHA-1 in your browser. Drag-and-drop comparison against expected hashes with zero server upload.",
       h1: "Free Client-Side Checksum Verifier",
       intro:
         "Confirm that downloaded files, ISO disk images, and software packages are authentic and uncorrupted. Fast, private cryptographic verification powered by Web Crypto hardware APIs.",
@@ -1326,9 +1289,8 @@ export const TOOLS: ToolDefinition[] = [
     disclaimer:
       "Disclaimer: Auto financing calculations are estimations for budgeting purposes. Actual interest rates, loan terms, and dealership fees are determined by individual lending institutions and credit approval.",
     seo: {
-      title: "Auto Loan Calculator — Free Car Payment, Interest & Trade-in Tool",
-      description:
-        "Calculate monthly car loan payments, total interest, sales tax, and trade-in equity. Loan terms from 24 to 84 months with complete purchase breakdown.",
+      title: "Auto Loan Calculator",
+      description: "Calculate monthly car loan payments, total interest, sales tax, and trade-in equity. Loan terms from 24 to 84 months with complete purchase breakdown.",
       h1: "Free Auto Loan & Car Finance Calculator",
       intro:
         "Calculate your true monthly car payment before stepping foot into the dealership. Factors in trade-in allowance, negative equity, local sales tax, and dealer fees.",
@@ -1361,9 +1323,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Scientific Calculator — Free Online Trigonometry & Math Engine",
-      description:
-        "Perform advanced scientific calculations with trigonometry (sin, cos, tan), logarithms, square roots, factorials, and powers. DEG/RAD switch and history.",
+      title: "Scientific Calculator",
+      description: "Perform advanced scientific calculations with trigonometry (sin, cos, tan), logarithms, square roots, factorials, and powers. DEG/RAD switch and history.",
       h1: "Free Client-Side Scientific Calculator",
       intro:
         "Calculate advanced algebraic, trigonometric, and scientific functions directly in your browser. Features safe recursive expression evaluation, history recall, and keyboard shortcuts.",
@@ -1397,8 +1358,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "JSON Schema Validator — Free In-Browser JSON Schema Linter",
-      description:
-        "Validate JSON payload data against JSON Schema definitions in real time. Detects type mismatches, missing required keys, enum violations, and range bounds.",
+      description: "Validate JSON payload data against JSON Schema definitions in real time. Detects type mismatches, missing required keys, enum violations, and range bounds.",
       h1: "Free Client-Side JSON Schema Validator",
       intro:
         "Validate REST API payloads and configuration files against JSON Schemas. Detailed error reports identify precise property paths and expected types with zero server transmission.",
@@ -1432,8 +1392,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "Aspect Ratio Calculator — Free 16:9, 4:3 & Resolution Scaler",
-      description:
-        "Calculate aspect ratios and proportional dimensions (16:9, 4:3, 1:1, 9:16, 21:9). Real-time geometric scale preview and proportional multiplier table.",
+      description: "Calculate aspect ratios and proportional dimensions (16:9, 4:3, 1:1, 9:16, 21:9). Real-time geometric scale preview and proportional multiplier table.",
       h1: "Free Aspect Ratio & Resolution Calculator",
       intro:
         "Calculate missing dimensions, simplify pixel ratios using greatest common divisors, and resize video and graphic resolutions without visual distortion.",
@@ -1467,8 +1426,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "Code Minifier — Free HTML, CSS, JavaScript & JSON Minifier",
-      description:
-        "Minify and compress HTML, CSS, JavaScript, and JSON code in your browser. Strip comments, collapse whitespace, remove debug logs, and inspect compression ratio.",
+      description: "Minify and compress HTML, CSS, JavaScript, and JSON code in your browser. Strip comments, collapse whitespace, remove debug logs, and inspect compression.",
       h1: "Free HTML, CSS, JS & JSON Code Minifier",
       intro:
         "Reduce code payload sizes and optimize web delivery assets directly in your browser. Strip whitespace, redundant syntax, and comments with zero server uploads.",
@@ -1496,14 +1454,13 @@ export const TOOLS: ToolDefinition[] = [
   {
     slug: "chmod-calculator",
     name: "Chmod Permissions Calculator",
-    category: "calculators",
+    category: "developer",
     phase: 1,
     status: "live",
     runtime: "client",
     seo: {
-      title: "Chmod Calculator — Free Linux & Unix File Permissions Generator",
-      description:
-        "Interactive Unix chmod calculator. Convert between octal (755, 644, 777) and symbolic (rwxr-xr-x) permissions, calculate umask, and generate shell commands.",
+      title: "Chmod Calculator",
+      description: "Interactive Unix chmod calculator. Convert between octal (755, 644, 777) and symbolic (rwxr-xr-x) permissions, calculate umask, and generate shell.",
       h1: "Free Linux / Unix Chmod Permissions Calculator",
       intro:
         "Calculate and convert Linux and Unix file access permissions. Toggle read, write, and execute bits across owner, group, and others with special SetUID, SetGID, and sticky bit support.",
@@ -1538,9 +1495,8 @@ export const TOOLS: ToolDefinition[] = [
     disclaimer:
       "Not medical advice. Consult a physician or registered dietitian before beginning any diet or exercise regimen.",
     seo: {
-      title: "BMR & TDEE Calculator — Free Daily Calorie & Macro Expenditure",
-      description:
-        "Calculate your Basal Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE). Supports Mifflin-St Jeor & Harris-Benedict formulas, cutting/bulking targets, and macro split.",
+      title: "BMR & TDEE Calculator",
+      description: "Calculate your Basal Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE). Supports Mifflin-St Jeor & Harris-Benedict formulas, cutting/bulking.",
       h1: "Free BMR & TDEE Daily Calorie Calculator",
       intro:
         "Determine your baseline metabolic burn and active daily calorie expenditure based on biological sex, age, weight, height, and activity level with balanced macronutrient goals.",
@@ -1575,9 +1531,8 @@ export const TOOLS: ToolDefinition[] = [
     disclaimer:
       "Not financial advice. For estimation and educational purposes only.",
     seo: {
-      title: "Inflation Calculator — Free Purchasing Power & Future Cost of Living",
-      description:
-        "Calculate compound inflation, future purchasing power of your money, and equivalent cost of goods over time with yearly compounding tables.",
+      title: "Inflation Calculator",
+      description: "Calculate compound inflation, future purchasing power of your money, and equivalent cost of goods over time with yearly compounding tables.",
       h1: "Free Inflation & Purchasing Power Calculator",
       intro:
         "Understand the compounding impact of inflation on your cash savings and long-term purchasing power. Model future costs of living across configurable time horizons.",
@@ -1610,9 +1565,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "IP Subnet Calculator — Free IPv4 CIDR, Mask & Host Range Tool",
-      description:
-        "Calculate IPv4 network addresses, broadcast addresses, usable host ranges, wildcard masks, and CIDR prefix notations with binary breakdown.",
+      title: "IP Subnet Calculator",
+      description: "Calculate IPv4 network addresses, broadcast addresses, usable host ranges, wildcard masks, and CIDR prefix notations with binary breakdown.",
       h1: "Free IPv4 Subnet & CIDR Calculator",
       intro:
         "Plan network subnets, determine host capacities, calculate broadcast and network addresses, and inspect dotted decimal and binary representations instantly.",
@@ -1645,9 +1599,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free Statistics Calculator — Mean, Median, Mode, Variance & Std Dev",
-      description:
-        "Compute comprehensive descriptive statistics instantly. Calculate mean, median, mode, sample and population standard deviation, variance, quartiles, and IQR.",
+      title: "Free Statistics Calculator — Mean, Median, Mode, Variance &",
+      description: "Compute comprehensive descriptive statistics instantly. Calculate mean, median, mode, sample and population standard deviation, variance, quartiles, and.",
       h1: "Free Client-Side Statistics Calculator",
       intro:
         "Calculate complete statistical summaries from any dataset in your browser. All calculations run locally in memory without uploading your confidential datasets or research numbers.",
@@ -1680,9 +1633,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Fraction Simplifier & Calculator — Reduce to Lowest Terms (+, -, ×, ÷)",
-      description:
-        "Simplify fractions to lowest terms instantly using GCD. Perform fraction addition, subtraction, multiplication, and division with step-by-step reduction.",
+      title: "Fraction Simplifier & Calculator — Reduce to Lowest Terms",
+      description: "Simplify fractions to lowest terms instantly using GCD. Perform fraction addition, subtraction, multiplication, and division with step-by-step reduction.",
       h1: "Free Fraction Simplifier & Arithmetic Calculator",
       intro:
         "Reduce improper and proper fractions to their simplest form, convert to mixed numbers and decimals, and perform two-fraction arithmetic with full step-by-step breakdown.",
@@ -1715,9 +1667,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "2D & 3D Geometry Calculator — Area, Perimeter, Volume & Surface Area",
-      description:
-        "Calculate area, perimeter, volume, surface area, and diagonals for circles, rectangles, triangles, spheres, cylinders, cones, and prisms.",
+      title: "2D & 3D Geometry Calculator — Area, Perimeter, Volume &",
+      description: "Calculate area, perimeter, volume, surface area, and diagonals for circles, rectangles, triangles, spheres, cylinders, cones, and prisms.",
       h1: "Free 2D & 3D Geometry Calculator",
       intro:
         "Instant geometric formulas and calculations for plane and solid shapes. Calculate surface areas, perimeters, volumes, and slant heights with visual step-by-step formulas.",
@@ -1752,9 +1703,8 @@ export const TOOLS: ToolDefinition[] = [
     disclaimer:
       "This time card calculator provides general hour and gross earnings estimates and does not account for local tax withholdings, wage garnishments, or employer-specific collective bargaining agreements.",
     seo: {
-      title: "Free Time Card Calculator — Weekly Hours, Overtime & Gross Pay",
-      description:
-        "Track weekly work shifts, unpaid lunch breaks, daily and weekly overtime (1.5x/2.0x), and estimate total gross earnings with instant CSV export.",
+      title: "Free Time Card Calculator — Weekly Hours, Overtime & Gross",
+      description: "Track weekly work shifts, unpaid lunch breaks, daily and weekly overtime (1.5x/2.0x), and estimate total gross earnings with instant CSV export.",
       h1: "Free Weekly Time Card & Overtime Calculator",
       intro:
         "Calculate work hours, unpaid lunch breaks, and gross paycheck earnings across Monday through Sunday. Supports customized daily and weekly overtime thresholds.",
@@ -1787,9 +1737,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "World Clock & Timezone Converter — Meeting Planner & Global Hours",
-      description:
-        "Compare local time across global cities and timezones simultaneously. Identify overlapping business working hours and date differences for international meetings.",
+      title: "World Clock & Timezone Converter — Meeting Planner & Global",
+      description: "Compare local time across global cities and timezones simultaneously. Identify overlapping business working hours and date differences for international.",
       h1: "Free World Clock & Timezone Converter",
       intro:
         "Compare time across major international business hubs, calculate relative time differences, and easily schedule remote cross-timezone meetings.",
@@ -1822,9 +1771,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Bandwidth & Download Time Calculator — Transfer Speed & Data Volume",
-      description:
-        "Calculate file download and upload transfer durations based on network speed (Mbps/Gbps) with real-world TCP/IP packet overhead adjustment.",
+      title: "Bandwidth & Download Time Calculator — Transfer Speed &",
+      description: "Calculate file download and upload transfer durations based on network speed (Mbps/Gbps) with real-world TCP/IP packet overhead adjustment.",
       h1: "Free Bandwidth & Download Time Calculator",
       intro:
         "Accurately estimate file transfer times across 4G, 5G, cable, and gigabit fiber connections with packet overhead adjustments and data volume estimators.",
@@ -1857,9 +1805,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "SIP Calculator — Systematic Investment Plan Returns & Wealth Growth",
-      description:
-        "Calculate expected maturity wealth and interest gains from systematic mutual fund investments. Includes step-up SIP compounding and annual growth schedule.",
+      title: "SIP Calculator — Systematic Investment Plan Returns &",
+      description: "Calculate expected maturity wealth and interest gains from systematic mutual fund investments. Includes step-up SIP compounding and annual growth schedule.",
       h1: "Free SIP & Mutual Fund Investment Calculator",
       intro:
         "Plan your long-term wealth creation with our private, client-side Systematic Investment Plan (SIP) calculator. Model compound growth, periodic step-ups, and annual balances.",
@@ -1892,9 +1839,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "401(k) & Retirement Calculator — Nest Egg Growth & Drawdown Simulator",
-      description:
-        "Calculate your retirement nest egg with employer matching contributions, salary growth, compounding interest, and safe monthly drawdown projections.",
+      title: "401(k) & Retirement Calculator — Nest Egg Growth & Drawdown",
+      description: "Calculate your retirement nest egg with employer matching contributions, salary growth, compounding interest, and safe monthly drawdown projections.",
       h1: "Free 401(k) & Retirement Savings Calculator",
       intro:
         "Simulate your retirement future with zero data uploads. Model 401(k) contributions, company match matches, annual raises, and sustainable retirement drawdown.",
@@ -1927,9 +1873,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Debt Payoff Calculator — Debt Snowball vs. Avalanche Comparison",
-      description:
-        "Compare Debt Avalanche and Debt Snowball repayment strategies. Calculate total interest saved, debt-free milestone dates, and payoff schedules.",
+      title: "Debt Payoff Calculator — Debt Snowball vs. Avalanche",
+      description: "Compare Debt Avalanche and Debt Snowball repayment strategies. Calculate total interest saved, debt-free milestone dates, and payoff schedules.",
       h1: "Free Debt Snowball & Avalanche Payoff Calculator",
       intro:
         "Eliminate credit card debt, medical bills, and personal loans faster. Compare the psychological momentum of the Snowball method against the interest savings of the Avalanche method.",
@@ -1962,9 +1907,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "ROI Calculator — Return on Investment, Net Profit & Annualized CAGR",
-      description:
-        "Calculate Return on Investment (ROI), annualized Compound Annual Growth Rate (CAGR), and investment profit/loss multipliers with zero data collection.",
+      title: "ROI Calculator — Return on Investment, Net Profit &",
+      description: "Calculate Return on Investment (ROI), annualized Compound Annual Growth Rate (CAGR), and investment profit/loss multipliers with zero data collection.",
       h1: "Free Return on Investment (ROI) Calculator",
       intro:
         "Quickly assess the profitability of marketing campaigns, real estate, stocks, or business acquisitions with net gain, simple ROI, and annualized CAGR analytics.",
@@ -1997,9 +1941,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Profit Margin Calculator — Gross Margin, Net Margin & Markup Solver",
-      description:
-        "Calculate gross profit margin, markup percentage, operating expenses, and net profit margins instantly. Optimize product pricing and retail margins.",
+      title: "Profit Margin Calculator — Gross Margin, Net Margin &",
+      description: "Calculate gross profit margin, markup percentage, operating expenses, and net profit margins instantly. Optimize product pricing and retail margins.",
       h1: "Free Profit Margin & Markup Calculator",
       intro:
         "Determine healthy product pricing and understand the mathematical difference between margin and markup. Model gross margins, operating expenses, and net profitability.",
@@ -2032,9 +1975,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Break-Even Calculator — Break-Even Units, Revenue & Contribution Margin",
-      description:
-        "Calculate unit and dollar break-even points, contribution margin ratios, and sales targets required to achieve desired net business profits.",
+      title: "Break-Even Calculator — Break-Even Units, Revenue &",
+      description: "Calculate unit and dollar break-even points, contribution margin ratios, and sales targets required to achieve desired net business profits.",
       h1: "Free Break-Even Analysis Calculator",
       intro:
         "Find the exact sales volume and revenue required to cover fixed overhead and variable costs. Model profitability targets, safety margins, and unit economics.",
@@ -2067,9 +2009,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Paycheck Calculator — Free Salary & Hourly Take-Home Pay Estimator",
-      description:
-        "Estimate net take-home paycheck earnings with federal income tax brackets, FICA (Social Security & Medicare), state taxes, and 401(k) pre-tax deductions.",
+      title: "Paycheck Calculator",
+      description: "Estimate net take-home paycheck earnings with federal income tax brackets, FICA (Social Security & Medicare), state taxes, and 401(k) pre-tax deductions.",
       h1: "Free Payroll & Paycheck Take-Home Calculator",
       intro:
         "Estimate your net take-home pay per paycheck whether you earn an annual salary or hourly wage. Factor in federal withholding, FICA, state income tax, and retirement benefits.",
@@ -2103,8 +2044,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "Body Fat Calculator — Free US Navy & BMI Body Fat Percentage",
-      description:
-        "Calculate body fat percentage, lean body mass, and fat mass using the US Navy tape method and BMI formula. Includes ACE standards and target goal simulator.",
+      description: "Calculate body fat percentage, lean body mass, and fat mass using the US Navy tape method and BMI formula. Includes ACE standards and target goal.",
       h1: "Free Body Fat Percentage Calculator",
       intro:
         "Accurately estimate body composition and lean muscle mass with client-side privacy. Compare the US Navy circumference method with BMI-based body fat formulas.",
@@ -2137,9 +2077,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Target Heart Rate Calculator — 5 Exercise Training Zones & MHR",
-      description:
-        "Calculate maximum heart rate (MHR) and 5 cardiovascular exercise training zones using the Tanaka, Karvonen (HRR), and Fox formulas.",
+      title: "Target Heart Rate Calculator — 5 Exercise Training Zones &",
+      description: "Calculate maximum heart rate (MHR) and 5 cardiovascular exercise training zones using the Tanaka, Karvonen (HRR), and Fox formulas.",
       h1: "Free Target Heart Rate & Training Zone Calculator",
       intro:
         "Optimize your cardio, endurance, and interval training with customized heart rate zones. Calculate max heart rate and heart rate reserve for peak conditioning.",
@@ -2172,9 +2111,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Pregnancy Due Date Calculator — EDD & Fetal Milestones Timeline",
-      description:
-        "Calculate your estimated due date (EDD) by Last Menstrual Period (LMP), conception date, IVF transfer, or ultrasound scan. Track trimesters and milestones.",
+      title: "Pregnancy Due Date Calculator — EDD & Fetal Milestones",
+      description: "Calculate your estimated due date (EDD) by Last Menstrual Period (LMP), conception date, IVF transfer, or ultrasound scan. Track trimesters and milestones.",
       h1: "Free Pregnancy Due Date & Timeline Calculator",
       intro:
         "Track gestational age, trimester progress, and fetal development milestones privately in your browser without creating accounts or uploading health data.",
@@ -2207,9 +2145,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "SQL Dump to CSV Converter — Free In-Browser SQL INSERT to CSV/JSON",
-      description:
-        "Convert SQL database dumps and INSERT INTO statements to CSV, TSV, or JSON. Extract tables, format columns, and export data with 100% client-side privacy.",
+      title: "SQL Dump to CSV Converter",
+      description: "Convert SQL database dumps and INSERT INTO statements to CSV, TSV, or JSON. Extract tables, format columns, and export data with 100% client-side privacy.",
       h1: "Free SQL Dump to CSV & JSON Converter",
       intro:
         "Parse SQL database dumps and INSERT statements into structured tabular CSV or JSON. Support for MySQL, PostgreSQL, and SQLite dumps without uploading your data.",
@@ -2243,8 +2180,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "Excel to JSON & CSV Converter — Free Client-Side XLSX Parser",
-      description:
-        "Convert Excel spreadsheets (.xlsx) and CSV files to clean JSON arrays or CSV/TSV. Multi-sheet support, tabular preview, and zero server uploads.",
+      description: "Convert Excel spreadsheets (.xlsx) and CSV files to clean JSON arrays or CSV/TSV. Multi-sheet support, tabular preview, and zero server uploads.",
       h1: "Free Excel to JSON & CSV Converter",
       intro:
         "Convert Microsoft Excel spreadsheets and CSV files into clean JSON or CSV in your browser memory. Inspect multi-sheet workbooks with zero data uploads.",
@@ -2277,9 +2213,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Archive Extractor & Viewer — Free Online ZIP, TAR, GZ Unpacker",
-      description:
-        "Extract and inspect ZIP, TAR, and GZ archives directly in your browser. Preview files, search paths, and download files with zero server uploads.",
+      title: "Archive Extractor & Viewer",
+      description: "Extract and inspect ZIP, TAR, and GZ archives directly in your browser. Preview files, search paths, and download files with zero server uploads.",
       h1: "Free In-Browser Archive Extractor & Viewer",
       intro:
         "Unpack and inspect ZIP, TAR, and GZ archives with client-side security. View file trees, preview documents and images, and extract individual files without uploading.",
@@ -2312,9 +2247,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Archive Packer & ZIP Creator — Free Client-Side Multi-File Compressor",
-      description:
-        "Create compressed ZIP archives from multiple files or text documents in your browser. Choose compression levels (0-9) with 100% privacy.",
+      title: "Archive Packer & ZIP Creator",
+      description: "Create compressed ZIP archives from multiple files or text documents in your browser. Choose compression levels (0-9) with 100% privacy.",
       h1: "Free In-Browser ZIP Archive Packer",
       intro:
         "Compress multiple files and custom directory structures into standard ZIP archives in your browser memory with zero telemetry or server uploads.",
@@ -2347,9 +2281,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free Barcode Scanner & Reader — Code 128, EAN-13, UPC-A, Code 39",
-      description:
-        "Scan and decode 1D retail and industrial barcodes from images or live webcam in your browser. 100% private with zero server uploads.",
+      title: "Free Barcode Scanner & Reader — Code 128, EAN-13, UPC-A,",
+      description: "Scan and decode 1D retail and industrial barcodes from images or live webcam in your browser. 100% private with zero server uploads.",
       h1: "Free Client-Side Barcode Scanner & Reader",
       intro:
         "Instantly read retail and industrial barcodes from camera feed or photo uploads. Decodes Code 128, EAN-13, UPC-A, and Code 39 with verified checksum validation.",
@@ -2382,9 +2315,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free QR Code Scanner & Reader — In-Browser Camera & Image Decoder",
-      description:
-        "Scan QR codes from webcam or image files directly in your browser. Parses URLs, Wi-Fi credentials, vCard contacts, and plain text with zero tracking.",
+      title: "Free QR Code Scanner & Reader — In-Browser Camera & Image",
+      description: "Scan QR codes from webcam or image files directly in your browser. Parses URLs, Wi-Fi credentials, vCard contacts, and plain text with zero tracking.",
       h1: "Free In-Browser QR Code Scanner & Reader",
       intro:
         "Scan and decode QR codes instantly on your device without installing third-party apps. Recognizes Wi-Fi passwords, digital contact cards, and direct links securely.",
@@ -2417,9 +2349,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free ATS Resume Checker & Score Analyzer — 100% Private In-Browser Audit",
-      description:
-        "Audit your resume against Applicant Tracking System (ATS) parsing rules with an instant 0-100 compatibility score, section checks, and keyword feedback.",
+      title: "Free ATS Resume Checker & Score Analyzer — 100% Private",
+      description: "Audit your resume against Applicant Tracking System (ATS) parsing rules with an instant 0-100 compatibility score, section checks, and keyword feedback.",
       h1: "Free ATS Resume Checker & Compatibility Analyzer",
       intro:
         "Evaluate your resume against enterprise ATS parsing criteria. Get an instant score breakdown across contact information, standard headings, power verbs, and measurable impact.",
@@ -2452,9 +2383,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Resume PDF & DOCX Import Inspector — Free Structured JSON & Schema Viewer",
-      description:
-        "Inspect, validate, and convert PDF & DOCX resume files into structured JSON schemas. View parsed timelines, competencies, and export to Cleartrix's builder.",
+      title: "Resume PDF & DOCX Import Inspector",
+      description: "Inspect, validate, and convert PDF & DOCX resume files into structured JSON schemas. View parsed timelines, competencies, and export to Cleartrix's.",
       h1: "Free Resume PDF & DOCX Import Inspector",
       intro:
         "Inspect extracted resume data with client-side transparency. View parsed personal details, work timelines, education records, and download standard JSON schemas.",
@@ -2489,8 +2419,7 @@ export const TOOLS: ToolDefinition[] = [
     heavyDeps: ["pdf-lib"],
     seo: {
       title: "Free PDF Merger — Merge PDF Files Online 100% In-Browser",
-      description:
-        "Combine multiple PDF documents into one single file securely in your browser. Reorder pages, zero file size limits, 100% private with no server uploads.",
+      description: "Combine multiple PDF documents into one single file securely in your browser. Reorder pages, zero file size limits, 100% private with no server uploads.",
       h1: "Free Client-Side PDF Merger & Combiner",
       intro:
         "Merge multiple PDF files into one clean document directly in your browser memory. Drag to reorder, inspect page counts, and download instantly without external file transfers.",
@@ -2521,8 +2450,7 @@ export const TOOLS: ToolDefinition[] = [
     heavyDeps: ["pdf-lib"],
     seo: {
       title: "Free PDF Splitter — Extract Pages or Burst Online In-Browser",
-      description:
-        "Extract page ranges or burst every page of your PDF into separate files. 100% client-side execution with zero file uploads and complete privacy.",
+      description: "Extract page ranges or burst every page of your PDF into separate files. 100% client-side execution with zero file uploads and complete privacy.",
       h1: "Free Client-Side PDF Splitter & Page Extractor",
       intro:
         "Extract individual pages, custom page ranges (e.g., 1-3, 5), or burst entire documents into separate files directly inside your browser.",
@@ -2553,8 +2481,7 @@ export const TOOLS: ToolDefinition[] = [
     heavyDeps: ["pdf-lib"],
     seo: {
       title: "Free PDF Page Rotator — Rotate PDF Pages 90°, 180°, 270°",
-      description:
-        "Rotate individual or all pages of a PDF document permanently in your browser. Rotate clockwise or counter-clockwise with zero server uploads.",
+      description: "Rotate individual or all pages of a PDF document permanently in your browser. Rotate clockwise or counter-clockwise with zero server uploads.",
       h1: "Free Client-Side PDF Page Rotator",
       intro:
         "Fix sideways or upside-down PDF pages instantly. Rotate single pages or entire documents by 90°, 180°, or 270° with 100% client-side privacy.",
@@ -2585,8 +2512,7 @@ export const TOOLS: ToolDefinition[] = [
     heavyDeps: ["pdf-lib"],
     seo: {
       title: "Free PDF Page Organizer — Reorder, Delete & Duplicate Pages",
-      description:
-        "Reorder pages, delete unwanted sheets, duplicate pages, or reverse page order in your PDF with an intuitive visual grid. 100% client-side.",
+      description: "Reorder pages, delete unwanted sheets, duplicate pages, or reverse page order in your PDF with an intuitive visual grid. 100% client-side.",
       h1: "Free Client-Side PDF Page Organizer & Reorder",
       intro:
         "Rearrange the sequence of pages in your PDF documents. Move pages left or right, duplicate important sheets, remove unwanted pages, and reverse order.",
@@ -2617,8 +2543,7 @@ export const TOOLS: ToolDefinition[] = [
     heavyDeps: ["pdf-lib"],
     seo: {
       title: "Free PDF Compressor — Reduce PDF File Size Online In-Browser",
-      description:
-        "Compress and reduce PDF file size client-side. Optimize object streams and strip hidden metadata with zero server upload and complete privacy.",
+      description: "Compress and reduce PDF file size client-side. Optimize object streams and strip hidden metadata with zero server upload and complete privacy.",
       h1: "Free Client-Side PDF Compressor & Optimizer",
       intro:
         "Shrink bloated PDF documents directly in your browser. Pack cross-reference streams and eliminate hidden metadata without transmitting your confidential files.",
@@ -2653,8 +2578,7 @@ export const TOOLS: ToolDefinition[] = [
     heavyDeps: ["pdf-lib"],
     seo: {
       title: "Free PDF Bates Stamper — Bates Numbering Online In-Browser",
-      description:
-        "Add legal Bates numbering, running headers, and sequential page footers to PDF documents. 100% client-side privacy with zero server uploads.",
+      description: "Add legal Bates numbering, running headers, and sequential page footers to PDF documents. 100% client-side privacy with zero server uploads.",
       h1: "Free Client-Side PDF Bates Numbering & Stamper",
       intro:
         "Stamp litigation Bates numbers, case IDs, and running page footers onto your PDF pages. Customize prefix, digit padding, font size, and positions.",
@@ -2684,9 +2608,8 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     heavyDeps: ["pdf-lib"],
     seo: {
-      title: "Free PDF Flattener — Flatten Form Fields & Annotations In-Browser",
-      description:
-        "Flatten interactive AcroForm text fields, checkboxes, and annotations into static printable vector pages. 100% client-side and tamper-proof.",
+      title: "Free PDF Flattener — Flatten Form Fields & Annotations",
+      description: "Flatten interactive AcroForm text fields, checkboxes, and annotations into static printable vector pages. 100% client-side and tamper-proof.",
       h1: "Free Client-Side PDF Form Flattener",
       intro:
         "Lock fillable PDF forms permanently. Convert interactive AcroForm widgets into static vector graphics to prevent post-signature editing or tampering.",
@@ -2716,9 +2639,8 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     heavyDeps: ["pdf-lib"],
     seo: {
-      title: "Free PDF Form Field Extractor — Export AcroForm Data to JSON & CSV",
-      description:
-        "Extract all interactive form field keys, widget types, and user input values from PDF forms into structured JSON or downloadable CSV spreadsheets.",
+      title: "Free PDF Form Field Extractor — Export AcroForm Data to",
+      description: "Extract all interactive form field keys, widget types, and user input values from PDF forms into structured JSON or downloadable CSV spreadsheets.",
       h1: "Free Client-Side PDF Form Field Extractor",
       intro:
         "Parse and inspect fillable PDF forms with instant client-side transparency. View form field keys, extract entered data, and download clean JSON or CSV.",
@@ -2749,8 +2671,7 @@ export const TOOLS: ToolDefinition[] = [
     heavyDeps: ["pdf-lib"],
     seo: {
       title: "Free PDF Form Builder — Create Fillable PDF Forms In-Browser",
-      description:
-        "Create interactive fillable PDF forms. Insert text boxes, checkboxes, and dropdowns onto any PDF page with zero server uploads.",
+      description: "Create interactive fillable PDF forms. Insert text boxes, checkboxes, and dropdowns onto any PDF page with zero server uploads.",
       h1: "Free Client-Side PDF Fillable Form Builder",
       intro:
         "Turn any static PDF document into an interactive fillable form. Add text input fields, checkboxes, and select dropdowns directly inside your browser.",
@@ -2780,9 +2701,8 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     heavyDeps: ["pdf-lib"],
     seo: {
-      title: "Free PDF Digital Signer — Sign PDF Documents Online In-Browser",
-      description:
-        "Sign PDF documents online for free. Draw, type, or upload your signature, set date stamps, and embed securely with 100% client-side privacy.",
+      title: "Free PDF Digital Signer — Sign PDF Documents Online",
+      description: "Sign PDF documents online for free. Draw, type, or upload your signature, set date stamps, and embed securely with 100% client-side privacy.",
       h1: "Free Client-Side PDF Digital Signer",
       intro:
         "Sign contracts, agreements, and NDAs directly in your browser. Draw your signature, type in calligraphic style, or upload a signature image with instant date stamps.",
@@ -2815,9 +2735,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free Image Format Converter — Convert PNG, WebP, JPEG, BMP & ICO",
-      description:
-        "Convert image files directly in your browser. Switch between PNG, JPEG, WebP, BMP, ICO, and SVG with adjustable quality and 100% client-side privacy.",
+      title: "Free Image Format Converter — Convert PNG, WebP, JPEG, BMP",
+      description: "Convert image files directly in your browser. Switch between PNG, JPEG, WebP, BMP, ICO, and SVG with adjustable quality and 100% client-side privacy.",
       h1: "Free Client-Side Image Format Converter",
       intro:
         "Convert images between popular web and desktop formats with zero cloud uploads. Adjust lossy/lossless quality, configure custom background fills, and scale resolution safely in memory.",
@@ -2846,9 +2765,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free Aspect Ratio Cropper — Crop Photos for Instagram, YouTube & Socials",
-      description:
-        "Crop images to 1:1, 16:9, 9:16, 4:5, and custom aspect ratios in your browser. Includes 90-degree rotation, horizontal flip, and pixel-precise dimension controls.",
+      title: "Free Aspect Ratio Cropper — Crop Photos for Instagram,",
+      description: "Crop images to 1:1, 16:9, 9:16, 4:5, and custom aspect ratios in your browser. Includes 90-degree rotation, horizontal flip, and pixel-precise dimension.",
       h1: "Free In-Browser Aspect Ratio Cropper",
       intro:
         "Crop your photos for Instagram posts, YouTube thumbnails, TikTok/Reels, or print dimensions. Includes interactive zoom, 90-degree rotations, mirror flipping, and instant lossless export.",
@@ -2878,8 +2796,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "Free Canvas Resizer — Scale Pixel Width & Height In-Browser",
-      description:
-        "Resize image dimensions by exact pixels, percentage scale, or resolution presets (4K, 1080p, 720p). Features aspect ratio lock and canvas padding modes.",
+      description: "Resize image dimensions by exact pixels, percentage scale, or resolution presets (4K, 1080p, 720p). Features aspect ratio lock and canvas padding modes.",
       h1: "Free Client-Side Canvas Resizer & Resolution Scaler",
       intro:
         "Resize photo dimensions with locked aspect ratio, percentage scaling, or popular display presets. Choose between fit, fill/crop, stretch, or pad canvas behaviors with zero server uploads.",
@@ -2908,9 +2825,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free Batch Image Compressor — Optimize Photos Online & Download ZIP",
-      description:
-        "Compress multiple JPEG, PNG, and WebP images simultaneously in your browser. Adjust quality, downscale dimensions, and download individually or as a single ZIP archive.",
+      title: "Free Batch Image Compressor — Optimize Photos Online &",
+      description: "Compress multiple JPEG, PNG, and WebP images simultaneously in your browser. Adjust quality, downscale dimensions, and download individually or as a.",
       h1: "Free Client-Side Batch Image Compressor",
       intro:
         "Optimize and shrink photo file sizes in bulk without uploading your confidential images to external servers. Process multi-file batches, view instant byte savings, and download all compressed images in a ZIP archive.",
@@ -2939,9 +2855,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free EXIF Metadata Stripper — Remove GPS & Camera Tags from Photos",
-      description:
-        "Inspect and remove hidden EXIF, GPS location coordinates, camera models, and timestamps from JPEG and PNG photos. 100% client-side privacy sanitization.",
+      title: "Free EXIF Metadata Stripper — Remove GPS & Camera Tags from",
+      description: "Inspect and remove hidden EXIF, GPS location coordinates, camera models, and timestamps from JPEG and PNG photos. 100% client-side privacy sanitization.",
       h1: "Free In-Browser EXIF Metadata Stripper & Privacy Sanitizer",
       intro:
         "Inspect hidden metadata embedded in your smartphone and camera photos. Strip sensitive GPS locations, device serial numbers, and capture timestamps before sharing online.",
@@ -2971,9 +2886,8 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     heavyDeps: ["pdf-lib"],
     seo: {
-      title: "Free Markdown to PDF Converter — High-Fidelity Vector PDF Online",
-      description:
-        "Convert Markdown text into professional vector PDF documents in your browser. Choose themes, customize page margins, and download high-resolution PDFs with zero cloud uploads.",
+      title: "Free Markdown to PDF Converter — High-Fidelity Vector PDF",
+      description: "Convert Markdown text into professional vector PDF documents in your browser. Choose themes, customize page margins, and download high-resolution PDFs.",
       h1: "Free In-Browser Markdown to PDF Converter",
       intro:
         "Compile Markdown documents, technical specifications, and release notes into clean, vector-rendered PDF files directly in your browser with zero server uploads.",
@@ -3002,9 +2916,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free HTML to PDF Converter — In-Browser Vector Print & PDF Export",
-      description:
-        "Convert HTML and CSS code into print-ready PDF documents. In-browser sandboxed preview, preset templates for invoices and certificates, and zero server uploads.",
+      title: "Free HTML to PDF Converter — In-Browser Vector Print & PDF",
+      description: "Convert HTML and CSS code into print-ready PDF documents. In-browser sandboxed preview, preset templates for invoices and certificates, and zero server.",
       h1: "Free Client-Side HTML to PDF Converter",
       intro:
         "Render and print HTML documents directly to vector PDF using your browser's native rendering engine. Includes templates for invoices, reports, and certificates with strict client-side privacy.",
@@ -3033,9 +2946,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free Online TXT Editor & Notepad — In-Browser Plain Text Workspace",
-      description:
-        "Distraction-free, zero-upload plain text editor and notepad. Real-time character/word counts, LF/CRLF line ending converter, whitespace cleaner, and instant TXT download.",
+      title: "Free Online TXT Editor & Notepad — In-Browser Plain Text",
+      description: "Distraction-free, zero-upload plain text editor and notepad. Real-time character/word counts, LF/CRLF line ending converter, whitespace cleaner, and.",
       h1: "Free In-Browser Direct TXT Notepad & Editor",
       intro:
         "Edit, format, and analyze plain text files with zero server uploads. Features real-time text metrics, line ending conversions, indentation helpers, and drag-and-drop file loading.",
@@ -3064,9 +2976,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free Markdown Live Editor — Split-Screen In-Browser Markdown Workspace",
-      description:
-        "Write, preview, and format Markdown in real time. Task checklist progress tracking, table generators, one-click HTML export, and 100% client-side execution.",
+      title: "Free Markdown Live Editor — Split-Screen In-Browser",
+      description: "Write, preview, and format Markdown in real time. Task checklist progress tracking, table generators, one-click HTML export, and 100% client-side.",
       h1: "Free In-Browser Direct Markdown Live Editor",
       intro:
         "Create technical documentation, READMEs, and structured notes with instant split-screen preview. Includes interactive task tracking, table generators, and standalone HTML export.",
@@ -3095,9 +3006,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free In-Browser HTML Playground — Interactive Code Editor & Sandbox",
-      description:
-        "Experiment with HTML, CSS, and JavaScript in real time. Sandboxed iframe preview, single-file bundle export, template presets, and zero server communication.",
+      title: "Free In-Browser HTML Playground — Interactive Code Editor &",
+      description: "Experiment with HTML, CSS, and JavaScript in real time. Sandboxed iframe preview, single-file bundle export, template presets, and zero server.",
       h1: "Free Client-Side HTML, CSS & JS Playground",
       intro:
         "Build, test, and preview responsive HTML, modern CSS styling, and interactive JavaScript in an isolated browser sandbox. Export clean, self-contained single-file HTML bundles instantly.",
@@ -3126,9 +3036,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free AES-256 File Locker — In-Browser Military-Grade File Encryption",
-      description:
-        "Encrypt any local file with AES-GCM-256 and PBKDF2 password derivation directly in your browser. Authenticated encryption, zero cloud sync, hardware-accelerated Web Crypto.",
+      title: "Free AES-256 File Locker — In-Browser Military-Grade File",
+      description: "Encrypt any local file with AES-GCM-256 and PBKDF2 password derivation directly in your browser. Authenticated encryption, zero cloud sync,.",
       h1: "Free In-Browser AES-256 File Locker & Encryptor",
       intro:
         "Lock and encrypt confidential documents, photos, archives, and videos using military-grade AES-GCM-256 directly inside your browser memory with zero server uploads.",
@@ -3157,9 +3066,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free AES-256 File Decryptor — In-Browser Secure File Unlocker",
-      description:
-        "Unlock and decrypt .enc files encrypted with Cleartrix AES-GCM-256 File Locker. 100% in-browser authentication tag verification, zero server uploads, instant file recovery.",
+      title: "Free AES-256 File Decryptor — In-Browser Secure File",
+      description: "Unlock and decrypt .enc files encrypted with Cleartrix AES-GCM-256 File Locker. 100% in-browser authentication tag verification, zero server uploads,.",
       h1: "Free In-Browser AES-256 File Decryptor & Unlocker",
       intro:
         "Decrypt and authenticate protected files in your browser sandbox. Enter your master password to verify the 128-bit GCM integrity tag and restore the original file instantly.",
@@ -3188,9 +3096,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free Image Steganography Online — Hide Secret Text in Photos In-Browser",
-      description:
-        "Invisibly hide and reveal secret messages inside image pixels using LSB steganography. Optional passphrase protection, lossless PNG export, zero server uploads.",
+      title: "Free Image Steganography Online — Hide Secret Text in",
+      description: "Invisibly hide and reveal secret messages inside image pixels using LSB steganography. Optional passphrase protection, lossless PNG export, zero server.",
       h1: "Free Client-Side Image Steganography (Hide & Reveal)",
       intro:
         "Invisibly encode confidential notes, passphrases, and text payloads into the least significant bits of image pixels. Export lossless stego-PNGs with zero cloud uploads.",
@@ -3220,9 +3127,8 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     heavyDeps: ["pdf-lib"],
     seo: {
-      title: "Free In-Browser PDF Redaction Tool — Black Out Sensitive Text Permanently",
-      description:
-        "Permanently redact SSNs, account numbers, and confidential text in PDF documents. Opaque vector bounding boxes baked irreversibly into pages with zero server uploads.",
+      title: "Free In-Browser PDF Redaction Tool — Black Out Sensitive",
+      description: "Permanently redact SSNs, account numbers, and confidential text in PDF documents. Opaque vector bounding boxes baked irreversibly into pages with zero.",
       h1: "Free Client-Side PDF Redaction & Sanitization Tool",
       intro:
         "Permanently obscure sensitive data, signatures, and confidential sections in PDF files. Bakes irreversible vector redaction blocks into the document stream directly in your browser.",
@@ -3251,9 +3157,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free Image to Base64 Converter — Convert Images to Data URI Online",
-      description:
-        "Convert PNG, JPEG, WebP, SVG, and GIF images into Base64 Data URIs. Generate HTML <img>, CSS background, and Markdown snippets with instant reverse decoding.",
+      title: "Free Image to Base64 Converter — Convert Images to Data URI",
+      description: "Convert PNG, JPEG, WebP, SVG, and GIF images into Base64 Data URIs. Generate HTML <img>, CSS background, and Markdown snippets with instant reverse.",
       h1: "Free In-Browser Image to Base64 & Data URI Converter",
       intro:
         "Convert image files into embedded Base64 strings for CSS, HTML, and Markdown integration with zero server uploads. Includes reverse Base64-to-image decoding and download.",
@@ -3282,9 +3187,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free In-Browser SVG Minifier — Optimize Vector Files & Strip Bloat",
-      description:
-        "Minify and optimize SVG vector files in your browser. Remove editor metadata, round coordinate decimals, collapse whitespace, and strip unused namespaces with 100% privacy.",
+      title: "Free In-Browser SVG Minifier — Optimize Vector Files &",
+      description: "Minify and optimize SVG vector files in your browser. Remove editor metadata, round coordinate decimals, collapse whitespace, and strip unused namespaces.",
       h1: "Free Client-Side SVG Minifier & Vector Optimizer",
       intro:
         "Compress, sanitize, and minify SVG vector graphics directly in your browser. Eliminates Illustrator and Inkscape bloat, collapses redundant whitespace, and reduces asset sizes for faster web performance.",
@@ -3313,9 +3217,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free In-Browser Favicon Generator — Generate ICO, PWA Icons & Web Manifest",
-      description:
-        "Generate multi-size Windows .ico files, Apple Touch icons, Android PWA icons, site.webmanifest, and HTML <head> snippets directly in your browser.",
+      title: "Free In-Browser Favicon Generator — Generate ICO, PWA Icons",
+      description: "Generate multi-size Windows .ico files, Apple Touch icons, Android PWA icons, site.webmanifest, and HTML <head> snippets directly in your browser.",
       h1: "Free Client-Side Favicon & App Icon Generator",
       intro:
         "Generate high-resolution favicon packages, Windows ICO binaries, Apple Touch icons, and web manifest configurations with zero server uploads.",
@@ -3344,9 +3247,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free In-Browser Image Rotator & Flipper — Rotate and Mirror Images",
-      description:
-        "Rotate images by 90°, 180°, 270°, or custom angles, and flip horizontally or vertically. Client-side canvas rendering with zero server uploads.",
+      title: "Free In-Browser Image Rotator & Flipper — Rotate and Mirror",
+      description: "Rotate images by 90°, 180°, 270°, or custom angles, and flip horizontally or vertically. Client-side canvas rendering with zero server uploads.",
       h1: "Free Client-Side Image Rotator & Flipper",
       intro:
         "Rotate, mirror, and flip images seamlessly in your browser. Correct inverted phone photos, flip graphics horizontally or vertically, and export in lossless PNG, WebP, or JPEG formats.",
@@ -3375,9 +3277,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free In-Browser Photo Filter Studio — Adjust Colors & Apply Presets",
-      description:
-        "Enhance photos directly in your browser. Adjust brightness, contrast, saturation, hue rotation, sepia, grayscale, and blur with 1-click vintage presets and zero server uploads.",
+      title: "Free In-Browser Photo Filter Studio — Adjust Colors & Apply",
+      description: "Enhance photos directly in your browser. Adjust brightness, contrast, saturation, hue rotation, sepia, grayscale, and blur with 1-click vintage presets.",
       h1: "Free Client-Side Photo Filter Studio & Color Balancer",
       intro:
         "Retouch photos and enhance color vibrancy directly in your browser. Apply curated aesthetics including Noir, Sepia, Golden Hour, and Cyberpunk with interactive before-and-after comparison.",
@@ -3406,9 +3307,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free In-Browser Image Watermarker — Add Text Stamps & Tiled Watermarks",
-      description:
-        "Add confidential text stamps, copyright notices, and diagonal tiled watermarks to images. 100% client-side privacy with customizable opacity and rotation.",
+      title: "Free In-Browser Image Watermarker — Add Text Stamps & Tiled",
+      description: "Add confidential text stamps, copyright notices, and diagonal tiled watermarks to images. 100% client-side privacy with customizable opacity and rotation.",
       h1: "Free Client-Side Image Watermark & Stamp Tool",
       intro:
         "Protect documents, photography, and creative assets with custom text watermarks. Support for single anchor stamps, diagonal tiled security grids, customizable opacity, and zero server uploads.",
@@ -3437,9 +3337,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free In-Browser Metadata Stripper — Scrub EXIF, GPS & Sensitive Data",
-      description:
-        "Permanently scrub EXIF, GPS coordinates, camera serial numbers, and author tags from JPEG and PNG images. 100% in-browser byte sanitization.",
+      title: "Free In-Browser Metadata Stripper — Scrub EXIF, GPS &",
+      description: "Permanently scrub EXIF, GPS coordinates, camera serial numbers, and author tags from JPEG and PNG images. 100% in-browser byte sanitization.",
       h1: "Free Client-Side Metadata Stripper & Privacy Sanitizer",
       intro:
         "Protect your personal privacy by stripping hidden EXIF data, GPS location coordinates, camera models, and author timestamps from images before sharing. Everything executes locally in your browser memory.",
@@ -3468,9 +3367,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free In-Browser RTF Document Creator — Write & Export Rich Text Format",
-      description:
-        "Create, format, and download Rich Text Format (.rtf) documents directly in your browser. Compatible with Microsoft Word, WordPad, and Apple TextEdit.",
+      title: "Free In-Browser RTF Document Creator — Write & Export Rich",
+      description: "Create, format, and download Rich Text Format (.rtf) documents directly in your browser. Compatible with Microsoft Word, WordPad, and Apple TextEdit.",
       h1: "Free Client-Side RTF Document Creator & Editor",
       intro:
         "Draft and export formatted Rich Text documents with zero server dependencies. Features customizable typography, templates, and full cross-platform compatibility.",
@@ -3500,9 +3398,8 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     heavyDeps: ["docx"],
     seo: {
-      title: "Free In-Browser Word (.docx) Document Creator — Write & Export DOCX",
-      description:
-        "Create, format, and download native Microsoft Word (.docx) documents directly in your browser. Add headings, bullet points, callout boxes, and custom color accents.",
+      title: "Free In-Browser Word (.docx) Document Creator — Write &",
+      description: "Create, format, and download native Microsoft Word (.docx) documents directly in your browser. Add headings, bullet points, callout boxes, and custom.",
       h1: "Free Client-Side Word (.docx) Document Creator",
       intro:
         "Draft and export professional Word documents (.docx) with structured headings, custom accent themes, and callouts with zero server uploads.",
@@ -3532,9 +3429,8 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     heavyDeps: ["pdf-lib"],
     seo: {
-      title: "Free In-Browser PDF Annotator — Add Highlights, Stamps & Notes",
-      description:
-        "Annotate PDF documents directly in your browser. Add vector highlights, approved/confidential stamps, sticky notes, and bounding shapes with zero server uploads.",
+      title: "Free In-Browser PDF Annotator — Add Highlights, Stamps &",
+      description: "Annotate PDF documents directly in your browser. Add vector highlights, approved/confidential stamps, sticky notes, and bounding shapes with zero server.",
       h1: "Free Client-Side PDF Vector Annotator",
       intro:
         "Mark up and annotate PDF agreements, contracts, and documents. Add vector highlights, approved badges, review notes, and rectangles directly into the document stream.",
@@ -3563,9 +3459,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free In-Browser Markdown Note Maker — Split Editor & Local Notebook",
-      description:
-        "Take, organize, and export Markdown notes with split-pane live preview and instant auto-save to browser storage. Export as Markdown or HTML with zero server tracking.",
+      title: "Free In-Browser Markdown Note Maker — Split Editor & Local",
+      description: "Take, organize, and export Markdown notes with split-pane live preview and instant auto-save to browser storage. Export as Markdown or HTML with zero.",
       h1: "Free Client-Side Markdown Note Maker & Notebook",
       intro:
         "A dedicated Markdown note-taking workspace featuring split-pane live preview, tag filtering, word count analytics, and 100% private local storage persistence.",
@@ -3595,9 +3490,8 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     heavyDeps: ["pdf-lib"],
     seo: {
-      title: "Free In-Browser Excel & CSV to PDF Converter — Formatted Table PDF Export",
-      description:
-        "Convert Excel CSV spreadsheets into vector PDF tables. Multi-page pagination, repeating headers, zebra striping, and landscape orientation with 100% privacy.",
+      title: "Free In-Browser Excel & CSV to PDF Converter — Formatted",
+      description: "Convert Excel CSV spreadsheets into vector PDF tables. Multi-page pagination, repeating headers, zebra striping, and landscape orientation with 100%.",
       h1: "Free Client-Side Excel & CSV to Vector PDF Converter",
       intro:
         "Convert raw CSV spreadsheets and tabular data into executive-grade vector PDF reports directly in your browser. Automatic pagination, custom table color accents, and zero server uploads.",
@@ -3627,9 +3521,8 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     heavyDeps: ["pdf-lib"],
     seo: {
-      title: "Free DOCX to PDF Converter — Convert Word to Vector PDF In-Browser",
-      description:
-        "Convert Microsoft Word .docx documents to formatted vector PDF in your browser. Automatic layout preservation, custom margins, page numbering, and zero server uploads.",
+      title: "Free DOCX to PDF Converter — Convert Word to Vector PDF",
+      description: "Convert Microsoft Word .docx documents to formatted vector PDF in your browser. Automatic layout preservation, custom margins, page numbering, and zero.",
       h1: "Free Client-Side Word DOCX to Vector PDF Converter",
       intro:
         "Transform Microsoft Word .docx files into executive-grade vector PDF documents directly in device memory. Preserves headings, lists, formatting, and page numbers with 100% privacy.",
@@ -3660,8 +3553,7 @@ export const TOOLS: ToolDefinition[] = [
     heavyDeps: ["docx", "pdfjs"],
     seo: {
       title: "Free PDF to DOCX Converter — Convert PDF to Word In-Browser",
-      description:
-        "Convert PDF documents to editable Microsoft Word .docx files in your browser. Extracts headings, paragraphs, and bullet lists with 100% privacy and zero server uploads.",
+      description: "Convert PDF documents to editable Microsoft Word .docx files in your browser. Extracts headings, paragraphs, and bullet lists with 100% privacy and zero.",
       h1: "Free Client-Side PDF to Editable Word DOCX Converter",
       intro:
         "Extract text, paragraphs, and structured headings from PDF files and compile them into genuine Microsoft Word .docx documents. 100% private in-browser memory execution.",
@@ -3690,9 +3582,8 @@ export const TOOLS: ToolDefinition[] = [
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free In-Browser PDF Encryptor — Military-Grade AES-256 PDF Password Locker",
-      description:
-        "Protect and encrypt PDF documents with AES-256 encryption and custom security policies in your browser. Restrict printing, copying, and modifications with 100% privacy.",
+      title: "Free In-Browser PDF Encryptor — Military-Grade AES-256 PDF",
+      description: "Protect and encrypt PDF documents with AES-256 encryption and custom security policies in your browser. Restrict printing, copying, and modifications with.",
       h1: "Free Client-Side PDF Encryptor & Password Locker",
       intro:
         "Protect sensitive PDFs with military-grade AES-GCM-256 encryption and PBKDF2 key derivation directly in your browser. Enforce granular permissions and lock confidential documents.",
@@ -3722,9 +3613,8 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     heavyDeps: ["pdf-lib"],
     seo: {
-      title: "Free In-Browser PDF Decryptor — Unlock Password-Protected PDFs",
-      description:
-        "Unlock and remove passwords from encrypted PDF documents directly in your browser. Strip DRM restrictions and export restriction-free PDFs with zero server uploads.",
+      title: "Free In-Browser PDF Decryptor — Unlock Password-Protected",
+      description: "Unlock and remove passwords from encrypted PDF documents directly in your browser. Strip DRM restrictions and export restriction-free PDFs with zero.",
       h1: "Free Client-Side PDF Decryptor & Password Remover",
       intro:
         "Unlock password-protected and encrypted PDF documents directly in your browser. Permanently remove password restrictions and export clean, open PDFs with 100% privacy.",
@@ -3754,9 +3644,8 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     heavyDeps: ["pdf-lib"],
     seo: {
-      title: "Free PowerPoint to PDF Converter — Convert PPTX & Slide Decks to Vector PDF",
-      description:
-        "Convert PowerPoint PPTX slide decks and markdown presentation outlines into 16:9 widescreen vector PDF slides. Executive pitch themes and 100% in-browser privacy.",
+      title: "Free PowerPoint to PDF Converter — Convert PPTX & Slide",
+      description: "Convert PowerPoint PPTX slide decks and markdown presentation outlines into 16:9 widescreen vector PDF slides. Executive pitch themes and 100% in-browser.",
       h1: "Free Client-Side PowerPoint PPTX to Vector PDF Converter",
       intro:
         "Transform PowerPoint .pptx presentations and slide deck outlines into executive 16:9 widescreen vector PDF slides directly in your browser. Zero cloud dependencies.",
@@ -4313,7 +4202,7 @@ export const TOOLS: ToolDefinition[] = [
   {
     slug: "roman-numeral-converter",
     name: "Roman Numeral Converter",
-    category: "calculators",
+    category: "utilities",
     phase: 2,
     status: "live",
     runtime: "client",

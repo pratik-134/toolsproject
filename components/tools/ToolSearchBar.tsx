@@ -28,7 +28,6 @@ const CATEGORY_ICON_MAP: Record<CategoryId, React.ElementType> = {
   codes: QrCode,
   utilities: Wrench,
   builders: FileText,
-  "url-cloud": Lock,
   video: ImageIcon,
   audio: Wrench,
 };
@@ -42,7 +41,6 @@ const CATEGORY_LABEL_MAP: Record<CategoryId, string> = {
   codes: "Code",
   utilities: "Utility",
   builders: "Builder",
-  "url-cloud": "Cloud",
   video: "Video",
   audio: "Audio",
 };
