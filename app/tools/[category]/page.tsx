@@ -9,6 +9,7 @@ import { CategoryId } from "@/lib/registry/types";
 import { getCategoryTheme } from "@/lib/category-theme";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { ToolCardGrid } from "@/components/tools/ToolCardGrid";
 import {
   ShieldCheck,
   ChevronRight,
@@ -141,87 +142,16 @@ export default async function CategoryHubPage({ params }: CategoryPageProps) {
           </div>
         </section>
 
-        {/* Live Tools Section */}
+        {/* Category Tools Grid */}
         <section className="max-w-container mx-auto px-4 sm:px-6 pt-10">
-          <div className="flex items-center gap-2 mb-6">
-            <Sparkles className="h-5 w-5" style={{ color: theme.primary }} />
-            <h2 className="font-headings text-xl sm:text-2xl font-bold text-slate-900">
-              Available Now
-            </h2>
-            <span
-              className="text-[11px] font-mono font-bold px-2 py-0.5 rounded-[6px] border ml-1"
-              style={{
-                backgroundColor: theme.tint,
-                borderColor: theme.border,
-                color: theme.primary,
-              }}
-            >
-              {liveTools.length} {liveTools.length === 1 ? "tool" : "tools"}
-            </span>
-          </div>
-
-          {liveTools.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {liveTools.map((tool) => (
-                <Link
-                  key={tool.slug}
-                  href={
-                    tool.slug === "resume-builder"
-                      ? "/editor"
-                      : `/tools/${tool.category}/${tool.slug}`
-                  }
-                  className="group flex flex-col justify-between p-5 rounded-2xl border border-slate-100/90 bg-white shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:border-blue-400/60 hover:shadow-[0_10px_30px_-5px_rgba(37,99,235,0.12)] transition-all duration-300 ease-out overflow-hidden"
-                  style={{ borderTop: `3px solid ${theme.primary}` }}
-                >
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <div
-                        className="h-8 w-8 rounded-xl border-0 flex items-center justify-center shrink-0 shadow-2xs"
-                        style={{
-                          backgroundColor: theme.tint,
-                          color: theme.primary,
-                        }}
-                      >
-                        <CategoryIcon className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <span
-                          className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full"
-                          style={{ backgroundColor: theme.tint, color: theme.primary }}
-                        >
-                          <span className="text-emerald-500 text-[9px]">●</span> Runs locally
-                        </span>
-                      </div>
-                    </div>
-                    <h3 className="font-headings font-bold text-slate-900 text-base mt-3 group-hover:text-blue-600 transition-colors">
-                      {tool.name}
-                    </h3>
-                    <p className="font-body text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
-                      {tool.seo.description}
-                    </p>
-                  </div>
-
-                  <div
-                    className="pt-3 border-t border-slate-100 mt-3 flex items-center justify-between text-xs font-semibold"
-                    style={{ color: theme.primary }}
-                  >
-                    <span>Launch</span>
-                    <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" strokeWidth={1.75} />
-                  </div>
-                </Link>
-              ))}
-            </div>
-          ) : (
-            <div className="p-8 rounded-2xl border border-dashed border-slate-300 bg-white text-center space-y-2">
-              <Clock className="h-6 w-6 text-slate-400 mx-auto" />
-              <p className="font-headings font-bold text-slate-700 text-sm">
-                Tools in this category are scheduled across upcoming phases.
-              </p>
-              <p className="font-body text-xs text-slate-500">
-                Check the roadmap below or explore live tools in other categories.
-              </p>
-            </div>
-          )}
+          <ToolCardGrid
+            tools={tools}
+            initialCategory={category.id}
+            showCategoryFilter={false}
+            showSearchBar={true}
+            title={`All ${category.name}`}
+            subtitle={`Select any ${category.shortName.toLowerCase()} utility below to process your files 100% locally in your browser memory.`}
+          />
         </section>
       </main>
       <Footer />

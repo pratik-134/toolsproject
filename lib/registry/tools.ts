@@ -3802,3 +3802,23 @@ export function getRelatedTools(tool: { related: string[] }): ToolMetadata[] {
     .map((slug) => getToolBySlug(slug))
     .filter((t): t is ToolMetadata => Boolean(t));
 }
+
+export function getToolUrl(tool: { slug: string; category?: string } | string): string {
+  if (typeof tool === "string") {
+    if (tool === "resume-builder") return "/editor";
+    const found = getToolBySlug(tool);
+    if (found) {
+      return found.slug === "resume-builder"
+        ? "/editor"
+        : `/tools/${found.category}/${found.slug}`;
+    }
+    return `/tools/${tool}`;
+  }
+  if (tool.slug === "resume-builder") return "/editor";
+  if (tool.category) return `/tools/${tool.category}/${tool.slug}`;
+  const found = getToolBySlug(tool.slug);
+  return found
+    ? (found.slug === "resume-builder" ? "/editor" : `/tools/${found.category}/${found.slug}`)
+    : `/tools/${tool.slug}`;
+}
+

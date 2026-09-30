@@ -18,13 +18,29 @@ import {
 } from "lucide-react";
 import { TOOLS } from "@/lib/registry/tools";
 
+import { CommandPalette } from "@/components/tools/CommandPalette";
+import { Search } from "lucide-react";
+
 const ANNOUNCEMENT_STORAGE_KEY = "ct_announcement_dismissed_v1";
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isBannerDismissed, setIsBannerDismissed] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  // Keyboard shortcut listener for Cmd+K / Ctrl+K
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setIsSearchOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleGlobalKeyDown);
+    return () => window.removeEventListener("keydown", handleGlobalKeyDown);
+  }, []);
 
   // Check if announcement was previously dismissed
   useEffect(() => {
@@ -168,6 +184,18 @@ export const Navbar: React.FC = () => {
 
       {/* Right Area: Action CTA & Mobile Hamburger Button */}
       <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+        <button
+          type="button"
+          onClick={() => setIsSearchOpen(true)}
+          className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600 text-xs font-semibold transition-all"
+        >
+          <Search className="h-3.5 w-3.5 text-slate-500" />
+          <span>Search</span>
+          <kbd className="hidden md:inline-block px-1.5 py-0.5 text-[10px] font-mono font-bold bg-white border border-slate-300 rounded text-slate-500">
+            ⌘K
+          </kbd>
+        </button>
+
         <Link href="/editor" onClick={handleLinkClick}>
           <Button
             size="sm"
@@ -408,6 +436,9 @@ export const Navbar: React.FC = () => {
           aria-hidden="true"
         />
       )}
+
+      {/* 4. Global Cmd/Ctrl+K Search Palette */}
+      <CommandPalette isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </>
   );
 };
