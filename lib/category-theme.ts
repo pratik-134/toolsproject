@@ -16,7 +16,7 @@ import {
 } from "./design-tokens";
 
 export interface CategoryTheme {
-  /** The 5-key design token key ('pdf' | 'image' | 'document' | 'security' | 'utility') */
+  /** The design token key */
   colorKey: CategoryColorKey;
   /** Primary accent hex — used for icon, progress fill, drag-over border, primary buttons */
   primary: string;
@@ -24,6 +24,10 @@ export interface CategoryTheme {
   tint: string;
   /** Border accent hex */
   border: string;
+  /** Background gradient from tint to white */
+  gradient: string;
+  /** Soft ambient glow shadow hex/rgba */
+  glow: string;
   /** Tailwind bg tint class */
   tintBg: string;
   /** Tailwind border class */
@@ -75,20 +79,68 @@ const COLOR_KEY_CONFIG: Record<CategoryColorKey, ColorKeyThemeConfig> = {
     ring: "focus-visible:ring-emerald-500",
   },
   security: {
-    tintBg: "bg-blue-50",
-    tintBorder: "border-blue-200",
-    text: "text-blue-700",
-    buttonBg: "bg-blue-700",
-    buttonHover: "hover:bg-blue-800",
-    ring: "focus-visible:ring-blue-600",
+    tintBg: "bg-indigo-50",
+    tintBorder: "border-indigo-200",
+    text: "text-indigo-900",
+    buttonBg: "bg-indigo-900",
+    buttonHover: "hover:bg-indigo-950",
+    ring: "focus-visible:ring-indigo-700",
+  },
+  codes: {
+    tintBg: "bg-purple-50",
+    tintBorder: "border-purple-200",
+    text: "text-purple-600",
+    buttonBg: "bg-purple-600",
+    buttonHover: "hover:bg-purple-700",
+    ring: "focus-visible:ring-purple-500",
+  },
+  video: {
+    tintBg: "bg-amber-50",
+    tintBorder: "border-amber-200",
+    text: "text-amber-600",
+    buttonBg: "bg-amber-600",
+    buttonHover: "hover:bg-amber-700",
+    ring: "focus-visible:ring-amber-500",
+  },
+  audio: {
+    tintBg: "bg-pink-50",
+    tintBorder: "border-pink-200",
+    text: "text-pink-600",
+    buttonBg: "bg-pink-600",
+    buttonHover: "hover:bg-pink-700",
+    ring: "focus-visible:ring-pink-500",
+  },
+  builders: {
+    tintBg: "bg-emerald-50",
+    tintBorder: "border-emerald-200",
+    text: "text-emerald-600",
+    buttonBg: "bg-emerald-600",
+    buttonHover: "hover:bg-emerald-700",
+    ring: "focus-visible:ring-emerald-500",
+  },
+  developer: {
+    tintBg: "bg-cyan-50",
+    tintBorder: "border-cyan-200",
+    text: "text-cyan-600",
+    buttonBg: "bg-cyan-600",
+    buttonHover: "hover:bg-cyan-700",
+    ring: "focus-visible:ring-cyan-500",
   },
   utility: {
-    tintBg: "bg-violet-50",
-    tintBorder: "border-violet-200",
-    text: "text-violet-700",
-    buttonBg: "bg-violet-700",
-    buttonHover: "hover:bg-violet-800",
-    ring: "focus-visible:ring-violet-500",
+    tintBg: "bg-indigo-50",
+    tintBorder: "border-indigo-200",
+    text: "text-indigo-600",
+    buttonBg: "bg-indigo-600",
+    buttonHover: "hover:bg-indigo-700",
+    ring: "focus-visible:ring-indigo-500",
+  },
+  calculators: {
+    tintBg: "bg-teal-50",
+    tintBorder: "border-teal-200",
+    text: "text-teal-600",
+    buttonBg: "bg-teal-600",
+    buttonHover: "hover:bg-teal-700",
+    ring: "focus-visible:ring-teal-500",
   },
 };
 
@@ -104,12 +156,14 @@ export function getColorKeyTheme(key: CategoryColorKey): CategoryTheme {
     primary: token.primary,
     tint: token.tint,
     border: token.border,
+    gradient: token.gradient,
+    glow: token.glow,
     label: token.label,
     ...config,
   };
 }
 
-/** Precomputed themes for all 11 registry categories */
+/** Precomputed themes for all 10 registry categories */
 export const CATEGORY_THEMES: Record<CategoryId, CategoryTheme> = {
   "document-pdf": getColorKeyTheme(CATEGORIES["document-pdf"].colorKey),
   image: getColorKeyTheme(CATEGORIES["image"].colorKey),
@@ -127,7 +181,7 @@ const DEFAULT_THEME = getColorKeyTheme("security");
 
 /**
  * Returns the full CategoryTheme for a given category ID or color key.
- * Falls back to security (Navy) if unknown.
+ * Falls back to security (Navy/Indigo) if unknown.
  */
 export function getCategoryTheme(categoryId: string): CategoryTheme {
   if (categoryId in CATEGORY_THEMES) {
