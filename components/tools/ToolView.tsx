@@ -9,6 +9,9 @@ import { PdfTextEngine } from "@/components/tools/engines/PdfTextEngine";
 import { HeicEngine } from "@/components/tools/engines/HeicEngine";
 import { IcoEngine } from "@/components/tools/engines/IcoEngine";
 import { FfmpegMediaEngine } from "@/components/tools/engines/FfmpegMediaEngine";
+import { DataTransformEngine } from "@/components/tools/engines/DataTransformEngine";
+import { TextTransformEngine } from "@/components/tools/engines/TextTransformEngine";
+import { ColorConverterEngine } from "@/components/tools/engines/ColorConverterEngine";
 import { getConverterPreset } from "@/lib/registry/converter-presets";
 
 const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
@@ -27,6 +30,21 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
   "mp4-to-mp3": () => <FfmpegMediaEngine preset={getConverterPreset("mp4-to-mp3")!} />,
   "mov-to-mp4": () => <FfmpegMediaEngine preset={getConverterPreset("mov-to-mp4")!} />,
   "wav-to-mp3": () => <FfmpegMediaEngine preset={getConverterPreset("wav-to-mp3")!} />,
+
+  // Wave 2 Converter Tools
+  "webm-to-mp4": () => <FfmpegMediaEngine preset={getConverterPreset("webm-to-mp4")!} />,
+  "m4a-to-mp3": () => <FfmpegMediaEngine preset={getConverterPreset("m4a-to-mp3")!} />,
+  "flac-to-mp3": () => <FfmpegMediaEngine preset={getConverterPreset("flac-to-mp3")!} />,
+  "gif-to-mp4": () => <FfmpegMediaEngine preset={getConverterPreset("gif-to-mp4")!} />,
+  "markdown-to-html": () => <DataTransformEngine preset={getConverterPreset("markdown-to-html")!} />,
+  "html-to-markdown": () => <DataTransformEngine preset={getConverterPreset("html-to-markdown")!} />,
+  "csv-to-excel": () => <DataTransformEngine preset={getConverterPreset("csv-to-excel")!} />,
+  "xml-to-csv": () => <DataTransformEngine preset={getConverterPreset("xml-to-csv")!} />,
+  "json-to-typescript": () => <TextTransformEngine preset={getConverterPreset("json-to-typescript")!} />,
+  "text-to-binary": () => <TextTransformEngine preset={getConverterPreset("text-to-binary")!} />,
+  "roman-numeral-converter": () => <TextTransformEngine preset={getConverterPreset("roman-numeral-converter")!} />,
+  "number-to-words": () => <TextTransformEngine preset={getConverterPreset("number-to-words")!} />,
+  "color-converter": () => <ColorConverterEngine preset={getConverterPreset("color-converter")!} />,
 
   // Pilot Tools
   "json-formatter": dynamic(() => import("@/components/tools/pilot/json-formatter"), {

@@ -4075,6 +4075,283 @@ export const TOOLS: ToolDefinition[] = [
     },
     related: ["mp4-to-mp3", "mov-to-mp4", "pdf-to-text", "audio-converter"]
   },
+
+  /* =========================================================================
+     WAVE 2 CONVERTER TOOLS (13 High-Volume Gaps)
+     ========================================================================= */
+  {
+    slug: "webm-to-mp4",
+    name: "WebM to MP4 Converter",
+    category: "video",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "WebM to MP4 Converter — Free In-Browser Video Tool",
+      description: "Convert WebM videos to universal MP4 format in browser memory. High-performance stream remuxing with zero server uploads.",
+      h1: "Free WebM to MP4 Converter",
+      intro: "Convert WebM videos captured from webcams or screen recordings into universally compatible MP4 videos directly in your browser.",
+      faq: [
+        { q: "Why convert WebM to MP4?", a: "MP4 offers 100% video playback support across all desktop OS, mobile devices, and video editing suites." },
+        { q: "Is my screen recording uploaded to any cloud server?", a: "No. ClearTrix processes your WebM video entirely within local browser memory." },
+        { q: "Does WebM to MP4 preserve video quality?", a: "Yes. In-browser stream remuxing preserves original video resolution and frame rate." },
+        { q: "Can I convert webcam recordings?", a: "Yes. WebM recordings from webcams or browser tab recorders convert seamlessly." }
+      ]
+    },
+    related: ["mov-to-mp4", "mp4-to-mp3", "gif-to-mp4"]
+  },
+  {
+    slug: "m4a-to-mp3",
+    name: "M4A to MP3 Converter",
+    category: "audio",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "M4A to MP3 Converter — Free In-Browser Audio Tool",
+      description: "Convert M4A and AAC audio files to universal MP3 format in browser memory. 192kbps encoding with zero server uploads.",
+      h1: "Free M4A to MP3 Converter",
+      intro: "Convert AAC and M4A voice memos or music files into standard MP3 format in your web browser. M4A is the default audio format for Apple Voice Memos.",
+      faq: [
+        { q: "Are iPhone Voice Memos supported?", a: "Yes. iPhone Voice Memos recorded in M4A format convert quickly to MP3." },
+        { q: "Is my private voice recording sent to any server?", a: "No. Conversion processing happens 100% inside local browser memory." },
+        { q: "What audio bitrate is generated?", a: "Output MP3 files are encoded at crisp 192kbps stereo audio bitrates." },
+        { q: "Can I convert M4A files on mobile browsers?", a: "Yes. ClearTrix works directly in mobile Safari and Chrome browsers." }
+      ]
+    },
+    related: ["flac-to-mp3", "wav-to-mp3", "mp4-to-mp3"]
+  },
+  {
+    slug: "flac-to-mp3",
+    name: "FLAC to MP3 Converter",
+    category: "audio",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "FLAC to MP3 Converter — Free In-Browser Lossless Converter",
+      description: "Convert high-resolution FLAC audio to 320kbps MP3 in your web browser. Maximum fidelity encoding with zero server uploads.",
+      h1: "Free FLAC to MP3 Converter",
+      intro: "Convert lossless FLAC audio files into high-bitrate 320kbps MP3 files directly inside your web browser. While FLAC provides uncompromised studio audio quality, its large file sizes can strain mobile storage.",
+      faq: [
+        { q: "What bitrate is used for FLAC to MP3 conversion?", a: "ClearTrix encodes FLAC files at 320kbps, the highest possible MP3 quality preset." },
+        { q: "How much space will I save?", a: "Converting FLAC to 320kbps MP3 reduces file size by approximately 60% to 75%." },
+        { q: "Are my music files uploaded to a server?", a: "No. Processing is 100% local inside browser memory." },
+        { q: "Does it support high-res 24-bit FLAC audio?", a: "Yes. High-resolution 24-bit FLAC streams are decoded and encoded cleanly." }
+      ]
+    },
+    related: ["m4a-to-mp3", "wav-to-mp3", "mp4-to-mp3"]
+  },
+  {
+    slug: "gif-to-mp4",
+    name: "GIF to MP4 Converter",
+    category: "video",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "GIF to MP4 Converter — Free In-Browser Video Compressor",
+      description: "Convert heavy animated GIFs to lightweight MP4 video in browser memory. Reduce file size up to 90% with zero server uploads.",
+      h1: "Free GIF to MP4 Converter",
+      intro: "Convert heavy animated GIF graphics into compact MP4 videos directly in your browser. Animated GIFs can easily grow to tens of megabytes, causing slow page loads.",
+      faq: [
+        { q: "How much smaller is MP4 compared to animated GIF?", a: "MP4 videos are typically 80% to 90% smaller than equivalent animated GIF files." },
+        { q: "Will the animation loop automatically?", a: "Most modern web browsers and social platforms loop short MP4 videos automatically." },
+        { q: "Is my GIF image sent to an external server?", a: "No. Animation encoding occurs 100% locally in browser memory." },
+        { q: "Can I convert large animated GIFs?", a: "Yes. The in-browser engine handles multi-megabyte GIFs efficiently." }
+      ]
+    },
+    related: ["webm-to-mp4", "mov-to-mp4", "svg-to-png"]
+  },
+  {
+    slug: "markdown-to-html",
+    name: "Markdown to HTML Converter",
+    category: "developer",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Markdown to HTML Converter — Free In-Browser Web Tool",
+      description: "Convert Markdown documents (.md) to clean HTML markup in browser memory. Instant live preview and download with zero uploads.",
+      h1: "Free Markdown to HTML Converter",
+      intro: "Convert Markdown syntax (.md) into semantic HTML code directly in your browser. Whether writing README files, blog posts, or documentation.",
+      faq: [
+        { q: "Does this tool sanitize HTML output?", a: "Yes. Output HTML is safely rendered to prevent XSS script injection." },
+        { q: "Can I upload .md or .txt files?", a: "Yes. You can upload files or paste raw Markdown text directly." },
+        { q: "Is my document uploaded to a server?", a: "No. Markdown parsing executes 100% in local browser memory." },
+        { q: "Does it support code blocks?", a: "Yes. Fenced code blocks with syntax markers are converted to <pre><code> tags." }
+      ]
+    },
+    related: ["html-to-markdown", "json-to-typescript", "pdf-to-text"]
+  },
+  {
+    slug: "html-to-markdown",
+    name: "HTML to Markdown Converter",
+    category: "developer",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "HTML to Markdown Converter — Free In-Browser Web Tool",
+      description: "Convert raw HTML code or web page snippets to clean Markdown (.md) in your web browser. Instant formatting with zero uploads.",
+      h1: "Free HTML to Markdown Converter",
+      intro: "Transform raw HTML markup into clean, readable Markdown syntax (.md) directly in your browser. Converting HTML to Markdown strips out noisy tags and inline styles.",
+      faq: [
+        { q: "What tags are supported during HTML conversion?", a: "Headings (h1-h6), paragraphs, strong, em, code, pre, lists (ul/ol), links (a), and blockquotes." },
+        { q: "Is my HTML code sent to a remote server?", a: "No. DOM parsing runs 100% locally inside your browser sandbox." },
+        { q: "Can I paste web page source code?", a: "Yes. Paste any HTML fragment to generate clean Markdown text." },
+        { q: "Does it preserve hyperlinks?", a: "Yes. Links are preserved in standard [Text](URL) Markdown format." }
+      ]
+    },
+    related: ["markdown-to-html", "json-to-typescript", "pdf-to-text"]
+  },
+  {
+    slug: "csv-to-excel",
+    name: "CSV to Excel (.XLSX) Converter",
+    category: "developer",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "CSV to Excel (.XLSX) Converter — Free Private Data Tool",
+      description: "Convert CSV and TSV spreadsheet files to native Excel .XLSX spreadsheets in browser memory. 100% private with zero server uploads.",
+      h1: "Free CSV to Excel Converter",
+      intro: "Convert CSV and TSV data files into native Microsoft Excel (.xlsx) workbook files directly in your web browser.",
+      faq: [
+        { q: "Will numerical values be recognized as numbers in Excel?", a: "Yes. Numeric fields are automatically typed as numbers in the generated XLSX cells." },
+        { q: "Is my sensitive spreadsheet data uploaded to any server?", a: "No. CSV parsing and XLSX building occur 100% inside local browser memory." },
+        { q: "Does it support custom delimiters like tabs or semicolons?", a: "Yes. Comma, tab (TSV), and semicolon delimited files are parsed automatically." },
+        { q: "Can I convert large CSV files?", a: "Yes. In-browser JSZip memory compilation handles thousands of spreadsheet rows efficiently." }
+      ]
+    },
+    related: ["xml-to-csv", "json-to-typescript", "csv-json-converter"]
+  },
+  {
+    slug: "json-to-typescript",
+    name: "JSON to TypeScript Interface Converter",
+    category: "developer",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "JSON to TypeScript Interface Converter — Free Developer Tool",
+      description: "Generate strongly-typed TypeScript interfaces from raw JSON objects in browser memory. Instant code generation with zero server uploads.",
+      h1: "Free JSON to TypeScript Converter",
+      intro: "Convert raw JSON payloads and API responses into strongly-typed TypeScript interfaces and type aliases instantly in your browser.",
+      faq: [
+        { q: "Does it support nested objects and arrays?", a: "Yes. Nested objects generate child interfaces, and arrays produce typed array aliases." },
+        { q: "Is my JSON payload sent to an external server?", a: "No. JSON parsing and type generation execute 100% inside your browser." },
+        { q: "What happens if JSON is invalid?", a: "An error message highlights invalid JSON syntax so you can fix quotes or trailing commas." },
+        { q: "Can I customize the root interface name?", a: "Yes. The default RootObject name can be edited directly in generated code." }
+      ]
+    },
+    related: ["markdown-to-html", "html-to-markdown", "csv-to-excel"]
+  },
+  {
+    slug: "xml-to-csv",
+    name: "XML to CSV Converter",
+    category: "developer",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "XML to CSV Converter — Free In-Browser Data Transformer",
+      description: "Convert XML data feeds and documents to tabular CSV format in browser memory. Instant tabular extraction with zero server uploads.",
+      h1: "Free XML to CSV Converter",
+      intro: "Convert complex XML documents and data feeds into flat CSV spreadsheet tables directly in your web browser.",
+      faq: [
+        { q: "How does it handle repeating XML nodes?", a: "ClearTrix identifies repeating record tags under the root element and extracts their properties into table rows." },
+        { q: "Is my enterprise XML data kept confidential?", a: "Yes. XML DOM parsing runs 100% inside local browser memory without network uploads." },
+        { q: "What if some XML records have missing fields?", a: "Missing fields are safely rendered as empty CSV cells to keep columns aligned." },
+        { q: "Can I open the resulting CSV in Microsoft Excel or Google Sheets?", a: "Yes. Output CSV files are fully compatible with Excel, Sheets, and database tools." }
+      ]
+    },
+    related: ["csv-to-excel", "json-to-typescript", "csv-json-converter"]
+  },
+  {
+    slug: "color-converter",
+    name: "Color Format Converter",
+    category: "utilities",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Color Format Converter — HEX, RGB, HSL & CMYK Tool",
+      description: "Convert color formats between HEX, RGB, HSL, and CMYK with live visual previews and one-click CSS copy in browser memory.",
+      h1: "Free Color Format Converter",
+      intro: "Convert color values seamlessly between HEX, RGB, HSL, CMYK, and CSS variable formats in your web browser.",
+      faq: [
+        { q: "What color formats are supported?", a: "HEX (#RRGGBB), RGB rgb(r,g,b), HSL hsl(h,s%,l%), CMYK cmyk(c%,m%,y%,k%), and CSS Variables." },
+        { q: "Does CMYK conversion match print standards?", a: "Calculated CMYK provides standard mathematical RGB-to-CMYK conversion ideal for digital print previews." },
+        { q: "Can I pick colors using a visual color swatch?", a: "Yes. Click the color swatch input to open your browser's visual color wheel." },
+        { q: "Is any data stored on external servers?", a: "No. All color math runs 100% locally on your machine." }
+      ]
+    },
+    related: ["text-to-binary", "roman-numeral-converter", "number-to-words"]
+  },
+  {
+    slug: "text-to-binary",
+    name: "Text to Binary Converter",
+    category: "developer",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Text to Binary Converter — Free In-Browser Translator",
+      description: "Convert plain text to 8-bit binary code (0s and 1s) or decode binary to text in browser memory. Instant conversion with zero uploads.",
+      h1: "Free Text to Binary Converter",
+      intro: "Convert ASCII and UTF-8 plain text into 8-bit binary code strings (0s and 1s) and decode binary back to plain text directly in your browser.",
+      faq: [
+        { q: "Can it decode binary back into text?", a: "Yes. Paste 8-bit binary strings separated by spaces to decode back to plain text." },
+        { q: "Is my text data private?", a: "Yes. Binary conversion executes 100% locally inside your browser memory." },
+        { q: "Does it support special characters and emojis?", a: "Yes. UTF-8 character codes are converted cleanly into binary byte sequences." },
+        { q: "How are binary bytes formatted?", a: "Bytes are formatted as 8-bit groups separated by single spaces for readability." }
+      ]
+    },
+    related: ["roman-numeral-converter", "number-to-words", "color-converter"]
+  },
+  {
+    slug: "roman-numeral-converter",
+    name: "Roman Numeral Converter",
+    category: "calculators",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Roman Numeral Converter — Convert Numbers & Roman Numerals",
+      description: "Convert Arabic numbers (1-3999) to Roman numerals (e.g. 2024 to MMXXIV) and decode Roman numerals to numbers in browser memory.",
+      h1: "Free Roman Numeral Converter",
+      intro: "Convert standard Arabic numbers (1-3999) to classical Roman numerals and decode Roman numerals back to numbers instantly in your browser.",
+      faq: [
+        { q: "What is the maximum number supported?", a: "Standard Roman notation supports numbers from 1 to 3999." },
+        { q: "Can it convert Roman numerals back to numbers?", a: "Yes. Enter Roman numerals like 'MCMLXXXIV' to get '1984'." },
+        { q: "Are lowercase Roman numerals supported?", a: "Yes. Inputs like 'mmxxiv' automatically normalize to uppercase 'MMXXIV'." },
+        { q: "Is my input sent to any remote server?", a: "No. Conversion calculations happen 100% locally in browser memory." }
+      ]
+    },
+    related: ["number-to-words", "text-to-binary", "color-converter"]
+  },
+  {
+    slug: "number-to-words",
+    name: "Number to Words Converter",
+    category: "utilities",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Number to Words Converter — Free In-Browser English Tool",
+      description: "Convert numeric integers to full English words (e.g. 1250 to 'one thousand two hundred fifty') in browser memory. 100% private.",
+      h1: "Free Number to Words Converter",
+      intro: "Convert numeric digits into full written English words instantly in your web browser. Converting numbers to words is essential when writing financial checks.",
+      faq: [
+        { q: "What range of numbers can be converted?", a: "ClearTrix converts integers from negative trillions up to positive trillions." },
+        { q: "Are commas allowed in input numbers?", a: "Yes. Numbers formatted with or without commas (e.g., 1,000,000 or 1000000) parse correctly." },
+        { q: "Is my financial number data uploaded to a server?", a: "No. Number conversion operates 100% inside local browser memory." },
+        { q: "Does it support negative numbers?", a: "Yes. Negative integers are prefixed with 'negative'." }
+      ]
+    },
+    related: ["roman-numeral-converter", "text-to-binary", "color-converter"]
+  },
 ];
 
 /* Helper Query Functions */

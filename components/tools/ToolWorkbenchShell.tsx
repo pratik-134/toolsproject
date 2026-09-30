@@ -31,6 +31,7 @@ export interface ToolWorkbenchShellProps {
   onDownload?: () => void;
   onReset?: () => void;
   customControls?: React.ReactNode;
+  children?: React.ReactNode;
   resultPreview?: React.ReactNode;
   errorMessage?: string | null;
   isActionDisabled?: boolean;
@@ -56,6 +57,7 @@ export const ToolWorkbenchShell: React.FC<ToolWorkbenchShellProps> = ({
   onDownload,
   onReset,
   customControls,
+  children,
   resultPreview,
   errorMessage: externalError,
   isActionDisabled = false,
@@ -285,7 +287,7 @@ export const ToolWorkbenchShell: React.FC<ToolWorkbenchShellProps> = ({
           )}
 
           {/* Tool Custom Options & Controls Slot */}
-          {customControls && <div className="space-y-4">{customControls}</div>}
+          {(children || customControls) && <div className="space-y-4">{children || customControls}</div>}
 
           {/* Live Progress Bar */}
           {isProcessing && (
