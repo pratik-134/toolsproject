@@ -12,6 +12,7 @@ import { FfmpegMediaEngine } from "@/components/tools/engines/FfmpegMediaEngine"
 import { DataTransformEngine } from "@/components/tools/engines/DataTransformEngine";
 import { TextTransformEngine } from "@/components/tools/engines/TextTransformEngine";
 import { ColorConverterEngine } from "@/components/tools/engines/ColorConverterEngine";
+import { OcrEngine } from "@/components/tools/engines/OcrEngine";
 import { getConverterPreset } from "@/lib/registry/converter-presets";
 
 const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
@@ -45,6 +46,19 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
   "roman-numeral-converter": () => <TextTransformEngine preset={getConverterPreset("roman-numeral-converter")!} />,
   "number-to-words": () => <TextTransformEngine preset={getConverterPreset("number-to-words")!} />,
   "color-converter": () => <ColorConverterEngine preset={getConverterPreset("color-converter")!} />,
+
+  // Wave 3 Converter Tools
+  "image-to-text": () => <OcrEngine preset={getConverterPreset("image-to-text")!} />,
+  "mkv-to-mp4": () => <FfmpegMediaEngine preset={getConverterPreset("mkv-to-mp4")!} />,
+  "avi-to-mp4": () => <FfmpegMediaEngine preset={getConverterPreset("avi-to-mp4")!} />,
+  "flv-to-mp4": () => <FfmpegMediaEngine preset={getConverterPreset("flv-to-mp4")!} />,
+  "ogg-to-mp3": () => <FfmpegMediaEngine preset={getConverterPreset("ogg-to-mp3")!} />,
+  "aac-to-mp3": () => <FfmpegMediaEngine preset={getConverterPreset("aac-to-mp3")!} />,
+  "wma-to-mp3": () => <FfmpegMediaEngine preset={getConverterPreset("wma-to-mp3")!} />,
+  "bmp-to-jpg": () => <CanvasImageEngine preset={getConverterPreset("bmp-to-jpg")!} />,
+  "bmp-to-png": () => <CanvasImageEngine preset={getConverterPreset("bmp-to-png")!} />,
+  "gif-to-png": () => <CanvasImageEngine preset={getConverterPreset("gif-to-png")!} />,
+  "tsv-to-csv": () => <DataTransformEngine preset={getConverterPreset("tsv-to-csv")!} />,
 
   // Pilot Tools
   "json-formatter": dynamic(() => import("@/components/tools/pilot/json-formatter"), {

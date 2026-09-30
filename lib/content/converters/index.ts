@@ -606,10 +606,254 @@ export const CONVERTER_CONTENT_REGISTRY: Record<string, ConverterContent> = {
       { q: "Does it support negative numbers?", a: "Yes. Negative integers are prefixed with 'negative'." }
     ],
     relatedSlugs: ["roman-numeral-converter", "text-to-binary", "color-converter"]
+  },
+
+  // Wave 3: Advanced Media, Image & OCR Converters
+  "image-to-text": {
+    slug: "image-to-text",
+    seoTitle: "Image to Text OCR Converter — Free In-Browser Extractor",
+    metaDescription: "Extract text from PNG, JPG, and WebP images using client-side OCR in browser memory. 100% private with zero server uploads.",
+    intro: "Extract editable text content directly from photos, document scans, screenshots, and graphics using in-browser Optical Character Recognition (OCR). ClearTrix dynamically loads a client-side Tesseract OCR engine to recognize characters in local browser memory without transmitting images to cloud servers.",
+    howTo: [
+      "Select or drop an image file (.png, .jpg, .webp, .bmp) into the OCR workspace.",
+      "Click 'Extract Text from Image with OCR' to begin optical character recognition.",
+      "Review the extracted text preview in the result window.",
+      "Copy text to your clipboard or download as a .txt file."
+    ],
+    whenToUse: "Use when copying text from non-selectable image screenshots, scanned documents, receipts, or signs.",
+    formatNotes: "Analyzes pixel patterns and converts text shapes into UTF-8 plain text string output.",
+    faqs: [
+      { q: "Are my document images uploaded to a cloud OCR server?", a: "No. Tesseract.js runs 100% inside local browser memory sandbox." },
+      { q: "What image formats are supported for OCR?", a: "Supports PNG, JPG, JPEG, WebP, and BMP images." },
+      { q: "How accurate is the text extraction?", a: "Clear, high-contrast images yield over 95% accuracy for standard typed fonts." },
+      { q: "Can I extract text from scanned receipts?", a: "Yes. High-resolution scanned receipts convert to plain text easily." }
+    ],
+    relatedSlugs: ["pdf-to-text", "png-to-jpg", "jpg-to-png"]
+  },
+
+  "mkv-to-mp4": {
+    slug: "mkv-to-mp4",
+    seoTitle: "MKV to MP4 Converter — Free In-Browser Video Tool",
+    metaDescription: "Convert Matroska MKV videos to universal MP4 format in browser memory. Stream remuxing with zero server uploads.",
+    intro: "Convert Matroska `.mkv` video files to universally compatible `.mp4` format directly in your browser. MKV containers are popular for high-definition video rips, but many TVs, mobile devices, and media players refuse to play MKV files. ClearTrix remuxes video and audio streams into standard MP4 containers in local browser memory.",
+    howTo: [
+      "Select or drop your MKV video file into the converter dropzone.",
+      "Review video container metadata and audio track details.",
+      "Click 'Convert MKV Video to MP4' to remux the video stream.",
+      "Download your converted MP4 video file."
+    ],
+    whenToUse: "Ideal for converting HD movie rips and TV recordings for playback on smart TVs, iPads, and Android smartphones.",
+    formatNotes: "Remuxes H.264/H.265 video streams and AAC audio tracks into standard MP4 container wrappers.",
+    faqs: [
+      { q: "Does MKV to MP4 conversion reduce video quality?", a: "No. Stream remuxing preserves original video pixel quality while updating container wrappers." },
+      { q: "Is my video file uploaded to an external server?", a: "No. All video processing takes place 100% locally in browser memory." },
+      { q: "Can I convert large MKV video files?", a: "Yes. In-browser stream remuxing handles multi-megabyte video files smoothly." },
+      { q: "Does it convert audio tracks too?", a: "Yes. Primary audio streams are remuxed into AAC audio compatible with MP4." }
+    ],
+    relatedSlugs: ["avi-to-mp4", "webm-to-mp4", "mp4-to-mp3"]
+  },
+
+  "avi-to-mp4": {
+    slug: "avi-to-mp4",
+    seoTitle: "AVI to MP4 Converter — Free In-Browser Video Tool",
+    metaDescription: "Convert legacy AVI video files to modern MP4 format in browser memory. Stream remuxing with zero server uploads.",
+    intro: "Convert legacy Audio Video Interleave `.avi` video clips into universally supported `.mp4` format in your web browser. AVI was the standard format for digital video in the 2000s, but modern smartphones, web applications, and streaming platforms require MP4. ClearTrix converts AVI clips in local memory with zero server uploads.",
+    howTo: [
+      "Upload or drop your AVI video file into the converter workspace.",
+      "Verify video file size and format details.",
+      "Click 'Convert AVI Video to MP4' to remux the video stream.",
+      "Download your converted MP4 video clip."
+    ],
+    whenToUse: "Use AVI to MP4 when digitizing old video camera archives, home videos, or legacy AVI media clips for modern device playback.",
+    formatNotes: "Remuxes MPEG-4/H.264 video streams from AVI container wrappers into modern MP4 container wrappers.",
+    faqs: [
+      { q: "Why convert AVI to MP4?", a: "MP4 provides 100% playback compatibility across modern smartphones, tablets, and web browsers." },
+      { q: "Are my family videos uploaded to a cloud server?", a: "No. Processing runs 100% locally inside your web browser sandbox." },
+      { q: "Will video playback be smooth?", a: "Yes. MP4 stream encoding ensures stutter-free video playback." },
+      { q: "Can I extract audio from AVI files?", a: "Yes. You can also use our MP4 to MP3 or audio converter tools." }
+    ],
+    relatedSlugs: ["mkv-to-mp4", "webm-to-mp4", "mp4-to-mp3"]
+  },
+
+  "flv-to-mp4": {
+    slug: "flv-to-mp4",
+    seoTitle: "FLV to MP4 Converter — Free Flash Video Converter",
+    metaDescription: "Convert Flash FLV videos to universal MP4 format in browser memory. 100% private in-browser remuxing with zero uploads.",
+    intro: "Convert legacy Flash `.flv` videos to modern `.mp4` video files directly in your web browser. Adobe Flash has been deprecated, and modern web browsers no longer play FLV video files natively. ClearTrix remuxes FLV video streams into standard MP4 containers in local browser memory so you can watch your video archives anywhere.",
+    howTo: [
+      "Select or drop your FLV video file into the processing dropzone.",
+      "Review file format metadata in the workspace.",
+      "Click 'Convert Flash FLV to MP4' to begin stream conversion.",
+      "Download your updated MP4 video file."
+    ],
+    whenToUse: "Essential for converting legacy web videos, archived animation clips, and Flash camera recordings.",
+    formatNotes: "Remuxes H.264 video streams and AAC/MP3 audio tracks from FLV containers into standard MP4 containers.",
+    faqs: [
+      { q: "Can modern browsers play FLV video files directly?", a: "No. Flash FLV is unsupported in modern browsers, making conversion to MP4 necessary." },
+      { q: "Is my Flash video uploaded to a remote server?", a: "No. Conversion happens 100% inside local browser memory." },
+      { q: "Will the output MP4 play on mobile devices?", a: "Yes. Output MP4 files play smoothly on iOS, Android, and Windows." },
+      { q: "Does it preserve video quality?", a: "Yes. Stream remuxing preserves original video frames without degradation." }
+    ],
+    relatedSlugs: ["mkv-to-mp4", "avi-to-mp4", "mov-to-mp4"]
+  },
+
+  "ogg-to-mp3": {
+    slug: "ogg-to-mp3",
+    seoTitle: "OGG to MP3 Converter — Free In-Browser Audio Tool",
+    metaDescription: "Convert OGG Vorbis audio files to standard MP3 format in browser memory. 192kbps encoding with zero server uploads.",
+    intro: "Convert OGG Vorbis audio files into standard MP3 format in your web browser. OGG Vorbis is widely used in gaming and open-source audio, but standard MP3 is required for hardware car audio players and legacy sound gear. ClearTrix encodes OGG audio tracks into crisp 192kbps MP3 files in local memory.",
+    howTo: [
+      "Upload or drop your OGG audio file into the workspace.",
+      "Review file metadata and bitrate options.",
+      "Click 'Convert OGG Audio to MP3' to process the audio track.",
+      "Download your converted MP3 file instantly."
+    ],
+    whenToUse: "Ideal for converting game audio assets, podcast recordings, and web audio streams into standard MP3 files.",
+    formatNotes: "Encodes Vorbis audio streams into standard 192kbps MP3 audio format in browser memory.",
+    faqs: [
+      { q: "Why convert OGG to MP3?", a: "MP3 provides universal compatibility with hardware media players and legacy audio systems." },
+      { q: "Is my audio track uploaded to an external server?", a: "No. Encoding runs 100% in local browser memory." },
+      { q: "What audio bitrate is generated?", a: "Extracted MP3 files are encoded at crisp 192kbps stereo audio bitrates." },
+      { q: "Can I convert multiple OGG files?", a: "Yes. Select files to convert them cleanly in browser memory." }
+    ],
+    relatedSlugs: ["aac-to-mp3", "wma-to-mp3", "wav-to-mp3"]
+  },
+
+  "aac-to-mp3": {
+    slug: "aac-to-mp3",
+    seoTitle: "AAC to MP3 Converter — Free In-Browser Audio Tool",
+    metaDescription: "Convert raw AAC audio streams to universal MP3 format in browser memory. High-quality encoding with zero server uploads.",
+    intro: "Convert raw Advanced Audio Coding `.aac` files into standard `.mp3` format directly in your web browser. AAC is a popular audio codec for web streaming, but legacy MP3 players often refuse to open raw AAC files. ClearTrix encodes AAC streams into 192kbps MP3 audio in local memory with zero cloud file storage.",
+    howTo: [
+      "Select or drop your AAC audio file into the converter dropzone.",
+      "Review input file size and details.",
+      "Click 'Convert AAC Audio to MP3' to process the audio stream.",
+      "Download your converted MP3 audio track."
+    ],
+    whenToUse: "Use AAC to MP3 when transferring web audio streams or voice recordings to legacy car stereos and hardware players.",
+    formatNotes: "Encodes raw AAC audio bitstreams into standard 192kbps MP3 audio format.",
+    faqs: [
+      { q: "Will converting AAC to MP3 preserve clear audio?", a: "Yes. High-quality 192kbps MP3 encoding preserves audio clarity." },
+      { q: "Is my audio file uploaded to a remote server?", a: "No. All audio encoding happens 100% inside local browser memory." },
+      { q: "Does this tool work on mobile devices?", a: "Yes. ClearTrix runs in mobile Safari and Chrome browsers." },
+      { q: "Can I convert M4A AAC files?", a: "Yes. Use our M4A to MP3 tool for Apple M4A container files." }
+    ],
+    relatedSlugs: ["m4a-to-mp3", "ogg-to-mp3", "wav-to-mp3"]
+  },
+
+  "wma-to-mp3": {
+    slug: "wma-to-mp3",
+    seoTitle: "WMA to MP3 Converter — Free Windows Media Audio Converter",
+    metaDescription: "Convert Windows Media Audio WMA files to universal MP3 in browser memory. 192kbps encoding with zero server uploads.",
+    intro: "Convert Windows Media Audio `.wma` music files into universally supported `.mp3` format directly in your browser. WMA was Microsoft's default audio format for Windows Media Player, but Mac, iOS, and Android devices cannot play WMA natively. ClearTrix converts WMA files in local browser memory with complete privacy.",
+    howTo: [
+      "Drag & drop your WMA audio file into the processing workspace.",
+      "Review file metadata and size.",
+      "Click 'Convert WMA Audio to MP3' to encode the audio stream.",
+      "Download your converted MP3 file."
+    ],
+    whenToUse: "Ideal for converting archived Windows Media Player music libraries for playback on iPhones, Macs, and Android devices.",
+    formatNotes: "Encodes WMA Audio 9/10 streams into standard 192kbps MP3 audio format.",
+    faqs: [
+      { q: "Why convert WMA to MP3?", a: "WMA is unsupported on Apple macOS, iOS, and non-Windows mobile platforms." },
+      { q: "Is my music collection uploaded to a server?", a: "No. WMA audio decoding and MP3 encoding run 100% locally." },
+      { q: "What audio bitrate is output?", a: "Outputs high-fidelity 192kbps MP3 audio streams." },
+      { q: "Can I convert large WMA voice recordings?", a: "Yes. In-browser audio encoding handles long voice recordings smoothly." }
+    ],
+    relatedSlugs: ["ogg-to-mp3", "aac-to-mp3", "wav-to-mp3"]
+  },
+
+  "bmp-to-jpg": {
+    slug: "bmp-to-jpg",
+    seoTitle: "BMP to JPG Converter — Free In-Browser Bitmap Tool",
+    metaDescription: "Convert uncompressed BMP bitmap images to compact JPG format in browser memory. Reduce file size up to 90% with zero server uploads.",
+    intro: "Convert uncompressed Windows Bitmap `.bmp` graphics into lightweight `.jpg` photos directly in your web browser. BMP files carry uncompressed pixel data resulting in huge file sizes. Converting to JPEG reduces file size by up to 90%, making photos faster to email and web upload. ClearTrix processes your BMP graphics in local browser memory.",
+    howTo: [
+      "Select or drop your BMP bitmap images into the dropzone.",
+      "Set JPEG output compression quality slider (default 92%).",
+      "Click 'Convert BMP Bitmap to JPG' to process the graphics.",
+      "Download your optimized JPEG image."
+    ],
+    whenToUse: "Use BMP to JPG when shrinking screenshots, legacy paint graphics, or medical imaging BMPs for web sharing.",
+    formatNotes: "Applies JPEG compression and replaces any missing background pixels with clean white fill.",
+    faqs: [
+      { q: "How much does BMP to JPG shrink file size?", a: "Converting uncompressed BMPs to JPG typically shrinks file size by 80% to 90%." },
+      { q: "Is my image uploaded to any cloud server?", a: "No. Image rendering occurs 100% in local browser memory sandbox." },
+      { q: "Can I convert multiple BMP images at once?", a: "Yes. Drag and drop multiple BMP files to process the entire batch." },
+      { q: "Will the converted photo look sharp?", a: "Yes. High JPEG quality settings ensure sharp visual clarity." }
+    ],
+    relatedSlugs: ["bmp-to-png", "png-to-jpg", "jpg-to-png"]
+  },
+
+  "bmp-to-png": {
+    slug: "bmp-to-png",
+    seoTitle: "BMP to PNG Converter — Free In-Browser Bitmap Tool",
+    metaDescription: "Convert BMP bitmap images to lossless PNG graphics in browser memory. Uncompromised clarity with zero server uploads.",
+    intro: "Convert Windows Bitmap `.bmp` files into lossless `.png` graphics directly inside your web browser. PNG uses lossless compression to reduce BMP file sizes dramatically without sacrificing a single pixel of visual clarity. ClearTrix renders your BMP files using HTML5 Canvas in local browser memory with zero network uploads.",
+    howTo: [
+      "Drag & drop your BMP image files into the processing workspace.",
+      "Verify file list and preview details.",
+      "Click 'Convert BMP Bitmap to PNG' to render the graphic.",
+      "Download your lossless PNG image."
+    ],
+    whenToUse: "Ideal for converting diagrams, screenshots, and illustrations where crisp pixel lines and zero loss are required.",
+    formatNotes: "Renders BMP pixel arrays into lossless PNG containers inside local browser memory.",
+    faqs: [
+      { q: "Is PNG smaller than BMP?", a: "Yes. PNG uses lossless DEFLATE compression, making files significantly smaller than uncompressed BMPs." },
+      { q: "Is my graphic sent to an external server?", a: "No. Conversion processing happens 100% inside local browser memory." },
+      { q: "Will any visual quality be lost?", a: "No. PNG is a 100% lossless image format." },
+      { q: "Can I convert multiple BMP graphics?", a: "Yes. Batch conversion processes multiple BMP files in parallel." }
+    ],
+    relatedSlugs: ["bmp-to-jpg", "jpg-to-png", "webp-to-png"]
+  },
+
+  "gif-to-png": {
+    slug: "gif-to-png",
+    seoTitle: "GIF to PNG Converter — Free In-Browser Image Tool",
+    metaDescription: "Convert GIF graphics to clean static PNG format in browser memory. Full transparency support with zero server uploads.",
+    intro: "Convert GIF images into clean, high-resolution PNG graphics in your web browser. Converting static or single-frame GIFs to PNG improves color accuracy and provides modern transparency support for web and graphic design. ClearTrix converts your GIF files in local browser memory without uploading data.",
+    howTo: [
+      "Select or drop your GIF image into the converter dropzone.",
+      "Review image dimensions and transparency settings.",
+      "Click 'Convert GIF to Static PNG' to render the image.",
+      "Download your high-resolution PNG graphic."
+    ],
+    whenToUse: "Use when converting static GIF logos, web icons, or banner graphics to modern PNG format.",
+    formatNotes: "Renders the primary GIF frame into full 24-bit PNG format with alpha channel transparency.",
+    faqs: [
+      { q: "Does converting GIF to PNG preserve transparent backgrounds?", a: "Yes. Alpha transparency is preserved cleanly in the output PNG file." },
+      { q: "What happens to animated GIFs?", a: "The first frame of the animation is rendered into a high-resolution static PNG graphic." },
+      { q: "Is my graphic uploaded to a server?", a: "No. Processing executes 100% in local browser memory." },
+      { q: "Does PNG support more colors than GIF?", a: "Yes. PNG supports millions of colors compared to GIF's 256 color limit." }
+    ],
+    relatedSlugs: ["gif-to-mp4", "png-to-jpg", "svg-to-png"]
+  },
+
+  "tsv-to-csv": {
+    slug: "tsv-to-csv",
+    seoTitle: "TSV to CSV Converter — Free In-Browser Data Transformer",
+    metaDescription: "Convert tab-separated TSV files to comma-separated CSV spreadsheets in browser memory. 100% private with zero server uploads.",
+    intro: "Convert Tab-Separated Values `.tsv` data files into standard Comma-Separated Values `.csv` spreadsheet files directly in your web browser. TSV files are commonly generated by database exports and scientific instruments, but standard CSV files are required by Excel, Google Sheets, and CRM tools. ClearTrix converts your data in local memory with complete secrecy.",
+    howTo: [
+      "Upload your TSV file or paste tab-delimited text into the workspace.",
+      "Click 'Convert TSV to CSV' to transform data formatting.",
+      "Review the parsed CSV preview in the result window.",
+      "Download your `.csv` file directly to your device."
+    ],
+    whenToUse: "Essential for data analysts converting TSV database dumps, bioinformatics data, or log files for spreadsheet analysis.",
+    formatNotes: "Replaces tab delimiters with commas and applies standard CSV double-quote escaping for values containing commas or newlines.",
+    faqs: [
+      { q: "How are fields with existing commas handled?", a: "Fields containing commas are wrapped in double quotes according to RFC 4180 CSV standards." },
+      { q: "Is my dataset uploaded to any cloud server?", a: "No. Data transformation runs 100% in local browser memory sandbox." },
+      { q: "Can I open the output CSV in Microsoft Excel?", a: "Yes. Output CSV files open smoothly in Excel, Google Sheets, and Apple Numbers." },
+      { q: "Can I paste raw TSV text directly?", a: "Yes. You can paste tabbed text directly into the text editor." }
+    ],
+    relatedSlugs: ["csv-to-excel", "xml-to-csv", "csv-json-converter"]
   }
 };
 
 export function getConverterContent(slug: string): ConverterContent | undefined {
   return CONVERTER_CONTENT_REGISTRY[slug];
 }
+
 

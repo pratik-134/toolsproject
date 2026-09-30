@@ -4352,6 +4352,242 @@ export const TOOLS: ToolDefinition[] = [
     },
     related: ["roman-numeral-converter", "text-to-binary", "color-converter"]
   },
+
+  /* =========================================================================
+     WAVE 3 CONVERTER TOOLS (11 Advanced & Specialty Gaps)
+     ========================================================================= */
+  {
+    slug: "image-to-text",
+    name: "Image to Text OCR Converter",
+    category: "image",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    heavyDeps: ["tesseract.js"],
+    seo: {
+      title: "Image to Text OCR Converter — Free In-Browser Extractor",
+      description: "Extract text from PNG, JPG, and WebP images using client-side OCR in browser memory. 100% private with zero server uploads.",
+      h1: "Free Image to Text OCR Converter",
+      intro: "Extract editable text content directly from photos, document scans, screenshots, and graphics using in-browser Optical Character Recognition (OCR).",
+      faq: [
+        { q: "Are my document images uploaded to a cloud OCR server?", a: "No. Tesseract.js runs 100% inside local browser memory sandbox." },
+        { q: "What image formats are supported for OCR?", a: "Supports PNG, JPG, JPEG, WebP, and BMP images." },
+        { q: "How accurate is the text extraction?", a: "Clear, high-contrast images yield over 95% accuracy for standard typed fonts." },
+        { q: "Can I extract text from scanned receipts?", a: "Yes. High-resolution scanned receipts convert to plain text easily." }
+      ]
+    },
+    related: ["pdf-to-text", "png-to-jpg", "jpg-to-png"]
+  },
+  {
+    slug: "mkv-to-mp4",
+    name: "MKV to MP4 Converter",
+    category: "video",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "MKV to MP4 Converter — Free In-Browser Video Tool",
+      description: "Convert Matroska MKV videos to universal MP4 format in browser memory. Stream remuxing with zero server uploads.",
+      h1: "Free MKV to MP4 Converter",
+      intro: "Convert Matroska .mkv video files to universally compatible .mp4 format directly in your browser.",
+      faq: [
+        { q: "Does MKV to MP4 conversion reduce video quality?", a: "No. Stream remuxing preserves original video pixel quality while updating container wrappers." },
+        { q: "Is my video file uploaded to an external server?", a: "No. All video processing takes place 100% locally in browser memory." },
+        { q: "Can I convert large MKV video files?", a: "Yes. In-browser stream remuxing handles multi-megabyte video files smoothly." },
+        { q: "Does it convert audio tracks too?", a: "Yes. Primary audio streams are remuxed into AAC audio compatible with MP4." }
+      ]
+    },
+    related: ["avi-to-mp4", "webm-to-mp4", "mp4-to-mp3"]
+  },
+  {
+    slug: "avi-to-mp4",
+    name: "AVI to MP4 Converter",
+    category: "video",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "AVI to MP4 Converter — Free In-Browser Video Tool",
+      description: "Convert legacy AVI video files to modern MP4 format in browser memory. Stream remuxing with zero server uploads.",
+      h1: "Free AVI to MP4 Converter",
+      intro: "Convert legacy Audio Video Interleave .avi video clips into universally supported .mp4 format in your web browser.",
+      faq: [
+        { q: "Why convert AVI to MP4?", a: "MP4 provides 100% playback compatibility across modern smartphones, tablets, and web browsers." },
+        { q: "Are my family videos uploaded to a cloud server?", a: "No. Processing runs 100% locally inside your web browser sandbox." },
+        { q: "Will video playback be smooth?", a: "Yes. MP4 stream encoding ensures stutter-free video playback." },
+        { q: "Can I extract audio from AVI files?", a: "Yes. You can also use our MP4 to MP3 or audio converter tools." }
+      ]
+    },
+    related: ["mkv-to-mp4", "webm-to-mp4", "mp4-to-mp3"]
+  },
+  {
+    slug: "flv-to-mp4",
+    name: "FLV to MP4 Converter",
+    category: "video",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "FLV to MP4 Converter — Free Flash Video Converter",
+      description: "Convert Flash FLV videos to universal MP4 format in browser memory. 100% private in-browser remuxing with zero uploads.",
+      h1: "Free FLV to MP4 Converter",
+      intro: "Convert legacy Flash .flv videos to modern .mp4 video files directly in your web browser.",
+      faq: [
+        { q: "Can modern browsers play FLV video files directly?", a: "No. Flash FLV is unsupported in modern browsers, making conversion to MP4 necessary." },
+        { q: "Is my Flash video uploaded to a remote server?", a: "No. Conversion happens 100% inside local browser memory." },
+        { q: "Will the output MP4 play on mobile devices?", a: "Yes. Output MP4 files play smoothly on iOS, Android, and Windows." },
+        { q: "Does it preserve video quality?", a: "Yes. Stream remuxing preserves original video frames without degradation." }
+      ]
+    },
+    related: ["mkv-to-mp4", "avi-to-mp4", "mov-to-mp4"]
+  },
+  {
+    slug: "ogg-to-mp3",
+    name: "OGG to MP3 Converter",
+    category: "audio",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "OGG to MP3 Converter — Free In-Browser Audio Tool",
+      description: "Convert OGG Vorbis audio files to standard MP3 format in browser memory. 192kbps encoding with zero server uploads.",
+      h1: "Free OGG to MP3 Converter",
+      intro: "Convert OGG Vorbis audio files into standard MP3 format in your web browser.",
+      faq: [
+        { q: "Why convert OGG to MP3?", a: "MP3 provides universal compatibility with hardware media players and legacy audio systems." },
+        { q: "Is my audio track uploaded to an external server?", a: "No. Encoding runs 100% in local browser memory." },
+        { q: "What audio bitrate is generated?", a: "Extracted MP3 files are encoded at crisp 192kbps stereo audio bitrates." },
+        { q: "Can I convert multiple OGG files?", a: "Yes. Select files to convert them cleanly in browser memory." }
+      ]
+    },
+    related: ["aac-to-mp3", "wma-to-mp3", "wav-to-mp3"]
+  },
+  {
+    slug: "aac-to-mp3",
+    name: "AAC to MP3 Converter",
+    category: "audio",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "AAC to MP3 Converter — Free In-Browser Audio Tool",
+      description: "Convert raw AAC audio streams to universal MP3 format in browser memory. High-quality encoding with zero server uploads.",
+      h1: "Free AAC to MP3 Converter",
+      intro: "Convert raw Advanced Audio Coding .aac files into standard .mp3 format directly in your web browser.",
+      faq: [
+        { q: "Will converting AAC to MP3 preserve clear audio?", a: "Yes. High-quality 192kbps MP3 encoding preserves audio clarity." },
+        { q: "Is my audio file uploaded to a remote server?", a: "No. All audio encoding happens 100% inside local browser memory." },
+        { q: "Does this tool work on mobile devices?", a: "Yes. ClearTrix runs in mobile Safari and Chrome browsers." },
+        { q: "Can I convert M4A AAC files?", a: "Yes. Use our M4A to MP3 tool for Apple M4A container files." }
+      ]
+    },
+    related: ["m4a-to-mp3", "ogg-to-mp3", "wav-to-mp3"]
+  },
+  {
+    slug: "wma-to-mp3",
+    name: "WMA to MP3 Converter",
+    category: "audio",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "WMA to MP3 Converter — Free Windows Media Audio Converter",
+      description: "Convert Windows Media Audio WMA files to universal MP3 in browser memory. 192kbps encoding with zero server uploads.",
+      h1: "Free WMA to MP3 Converter",
+      intro: "Convert Windows Media Audio .wma music files into universally supported .mp3 format directly in your browser.",
+      faq: [
+        { q: "Why convert WMA to MP3?", a: "WMA is unsupported on Apple macOS, iOS, and non-Windows mobile platforms." },
+        { q: "Is my music collection uploaded to a server?", a: "No. WMA audio decoding and MP3 encoding run 100% locally." },
+        { q: "What audio bitrate is output?", a: "Outputs high-fidelity 192kbps MP3 audio streams." },
+        { q: "Can I convert large WMA voice recordings?", a: "Yes. In-browser audio encoding handles long voice recordings smoothly." }
+      ]
+    },
+    related: ["ogg-to-mp3", "aac-to-mp3", "wav-to-mp3"]
+  },
+  {
+    slug: "bmp-to-jpg",
+    name: "BMP to JPG Converter",
+    category: "image",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "BMP to JPG Converter — Free In-Browser Bitmap Tool",
+      description: "Convert uncompressed BMP bitmap images to compact JPG format in browser memory. Reduce file size up to 90% with zero server uploads.",
+      h1: "Free BMP to JPG Converter",
+      intro: "Convert uncompressed Windows Bitmap .bmp graphics into lightweight .jpg photos directly in your web browser.",
+      faq: [
+        { q: "How much does BMP to JPG shrink file size?", a: "Converting uncompressed BMPs to JPG typically shrinks file size by 80% to 90%." },
+        { q: "Is my image uploaded to any cloud server?", a: "No. Image rendering occurs 100% in local browser memory sandbox." },
+        { q: "Can I convert multiple BMP images at once?", a: "Yes. Drag and drop multiple BMP files to process the entire batch." },
+        { q: "Will the converted photo look sharp?", a: "Yes. High JPEG quality settings ensure sharp visual clarity." }
+      ]
+    },
+    related: ["bmp-to-png", "png-to-jpg", "jpg-to-png"]
+  },
+  {
+    slug: "bmp-to-png",
+    name: "BMP to PNG Converter",
+    category: "image",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "BMP to PNG Converter — Free In-Browser Bitmap Tool",
+      description: "Convert BMP bitmap images to lossless PNG graphics in browser memory. Uncompromised clarity with zero server uploads.",
+      h1: "Free BMP to PNG Converter",
+      intro: "Convert Windows Bitmap .bmp files into lossless .png graphics directly inside your web browser.",
+      faq: [
+        { q: "Is PNG smaller than BMP?", a: "Yes. PNG uses lossless DEFLATE compression, making files significantly smaller than uncompressed BMPs." },
+        { q: "Is my graphic sent to an external server?", a: "No. Conversion processing happens 100% inside local browser memory." },
+        { q: "Will any visual quality be lost?", a: "No. PNG is a 100% lossless image format." },
+        { q: "Can I convert multiple BMP graphics?", a: "Yes. Batch conversion processes multiple BMP files in parallel." }
+      ]
+    },
+    related: ["bmp-to-jpg", "jpg-to-png", "webp-to-png"]
+  },
+  {
+    slug: "gif-to-png",
+    name: "GIF to PNG Converter",
+    category: "image",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "GIF to PNG Converter — Free In-Browser Image Tool",
+      description: "Convert GIF graphics to clean static PNG format in browser memory. Full transparency support with zero server uploads.",
+      h1: "Free GIF to PNG Converter",
+      intro: "Convert GIF images into clean, high-resolution PNG graphics in your web browser.",
+      faq: [
+        { q: "Does converting GIF to PNG preserve transparent backgrounds?", a: "Yes. Alpha transparency is preserved cleanly in the output PNG file." },
+        { q: "What happens to animated GIFs?", a: "The first frame of the animation is rendered into a high-resolution static PNG graphic." },
+        { q: "Is my graphic uploaded to a server?", a: "No. Processing executes 100% in local browser memory." },
+        { q: "Does PNG support more colors than GIF?", a: "Yes. PNG supports millions of colors compared to GIF's 256 color limit." }
+      ]
+    },
+    related: ["gif-to-mp4", "png-to-jpg", "svg-to-png"]
+  },
+  {
+    slug: "tsv-to-csv",
+    name: "TSV to CSV Converter",
+    category: "developer",
+    phase: 2,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "TSV to CSV Converter — Free In-Browser Data Transformer",
+      description: "Convert tab-separated TSV files to comma-separated CSV spreadsheets in browser memory. 100% private with zero server uploads.",
+      h1: "Free TSV to CSV Converter",
+      intro: "Convert Tab-Separated Values .tsv data files into standard Comma-Separated Values .csv spreadsheet files directly in your web browser.",
+      faq: [
+        { q: "How are fields with existing commas handled?", a: "Fields containing commas are wrapped in double quotes according to RFC 4180 CSV standards." },
+        { q: "Is my dataset uploaded to any cloud server?", a: "No. Data transformation runs 100% in local browser memory sandbox." },
+        { q: "Can I open the output CSV in Microsoft Excel?", a: "Yes. Output CSV files open smoothly in Excel, Google Sheets, and Apple Numbers." },
+        { q: "Can I paste raw TSV text directly?", a: "Yes. You can paste tabbed text directly into the text editor." }
+      ]
+    },
+    related: ["csv-to-excel", "xml-to-csv", "csv-json-converter"]
+  },
 ];
 
 /* Helper Query Functions */
