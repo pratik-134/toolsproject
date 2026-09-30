@@ -9,7 +9,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Merge, split, compress, encrypt, redact, and convert PDFs and office documents 100% locally in your browser sandbox.",
     iconName: "FileText",
-    expectedToolCount: 28,
+    expectedToolCount: 31,
     colorKey: "pdf",
   },
   image: {
@@ -19,7 +19,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Crop, convert, resize, compress, retouch, remove EXIF metadata, and generate app favicons with zero server uploads.",
     iconName: "Image",
-    expectedToolCount: 18,
+    expectedToolCount: 22,
     colorKey: "image",
   },
   security: {
@@ -29,9 +29,10 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Client-side file locker encryption (AES-256), metadata scrubbing, steganography, and privacy verification utilities.",
     iconName: "ShieldCheck",
-    expectedToolCount: 8,
+    expectedToolCount: 4,
     colorKey: "security",
-  },  codes: {
+  },
+  codes: {
     id: "codes",
     name: "QR & Barcode Utilities",
     shortName: "Codes & QR",
@@ -48,7 +49,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Record desktop, windows, and webcam; trim, crop, compress, and transcode video without data ever leaving your browser.",
     iconName: "Video",
-    expectedToolCount: 14,
+    expectedToolCount: 7,
     colorKey: "image",
   },
   audio: {
@@ -58,7 +59,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Transcode audio, trim waveforms, record voice memos, boost volume, and edit ID3 tags in your browser memory.",
     iconName: "Mic",
-    expectedToolCount: 12,
+    expectedToolCount: 6,
     colorKey: "image",
   },
   builders: {
@@ -68,7 +69,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Craft ATS-friendly resumes, professional invoices, proposals, certificates, and cover letters with real-time vector preview.",
     iconName: "Layers",
-    expectedToolCount: 21,
+    expectedToolCount: 1,
     colorKey: "document",
   },
   developer: {
@@ -78,7 +79,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Format, validate, beautify, and convert JSON, XML, YAML, SQL, regex, Base64, and code diffs with complete local secrecy.",
     iconName: "Code2",
-    expectedToolCount: 17,
+    expectedToolCount: 27,
     colorKey: "utility",
   },
   utilities: {
@@ -88,7 +89,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Word counter, case converter, password generator, checksum verifier, unit converter, and duplicate line cleaner.",
     iconName: "Wrench",
-    expectedToolCount: 10,
+    expectedToolCount: 13,
     colorKey: "utility",
   },
   calculators: {
@@ -98,7 +99,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Mortgage amortization, compound interest, ROI, BMI, calorie split, date math, subnetting, and unit converters.",
     iconName: "Calculator",
-    expectedToolCount: 39,
+    expectedToolCount: 33,
     colorKey: "utility",
   },
 };

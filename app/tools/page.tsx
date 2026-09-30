@@ -77,7 +77,7 @@ export default function ToolsHubPage() {
               Browse by Category
             </h2>
             <span className="text-xs font-semibold text-slate-500 font-mono">
-              11 Categories
+              {CATEGORY_LIST.length} Categories
             </span>
           </div>
 
@@ -112,7 +112,7 @@ export default function ToolsHubPage() {
                           color: theme.primary,
                         }}
                       >
-                        {cat.expectedToolCount} tools
+                        {catTools.length} {catTools.length === 1 ? "tool" : "tools"}
                       </span>
                     </div>
 
@@ -130,9 +130,7 @@ export default function ToolsHubPage() {
                     style={{ color: theme.primary }}
                   >
                     <span>
-                      {catTools.filter((t) => t.status === "live").length > 0
-                        ? `${catTools.filter((t) => t.status === "live").length} Live Now`
-                        : "Phase Pipeline"}
+                      {catTools.length > 0 ? `${catTools.length} Live Now` : "Phase Pipeline"}
                     </span>
                     <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" strokeWidth={1.75} />
                   </div>

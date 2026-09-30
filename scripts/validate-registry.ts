@@ -96,6 +96,15 @@ redirects.forEach((r) => {
   }
 });
 
+// 8. Category Tool Count Synchronization
+Object.keys(CATEGORIES).forEach((catId) => {
+  const catDef = CATEGORIES[catId as keyof typeof CATEGORIES];
+  const actualCount = TOOLS.filter((t) => t.category === catId).length;
+  if (catDef.expectedToolCount !== actualCount) {
+    reportError(`Category "${catId}" expectedToolCount (${catDef.expectedToolCount}) does not match actual live tools count (${actualCount})!`);
+  }
+});
+
 if (errorsCount > 0) {
   console.error(`\n💥 Registry validation FAILED with ${errorsCount} error(s).`);
   process.exit(1);
