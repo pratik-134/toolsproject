@@ -2,8 +2,32 @@
 
 import React from "react";
 import dynamic from "next/dynamic";
+import { CanvasImageEngine } from "@/components/tools/engines/CanvasImageEngine";
+import { ImagesToPdfEngine } from "@/components/tools/engines/ImagesToPdfEngine";
+import { PdfImageEngine } from "@/components/tools/engines/PdfImageEngine";
+import { PdfTextEngine } from "@/components/tools/engines/PdfTextEngine";
+import { HeicEngine } from "@/components/tools/engines/HeicEngine";
+import { IcoEngine } from "@/components/tools/engines/IcoEngine";
+import { FfmpegMediaEngine } from "@/components/tools/engines/FfmpegMediaEngine";
+import { getConverterPreset } from "@/lib/registry/converter-presets";
 
 const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
+  // Wave 1 Converter Tools
+  "webp-to-png": () => <CanvasImageEngine preset={getConverterPreset("webp-to-png")!} />,
+  "webp-to-jpg": () => <CanvasImageEngine preset={getConverterPreset("webp-to-jpg")!} />,
+  "png-to-jpg": () => <CanvasImageEngine preset={getConverterPreset("png-to-jpg")!} />,
+  "jpg-to-png": () => <CanvasImageEngine preset={getConverterPreset("jpg-to-png")!} />,
+  "svg-to-png": () => <CanvasImageEngine preset={getConverterPreset("svg-to-png")!} />,
+  "image-to-ico": () => <IcoEngine preset={getConverterPreset("image-to-ico")!} />,
+  "heic-to-jpg": () => <HeicEngine preset={getConverterPreset("heic-to-jpg")!} />,
+  "jpg-to-pdf": () => <ImagesToPdfEngine preset={getConverterPreset("jpg-to-pdf")!} />,
+  "pdf-to-jpg": () => <PdfImageEngine preset={getConverterPreset("pdf-to-jpg")!} />,
+  "pdf-to-png": () => <PdfImageEngine preset={getConverterPreset("pdf-to-png")!} />,
+  "pdf-to-text": () => <PdfTextEngine preset={getConverterPreset("pdf-to-text")!} />,
+  "mp4-to-mp3": () => <FfmpegMediaEngine preset={getConverterPreset("mp4-to-mp3")!} />,
+  "mov-to-mp4": () => <FfmpegMediaEngine preset={getConverterPreset("mov-to-mp4")!} />,
+  "wav-to-mp3": () => <FfmpegMediaEngine preset={getConverterPreset("wav-to-mp3")!} />,
+
   // Pilot Tools
   "json-formatter": dynamic(() => import("@/components/tools/pilot/json-formatter"), {
     ssr: false,
