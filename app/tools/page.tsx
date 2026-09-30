@@ -43,7 +43,7 @@ export default function ToolsHubPage() {
           </div>
         </section>
 
-        {/* Categories Grid (Soft-Tech Editorial Bento Layout) */}
+        {/* Categories Grid (Clean Soft-Tech Grid Layout) */}
         <section className="max-w-container mx-auto px-4 sm:px-6 pt-10">
           <div className="flex items-center justify-between mb-6">
             <div>
@@ -60,63 +60,52 @@ export default function ToolsHubPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {CATEGORY_LIST.map((cat, idx) => {
+            {CATEGORY_LIST.map((cat) => {
               const IconComp = CATEGORY_ICON_MAP[cat.id] || Wrench;
               const catTools = allTools.filter((t) => t.category === cat.id);
               const theme = getCategoryTheme(cat.id);
-              const isBento = idx === 0 || cat.id === "developer"; // Document & PDF, Developer span 2 cols on lg
 
               return (
                 <Link
                   key={cat.id}
                   href={`/tools/${cat.id}`}
-                  className={`group relative flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white border border-slate-200/80 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] hover:shadow-[0_12px_35px_-5px_rgba(15,23,42,0.1)] transition-all duration-300 ease-out overflow-hidden focus:outline-none focus-visible:ring-2 ${
-                    isBento ? "lg:col-span-2" : "lg:col-span-1"
-                  }`}
-                  style={{
-                    borderColor: "rgba(226, 232, 240, 0.8)",
-                  }}
+                  className="group relative flex flex-col justify-between h-full p-6 sm:p-7 rounded-3xl bg-white border border-slate-200/80 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] hover:shadow-[0_12px_35px_-5px_rgba(15,23,42,0.1)] transition-all duration-300 ease-out overflow-hidden focus:outline-none focus-visible:ring-2"
                 >
-                  {/* Background Oversized Faint Watermark Icon */}
+                  {/* Background Soft Faint Watermark Icon */}
                   <div
-                    className="absolute -right-6 -top-6 pointer-events-none opacity-[0.06] -rotate-12 transition-all duration-300 ease-out group-hover:scale-110 group-hover:opacity-[0.09] group-hover:-rotate-6 select-none"
+                    className="absolute -right-3 -top-3 pointer-events-none opacity-[0.05] -rotate-12 transition-all duration-300 ease-out group-hover:scale-110 group-hover:opacity-[0.08] group-hover:-rotate-6 select-none"
                     style={{ color: theme.primary }}
                     aria-hidden="true"
                   >
-                    <IconComp className="h-36 w-36 sm:h-40 sm:w-40" strokeWidth={1.25} />
+                    <IconComp className="h-28 w-28 sm:h-32 sm:w-32" strokeWidth={1.25} />
                   </div>
 
                   <div className="space-y-4 relative z-10">
-                    {/* Hero Icon 64x64 Tile */}
+                    {/* Hero Icon Tile */}
                     <div
-                      className="h-16 w-16 rounded-2xl border flex items-center justify-center shrink-0 shadow-2xs transition-transform duration-300 group-hover:scale-105"
+                      className="h-13 w-13 sm:h-14 sm:w-14 rounded-2xl border flex items-center justify-center shrink-0 shadow-2xs transition-transform duration-300 group-hover:scale-105"
                       style={{
                         background: `linear-gradient(135deg, ${theme.tint} 0%, #FFFFFF 100%)`,
                         borderColor: theme.border,
                         color: theme.primary,
                       }}
                     >
-                      <IconComp className="h-8 w-8" strokeWidth={1.75} aria-hidden="true" />
+                      <IconComp className="h-6.5 w-6.5 sm:h-7 sm:w-7" strokeWidth={1.75} aria-hidden="true" />
                     </div>
 
                     <div className="space-y-1.5">
-                      <h3
-                        className="font-headings text-lg sm:text-xl font-bold text-slate-900 tracking-tight transition-colors duration-200"
-                        style={{ color: undefined }}
-                      >
-                        <span className="group-hover:text-blue-600 transition-colors">
-                          {cat.name}
-                        </span>
+                      <h3 className="font-headings text-lg font-bold text-slate-900 tracking-tight transition-colors duration-200 group-hover:text-blue-600">
+                        {cat.name}
                       </h3>
 
-                      <p className="font-body text-xs sm:text-sm text-slate-500 leading-relaxed line-clamp-2">
+                      <p className="font-body text-xs sm:text-sm text-slate-500 leading-relaxed line-clamp-2 min-h-[2.5rem]">
                         {cat.description}
                       </p>
                     </div>
                   </div>
 
-                  {/* Single Dynamic Count Footer Row */}
-                  <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between relative z-10">
+                  {/* Dynamic Tool Count Footer Row */}
+                  <div className="pt-4 mt-5 border-t border-slate-100 flex items-center justify-between relative z-10">
                     <span
                       className="text-xs font-semibold font-mono px-3 py-1 rounded-full border shadow-2xs"
                       style={{
@@ -129,7 +118,7 @@ export default function ToolsHubPage() {
                     </span>
 
                     <div
-                      className="h-9 w-9 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center transition-all duration-200 group-hover:bg-blue-600 group-hover:text-white shadow-2xs group-hover:scale-105"
+                      className="h-8.5 w-8.5 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center transition-all duration-200 group-hover:bg-blue-600 group-hover:text-white shadow-2xs group-hover:scale-105"
                       aria-hidden="true"
                     >
                       <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" strokeWidth={2} />

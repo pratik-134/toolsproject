@@ -138,29 +138,25 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
               <Link
                 key={tool.slug}
                 href={getToolUrl(tool)}
-                className="group relative flex flex-col justify-between p-5.5 rounded-3xl border border-slate-200/80 bg-white hover:-translate-y-0.5 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.03)] transition-all duration-200 ease-out focus:outline-none focus-visible:ring-2"
-                style={{
-                  // Dynamic hover border and soft glow shadow in category accent
-                  borderColor: undefined,
-                }}
+                className="group relative flex flex-col justify-between h-full p-5 sm:p-6 rounded-3xl border border-slate-200/80 bg-white hover:-translate-y-0.5 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.03)] hover:shadow-[0_12px_35px_-5px_rgba(15,23,42,0.08)] transition-all duration-200 ease-out focus:outline-none focus-visible:ring-2"
               >
                 <div className="space-y-3.5">
-                  {/* Hero Icon Tile (48-56px) + Optional Category Pill */}
-                  <div className="flex items-center justify-between">
+                  {/* Hero Icon Tile (48x48px) + Category Pill */}
+                  <div className="flex items-center justify-between gap-2">
                     <div
-                      className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl border flex items-center justify-center shrink-0 shadow-2xs transition-transform duration-200 group-hover:scale-105"
+                      className="h-12 w-12 rounded-2xl border flex items-center justify-center shrink-0 shadow-2xs transition-transform duration-200 group-hover:scale-105"
                       style={{
                         backgroundColor: theme.tint,
                         borderColor: theme.border,
                         color: theme.primary,
                       }}
                     >
-                      <ToolIcon className="h-6 w-6 sm:h-7 sm:w-7" strokeWidth={1.75} aria-hidden="true" />
+                      <ToolIcon className="h-6 w-6" strokeWidth={1.75} aria-hidden="true" />
                     </div>
 
                     {!isSingleCategoryHub && categoryDef && (
                       <span
-                        className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border shadow-2xs"
+                        className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border shadow-2xs shrink-0 max-w-[120px] truncate"
                         style={{
                           backgroundColor: theme.tint,
                           borderColor: theme.border,
@@ -174,24 +170,24 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
 
                   {/* Tool Title & Description */}
                   <div className="space-y-1">
-                    <h3 className="text-base font-semibold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug truncate">
+                    <h3 className="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug line-clamp-1">
                       {tool.name}
                     </h3>
-                    <p className="text-[13px] text-slate-500 leading-relaxed line-clamp-2">
+                    <p className="text-xs sm:text-[13px] text-slate-500 leading-relaxed line-clamp-2 min-h-[2.5rem]">
                       {tool.seo.description}
                     </p>
                   </div>
                 </div>
 
                 {/* Footer Bar: Runs in Browser indicator + Circular Arrow */}
-                <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between text-[11px] font-medium text-slate-500">
-                  <span className="flex items-center gap-1.5 text-slate-600" title="Executes 100% in local browser memory">
+                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] font-medium text-slate-500">
+                  <span className="flex items-center gap-1.5 text-slate-600 text-xs" title="Executes 100% in local browser memory">
                     <ShieldCheck className="h-3.5 w-3.5 text-emerald-500 shrink-0" aria-hidden="true" />
                     <span>Runs in browser</span>
                   </span>
 
                   <div
-                    className="h-7 w-7 rounded-full bg-slate-100 text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all duration-200 flex items-center justify-center shrink-0 shadow-2xs"
+                    className="h-7.5 w-7.5 rounded-full bg-slate-100 text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all duration-200 flex items-center justify-center shrink-0 shadow-2xs"
                     aria-hidden="true"
                   >
                     <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" strokeWidth={2} />

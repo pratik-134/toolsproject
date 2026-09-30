@@ -106,34 +106,34 @@ export const ToolsMegaSection: React.FC = () => {
               <Link
                 key={card.key}
                 href={`/tools/${card.categoryId}`}
-                className="group relative flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white border border-slate-200/80 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] hover:shadow-[0_12px_35px_-5px_rgba(15,23,42,0.1)] transition-all duration-300 ease-out overflow-hidden"
+                className="group relative flex flex-col justify-between h-full p-6 rounded-3xl bg-white border border-slate-200/80 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] hover:shadow-[0_12px_35px_-5px_rgba(15,23,42,0.1)] transition-all duration-300 ease-out overflow-hidden"
               >
                 {/* Background Watermark */}
                 <div
-                  className="absolute -right-6 -top-6 pointer-events-none opacity-[0.06] -rotate-12 transition-all duration-300 ease-out group-hover:scale-110 group-hover:opacity-[0.09] group-hover:-rotate-6 select-none"
+                  className="absolute -right-3 -top-3 pointer-events-none opacity-[0.05] -rotate-12 transition-all duration-300 ease-out group-hover:scale-110 group-hover:opacity-[0.08] group-hover:-rotate-6 select-none"
                   style={{ color: color.primary }}
                   aria-hidden="true"
                 >
-                  <Icon className="h-36 w-36" strokeWidth={1.25} />
+                  <Icon className="h-28 w-28" strokeWidth={1.25} />
                 </div>
 
-                <div className="relative z-10 space-y-4">
+                <div className="relative z-10 space-y-3.5">
                   <div
-                    className="h-14 w-14 rounded-2xl flex items-center justify-center shrink-0 border shadow-2xs group-hover:scale-105 transition-transform"
+                    className="h-13 w-13 rounded-2xl flex items-center justify-center shrink-0 border shadow-2xs group-hover:scale-105 transition-transform"
                     style={{
                       background: `linear-gradient(135deg, ${color.tint} 0%, #FFFFFF 100%)`,
                       borderColor: color.border,
                       color: color.primary,
                     }}
                   >
-                    <Icon className="h-7 w-7" strokeWidth={1.75} />
+                    <Icon className="h-6.5 w-6.5" strokeWidth={1.75} />
                   </div>
 
                   <div>
-                    <h3 className="font-headings text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                    <h3 className="font-headings text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
                       {card.name}
                     </h3>
-                    <p className="font-body text-xs text-slate-500 leading-relaxed mt-1.5 line-clamp-3">
+                    <p className="font-body text-xs text-slate-500 leading-relaxed mt-1.5 line-clamp-3 min-h-[3.375rem]">
                       {card.description}
                     </p>
                   </div>
@@ -141,13 +141,13 @@ export const ToolsMegaSection: React.FC = () => {
 
                 <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs relative z-10">
                   <span
-                    className="font-mono text-[11px] font-bold px-2.5 py-0.5 rounded-full border"
+                    className="font-mono text-[11px] font-bold px-2.5 py-0.5 rounded-full border shadow-2xs"
                     style={{ backgroundColor: color.tint, borderColor: color.border, color: color.primary }}
                   >
                     {card.count}
                   </span>
                   <div
-                    className="h-8 w-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center transition-all group-hover:bg-blue-600 group-hover:text-white"
+                    className="h-8 w-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center transition-all group-hover:bg-blue-600 group-hover:text-white shrink-0 shadow-2xs"
                   >
                     <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" strokeWidth={2} />
                   </div>
