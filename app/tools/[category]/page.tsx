@@ -26,12 +26,14 @@ import {
   Code2,
   Wrench,
   Calculator,
+  Cloud,
 } from "lucide-react";
 
 const CATEGORY_ICON_MAP: Record<CategoryId, React.ElementType> = {
   "document-pdf": FileText,
   image: ImageIcon,
   security: Lock,
+  "url-cloud": Cloud,
   codes: QrCode,
   video: Video,
   audio: Mic,

@@ -81,7 +81,6 @@ const redirects = [
   { source: '/tools/calculators/chmod-calculator', destination: '/tools/developer/chmod-calculator' },
   { source: '/tools/calculators/base-converter', destination: '/tools/developer/base-converter' },
   { source: '/tools/calculators/roman-numeral-converter', destination: '/tools/utilities/roman-numeral-converter' },
-  { source: '/tools/url-cloud', destination: '/tools' },
   { source: '/tools/document-pdf/pdf-protect', destination: '/tools/document-pdf/pdf-encryptor' },
   { source: '/tools/document-pdf/pdf-unlock', destination: '/tools/document-pdf/pdf-decryptor' },
   { source: '/tools/document-pdf/markdown-note-maker', destination: '/tools/document-pdf/direct-markdown-editor' },

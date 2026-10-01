@@ -202,6 +202,27 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
             );
           })}
         </div>
+      ) : tools.length === 0 ? (
+        <div className="p-12 text-center bg-white rounded-3xl border border-slate-200/80 shadow-sm text-slate-600 space-y-4 max-w-xl mx-auto">
+          <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center mx-auto shadow-sm">
+            <ShieldCheck className="w-6 h-6" />
+          </div>
+          <div className="space-y-1">
+            <h3 className="font-headings text-base font-bold text-slate-900">Tools in Development</h3>
+            <p className="font-body text-xs sm:text-sm text-slate-500 leading-relaxed">
+              Utilities for this category are currently being built and tested for upcoming release phases.
+            </p>
+          </div>
+          <div className="pt-2">
+            <Link
+              href="/tools"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition-colors shadow-sm"
+            >
+              <span>Browse All Live Utilities</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </div>
       ) : (
         <div className="p-12 text-center bg-slate-50 rounded-3xl border border-slate-200 text-slate-500 space-y-3">
           <p className="text-sm font-semibold text-slate-700">No tools found matching your filter criteria.</p>

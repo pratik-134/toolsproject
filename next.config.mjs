@@ -39,11 +39,6 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/tools/url-cloud',
-        destination: '/tools',
-        permanent: true,
-      },
-      {
         source: '/tools/document-pdf/pdf-protect',
         destination: '/tools/document-pdf/pdf-encryptor',
         permanent: true,

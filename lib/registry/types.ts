@@ -5,6 +5,7 @@ export type CategoryId =
   | "document-pdf"
   | "image"
   | "security"
+  | "url-cloud"
   | "codes"
   | "video"
   | "audio"

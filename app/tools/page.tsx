@@ -119,7 +119,9 @@ export default function ToolsHubPage() {
                         color: theme.primary,
                       }}
                     >
-                      {catTools.length} {catTools.length === 1 ? "tool" : "tools"}
+                      {catTools.length > 0
+                        ? `${catTools.length} ${catTools.length === 1 ? "tool" : "tools"}`
+                        : "Upcoming Phase"}
                     </span>
 
                     <div

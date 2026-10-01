@@ -14,6 +14,7 @@ import {
   QrCode,
   Wrench,
   Sparkles,
+  Cloud,
 } from "lucide-react";
 import { getLiveTools } from "@/lib/registry/tools";
 import { ToolDefinition, CategoryId } from "@/lib/registry/types";
@@ -23,6 +24,7 @@ const CATEGORY_ICON_MAP: Record<CategoryId, React.ElementType> = {
   "document-pdf": FileText,
   image: ImageIcon,
   security: Lock,
+  "url-cloud": Cloud,
   calculators: Calculator,
   developer: Code2,
   codes: QrCode,
@@ -36,6 +38,7 @@ const CATEGORY_LABEL_MAP: Record<CategoryId, string> = {
   "document-pdf": "PDF",
   image: "Image",
   security: "Security",
+  "url-cloud": "Cloud",
   calculators: "Calculator",
   developer: "Dev",
   codes: "Code",

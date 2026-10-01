@@ -52,6 +52,7 @@ import {
   Sparkle,
   FileCheck,
   FileCheck2,
+  Cloud,
   LucideIcon,
 } from "lucide-react";
 import { ToolDefinition } from "@/lib/registry/types";
@@ -64,6 +65,7 @@ export const CATEGORY_ICON_MAP: Record<string, LucideIcon> = {
   "document-pdf": FileText,
   image: ImageIcon,
   security: Lock,
+  "url-cloud": Cloud,
   codes: QrCode,
   video: Video,
   audio: Mic,

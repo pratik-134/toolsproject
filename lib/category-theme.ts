@@ -163,11 +163,12 @@ export function getColorKeyTheme(key: CategoryColorKey): CategoryTheme {
   };
 }
 
-/** Precomputed themes for all 10 registry categories */
+/** Precomputed themes for all registry categories */
 export const CATEGORY_THEMES: Record<CategoryId, CategoryTheme> = {
   "document-pdf": getColorKeyTheme(CATEGORIES["document-pdf"].colorKey),
   image: getColorKeyTheme(CATEGORIES["image"].colorKey),
   security: getColorKeyTheme(CATEGORIES["security"].colorKey),
+  "url-cloud": getColorKeyTheme(CATEGORIES["url-cloud"].colorKey),
   codes: getColorKeyTheme(CATEGORIES["codes"].colorKey),
   video: getColorKeyTheme(CATEGORIES["video"].colorKey),
   audio: getColorKeyTheme(CATEGORIES["audio"].colorKey),
