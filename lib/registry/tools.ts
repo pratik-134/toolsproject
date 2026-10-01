@@ -2339,6 +2339,45 @@ export const TOOLS: ToolDefinition[] = [
   },
 
   /* =========================================================================
+     PHASE 3 FLAGSHIP: Full-Featured In-Browser PDF Editor Workspace
+     ========================================================================= */
+  {
+    slug: "pdf-editor",
+    name: "PDF Editor & Workspace",
+    category: "document-pdf",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    heavyDeps: ["pdf-lib", "pdfjs"],
+    seo: {
+      title: "In-Browser PDF Editor — Free Client-Side Workspace",
+      description: "Edit, organize, annotate, sign, and stamp PDF files 100% in your browser. Zero uploads, zero tracking, Acrobat Pro power client-side.",
+      h1: "Free In-Browser PDF Editor & Workspace",
+      intro:
+        "The full-featured browser PDF workspace covering Acrobat Pro functions client-side. Reorder, rotate, split, merge, crop, annotate, sign, whiteout redact, and stamp PDF documents with zero telemetry and zero server uploads.",
+      faq: [
+        {
+          q: "Is my PDF uploaded to any server or cloud storage?",
+          a: "No. ClearTrix processes every page, annotation, signature, and stamp 100% locally in your browser memory.",
+        },
+        {
+          q: "Can I reorganize, duplicate, and delete pages?",
+          a: "Yes. The page organizer allows drag-and-drop reordering, 90-degree rotations, page extraction, blank page insertion, and duplication.",
+        },
+        {
+          q: "Does the PDF editor support digital signatures?",
+          a: "Yes. You can draw your signature, type cursive calligraphy, or upload transparent PNG signatures with date stamps.",
+        },
+        {
+          q: "Can I replace or redact text in the PDF?",
+          a: "Yes. Use the Whiteout tool to cover existing text and place new vector text directly over it.",
+        },
+      ],
+    },
+    related: ["pdf-page-organizer", "pdf-annotator", "pdf-digital-signer", "pdf-merger"],
+  },
+
+  /* =========================================================================
      PHASE 1 DOCUMENT: ATS Resume Checker & Score Analyzer
      ========================================================================= */
   {

@@ -9,7 +9,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Merge, split, compress, encrypt, redact, and convert PDFs and office documents 100% locally in your browser sandbox.",
     iconName: "FileText",
-    expectedToolCount: 31,
+    expectedToolCount: 32,
     colorKey: "pdf",
   },
   image: {

@@ -511,6 +511,10 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     ssr: false,
     loading: () => <ToolLoadingState name="PowerPoint to Vector PDF Converter" />,
   }),
+  "pdf-editor": dynamic(() => import("@/components/tools/phase3/pdf-editor"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Professional In-Browser PDF Editor" />,
+  }),
 };
 
 function ToolLoadingState({ name }: { name: string }) {
