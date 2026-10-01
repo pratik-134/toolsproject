@@ -83,6 +83,8 @@ function rgbToCmyk(r: number, g: number, b: number): { c: number; m: number; y: 
   };
 }
 
+export { hexToRgb, rgbToHex, rgbToHsl, rgbToCmyk };
+
 export function ColorConverterEngine({ preset }: ColorConverterEngineProps) {
   const [colorInput, setColorInput] = useState<string>("#3B82F6");
   const [copiedKey, setCopiedKey] = useState<string | null>(null);

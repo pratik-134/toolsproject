@@ -171,7 +171,7 @@ function loadImage(file: File): Promise<HTMLImageElement> {
 /**
  * Packs array of PNG binary buffers into a valid multi-icon Windows .ICO file structure
  */
-function buildIcoBinary(pngs: { size: number; buffer: Uint8Array }[]): Blob {
+export function buildIcoBinary(pngs: { size: number; buffer: Uint8Array }[]): Blob {
   const count = pngs.length;
   const headerSize = 6;
   const directorySize = 16 * count;

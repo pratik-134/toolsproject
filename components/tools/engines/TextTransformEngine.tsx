@@ -176,6 +176,8 @@ function numberToWords(n: number): string {
   return words.trim();
 }
 
+export { jsonToTypeScript, textToBinary, binaryToText, numberToRoman, romanToNumber, numberToWords };
+
 export function TextTransformEngine({ preset }: TextTransformEngineProps) {
   const [files, setFiles] = useState<File[]>([]);
   const [textInput, setTextInput] = useState<string>("");

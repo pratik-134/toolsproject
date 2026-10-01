@@ -292,6 +292,23 @@ function xmlToCsv(xmlText: string): string {
   return csvLines.join("\n");
 }
 
+function parseTsv(tsvText: string): string[][] {
+  const lines = tsvText.split(/\r?\n/);
+  const result: string[][] = [];
+  for (const line of lines) {
+    if (!line.trim()) continue;
+    result.push(line.split("\t"));
+  }
+  return result;
+}
+
+function tsvToCsv(tsvText: string): string {
+  const rows = parseTsv(tsvText);
+  return rows.map((row) => row.map((cell) => `"${cell.replace(/"/g, '""')}"`).join(",")).join("\n");
+}
+
+export { escapeXml, parseCsv, parseTsv, colName, csvToXlsxBlob, markdownToHtml, htmlToMarkdown, xmlToCsv, tsvToCsv };
+
 export function DataTransformEngine({ preset }: DataTransformEngineProps) {
   const [files, setFiles] = useState<File[]>([]);
   const [textInput, setTextInput] = useState<string>("");
@@ -344,6 +361,9 @@ export function DataTransformEngine({ preset }: DataTransformEngineProps) {
         outputBlob = await csvToXlsxBlob(sourceText);
       } else if (preset.slug === "xml-to-csv") {
         const csv = xmlToCsv(sourceText);
+        outputBlob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+      } else if (preset.slug === "tsv-to-csv") {
+        const csv = tsvToCsv(sourceText);
         outputBlob = new Blob([csv], { type: "text/csv;charset=utf-8" });
       } else {
         throw new Error(`Unsupported data transform slug: ${preset.slug}`);

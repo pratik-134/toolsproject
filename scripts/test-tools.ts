@@ -125,6 +125,9 @@ import { runTests as runChartGraphVisualizerTests } from "../components/tools/ph
 import { runTests as runMemeCaptionGeneratorTests } from "../components/tools/phase3/meme-caption-generator/logic.test";
 import { runTests as runLatexEditorTests } from "../components/tools/phase3/latex-editor/logic.test";
 import { runTests as runCameraToPdfScannerTests } from "../components/tools/phase3/camera-to-pdf-scanner/logic.test";
+import { runTests as runPdfEditorTests } from "../components/tools/phase3/pdf-editor/logic.test";
+import { runConverterEngineTests } from "../components/tools/engines/logic.test";
+import { resumeDataSchema, initialResumeData } from "../lib/schema";
 
 async function main() {
   console.log("=== CLEARTRIX TOOL LOGIC UNIT TESTS ===");
@@ -622,8 +625,25 @@ async function main() {
   runCameraToPdfScannerTests();
   console.log("✅ [camera-to-pdf-scanner] unit tests passed!");
 
+  // Flagship Tool: Resume Builder
+  console.log("Testing [resume-builder] logic...");
+  const parsedResume = resumeDataSchema.safeParse(initialResumeData);
+  if (!parsedResume.success) {
+    throw new Error("Resume builder schema verification failed");
+  }
+  console.log("✅ [resume-builder] unit tests passed!");
+
+  // Flagship Tool: PDF Editor
+  console.log("Testing [pdf-editor] logic...");
+  await runPdfEditorTests();
+  console.log("✅ [pdf-editor] unit tests passed!");
+
+  // 38 Converter Engine Tools
+  console.log("Testing [38 converter engine tools] logic...");
+  await runConverterEngineTests();
+
   console.log("===============================================");
-  console.log("🎉 ALL TOOL UNIT TESTS PASSED (123/123)!");
+  console.log("🎉 ALL TOOL UNIT TESTS PASSED (162/162)!");
 }
 
 main().catch((err) => {
