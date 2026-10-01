@@ -40,7 +40,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
       "Generate and scan custom QR codes and retail barcodes (UPC-A, EAN-13, Code 128) instantly on your device.",
     iconName: "QrCode",
     expectedToolCount: 4,
-    colorKey: "security",
+    colorKey: "codes",
   },
   video: {
     id: "video",
@@ -50,7 +50,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
       "Record desktop, windows, and webcam; trim, crop, compress, and transcode video without data ever leaving your browser.",
     iconName: "Video",
     expectedToolCount: 7,
-    colorKey: "image",
+    colorKey: "video",
   },
   audio: {
     id: "audio",
@@ -60,7 +60,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
       "Transcode audio, trim waveforms, record voice memos, boost volume, and edit ID3 tags in your browser memory.",
     iconName: "Mic",
     expectedToolCount: 6,
-    colorKey: "image",
+    colorKey: "audio",
   },
   builders: {
     id: "builders",
@@ -70,7 +70,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
       "Craft ATS-friendly resumes, professional invoices, proposals, certificates, and cover letters with real-time vector preview.",
     iconName: "Layers",
     expectedToolCount: 1,
-    colorKey: "document",
+    colorKey: "builders",
   },
   developer: {
     id: "developer",
@@ -80,7 +80,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
       "Format, validate, beautify, and convert JSON, XML, YAML, SQL, regex, Base64, and code diffs with complete local secrecy.",
     iconName: "Code2",
     expectedToolCount: 27,
-    colorKey: "utility",
+    colorKey: "developer",
   },
   utilities: {
     id: "utilities",
@@ -100,7 +100,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
       "Mortgage amortization, compound interest, ROI, BMI, calorie split, date math, subnetting, and unit converters.",
     iconName: "Calculator",
     expectedToolCount: 33,
-    colorKey: "utility",
+    colorKey: "calculators",
   },
 };
 

@@ -104,14 +104,14 @@ export default async function CategoryHubPage({ params }: CategoryPageProps) {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="flex items-center gap-3.5">
                 <div
-                  className="h-12 w-12 rounded-[12px] border flex items-center justify-center shrink-0 shadow-xs"
+                  className="w-12 h-12 rounded-2xl border flex items-center justify-center shrink-0 shadow-sm"
                   style={{
                     backgroundColor: theme.tint,
                     borderColor: theme.border,
                     color: theme.primary,
                   }}
                 >
-                  <CategoryIcon className="h-6 w-6" strokeWidth={1.75} aria-hidden="true" />
+                  <CategoryIcon className="w-6 h-6" strokeWidth={1.75} aria-hidden="true" />
                 </div>
                 <div className="flex items-center gap-3">
                   <div
@@ -127,7 +127,7 @@ export default async function CategoryHubPage({ params }: CategoryPageProps) {
 
               {/* Uniform Security Privacy Badge */}
               <div
-                className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 font-body text-xs font-medium text-slate-600 shadow-xs shrink-0 self-start sm:self-auto"
+                className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 font-body text-xs font-medium text-slate-600 shadow-sm shrink-0 self-start sm:self-auto"
               >
                 <span className="text-emerald-500 text-[10px] leading-none">●</span>
                 <span>Runs locally · zero uploads</span>

@@ -36,9 +36,11 @@ import {
   FileUp,
 } from "lucide-react";
 
+import { getAllTools } from "@/lib/registry/tools";
 import { generateWebApplicationSchema, generateFAQPageSchema } from "@/lib/seo/jsonld";
 
 export default function HomePage() {
+  const totalTools = getAllTools().length;
   const webAppSchema = generateWebApplicationSchema();
   const faqSchema = generateFAQPageSchema([...RESUME_FAQS, ...TOOLS_FAQS]);
 
@@ -623,7 +625,7 @@ export default function HomePage() {
                     className="bg-slate-800/80 hover:bg-slate-800 text-slate-200 border-slate-700 px-7 py-3.5 rounded-xl min-h-[48px] text-base font-semibold shadow-xs gap-2"
                   >
                     <Sparkles className="h-4 w-4 text-cyan-300" />
-                    Explore 111+ Tools
+                    Explore {totalTools} Tools
                   </Button>
                 </Link>
                 <a href="#templates">

@@ -106,34 +106,39 @@ export const ToolsMegaSection: React.FC = () => {
               <Link
                 key={card.key}
                 href={`/tools/${card.categoryId}`}
-                className="group relative flex flex-col justify-between h-full p-6 rounded-3xl bg-white border border-slate-200/80 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] hover:shadow-[0_12px_35px_-5px_rgba(15,23,42,0.1)] transition-all duration-300 ease-out overflow-hidden"
+                className="group relative flex flex-col justify-between h-full min-h-[250px] p-6 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:border-[var(--cat-border)] transition-all duration-200 ease-out overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                style={{
+                  '--cat-primary': color.primary,
+                  '--cat-border': color.border,
+                } as React.CSSProperties}
               >
-                {/* Background Watermark */}
+                {/* Background Watermark (144px, clipped by overflow-hidden) */}
                 <div
-                  className="absolute -right-3 -top-3 pointer-events-none opacity-[0.05] -rotate-12 transition-all duration-300 ease-out group-hover:scale-110 group-hover:opacity-[0.08] group-hover:-rotate-6 select-none"
+                  className="absolute -right-3 -top-3 pointer-events-none opacity-[0.06] -rotate-12 transition-all duration-300 ease-out group-hover:scale-105 group-hover:opacity-[0.09] group-hover:-rotate-6 select-none"
                   style={{ color: color.primary }}
                   aria-hidden="true"
                 >
-                  <Icon className="h-28 w-28" strokeWidth={1.25} />
+                  <Icon className="w-36 h-36" strokeWidth={1.25} />
                 </div>
 
-                <div className="relative z-10 space-y-3.5">
+                <div className="relative z-10 space-y-4">
+                  {/* Hero Icon 64x64 Tile */}
                   <div
-                    className="h-13 w-13 rounded-2xl flex items-center justify-center shrink-0 border shadow-2xs group-hover:scale-105 transition-transform"
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 border shadow-sm group-hover:scale-105 transition-transform duration-200"
                     style={{
                       background: `linear-gradient(135deg, ${color.tint} 0%, #FFFFFF 100%)`,
                       borderColor: color.border,
                       color: color.primary,
                     }}
                   >
-                    <Icon className="h-6.5 w-6.5" strokeWidth={1.75} />
+                    <Icon className="w-8 h-8" strokeWidth={1.75} />
                   </div>
 
-                  <div>
-                    <h3 className="font-headings text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                  <div className="space-y-1.5">
+                    <h3 className="font-headings text-lg font-semibold text-slate-900 group-hover:text-slate-900 transition-colors">
                       {card.name}
                     </h3>
-                    <p className="font-body text-xs text-slate-500 leading-relaxed mt-1.5 line-clamp-3 min-h-[3.375rem]">
+                    <p className="font-body text-xs sm:text-sm text-slate-500 leading-relaxed line-clamp-3 min-h-[3rem]">
                       {card.description}
                     </p>
                   </div>
@@ -141,15 +146,15 @@ export const ToolsMegaSection: React.FC = () => {
 
                 <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs relative z-10">
                   <span
-                    className="font-mono text-[11px] font-bold px-2.5 py-0.5 rounded-full border shadow-2xs"
+                    className="font-mono text-xs font-medium px-2.5 py-0.5 rounded-full border shadow-sm"
                     style={{ backgroundColor: color.tint, borderColor: color.border, color: color.primary }}
                   >
                     {card.count}
                   </span>
                   <div
-                    className="h-8 w-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center transition-all group-hover:bg-blue-600 group-hover:text-white shrink-0 shadow-2xs"
+                    className="w-9 h-9 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center transition-all duration-200 group-hover:bg-[var(--cat-primary)] group-hover:text-white shrink-0 shadow-sm group-hover:scale-105"
                   >
-                    <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" strokeWidth={2} />
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" strokeWidth={2} />
                   </div>
                 </div>
               </Link>
@@ -157,7 +162,7 @@ export const ToolsMegaSection: React.FC = () => {
           })}
         </div>
 
-        <div className="mt-12 sm:mt-14 inline-flex flex-wrap items-center justify-center gap-3 sm:gap-6 px-5 sm:px-7 py-3 rounded-2xl bg-white/90 backdrop-blur-xs border border-slate-200/80 shadow-xs text-xs sm:text-sm font-medium text-slate-600 font-body">
+        <div className="mt-12 sm:mt-14 inline-flex flex-wrap items-center justify-center gap-3 sm:gap-6 px-5 sm:px-7 py-3 rounded-2xl bg-white/90 backdrop-blur-sm border border-slate-200/80 shadow-sm text-xs sm:text-sm font-medium text-slate-600 font-body">
           <span className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-emerald-500" />
             <span className="text-slate-800"><strong className="font-mono font-bold">{totalCount}</strong> Tools Live</span>

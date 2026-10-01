@@ -69,36 +69,40 @@ export default function ToolsHubPage() {
                 <Link
                   key={cat.id}
                   href={`/tools/${cat.id}`}
-                  className="group relative flex flex-col justify-between h-full p-6 sm:p-7 rounded-3xl bg-white border border-slate-200/80 shadow-[0_4px_25px_-5px_rgba(15,23,42,0.04)] hover:shadow-[0_12px_35px_-5px_rgba(15,23,42,0.1)] transition-all duration-300 ease-out overflow-hidden focus:outline-none focus-visible:ring-2"
+                  className="group relative flex flex-col justify-between h-full min-h-[230px] p-6 sm:p-7 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:border-[var(--cat-border)] transition-all duration-200 ease-out overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  style={{
+                    '--cat-primary': theme.primary,
+                    '--cat-border': theme.border,
+                  } as React.CSSProperties}
                 >
-                  {/* Background Soft Faint Watermark Icon */}
+                  {/* Background Soft Faint Watermark Icon (144px, clipped by overflow-hidden) */}
                   <div
-                    className="absolute -right-3 -top-3 pointer-events-none opacity-[0.05] -rotate-12 transition-all duration-300 ease-out group-hover:scale-110 group-hover:opacity-[0.08] group-hover:-rotate-6 select-none"
+                    className="absolute -right-3 -top-3 pointer-events-none opacity-[0.06] -rotate-12 transition-all duration-300 ease-out group-hover:scale-105 group-hover:opacity-[0.09] group-hover:-rotate-6 select-none"
                     style={{ color: theme.primary }}
                     aria-hidden="true"
                   >
-                    <IconComp className="h-28 w-28 sm:h-32 sm:w-32" strokeWidth={1.25} />
+                    <IconComp className="w-36 h-36" strokeWidth={1.25} />
                   </div>
 
                   <div className="space-y-4 relative z-10">
-                    {/* Hero Icon Tile */}
+                    {/* Hero Icon 64x64 Tile */}
                     <div
-                      className="h-13 w-13 sm:h-14 sm:w-14 rounded-2xl border flex items-center justify-center shrink-0 shadow-2xs transition-transform duration-300 group-hover:scale-105"
+                      className="w-16 h-16 rounded-2xl border flex items-center justify-center shrink-0 shadow-sm transition-transform duration-200 group-hover:scale-105"
                       style={{
                         background: `linear-gradient(135deg, ${theme.tint} 0%, #FFFFFF 100%)`,
                         borderColor: theme.border,
                         color: theme.primary,
                       }}
                     >
-                      <IconComp className="h-6.5 w-6.5 sm:h-7 sm:w-7" strokeWidth={1.75} aria-hidden="true" />
+                      <IconComp className="w-8 h-8" strokeWidth={1.75} aria-hidden="true" />
                     </div>
 
                     <div className="space-y-1.5">
-                      <h3 className="font-headings text-lg font-bold text-slate-900 tracking-tight transition-colors duration-200 group-hover:text-blue-600">
+                      <h3 className="font-headings text-lg font-semibold text-slate-900 tracking-tight transition-colors duration-200 group-hover:text-slate-900">
                         {cat.name}
                       </h3>
 
-                      <p className="font-body text-xs sm:text-sm text-slate-500 leading-relaxed line-clamp-2 min-h-[2.5rem]">
+                      <p className="font-body text-sm text-slate-500 leading-relaxed line-clamp-2 min-h-[2.5rem]">
                         {cat.description}
                       </p>
                     </div>
@@ -107,7 +111,7 @@ export default function ToolsHubPage() {
                   {/* Dynamic Tool Count Footer Row */}
                   <div className="pt-4 mt-5 border-t border-slate-100 flex items-center justify-between relative z-10">
                     <span
-                      className="text-xs font-semibold font-mono px-3 py-1 rounded-full border shadow-2xs"
+                      className="text-xs font-medium font-mono px-3 py-1 rounded-full border shadow-sm"
                       style={{
                         backgroundColor: theme.tint,
                         borderColor: theme.border,
@@ -118,10 +122,10 @@ export default function ToolsHubPage() {
                     </span>
 
                     <div
-                      className="h-8.5 w-8.5 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center transition-all duration-200 group-hover:bg-blue-600 group-hover:text-white shadow-2xs group-hover:scale-105"
+                      className="w-9 h-9 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center transition-all duration-200 group-hover:bg-[var(--cat-primary)] group-hover:text-white shadow-sm group-hover:scale-105 shrink-0"
                       aria-hidden="true"
                     >
-                      <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" strokeWidth={2} />
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" strokeWidth={2} />
                     </div>
                   </div>
                 </Link>
