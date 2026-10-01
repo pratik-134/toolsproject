@@ -2348,7 +2348,7 @@ export const TOOLS: ToolDefinition[] = [
     phase: 3,
     status: "live",
     runtime: "client",
-    heavyDeps: ["pdf-lib", "pdfjs", "docx", "tesseract.js", "jszip"],
+    heavyDeps: ["pdf-lib", "pdfjs", "docx", "tesseract"],
     seo: {
       title: "In-Browser PDF Editor — Free Client-Side Workspace",
       description: "Full Acrobat Pro client-side workspace. Organize, annotate, fill AcroForms, sign, redact, OCR, compare, and convert PDF documents 100% in browser memory.",
