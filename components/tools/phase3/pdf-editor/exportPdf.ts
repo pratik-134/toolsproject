@@ -3,6 +3,9 @@ import {
   PageMeta,
   AnnotationObject,
   ContentElement,
+  FormFieldDef,
+  RedactionItem,
+  PdfMetadata,
   WatermarkConfig,
   PageNumberConfig,
   BatesConfig,
@@ -35,13 +38,18 @@ function base64ToUint8(base64: string): Uint8Array {
 export interface ExportPdfOptions {
   sourcePdfBytes: Uint8Array;
   pages: PageMeta[];
-  annotations: AnnotationObject[];
-  elements: ContentElement[];
-  watermark: WatermarkConfig | null;
-  pageNumbering: PageNumberConfig | null;
-  bates: BatesConfig | null;
-  headerFooter: HeaderFooterConfig | null;
-  pageBackground: PageBackgroundConfig | null;
+  annotations?: AnnotationObject[];
+  elements?: ContentElement[];
+  formFields?: FormFieldDef[];
+  redactions?: RedactionItem[];
+  metadata?: PdfMetadata;
+  security?: import("./types").SecurityConfig;
+  isFlattened?: boolean;
+  watermark?: WatermarkConfig | null;
+  pageNumbering?: PageNumberConfig | null;
+  bates?: BatesConfig | null;
+  headerFooter?: HeaderFooterConfig | null;
+  pageBackground?: PageBackgroundConfig | null;
 }
 
 /**
@@ -52,8 +60,12 @@ export async function exportPdfDocument(options: ExportPdfOptions): Promise<Uint
   const {
     sourcePdfBytes,
     pages,
-    annotations,
-    elements,
+    annotations = [],
+    elements = [],
+    formFields = [],
+    redactions = [],
+    metadata,
+    isFlattened,
     watermark,
     pageNumbering,
     bates,
@@ -64,6 +76,7 @@ export async function exportPdfDocument(options: ExportPdfOptions): Promise<Uint
   // Load the source PDF for extracting pages
   const sourceDoc = await PDFDocument.load(sourcePdfBytes);
   const outputDoc = await PDFDocument.create();
+  const form = outputDoc.getForm();
 
   // Pre-embed standard fonts to ensure zero runtime shift
   const fontHelvetica = await outputDoc.embedFont(StandardFonts.Helvetica);
@@ -565,6 +578,91 @@ export async function exportPdfDocument(options: ExportPdfOptions): Promise<Uint
         color: rgb(0.2, 0.2, 0.25),
       });
     }
+
+    // 11. Permanent Vector Redactions
+    if (redactions && redactions.length > 0) {
+      const pageRedactions = redactions.filter((r) => r.pageIndex === i);
+      for (const r of pageRedactions) {
+        page.drawRectangle({
+          x: r.x,
+          y: pHeight - r.y - r.height,
+          width: r.width,
+          height: r.height,
+          color: rgb(0, 0, 0),
+          borderColor: rgb(0, 0, 0),
+          borderWidth: 0,
+          opacity: 1,
+        });
+
+        const label = r.label || "[REDACTED]";
+        const fontSize = Math.min(10, Math.max(6, r.height * 0.45));
+        const tw = fontHelveticaBold.widthOfTextAtSize(label, fontSize);
+        if (r.width > tw + 4) {
+          page.drawText(label, {
+            x: r.x + (r.width - tw) / 2,
+            y: pHeight - r.y - (r.height + fontSize) / 2 + 1,
+            size: fontSize,
+            font: fontHelveticaBold,
+            color: rgb(1, 1, 1),
+          });
+        }
+      }
+    }
+
+    // 12. Interactive AcroForm Fields
+    if (formFields && formFields.length > 0) {
+      const pageFields = formFields.filter((f) => f.pageIndex === i);
+      for (const f of pageFields) {
+        const fieldY = pHeight - f.y - f.height;
+        try {
+          if (f.type === "text") {
+            const tf = form.createTextField(f.name);
+            if (f.isMultiline) tf.enableMultiline();
+            if (f.isReadOnly) tf.enableReadOnly();
+            if (f.value !== undefined) tf.setText(String(f.value));
+            tf.addToPage(page, { x: f.x, y: fieldY, width: f.width, height: f.height });
+          } else if (f.type === "checkbox") {
+            const cb = form.createCheckBox(f.name);
+            if (f.value === true || f.value === "true") cb.check();
+            cb.addToPage(page, { x: f.x, y: fieldY, width: f.width, height: f.height });
+          } else if (f.type === "dropdown") {
+            const dd = form.createDropdown(f.name);
+            const opts = f.options && f.options.length > 0 ? f.options : ["Option 1", "Option 2"];
+            dd.setOptions(opts);
+            if (f.value && opts.includes(String(f.value))) dd.select(String(f.value));
+            dd.addToPage(page, { x: f.x, y: fieldY, width: f.width, height: f.height });
+          } else if (f.type === "radio") {
+            const rg = form.createRadioGroup(f.name);
+            rg.addOptionToPage(f.name, page, { x: f.x, y: fieldY, width: f.width, height: f.height });
+          } else if (f.type === "button-submit" || f.type === "button-reset") {
+            const btn = form.createButton(f.name);
+            const btnLabel = String(f.defaultValue || f.name || "Button");
+            btn.addToPage(btnLabel, page, { x: f.x, y: fieldY, width: f.width, height: f.height });
+          }
+        } catch (fieldErr) {
+          console.warn("Failed to create AcroForm field:", f.name, fieldErr);
+        }
+      }
+    }
+  }
+
+  // 13. Form Flattening
+  if (isFlattened) {
+    try {
+      form.flatten();
+    } catch (flatErr) {
+      console.warn("Flatten error:", flatErr);
+    }
+  }
+
+  // 14. Document Metadata
+  if (metadata) {
+    if (metadata.title) outputDoc.setTitle(metadata.title);
+    if (metadata.author) outputDoc.setAuthor(metadata.author);
+    if (metadata.subject) outputDoc.setSubject(metadata.subject);
+    if (metadata.keywords) outputDoc.setKeywords(metadata.keywords.split(",").map((k) => k.trim()));
+    if (metadata.creator) outputDoc.setCreator(metadata.creator);
+    if (metadata.producer) outputDoc.setProducer(metadata.producer);
   }
 
   return await outputDoc.save();

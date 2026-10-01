@@ -11,6 +11,10 @@ import {
   Maximize2,
   Hash,
   Palette,
+  Lock,
+  ShieldCheck,
+  FormInput,
+  ShieldAlert,
 } from "lucide-react";
 import { usePdfEditorStore } from "../store";
 import { exportComments } from "../logic";
@@ -46,9 +50,19 @@ export const PropertiesSidebar: React.FC<PropertiesSidebarProps> = ({
     setActivePageIndex,
     selectObject,
     fileName,
+    formFields,
+    updateFormField,
+    deleteFormField,
+    redactions,
+    updateRedaction,
+    deleteRedaction,
+    metadata,
+    setMetadata,
+    security,
+    flattenDocument,
   } = usePdfEditorStore();
 
-  const [activeTab, setActiveTab] = useState<"properties" | "comments" | "stamps">(
+  const [activeTab, setActiveTab] = useState<"properties" | "comments" | "stamps" | "security">(
     selectedObjectId ? "properties" : "properties"
   );
 
@@ -60,6 +74,16 @@ export const PropertiesSidebar: React.FC<PropertiesSidebarProps> = ({
   const selectedElement =
     selectedObjectType === "element"
       ? elements.find((el) => el.id === selectedObjectId)
+      : null;
+
+  const selectedFormField =
+    selectedObjectType === "formField"
+      ? formFields.find((f) => f.id === selectedObjectId)
+      : null;
+
+  const selectedRedaction =
+    selectedObjectType === "redaction"
+      ? redactions.find((r) => r.id === selectedObjectId)
       : null;
 
   const currentPage = pages[activePageIndex];
@@ -101,6 +125,17 @@ export const PropertiesSidebar: React.FC<PropertiesSidebarProps> = ({
         >
           <Stamp className="w-3.5 h-3.5" />
           <span>Stamps</span>
+        </button>
+        <button
+          onClick={() => setActiveTab("security")}
+          className={`flex-1 py-1.5 px-2 rounded-md font-medium text-center transition-colors flex items-center justify-center gap-1.5 ${
+            activeTab === "security"
+              ? "bg-background text-foreground shadow-xs font-semibold"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          <Lock className="w-3.5 h-3.5" />
+          <span>Security</span>
         </button>
       </div>
 
@@ -268,6 +303,150 @@ export const PropertiesSidebar: React.FC<PropertiesSidebarProps> = ({
                     />
                   </div>
                 )}
+              </div>
+            ) : selectedFormField ? (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between border-b border-border pb-2">
+                  <div className="flex items-center gap-1.5 font-semibold text-foreground">
+                    <FormInput className="w-3.5 h-3.5 text-blue-600" />
+                    <span className="capitalize">{selectedFormField.type} Field</span>
+                  </div>
+                  <button
+                    onClick={() => deleteFormField(selectedFormField.id)}
+                    className="p-1 rounded text-red-500 hover:bg-red-500/10"
+                    title="Delete Form Field"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                <div>
+                  <label className="text-muted-foreground block mb-1">Field Name (ID)</label>
+                  <input
+                    type="text"
+                    value={selectedFormField.name}
+                    onChange={(e) => updateFormField(selectedFormField.id, { name: e.target.value })}
+                    className="w-full p-1.5 rounded border border-border bg-background font-mono text-xs"
+                  />
+                </div>
+
+                {selectedFormField.type === "text" && (
+                  <div>
+                    <label className="text-muted-foreground block mb-1">Current / Default Value</label>
+                    <input
+                      type="text"
+                      value={String(selectedFormField.value ?? selectedFormField.defaultValue ?? "")}
+                      onChange={(e) => updateFormField(selectedFormField.id, { value: e.target.value })}
+                      className="w-full p-1.5 rounded border border-border bg-background text-xs"
+                    />
+                  </div>
+                )}
+
+                {(selectedFormField.type === "dropdown" ||
+                  selectedFormField.type === "listbox" ||
+                  selectedFormField.type === "radio") && (
+                  <div>
+                    <label className="text-muted-foreground block mb-1">Options (comma-separated)</label>
+                    <input
+                      type="text"
+                      value={(selectedFormField.options || []).join(", ")}
+                      onChange={(e) =>
+                        updateFormField(selectedFormField.id, {
+                          options: e.target.value
+                            .split(",")
+                            .map((o) => o.trim())
+                            .filter(Boolean),
+                        })
+                      }
+                      className="w-full p-1.5 rounded border border-border bg-background text-xs"
+                    />
+                  </div>
+                )}
+
+                <div className="border-t border-border pt-3 space-y-2">
+                  <span className="font-semibold text-foreground block">Field Settings:</span>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={selectedFormField.isReadOnly || false}
+                      onChange={(e) =>
+                        updateFormField(selectedFormField.id, { isReadOnly: e.target.checked })
+                      }
+                      className="rounded border-border text-primary"
+                    />
+                    <span>Read-Only</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={selectedFormField.isRequired || false}
+                      onChange={(e) =>
+                        updateFormField(selectedFormField.id, { isRequired: e.target.checked })
+                      }
+                      className="rounded border-border text-primary"
+                    />
+                    <span>Required Field</span>
+                  </label>
+                  {selectedFormField.type === "text" && (
+                    <>
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={selectedFormField.isMultiline || false}
+                          onChange={(e) =>
+                            updateFormField(selectedFormField.id, { isMultiline: e.target.checked })
+                          }
+                          className="rounded border-border text-primary"
+                        />
+                        <span>Multiline Text Box</span>
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={selectedFormField.isPassword || false}
+                          onChange={(e) =>
+                            updateFormField(selectedFormField.id, { isPassword: e.target.checked })
+                          }
+                          className="rounded border-border text-primary"
+                        />
+                        <span>Mask as Password</span>
+                      </label>
+                    </>
+                  )}
+                </div>
+              </div>
+            ) : selectedRedaction ? (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between border-b border-border pb-2">
+                  <div className="flex items-center gap-1.5 font-semibold text-red-600">
+                    <ShieldAlert className="w-3.5 h-3.5" />
+                    <span>Permanent Redaction</span>
+                  </div>
+                  <button
+                    onClick={() => deleteRedaction(selectedRedaction.id)}
+                    className="p-1 rounded text-red-500 hover:bg-red-500/10"
+                    title="Remove Redaction Box"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                <div>
+                  <label className="text-muted-foreground block mb-1">Exemption Code / Label</label>
+                  <input
+                    type="text"
+                    value={selectedRedaction.label || "[REDACTED]"}
+                    onChange={(e) => updateRedaction(selectedRedaction.id, { label: e.target.value })}
+                    className="w-full p-1.5 rounded border border-border bg-background font-mono text-xs"
+                  />
+                  <span className="text-[10px] text-muted-foreground block mt-1">
+                    Examples: [REDACTED], FOIA (b)(4), PRIVILEGED
+                  </span>
+                </div>
+
+                <div className="p-3 bg-red-50 dark:bg-red-950/20 rounded-lg border border-red-200 dark:border-red-900/40 text-[11px] text-red-700 dark:text-red-300">
+                  This area will be permanently burned on export. Underlying characters and graphics cannot be recovered.
+                </div>
               </div>
             ) : (
               /* Nothing selected: Show document and page summary */
@@ -601,6 +780,108 @@ export const PropertiesSidebar: React.FC<PropertiesSidebarProps> = ({
                   </div>
                 </div>
               )}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 4: SECURITY & METADATA */}
+        {activeTab === "security" && (
+          <div className="space-y-6">
+            {/* Metadata Section */}
+            <div className="space-y-3 border-b border-border pb-4">
+              <span className="font-semibold text-foreground block">Document Metadata</span>
+              <div>
+                <label className="text-muted-foreground block mb-1">Document Title</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Master Services Agreement"
+                  value={metadata.title || ""}
+                  onChange={(e) => setMetadata({ title: e.target.value })}
+                  className="w-full p-1.5 rounded border border-border bg-background text-xs"
+                />
+              </div>
+              <div>
+                <label className="text-muted-foreground block mb-1">Author / Organization</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Legal Department"
+                  value={metadata.author || ""}
+                  onChange={(e) => setMetadata({ author: e.target.value })}
+                  className="w-full p-1.5 rounded border border-border bg-background text-xs"
+                />
+              </div>
+              <div>
+                <label className="text-muted-foreground block mb-1">Subject</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Confidential Contract"
+                  value={metadata.subject || ""}
+                  onChange={(e) => setMetadata({ subject: e.target.value })}
+                  className="w-full p-1.5 rounded border border-border bg-background text-xs"
+                />
+              </div>
+              <div>
+                <label className="text-muted-foreground block mb-1">Keywords (comma-separated)</label>
+                <input
+                  type="text"
+                  placeholder="contract, privacy, agreement"
+                  value={metadata.keywords || ""}
+                  onChange={(e) => setMetadata({ keywords: e.target.value })}
+                  className="w-full p-1.5 rounded border border-border bg-background text-xs"
+                />
+              </div>
+            </div>
+
+            {/* Document Protection Status */}
+            <div className="space-y-3 border-b border-border pb-4">
+              <span className="font-semibold text-foreground block">Password Protection</span>
+              <div
+                className={`p-3 rounded-lg border text-xs flex items-center justify-between ${
+                  security.isEncrypted
+                    ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-300"
+                    : "bg-muted/40 border-border text-muted-foreground"
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <Lock className="w-4 h-4 shrink-0" />
+                  <span>
+                    {security.isEncrypted ? "Document Encrypted (Password Set)" : "No Password Set"}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Document Flattening */}
+            <div className="space-y-3">
+              <span className="font-semibold text-foreground block">Document Flattening</span>
+              <p className="text-[11px] text-muted-foreground leading-relaxed">
+                Permanently burn interactive layers into the static PDF content stream so they cannot be selected or modified.
+              </p>
+              <div className="space-y-2 pt-1">
+                <button
+                  type="button"
+                  onClick={() => flattenDocument("forms")}
+                  className="w-full py-1.5 px-2 rounded-md border border-border hover:bg-muted text-xs font-medium text-foreground transition-colors flex items-center justify-center gap-1.5"
+                >
+                  <FormInput className="w-3.5 h-3.5" />
+                  <span>Flatten All Form Fields</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => flattenDocument("annotations")}
+                  className="w-full py-1.5 px-2 rounded-md border border-border hover:bg-muted text-xs font-medium text-foreground transition-colors flex items-center justify-center gap-1.5"
+                >
+                  <MessageSquare className="w-3.5 h-3.5" />
+                  <span>Flatten All Annotations</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => flattenDocument("all")}
+                  className="w-full py-1.5 px-2 rounded-md bg-muted/80 hover:bg-muted border border-border/80 text-xs font-semibold text-foreground transition-colors flex items-center justify-center gap-1.5"
+                >
+                  <span>Flatten Entire Document</span>
+                </button>
+              </div>
             </div>
           </div>
         )}

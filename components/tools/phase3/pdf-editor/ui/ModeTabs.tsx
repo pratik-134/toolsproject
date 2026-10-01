@@ -5,6 +5,9 @@ import {
   Type,
   FileSignature,
   Stamp,
+  FormInput,
+  ShieldAlert,
+  Lock,
 } from "lucide-react";
 import { usePdfEditorStore } from "../store";
 import { EditorMode } from "../types";
@@ -16,8 +19,11 @@ export const ModeTabs: React.FC = () => {
     { id: "organize", label: "Organize Pages", icon: Layers },
     { id: "annotate", label: "Annotate", icon: Highlighter },
     { id: "content", label: "Edit Content", icon: Type },
+    { id: "forms", label: "Interactive Forms", icon: FormInput },
+    { id: "redact", label: "Redact", icon: ShieldAlert },
     { id: "sign", label: "Fill & Sign", icon: FileSignature },
     { id: "stamp", label: "Stamps & Numbers", icon: Stamp },
+    { id: "security", label: "Security & Metadata", icon: Lock },
   ];
 
   return (

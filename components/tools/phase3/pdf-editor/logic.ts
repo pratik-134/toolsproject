@@ -405,3 +405,192 @@ export function exportComments(
   link.click();
   URL.revokeObjectURL(url);
 }
+
+/**
+ * Parses existing AcroForm fields from an uploaded PDF document
+ */
+export async function parseExistingFormFields(
+  pdfBytes: Uint8Array
+): Promise<import("./types").FormFieldDef[]> {
+  try {
+    const doc = await PDFDocument.load(pdfBytes, { ignoreEncryption: true });
+    const form = doc.getForm();
+    const fields = form.getFields();
+    const extracted: import("./types").FormFieldDef[] = [];
+
+    fields.forEach((f, idx) => {
+      const name = f.getName();
+      const typeName = f.constructor.name;
+      let type: import("./types").FormFieldType = "text";
+      let val: string | boolean | undefined;
+
+      if (typeName.includes("TextField")) {
+        type = "text";
+        try {
+          val = (f as any).getText() || "";
+        } catch {}
+      } else if (typeName.includes("CheckBox")) {
+        type = "checkbox";
+        try {
+          val = (f as any).isChecked();
+        } catch {}
+      } else if (typeName.includes("Dropdown")) {
+        type = "dropdown";
+        try {
+          const selected = (f as any).getSelected();
+          val = Array.isArray(selected) ? selected[0] : selected;
+        } catch {}
+      } else if (typeName.includes("RadioGroup")) {
+        type = "radio";
+        try {
+          val = (f as any).getSelected();
+        } catch {}
+      } else if (typeName.includes("OptionList")) {
+        type = "listbox";
+      } else if (typeName.includes("Button")) {
+        type = "button-submit";
+      }
+
+      // Default fallback placement
+      extracted.push({
+        id: `field-parsed-${idx}-${Date.now()}`,
+        name,
+        type,
+        pageIndex: 0,
+        x: 60,
+        y: 100 + idx * 40,
+        width: type === "checkbox" || type === "radio" ? 20 : 180,
+        height: type === "checkbox" || type === "radio" ? 20 : 28,
+        value: val,
+        defaultValue: val,
+      });
+    });
+
+    return extracted;
+  } catch (err) {
+    console.warn("No AcroForms or failed to parse form fields:", err);
+    return [];
+  }
+}
+
+export interface SearchMatch {
+  pageIndex: number;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  text: string;
+}
+
+/**
+ * Searches PDF pages for query string occurrences using pdfjs text content
+ */
+export async function searchPdfText(
+  rawPdfDoc: any,
+  query: string
+): Promise<SearchMatch[]> {
+  if (!rawPdfDoc || !query.trim()) return [];
+
+  const matches: SearchMatch[] = [];
+  const cleanQuery = query.toLowerCase();
+  const numPages = rawPdfDoc.numPages;
+
+  for (let p = 1; p <= numPages; p++) {
+    const page = await rawPdfDoc.getPage(p);
+    const viewport = page.getViewport({ scale: 1 });
+    const textContent = await page.getTextContent();
+
+    for (const item of textContent.items) {
+      if (!("str" in item)) continue;
+      const str = item.str.toLowerCase();
+      if (str.includes(cleanQuery)) {
+        // transform is [scaleX, skewY, skewX, scaleY, tx, ty]
+        const tx = item.transform[4];
+        const ty = item.transform[5];
+        const itemWidth = item.width || 60;
+        const itemHeight = item.height || 14;
+
+        // In PDF coordinate space, ty is from bottom. Convert to browser top-left:
+        const x = tx;
+        const y = viewport.height - ty - itemHeight;
+
+        matches.push({
+          pageIndex: p - 1,
+          x: Math.max(0, x),
+          y: Math.max(0, y),
+          width: Math.max(20, itemWidth),
+          height: Math.max(12, itemHeight + 4),
+          text: item.str,
+        });
+      }
+    }
+  }
+
+  return matches;
+}
+
+/**
+ * Serialize form values to JSON string
+ */
+export function serializeFormDataToJson(fields: import("./types").FormFieldDef[]): string {
+  const data: Record<string, any> = {};
+  fields.forEach((f) => {
+    data[f.name] = f.value !== undefined ? f.value : f.defaultValue || "";
+  });
+  return JSON.stringify(data, null, 2);
+}
+
+/**
+ * Export form values to JSON file download
+ */
+export function exportFormDataToJson(
+  fields: import("./types").FormFieldDef[],
+  documentName: string
+) {
+  const jsonStr = serializeFormDataToJson(fields);
+  if (typeof window === "undefined" || !document?.createElement) return;
+
+  const blob = new Blob([jsonStr], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `${documentName.replace(/\.pdf$/i, "")}-form-data.json`;
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+/**
+ * Serialize form values to standard Adobe FDF string
+ */
+export function serializeFormDataToFdf(
+  fields: import("./types").FormFieldDef[],
+  documentName: string
+): string {
+  let fdf = "%FDF-1.2\n%\n1 0 obj\n<<\n/FDF <<\n/Fields [\n";
+  fields.forEach((f) => {
+    const val = f.value !== undefined ? String(f.value) : String(f.defaultValue || "");
+    fdf += `<< /T (${f.name}) /V (${val.replace(/[()]/g, "")}) >>\n`;
+  });
+  fdf += `]\n/F (${documentName})\n>>\n>>\nendobj\ntrailer\n<<\n/Root 1 0 R\n>>\n%%EOF\n`;
+  return fdf;
+}
+
+/**
+ * Export form values to standard Adobe FDF (Forms Data Format)
+ */
+export function exportFormDataToFdf(
+  fields: import("./types").FormFieldDef[],
+  documentName: string
+) {
+  const fdf = serializeFormDataToFdf(fields, documentName);
+  if (typeof window === "undefined" || !document?.createElement) return;
+
+  const blob = new Blob([fdf], { type: "application/vnd.fdf" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `${documentName.replace(/\.pdf$/i, "")}.fdf`;
+  link.click();
+  URL.revokeObjectURL(url);
+}
+

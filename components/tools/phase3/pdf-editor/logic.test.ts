@@ -188,7 +188,190 @@ export async function runTests(): Promise<boolean> {
   }
   console.log("✓ Test 4: Export engine successfully baked all vector annotations, whiteout, and stamps.");
 
-  console.log("All Tier 1 PDF Editor tests passed cleanly!");
+  // ==========================================
+  // TIER 2 TESTS
+  // ==========================================
+  console.log("\nStarting Tier 2 PDF Editor Interactive tests...");
+
+  // Test 5: AcroForms Field Creation & Export
+  const formFields: import("./types").FormFieldDef[] = [
+    {
+      id: "ff-1",
+      name: "FullName",
+      type: "text",
+      pageIndex: 0,
+      x: 100,
+      y: 120,
+      width: 200,
+      height: 25,
+      defaultValue: "Jane Doe",
+      value: "Jane Doe",
+      isRequired: true,
+    },
+    {
+      id: "ff-2",
+      name: "AgreeTerms",
+      type: "checkbox",
+      pageIndex: 0,
+      x: 100,
+      y: 160,
+      width: 20,
+      height: 20,
+      defaultValue: true,
+      value: true,
+    },
+    {
+      id: "ff-3",
+      name: "CountrySelect",
+      type: "dropdown",
+      pageIndex: 0,
+      x: 100,
+      y: 200,
+      width: 150,
+      height: 25,
+      options: ["United States", "Canada", "Germany", "United Kingdom"],
+      defaultValue: "United States",
+      value: "United States",
+    },
+    {
+      id: "ff-4",
+      name: "PlanType",
+      type: "radio",
+      pageIndex: 0,
+      x: 100,
+      y: 240,
+      width: 20,
+      height: 20,
+      options: ["Standard", "Enterprise"],
+      defaultValue: "Enterprise",
+      value: "Enterprise",
+    },
+    {
+      id: "ff-5",
+      name: "SubmitOrder",
+      type: "button-submit",
+      pageIndex: 0,
+      x: 100,
+      y: 280,
+      width: 120,
+      height: 30,
+      defaultValue: "Submit Agreement",
+    },
+  ];
+
+  const { serializeFormDataToJson, serializeFormDataToFdf, parseExistingFormFields } = await import("./logic");
+
+  // Test 5a: Export with AcroForms
+  const pdfWithFormsBytes = await exportPdfDocument({
+    sourcePdfBytes: demoBytes,
+    pages,
+    formFields,
+    metadata: {
+      title: "Privacy Agreement 2026",
+      author: "ClearTrix Enterprise",
+      subject: "Interactive Contract",
+      keywords: "privacy, acroforms, client-side",
+      creator: "ClearTrix Suite",
+      producer: "pdf-lib",
+    },
+  });
+
+  const docWithForms = await PDFDocument.load(pdfWithFormsBytes);
+  const form = docWithForms.getForm();
+  const fields = form.getFields();
+
+  if (fields.length < 4) {
+    throw new Error(`Expected at least 4 AcroForm fields, found ${fields.length}`);
+  }
+
+  const nameField = form.getTextField("FullName");
+  if (!nameField || nameField.getText() !== "Jane Doe") {
+    throw new Error(`Expected text field 'FullName' with value 'Jane Doe'`);
+  }
+
+  const checkField = form.getCheckBox("AgreeTerms");
+  if (!checkField || !checkField.isChecked()) {
+    throw new Error(`Expected checkbox 'AgreeTerms' to be checked`);
+  }
+
+  const dropdownField = form.getDropdown("CountrySelect");
+  if (!dropdownField || dropdownField.getSelected()[0] !== "United States") {
+    throw new Error(`Expected dropdown 'CountrySelect' with 'United States'`);
+  }
+
+  console.log(`✓ Test 5: AcroForms successfully created and verified (${fields.length} interactive fields).`);
+
+  // Test 6: Form Data Serialization (JSON and Adobe FDF)
+  const jsonStr = serializeFormDataToJson(formFields);
+  const parsedJson = JSON.parse(jsonStr);
+  if (parsedJson["FullName"] !== "Jane Doe" || parsedJson["AgreeTerms"] !== true) {
+    throw new Error("Failed to serialize form data to JSON correctly");
+  }
+
+  const fdfStr = serializeFormDataToFdf(formFields, "Contract.pdf");
+  if (!fdfStr.includes("%FDF-1.2") || !fdfStr.includes("FullName") || !fdfStr.includes("Jane Doe")) {
+    throw new Error("Failed to serialize form data to valid Adobe FDF format");
+  }
+
+  const parsedFields = await parseExistingFormFields(pdfWithFormsBytes);
+  if (parsedFields.length < 3) {
+    throw new Error(`Expected parseExistingFormFields to discover at least 3 fields, found ${parsedFields.length}`);
+  }
+  console.log(`✓ Test 6: Form data JSON/FDF export and live AcroForm parser verified.`);
+
+  // Test 7: Permanent Vector Redaction & Metadata Injection
+  const redactions: import("./types").RedactionItem[] = [
+    {
+      id: "red-1",
+      pageIndex: 0,
+      x: 100,
+      y: 100,
+      width: 150,
+      height: 25,
+      label: "CONFIDENTIAL / REDACTED",
+    },
+  ];
+
+  const redactedPdfBytes = await exportPdfDocument({
+    sourcePdfBytes: demoBytes,
+    pages,
+    redactions,
+    metadata: {
+      title: "Redacted Disclosure",
+      author: "Legal Dept",
+      subject: "Security Redaction",
+      keywords: "redaction, compliance",
+      creator: "ClearTrix Redaction Suite",
+      producer: "pdf-lib",
+    },
+  });
+
+  const redactedDoc = await PDFDocument.load(redactedPdfBytes);
+  if (redactedDoc.getTitle() !== "Redacted Disclosure") {
+    throw new Error(`Expected title 'Redacted Disclosure', got '${redactedDoc.getTitle()}'`);
+  }
+  if (redactedDoc.getAuthor() !== "Legal Dept") {
+    throw new Error(`Expected author 'Legal Dept', got '${redactedDoc.getAuthor()}'`);
+  }
+  console.log("✓ Test 7: Permanent vector redaction & document metadata successfully injected.");
+
+  // Test 8: Document Flattener
+  const flattenedPdfBytes = await exportPdfDocument({
+    sourcePdfBytes: demoBytes,
+    pages,
+    formFields,
+    isFlattened: true,
+  });
+
+  const flattenedDoc = await PDFDocument.load(flattenedPdfBytes);
+  const flattenedForm = flattenedDoc.getForm();
+  const remainingFields = flattenedForm.getFields();
+  if (remainingFields.length !== 0) {
+    throw new Error(`Expected 0 AcroForm fields after flattening, found ${remainingFields.length}`);
+  }
+  console.log("✓ Test 8: Document Flattener successfully merged all AcroForms into static page vectors.");
+
+  console.log("\nAll Tier 1 & Tier 2 PDF Editor tests passed cleanly!");
   return true;
 }
 

@@ -26,10 +26,16 @@ export const PageCanvas: React.FC<PageCanvasProps> = ({
     selectObject,
     annotations,
     elements,
+    formFields,
+    redactions,
     addAnnotation,
     updateAnnotation,
     addElement,
     updateElement,
+    addFormField,
+    updateFormField,
+    addRedaction,
+    updateRedaction,
     watermark,
     pageNumbering,
     bates,
@@ -143,7 +149,7 @@ export const PageCanvas: React.FC<PageCanvasProps> = ({
       return;
     }
 
-    // If activeTool is bounding shape or highlight or whiteout
+    // If activeTool is bounding shape or highlight or whiteout or redact or form field
     if (
       activeTool === "highlight" ||
       activeTool === "underline" ||
@@ -153,7 +159,9 @@ export const PageCanvas: React.FC<PageCanvasProps> = ({
       activeTool === "shape-circle" ||
       activeTool === "line" ||
       activeTool === "arrow" ||
-      activeTool === "whiteout"
+      activeTool === "whiteout" ||
+      activeTool === "redact-box" ||
+      activeTool.startsWith("form-")
     ) {
       setIsInteracting(true);
       setStartPoint(pt);
@@ -236,6 +244,10 @@ export const PageCanvas: React.FC<PageCanvasProps> = ({
         updateAnnotation(selectedObjectId, { x: newX, y: newY });
       } else if (selectedObjectType === "element") {
         updateElement(selectedObjectId, { x: newX, y: newY });
+      } else if (selectedObjectType === "formField") {
+        updateFormField(selectedObjectId, { x: newX, y: newY });
+      } else if (selectedObjectType === "redaction") {
+        updateRedaction(selectedObjectId, { x: newX, y: newY });
       }
     }
   };
@@ -278,6 +290,49 @@ export const PageCanvas: React.FC<PageCanvasProps> = ({
           backgroundColor: "#ffffff",
         };
         addElement(newWhiteout);
+        setActiveTool("select");
+      } else if (activeTool === "redact-box") {
+        addRedaction({
+          id: `redact-${Date.now()}`,
+          pageIndex: activePageIndex,
+          x: dragBox.x,
+          y: dragBox.y,
+          width: Math.max(30, dragBox.width),
+          height: Math.max(16, dragBox.height),
+          label: "[REDACTED]",
+        });
+        setActiveTool("select");
+      } else if (activeTool.startsWith("form-")) {
+        const fType: import("../types").FormFieldType =
+          activeTool === "form-text"
+            ? "text"
+            : activeTool === "form-check"
+            ? "checkbox"
+            : activeTool === "form-radio"
+            ? "radio"
+            : activeTool === "form-dropdown"
+            ? "dropdown"
+            : activeTool === "form-listbox"
+            ? "listbox"
+            : activeTool === "form-sig"
+            ? "signature-placeholder"
+            : "button-submit";
+
+        addFormField({
+          id: `field-${Date.now()}`,
+          name: `field_${formFields.length + 1}`,
+          type: fType,
+          pageIndex: activePageIndex,
+          x: dragBox.x,
+          y: dragBox.y,
+          width: Math.max(fType === "checkbox" || fType === "radio" ? 22 : 120, dragBox.width),
+          height: Math.max(fType === "checkbox" || fType === "radio" ? 22 : 28, dragBox.height),
+          options:
+            fType === "dropdown" || fType === "listbox" || fType === "radio"
+              ? ["Option 1", "Option 2", "Option 3"]
+              : undefined,
+          value: fType === "checkbox" ? false : "",
+        });
         setActiveTool("select");
       } else {
         const annType =
@@ -325,7 +380,7 @@ export const PageCanvas: React.FC<PageCanvasProps> = ({
   const handleStartMoveObject = (
     e: React.MouseEvent,
     id: string,
-    type: "annotation" | "element",
+    type: "annotation" | "element" | "formField" | "redaction",
     currentX: number,
     currentY: number
   ) => {
@@ -697,6 +752,140 @@ export const PageCanvas: React.FC<PageCanvasProps> = ({
                   <div className="w-full h-full border border-blue-500/50 bg-blue-500/10 flex items-center justify-between px-1 text-xs text-blue-600">
                     <span className="truncate">{el.text || el.url}</span>
                     <ExternalLink className="w-3 h-3 shrink-0" />
+                  </div>
+                )}
+              </div>
+            );
+          })}
+
+        {/* Tier 2: Permanent Redaction Boxes */}
+        {redactions
+          .filter((r) => r.pageIndex === activePageIndex)
+          .map((r) => {
+            const isSelected = selectedObjectId === r.id;
+            return (
+              <div
+                key={r.id}
+                onMouseDown={(e) => handleStartMoveObject(e, r.id, "redaction", r.x, r.y)}
+                style={{
+                  left: r.x * zoom,
+                  top: r.y * zoom,
+                  width: r.width * zoom,
+                  height: r.height * zoom,
+                }}
+                className={`absolute bg-black flex items-center justify-center cursor-move z-20 ${
+                  isSelected ? "ring-2 ring-red-500 ring-offset-1" : ""
+                }`}
+              >
+                <span
+                  className="font-bold text-white font-mono uppercase tracking-wider select-none truncate px-1"
+                  style={{ fontSize: `${Math.max(8, Math.min(12, r.height * 0.45 * zoom))}px` }}
+                >
+                  {r.label || "[REDACTED]"}
+                </span>
+              </div>
+            );
+          })}
+
+        {/* Tier 2: Interactive AcroForm Fields */}
+        {formFields
+          .filter((f) => f.pageIndex === activePageIndex)
+          .map((f) => {
+            const isSelected = selectedObjectId === f.id;
+            return (
+              <div
+                key={f.id}
+                onMouseDown={(e) => handleStartMoveObject(e, f.id, "formField", f.x, f.y)}
+                style={{
+                  left: f.x * zoom,
+                  top: f.y * zoom,
+                  width: f.width * zoom,
+                  height: f.height * zoom,
+                }}
+                className={`absolute z-20 group border rounded-xs transition-shadow ${
+                  isSelected
+                    ? "border-blue-600 bg-blue-500/10 ring-2 ring-blue-500/30 shadow-xs cursor-move"
+                    : "border-blue-400/80 bg-blue-50/40 hover:border-blue-600 cursor-pointer"
+                }`}
+              >
+                {/* Field Name Badge on Hover or Selection */}
+                <div className="absolute -top-4 left-0 text-[9px] bg-blue-600 text-white font-mono px-1 py-0.2 rounded-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-30">
+                  {f.name} ({f.type})
+                </div>
+
+                {f.type === "text" && (
+                  <input
+                    type={f.isPassword ? "password" : "text"}
+                    value={String(f.value ?? f.defaultValue ?? "")}
+                    disabled={f.isReadOnly}
+                    onChange={(e) => updateFormField(f.id, { value: e.target.value })}
+                    placeholder={f.name}
+                    className="w-full h-full px-1.5 py-0.5 bg-transparent text-xs text-foreground focus:outline-hidden"
+                  />
+                )}
+
+                {f.type === "checkbox" && (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <input
+                      type="checkbox"
+                      checked={Boolean(f.value ?? f.defaultValue)}
+                      disabled={f.isReadOnly}
+                      onChange={(e) => updateFormField(f.id, { value: e.target.checked })}
+                      className="w-4 h-4 rounded text-blue-600 focus:ring-0 cursor-pointer"
+                    />
+                  </div>
+                )}
+
+                {f.type === "radio" && (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <input
+                      type="radio"
+                      name={f.name}
+                      checked={Boolean(f.value)}
+                      disabled={f.isReadOnly}
+                      onChange={(e) => updateFormField(f.id, { value: e.target.checked })}
+                      className="w-4 h-4 text-blue-600 focus:ring-0 cursor-pointer"
+                    />
+                  </div>
+                )}
+
+                {f.type === "dropdown" && (
+                  <select
+                    value={String(f.value ?? (f.options && f.options[0]) ?? "")}
+                    disabled={f.isReadOnly}
+                    onChange={(e) => updateFormField(f.id, { value: e.target.value })}
+                    className="w-full h-full px-1 py-0.5 bg-transparent text-xs text-foreground focus:outline-hidden"
+                  >
+                    {(f.options || ["Option 1", "Option 2"]).map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                )}
+
+                {f.type === "listbox" && (
+                  <div className="w-full h-full overflow-y-auto text-[11px] p-1 bg-white">
+                    {(f.options || ["Option 1", "Option 2"]).map((opt) => (
+                      <div key={opt} className="px-1 py-0.5 hover:bg-blue-100 rounded text-foreground">
+                        {opt}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {(f.type === "button-submit" || f.type === "button-reset") && (
+                  <button
+                    type="button"
+                    className="w-full h-full bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-xs flex items-center justify-center"
+                  >
+                    {f.name || "Submit"}
+                  </button>
+                )}
+
+                {f.type === "signature-placeholder" && (
+                  <div className="w-full h-full border-2 border-dashed border-blue-400 bg-blue-50/50 flex items-center justify-center text-[10px] text-blue-600 font-semibold uppercase">
+                    Signature Field
                   </div>
                 )}
               </div>

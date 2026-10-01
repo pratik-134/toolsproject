@@ -1,4 +1,12 @@
-export type EditorMode = "organize" | "annotate" | "content" | "sign" | "stamp";
+export type EditorMode =
+  | "organize"
+  | "annotate"
+  | "content"
+  | "sign"
+  | "stamp"
+  | "forms"
+  | "redact"
+  | "security";
 
 export type EditorTool =
   | "select"
@@ -18,7 +26,15 @@ export type EditorTool =
   | "arrow"
   | "sign"
   | "stamp"
-  | "eraser";
+  | "eraser"
+  | "form-text"
+  | "form-check"
+  | "form-radio"
+  | "form-dropdown"
+  | "form-listbox"
+  | "form-button"
+  | "form-sig"
+  | "redact-box";
 
 export interface PageMeta {
   id: string;
@@ -91,6 +107,70 @@ export interface ContentElement {
   url?: string;
 }
 
+// --- TIER 2: FORMS ---
+export type FormFieldType =
+  | "text"
+  | "checkbox"
+  | "radio"
+  | "dropdown"
+  | "listbox"
+  | "button-submit"
+  | "button-reset"
+  | "signature-placeholder";
+
+export interface FormFieldDef {
+  id: string;
+  name: string;
+  type: FormFieldType;
+  pageIndex: number;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  value?: string | boolean;
+  defaultValue?: string | boolean;
+  options?: string[]; // For dropdown, listbox, radio
+  isMultiline?: boolean;
+  isReadOnly?: boolean;
+  isRequired?: boolean;
+  isPassword?: boolean;
+  actionUrl?: string; // For submit button
+}
+
+// --- TIER 2: REDACTION ---
+export interface RedactionItem {
+  id: string;
+  pageIndex: number;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  label?: string; // e.g. "[REDACTED]" or "FOIA (b)(4)"
+  applied?: boolean;
+}
+
+// --- TIER 2: SECURITY & METADATA ---
+export interface PdfMetadata {
+  title?: string;
+  author?: string;
+  subject?: string;
+  keywords?: string;
+  creator?: string;
+  producer?: string;
+  creationDate?: string;
+}
+
+export interface SecurityConfig {
+  isEncrypted: boolean;
+  userPassword?: string;
+  permissions: {
+    allowPrinting: boolean;
+    allowCopying: boolean;
+    allowModifying: boolean;
+    allowAnnotating: boolean;
+  };
+}
+
 export interface WatermarkConfig {
   enabled: boolean;
   text: string;
@@ -134,6 +214,11 @@ export interface DocumentHistoryEntry {
   pages: PageMeta[];
   annotations: AnnotationObject[];
   elements: ContentElement[];
+  formFields: FormFieldDef[];
+  redactions: RedactionItem[];
+  metadata: PdfMetadata;
+  security: SecurityConfig;
+  isFlattened: boolean;
   watermark: WatermarkConfig | null;
   pageNumbering: PageNumberConfig | null;
   bates: BatesConfig | null;

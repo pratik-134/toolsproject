@@ -28,6 +28,16 @@ import {
   AlignVerticalJustifyCenter,
   Split,
   Download,
+  FormInput,
+  CheckSquare,
+  Radio,
+  ChevronDown,
+  ListFilter,
+  ShieldAlert,
+  Lock,
+  Search,
+  FileDown,
+  FileCheck,
 } from "lucide-react";
 import { usePdfEditorStore } from "../store";
 import { EditorTool } from "../types";
@@ -37,6 +47,11 @@ interface ToolbarProps {
   onInsertImageClick: () => void;
   onMergeFileClick: () => void;
   onExtractPagesClick: () => void;
+  onOpenSearchRedact: () => void;
+  onOpenSecurityModal: () => void;
+  onExportFormData: (format: "json" | "fdf") => void;
+  onImportFormDataClick: () => void;
+  onFlattenClick: (target: "forms" | "annotations" | "all") => void;
   activeColor: string;
   onChangeColor: (color: string) => void;
   activeStrokeWidth: number;
@@ -50,6 +65,11 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   onInsertImageClick,
   onMergeFileClick,
   onExtractPagesClick,
+  onOpenSearchRedact,
+  onOpenSecurityModal,
+  onExportFormData,
+  onImportFormDataClick,
+  onFlattenClick,
   activeColor,
   onChangeColor,
   activeStrokeWidth,
@@ -434,6 +454,184 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           <div className="text-muted-foreground flex items-center gap-2">
             <span>Configure document-wide Watermarks, Bates numbering, Page numbers, and Headers/Footers in the right sidebar.</span>
           </div>
+        )}
+
+        {/* Mode: FORMS */}
+        {mode === "forms" && (
+          <>
+            <button
+              onClick={() => setActiveTool("select")}
+              className={`p-1.5 rounded-md transition-colors ${
+                activeTool === "select" ? "bg-primary text-primary-foreground" : "hover:bg-muted text-foreground"
+              }`}
+              title="Select / Move Form Fields"
+            >
+              <MousePointer className="w-4 h-4" />
+            </button>
+
+            <div className="h-4 w-px bg-border/80 mx-0.5" />
+
+            <button
+              onClick={() => setActiveTool("form-text")}
+              className={`inline-flex items-center gap-1 px-2 py-1.5 rounded-md transition-colors ${
+                activeTool === "form-text" ? "bg-primary text-primary-foreground" : "hover:bg-muted text-foreground"
+              }`}
+              title="Add Single or Multiline Text Field"
+            >
+              <FormInput className="w-3.5 h-3.5" />
+              <span>Text Field</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTool("form-check")}
+              className={`inline-flex items-center gap-1 px-2 py-1.5 rounded-md transition-colors ${
+                activeTool === "form-check" ? "bg-primary text-primary-foreground" : "hover:bg-muted text-foreground"
+              }`}
+              title="Add Checkbox"
+            >
+              <CheckSquare className="w-3.5 h-3.5" />
+              <span>Checkbox</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTool("form-radio")}
+              className={`inline-flex items-center gap-1 px-2 py-1.5 rounded-md transition-colors ${
+                activeTool === "form-radio" ? "bg-primary text-primary-foreground" : "hover:bg-muted text-foreground"
+              }`}
+              title="Add Radio Button Option"
+            >
+              <Radio className="w-3.5 h-3.5" />
+              <span>Radio</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTool("form-dropdown")}
+              className={`inline-flex items-center gap-1 px-2 py-1.5 rounded-md transition-colors ${
+                activeTool === "form-dropdown" ? "bg-primary text-primary-foreground" : "hover:bg-muted text-foreground"
+              }`}
+              title="Add Dropdown Combo Box"
+            >
+              <ChevronDown className="w-3.5 h-3.5" />
+              <span>Dropdown</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTool("form-listbox")}
+              className={`inline-flex items-center gap-1 px-2 py-1.5 rounded-md transition-colors ${
+                activeTool === "form-listbox" ? "bg-primary text-primary-foreground" : "hover:bg-muted text-foreground"
+              }`}
+              title="Add List Box"
+            >
+              <ListFilter className="w-3.5 h-3.5" />
+              <span>List Box</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTool("form-button")}
+              className={`inline-flex items-center gap-1 px-2 py-1.5 rounded-md transition-colors ${
+                activeTool === "form-button" ? "bg-primary text-primary-foreground" : "hover:bg-muted text-foreground"
+              }`}
+              title="Add Submit / Reset Button"
+            >
+              <span>Submit Button</span>
+            </button>
+
+            <div className="h-4 w-px bg-border/80 mx-1" />
+
+            <button
+              onClick={() => onExportFormData("json")}
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md hover:bg-muted text-foreground transition-colors"
+              title="Export Form Data as JSON"
+            >
+              <FileDown className="w-3.5 h-3.5" />
+              <span>Export JSON</span>
+            </button>
+
+            <button
+              onClick={() => onExportFormData("fdf")}
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md hover:bg-muted text-foreground transition-colors"
+              title="Export Form Data as Adobe FDF"
+            >
+              <FileCheck className="w-3.5 h-3.5" />
+              <span>Export FDF</span>
+            </button>
+
+            <button
+              onClick={onImportFormDataClick}
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md hover:bg-muted text-foreground transition-colors"
+              title="Import Form Data from JSON"
+            >
+              <Upload className="w-3.5 h-3.5" />
+              <span>Import JSON</span>
+            </button>
+          </>
+        )}
+
+        {/* Mode: REDACT */}
+        {mode === "redact" && (
+          <>
+            <button
+              onClick={() => setActiveTool("select")}
+              className={`p-1.5 rounded-md transition-colors ${
+                activeTool === "select" ? "bg-primary text-primary-foreground" : "hover:bg-muted text-foreground"
+              }`}
+              title="Select / Move Redactions"
+            >
+              <MousePointer className="w-4 h-4" />
+            </button>
+
+            <button
+              onClick={() => setActiveTool("redact-box")}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md font-medium transition-colors ${
+                activeTool === "redact-box" ? "bg-red-600 text-white" : "hover:bg-muted text-red-600"
+              }`}
+              title="Drag to Mark Area for Permanent Redaction"
+            >
+              <ShieldAlert className="w-3.5 h-3.5" />
+              <span>Mark Redaction Box</span>
+            </button>
+
+            <button
+              onClick={onOpenSearchRedact}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md hover:bg-muted text-foreground transition-colors"
+              title="Search Document and Batch Redact All Matches"
+            >
+              <Search className="w-3.5 h-3.5" />
+              <span>Search & Redact</span>
+            </button>
+          </>
+        )}
+
+        {/* Mode: SECURITY */}
+        {mode === "security" && (
+          <>
+            <button
+              onClick={onOpenSecurityModal}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 font-medium transition-colors"
+              title="Configure Password Encryption & Permissions"
+            >
+              <Lock className="w-3.5 h-3.5" />
+              <span>Password & Permissions</span>
+            </button>
+
+            <div className="h-4 w-px bg-border/80 mx-1" />
+
+            <button
+              onClick={() => onFlattenClick("forms")}
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md hover:bg-muted text-foreground transition-colors"
+              title="Convert Interactive Form Fields to Permanent Static Content"
+            >
+              <span>Flatten Forms</span>
+            </button>
+
+            <button
+              onClick={() => onFlattenClick("annotations")}
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md hover:bg-muted text-foreground transition-colors"
+              title="Bake All Annotations into Static Page Content"
+            >
+              <span>Flatten Annotations</span>
+            </button>
+          </>
         )}
       </div>
 

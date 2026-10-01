@@ -16,7 +16,16 @@ import {
   Sliders,
 } from "lucide-react";
 import { usePdfEditorStore } from "./store";
-import { loadPdfDocument, createDemoPdf, mergePdfs, extractPagesAsPdf, exportComments } from "./logic";
+import {
+  loadPdfDocument,
+  createDemoPdf,
+  mergePdfs,
+  extractPagesAsPdf,
+  exportComments,
+  parseExistingFormFields,
+  exportFormDataToJson,
+  exportFormDataToFdf,
+} from "./logic";
 import { exportPdfDocument } from "./exportPdf";
 import { HeaderBar } from "./ui/HeaderBar";
 import { ModeTabs } from "./ui/ModeTabs";
@@ -25,6 +34,8 @@ import { ThumbnailSidebar } from "./ui/ThumbnailSidebar";
 import { PageCanvas } from "./ui/PageCanvas";
 import { PropertiesSidebar } from "./ui/PropertiesSidebar";
 import { SignatureModal } from "./ui/SignatureModal";
+import { SearchRedactModal } from "./ui/SearchRedactModal";
+import { SecurityModal } from "./ui/SecurityModal";
 import { MobileToolbar } from "./ui/MobileToolbar";
 import { ContentElement, AnnotationObject } from "./types";
 
@@ -38,6 +49,11 @@ export default function PdfEditor() {
     resetDocument,
     annotations,
     elements,
+    formFields,
+    redactions,
+    metadata,
+    security,
+    isFlattened,
     watermark,
     pageNumbering,
     bates,
@@ -45,6 +61,10 @@ export default function PdfEditor() {
     pageBackground,
     addElement,
     addAnnotation,
+    addRedaction,
+    setFormFields,
+    importFormData,
+    flattenDocument,
     insertBlankPage,
     insertPages,
     undo,
@@ -52,6 +72,8 @@ export default function PdfEditor() {
     selectObject,
     deleteAnnotation,
     deleteElement,
+    deleteFormField,
+    deleteRedaction,
     selectedObjectId,
     selectedObjectType,
   } = usePdfEditorStore();
@@ -71,10 +93,13 @@ export default function PdfEditor() {
   // Modals & Hidden File Pickers
   const [isSignatureModalOpen, setIsSignatureModalOpen] = useState(false);
   const [signatureInitialTab, setSignatureInitialTab] = useState<"draw" | "type" | "upload" | "initials">("draw");
+  const [isSearchRedactOpen, setIsSearchRedactOpen] = useState(false);
+  const [isSecurityModalOpen, setIsSecurityModalOpen] = useState(false);
 
   const openFileInputRef = useRef<HTMLInputElement | null>(null);
   const mergeFileInputRef = useRef<HTMLInputElement | null>(null);
   const imageFileInputRef = useRef<HTMLInputElement | null>(null);
+  const jsonFileInputRef = useRef<HTMLInputElement | null>(null);
 
   // Load a PDF file from buffer
   const handleLoadPdf = async (file: File | Uint8Array, name: string) => {
@@ -88,12 +113,21 @@ export default function PdfEditor() {
         size = file.size;
       } else {
         buffer = file;
-        size = file.byteLength;
       }
 
       const { pages: extractedPages, rawPdf } = await loadPdfDocument(buffer);
       setRawPdfDoc(rawPdf);
       setDocument(buffer, name, size, extractedPages);
+
+      // Auto-extract existing AcroForm fields
+      try {
+        const existingFields = await parseExistingFormFields(buffer);
+        if (existingFields && existingFields.length > 0) {
+          setFormFields(existingFields);
+        }
+      } catch (err) {
+        console.warn("Could not parse existing AcroForms:", err);
+      }
     } catch (err) {
       console.error("Error loading PDF:", err);
       alert("Failed to load PDF file. Please ensure it is a valid PDF document.");
@@ -125,6 +159,11 @@ export default function PdfEditor() {
         pages,
         annotations,
         elements,
+        formFields,
+        redactions,
+        metadata,
+        security,
+        isFlattened,
         watermark,
         pageNumbering,
         bates,
@@ -146,6 +185,29 @@ export default function PdfEditor() {
     } finally {
       setIsExporting(false);
     }
+  };
+
+  // Handle JSON Form Data Import
+  const handleJsonImportChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const content = event.target?.result as string;
+        const parsed = JSON.parse(content);
+        if (parsed && typeof parsed === "object") {
+          importFormData(parsed);
+          alert("Form data imported successfully!");
+        }
+      } catch (err) {
+        console.error("Failed to parse JSON form data:", err);
+        alert("Failed to parse JSON form data. Please check file format.");
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = "";
   };
 
   // Handle Drag & Drop on Welcome Screen
@@ -338,6 +400,10 @@ export default function PdfEditor() {
             deleteAnnotation(selectedObjectId);
           } else if (selectedObjectType === "element") {
             deleteElement(selectedObjectId);
+          } else if (selectedObjectType === "formField") {
+            deleteFormField(selectedObjectId);
+          } else if (selectedObjectType === "redaction") {
+            deleteRedaction(selectedObjectId);
           }
         }
       } else if (e.key === "Escape") {
@@ -347,7 +413,17 @@ export default function PdfEditor() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [undo, redo, selectedObjectId, selectedObjectType, deleteAnnotation, deleteElement, selectObject]);
+  }, [
+    undo,
+    redo,
+    selectedObjectId,
+    selectedObjectType,
+    deleteAnnotation,
+    deleteElement,
+    deleteFormField,
+    deleteRedaction,
+    selectObject,
+  ]);
 
   // WELCOME / DROPZONE SCREEN
   if (!pdfBytes || pages.length === 0) {
@@ -479,6 +555,17 @@ export default function PdfEditor() {
         onInsertImageClick={() => imageFileInputRef.current?.click()}
         onMergeFileClick={() => mergeFileInputRef.current?.click()}
         onExtractPagesClick={handleExtractPages}
+        onOpenSearchRedact={() => setIsSearchRedactOpen(true)}
+        onOpenSecurityModal={() => setIsSecurityModalOpen(true)}
+        onExportFormData={(format) => {
+          if (format === "json") {
+            exportFormDataToJson(formFields, fileName);
+          } else {
+            exportFormDataToFdf(formFields, fileName);
+          }
+        }}
+        onImportFormDataClick={() => jsonFileInputRef.current?.click()}
+        onFlattenClick={(target) => flattenDocument(target)}
         activeColor={activeColor}
         onChangeColor={setActiveColor}
         activeStrokeWidth={activeStrokeWidth}
@@ -544,6 +631,22 @@ export default function PdfEditor() {
         initialTab={signatureInitialTab}
       />
 
+      {/* Search & Redact Modal */}
+      <SearchRedactModal
+        isOpen={isSearchRedactOpen}
+        onClose={() => setIsSearchRedactOpen(false)}
+        rawPdfDoc={rawPdfDoc}
+        onApplyRedactionMatches={(matches) => {
+          matches.forEach((m) => addRedaction(m));
+        }}
+      />
+
+      {/* Security & Permissions Modal */}
+      <SecurityModal
+        isOpen={isSecurityModalOpen}
+        onClose={() => setIsSecurityModalOpen(false)}
+      />
+
       {/* Hidden File Input for Opening New PDF */}
       <input
         ref={openFileInputRef}
@@ -568,6 +671,15 @@ export default function PdfEditor() {
         type="file"
         accept="image/png,image/jpeg,image/webp"
         onChange={handleImageFileInputChange}
+        className="hidden"
+      />
+
+      {/* Hidden File Input for Form Data JSON Import */}
+      <input
+        ref={jsonFileInputRef}
+        type="file"
+        accept="application/json"
+        onChange={handleJsonImportChange}
         className="hidden"
       />
     </div>
