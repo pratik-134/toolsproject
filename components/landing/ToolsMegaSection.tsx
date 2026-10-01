@@ -106,15 +106,16 @@ export const ToolsMegaSection: React.FC = () => {
               <Link
                 key={card.key}
                 href={`/tools/${card.categoryId}`}
-                className="group relative flex flex-col justify-between h-full min-h-[250px] p-6 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:border-[var(--cat-border)] transition-all duration-200 ease-out overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                className="group relative flex flex-col justify-between h-full min-h-[250px] p-6 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-[0_16px_36px_-8px_var(--cat-glow)] hover:-translate-y-1 hover:border-[var(--cat-border)] transition-all duration-300 ease-out overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 motion-reduce:transition-none motion-reduce:hover:transform-none"
                 style={{
                   '--cat-primary': color.primary,
                   '--cat-border': color.border,
+                  '--cat-glow': color.glow,
                 } as React.CSSProperties}
               >
                 {/* Background Watermark (144px, clipped by overflow-hidden) */}
                 <div
-                  className="absolute -right-3 -top-3 pointer-events-none opacity-[0.06] -rotate-12 transition-all duration-300 ease-out group-hover:scale-105 group-hover:opacity-[0.09] group-hover:-rotate-6 select-none"
+                  className="absolute -right-3 -top-3 pointer-events-none opacity-[0.06] -rotate-12 transition-all duration-500 ease-out group-hover:scale-110 group-hover:opacity-[0.10] group-hover:-rotate-6 group-hover:translate-x-1 group-hover:-translate-y-1 select-none"
                   style={{ color: color.primary }}
                   aria-hidden="true"
                 >
@@ -124,18 +125,18 @@ export const ToolsMegaSection: React.FC = () => {
                 <div className="relative z-10 space-y-4">
                   {/* Hero Icon 64x64 Tile */}
                   <div
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 border shadow-sm group-hover:scale-105 transition-transform duration-200"
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 border shadow-sm transition-all duration-300 ease-out group-hover:scale-105 group-hover:shadow-md"
                     style={{
                       background: `linear-gradient(135deg, ${color.tint} 0%, #FFFFFF 100%)`,
                       borderColor: color.border,
                       color: color.primary,
                     }}
                   >
-                    <Icon className="w-8 h-8" strokeWidth={1.75} />
+                    <Icon className="w-8 h-8 transition-transform duration-300 ease-out group-hover:scale-105" strokeWidth={1.75} />
                   </div>
 
                   <div className="space-y-1.5">
-                    <h3 className="font-headings text-lg font-semibold text-slate-900 group-hover:text-slate-900 transition-colors">
+                    <h3 className="font-headings text-lg font-semibold text-slate-900 group-hover:text-blue-600 transition-colors duration-200">
                       {card.name}
                     </h3>
                     <p className="font-body text-xs sm:text-sm text-slate-500 leading-relaxed line-clamp-3 min-h-[3rem]">
@@ -146,15 +147,15 @@ export const ToolsMegaSection: React.FC = () => {
 
                 <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs relative z-10">
                   <span
-                    className="font-mono text-xs font-medium px-2.5 py-0.5 rounded-full border shadow-sm"
+                    className="font-mono text-xs font-medium px-2.5 py-0.5 rounded-full border shadow-sm transition-all duration-200 group-hover:shadow-xs"
                     style={{ backgroundColor: color.tint, borderColor: color.border, color: color.primary }}
                   >
                     {card.count}
                   </span>
                   <div
-                    className="w-9 h-9 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center transition-all duration-200 group-hover:bg-[var(--cat-primary)] group-hover:text-white shrink-0 shadow-sm group-hover:scale-105"
+                    className="w-9 h-9 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center transition-all duration-300 ease-out group-hover:bg-[var(--cat-primary)] group-hover:text-white shrink-0 shadow-sm group-hover:scale-110 group-hover:shadow-md"
                   >
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" strokeWidth={2} />
+                    <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-1" strokeWidth={2} />
                   </div>
                 </div>
               </Link>

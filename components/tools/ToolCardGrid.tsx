@@ -138,7 +138,7 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
               <Link
                 key={tool.slug}
                 href={getToolUrl(tool)}
-                className="group relative flex flex-col justify-between h-full min-h-[200px] p-5 sm:p-6 rounded-3xl border border-slate-200/80 bg-white hover:-translate-y-0.5 hover:border-[var(--cat-border)] hover:shadow-[0_12px_28px_-6px_var(--cat-glow)] transition-all duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                className="group relative flex flex-col justify-between h-full min-h-[200px] p-5 sm:p-6 rounded-3xl border border-slate-200/80 bg-white hover:-translate-y-1 hover:border-[var(--cat-border)] hover:shadow-[0_14px_32px_-6px_var(--cat-glow)] transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 motion-reduce:transition-none motion-reduce:hover:transform-none"
                 style={{
                   '--cat-primary': theme.primary,
                   '--cat-border': theme.border,
@@ -149,19 +149,19 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
                   {/* Hero Icon Tile (48x48px) + Category Pill */}
                   <div className="flex items-center justify-between gap-2">
                     <div
-                      className="w-12 h-12 rounded-2xl border flex items-center justify-center shrink-0 shadow-sm transition-transform duration-200 group-hover:scale-105"
+                      className="w-12 h-12 rounded-2xl border flex items-center justify-center shrink-0 shadow-sm transition-all duration-300 ease-out group-hover:scale-105 group-hover:shadow-md"
                       style={{
                         backgroundColor: theme.tint,
                         borderColor: theme.border,
                         color: theme.primary,
                       }}
                     >
-                      <ToolIcon className="w-6 h-6" strokeWidth={1.75} aria-hidden="true" />
+                      <ToolIcon className="w-6 h-6 transition-transform duration-300 ease-out group-hover:scale-105" strokeWidth={1.75} aria-hidden="true" />
                     </div>
 
                     {!isSingleCategoryHub && categoryDef && (
                       <span
-                        className="text-[11px] font-mono font-medium lowercase tracking-wide px-2.5 py-0.5 rounded-full border shadow-sm shrink-0"
+                        className="text-[11px] font-mono font-medium lowercase tracking-wide px-2.5 py-0.5 rounded-full border shadow-sm shrink-0 transition-all duration-200 group-hover:shadow-xs"
                         style={{
                           backgroundColor: theme.tint,
                           borderColor: theme.border,
@@ -175,7 +175,7 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
 
                   {/* Tool Title & Description with rigid height matching */}
                   <div>
-                    <h3 className="font-headings text-base font-semibold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug line-clamp-2 h-11 flex items-center">
+                    <h3 className="font-headings text-base font-semibold text-slate-900 group-hover:text-blue-600 transition-colors duration-200 leading-snug line-clamp-2 h-11 flex items-center">
                       {tool.name}
                     </h3>
                     <p className="font-body text-xs sm:text-[13px] text-slate-500 leading-relaxed line-clamp-2 h-10 mt-1 overflow-hidden">
@@ -192,10 +192,10 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
                   </div>
 
                   <div
-                    className="w-8 h-8 rounded-full bg-slate-100 text-slate-400 group-hover:bg-[var(--cat-primary)] group-hover:text-white transition-all duration-200 flex items-center justify-center shrink-0 shadow-sm"
+                    className="w-8 h-8 rounded-full bg-slate-100 text-slate-400 group-hover:bg-[var(--cat-primary)] group-hover:text-white transition-all duration-300 ease-out flex items-center justify-center shrink-0 shadow-sm group-hover:scale-110 group-hover:shadow-md"
                     aria-hidden="true"
                   >
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" strokeWidth={2} />
+                    <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-1" strokeWidth={2} />
                   </div>
                 </div>
               </Link>
