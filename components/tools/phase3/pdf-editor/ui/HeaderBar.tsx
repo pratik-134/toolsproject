@@ -10,6 +10,8 @@ import {
   Sparkles,
   ShieldCheck,
   RotateCcw,
+  Maximize2,
+  Minimize2,
 } from "lucide-react";
 import { usePdfEditorStore } from "../store";
 
@@ -18,6 +20,8 @@ interface HeaderBarProps {
   onLoadDemo: () => void;
   onOpenNewFile: () => void;
   isExporting: boolean;
+  isFullscreen?: boolean;
+  onToggleFullscreen?: () => void;
 }
 
 export const HeaderBar: React.FC<HeaderBarProps> = ({
@@ -25,6 +29,8 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
   onLoadDemo,
   onOpenNewFile,
   isExporting,
+  isFullscreen,
+  onToggleFullscreen,
 }) => {
   const {
     fileName,
@@ -148,6 +154,26 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
           <Sparkles className="w-3.5 h-3.5 text-amber-500" />
           Sample PDF
         </button>
+
+        {onToggleFullscreen && (
+          <button
+            onClick={onToggleFullscreen}
+            title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen Studio"}
+            className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium rounded-lg border border-border hover:bg-muted text-foreground transition-colors"
+          >
+            {isFullscreen ? (
+              <>
+                <Minimize2 className="w-3.5 h-3.5" />
+                <span className="hidden xl:inline">Exit Fullscreen</span>
+              </>
+            ) : (
+              <>
+                <Maximize2 className="w-3.5 h-3.5" />
+                <span className="hidden xl:inline">Fullscreen</span>
+              </>
+            )}
+          </button>
+        )}
 
         <button
           onClick={onExport}

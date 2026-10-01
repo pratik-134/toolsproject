@@ -14,6 +14,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Sliders,
+  Eye,
 } from "lucide-react";
 import { usePdfEditorStore } from "./store";
 import {
@@ -28,11 +29,8 @@ import {
 } from "./logic";
 import { exportPdfDocument } from "./exportPdf";
 import { HeaderBar } from "./ui/HeaderBar";
-import { ModeTabs } from "./ui/ModeTabs";
-import { Toolbar } from "./ui/Toolbar";
-import { ThumbnailSidebar } from "./ui/ThumbnailSidebar";
+import { EditPanel } from "./ui/EditPanel";
 import { PageCanvas } from "./ui/PageCanvas";
-import { PropertiesSidebar } from "./ui/PropertiesSidebar";
 import { SignatureModal } from "./ui/SignatureModal";
 import { SearchRedactModal } from "./ui/SearchRedactModal";
 import { SecurityModal } from "./ui/SecurityModal";
@@ -86,9 +84,9 @@ export default function PdfEditor() {
   const [isExporting, setIsExporting] = useState(false);
   const [rawPdfDoc, setRawPdfDoc] = useState<any>(null);
 
-  // Layout toggles
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [isPropertiesOpen, setIsPropertiesOpen] = useState(true);
+  // Layout & Studio State
+  const [mobileTab, setMobileTab] = useState<"edit" | "preview">("edit");
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   // Active Drawing / Styling State
   const [activeColor, setActiveColor] = useState("#eab308");
@@ -415,6 +413,9 @@ export default function PdfEditor() {
           }
         }
       } else if (e.key === "Escape") {
+        if (isFullscreen) {
+          setIsFullscreen(false);
+        }
         selectObject(null);
       }
     };
@@ -424,6 +425,7 @@ export default function PdfEditor() {
   }, [
     undo,
     redo,
+    isFullscreen,
     selectedObjectId,
     selectedObjectType,
     deleteAnnotation,
@@ -542,98 +544,103 @@ export default function PdfEditor() {
 
   // WORKSPACE VIEW
   return (
-    <div className="flex flex-col h-[calc(100vh-65px)] bg-background select-none overflow-hidden">
+    <div
+      className={
+        isFullscreen
+          ? "fixed inset-0 z-50 h-screen w-screen bg-background flex flex-col select-none overflow-hidden"
+          : "flex flex-col h-[820px] max-h-[calc(100vh-80px)] min-h-[720px] bg-background select-none overflow-hidden"
+      }
+    >
       {/* 1. Top Header Bar */}
       <HeaderBar
         onExport={handleExport}
         onLoadDemo={handleLoadDemo}
         onOpenNewFile={() => openFileInputRef.current?.click()}
         isExporting={isExporting}
+        isFullscreen={isFullscreen}
+        onToggleFullscreen={() => setIsFullscreen(!isFullscreen)}
       />
 
-      {/* 2. Mode Selector Bar */}
-      <ModeTabs />
-
-      {/* 3. Contextual Tool Bar */}
-      <Toolbar
-        onOpenSignatureModal={(tab) => {
-          setSignatureInitialTab(tab);
-          setIsSignatureModalOpen(true);
-        }}
-        onInsertImageClick={() => imageFileInputRef.current?.click()}
-        onMergeFileClick={() => mergeFileInputRef.current?.click()}
-        onExtractPagesClick={handleExtractPages}
-        onOpenSearchRedact={() => setIsSearchRedactOpen(true)}
-        onOpenSecurityModal={() => setIsSecurityModalOpen(true)}
-        onOpenConvertModal={() => setIsConvertModalOpen(true)}
-        onOpenOcrModal={() => setIsOcrModalOpen(true)}
-        onOpenCompareModal={() => setIsCompareModalOpen(true)}
-        onOpenFindReplaceModal={() => setIsFindReplaceModalOpen(true)}
-        onExportFormData={(format) => {
-          if (format === "json") {
-            exportFormDataToJson(formFields, fileName);
-          } else {
-            exportFormDataToFdf(formFields, fileName);
-          }
-        }}
-        onImportFormDataClick={() => jsonFileInputRef.current?.click()}
-        onFlattenClick={(target) => flattenDocument(target)}
-        activeColor={activeColor}
-        onChangeColor={setActiveColor}
-        activeStrokeWidth={activeStrokeWidth}
-        onChangeStrokeWidth={setActiveStrokeWidth}
-        onAddStamp={handleAddStamp}
-        onAddDate={handleAddDate}
-      />
-
-      {/* 4. Main 3-Pane Body */}
-      <div className="flex-1 flex overflow-hidden relative">
-        {/* Left: Thumbnail Sidebar */}
-        {isSidebarOpen && (
-          <ThumbnailSidebar
-            onInsertBlank={() => insertBlankPage(activePageIndex)}
-            onInsertFromFile={() => mergeFileInputRef.current?.click()}
-            onExtractPages={handleExtractPages}
-          />
-        )}
-
-        {/* Sidebar Toggle Button */}
-        <button
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 p-1 rounded-r-md bg-card border-y border-r border-border shadow-xs text-muted-foreground hover:text-foreground hidden sm:block"
-          style={{ left: isSidebarOpen ? "14rem" : "0" }}
-          title={isSidebarOpen ? "Hide Pages Sidebar" : "Show Pages Sidebar"}
-        >
-          {isSidebarOpen ? <ChevronLeft className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
-        </button>
-
-        {/* Center: Interactive Page Canvas */}
-        <PageCanvas
-          rawPdfDoc={rawPdfDoc}
-          activeColor={activeColor}
-          activeStrokeWidth={activeStrokeWidth}
-        />
-
-        {/* Right: Properties & Stamping Sidebar */}
-        {isPropertiesOpen && (
-          <PropertiesSidebar
-            onExportComments={(format) => exportComments(annotations, format, fileName)}
-          />
-        )}
-
-        {/* Properties Toggle Button */}
-        <button
-          onClick={() => setIsPropertiesOpen(!isPropertiesOpen)}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 p-1 rounded-l-md bg-card border-y border-l border-border shadow-xs text-muted-foreground hover:text-foreground hidden sm:block"
-          style={{ right: isPropertiesOpen ? "18rem" : "0" }}
-          title={isPropertiesOpen ? "Hide Properties Sidebar" : "Show Properties Sidebar"}
-        >
-          {isPropertiesOpen ? <ChevronRight className="w-3.5 h-3.5" /> : <ChevronLeft className="w-3.5 h-3.5" />}
-        </button>
+      {/* 2. Mobile Tab Switcher */}
+      <div className="flex border-b border-border bg-card p-2 lg:hidden gap-1.5 shadow-2xs shrink-0">
+        <div className="flex w-full max-w-md mx-auto rounded-lg bg-muted p-1 border border-border">
+          <button
+            onClick={() => setMobileTab("edit")}
+            className={`flex-1 py-1.5 text-xs font-medium rounded-md flex items-center justify-center gap-1.5 transition-all ${
+              mobileTab === "edit"
+                ? "bg-card text-foreground shadow-xs font-semibold"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Sliders className="h-3.5 w-3.5 text-primary" /> Edit Tools
+          </button>
+          <button
+            onClick={() => setMobileTab("preview")}
+            className={`flex-1 py-1.5 text-xs font-medium rounded-md flex items-center justify-center gap-1.5 transition-all ${
+              mobileTab === "preview"
+                ? "bg-card text-foreground shadow-xs font-semibold"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Eye className="h-3.5 w-3.5 text-primary" /> PDF Preview
+          </button>
+        </div>
       </div>
 
-      {/* 5. Mobile Bottom Toolbar */}
-      <MobileToolbar onExport={handleExport} isExporting={isExporting} />
+      {/* 3. Studio Two-Panel Workspace (Resume Builder style) */}
+      <div className="flex flex-1 overflow-hidden relative">
+        {/* Left: Dedicated Edit Panel */}
+        <div
+          className={`w-full lg:w-[420px] xl:w-[450px] h-full overflow-hidden shrink-0 border-r border-border bg-card ${
+            mobileTab === "preview" ? "hidden lg:flex" : "flex"
+          }`}
+        >
+          <EditPanel
+            onOpenSignatureModal={(tab) => {
+              setSignatureInitialTab(tab);
+              setIsSignatureModalOpen(true);
+            }}
+            onInsertImageClick={() => imageFileInputRef.current?.click()}
+            onMergeFileClick={() => mergeFileInputRef.current?.click()}
+            onExtractPagesClick={handleExtractPages}
+            onOpenSearchRedact={() => setIsSearchRedactOpen(true)}
+            onOpenSecurityModal={() => setIsSecurityModalOpen(true)}
+            onOpenConvertModal={() => setIsConvertModalOpen(true)}
+            onOpenOcrModal={() => setIsOcrModalOpen(true)}
+            onOpenCompareModal={() => setIsCompareModalOpen(true)}
+            onOpenFindReplaceModal={() => setIsFindReplaceModalOpen(true)}
+            onExportFormData={(format) => {
+              if (format === "json") {
+                exportFormDataToJson(formFields, fileName);
+              } else {
+                exportFormDataToFdf(formFields, fileName);
+              }
+            }}
+            onImportFormDataClick={() => jsonFileInputRef.current?.click()}
+            onFlattenClick={(target) => flattenDocument(target)}
+            activeColor={activeColor}
+            onChangeColor={setActiveColor}
+            activeStrokeWidth={activeStrokeWidth}
+            onChangeStrokeWidth={setActiveStrokeWidth}
+            onAddStamp={handleAddStamp}
+            onAddDate={handleAddDate}
+            onExportComments={(format) => exportComments(annotations, format, fileName)}
+          />
+        </div>
+
+        {/* Right: Unobstructed Interactive Page Canvas */}
+        <div
+          className={`flex-1 h-full overflow-hidden relative bg-muted/20 ${
+            mobileTab === "edit" ? "hidden lg:flex" : "flex"
+          }`}
+        >
+          <PageCanvas
+            rawPdfDoc={rawPdfDoc}
+            activeColor={activeColor}
+            activeStrokeWidth={activeStrokeWidth}
+          />
+        </div>
+      </div>
 
       {/* Signature Modal */}
       <SignatureModal
