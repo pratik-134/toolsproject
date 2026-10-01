@@ -2348,33 +2348,44 @@ export const TOOLS: ToolDefinition[] = [
     phase: 3,
     status: "live",
     runtime: "client",
-    heavyDeps: ["pdf-lib", "pdfjs"],
+    heavyDeps: ["pdf-lib", "pdfjs", "docx", "tesseract.js", "jszip"],
     seo: {
       title: "In-Browser PDF Editor — Free Client-Side Workspace",
-      description: "Edit, organize, annotate, sign, and stamp PDF files 100% in your browser. Zero uploads, zero tracking, Acrobat Pro power client-side.",
-      h1: "Free In-Browser PDF Editor & Workspace",
+      description: "Full Acrobat Pro client-side workspace. Organize, annotate, fill AcroForms, sign, redact, OCR, compare, and convert PDF documents 100% in browser memory.",
+      h1: "Free In-Browser PDF Editor & Professional Workspace",
       intro:
-        "The full-featured browser PDF workspace covering Acrobat Pro functions client-side. Reorder, rotate, split, merge, crop, annotate, sign, whiteout redact, and stamp PDF documents with zero telemetry and zero server uploads.",
+        "The complete client-side PDF productivity suite covering Acrobat Pro functions. Organize pages, draw annotations, fill interactive AcroForms, permanently redact sensitive data, stamp watermarks and Bates numbers, extract text with WebAssembly OCR, compare document revisions, and convert across 10 office formats — with zero server uploads and zero data retention.",
       faq: [
         {
           q: "Is my PDF uploaded to any server or cloud storage?",
-          a: "No. ClearTrix processes every page, annotation, signature, and stamp 100% locally in your browser memory.",
+          a: "Never. ClearTrix processes every page, vector annotation, AcroForm field, and OCR recognition pass 100% locally in your web browser memory. No files or metrics are ever sent over the network.",
         },
         {
-          q: "Can I reorganize, duplicate, and delete pages?",
-          a: "Yes. The page organizer allows drag-and-drop reordering, 90-degree rotations, page extraction, blank page insertion, and duplication.",
+          q: "What interactive form and redaction tools are included?",
+          a: "The editor supports interactive AcroForms (text fields, checkboxes, dropdowns, radio groups, buttons), bidirectional JSON and Adobe FDF form data export/import, permanent vector redactions, and flattener engines.",
         },
         {
-          q: "Does the PDF editor support digital signatures?",
-          a: "Yes. You can draw your signature, type cursive calligraphy, or upload transparent PNG signatures with date stamps.",
+          q: "Can I convert scanned PDFs into searchable text?",
+          a: "Yes. The built-in client-side OCR engine uses Tesseract.js neural networks to recognize text and bakes an invisible vector text layer over scanned bitmaps, creating genuine Searchable PDFs compatible with Adobe Acrobat Pro.",
         },
         {
-          q: "Can I replace or redact text in the PDF?",
-          a: "Yes. Use the Whiteout tool to cover existing text and place new vector text directly over it.",
+          q: "How does the document comparison tool work?",
+          a: "The comparison engine renders two versions side-by-side and performs pixel-by-pixel differential analysis, highlighting additions in green and deletions in red with visual difference scores.",
+        },
+        {
+          q: "Which file formats can I convert to and from PDF?",
+          a: "You can export PDFs to Word (.docx), Excel (.csv), PowerPoint (.pptx), High-Res PNG, JPG, Text (.txt), and HTML. You can also compile multiple images, Word (.docx) files, or spreadsheets into PDF documents.",
         },
       ],
     },
-    related: ["pdf-page-organizer", "pdf-annotator", "pdf-digital-signer", "pdf-merger"],
+    related: [
+      "pdf-page-organizer",
+      "pdf-annotator",
+      "pdf-digital-signer",
+      "pdf-merger",
+      "pdf-redaction-tool",
+      "pdf-to-docx",
+    ],
   },
 
   /* =========================================================================
