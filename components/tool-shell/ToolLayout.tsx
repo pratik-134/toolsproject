@@ -153,6 +153,19 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
               <p className="text-[15px] leading-[1.5] text-[#475569] max-w-3xl">
                 {tool.seo.intro}
               </p>
+              {tool.category === "document-pdf" && tool.slug !== "pdf-editor" && (
+                <div className="pt-1">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-medium">
+                    <span>Looking for complete multi-page editing, signatures, and annotations?</span>
+                    <Link
+                      href="/tools/document-pdf/pdf-editor"
+                      className="font-semibold underline hover:text-blue-900 inline-flex items-center gap-0.5"
+                    >
+                      Open Full PDF Editor →
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
