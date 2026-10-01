@@ -52,9 +52,9 @@ export const AddSectionMenu: React.FC = () => {
   };
 
   return (
-    <div className="rounded-lg border-2 border-dashed border-slate-200 p-5 sm:p-6 text-center bg-white hover:border-blue-300 hover:bg-blue-50/20 transition-all duration-200 shadow-xs">
-      <h4 className="text-sm font-semibold text-slate-900 mb-1">Add Resume Section</h4>
-      <p className="text-xs text-slate-500 max-w-sm mx-auto mb-4 leading-relaxed">
+    <div className="rounded-lg border-2 border-dashed border-slate-200 dark:border-slate-800 p-5 sm:p-6 text-center bg-white dark:bg-slate-900 hover:border-blue-300 dark:hover:border-blue-500 hover:bg-blue-50/20 dark:hover:bg-blue-950/20 transition-all duration-200 shadow-xs">
+      <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-1">Add Resume Section</h4>
+      <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto mb-4 leading-relaxed">
         Tailor your resume structure with standard ATS-compliant sections or custom additions.
       </p>
 
@@ -63,9 +63,9 @@ export const AddSectionMenu: React.FC = () => {
           variant="outline"
           size="sm"
           onClick={() => setIsOpen(true)}
-          className="gap-1.5 font-semibold rounded-lg bg-white text-slate-800 border-slate-200 hover:bg-slate-50 hover:border-blue-300 hover:text-blue-600 shadow-xs h-9 px-4 text-xs transition-all"
+          className="gap-1.5 font-semibold rounded-lg bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-blue-300 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 shadow-xs h-9 px-4 text-xs transition-all"
         >
-          <Plus className="h-4 w-4 text-blue-600" /> Add Section
+          <Plus className="h-4 w-4 text-blue-600 dark:text-blue-400" /> Add Section
         </Button>
       ) : (
         <div className="space-y-3.5">
@@ -80,11 +80,11 @@ export const AddSectionMenu: React.FC = () => {
                   onClick={() => handleAdd(opt)}
                   className={`flex items-center gap-2 rounded-lg border p-2.5 text-xs font-medium transition-all ${
                     alreadyExists
-                      ? "opacity-40 cursor-not-allowed bg-slate-100/60 border-slate-200/50 text-slate-400"
-                      : "bg-white border-slate-200 hover:border-blue-300 hover:bg-blue-50/40 text-slate-800 hover:text-blue-700 shadow-2xs hover:shadow-xs"
+                      ? "opacity-40 cursor-not-allowed bg-slate-100/60 dark:bg-slate-800/40 border-slate-200/50 dark:border-slate-700/50 text-slate-400 dark:text-slate-500"
+                      : "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 hover:bg-blue-50/40 dark:hover:bg-blue-950/40 text-slate-800 dark:text-slate-200 hover:text-blue-700 dark:hover:text-blue-300 shadow-2xs hover:shadow-xs"
                   }`}
                 >
-                  <Icon className="h-4 w-4 text-blue-600 shrink-0" />
+                  <Icon className="h-4 w-4 text-blue-600 dark:text-blue-400 shrink-0" />
                   <span className="truncate">{opt.title}</span>
                 </button>
               );
@@ -94,7 +94,7 @@ export const AddSectionMenu: React.FC = () => {
             variant="ghost"
             size="sm"
             onClick={() => setIsOpen(false)}
-            className="text-xs text-slate-500 hover:text-slate-800 rounded-lg"
+            className="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 rounded-lg"
           >
             Cancel
           </Button>

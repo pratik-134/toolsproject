@@ -79,8 +79,8 @@ export const EducationForm: React.FC<EducationFormProps> = ({ sectionId }) => {
                 key={item.id}
                 className={`rounded-lg border transition-all duration-200 ${
                   isLocked
-                    ? "border-amber-200 bg-amber-50/30 p-3.5"
-                    : "border-slate-200 bg-slate-50/40 p-3.5 hover:bg-white hover:border-blue-200 shadow-xs"
+                    ? "border-amber-200 dark:border-amber-800 bg-amber-50/30 dark:bg-amber-950/30 p-3.5"
+                    : "border-slate-200 dark:border-slate-800 bg-slate-50/40 dark:bg-slate-800/40 p-3.5 hover:bg-white dark:hover:bg-slate-800 hover:border-blue-200 dark:hover:border-blue-800 shadow-xs"
                 }`}
               >
                 <div
@@ -88,14 +88,14 @@ export const EducationForm: React.FC<EducationFormProps> = ({ sectionId }) => {
                   onClick={() => setExpandedItemId(isItemExpanded ? null : item.id)}
                 >
                   <div className="flex items-center gap-2 min-w-0 flex-1">
-                    <div className="cursor-grab text-slate-400 hover:text-slate-600 shrink-0">
+                    <div className="cursor-grab text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 shrink-0">
                       <GripVertical className="h-3.5 w-3.5" />
                     </div>
                     <div className="min-w-0">
-                      <h4 className="text-sm font-semibold text-slate-900 truncate">
+                      <h4 className="text-sm font-semibold text-slate-900 dark:text-white truncate">
                         {item.degree || "Degree"} {item.fieldOfStudy ? `in ${item.fieldOfStudy}` : ""}
                       </h4>
-                      <p className="text-xs text-slate-500 mt-0.5 truncate">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 truncate">
                         {item.institution || "Institution"} • {item.startDate || "Start"} –{" "}
                         {item.current ? "Present" : item.endDate || "Graduation"}
                       </p>
@@ -116,10 +116,10 @@ export const EducationForm: React.FC<EducationFormProps> = ({ sectionId }) => {
                 </div>
 
                 {isItemExpanded && (
-                  <div className="mt-3 border-t border-slate-100 pt-3.5 space-y-3.5">
+                  <div className="mt-3 border-t border-slate-100 dark:border-slate-800 pt-3.5 space-y-3.5">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       <div>
-                        <label className="text-xs font-medium text-slate-600 mb-1 block">
+                        <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1 block">
                           Degree / Credential
                         </label>
                         <Input
@@ -134,7 +134,7 @@ export const EducationForm: React.FC<EducationFormProps> = ({ sectionId }) => {
                         />
                       </div>
                       <div>
-                        <label className="text-xs font-medium text-slate-600 mb-1 block">
+                        <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1 block">
                           Field of Study / Major
                         </label>
                         <Input
@@ -151,7 +151,7 @@ export const EducationForm: React.FC<EducationFormProps> = ({ sectionId }) => {
                     </div>
 
                     <div>
-                      <label className="text-xs font-medium text-slate-600 mb-1 block">
+                      <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1 block">
                         Institution / University
                       </label>
                       <Input
@@ -168,7 +168,7 @@ export const EducationForm: React.FC<EducationFormProps> = ({ sectionId }) => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                       <div>
-                        <label className="text-xs font-medium text-slate-600 mb-1 block">
+                        <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1 block">
                           Location
                         </label>
                         <Input
@@ -183,7 +183,7 @@ export const EducationForm: React.FC<EducationFormProps> = ({ sectionId }) => {
                         />
                       </div>
                       <div>
-                        <label className="text-xs font-medium text-slate-600 mb-1 block">
+                        <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1 block">
                           Start Date
                         </label>
                         <Input
@@ -198,7 +198,7 @@ export const EducationForm: React.FC<EducationFormProps> = ({ sectionId }) => {
                         />
                       </div>
                       <div>
-                        <label className="text-xs font-medium text-slate-600 mb-1 block">
+                        <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1 block">
                           End Date / Graduation
                         </label>
                         <Input
@@ -216,7 +216,7 @@ export const EducationForm: React.FC<EducationFormProps> = ({ sectionId }) => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       <div>
-                        <label className="text-xs font-medium text-slate-600 mb-1 block">
+                        <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1 block">
                           GPA (Optional)
                         </label>
                         <Input
@@ -231,7 +231,7 @@ export const EducationForm: React.FC<EducationFormProps> = ({ sectionId }) => {
                         />
                       </div>
                       <div>
-                        <label className="text-xs font-medium text-slate-600 mb-1 block">
+                        <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1 block">
                           Honors / Awards (Optional)
                         </label>
                         <Input
@@ -258,9 +258,9 @@ export const EducationForm: React.FC<EducationFormProps> = ({ sectionId }) => {
             variant="outline"
             size="sm"
             onClick={() => addSectionItem(sectionId)}
-            className="w-full gap-1.5 border-dashed border-slate-300 bg-white text-slate-700 hover:bg-blue-50/40 hover:border-blue-300 hover:text-blue-700 rounded-lg font-medium shadow-xs transition-all h-9"
+            className="w-full gap-1.5 border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-blue-50/40 dark:hover:bg-blue-950/40 hover:border-blue-300 dark:hover:border-blue-700 hover:text-blue-700 dark:hover:text-blue-300 rounded-lg font-medium shadow-xs transition-all h-9"
           >
-            <Plus className="h-4 w-4 text-blue-600" /> Add Another Education
+            <Plus className="h-4 w-4 text-blue-600 dark:text-blue-400" /> Add Another Education
           </Button>
         )}
       </div>

@@ -117,21 +117,39 @@ const jsonLd = {
   ],
 };
 
+import { ThemeProvider } from "@/components/theme-provider";
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={fontClassNames}>
+    <html lang="en" className={fontClassNames} suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function() {
+              try {
+                var t = localStorage.getItem('ct_theme');
+                if (t === 'dark') {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+              } catch (e) {}
+            })();`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-surface-white font-body antialiased text-text-primary selection:bg-blue-500/20 selection:text-slate-900">
-        <ToastProvider>{children}</ToastProvider>
+      <body className="min-h-screen bg-background text-foreground font-body antialiased selection:bg-blue-500/20 selection:text-slate-900 dark:selection:text-slate-100 transition-colors duration-200">
+        <ThemeProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -102,9 +102,9 @@ export const UploadBox: React.FC<UploadBoxProps> = ({
           ${
             isDragOver
               ? !theme
-                ? "border-emerald-500 bg-emerald-50"
+                ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40"
                 : ""
-              : "border-[#CBD5E1] bg-[#FAFAFA] hover:border-[#94A3B8] hover:bg-slate-50"
+              : "border-[#CBD5E1] dark:border-slate-700 bg-[#FAFAFA] dark:bg-slate-900/60 hover:border-[#94A3B8] dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800/60"
           }`}
       >
         {/* Stroke icon chip with categorical theme */}
@@ -132,10 +132,10 @@ export const UploadBox: React.FC<UploadBoxProps> = ({
         </div>
 
         <div className="space-y-1">
-          <p className="font-semibold text-[16px] leading-snug text-[#0F172A]">
+          <p className="font-semibold text-[16px] leading-snug text-[#0F172A] dark:text-slate-100">
             {title}
           </p>
-          <p className="text-[13px] leading-[1.4] text-[#64748B]">{subtitle}</p>
+          <p className="text-[13px] leading-[1.4] text-[#64748B] dark:text-slate-400">{subtitle}</p>
         </div>
 
         {/* Browse Device — Secondary Button */}
@@ -145,9 +145,9 @@ export const UploadBox: React.FC<UploadBoxProps> = ({
             e.stopPropagation();
             fileInputRef.current?.click();
           }}
-          className="h-[44px] px-[18px] rounded-lg bg-white border border-[#CBD5E1]
-            text-[14px] font-medium text-[#0F172A]
-            hover:bg-[#F8F9FA] hover:border-[#94A3B8]
+          className="h-[44px] px-[18px] rounded-lg bg-white dark:bg-slate-800 border border-[#CBD5E1] dark:border-slate-700
+            text-[14px] font-medium text-[#0F172A] dark:text-slate-200
+            hover:bg-[#F8F9FA] dark:hover:bg-slate-700 hover:border-[#94A3B8] dark:hover:border-slate-600
             transition-colors duration-150"
         >
           Browse Device
@@ -169,11 +169,11 @@ export const UploadBox: React.FC<UploadBoxProps> = ({
 
       {error && (
         <div
-          className="flex items-center gap-2 px-3 py-2.5 bg-red-50 text-red-700 text-[13px]
-            rounded-[6px] border border-[#FECACA]"
+          className="flex items-center gap-2 px-3 py-2.5 bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 text-[13px]
+            rounded-[6px] border border-[#FECACA] dark:border-red-900/60"
         >
           <AlertCircle
-            className="h-4 w-4 shrink-0 text-red-600"
+            className="h-4 w-4 shrink-0 text-red-600 dark:text-red-400"
             strokeWidth={1.75}
             aria-hidden="true"
           />

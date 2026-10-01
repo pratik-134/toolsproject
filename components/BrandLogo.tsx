@@ -66,7 +66,7 @@ export const CleartrixLogo: React.FC<CleartrixLogoProps> = ({
   }
 
   // Wordmark colors per spec: Clear (#0F172A/white) + Trix gradient (#0EA5E9 to #06D6A0)
-  const clearTextColor = isLight || variant === "dark" ? "text-white" : "text-[#0F172A]";
+  const clearTextColor = isLight || variant === "dark" ? "text-white" : "text-[#0F172A] dark:text-white";
 
   if (variant === "stacked") {
     return (

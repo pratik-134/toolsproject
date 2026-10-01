@@ -45,16 +45,16 @@ export const AiAssistantShowcase: React.FC = () => {
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center text-left">
       {/* Left Column: Context & Value */}
       <div className="lg:col-span-5 space-y-5">
-        <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1.5 font-body text-eyebrow uppercase tracking-[1.2px] text-blue-800 font-bold shadow-2xs">
-          <Sparkles className="h-3.5 w-3.5 text-blue-600" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/60 px-3.5 py-1.5 font-body text-eyebrow uppercase tracking-[1.2px] text-blue-800 dark:text-blue-300 font-bold shadow-2xs">
+          <Sparkles className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
           <span>Intelligent Bullet Polishing</span>
         </div>
 
-        <h3 className="font-headings text-2xl sm:text-3xl font-bold text-slate-900 leading-tight">
+        <h3 className="font-headings text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white leading-tight">
           Turn passive task lists into quantifiable career wins.
         </h3>
 
-        <p className="font-body text-body text-slate-600 leading-relaxed">
+        <p className="font-body text-body text-slate-600 dark:text-slate-400 leading-relaxed">
           Recruiters scan for strong action verbs and measurable business results.
           Our integrated AI assistant refines your raw draft into authoritative,
           bulletproof statements—without inventing fake credentials or hallucinating data.
@@ -62,20 +62,20 @@ export const AiAssistantShowcase: React.FC = () => {
 
         {/* Feature Checkpoints */}
         <div className="space-y-3 pt-2">
-          <div className="flex items-center gap-3 text-small text-slate-800 font-medium">
-            <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 text-blue-700 shrink-0">
+          <div className="flex items-center gap-3 text-small text-slate-800 dark:text-slate-200 font-medium">
+            <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-400 shrink-0">
               <CheckCircle2 className="h-3.5 w-3.5" />
             </div>
             <span>Power action verbs calibrated for executive and tech roles</span>
           </div>
-          <div className="flex items-center gap-3 text-small text-slate-800 font-medium">
-            <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 text-blue-700 shrink-0">
+          <div className="flex items-center gap-3 text-small text-slate-800 dark:text-slate-200 font-medium">
+            <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-400 shrink-0">
               <CheckCircle2 className="h-3.5 w-3.5" />
             </div>
             <span>Framework prompts that guide you to quantify real metrics (% and $)</span>
           </div>
-          <div className="flex items-center gap-3 text-small text-slate-800 font-medium">
-            <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 text-blue-700 shrink-0">
+          <div className="flex items-center gap-3 text-small text-slate-800 dark:text-slate-200 font-medium">
+            <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-400 shrink-0">
               <CheckCircle2 className="h-3.5 w-3.5" />
             </div>
             <span>Context-aware tailoring for targeted job descriptions</span>
@@ -120,22 +120,22 @@ export const AiAssistantShowcase: React.FC = () => {
           <circle cx="80" cy="80" r="3" fill="#2563EB" />
         </svg>
 
-        <div className="rounded-2xl border border-blue-200/80 bg-white/95 backdrop-blur-sm shadow-xl p-5 sm:p-7 space-y-6 relative overflow-hidden z-10">
+        <div className="rounded-2xl border border-blue-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm shadow-xl dark:shadow-none p-5 sm:p-7 space-y-6 relative overflow-hidden z-10">
           {/* Subtle Accent Glow */}
           <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-blue-400/10 blur-2xl pointer-events-none" />
           <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-blue-400/10 blur-2xl pointer-events-none" />
 
           {/* Header & Role Switcher */}
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-4">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 border border-blue-200/80 text-blue-600">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950/60 border border-blue-200/80 dark:border-blue-800 text-blue-600 dark:text-blue-400">
                 <Wand2 className="h-4 w-4" />
               </div>
               <div>
-                <h4 className="font-headings text-sm font-bold text-slate-900">
+                <h4 className="font-headings text-sm font-bold text-slate-900 dark:text-white">
                   Live Bullet Transformation
                 </h4>
-                <p className="font-body text-[11px] text-slate-500">
+                <p className="font-body text-[11px] text-slate-500 dark:text-slate-400">
                   Select a role to see real before vs. after optimizations
                 </p>
               </div>
@@ -150,7 +150,7 @@ export const AiAssistantShowcase: React.FC = () => {
                   className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
                     activeIdx === i
                       ? "bg-blue-600 text-white shadow-xs"
-                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                      : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
                   }`}
                 >
                   {ex.role}
@@ -162,53 +162,53 @@ export const AiAssistantShowcase: React.FC = () => {
           {/* Before & After Cards */}
           <div className="space-y-4">
             {/* Before Box */}
-            <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4 relative text-left">
+            <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/40 p-4 relative text-left">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full bg-amber-400" />
                   Original User Draft (Passive & Vague)
                 </span>
-                <span className="text-[11px] font-mono text-slate-500 bg-slate-200/60 px-2 py-0.5 rounded">
+                <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400 bg-slate-200/60 dark:bg-slate-800 px-2 py-0.5 rounded">
                   Score: 48/100
                 </span>
               </div>
-              <p className="font-body text-sm text-slate-600 leading-relaxed italic">
+              <p className="font-body text-sm text-slate-600 dark:text-slate-400 leading-relaxed italic">
                 "{current.before}"
               </p>
             </div>
 
             {/* AI Arrow Indicator */}
             <div className="flex items-center justify-center">
-              <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200 px-3.5 py-1 text-xs font-bold text-blue-700 shadow-2xs">
-                <Zap className="h-3.5 w-3.5 text-blue-600 fill-blue-600" />
+              <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 px-3.5 py-1 text-xs font-bold text-blue-700 dark:text-blue-300 shadow-2xs">
+                <Zap className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400 fill-blue-600 dark:fill-blue-400" />
                 <span>AI Enhancement Applied • {current.atsDelta}</span>
               </div>
             </div>
 
             {/* After Box */}
-            <div className="rounded-xl border-2 border-blue-500/40 bg-blue-50/30 p-4 relative text-left shadow-xs">
+            <div className="rounded-xl border-2 border-blue-500/40 dark:border-blue-500/50 bg-blue-50/30 dark:bg-blue-950/30 p-4 relative text-left shadow-xs">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-blue-800 flex items-center gap-1.5">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-blue-800 dark:text-blue-300 flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
                   Optimized for ATS & Hiring Managers
                 </span>
-                <span className="text-[11px] font-mono font-bold text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded border border-blue-200">
+                <span className="text-[11px] font-mono font-bold text-blue-700 dark:text-blue-300 bg-blue-100/80 dark:bg-blue-900/60 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-800">
                   Score: 98/100
                 </span>
               </div>
-              <p className="font-body text-sm font-medium text-slate-900 leading-relaxed">
+              <p className="font-body text-sm font-medium text-slate-900 dark:text-slate-100 leading-relaxed">
                 "{current.after}"
               </p>
 
               {/* Action Verbs Highlight Bar */}
-              <div className="mt-3 pt-3 border-t border-blue-100 flex flex-wrap items-center gap-2">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-blue-700">
+              <div className="mt-3 pt-3 border-t border-blue-100 dark:border-blue-900/60 flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-blue-700 dark:text-blue-400">
                   Power Verbs Used:
                 </span>
                 {current.verbs.map((verb) => (
                   <span
                     key={verb}
-                    className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-white text-blue-700 border border-blue-200 shadow-2xs"
+                    className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-700 shadow-2xs"
                   >
                     {verb}
                   </span>

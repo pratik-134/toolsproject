@@ -27,8 +27,8 @@ export const RelatedToolsDrawer: React.FC<RelatedToolsDrawerProps> = ({
     <>
       {/* ── Desktop Sidebar Drawer (Visible on lg screens) ────────────────── */}
       <aside className="hidden lg:block w-72 shrink-0 space-y-4 font-body">
-        <div className="bg-white rounded-2xl border border-slate-200/90 p-4 shadow-xs space-y-3">
-          <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-4 shadow-xs space-y-3">
+          <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2">
               <div
                 className="h-6 w-6 rounded-lg flex items-center justify-center text-white"
@@ -36,13 +36,13 @@ export const RelatedToolsDrawer: React.FC<RelatedToolsDrawerProps> = ({
               >
                 <Layers className="h-3.5 w-3.5" />
               </div>
-              <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+              <h3 className="text-xs font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider">
                 Related {categoryDef?.shortName || "Category"} Tools
               </h3>
             </div>
             <Link
               href={`/tools/${currentCategory}`}
-              className="text-[11px] font-bold text-blue-600 hover:underline"
+              className="text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline"
             >
               View All
             </Link>
@@ -53,17 +53,17 @@ export const RelatedToolsDrawer: React.FC<RelatedToolsDrawerProps> = ({
               <Link
                 key={tool.slug}
                 href={getToolUrl(tool)}
-                className="group flex items-center justify-between p-2.5 rounded-xl border border-slate-100 hover:border-blue-200 hover:bg-blue-50/50 transition-all text-xs"
+                className="group flex items-center justify-between p-2.5 rounded-xl border border-slate-100 dark:border-slate-800/80 hover:border-blue-200 dark:hover:border-blue-500/40 hover:bg-blue-50/50 dark:hover:bg-slate-800/50 transition-all text-xs"
               >
                 <div className="truncate pr-2">
-                  <p className="font-bold text-slate-800 group-hover:text-blue-600 truncate transition-colors">
+                  <p className="font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate transition-colors">
                     {tool.name}
                   </p>
-                  <p className="text-[10px] text-slate-500 truncate mt-0.5">
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400 truncate mt-0.5">
                     100% Client-side
                   </p>
                 </div>
-                <ArrowRight className="h-3.5 w-3.5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all shrink-0" />
+                <ArrowRight className="h-3.5 w-3.5 text-slate-400 dark:text-slate-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all shrink-0" />
               </Link>
             ))}
           </div>
@@ -95,19 +95,19 @@ export const RelatedToolsDrawer: React.FC<RelatedToolsDrawerProps> = ({
           >
             <div
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-t-3xl sm:rounded-3xl p-5 border border-slate-200 shadow-2xl max-h-[80vh] overflow-y-auto space-y-4 animate-slide-up"
+              className="bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-3xl p-5 border border-slate-200 dark:border-slate-800 shadow-2xl max-h-[80vh] overflow-y-auto space-y-4 animate-slide-up"
             >
-              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
                 <div className="flex items-center gap-2">
-                  <Sparkles className="h-4 w-4 text-blue-600" />
-                  <h3 className="text-sm font-bold text-slate-900">
+                  <Sparkles className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">
                     Related {categoryDef?.name || "Tools"}
                   </h3>
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsMobileSheetOpen(false)}
-                  className="p-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500"
+                  className="p-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400"
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -119,15 +119,15 @@ export const RelatedToolsDrawer: React.FC<RelatedToolsDrawerProps> = ({
                     key={tool.slug}
                     href={getToolUrl(tool)}
                     onClick={() => setIsMobileSheetOpen(false)}
-                    className="p-3 rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 flex items-center justify-between text-xs transition-colors"
+                    className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-blue-500 dark:hover:border-blue-500 hover:bg-blue-50/50 dark:hover:bg-slate-800/50 flex items-center justify-between text-xs transition-colors"
                   >
                     <div>
-                      <p className="font-bold text-slate-900">{tool.name}</p>
-                      <p className="text-[10px] text-slate-500 mt-0.5 line-clamp-1">
+                      <p className="font-bold text-slate-900 dark:text-slate-100">{tool.name}</p>
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-1">
                         {tool.seo.description}
                       </p>
                     </div>
-                    <ArrowRight className="h-4 w-4 text-blue-600 shrink-0 ml-2" />
+                    <ArrowRight className="h-4 w-4 text-blue-600 dark:text-blue-400 shrink-0 ml-2" />
                   </Link>
                 ))}
               </div>

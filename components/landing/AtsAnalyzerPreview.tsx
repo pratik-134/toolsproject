@@ -99,32 +99,32 @@ export const AtsAnalyzerPreview: React.FC = () => {
     >
       {/* Left Column: Analytical Dashboard Card */}
       <div className="lg:col-span-7">
-        <div className="rounded-2xl border border-slate-200/90 bg-white shadow-xl p-5 sm:p-7 space-y-6">
+        <div className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xl dark:shadow-none p-5 sm:p-7 space-y-6">
           {/* Header Bar with Animated Circular Score Gauge */}
-          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 border border-blue-200 text-blue-600">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400">
                 <FileCheck className="h-5 w-5" />
               </div>
               <div>
-                <h4 className="font-headings text-sm font-bold text-slate-900">
+                <h4 className="font-headings text-sm font-bold text-slate-900 dark:text-white">
                   ATS Parser Compliance Audit
                 </h4>
-                <p className="font-body text-[11px] text-slate-500">
+                <p className="font-body text-[11px] text-slate-500 dark:text-slate-400">
                   Live verification against enterprise applicant screening algorithms
                 </p>
               </div>
             </div>
 
             {/* Circular Progress Gauge */}
-            <div className="flex items-center gap-3 bg-slate-50 border border-slate-200/80 rounded-xl px-3 py-1.5">
+            <div className="flex items-center gap-3 bg-slate-50 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 rounded-xl px-3 py-1.5">
               <div className="relative w-11 h-11 flex items-center justify-center">
                 <svg className="w-full h-full transform -rotate-90" viewBox="0 0 84 84">
                   <circle
                     cx="42"
                     cy="42"
                     r="36"
-                    className="text-slate-200"
+                    className="text-slate-200 dark:text-slate-700"
                     strokeWidth="7"
                     stroke="currentColor"
                     fill="transparent"
@@ -133,7 +133,7 @@ export const AtsAnalyzerPreview: React.FC = () => {
                     cx="42"
                     cy="42"
                     r="36"
-                    className="text-blue-600 transition-all duration-300"
+                    className="text-blue-600 dark:text-blue-400 transition-all duration-300"
                     strokeWidth="7"
                     strokeDasharray={circumference}
                     strokeDashoffset={strokeDashoffset}
@@ -142,15 +142,15 @@ export const AtsAnalyzerPreview: React.FC = () => {
                     fill="transparent"
                   />
                 </svg>
-                <span className="absolute font-mono text-xs font-bold text-slate-900">
+                <span className="absolute font-mono text-xs font-bold text-slate-900 dark:text-white">
                   {score}%
                 </span>
               </div>
               <div className="text-left">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-blue-700 block leading-tight">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-blue-700 dark:text-blue-400 block leading-tight">
                   Status
                 </span>
-                <span className="text-xs font-bold text-slate-800 block leading-tight">
+                <span className="text-xs font-bold text-slate-800 dark:text-slate-200 block leading-tight">
                   Excellent
                 </span>
               </div>
@@ -162,21 +162,21 @@ export const AtsAnalyzerPreview: React.FC = () => {
             {ATS_CHECKS.map((check, idx) => (
               <div
                 key={idx}
-                className="flex items-start gap-3 rounded-lg border border-slate-100 bg-slate-50/60 p-3 hover:bg-slate-50 transition-colors"
+                className="flex items-start gap-3 rounded-lg border border-slate-100 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40 p-3 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
               >
-                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 text-blue-700 mt-0.5 shrink-0">
+                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-blue-400 mt-0.5 shrink-0">
                   <Check className="h-3.5 w-3.5 stroke-[3]" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-headings text-xs font-bold text-slate-900">
+                    <span className="font-headings text-xs font-bold text-slate-900 dark:text-white">
                       {check.title}
                     </span>
-                    <span className="font-mono text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200 shrink-0">
+                    <span className="font-mono text-[10px] font-bold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-800 shrink-0">
                       100% Passed
                     </span>
                   </div>
-                  <p className="font-body text-[11px] text-slate-600 mt-0.5 leading-snug">
+                  <p className="font-body text-[11px] text-slate-600 dark:text-slate-400 mt-0.5 leading-snug">
                     {check.desc}
                   </p>
                 </div>
@@ -185,15 +185,15 @@ export const AtsAnalyzerPreview: React.FC = () => {
           </div>
 
           {/* Tested Systems Pills */}
-          <div className="pt-2 border-t border-slate-100">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-2">
+          <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-2">
               Tested & Verified Against Enterprise ATS Platforms:
             </span>
             <div className="flex flex-wrap gap-1.5">
               {COMPATIBLE_SYSTEMS.map((sys) => (
                 <span
                   key={sys}
-                  className="rounded-md bg-slate-100 border border-slate-200/80 px-2.5 py-1 text-[11px] font-medium text-slate-700"
+                  className="rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 px-2.5 py-1 text-[11px] font-medium text-slate-700 dark:text-slate-300"
                 >
                   {sys}
                 </span>
@@ -205,22 +205,22 @@ export const AtsAnalyzerPreview: React.FC = () => {
 
       {/* Right Column: Value Narrative */}
       <div className="lg:col-span-5 space-y-5">
-        <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1.5 font-body text-eyebrow uppercase tracking-[1.2px] text-blue-800 font-bold shadow-2xs">
-          <ShieldCheck className="h-3.5 w-3.5 text-blue-600" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/60 px-3.5 py-1.5 font-body text-eyebrow uppercase tracking-[1.2px] text-blue-800 dark:text-blue-300 font-bold shadow-2xs">
+          <ShieldCheck className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
           <span>75% of Resumes Get Rejected By Bots</span>
         </div>
 
-        <h3 className="font-headings text-2xl sm:text-3xl font-bold text-slate-900 leading-tight">
+        <h3 className="font-headings text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white leading-tight">
           Never let a software parser discard your application.
         </h3>
 
-        <p className="font-body text-body text-slate-600 leading-relaxed">
+        <p className="font-body text-body text-slate-600 dark:text-slate-400 leading-relaxed">
           Fancy graphic resumes created in design tools often hide text inside complex
           floating boxes, tables, and multi-column layers. When ATS parsers attempt to
           read them, sections get jumbled together and the bot automatically rejects you.
         </p>
 
-        <p className="font-body text-body text-slate-600 leading-relaxed">
+        <p className="font-body text-body text-slate-600 dark:text-slate-400 leading-relaxed">
           Cleartrix constructs every template with strict semantic hierarchy.
           Your credentials arrive at the recruiter's inbox crystal-clear, structured,
           and completely intact.

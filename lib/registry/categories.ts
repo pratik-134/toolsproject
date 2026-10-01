@@ -9,7 +9,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Merge, split, compress, encrypt, redact, and convert PDFs and office documents 100% locally in your browser sandbox.",
     iconName: "FileText",
-    expectedToolCount: 32,
+    expectedToolCount: 34,
     colorKey: "pdf",
   },
   image: {
@@ -19,7 +19,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Crop, convert, resize, compress, retouch, remove EXIF metadata, and generate app favicons with zero server uploads.",
     iconName: "Image",
-    expectedToolCount: 22,
+    expectedToolCount: 26,
     colorKey: "image",
   },
   security: {
@@ -59,7 +59,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Record desktop, windows, and webcam; trim, crop, compress, and transcode video without data ever leaving your browser.",
     iconName: "Video",
-    expectedToolCount: 7,
+    expectedToolCount: 10,
     colorKey: "video",
   },
   audio: {
@@ -79,7 +79,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Craft ATS-friendly resumes, professional invoices, proposals, certificates, and cover letters with real-time vector preview.",
     iconName: "Layers",
-    expectedToolCount: 1,
+    expectedToolCount: 5,
     colorKey: "builders",
   },
   developer: {

@@ -140,19 +140,19 @@ export const ResumeCard: React.FC<ResumeCardProps> = ({ resume, onDelete }) => {
   const completeness = resume.completenessScore || 0;
   const scoreColor =
     completeness >= 80
-      ? "text-blue-700 bg-blue-50 border-blue-200"
+      ? "text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/50 border-blue-200 dark:border-blue-800"
       : completeness >= 50
-      ? "text-amber-700 bg-amber-50 border-amber-200"
-      : "text-slate-600 bg-slate-100 border-slate-200";
+      ? "text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/50 border-amber-200 dark:border-amber-800"
+      : "text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700";
 
   return (
-    <div className="group relative rounded-2xl border border-slate-100/90 bg-white shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-md hover:border-blue-400/60 transition-all flex flex-col overflow-hidden">
+    <div className="group relative rounded-2xl border border-slate-100/90 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-md hover:border-blue-400/60 dark:hover:border-blue-500/50 transition-all flex flex-col overflow-hidden">
       {/* Thumbnail Area with Click-to-Open Overlay */}
-      <div className="relative w-full h-[220px] bg-white border-b border-slate-100 overflow-hidden cursor-pointer">
+      <div className="relative w-full h-[220px] bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 overflow-hidden cursor-pointer">
         {resumeData ? (
           <TemplateThumbnail templateId={resume.templateId} data={resumeData} />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-slate-400 text-xs font-mono">
+          <div className="w-full h-full flex items-center justify-center text-slate-400 dark:text-slate-500 text-xs font-mono">
             Preview unavailable
           </div>
         )}
@@ -191,11 +191,11 @@ export const ResumeCard: React.FC<ResumeCardProps> = ({ resume, onDelete }) => {
                     }
                   }}
                   autoFocus
-                  className="w-full rounded-lg border border-blue-400 bg-white px-2 py-0.5 text-sm font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                  className="w-full rounded-lg border border-blue-400 dark:border-blue-500 bg-white dark:bg-slate-900 px-2 py-0.5 text-sm font-bold text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                 />
                 <button
                   onClick={handleSaveTitle}
-                  className="p-1 text-blue-600 hover:text-blue-700"
+                  className="p-1 text-blue-600 dark:text-blue-400 hover:text-blue-700"
                   title="Save title"
                 >
                   <Check className="h-4 w-4" />
@@ -217,7 +217,7 @@ export const ResumeCard: React.FC<ResumeCardProps> = ({ resume, onDelete }) => {
                 className="cursor-pointer group/title flex items-center gap-1.5"
               >
                 <h3
-                  className="text-sm font-bold text-slate-900 truncate hover:text-blue-600 transition-colors"
+                  className="text-sm font-bold text-slate-900 dark:text-slate-100 truncate hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   title={resume.title}
                 >
                   {resume.title}
@@ -228,7 +228,7 @@ export const ResumeCard: React.FC<ResumeCardProps> = ({ resume, onDelete }) => {
                     e.stopPropagation();
                     setIsEditingTitle(true);
                   }}
-                  className="opacity-0 group/title:opacity-100 p-0.5 text-slate-400 hover:text-slate-700 transition-opacity"
+                  className="opacity-0 group/title:opacity-100 p-0.5 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-opacity"
                   title="Rename resume"
                 >
                   <Edit3 className="h-3 w-3" />
@@ -237,11 +237,11 @@ export const ResumeCard: React.FC<ResumeCardProps> = ({ resume, onDelete }) => {
             )}
 
             <div className="flex items-center gap-2 pt-1">
-              <span className="text-[11px] font-semibold text-slate-600">
+              <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-400">
                 {templateInfo?.name || "Modern"}
               </span>
-              <span className="text-slate-300">•</span>
-              <span className="flex items-center gap-1 text-[11px] text-slate-400">
+              <span className="text-slate-300 dark:text-slate-700">•</span>
+              <span className="flex items-center gap-1 text-[11px] text-slate-400 dark:text-slate-500">
                 <Clock className="h-3 w-3" />
                 {formatRelativeTime(resume.updatedAt)}
               </span>
@@ -254,7 +254,7 @@ export const ResumeCard: React.FC<ResumeCardProps> = ({ resume, onDelete }) => {
               <DropdownMenuTrigger asChild>
                 <button
                   type="button"
-                  className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  className="p-1.5 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                   title="More options"
                   aria-label="More options"
                 >
@@ -289,9 +289,9 @@ export const ResumeCard: React.FC<ResumeCardProps> = ({ resume, onDelete }) => {
                   onSelect={handleExportPdf}
                 >
                   {isExportingPdf ? (
-                    <Loader2 className="h-3.5 w-3.5 animate-spin text-blue-600" />
+                    <Loader2 className="h-3.5 w-3.5 animate-spin text-blue-600 dark:text-blue-400" />
                   ) : (
-                    <Download className="h-3.5 w-3.5 text-blue-600" />
+                    <Download className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
                   )}
                   <span>Quick Export PDF</span>
                 </DropdownMenuItem>
@@ -300,9 +300,9 @@ export const ResumeCard: React.FC<ResumeCardProps> = ({ resume, onDelete }) => {
                   onSelect={handleExportDocx}
                 >
                   {isExportingDocx ? (
-                    <Loader2 className="h-3.5 w-3.5 animate-spin text-blue-600" />
+                    <Loader2 className="h-3.5 w-3.5 animate-spin text-blue-600 dark:text-blue-400" />
                   ) : (
-                    <FileDown className="h-3.5 w-3.5 text-blue-600" />
+                    <FileDown className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
                   )}
                   <span>Quick Export Word</span>
                 </DropdownMenuItem>
@@ -322,7 +322,7 @@ export const ResumeCard: React.FC<ResumeCardProps> = ({ resume, onDelete }) => {
         </div>
 
         {/* Footer Badges & Direct Buttons */}
-        <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
+        <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
           <span
             className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md border text-[10px] font-bold ${scoreColor}`}
           >
@@ -335,10 +335,10 @@ export const ResumeCard: React.FC<ResumeCardProps> = ({ resume, onDelete }) => {
               onClick={handleExportPdf}
               disabled={isExportingPdf}
               title="Quick Export PDF"
-              className="p-1 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+              className="p-1 text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 rounded-md transition-colors"
             >
               {isExportingPdf ? (
-                <Loader2 className="h-3.5 w-3.5 animate-spin text-blue-600" />
+                <Loader2 className="h-3.5 w-3.5 animate-spin text-blue-600 dark:text-blue-400" />
               ) : (
                 <Download className="h-3.5 w-3.5" />
               )}
@@ -347,10 +347,10 @@ export const ResumeCard: React.FC<ResumeCardProps> = ({ resume, onDelete }) => {
               onClick={handleExportDocx}
               disabled={isExportingDocx}
               title="Quick Export Word (.docx)"
-              className="p-1 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+              className="p-1 text-slate-400 dark:text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 rounded-md transition-colors"
             >
               {isExportingDocx ? (
-                <Loader2 className="h-3.5 w-3.5 animate-spin text-blue-600" />
+                <Loader2 className="h-3.5 w-3.5 animate-spin text-blue-600 dark:text-blue-400" />
               ) : (
                 <FileDown className="h-3.5 w-3.5" />
               )}
@@ -359,7 +359,7 @@ export const ResumeCard: React.FC<ResumeCardProps> = ({ resume, onDelete }) => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-7 px-2.5 rounded-md text-xs font-bold text-blue-600 hover:text-blue-700 hover:bg-blue-50 gap-1"
+                className="h-7 px-2.5 rounded-md text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:bg-blue-50 dark:hover:bg-slate-800 gap-1"
               >
                 Edit
                 <ExternalLink className="h-3 w-3" />

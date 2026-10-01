@@ -86,10 +86,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         ref={containerRef}
         onClick={(e) => e.stopPropagation()}
         onKeyDown={handleKeyDown}
-        className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden space-y-0 relative animate-scale-up"
+        className="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden space-y-0 relative animate-scale-up"
       >
         {/* Search Header Input */}
-        <div className="relative flex items-center border-b border-slate-200 px-4 py-3 bg-slate-50/50">
+        <div className="relative flex items-center border-b border-slate-200 dark:border-slate-800 px-4 py-3 bg-slate-50/50 dark:bg-slate-800/50">
           <Search className="h-5 w-5 text-slate-400 shrink-0" />
           <input
             ref={inputRef}
@@ -97,19 +97,19 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search 111+ free tools (e.g. PDF merge, WebP, AES, JSON)..."
-            className="w-full bg-transparent pl-3 pr-10 text-sm sm:text-base font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none"
+            className="w-full bg-transparent pl-3 pr-10 text-sm sm:text-base font-medium text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none"
           />
           <button
             type="button"
             onClick={onClose}
-            className="p-1 rounded-lg hover:bg-slate-200 text-slate-400 hover:text-slate-700 transition-colors"
+            className="p-1 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
         {/* Results List */}
-        <div className="max-h-[60vh] overflow-y-auto p-2 divide-y divide-slate-100">
+        <div className="max-h-[60vh] overflow-y-auto p-2 divide-y divide-slate-100 dark:divide-slate-800">
           {results.length > 0 ? (
             results.map((tool, idx) => {
               const categoryDef = getCategoryById(tool.category);
@@ -125,7 +125,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                   }}
                   onMouseEnter={() => setSelectedIndex(idx)}
                   className={`flex items-center justify-between p-3 rounded-xl cursor-pointer transition-colors ${
-                    isSelected ? "bg-blue-50/80 border border-blue-200" : "hover:bg-slate-50"
+                    isSelected ? "bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800" : "hover:bg-slate-50 dark:hover:bg-slate-800/60"
                   }`}
                 >
                   <div className="flex items-center gap-3 truncate">
@@ -140,57 +140,57 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                       {categoryDef?.shortName || tool.category}
                     </span>
                     <div className="truncate">
-                      <p className="text-sm font-bold text-slate-900 truncate">{tool.name}</p>
-                      <p className="text-xs text-slate-500 truncate">{tool.seo.description}</p>
+                      <p className="text-sm font-bold text-slate-900 dark:text-slate-100 truncate">{tool.name}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 truncate">{tool.seo.description}</p>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-2 text-slate-400 shrink-0">
                     {isSelected && (
-                      <span className="text-[10px] font-mono text-blue-600 bg-blue-100/80 px-2 py-0.5 rounded flex items-center gap-1 font-semibold">
+                      <span className="text-[10px] font-mono text-blue-600 dark:text-blue-400 bg-blue-100/80 dark:bg-blue-900/60 px-2 py-0.5 rounded flex items-center gap-1 font-semibold">
                         Press Enter <CornerDownLeft className="h-3 w-3" />
                       </span>
                     )}
-                    <ArrowRight className={`h-4 w-4 ${isSelected ? "text-blue-600" : ""}`} />
+                    <ArrowRight className={`h-4 w-4 ${isSelected ? "text-blue-600 dark:text-blue-400" : ""}`} />
                   </div>
                 </div>
               );
             })
           ) : (
-            <div className="p-8 text-center text-slate-500 text-sm">
+            <div className="p-8 text-center text-slate-500 dark:text-slate-400 text-sm">
               No matching tools found for "{query}".
             </div>
           )}
         </div>
 
         {/* Footer shortcuts helper */}
-        <div className="border-t border-slate-200 px-4 py-2.5 bg-slate-50 flex items-center justify-between text-[11px] text-slate-500 font-medium">
+        <div className="border-t border-slate-200 dark:border-slate-800 px-4 py-2.5 bg-slate-50 dark:bg-slate-900 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-medium">
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1">
-              <kbd className="px-1.5 py-0.5 bg-white border border-slate-300 rounded font-mono text-[10px]">
+              <kbd className="px-1.5 py-0.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded font-mono text-[10px]">
                 ↑
               </kbd>
-              <kbd className="px-1.5 py-0.5 bg-white border border-slate-300 rounded font-mono text-[10px]">
+              <kbd className="px-1.5 py-0.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded font-mono text-[10px]">
                 ↓
               </kbd>
               Navigate
             </span>
             <span className="flex items-center gap-1">
-              <kbd className="px-1.5 py-0.5 bg-white border border-slate-300 rounded font-mono text-[10px]">
+              <kbd className="px-1.5 py-0.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded font-mono text-[10px]">
                 ↵
               </kbd>
               Select
             </span>
             <span className="flex items-center gap-1">
-              <kbd className="px-1.5 py-0.5 bg-white border border-slate-300 rounded font-mono text-[10px]">
+              <kbd className="px-1.5 py-0.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded font-mono text-[10px]">
                 Esc
               </kbd>
               Close
             </span>
           </div>
 
-          <div className="flex items-center gap-1 font-semibold text-slate-700">
-            <Command className="h-3 w-3 text-blue-600" />
+          <div className="flex items-center gap-1 font-semibold text-slate-700 dark:text-slate-300">
+            <Command className="h-3 w-3 text-blue-600 dark:text-blue-400" />
             <span>ClearTrix Utility Index</span>
           </div>
         </div>

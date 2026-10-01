@@ -119,8 +119,8 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ sectionId }) => 
                   key={item.id}
                   className={`rounded-lg border transition-all duration-200 ${
                     isLocked
-                      ? "border-amber-200 bg-amber-50/30 p-3.5"
-                      : "border-slate-200 bg-slate-50/40 p-3.5 hover:bg-white hover:border-blue-200 shadow-xs"
+                      ? "border-amber-200 dark:border-amber-800 bg-amber-50/30 dark:bg-amber-950/30 p-3.5"
+                      : "border-slate-200 dark:border-slate-800 bg-slate-50/40 dark:bg-slate-800/40 p-3.5 hover:bg-white dark:hover:bg-slate-800 hover:border-blue-200 dark:hover:border-blue-800 shadow-xs"
                   }`}
                 >
                   {/* Item Summary Bar */}
@@ -129,14 +129,14 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ sectionId }) => 
                     onClick={() => setExpandedItemId(isItemExpanded ? null : item.id)}
                   >
                     <div className="flex items-center gap-2 min-w-0 flex-1">
-                      <div className="cursor-grab text-slate-400 hover:text-slate-600 shrink-0">
+                      <div className="cursor-grab text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 shrink-0">
                         <GripVertical className="h-3.5 w-3.5" />
                       </div>
                       <div className="min-w-0">
-                        <h4 className="text-sm font-semibold text-slate-900 truncate">
+                        <h4 className="text-sm font-semibold text-slate-900 dark:text-white truncate">
                           {item.position || "Untitled Role"}
                         </h4>
-                        <p className="text-xs text-slate-500 mt-0.5 truncate">
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 truncate">
                           {item.company || "Company"} • {item.startDate || "Start"} –{" "}
                           {item.current ? "Present" : item.endDate || "End"}
                         </p>
@@ -158,10 +158,10 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ sectionId }) => 
 
                   {/* Item Detailed Fields */}
                   {isItemExpanded && (
-                    <div className="mt-3 border-t border-slate-100 pt-3.5 space-y-3.5">
+                    <div className="mt-3 border-t border-slate-100 dark:border-slate-800 pt-3.5 space-y-3.5">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                         <div>
-                          <label className="text-xs font-medium text-slate-600 mb-1 block">
+                          <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1 block">
                             Job Title
                           </label>
                           <Input
@@ -176,7 +176,7 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ sectionId }) => 
                           />
                         </div>
                         <div>
-                          <label className="text-xs font-medium text-slate-600 mb-1 block">
+                          <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1 block">
                             Company Name
                           </label>
                           <Input
@@ -194,7 +194,7 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ sectionId }) => 
 
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                         <div>
-                          <label className="text-xs font-medium text-slate-600 mb-1 block">
+                          <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1 block">
                             Location
                           </label>
                           <Input
@@ -209,7 +209,7 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ sectionId }) => 
                           />
                         </div>
                         <div>
-                          <label className="text-xs font-medium text-slate-600 mb-1 block">
+                          <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1 block">
                             Start Date
                           </label>
                           <Input
@@ -224,7 +224,7 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ sectionId }) => 
                           />
                         </div>
                         <div>
-                          <label className="text-xs font-medium text-slate-600 mb-1 block">
+                          <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1 block">
                             End Date
                           </label>
                           <Input
@@ -253,20 +253,20 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ sectionId }) => 
                               endDate: e.target.checked ? "Present" : "",
                             })
                           }
-                          className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500/20"
+                          className="h-4 w-4 rounded border-slate-300 dark:border-slate-700 text-blue-600 focus:ring-blue-500/20 cursor-pointer"
                         />
                         <label
                           htmlFor={`curr-${item.id}`}
-                          className="text-xs text-slate-700 font-medium cursor-pointer"
+                          className="text-xs text-slate-700 dark:text-slate-300 font-medium cursor-pointer"
                         >
                           I currently work here
                         </label>
                       </div>
 
                       {/* Bullet Highlights */}
-                      <div className="space-y-2 pt-2 border-t border-slate-100">
+                      <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
                         <div className="flex items-center justify-between">
-                          <label className="text-xs font-semibold text-slate-700">
+                          <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                             Key Accomplishments & Bullets
                           </label>
                           <div className="flex items-center gap-2">
@@ -276,9 +276,9 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ sectionId }) => 
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => setAiModalItem(item)}
-                                className="h-6 gap-1 text-[11px] text-blue-700 bg-blue-50 hover:bg-blue-100 hover:text-blue-800 border border-blue-200 font-medium rounded-md px-2.5 transition-colors"
+                                className="h-6 gap-1 text-[11px] text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-900/50 hover:text-blue-800 dark:hover:text-blue-200 border border-blue-200 dark:border-blue-800 font-medium rounded-md px-2.5 transition-colors"
                               >
-                                <Sparkles className="h-3 w-3 text-blue-600" /> AI Bullets
+                                <Sparkles className="h-3 w-3 text-blue-600 dark:text-blue-400" /> AI Bullets
                               </Button>
                             )}
                             <Button
@@ -286,7 +286,7 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ sectionId }) => 
                               size="sm"
                               disabled={isLocked}
                               onClick={() => handleAddHighlight(item)}
-                              className="h-6 gap-1 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium rounded-md transition-colors"
+                              className="h-6 gap-1 text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 font-medium rounded-md transition-colors"
                             >
                               <Plus className="h-3 w-3" /> Add Bullet
                             </Button>
@@ -296,7 +296,7 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ sectionId }) => 
                         <div className="space-y-1.5">
                           {(item.highlights || []).map((highlight, idx) => (
                             <div key={idx} className="flex items-center gap-1.5">
-                              <span className="text-slate-400 text-xs select-none pl-1">•</span>
+                              <span className="text-slate-400 dark:text-slate-500 text-xs select-none pl-1">•</span>
                               <Input
                                 disabled={isLocked}
                                 value={highlight}
@@ -311,7 +311,7 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ sectionId }) => 
                                   variant="ghost"
                                   size="icon"
                                   onClick={() => handleRemoveHighlight(item, idx)}
-                                  className="h-7 w-7 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors shrink-0"
+                                  className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/50 rounded-md transition-colors shrink-0"
                                 >
                                   <Trash2 className="h-3 w-3" />
                                 </Button>
@@ -332,9 +332,9 @@ export const ExperienceForm: React.FC<ExperienceFormProps> = ({ sectionId }) => 
               variant="outline"
               size="sm"
               onClick={() => addSectionItem(sectionId)}
-              className="w-full gap-1.5 border-dashed border-slate-300 bg-white text-slate-700 hover:bg-blue-50/40 hover:border-blue-300 hover:text-blue-700 rounded-lg font-medium shadow-xs transition-all h-9"
+              className="w-full gap-1.5 border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-blue-50/40 dark:hover:bg-blue-950/40 hover:border-blue-300 dark:hover:border-blue-700 hover:text-blue-700 dark:hover:text-blue-300 rounded-lg font-medium shadow-xs transition-all h-9"
             >
-              <Plus className="h-4 w-4 text-blue-600" /> Add Another Experience
+              <Plus className="h-4 w-4 text-blue-600 dark:text-blue-400" /> Add Another Experience
             </Button>
           )}
         </div>

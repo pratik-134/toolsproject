@@ -30,34 +30,34 @@ export const PersonalInfoForm: React.FC = () => {
 
       <div
         id="editor-section-personal"
-        className="group/personal rounded-lg border border-slate-200 bg-white shadow-xs hover:shadow-sm hover:border-slate-300 transition-all duration-200 scroll-mt-20"
+        className="group/personal rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs hover:shadow-sm hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-200 scroll-mt-20"
       >
         <div
           className="flex items-center justify-between p-3.5 sm:p-4 cursor-pointer select-none"
           onClick={() => setExpanded(!expanded)}
         >
           <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-blue-100 bg-blue-50 text-blue-600 transition-transform duration-200 group-hover/personal:scale-105">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-blue-100 dark:border-blue-900 bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 transition-transform duration-200 group-hover/personal:scale-105">
               <User className="h-4 w-4" />
             </div>
-            <span className="text-sm font-semibold text-slate-900 tracking-tight">
+            <span className="text-sm font-semibold text-slate-900 dark:text-white tracking-tight">
               Personal Details
             </span>
           </div>
           <Button
             variant="ghost"
             size="icon"
-            className="h-7 w-7 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-md transition-colors"
+            className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors"
           >
             {expanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
           </Button>
         </div>
 
         {expanded && (
-          <div className="border-t border-slate-100 p-4 sm:p-5 pt-4 space-y-4">
+          <div className="border-t border-slate-100 dark:border-slate-800 p-4 sm:p-5 pt-4 space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               <div>
-                <label className="text-xs font-medium text-slate-600 mb-1.5 block">
+                <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1.5 block">
                   Full Name <span className="text-red-500 font-bold">*</span>
                 </label>
                 <Input
@@ -67,7 +67,7 @@ export const PersonalInfoForm: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="text-xs font-medium text-slate-600 mb-1.5 block">
+                <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1.5 block">
                   Professional Title
                 </label>
                 <Input
@@ -80,7 +80,7 @@ export const PersonalInfoForm: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
               <div>
-                <label className="text-xs font-medium text-slate-600 mb-1.5 block">
+                <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1.5 block">
                   Email
                 </label>
                 <Input
@@ -91,7 +91,7 @@ export const PersonalInfoForm: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="text-xs font-medium text-slate-600 mb-1.5 block">
+                <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1.5 block">
                   Phone
                 </label>
                 <Input
@@ -101,7 +101,7 @@ export const PersonalInfoForm: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="text-xs font-medium text-slate-600 mb-1.5 block">
+                <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1.5 block">
                   Location
                 </label>
                 <Input
@@ -114,7 +114,7 @@ export const PersonalInfoForm: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
               <div>
-                <label className="text-xs font-medium text-slate-600 mb-1.5 block">
+                <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1.5 block">
                   Website / Portfolio
                 </label>
                 <Input
@@ -124,7 +124,7 @@ export const PersonalInfoForm: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="text-xs font-medium text-slate-600 mb-1.5 block">
+                <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1.5 block">
                   LinkedIn
                 </label>
                 <Input
@@ -134,7 +134,7 @@ export const PersonalInfoForm: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="text-xs font-medium text-slate-600 mb-1.5 block">
+                <label className="text-xs font-medium text-slate-600 dark:text-slate-300 mb-1.5 block">
                   GitHub
                 </label>
                 <Input
@@ -147,16 +147,16 @@ export const PersonalInfoForm: React.FC = () => {
 
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="text-xs font-medium text-slate-600">
+                <label className="text-xs font-medium text-slate-600 dark:text-slate-300">
                   Professional Summary
                 </label>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsAiModalOpen(true)}
-                  className="h-6 gap-1 text-[11px] text-blue-700 bg-blue-50 hover:bg-blue-100 hover:text-blue-800 border border-blue-200 font-medium rounded-md px-2.5 transition-colors"
+                  className="h-6 gap-1 text-[11px] text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-900/50 hover:text-blue-800 dark:hover:text-blue-200 border border-blue-200 dark:border-blue-800 font-medium rounded-md px-2.5 transition-colors"
                 >
-                  <Sparkles className="h-3 w-3 text-blue-600" /> AI Polish Summary
+                  <Sparkles className="h-3 w-3 text-blue-600 dark:text-blue-400" /> AI Polish Summary
                 </Button>
               </div>
               <Textarea

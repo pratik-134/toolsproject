@@ -39,38 +39,38 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-60 flex items-center justify-center bg-slate-950/70 backdrop-blur-xs p-2 sm:p-4 overflow-hidden">
-      <div className="relative w-full max-w-6xl h-[94vh] rounded-lg border border-slate-200 bg-white shadow-2xl flex flex-col overflow-hidden">
+      <div className="relative w-full max-w-6xl h-[94vh] rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xl flex flex-col overflow-hidden">
         {/* Modal Top Bar */}
-        <div className="flex items-center justify-between border-b border-slate-100 px-6 py-3.5 shrink-0 bg-white">
+        <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-6 py-3.5 shrink-0 bg-white dark:bg-slate-900">
           <div className="flex items-center gap-3">
             <div>
               <div className="flex items-center gap-2.5">
-                <h3 className="font-headings text-lg font-bold text-slate-900">{template.name}</h3>
-                <span className="font-body text-xs text-blue-700 font-bold bg-blue-50 border border-blue-200 px-2.5 py-0.5 rounded-md">
+                <h3 className="font-headings text-lg font-bold text-slate-900 dark:text-white">{template.name}</h3>
+                <span className="font-body text-xs text-blue-700 dark:text-blue-300 font-bold bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-900 px-2.5 py-0.5 rounded-md">
                   ATS Score: {template.atsScore}%
                 </span>
-                <span className="font-body text-xs text-slate-500 font-medium capitalize">
+                <span className="font-body text-xs text-slate-500 dark:text-slate-400 font-medium capitalize">
                   • {template.category}
                 </span>
               </div>
-              <p className="font-body text-xs text-slate-500 line-clamp-1 mt-0.5">{template.description}</p>
+              <p className="font-body text-xs text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">{template.description}</p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
             {/* Zoom Controls */}
-            <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-md border border-slate-200">
+            <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-md border border-slate-200 dark:border-slate-700">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setZoom(Math.max(50, zoom - 10))}
                 disabled={zoom <= 50}
-                className="h-7 w-7 text-slate-500 hover:text-slate-900 rounded-md"
+                className="h-7 w-7 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-md"
                 title="Zoom Out"
               >
                 <ZoomOut className="h-3.5 w-3.5" />
               </Button>
-              <span className="text-xs font-mono font-bold px-1 text-slate-900 w-10 text-center">
+              <span className="text-xs font-mono font-bold px-1 text-slate-900 dark:text-white w-10 text-center">
                 {zoom}%
               </span>
               <Button
@@ -78,7 +78,7 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
                 size="icon"
                 onClick={() => setZoom(Math.min(130, zoom + 10))}
                 disabled={zoom >= 130}
-                className="h-7 w-7 text-slate-500 hover:text-slate-900 rounded-md"
+                className="h-7 w-7 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-md"
                 title="Zoom In"
               >
                 <ZoomIn className="h-3.5 w-3.5" />
@@ -93,14 +93,14 @@ export const TemplatePreviewModal: React.FC<TemplatePreviewModalProps> = ({
               <Check className="h-4 w-4" /> Apply Template
             </Button>
 
-            <Button variant="ghost" size="icon" onClick={onClose} className="h-8 w-8 text-slate-400 hover:text-slate-700 rounded-md">
+            <Button variant="ghost" size="icon" onClick={onClose} className="h-8 w-8 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 rounded-md">
               <X className="h-4 w-4" />
             </Button>
           </div>
         </div>
 
         {/* Modal Body Preview Canvas */}
-        <div className="flex-1 overflow-auto bg-slate-100 p-6 flex items-start justify-center">
+        <div className="flex-1 overflow-auto bg-slate-100 dark:bg-slate-950 p-6 flex items-start justify-center">
           <div
             className="transition-transform duration-150 origin-top"
             style={{

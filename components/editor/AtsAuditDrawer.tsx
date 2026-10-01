@@ -192,49 +192,49 @@ export const AtsAuditDrawer: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-end bg-slate-950/40 backdrop-blur-xs animate-in fade-in duration-150 no-print select-none">
-      <div className="w-full max-w-md h-full bg-white text-slate-900 border-l border-slate-200 p-4 sm:p-6 shadow-2xl flex flex-col justify-between overflow-y-auto">
+      <div className="w-full max-w-md h-full bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 border-l border-slate-200 dark:border-slate-800 p-4 sm:p-6 shadow-2xl flex flex-col justify-between overflow-y-auto">
         {/* Header */}
         <div>
-          <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+          <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2.5">
-              <div className="p-2 rounded-lg bg-blue-50 border border-blue-200 text-blue-600">
+              <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-900 text-blue-600 dark:text-blue-400">
                 <ShieldCheck className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="font-semibold text-base text-slate-900">ATS & Quality Audit</h3>
-                <p className="text-xs text-slate-500">Real-time parser compatibility scan</p>
+                <h3 className="font-semibold text-base text-slate-900 dark:text-white">ATS & Quality Audit</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Real-time parser compatibility scan</p>
               </div>
             </div>
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setAtsAuditOpen(false)}
-              className="h-8 w-8 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-md"
+              className="h-8 w-8 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md"
             >
               <X className="h-4 w-4" />
             </Button>
           </div>
 
           {/* Score Badge Banner */}
-          <div className="mt-4 p-4 rounded-lg border border-slate-200 bg-slate-50/70 flex items-center justify-between">
+          <div className="mt-4 p-4 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/50 flex items-center justify-between">
             <div>
-              <span className="text-xs text-slate-500 block font-medium">Overall ATS Score</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Overall ATS Score</span>
               <span className={`text-3xl font-extrabold tracking-tight ${gradeColor}`}>
                 {atsScore}%
               </span>
-              <span className="text-xs text-slate-600 block mt-0.5 font-medium">{grade}</span>
+              <span className="text-xs text-slate-600 dark:text-slate-300 block mt-0.5 font-medium">{grade}</span>
             </div>
             <div className="text-right">
-              <span className="text-xs text-slate-700 font-semibold font-mono block">
+              <span className="text-xs text-slate-700 dark:text-slate-300 font-semibold font-mono block">
                 {passedCount} of {checks.length} checks passed
               </span>
-              <span className="text-[11px] text-slate-400 block mt-1">100% Client-Side Engine</span>
+              <span className="text-[11px] text-slate-400 dark:text-slate-500 block mt-1">100% Client-Side Engine</span>
             </div>
           </div>
 
           {/* Audit Checklist */}
           <div className="mt-6 space-y-3">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
               Audit Breakdown
             </h4>
 
@@ -244,24 +244,24 @@ export const AtsAuditDrawer: React.FC = () => {
                   key={check.id}
                   className={`p-3.5 rounded-lg border text-xs transition-all ${
                     check.passed
-                      ? "border-slate-200 bg-white shadow-2xs"
-                      : "border-amber-200 bg-amber-50/40"
+                      ? "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/60 shadow-2xs"
+                      : "border-amber-200 dark:border-amber-900/60 bg-amber-50/40 dark:bg-amber-950/30"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex items-center gap-2">
                       {check.passed ? (
-                        <CheckCircle2 className="h-4 w-4 text-blue-600 shrink-0" />
+                        <CheckCircle2 className="h-4 w-4 text-blue-600 dark:text-blue-400 shrink-0" />
                       ) : (
-                        <AlertTriangle className="h-4 w-4 text-amber-600 shrink-0" />
+                        <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0" />
                       )}
-                      <span className="font-semibold text-slate-900 text-xs">{check.title}</span>
+                      <span className="font-semibold text-slate-900 dark:text-white text-xs">{check.title}</span>
                     </div>
 
                     {check.targetSectionId && !check.passed && (
                       <button
                         onClick={() => handleJump(check.targetSectionId)}
-                        className="text-xs text-blue-600 hover:text-blue-700 hover:underline flex items-center gap-0.5 shrink-0 font-medium"
+                        className="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline flex items-center gap-0.5 shrink-0 font-medium"
                       >
                         <span>Fix</span>
                         <ArrowRight className="h-3 w-3" />
@@ -269,10 +269,10 @@ export const AtsAuditDrawer: React.FC = () => {
                     )}
                   </div>
 
-                  <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">{check.description}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">{check.description}</p>
                   <p
                     className={`text-xs mt-1.5 font-medium ${
-                      check.passed ? "text-blue-700" : "text-amber-800"
+                      check.passed ? "text-blue-700 dark:text-blue-300" : "text-amber-800 dark:text-amber-300"
                     }`}
                   >
                     • {check.recommendation}
@@ -284,8 +284,8 @@ export const AtsAuditDrawer: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs mt-4">
-          <span className="text-slate-400 text-xs">Updated live on every edit</span>
+        <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs mt-4">
+          <span className="text-slate-400 dark:text-slate-500 text-xs">Updated live on every edit</span>
           <Button
             size="sm"
             onClick={() => setAtsAuditOpen(false)}

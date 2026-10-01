@@ -20,116 +20,124 @@ export default function ToolsHubPage() {
   const allTools = getAllTools();
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F8FAFC] text-[#0F172A] selection:bg-blue-500/20">
+    <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-slate-950 text-[#0F172A] dark:text-slate-100 selection:bg-blue-500/20">
       <Navbar />
 
-      <main className="flex-1 pb-16">
+      <main className="flex-1 pb-20">
         {/* Hub Header */}
-        <section className="bg-gradient-to-b from-blue-50/40 via-slate-50/60 to-white py-12 sm:py-16">
+        <section className="bg-gradient-to-b from-blue-50/50 via-slate-50/40 to-[#F8FAFC] dark:from-slate-900/60 dark:via-slate-950/70 dark:to-slate-950 py-12 sm:py-16 border-b border-slate-200/60 dark:border-slate-800/60">
           <div className="max-w-container mx-auto px-4 sm:px-6 text-center space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full bg-slate-100/90 border border-slate-200/80 px-4 py-1.5 text-xs font-semibold text-slate-700 shadow-2xs">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 px-4 py-1.5 text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 shadow-sm">
               <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>✦ {allTools.length} Tools · 100% Client-Side In-Browser Execution</span>
+              <span>{allTools.length} Tools · 100% In-Browser · Zero Uploads</span>
             </div>
 
-            <h1 className="font-headings text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
+            <h1 className="font-headings text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
               All {BRAND.name} Tools
             </h1>
 
-            <p className="font-body text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-medium">
-              Every utility processes completely inside your local browser memory.
-              Zero file uploads, zero watermarks, zero tracking cookies, zero paywalls.
+            <p className="font-body text-slate-700 dark:text-slate-200 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-medium">
+              Every utility runs inside your browser. Zero file uploads, zero
+              watermarks, zero paywalls.
             </p>
           </div>
         </section>
 
-        {/* Categories Grid (Clean Soft-Tech Grid Layout) */}
-        <section className="max-w-container mx-auto px-4 sm:px-6 pt-10">
+        {/* Browse by Category */}
+        <section className="max-w-container mx-auto px-4 sm:px-6 pt-12">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="font-headings text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+              <h2 className="font-headings text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
                 Browse by Category
               </h2>
-              <p className="text-xs text-slate-500 mt-0.5 font-medium">
-                Explore specialized utility suites optimized for speed and complete data secrecy
+              <p className="text-sm text-slate-700 dark:text-slate-200 font-medium mt-0.5">
+                Specialized suites built for speed and complete data privacy
               </p>
             </div>
-            <span className="text-xs font-mono font-bold text-slate-500 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full">
-              {CATEGORY_LIST.length} Categories
+            <span className="text-xs font-mono font-bold text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 px-3 py-1 rounded-full shadow-sm">
+              {CATEGORY_LIST.length} categories
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {CATEGORY_LIST.map((cat) => {
               const IconComp = CATEGORY_ICON_MAP[cat.id] || Wrench;
               const catTools = allTools.filter((t) => t.category === cat.id);
               const theme = getCategoryTheme(cat.id);
+              const toolCount = catTools.length;
 
               return (
                 <Link
                   key={cat.id}
                   href={`/tools/${cat.id}`}
-                  className="group relative flex flex-col justify-between h-full min-h-[230px] p-6 sm:p-7 rounded-3xl bg-white border border-slate-200/80 shadow-sm hover:shadow-[0_16px_36px_-8px_var(--cat-glow)] hover:-translate-y-1 hover:border-[var(--cat-border)] transition-all duration-300 ease-out overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 motion-reduce:transition-none motion-reduce:hover:transform-none"
+                  className="group relative flex flex-col h-full rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-[0_4px_20px_-2px_rgba(15,23,42,0.08)] hover:shadow-[0_12px_28px_-4px_rgba(15,23,42,0.14)] dark:shadow-none dark:hover:shadow-none overflow-hidden transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[var(--cat-border)] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 motion-reduce:transition-none motion-reduce:hover:transform-none"
                   style={{
-                    '--cat-primary': theme.primary,
-                    '--cat-border': theme.border,
-                    '--cat-glow': theme.glow,
+                    "--cat-primary": theme.primary,
+                    "--cat-border": theme.border,
+                    "--cat-glow": theme.glow,
                   } as React.CSSProperties}
                 >
-                  {/* Background Soft Faint Watermark Icon (144px, clipped by overflow-hidden) */}
+                  {/* Tinted header band */}
                   <div
-                    className="absolute -right-3 -top-3 pointer-events-none opacity-[0.06] -rotate-12 transition-all duration-500 ease-out group-hover:scale-110 group-hover:opacity-[0.10] group-hover:-rotate-6 group-hover:translate-x-1 group-hover:-translate-y-1 select-none"
-                    style={{ color: theme.primary }}
-                    aria-hidden="true"
+                    className="relative px-6 pt-6 pb-5 overflow-hidden"
+                    style={{ backgroundColor: theme.tint }}
                   >
-                    <IconComp className="w-36 h-36" strokeWidth={1.25} />
-                  </div>
-
-                  <div className="space-y-4 relative z-10">
-                    {/* Hero Icon 64x64 Tile */}
+                    {/* Watermark */}
                     <div
-                      className="w-16 h-16 rounded-2xl border flex items-center justify-center shrink-0 shadow-sm transition-all duration-300 ease-out group-hover:scale-105 group-hover:shadow-md"
+                      className="absolute -right-5 -top-5 pointer-events-none opacity-[0.13] -rotate-12 transition-all duration-500 ease-out group-hover:scale-110 group-hover:opacity-[0.20] group-hover:-rotate-6 select-none"
+                      style={{ color: theme.primary }}
+                      aria-hidden="true"
+                    >
+                      <IconComp className="w-32 h-32" strokeWidth={1.25} />
+                    </div>
+
+                    {/* Icon tile */}
+                    <div
+                      className="relative z-10 w-12 h-12 rounded-xl flex items-center justify-center border shadow-sm transition-all duration-300 group-hover:scale-105"
                       style={{
-                        background: `linear-gradient(135deg, ${theme.tint} 0%, #FFFFFF 100%)`,
+                        backgroundColor: "rgba(255,255,255,0.80)",
                         borderColor: theme.border,
                         color: theme.primary,
                       }}
                     >
-                      <IconComp className="w-8 h-8 transition-transform duration-300 ease-out group-hover:scale-105" strokeWidth={1.75} aria-hidden="true" />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <h3 className="font-headings text-lg font-semibold text-slate-900 tracking-tight transition-colors duration-200 group-hover:text-blue-600">
-                        {cat.name}
-                      </h3>
-
-                      <p className="font-body text-sm text-slate-500 leading-relaxed line-clamp-2 min-h-[2.5rem]">
-                        {cat.description}
-                      </p>
+                      <IconComp className="w-6 h-6" strokeWidth={1.75} aria-hidden="true" />
                     </div>
                   </div>
 
-                  {/* Dynamic Tool Count Footer Row */}
-                  <div className="pt-4 mt-5 border-t border-slate-100 flex items-center justify-between relative z-10">
+                  {/* Body */}
+                  <div className="px-6 pt-4 pb-3 flex flex-col flex-1 gap-2">
+                    <h3 className="font-headings text-lg font-bold text-slate-900 dark:text-white leading-snug transition-colors duration-200 group-hover:text-[var(--cat-primary)]">
+                      {cat.name}
+                    </h3>
+                    <p className="font-body text-sm text-slate-700 dark:text-slate-200 font-medium leading-relaxed line-clamp-2">
+                      {cat.description}
+                    </p>
+                  </div>
+
+                  {/* Footer */}
+                  <div className="px-6 pb-5 pt-3 flex items-center justify-between gap-2 border-t border-slate-100 dark:border-slate-800 mt-auto">
                     <span
-                      className="text-xs font-medium font-mono px-3 py-1 rounded-full border shadow-sm transition-all duration-200 group-hover:shadow-xs"
+                      className="text-xs font-bold px-3 py-1 rounded-full border"
                       style={{
                         backgroundColor: theme.tint,
                         borderColor: theme.border,
                         color: theme.primary,
                       }}
                     >
-                      {catTools.length > 0
-                        ? `${catTools.length} ${catTools.length === 1 ? "tool" : "tools"}`
-                        : "Upcoming Phase"}
+                      {toolCount > 0
+                        ? `${toolCount} ${toolCount === 1 ? "tool" : "tools"}`
+                        : "Upcoming"}
                     </span>
 
-                    <div
-                      className="w-9 h-9 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center transition-all duration-300 ease-out group-hover:bg-[var(--cat-primary)] group-hover:text-white shadow-sm group-hover:scale-110 group-hover:shadow-md shrink-0"
+                    {/* Slide-in CTA pill */}
+                    <span
+                      className="inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded-full text-white opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 ease-out shadow-sm"
+                      style={{ backgroundColor: theme.primary }}
                       aria-hidden="true"
                     >
-                      <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-1" strokeWidth={2} />
-                    </div>
+                      Explore
+                      <ArrowRight className="w-3.5 h-3.5" strokeWidth={2.5} />
+                    </span>
                   </div>
                 </Link>
               );
@@ -137,19 +145,23 @@ export default function ToolsHubPage() {
           </div>
         </section>
 
-        {/* Interactive Directory Search & Live Tools */}
-        <section className="max-w-container mx-auto px-4 sm:px-6 pt-12">
-          <div className="flex items-center gap-2 mb-6">
-            <Sparkles className="h-5 w-5 text-blue-600" />
-            <h2 className="font-headings text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
-              Search & Launch Tools
-            </h2>
+        {/* Search & Tools Grid */}
+        <section className="max-w-container mx-auto px-4 sm:px-6 pt-14">
+          <div className="flex items-center gap-2.5 mb-6">
+            <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center shrink-0">
+              <Sparkles className="h-4 w-4 text-white" />
+            </div>
+            <div>
+              <h2 className="font-headings text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                Search &amp; Launch Tools
+              </h2>
+            </div>
           </div>
 
           <React.Suspense
             fallback={
-              <div className="p-8 text-center text-slate-400 font-body text-sm">
-                Loading tools directory...
+              <div className="p-8 text-center text-slate-400 dark:text-slate-500 font-body text-sm">
+                Loading tools directory…
               </div>
             }
           >

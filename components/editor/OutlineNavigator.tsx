@@ -44,13 +44,13 @@ export const OutlineNavigator: React.FC<OutlineNavigatorProps> = ({ onClose }) =
   if (!isOutlineOpen) return null;
 
   return (
-    <div className="fixed right-4 top-16 z-40 w-80 bg-white text-slate-900 border border-slate-200 rounded-lg p-4 shadow-xl backdrop-blur-md no-print select-none animate-in fade-in slide-in-from-right-4 duration-200">
+    <div className="fixed right-4 top-16 z-40 w-80 bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-800 rounded-lg p-4 shadow-xl backdrop-blur-md no-print select-none animate-in fade-in slide-in-from-right-4 duration-200">
       {/* Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+      <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800 mb-3">
         <div className="flex items-center gap-2">
-          <ListTree className="h-4 w-4 text-blue-600" />
-          <span className="font-semibold text-sm text-slate-900">Section Outline</span>
-          <span className="text-[11px] font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md border border-slate-200">
+          <ListTree className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+          <span className="font-semibold text-sm text-slate-900 dark:text-white">Section Outline</span>
+          <span className="text-[11px] font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-700">
             {sections.length}
           </span>
         </div>
@@ -58,7 +58,7 @@ export const OutlineNavigator: React.FC<OutlineNavigatorProps> = ({ onClose }) =
           variant="ghost"
           size="icon"
           onClick={toggleOutline}
-          className="h-6 w-6 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-md"
+          className="h-6 w-6 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md"
         >
           <X className="h-3.5 w-3.5" />
         </Button>
@@ -77,8 +77,8 @@ export const OutlineNavigator: React.FC<OutlineNavigatorProps> = ({ onClose }) =
               key={section.id}
               className={`group flex items-center justify-between px-2.5 py-2 rounded-md border transition-all ${
                 section.visible
-                  ? "border-slate-200 bg-slate-50/70 hover:bg-white hover:border-blue-200 shadow-xs"
-                  : "border-slate-200/50 bg-slate-50/30 opacity-50"
+                  ? "border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/60 hover:bg-white dark:hover:bg-slate-800 hover:border-blue-200 dark:hover:border-blue-800 shadow-xs"
+                  : "border-slate-200/50 dark:border-slate-800/50 bg-slate-50/30 dark:bg-slate-800/20 opacity-50"
               }`}
             >
               {/* Click to jump */}
@@ -86,11 +86,11 @@ export const OutlineNavigator: React.FC<OutlineNavigatorProps> = ({ onClose }) =
                 onClick={() => handleSectionClick(section.id)}
                 className="flex items-center gap-2 flex-1 min-w-0 cursor-pointer"
               >
-                <span className="text-[11px] font-mono text-slate-400 w-4">{index + 1}.</span>
-                <span className="text-xs font-medium text-slate-800 truncate group-hover:text-blue-600">
+                <span className="text-[11px] font-mono text-slate-400 dark:text-slate-500 w-4">{index + 1}.</span>
+                <span className="text-xs font-medium text-slate-800 dark:text-slate-200 truncate group-hover:text-blue-600 dark:group-hover:text-blue-400">
                   {section.title}
                 </span>
-                <span className="text-[10px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded-md font-mono">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded-md font-mono">
                   {itemCount}
                 </span>
                 {isLocked && <Lock className="h-3 w-3 text-amber-500" />}
@@ -105,7 +105,7 @@ export const OutlineNavigator: React.FC<OutlineNavigatorProps> = ({ onClose }) =
                     e.stopPropagation();
                     moveSection(section.id, "up");
                   }}
-                  className="p-1 text-slate-400 hover:text-slate-700 disabled:opacity-20 hover:bg-slate-100 rounded-md transition-colors"
+                  className="p-1 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 disabled:opacity-20 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors"
                   title="Move Up"
                 >
                   <ArrowUp className="h-3 w-3" />
@@ -117,7 +117,7 @@ export const OutlineNavigator: React.FC<OutlineNavigatorProps> = ({ onClose }) =
                     e.stopPropagation();
                     moveSection(section.id, "down");
                   }}
-                  className="p-1 text-slate-400 hover:text-slate-700 disabled:opacity-20 hover:bg-slate-100 rounded-md transition-colors"
+                  className="p-1 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 disabled:opacity-20 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors"
                   title="Move Down"
                 >
                   <ArrowDown className="h-3 w-3" />
@@ -128,11 +128,11 @@ export const OutlineNavigator: React.FC<OutlineNavigatorProps> = ({ onClose }) =
                     e.stopPropagation();
                     toggleSectionVisibility(section.id);
                   }}
-                  className="p-1 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-md transition-colors"
+                  className="p-1 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors"
                   title={section.visible ? "Hide section" : "Show section"}
                 >
                   {section.visible ? (
-                    <Eye className="h-3 w-3 text-slate-600" />
+                    <Eye className="h-3 w-3 text-slate-600 dark:text-slate-400" />
                   ) : (
                     <EyeOff className="h-3 w-3 text-amber-500" />
                   )}
@@ -144,9 +144,9 @@ export const OutlineNavigator: React.FC<OutlineNavigatorProps> = ({ onClose }) =
       </div>
 
       {/* Footer Info */}
-      <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+      <div className="mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-400 dark:text-slate-500">
         <span>Click any section to jump directly</span>
-        <Sparkles className="h-3 w-3 text-slate-400" />
+        <Sparkles className="h-3 w-3 text-slate-400 dark:text-slate-500" />
       </div>
     </div>
   );

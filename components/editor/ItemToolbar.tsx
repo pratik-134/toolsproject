@@ -36,7 +36,7 @@ export const ItemToolbar: React.FC<ItemToolbarProps> = ({
           size="icon"
           disabled={!canMoveUp || isLocked}
           onClick={onMoveUp}
-          className="h-7 w-7 text-slate-400 hover:text-slate-700 hover:bg-slate-100 disabled:opacity-20 rounded-md transition-colors"
+          className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 rounded-md transition-colors"
           title="Move Item Up"
         >
           <ArrowUp className="h-3 w-3" />
@@ -50,7 +50,7 @@ export const ItemToolbar: React.FC<ItemToolbarProps> = ({
           size="icon"
           disabled={!canMoveDown || isLocked}
           onClick={onMoveDown}
-          className="h-7 w-7 text-slate-400 hover:text-slate-700 hover:bg-slate-100 disabled:opacity-20 rounded-md transition-colors"
+          className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 rounded-md transition-colors"
           title="Move Item Down"
         >
           <ArrowDown className="h-3 w-3" />
@@ -63,7 +63,7 @@ export const ItemToolbar: React.FC<ItemToolbarProps> = ({
           variant="ghost"
           size="icon"
           onClick={onDuplicate}
-          className="h-7 w-7 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-md transition-colors"
+          className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors"
           title="Duplicate Entry"
         >
           <Copy className="h-3 w-3" />
@@ -76,7 +76,7 @@ export const ItemToolbar: React.FC<ItemToolbarProps> = ({
           variant="ghost"
           size="icon"
           onClick={onRemove}
-          className="h-7 w-7 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
+          className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/50 rounded-md transition-colors"
           title="Delete Entry"
         >
           <Trash2 className="h-3 w-3" />
@@ -88,7 +88,7 @@ export const ItemToolbar: React.FC<ItemToolbarProps> = ({
         variant="ghost"
         size="icon"
         onClick={onToggleExpand}
-        className="h-7 w-7 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-md transition-colors"
+        className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors"
       >
         {isExpanded ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
       </Button>

@@ -67,29 +67,29 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
   const isStudioWorkspace = tool.slug === "pdf-editor";
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F8F9FA] text-[#0F172A]">
+    <div className="flex min-h-screen flex-col bg-[#F8F9FA] dark:bg-slate-950 text-[#0F172A] dark:text-slate-100">
       <Navbar />
 
       <main className="flex-1 pb-20">
         {/* ── Page Header ────────────────────────────────────── */}
-        <div className="border-b border-[#E2E8F0] bg-white">
+        <div className="border-b border-[#E2E8F0] dark:border-slate-800 bg-white dark:bg-slate-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-4">
 
             {/* Breadcrumb */}
             <nav
               aria-label="Breadcrumb"
-              className="flex items-center gap-1.5 text-[13px] text-[#94A3B8] flex-wrap"
+              className="flex items-center gap-1.5 text-[13px] text-[#94A3B8] dark:text-slate-400 flex-wrap"
             >
               <Link
                 href="/"
-                className="hover:text-[#475569] transition-colors duration-150"
+                className="hover:text-[#475569] dark:hover:text-slate-200 transition-colors duration-150"
               >
                 Home
               </Link>
               <ChevronRight className="h-3 w-3" strokeWidth={1.75} aria-hidden="true" />
               <Link
                 href="/tools"
-                className="hover:text-[#475569] transition-colors duration-150"
+                className="hover:text-[#475569] dark:hover:text-slate-200 transition-colors duration-150"
               >
                 Tools
               </Link>
@@ -98,14 +98,14 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                   <ChevronRight className="h-3 w-3" strokeWidth={1.75} aria-hidden="true" />
                   <Link
                     href={`/tools/${category.id}`}
-                    className={`hover:text-[#475569] transition-colors duration-150`}
+                    className="hover:text-[#475569] dark:hover:text-slate-200 transition-colors duration-150"
                   >
                     {category.shortName}
                   </Link>
                 </>
               )}
               <ChevronRight className="h-3 w-3" strokeWidth={1.75} aria-hidden="true" />
-              <span className="font-semibold text-[#0F172A] truncate">
+              <span className="font-semibold text-[#0F172A] dark:text-slate-100 truncate">
                 {tool.name}
               </span>
             </nav>
@@ -119,7 +119,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                   style={{ backgroundColor: theme.primary }}
                   aria-hidden="true"
                 />
-                <h1 className="text-[28px] sm:text-[34px] leading-[1.2] font-bold text-[#0F172A] tracking-[-0.02em]">
+                <h1 className="text-[28px] sm:text-[34px] leading-[1.2] font-bold text-[#0F172A] dark:text-slate-100 tracking-[-0.02em]">
                   {tool.seo.h1 || tool.name}
                 </h1>
               </div>
@@ -127,10 +127,10 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
               {/* Privacy badge & Trust line */}
               <div
                 className="inline-flex items-center gap-1.5 rounded-[6px]
-                  border border-[#BFDBFE] bg-[#EFF6FF] text-[#1D4ED8] px-2.5 py-1 text-[11px] font-semibold tracking-[0.05em] uppercase shrink-0
+                  border border-[#BFDBFE] dark:border-blue-900/60 bg-[#EFF6FF] dark:bg-blue-950/40 text-[#1D4ED8] dark:text-blue-300 px-2.5 py-1 text-[11px] font-semibold tracking-[0.05em] uppercase shrink-0
                   self-start sm:self-auto"
               >
-                <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-[#1D4ED8]" strokeWidth={1.75} aria-hidden="true" />
+                <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-[#1D4ED8] dark:text-blue-300" strokeWidth={1.75} aria-hidden="true" />
                 <span>Files never leave your browser • 100% Client-Side</span>
               </div>
             </div>
@@ -151,16 +151,16 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                   {category.shortName}
                 </span>
               )}
-              <p className="text-[15px] leading-[1.5] text-[#475569] max-w-3xl">
+              <p className="text-[15px] leading-[1.5] text-[#475569] dark:text-slate-300 max-w-3xl">
                 {tool.seo.intro}
               </p>
               {tool.category === "document-pdf" && tool.slug !== "pdf-editor" && (
                 <div className="pt-1">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-medium">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-900/60 text-blue-700 dark:text-blue-300 text-xs font-medium">
                     <span>Looking for complete multi-page editing, signatures, and annotations?</span>
                     <Link
                       href="/tools/document-pdf/pdf-editor"
-                      className="font-semibold underline hover:text-blue-900 inline-flex items-center gap-0.5"
+                      className="font-semibold underline hover:text-blue-900 dark:hover:text-blue-200 inline-flex items-center gap-0.5"
                     >
                       Open Full PDF Editor →
                     </Link>
@@ -175,7 +175,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
         {isStudioWorkspace ? (
           <div className="w-full max-w-[1800px] mx-auto px-2 sm:px-4 pt-4 space-y-8">
             <ToolContextProvider categoryId={tool.category}>
-              <div className="bg-white rounded-xl border border-[#E2E8F0] shadow-sm overflow-hidden min-h-[820px]">
+              <div className="bg-white dark:bg-slate-900 rounded-xl border border-[#E2E8F0] dark:border-slate-800 shadow-sm overflow-hidden min-h-[820px]">
                 {children}
               </div>
             </ToolContextProvider>
@@ -183,11 +183,11 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
             {/* Disclaimer */}
             {tool.disclaimer && (
               <div
-                className="max-w-7xl mx-auto rounded-[8px] border border-amber-200 bg-amber-50/80
-                  px-3.5 py-3 flex items-start gap-2.5 text-[13px] text-amber-900"
+                className="max-w-7xl mx-auto rounded-[8px] border border-amber-200 dark:border-amber-900/60 bg-amber-50/80 dark:bg-amber-950/40
+                  px-3.5 py-3 flex items-start gap-2.5 text-[13px] text-amber-900 dark:text-amber-200"
               >
                 <AlertTriangle
-                  className="h-4 w-4 text-amber-600 shrink-0 mt-0.5"
+                  className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5"
                   strokeWidth={1.75}
                   aria-hidden="true"
                 />
@@ -200,7 +200,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
             {/* ── FAQ ──────────────────────────────────────────── */}
             {tool.seo.faq && tool.seo.faq.length > 0 && (
               <section className="max-w-7xl mx-auto mt-10 space-y-4" aria-labelledby="faq-heading">
-                <div className="flex items-center gap-2 border-b border-[#E2E8F0] pb-3">
+                <div className="flex items-center gap-2 border-b border-[#E2E8F0] dark:border-slate-800 pb-3">
                   <HelpCircle
                     className={`h-5 w-5 shrink-0 ${theme.text}`}
                     strokeWidth={1.75}
@@ -208,13 +208,13 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                   />
                   <h2
                     id="faq-heading"
-                    className="text-[18px] font-semibold text-[#0F172A] tracking-[-0.01em]"
+                    className="text-[18px] font-semibold text-[#0F172A] dark:text-slate-100 tracking-[-0.01em]"
                   >
                     Frequently Asked Questions
                   </h2>
                 </div>
 
-                <div className="divide-y divide-[#E2E8F0] rounded-xl border border-[#E2E8F0] bg-white overflow-hidden shadow-[0_1px_3px_rgba(15,23,42,0.05)]">
+                <div className="divide-y divide-[#E2E8F0] dark:divide-slate-800 rounded-xl border border-[#E2E8F0] dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-[0_1px_3px_rgba(15,23,42,0.05)]">
                   {tool.seo.faq.map((item, idx) => (
                     <div key={idx}>
                       <button
@@ -223,14 +223,14 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                         className="w-full flex items-center justify-between text-left gap-3
                           px-4 sm:px-5 py-4 focus:outline-none
                           focus-visible:ring-2 focus-visible:ring-inset
-                          hover:bg-[#F8F9FA] transition-colors duration-150"
+                          hover:bg-[#F8F9FA] dark:hover:bg-slate-800/60 transition-colors duration-150"
                         aria-expanded={openFaqIndex === idx}
                       >
-                        <span className="text-[15px] font-semibold text-[#0F172A] leading-snug">
+                        <span className="text-[15px] font-semibold text-[#0F172A] dark:text-slate-100 leading-snug">
                           {item.q}
                         </span>
                         <ChevronDown
-                          className={`h-4 w-4 text-[#94A3B8] transition-transform duration-200 shrink-0 ${
+                          className={`h-4 w-4 text-[#94A3B8] dark:text-slate-400 transition-transform duration-200 shrink-0 ${
                             openFaqIndex === idx
                               ? `rotate-180 ${theme.text}`
                               : ""
@@ -240,8 +240,8 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                         />
                       </button>
                       {openFaqIndex === idx && (
-                        <div className="px-4 sm:px-5 pb-4 border-t border-[#E2E8F0]">
-                          <p className="pt-3 text-[13px] sm:text-[15px] leading-[1.5] text-[#475569]">
+                        <div className="px-4 sm:px-5 pb-4 border-t border-[#E2E8F0] dark:border-slate-800">
+                          <p className="pt-3 text-[13px] sm:text-[15px] leading-[1.5] text-[#475569] dark:text-slate-300">
                             {item.a}
                           </p>
                         </div>
@@ -255,7 +255,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
             {/* ── Bottom Related Tools Grid ─────────────────────── */}
             {relatedTools.length > 0 && (
               <section className="max-w-7xl mx-auto mt-10 space-y-4" aria-labelledby="related-heading">
-                <div className="flex items-center gap-2 border-b border-[#E2E8F0] pb-3">
+                <div className="flex items-center gap-2 border-b border-[#E2E8F0] dark:border-slate-800 pb-3">
                   <div
                     className="h-5 w-5 shrink-0 rounded-[4px] flex items-center justify-center"
                     style={{ backgroundColor: theme.primary }}
@@ -268,7 +268,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                   </div>
                   <h2
                     id="related-heading"
-                    className="text-[18px] font-semibold text-[#0F172A] tracking-[-0.01em]"
+                    className="text-[18px] font-semibold text-[#0F172A] dark:text-slate-100 tracking-[-0.01em]"
                   >
                     Related Privacy-First Utilities
                   </h2>
@@ -282,7 +282,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                       <Link
                         key={rel.slug}
                         href={getToolUrl(rel)}
-                        className="group flex flex-col justify-between p-4 rounded-[12px] border border-slate-200 bg-white hover:border-blue-500/50 hover:shadow-md transition-all duration-200 ease-in-out"
+                        className="group flex flex-col justify-between p-4 rounded-[12px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-blue-500/50 hover:shadow-md transition-all duration-200 ease-in-out"
                       >
                         <div>
                           <div className="flex items-center justify-between mb-2">
@@ -309,16 +309,16 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                               </span>
                             </div>
                             <ArrowRight
-                              className="h-3.5 w-3.5 text-[#94A3B8] group-hover:text-[#0F172A]
+                              className="h-3.5 w-3.5 text-[#94A3B8] dark:text-slate-500 group-hover:text-[#0F172A] dark:group-hover:text-white
                                 group-hover:translate-x-0.5 transition-all duration-150"
                               strokeWidth={1.75}
                               aria-hidden="true"
                             />
                           </div>
-                          <h3 className="text-[15px] font-semibold text-[#0F172A] leading-snug tracking-[-0.01em]">
+                          <h3 className="text-[15px] font-semibold text-[#0F172A] dark:text-slate-100 leading-snug tracking-[-0.01em]">
                             {rel.name}
                           </h3>
-                          <p className="mt-1 text-[13px] leading-[1.4] text-[#475569] line-clamp-2">
+                          <p className="mt-1 text-[13px] leading-[1.4] text-[#475569] dark:text-slate-400 line-clamp-2">
                             {rel.seo.description}
                           </p>
                         </div>
@@ -336,7 +336,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
             <div className="flex-1 min-w-0 space-y-6">
               <ToolContextProvider categoryId={tool.category}>
                 <div
-                  className="bg-white rounded-xl border border-[#E2E8F0]
+                  className="bg-white dark:bg-slate-900 rounded-xl border border-[#E2E8F0] dark:border-slate-800
                     shadow-[0_1px_3px_rgba(15,23,42,0.05)] p-4 sm:p-6"
                 >
                   {children}
@@ -346,11 +346,11 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
               {/* Disclaimer */}
               {tool.disclaimer && (
                 <div
-                  className="rounded-[8px] border border-amber-200 bg-amber-50/80
-                    px-3.5 py-3 flex items-start gap-2.5 text-[13px] text-amber-900"
+                  className="rounded-[8px] border border-amber-200 dark:border-amber-900/60 bg-amber-50/80 dark:bg-amber-950/30
+                    px-3.5 py-3 flex items-start gap-2.5 text-[13px] text-amber-900 dark:text-amber-200"
                 >
                   <AlertTriangle
-                    className="h-4 w-4 text-amber-600 shrink-0 mt-0.5"
+                    className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5"
                     strokeWidth={1.75}
                     aria-hidden="true"
                   />
@@ -363,7 +363,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
               {/* ── FAQ ──────────────────────────────────────────── */}
               {tool.seo.faq && tool.seo.faq.length > 0 && (
                 <section className="mt-10 space-y-4" aria-labelledby="faq-heading">
-                  <div className="flex items-center gap-2 border-b border-[#E2E8F0] pb-3">
+                  <div className="flex items-center gap-2 border-b border-[#E2E8F0] dark:border-slate-800 pb-3">
                     <HelpCircle
                       className={`h-5 w-5 shrink-0 ${theme.text}`}
                       strokeWidth={1.75}
@@ -371,13 +371,13 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                     />
                     <h2
                       id="faq-heading"
-                      className="text-[18px] font-semibold text-[#0F172A] tracking-[-0.01em]"
+                      className="text-[18px] font-semibold text-[#0F172A] dark:text-slate-100 tracking-[-0.01em]"
                     >
                       Frequently Asked Questions
                     </h2>
                   </div>
 
-                  <div className="divide-y divide-[#E2E8F0] rounded-xl border border-[#E2E8F0] bg-white overflow-hidden shadow-[0_1px_3px_rgba(15,23,42,0.05)]">
+                  <div className="divide-y divide-[#E2E8F0] dark:divide-slate-800 rounded-xl border border-[#E2E8F0] dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-[0_1px_3px_rgba(15,23,42,0.05)]">
                     {tool.seo.faq.map((item, idx) => (
                       <div key={idx}>
                         <button
@@ -386,14 +386,14 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                           className="w-full flex items-center justify-between text-left gap-3
                             px-4 sm:px-5 py-4 focus:outline-none
                             focus-visible:ring-2 focus-visible:ring-inset
-                            hover:bg-[#F8F9FA] transition-colors duration-150"
+                            hover:bg-[#F8F9FA] dark:hover:bg-slate-800/60 transition-colors duration-150"
                           aria-expanded={openFaqIndex === idx}
                         >
-                          <span className="text-[15px] font-semibold text-[#0F172A] leading-snug">
+                          <span className="text-[15px] font-semibold text-[#0F172A] dark:text-slate-100 leading-snug">
                             {item.q}
                           </span>
                           <ChevronDown
-                            className={`h-4 w-4 text-[#94A3B8] transition-transform duration-200 shrink-0 ${
+                            className={`h-4 w-4 text-[#94A3B8] dark:text-slate-400 transition-transform duration-200 shrink-0 ${
                               openFaqIndex === idx
                                 ? `rotate-180 ${theme.text}`
                                 : ""
@@ -403,8 +403,8 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                           />
                         </button>
                         {openFaqIndex === idx && (
-                          <div className="px-4 sm:px-5 pb-4 border-t border-[#E2E8F0]">
-                            <p className="pt-3 text-[13px] sm:text-[15px] leading-[1.5] text-[#475569]">
+                          <div className="px-4 sm:px-5 pb-4 border-t border-[#E2E8F0] dark:border-slate-800">
+                            <p className="pt-3 text-[13px] sm:text-[15px] leading-[1.5] text-[#475569] dark:text-slate-300">
                               {item.a}
                             </p>
                           </div>
@@ -418,7 +418,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
               {/* ── Bottom Related Tools Grid ─────────────────────── */}
               {relatedTools.length > 0 && (
                 <section className="mt-10 space-y-4" aria-labelledby="related-heading">
-                  <div className="flex items-center gap-2 border-b border-[#E2E8F0] pb-3">
+                  <div className="flex items-center gap-2 border-b border-[#E2E8F0] dark:border-slate-800 pb-3">
                     <div
                       className="h-5 w-5 shrink-0 rounded-[4px] flex items-center justify-center"
                       style={{ backgroundColor: theme.primary }}
@@ -431,7 +431,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                     </div>
                     <h2
                       id="related-heading"
-                      className="text-[18px] font-semibold text-[#0F172A] tracking-[-0.01em]"
+                      className="text-[18px] font-semibold text-[#0F172A] dark:text-slate-100 tracking-[-0.01em]"
                     >
                       Related Privacy-First Utilities
                     </h2>
@@ -445,7 +445,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                         <Link
                           key={rel.slug}
                           href={getToolUrl(rel)}
-                          className="group flex flex-col justify-between p-4 rounded-[12px] border border-slate-200 bg-white hover:border-blue-500/50 hover:shadow-md transition-all duration-200 ease-in-out"
+                          className="group flex flex-col justify-between p-4 rounded-[12px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-blue-500/50 dark:hover:border-blue-500/50 hover:shadow-md transition-all duration-200 ease-in-out"
                         >
                           <div>
                             <div className="flex items-center justify-between mb-2">
@@ -472,16 +472,16 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                                 </span>
                               </div>
                               <ArrowRight
-                                className="h-3.5 w-3.5 text-[#94A3B8] group-hover:text-[#0F172A]
+                                className="h-3.5 w-3.5 text-[#94A3B8] dark:text-slate-400 group-hover:text-[#0F172A] dark:group-hover:text-slate-100
                                   group-hover:translate-x-0.5 transition-all duration-150"
                                 strokeWidth={1.75}
                                 aria-hidden="true"
                               />
                             </div>
-                            <h3 className="text-[15px] font-semibold text-[#0F172A] leading-snug tracking-[-0.01em]">
+                            <h3 className="text-[15px] font-semibold text-[#0F172A] dark:text-slate-100 leading-snug tracking-[-0.01em]">
                               {rel.name}
                             </h3>
-                            <p className="mt-1 text-[13px] leading-[1.4] text-[#475569] line-clamp-2">
+                            <p className="mt-1 text-[13px] leading-[1.4] text-[#475569] dark:text-slate-400 line-clamp-2">
                               {rel.seo.description}
                             </p>
                           </div>

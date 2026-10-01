@@ -49,7 +49,7 @@ export const BrandNewHeroBanner: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative pt-8 sm:pt-14 pb-16 sm:pb-24 overflow-hidden bg-[radial-gradient(120%_90%_at_50%_-10%,#EFF6FF_0%,#F8FAFC_55%,#FFFFFF_100%)]">
+    <section className="relative pt-8 sm:pt-14 pb-16 sm:pb-24 overflow-hidden bg-[radial-gradient(120%_90%_at_50%_-10%,#EFF6FF_0%,#F8FAFC_55%,#FFFFFF_100%)] dark:bg-[radial-gradient(120%_90%_at_50%_-10%,#1E293B_0%,#0F172A_55%,#020617_100%)]">
       {/* Silky Topographic Curve Wave Background */}
       <AnimatedBannerBackground variant="hero" />
 
@@ -60,13 +60,13 @@ export const BrandNewHeroBanner: React.FC = () => {
         <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
           
           {/* 1. Live Eyebrow Badge */}
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-blue-200/90 bg-white/90 px-3 sm:px-4 py-1.5 font-body text-[11px] sm:text-xs font-semibold text-slate-800 shadow-[0_2px_12px_rgba(37,99,235,0.08)] backdrop-blur-md max-w-full">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-blue-200/90 dark:border-blue-900/60 bg-white/90 dark:bg-slate-900/90 px-3 sm:px-4 py-1.5 font-body text-[11px] sm:text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-[0_2px_12px_rgba(37,99,235,0.08)] backdrop-blur-md max-w-full">
             <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-sky-600 font-extrabold shrink-0">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-sky-600 dark:from-blue-400 dark:to-sky-400 font-extrabold shrink-0">
               100% In-Browser Privacy
             </span>
-            <span className="text-slate-300 shrink-0 hidden xs:inline">•</span>
-            <span className="text-slate-700 truncate hidden xs:inline">
+            <span className="text-slate-300 dark:text-slate-700 shrink-0 hidden xs:inline">•</span>
+            <span className="text-slate-700 dark:text-slate-300 truncate hidden xs:inline">
               Free ATS Resume Engine & {toolCount} Client-Side Tools
             </span>
           </div>
@@ -75,7 +75,7 @@ export const BrandNewHeroBanner: React.FC = () => {
           <HeroHeadlineTicker centered={true} />
 
           {/* 3. Subtitle Description */}
-          <p className="font-body text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-normal">
+          <p className="font-body text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto font-normal">
             Create ATS-optimized resumes with 20 professional templates, or run {toolCount} client-side privacy tools for PDFs, images, code, and security. Zero server uploads, zero watermarks, and zero paywalls—ever.
           </p>
 
@@ -105,17 +105,17 @@ export const BrandNewHeroBanner: React.FC = () => {
               variant="outline"
               size="lg"
               onClick={() => setIsImportModalOpen(true)}
-              className="w-full sm:w-auto justify-center gap-2 text-sm sm:text-base px-6 py-3.5 rounded-xl min-h-[52px] bg-white/90 backdrop-blur-md text-slate-800 border-slate-200/90 hover:bg-blue-50/80 hover:text-blue-600 hover:border-blue-300 font-bold transition-all duration-200 shadow-2xs hover:shadow-md active:scale-[0.98]"
+              className="w-full sm:w-auto justify-center gap-2 text-sm sm:text-base px-6 py-3.5 rounded-xl min-h-[52px] bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-slate-800 dark:text-slate-200 border-slate-200/90 dark:border-slate-800 hover:bg-blue-50/80 dark:hover:bg-slate-800 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-300 dark:hover:border-slate-700 font-bold transition-all duration-200 shadow-2xs hover:shadow-md active:scale-[0.98]"
             >
-              <FileUp className="h-4 w-4 text-blue-600" />
+              <FileUp className="h-4 w-4 text-blue-600 dark:text-blue-400" />
               <span>Import Resume (PDF / DOCX)</span>
             </Button>
 
-            <a href="#tools" className="w-full sm:w-auto">
+            <a href="#tools-suite" className="w-full sm:w-auto">
               <Button
                 variant="ghost"
                 size="lg"
-                className="w-full sm:w-auto justify-center gap-2 text-sm sm:text-base px-5 py-3.5 rounded-xl min-h-[52px] text-slate-600 hover:text-slate-900 hover:bg-slate-100/80 font-bold transition-all duration-200 active:scale-[0.98]"
+                className="w-full sm:w-auto justify-center gap-2 text-sm sm:text-base px-5 py-3.5 rounded-xl min-h-[52px] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-850 font-bold transition-all duration-200 active:scale-[0.98]"
               >
                 <span>Browse {toolCount} Tools</span>
               </Button>
@@ -123,17 +123,17 @@ export const BrandNewHeroBanner: React.FC = () => {
           </div>
 
           {/* 6. Proof Pills Strip */}
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs sm:text-sm text-slate-600 font-medium">
-            <div className="flex items-center gap-1.5 text-slate-800 font-semibold">
-              <CheckCircle2 className="h-4 w-4 text-blue-600 shrink-0" />
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-medium">
+            <div className="flex items-center gap-1.5 text-slate-800 dark:text-slate-200 font-semibold">
+              <CheckCircle2 className="h-4 w-4 text-blue-600 dark:text-blue-400 shrink-0" />
               <span>Instant High-Res Vector PDF</span>
             </div>
-            <div className="flex items-center gap-1.5 text-slate-800 font-semibold">
-              <CheckCircle2 className="h-4 w-4 text-blue-600 shrink-0" />
+            <div className="flex items-center gap-1.5 text-slate-800 dark:text-slate-200 font-semibold">
+              <CheckCircle2 className="h-4 w-4 text-blue-600 dark:text-blue-400 shrink-0" />
               <span>100% ATS Parser Verified</span>
             </div>
-            <div className="flex items-center gap-1.5 text-slate-800 font-semibold">
-              <CheckCircle2 className="h-4 w-4 text-blue-600 shrink-0" />
+            <div className="flex items-center gap-1.5 text-slate-800 dark:text-slate-200 font-semibold">
+              <CheckCircle2 className="h-4 w-4 text-blue-600 dark:text-blue-400 shrink-0" />
               <span>Zero Server Uploads & Storage</span>
             </div>
           </div>
@@ -144,35 +144,35 @@ export const BrandNewHeroBanner: React.FC = () => {
           {/* Ambient Glow behind Studio Card */}
           <div className="pointer-events-none absolute -inset-2 rounded-3xl bg-gradient-to-r from-blue-500/10 via-sky-400/10 to-teal-400/10 blur-xl -z-10" />
 
-          <div className="rounded-2xl border border-slate-200/90 bg-white p-3 sm:p-5 shadow-[0_20px_50px_-12px_rgba(15,23,42,0.1),0_0_0_1px_rgba(226,232,240,0.8)] relative overflow-hidden backdrop-blur-xl">
+          <div className="rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 sm:p-5 shadow-[0_20px_50px_-12px_rgba(15,23,42,0.1),0_0_0_1px_rgba(226,232,240,0.8)] relative overflow-hidden backdrop-blur-xl">
             {/* Top Right Ambient Glow inside Card */}
             <div className="pointer-events-none absolute -top-24 -right-24 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
 
             {/* Showcase Header Controls & Tabs */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 border-b border-slate-200/80 pb-3 mb-4 relative z-10">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 border-b border-slate-200/80 dark:border-slate-800 pb-3 mb-4 relative z-10">
               <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1.5">
                   <div className="h-3 w-3 rounded-full bg-rose-400/90 shadow-xs" />
                   <div className="h-3 w-3 rounded-full bg-amber-400/90 shadow-xs" />
                   <div className="h-3 w-3 rounded-full bg-emerald-400/90 shadow-xs" />
                 </div>
-                <span className="font-mono text-xs text-slate-500 font-semibold ml-2">
+                <span className="font-mono text-xs text-slate-500 dark:text-slate-400 font-semibold ml-2">
                   ClearTrix Engine Sandbox
                 </span>
               </div>
 
               {/* Mode Switcher Buttons */}
-              <div className="grid grid-cols-3 sm:flex items-center gap-1 sm:gap-1.5 bg-slate-100 p-1 rounded-xl text-[11px] sm:text-xs font-bold w-full sm:w-auto justify-center">
+              <div className="grid grid-cols-3 sm:flex items-center gap-1 sm:gap-1.5 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-[11px] sm:text-xs font-bold w-full sm:w-auto justify-center">
                 <button
                   type="button"
                   onClick={() => setActiveTab("resume")}
                   className={`inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-4 py-1.5 rounded-lg transition-all ${
                     activeTab === "resume"
-                      ? "bg-white text-blue-600 shadow-xs border border-slate-200/60"
-                      : "text-slate-600 hover:text-slate-900"
+                      ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-xs border border-slate-200/60 dark:border-slate-700"
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
                   }`}
                 >
-                  <FileText className="h-3.5 w-3.5 text-blue-600 shrink-0" />
+                  <FileText className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
                   <span className="truncate">ATS Resume</span>
                 </button>
                 <button
@@ -180,8 +180,8 @@ export const BrandNewHeroBanner: React.FC = () => {
                   onClick={() => setActiveTab("pdf")}
                   className={`inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-4 py-1.5 rounded-lg transition-all ${
                     activeTab === "pdf"
-                      ? "bg-white text-blue-600 shadow-xs border border-slate-200/60"
-                      : "text-slate-600 hover:text-slate-900"
+                      ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-xs border border-slate-200/60 dark:border-slate-700"
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
                   }`}
                 >
                   <Zap className="h-3.5 w-3.5 text-amber-500 shrink-0" />
@@ -192,11 +192,11 @@ export const BrandNewHeroBanner: React.FC = () => {
                   onClick={() => setActiveTab("tools")}
                   className={`inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-4 py-1.5 rounded-lg transition-all ${
                     activeTab === "tools"
-                      ? "bg-white text-blue-600 shadow-xs border border-slate-200/60"
-                      : "text-slate-600 hover:text-slate-900"
+                      ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-xs border border-slate-200/60 dark:border-slate-700"
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
                   }`}
                 >
-                  <Wrench className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                  <Wrench className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                   <span className="truncate">111+ Tools</span>
                 </button>
               </div>
@@ -204,29 +204,29 @@ export const BrandNewHeroBanner: React.FC = () => {
 
             {/* Dynamic Interactive Card Content */}
             {activeTab === "resume" && (
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-slate-50/70 p-4 sm:p-5 rounded-xl border border-slate-200/70 text-left relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-slate-50/70 dark:bg-slate-950/60 p-4 sm:p-5 rounded-xl border border-slate-200/70 dark:border-slate-800 text-left relative z-10">
                 <div className="md:col-span-6 space-y-3">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-xs font-bold border border-emerald-200 dark:border-emerald-800">
                     <ShieldCheck className="h-3.5 w-3.5" />
                     <span>ATS Score: 98/100 Verified</span>
                   </div>
-                  <h2 className="font-headings text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+                  <h2 className="font-headings text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
                     Create Workday & Greenhouse Safe Resumes
                   </h2>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                     20 pixel-perfect A4 templates formatted with clean single-column hierarchy, standard typography, and 100% vector text export.
                   </p>
                   <div className="flex flex-wrap gap-2 pt-1">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-white border border-slate-200 text-xs font-medium text-slate-700 shadow-2xs">
-                      <Check className="h-3.5 w-3.5 text-blue-600" />
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-medium text-slate-700 dark:text-slate-300 shadow-2xs">
+                      <Check className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
                       <span>Instant PDF Export</span>
                     </span>
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-white border border-slate-200 text-xs font-medium text-slate-700 shadow-2xs">
-                      <Check className="h-3.5 w-3.5 text-blue-600" />
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-medium text-slate-700 dark:text-slate-300 shadow-2xs">
+                      <Check className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
                       <span>Zero Watermarks</span>
                     </span>
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-white border border-slate-200 text-xs font-medium text-slate-700 shadow-2xs">
-                      <Check className="h-3.5 w-3.5 text-blue-600" />
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-medium text-slate-700 dark:text-slate-300 shadow-2xs">
+                      <Check className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
                       <span>Local Storage Privacy</span>
                     </span>
                   </div>
@@ -241,52 +241,52 @@ export const BrandNewHeroBanner: React.FC = () => {
                 </div>
 
                 {/* Simulated Light Mode A4 Document Live Sheet */}
-                <div className="md:col-span-6 bg-white rounded-xl border border-slate-200 p-4 sm:p-5 shadow-[0_4px_20px_rgba(15,23,42,0.06)] text-xs space-y-3 text-slate-800">
+                <div className="md:col-span-6 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 sm:p-5 shadow-[0_4px_20px_rgba(15,23,42,0.06)] text-xs space-y-3 text-slate-800 dark:text-slate-200">
                   <div className="border-b-2 border-blue-600 pb-2.5">
                     <div className="flex items-center justify-between">
-                      <h3 className="font-headings text-lg font-bold text-slate-900">Alex Rivera</h3>
-                      <span className="text-[10px] font-mono font-bold bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-200">
+                      <h3 className="font-headings text-lg font-bold text-slate-900 dark:text-slate-100">Alex Rivera</h3>
+                      <span className="text-[10px] font-mono font-bold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-800">
                         Senior Template #01
                       </span>
                     </div>
-                    <p className="text-xs font-semibold text-blue-600 mt-0.5">Staff Software Engineer</p>
+                    <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 mt-0.5">Staff Software Engineer</p>
                   </div>
 
                   <div>
-                    <span className="text-[10px] font-bold text-slate-900 uppercase tracking-wider block border-b border-slate-200 pb-0.5 mb-1.5">
+                    <span className="text-[10px] font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider block border-b border-slate-200 dark:border-slate-800 pb-0.5 mb-1.5">
                       Experience Highlights
                     </span>
-                    <p className="text-xs text-slate-700 leading-relaxed">
-                      • Spearheaded microservices architecture reducing server latency by <span className="font-bold text-blue-600">42%</span>.
+                    <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                      • Spearheaded microservices architecture reducing server latency by <span className="font-bold text-blue-600 dark:text-blue-400">42%</span>.
                     </p>
-                    <p className="text-xs text-slate-700 leading-relaxed mt-1">
+                    <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed mt-1">
                       • Managed cross-functional engineering team delivering $4.2M high-volume SaaS platform.
                     </p>
                   </div>
 
-                  <div className="pt-1 flex items-center justify-between text-[11px] text-slate-500 border-t border-slate-100">
-                    <span className="flex items-center gap-1 text-emerald-600 font-semibold">
+                  <div className="pt-1 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">
+                    <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-semibold">
                       <CheckCircle2 className="h-3.5 w-3.5" /> Ready to print / export
                     </span>
-                    <span className="font-mono text-slate-400">A4 Vector Standard</span>
+                    <span className="font-mono text-slate-400 dark:text-slate-500">A4 Vector Standard</span>
                   </div>
                 </div>
               </div>
             )}
 
             {activeTab === "pdf" && (
-              <div className="bg-slate-50/70 p-4 sm:p-6 rounded-xl border border-slate-200/70 text-left space-y-4 relative z-10">
+              <div className="bg-slate-50/70 dark:bg-slate-950/60 p-4 sm:p-6 rounded-xl border border-slate-200/70 dark:border-slate-800 text-left space-y-4 relative z-10">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
-                    <h2 className="font-headings text-lg sm:text-xl font-bold text-slate-900">
+                    <h2 className="font-headings text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">
                       In-Browser PDF & Document Utilities
                     </h2>
-                    <p className="text-xs sm:text-sm text-slate-600">
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                       Merge, split, compress, and edit PDF documents with 100% client-side privacy.
                     </p>
                   </div>
                   <Link href="/tools/document-pdf">
-                    <Button variant="outline" className="gap-1.5 text-xs font-bold rounded-xl h-9 bg-white border-slate-200 text-slate-800 hover:bg-slate-50 hover:text-blue-600">
+                    <Button variant="outline" className="gap-1.5 text-xs font-bold rounded-xl h-9 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-blue-600 dark:hover:text-blue-400">
                       <span>View All PDF Tools</span>
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Button>
@@ -295,32 +295,32 @@ export const BrandNewHeroBanner: React.FC = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <Link href="/tools/document-pdf/pdf-merge" className="group">
-                    <div className="bg-white rounded-xl p-3.5 border border-slate-200 shadow-2xs group-hover:border-blue-300 group-hover:shadow-md transition-all">
-                      <div className="h-8 w-8 rounded-lg bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center mb-2">
+                    <div className="bg-white dark:bg-slate-900 rounded-xl p-3.5 border border-slate-200 dark:border-slate-800 shadow-2xs group-hover:border-blue-300 dark:group-hover:border-blue-500/40 group-hover:shadow-md transition-all">
+                      <div className="h-8 w-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-800 flex items-center justify-center mb-2">
                         <Layers className="h-4 w-4" />
                       </div>
-                      <h3 className="font-bold text-sm text-slate-900 group-hover:text-blue-600 transition-colors">PDF Merge</h3>
-                      <p className="text-xs text-slate-500 mt-1">Combine multiple PDF documents into one seamless file.</p>
+                      <h3 className="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">PDF Merge</h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Combine multiple PDF documents into one seamless file.</p>
                     </div>
                   </Link>
 
                   <Link href="/tools/document-pdf/pdf-compressor" className="group">
-                    <div className="bg-white rounded-xl p-3.5 border border-slate-200 shadow-2xs group-hover:border-blue-300 group-hover:shadow-md transition-all">
-                      <div className="h-8 w-8 rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center mb-2">
+                    <div className="bg-white dark:bg-slate-900 rounded-xl p-3.5 border border-slate-200 dark:border-slate-800 shadow-2xs group-hover:border-blue-300 dark:group-hover:border-blue-500/40 group-hover:shadow-md transition-all">
+                      <div className="h-8 w-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-800 flex items-center justify-center mb-2">
                         <Zap className="h-4 w-4" />
                       </div>
-                      <h3 className="font-bold text-sm text-slate-900 group-hover:text-blue-600 transition-colors">PDF Compress</h3>
-                      <p className="text-xs text-slate-500 mt-1">Reduce PDF file size up to 80% without losing text quality.</p>
+                      <h3 className="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">PDF Compress</h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Reduce PDF file size up to 80% without losing text quality.</p>
                     </div>
                   </Link>
 
                   <Link href="/tools/document-pdf/pdf-split" className="group">
-                    <div className="bg-white rounded-xl p-3.5 border border-slate-200 shadow-2xs group-hover:border-blue-300 group-hover:shadow-md transition-all">
-                      <div className="h-8 w-8 rounded-lg bg-purple-50 text-purple-600 border border-purple-100 flex items-center justify-center mb-2">
+                    <div className="bg-white dark:bg-slate-900 rounded-xl p-3.5 border border-slate-200 dark:border-slate-800 shadow-2xs group-hover:border-blue-300 dark:group-hover:border-blue-500/40 group-hover:shadow-md transition-all">
+                      <div className="h-8 w-8 rounded-lg bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 border border-purple-100 dark:border-purple-800 flex items-center justify-center mb-2">
                         <FileText className="h-4 w-4" />
                       </div>
-                      <h3 className="font-bold text-sm text-slate-900 group-hover:text-blue-600 transition-colors">PDF Split</h3>
-                      <p className="text-xs text-slate-500 mt-1">Extract specific page ranges or split PDFs into individual files.</p>
+                      <h3 className="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">PDF Split</h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Extract specific page ranges or split PDFs into individual files.</p>
                     </div>
                   </Link>
                 </div>
@@ -328,18 +328,18 @@ export const BrandNewHeroBanner: React.FC = () => {
             )}
 
             {activeTab === "tools" && (
-              <div className="bg-slate-50/70 p-4 sm:p-6 rounded-xl border border-slate-200/70 text-left space-y-4 relative z-10">
+              <div className="bg-slate-50/70 dark:bg-slate-950/60 p-4 sm:p-6 rounded-xl border border-slate-200/70 dark:border-slate-800 text-left space-y-4 relative z-10">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
-                    <h2 className="font-headings text-lg sm:text-xl font-bold text-slate-900">
+                    <h2 className="font-headings text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">
                       111+ In-Browser Privacy Utilities
                     </h2>
-                    <p className="text-xs sm:text-sm text-slate-600">
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                       Images, Security, Developer Formatters, Calculators, and QR Code Generators.
                     </p>
                   </div>
                   <Link href="/tools">
-                    <Button variant="outline" className="gap-1.5 text-xs font-bold rounded-xl h-9 bg-white border-slate-200 text-slate-800 hover:bg-slate-50 hover:text-blue-600">
+                    <Button variant="outline" className="gap-1.5 text-xs font-bold rounded-xl h-9 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-blue-600 dark:hover:text-blue-400">
                       <span>Explore Tools Directory</span>
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Button>
@@ -347,28 +347,28 @@ export const BrandNewHeroBanner: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  <div className="bg-white rounded-xl p-3 border border-slate-200 shadow-2xs text-left">
-                    <ImageIcon className="h-4 w-4 text-blue-600 mb-1" />
-                    <span className="font-bold text-xs text-slate-900 block">Image Converter</span>
-                    <span className="text-[11px] text-slate-500">WebP, PNG, JPG</span>
+                  <div className="bg-white dark:bg-slate-900 rounded-xl p-3 border border-slate-200 dark:border-slate-800 shadow-2xs text-left">
+                    <ImageIcon className="h-4 w-4 text-blue-600 dark:text-blue-400 mb-1" />
+                    <span className="font-bold text-xs text-slate-900 dark:text-slate-100 block">Image Converter</span>
+                    <span className="text-[11px] text-slate-500 dark:text-slate-400">WebP, PNG, JPG</span>
                   </div>
 
-                  <div className="bg-white rounded-xl p-3 border border-slate-200 shadow-2xs text-left">
-                    <Code2 className="h-4 w-4 text-purple-600 mb-1" />
-                    <span className="font-bold text-xs text-slate-900 block">JSON Formatter</span>
-                    <span className="text-[11px] text-slate-500">Beautify & Validate</span>
+                  <div className="bg-white dark:bg-slate-900 rounded-xl p-3 border border-slate-200 dark:border-slate-800 shadow-2xs text-left">
+                    <Code2 className="h-4 w-4 text-purple-600 dark:text-purple-400 mb-1" />
+                    <span className="font-bold text-xs text-slate-900 dark:text-slate-100 block">JSON Formatter</span>
+                    <span className="text-[11px] text-slate-500 dark:text-slate-400">Beautify & Validate</span>
                   </div>
 
-                  <div className="bg-white rounded-xl p-3 border border-slate-200 shadow-2xs text-left">
-                    <Lock className="h-4 w-4 text-emerald-600 mb-1" />
-                    <span className="font-bold text-xs text-slate-900 block">Password Gen</span>
-                    <span className="text-[11px] text-slate-500">Secure Random</span>
+                  <div className="bg-white dark:bg-slate-900 rounded-xl p-3 border border-slate-200 dark:border-slate-800 shadow-2xs text-left">
+                    <Lock className="h-4 w-4 text-emerald-600 dark:text-emerald-400 mb-1" />
+                    <span className="font-bold text-xs text-slate-900 dark:text-slate-100 block">Password Gen</span>
+                    <span className="text-[11px] text-slate-500 dark:text-slate-400">Secure Random</span>
                   </div>
 
-                  <div className="bg-white rounded-xl p-3 border border-slate-200 shadow-2xs text-left">
-                    <Cpu className="h-4 w-4 text-amber-600 mb-1" />
-                    <span className="font-bold text-xs text-slate-900 block">Hash Generator</span>
-                    <span className="text-[11px] text-slate-500">SHA-256 & MD5</span>
+                  <div className="bg-white dark:bg-slate-900 rounded-xl p-3 border border-slate-200 dark:border-slate-800 shadow-2xs text-left">
+                    <Cpu className="h-4 w-4 text-amber-600 dark:text-amber-400 mb-1" />
+                    <span className="font-bold text-xs text-slate-900 dark:text-slate-100 block">Hash Generator</span>
+                    <span className="text-[11px] text-slate-500 dark:text-slate-400">SHA-256 & MD5</span>
                   </div>
                 </div>
               </div>

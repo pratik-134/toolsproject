@@ -111,6 +111,21 @@ import { runTests as runPdfEncryptorTests } from "../components/tools/phase2/pdf
 import { runTests as runPdfDecryptorTests } from "../components/tools/phase2/pdf-decryptor/logic.test";
 import { runTests as runPowerPointToPdfTests } from "../components/tools/phase2/powerpoint-to-pdf/logic.test";
 
+// Phase 3 Stage 1 Tools
+import { runTests as runInvoiceGeneratorTests } from "../components/tools/phase3/invoice-generator/logic.test";
+import { runTests as runEstimateQuoteTests } from "../components/tools/phase3/estimate-quote-builder/logic.test";
+import { runTests as runCertificateGeneratorTests } from "../components/tools/phase3/certificate-generator/logic.test";
+import { runTests as runProposalBuilderTests } from "../components/tools/phase3/proposal-builder/logic.test";
+import { runTests as runDesktopScreenRecorderTests } from "../components/tools/phase3/desktop-screen-recorder/logic.test";
+import { runTests as runWebTabRecorderTests } from "../components/tools/phase3/web-tab-recorder/logic.test";
+import { runTests as runWebcamOverlayRecorderTests } from "../components/tools/phase3/webcam-overlay-recorder/logic.test";
+import { runTests as runSocialPostMakerTests } from "../components/tools/phase3/social-post-maker/logic.test";
+import { runTests as runStoryReelsMakerTests } from "../components/tools/phase3/story-reels-maker/logic.test";
+import { runTests as runChartGraphVisualizerTests } from "../components/tools/phase3/chart-graph-visualizer/logic.test";
+import { runTests as runMemeCaptionGeneratorTests } from "../components/tools/phase3/meme-caption-generator/logic.test";
+import { runTests as runLatexEditorTests } from "../components/tools/phase3/latex-editor/logic.test";
+import { runTests as runCameraToPdfScannerTests } from "../components/tools/phase3/camera-to-pdf-scanner/logic.test";
+
 async function main() {
   console.log("=== CLEARTRIX TOOL LOGIC UNIT TESTS ===");
 
@@ -554,8 +569,61 @@ async function main() {
   await runPowerPointToPdfTests();
   console.log("✅ [powerpoint-to-pdf] unit tests passed!");
 
+  // Phase 3 Stage 1 Tools
+  console.log("Testing [invoice-receipt-generator] logic...");
+  runInvoiceGeneratorTests();
+  console.log("✅ [invoice-receipt-generator] unit tests passed!");
+
+  console.log("Testing [estimate-quote-builder] logic...");
+  runEstimateQuoteTests();
+  console.log("✅ [estimate-quote-builder] unit tests passed!");
+
+  console.log("Testing [certificate-diploma-generator] logic...");
+  runCertificateGeneratorTests();
+  console.log("✅ [certificate-diploma-generator] unit tests passed!");
+
+  console.log("Testing [proposal-builder] logic...");
+  runProposalBuilderTests();
+  console.log("✅ [proposal-builder] unit tests passed!");
+
+  console.log("Testing [desktop-screen-recorder] logic...");
+  runDesktopScreenRecorderTests();
+  console.log("✅ [desktop-screen-recorder] unit tests passed!");
+
+  console.log("Testing [web-tab-recorder] logic...");
+  runWebTabRecorderTests();
+  console.log("✅ [web-tab-recorder] unit tests passed!");
+
+  console.log("Testing [webcam-overlay-recorder] logic...");
+  runWebcamOverlayRecorderTests();
+  console.log("✅ [webcam-overlay-recorder] unit tests passed!");
+
+  console.log("Testing [social-post-maker] logic...");
+  runSocialPostMakerTests();
+  console.log("✅ [social-post-maker] unit tests passed!");
+
+  console.log("Testing [story-reels-maker] logic...");
+  runStoryReelsMakerTests();
+  console.log("✅ [story-reels-maker] unit tests passed!");
+
+  console.log("Testing [chart-graph-visualizer] logic...");
+  runChartGraphVisualizerTests();
+  console.log("✅ [chart-graph-visualizer] unit tests passed!");
+
+  console.log("Testing [meme-caption-generator] logic...");
+  runMemeCaptionGeneratorTests();
+  console.log("✅ [meme-caption-generator] unit tests passed!");
+
+  console.log("Testing [latex-editor] logic...");
+  runLatexEditorTests();
+  console.log("✅ [latex-editor] unit tests passed!");
+
+  console.log("Testing [camera-to-pdf-scanner] logic...");
+  runCameraToPdfScannerTests();
+  console.log("✅ [camera-to-pdf-scanner] unit tests passed!");
+
   console.log("===============================================");
-  console.log("🎉 ALL TOOL UNIT TESTS PASSED (110/110)!");
+  console.log("🎉 ALL TOOL UNIT TESTS PASSED (123/123)!");
 }
 
 main().catch((err) => {

@@ -75,7 +75,7 @@ export default function DashboardPage() {
   });
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-slate-50 font-body text-slate-900 antialiased">
+    <div className="flex min-h-screen w-full flex-col bg-slate-50 dark:bg-slate-950 font-body text-slate-900 dark:text-slate-100 antialiased">
       {/* Top Header */}
       <DashboardHeader
         onNewResume={() => setIsNewModalOpen(true)}
@@ -88,11 +88,11 @@ export default function DashboardPage() {
       <main className="flex-1 max-w-container w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex flex-col">
         {/* Storage Quota Warning Banner (if near or exceeding browser storage limits) */}
         {isStorageQuotaExceeded && (
-          <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 p-4 flex items-start gap-3 text-amber-800 text-xs sm:text-sm animate-fade-in">
-            <AlertTriangle className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
+          <div className="mb-6 rounded-lg border border-amber-200 dark:border-amber-900/60 bg-amber-50 dark:bg-amber-950/40 p-4 flex items-start gap-3 text-amber-800 dark:text-amber-200 text-xs sm:text-sm animate-fade-in">
+            <AlertTriangle className="h-5 w-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
             <div className="space-y-1">
               <p className="font-bold">Browser Local Storage Limit Reached</p>
-              <p className="text-amber-700">
+              <p className="text-amber-700 dark:text-amber-300">
                 Your browser local storage is near capacity. We recommend downloading backup
                 copies (PDF or Word .docx) and deleting unneeded drafts to ensure autosave continues functioning smoothly.
               </p>
@@ -103,15 +103,15 @@ export default function DashboardPage() {
         {/* Dashboard Title & Search Controls */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-black font-headings text-slate-900 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-black font-headings text-slate-900 dark:text-slate-100 tracking-tight">
               My Resumes
             </h1>
-            <p className="text-xs sm:text-sm text-slate-500 mt-1">
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
               {resumes.length === 1
                 ? "1 resume saved locally in browser"
                 : `${resumes.length} resumes saved locally in browser`}
               {" • "}
-              <span className="text-blue-600 font-semibold inline-flex items-center gap-1">
+              <span className="text-blue-600 dark:text-blue-400 font-semibold inline-flex items-center gap-1">
                 <Lock className="h-3 w-3" /> Zero Server Transmission
               </span>
             </p>
@@ -120,13 +120,13 @@ export default function DashboardPage() {
           {/* Search Filter */}
           {resumes.length > 0 && (
             <div className="relative w-full sm:w-72">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search resumes..."
-                className="w-full rounded-lg border border-slate-200 bg-white pl-9 pr-4 py-2 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all shadow-xs"
+                className="w-full rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 pl-9 pr-4 py-2 text-xs sm:text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all shadow-xs"
               />
             </div>
           )}
@@ -137,7 +137,7 @@ export default function DashboardPage() {
           <div className="flex-1 flex items-center justify-center py-12">
             <div className="flex flex-col items-center gap-3 text-slate-400">
               <div className="h-8 w-8 animate-spin rounded-full border-2 border-blue-600 border-t-transparent" />
-              <p className="text-xs font-medium text-slate-500">Loading your resumes...</p>
+              <p className="text-xs font-medium text-slate-500 dark:text-slate-400">Loading your resumes...</p>
             </div>
           </div>
         ) : filteredResumes.length > 0 ? (
@@ -153,16 +153,16 @@ export default function DashboardPage() {
         ) : resumes.length === 0 ? (
           /* Empty State: Brand New User - Properly Centered in Remaining Space */
           <div className="flex-1 flex items-center justify-center py-10 sm:py-16">
-            <div className="w-full max-w-2xl rounded-2xl border border-dashed border-slate-300 bg-white p-8 sm:p-14 text-center space-y-6 shadow-sm">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100 text-blue-600 shadow-xs">
+            <div className="w-full max-w-2xl rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 p-8 sm:p-14 text-center space-y-6 shadow-sm">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-900/60 text-blue-600 dark:text-blue-400 shadow-xs">
                 <FileText className="h-8 w-8" />
               </div>
 
               <div className="space-y-2.5">
-                <h2 className="text-xl sm:text-2xl font-bold font-headings text-slate-900">
+                <h2 className="text-xl sm:text-2xl font-bold font-headings text-slate-900 dark:text-slate-100">
                   No Resumes Created Yet
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed">
                   Create a resume from scratch with 20+ professional templates, or import your
                   existing PDF or Word resume. Everything is saved 100% privately in your browser.
                 </p>
@@ -181,9 +181,9 @@ export default function DashboardPage() {
                   variant="outline"
                   size="lg"
                   onClick={() => setIsImportModalOpen(true)}
-                  className="rounded-lg px-6 font-semibold border-slate-200 text-slate-700 hover:bg-slate-50 gap-2 shadow-2xs"
+                  className="rounded-lg px-6 font-semibold border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 gap-2 shadow-2xs"
                 >
-                  <FileUp className="h-4 w-4 text-blue-600" />
+                  <FileUp className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                   Import Existing (PDF / DOCX)
                 </Button>
               </div>
@@ -192,13 +192,13 @@ export default function DashboardPage() {
         ) : (
           /* Empty Search Filter State - Properly Centered */
           <div className="flex-1 flex items-center justify-center py-10 sm:py-16">
-            <div className="w-full max-w-md rounded-xl border border-slate-200 bg-white p-10 text-center space-y-4 shadow-sm">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-slate-50 text-slate-400">
+            <div className="w-full max-w-md rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-10 text-center space-y-4 shadow-sm">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500">
                 <Search className="h-6 w-6" />
               </div>
               <div className="space-y-1">
-                <h3 className="text-base font-bold text-slate-900">No matching resumes</h3>
-                <p className="text-xs text-slate-500">
+                <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">No matching resumes</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   No resumes found matching &ldquo;{searchQuery}&rdquo;. Try another search term.
                 </p>
               </div>
@@ -206,7 +206,7 @@ export default function DashboardPage() {
                 variant="outline"
                 size="sm"
                 onClick={() => setSearchQuery("")}
-                className="rounded-lg mt-2 text-xs border-slate-200 hover:text-blue-600"
+                className="rounded-lg mt-2 text-xs border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
               >
                 Clear Search
               </Button>

@@ -14,39 +14,41 @@
 
     --surface-white: #FFFFFF;
     --canvas-slate: #F8FAFC;
-    --border-slate: #E2E8F0;
+    --border-slate: #CBD5E1;
     --dark-slate: #0F172A;
+    --text-primary: #0F172A;
+    --text-muted: #334155;
 
     --background: 210 40% 98%;      /* #F8FAFC Light Canvas */
-    --foreground: 222.2 47.4% 11.2%; /* #0F172A Dark Navy */
+    --foreground: 222 47% 4%;       /* #090D16 rich crisp near-black */
 
-    --card: 0 0% 100%;               /* #FFFFFF Surface White */
-    --card-foreground: 222.2 47.4% 11.2%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 4%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 47.4% 11.2%;
+    --popover-foreground: 222 47% 4%;
 
     /* Brand Primary Blue #3B82F6 */
     --primary: 217.2 91.2% 59.8%;
     --primary-foreground: 0 0% 100%;
 
     /* Dark Navy #0F172A */
-    --secondary: 222.2 47.4% 11.2%;
+    --secondary: 222 47% 8%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Muted Text #94A3B8 & Surface #F8FAFC */
+    /* Muted — High contrast charcoal slate */
     --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 65.1%;
+    --muted-foreground: 215 25% 28%;
 
     /* Accent Teal #06D6A0 */
     --accent: 163.6 93.7% 41.4%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent-foreground: 222 47% 4%;
 
     /* Destructive Alert #DC2626 */
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Border Slate #E2E8F0 */
+    /* Border Slate */
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 217.2 91.2% 59.8%;
@@ -55,29 +57,36 @@
   }
 
   .dark {
+    --surface-white: #1E293B;
+    --canvas-slate: #0F172A;
+    --border-slate: #334155;
+    --dark-slate: #F8FAFC;
+    --text-primary: #FFFFFF;
+    --text-muted: #CBD5E1;
+
     --background: 222.2 47.4% 11.2%; /* #0F172A Dark Navy */
-    --foreground: 210 40% 98%;       /* #F8FAFC Light Canvas */
+    --foreground: 0 0% 100%;         /* pure crisp white */
 
-    --card: 215 27.9% 16.9%;          /* #1E293B Dark Surface */
-    --card-foreground: 210 40% 98%;
+    --card: 215 27.9% 16.9%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 215 27.9% 16.9%;       /* #1E293B Dark Surface */
-    --popover-foreground: 210 40% 98%;
+    --popover: 215 27.9% 16.9%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 217.2 91.2% 59.8%;    /* #3B82F6 Primary Blue */
+    --primary: 217.2 91.2% 59.8%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted-foreground: 215 25% 85%;  /* bright crisp slate-200 */
 
-    --accent: 163.6 93.7% 41.4%;     /* #06D6A0 Accent Teal */
-    --accent-foreground: 210 40% 98%;
+    --accent: 163.6 93.7% 41.4%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
     --border: 217.2 32.6% 22.5%;
     --input: 217.2 32.6% 22.5%;
@@ -89,6 +98,9 @@
   }
   body {
     @apply bg-background text-foreground font-body antialiased;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 600;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 }

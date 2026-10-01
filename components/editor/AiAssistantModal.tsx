@@ -95,22 +95,22 @@ export const AiAssistantModal: React.FC<AiAssistantModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/40 backdrop-blur-xs p-4 animate-in fade-in duration-150 no-print">
-      <div className="w-full max-w-xl bg-white text-slate-900 border border-slate-200 rounded-lg p-6 shadow-2xl space-y-4">
+      <div className="w-full max-w-xl bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-800 rounded-lg p-6 shadow-2xl space-y-4">
         {/* Header */}
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-lg bg-blue-50 border border-blue-200 text-blue-600">
-              <Sparkles className="h-4 w-4 text-blue-600" />
+            <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-900 text-blue-600 dark:text-blue-400">
+              <Sparkles className="h-4 w-4 text-blue-600 dark:text-blue-400" />
             </div>
             <div>
-              <h3 className="font-semibold text-base text-slate-900">
+              <h3 className="font-semibold text-base text-slate-900 dark:text-white">
                 {mode === "summary"
                   ? "AI Summary Polish"
                   : mode === "bullet"
                   ? "AI STAR Bullet Enhancer"
                   : "AI Role-Targeted Skills"}
               </h3>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 100% Client-Side • Zero Data Transmission • Instant High-Impact Presets
               </p>
             </div>
@@ -119,28 +119,28 @@ export const AiAssistantModal: React.FC<AiAssistantModalProps> = ({
             variant="ghost"
             size="icon"
             onClick={onClose}
-            className="h-8 w-8 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-md"
+            className="h-8 w-8 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md"
           >
             <X className="h-4 w-4" />
           </Button>
         </div>
 
         {/* Target Role Input & Tone Selector */}
-        <div className="space-y-3 bg-slate-50 border border-slate-200 p-3 rounded-lg">
+        <div className="space-y-3 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 p-3 rounded-lg">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <label className="text-xs font-medium text-slate-700">Target Role / Focus:</label>
+            <label className="text-xs font-medium text-slate-700 dark:text-slate-300">Target Role / Focus:</label>
             <input
               type="text"
               value={customRole}
               onChange={(e) => setCustomRole(e.target.value)}
               placeholder="e.g. Senior Product Manager"
-              className="bg-white text-slate-900 text-xs border border-slate-200 rounded-md px-2.5 py-1 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500/20 max-w-xs"
+              className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs border border-slate-200 dark:border-slate-700 rounded-md px-2.5 py-1 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500/20 max-w-xs"
             />
           </div>
 
           {mode === "summary" && (
             <div className="flex items-center gap-2 pt-1">
-              <span className="text-xs text-slate-500">Tone:</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Tone:</span>
               {(["executive", "metrics", "concise"] as const).map((t) => (
                 <button
                   key={t}
@@ -148,7 +148,7 @@ export const AiAssistantModal: React.FC<AiAssistantModalProps> = ({
                   className={`text-xs font-medium px-2.5 py-1 rounded-md capitalize transition-all ${
                     tone === t
                       ? "bg-blue-600 text-white shadow-xs font-semibold"
-                      : "text-slate-600 hover:text-slate-900 bg-white border border-slate-200"
+                      : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700"
                   }`}
                 >
                   {t}
@@ -169,7 +169,7 @@ export const AiAssistantModal: React.FC<AiAssistantModalProps> = ({
                     onApply(skill);
                     onClose();
                   }}
-                  className="group flex items-center gap-1.5 text-xs bg-slate-100 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 text-slate-800 px-3 py-1.5 rounded-md border border-slate-200 transition-all text-left font-medium"
+                  className="group flex items-center gap-1.5 text-xs bg-slate-100 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-blue-700 dark:hover:text-blue-300 text-slate-800 dark:text-slate-200 px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 transition-all text-left font-medium"
                 >
                   <span>+ {skill}</span>
                 </button>
@@ -179,16 +179,16 @@ export const AiAssistantModal: React.FC<AiAssistantModalProps> = ({
             suggestions.map((suggestion, idx) => (
               <div
                 key={idx}
-                className="group p-3.5 rounded-lg border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-blue-200 hover:shadow-xs transition-all space-y-2"
+                className="group p-3.5 rounded-lg border border-slate-200 dark:border-slate-700/80 bg-slate-50/50 dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800 hover:border-blue-200 dark:hover:border-blue-800 hover:shadow-xs transition-all space-y-2"
               >
-                <p className="text-xs text-slate-800 leading-relaxed font-normal">{suggestion}</p>
-                <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
-                  <span className="text-slate-400 font-mono text-[10px]">Option #{idx + 1}</span>
+                <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed font-normal">{suggestion}</p>
+                <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-700/80 text-xs">
+                  <span className="text-slate-400 dark:text-slate-500 font-mono text-[10px]">Option #{idx + 1}</span>
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={() => handleCopy(suggestion)}
-                      className="text-slate-500 hover:text-slate-800 flex items-center gap-1 text-xs"
+                      className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 flex items-center gap-1 text-xs"
                     >
                       <Copy className="h-3 w-3" />
                       <span>{copied ? "Copied" : "Copy"}</span>
@@ -199,7 +199,7 @@ export const AiAssistantModal: React.FC<AiAssistantModalProps> = ({
                         onApply(suggestion);
                         onClose();
                       }}
-                      className="text-xs font-semibold text-blue-700 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2.5 py-1 rounded-md flex items-center gap-1 transition-colors"
+                      className="text-xs font-semibold text-blue-700 dark:text-blue-300 hover:text-blue-800 dark:hover:text-blue-200 bg-blue-50 dark:bg-blue-950/60 hover:bg-blue-100 dark:hover:bg-blue-900/60 border border-blue-200 dark:border-blue-800 px-2.5 py-1 rounded-md flex items-center gap-1 transition-colors"
                     >
                       <Check className="h-3 w-3" />
                       <span>Apply</span>
@@ -212,9 +212,9 @@ export const AiAssistantModal: React.FC<AiAssistantModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs text-slate-500">
+        <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
           <span>Click "Apply" to instantly update your resume</span>
-          <Button variant="ghost" size="sm" onClick={onClose} className="h-7 text-xs text-slate-600 hover:text-slate-900 rounded-md">
+          <Button variant="ghost" size="sm" onClick={onClose} className="h-7 text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 rounded-md">
             Cancel
           </Button>
         </div>

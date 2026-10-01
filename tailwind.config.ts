@@ -74,8 +74,8 @@ const config: Config = {
           dark: "#1E293B",
         },
         text: {
-          primary: "#0F172A",
-          muted: "#94A3B8",
+          primary: "var(--text-primary, #0F172A)",
+          muted: "var(--text-muted, #94A3B8)",
         },
         status: {
           active: "#06D6A0",
@@ -121,9 +121,9 @@ const config: Config = {
         'button-card-grad': 'linear-gradient(135deg, #3B82F6 0%, #0EA5E9 100%)',
       },
       fontFamily: {
-        headings: ['var(--font-poppins)', "Poppins", "sans-serif"],
-        body: ['var(--font-inter)', "Inter", "sans-serif"],
-        sans: ['var(--font-inter)', "Inter", "sans-serif"],
+        headings: ['var(--font-manrope)', "Manrope", "sans-serif"],
+        body: ['var(--font-manrope)', "Manrope", "sans-serif"],
+        sans: ['var(--font-manrope)', "Manrope", "sans-serif"],
       },
       fontSize: {
         // ── Design System Spec: WebTools Core Modular Scale ───────────────

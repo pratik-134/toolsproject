@@ -7,7 +7,7 @@ import { CATEGORY_LIST, getCategoryById } from "@/lib/registry/categories";
 import { getToolUrl } from "@/lib/registry/tools";
 import { getCategoryTheme } from "@/lib/category-theme";
 import { getToolIcon } from "@/lib/tool-icons";
-import { ArrowRight, Search, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Search, ShieldCheck } from "lucide-react";
 
 export interface ToolCardGridProps {
   tools: ToolDefinition[];
@@ -45,7 +45,6 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
     });
   }, [tools, selectedCategory, searchQuery]);
 
-  // Determine whether to show category pills on cards (hide on single-category hub)
   const isSingleCategoryHub = initialCategory !== "all" && !showCategoryFilter;
 
   return (
@@ -54,23 +53,29 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
         <div className="space-y-4">
           {title && (
             <div className="text-center sm:text-left space-y-1">
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
                 {title}
               </h2>
-              {subtitle && <p className="text-sm text-slate-600 max-w-2xl font-medium">{subtitle}</p>}
+              {subtitle && (
+                <p className="text-sm text-slate-600 dark:text-slate-400 max-w-2xl font-medium">
+                  {subtitle}
+                </p>
+              )}
             </div>
           )}
 
-          {/* Search Filter input */}
           {showSearchBar && (
             <div className="relative max-w-xl">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" aria-hidden="true" />
+              <Search
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500"
+                aria-hidden="true"
+              />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={`Search ${tools.length} utilities by name or keyword...`}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 placeholder-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 shadow-sm transition-all"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 shadow-sm transition-all"
                 aria-label="Filter tools by keyword"
               />
             </div>
@@ -80,17 +85,20 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
 
       {/* Category Pills Filter */}
       {showCategoryFilter && (
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none" aria-label="Category filter">
+        <div
+          className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none"
+          aria-label="Category filter"
+        >
           <button
             type="button"
             onClick={() => setSelectedCategory("all")}
-            className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+            className={`px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-200 border ${
               selectedCategory === "all"
-                ? "bg-slate-900 text-white shadow-sm"
-                : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900"
+                ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white shadow-sm"
+                : "bg-white dark:bg-slate-800/80 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-400 dark:hover:border-slate-600"
             }`}
           >
-            All Tools ({tools.length})
+            All ({tools.length})
           </button>
           {CATEGORY_LIST.map((cat) => {
             const count = tools.filter((t) => t.category === cat.id).length;
@@ -103,19 +111,22 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
                 key={cat.id}
                 type="button"
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 ${
+                className={`px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-200 flex items-center gap-2 border ${
                   isSelected
-                    ? "text-white shadow-sm"
-                    : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900"
+                    ? "text-white shadow-sm border-transparent"
+                    : "bg-white dark:bg-slate-800/80 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-400 dark:hover:border-slate-600"
                 }`}
                 style={{
                   backgroundColor: isSelected ? theme.primary : undefined,
+                  borderColor: isSelected ? theme.primary : undefined,
                 }}
               >
                 <span>{cat.shortName}</span>
                 <span
-                  className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono ${
-                    isSelected ? "bg-white/20 text-white" : "bg-slate-200 text-slate-700"
+                  className={`text-xs px-2 py-0.5 rounded-full font-mono leading-tight font-bold ${
+                    isSelected
+                      ? "bg-white/25 text-white"
+                      : "bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-slate-100"
                   }`}
                 >
                   {count}
@@ -126,9 +137,9 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
         </div>
       )}
 
-      {/* Soft-Tech Editorial Grid of Tool Cards */}
+      {/* Tool Cards Grid */}
       {filteredTools.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
           {filteredTools.map((tool) => {
             const categoryDef = getCategoryById(tool.category);
             const theme = getCategoryTheme(tool.category);
@@ -138,30 +149,38 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
               <Link
                 key={tool.slug}
                 href={getToolUrl(tool)}
-                className="group relative flex flex-col justify-between h-full min-h-[200px] p-5 sm:p-6 rounded-3xl border border-slate-200/80 bg-white hover:-translate-y-1 hover:border-[var(--cat-border)] hover:shadow-[0_14px_32px_-6px_var(--cat-glow)] transition-all duration-300 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 motion-reduce:transition-none motion-reduce:hover:transform-none"
+                className="group relative flex flex-col h-full rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-[0_4px_20px_-2px_rgba(15,23,42,0.08)] hover:shadow-[0_12px_28px_-4px_rgba(15,23,42,0.14)] dark:shadow-none dark:hover:shadow-none overflow-hidden transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[var(--cat-border)] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 motion-reduce:transition-none motion-reduce:hover:transform-none"
                 style={{
-                  '--cat-primary': theme.primary,
-                  '--cat-border': theme.border,
-                  '--cat-glow': theme.glow,
+                  "--cat-primary": theme.primary,
+                  "--cat-border": theme.border,
+                  "--cat-glow": theme.glow,
                 } as React.CSSProperties}
               >
-                <div className="space-y-3.5">
-                  {/* Hero Icon Tile (48x48px) + Category Pill */}
-                  <div className="flex items-center justify-between gap-2">
+                {/* Subtle top accent stripe that appears on hover */}
+                <div
+                  className="absolute top-0 inset-x-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl"
+                  style={{ background: `linear-gradient(90deg, transparent, ${theme.primary}, transparent)` }}
+                />
+
+                <div className="p-5 sm:p-6 flex flex-col flex-1 gap-4">
+                  {/* Header row: icon + category badge */}
+                  <div className="flex items-start justify-between gap-3">
+                    {/* Icon tile */}
                     <div
-                      className="w-12 h-12 rounded-2xl border flex items-center justify-center shrink-0 shadow-sm transition-all duration-300 ease-out group-hover:scale-105 group-hover:shadow-md"
+                      className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border transition-all duration-300 group-hover:scale-105"
                       style={{
                         backgroundColor: theme.tint,
                         borderColor: theme.border,
                         color: theme.primary,
                       }}
                     >
-                      <ToolIcon className="w-6 h-6 transition-transform duration-300 ease-out group-hover:scale-105" strokeWidth={1.75} aria-hidden="true" />
+                      <ToolIcon className="w-6 h-6" strokeWidth={1.75} aria-hidden="true" />
                     </div>
 
+                    {/* Category badge */}
                     {!isSingleCategoryHub && categoryDef && (
                       <span
-                        className="text-[11px] font-mono font-medium lowercase tracking-wide px-2.5 py-0.5 rounded-full border shadow-sm shrink-0 transition-all duration-200 group-hover:shadow-xs"
+                        className="text-xs font-bold px-2.5 py-0.5 rounded-full border shrink-0 mt-0.5 leading-tight"
                         style={{
                           backgroundColor: theme.tint,
                           borderColor: theme.border,
@@ -173,66 +192,74 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
                     )}
                   </div>
 
-                  {/* Tool Title & Description with rigid height matching */}
-                  <div>
-                    <h3 className="font-headings text-base font-semibold text-slate-900 group-hover:text-blue-600 transition-colors duration-200 leading-snug line-clamp-2 h-11 flex items-center">
+                  {/* Title + description */}
+                  <div className="flex-1 space-y-2">
+                    <h3 className="font-headings text-base sm:text-[17px] font-bold text-slate-900 dark:text-white leading-snug line-clamp-2 group-hover:text-[var(--cat-primary)] transition-colors duration-200">
                       {tool.name}
                     </h3>
-                    <p className="font-body text-xs sm:text-[13px] text-slate-500 leading-relaxed line-clamp-2 h-10 mt-1 overflow-hidden">
+                    <p className="font-body text-sm text-slate-700 dark:text-slate-200 font-medium leading-relaxed line-clamp-2">
                       {tool.seo.description}
                     </p>
                   </div>
                 </div>
 
-                {/* Footer Bar: Runs in Browser indicator + Circular Arrow */}
-                <div className="mt-4 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs font-medium text-slate-500">
-                  <div className="flex items-center gap-1.5 text-slate-600 text-xs" title="Runs in your browser">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 shrink-0" aria-hidden="true" />
-                    <span className="text-[11px] text-slate-500 font-medium">Runs in browser</span>
+                {/* Card footer */}
+                <div className="px-5 sm:px-6 pb-4 sm:pb-5 flex items-center justify-between gap-2">
+                  {/* Privacy badge */}
+                  <div className="flex items-center gap-1.5" title="Runs 100% in your browser">
+                    <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" aria-hidden="true" />
+                    <span className="text-xs text-slate-700 dark:text-slate-300 font-semibold">
+                      In-browser
+                    </span>
                   </div>
 
-                  <div
-                    className="w-8 h-8 rounded-full bg-slate-100 text-slate-400 group-hover:bg-[var(--cat-primary)] group-hover:text-white transition-all duration-300 ease-out flex items-center justify-center shrink-0 shadow-sm group-hover:scale-110 group-hover:shadow-md"
+                  {/* CTA pill — slides in from right on hover */}
+                  <span
+                    className="inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded-full text-white opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-250 ease-out shadow-sm shrink-0"
+                    style={{ backgroundColor: theme.primary }}
                     aria-hidden="true"
                   >
-                    <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-1" strokeWidth={2} />
-                  </div>
+                    Open
+                    <ArrowUpRight className="w-3.5 h-3.5" strokeWidth={2.5} />
+                  </span>
                 </div>
               </Link>
             );
           })}
         </div>
       ) : tools.length === 0 ? (
-        <div className="p-12 text-center bg-white rounded-3xl border border-slate-200/80 shadow-sm text-slate-600 space-y-4 max-w-xl mx-auto">
-          <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center mx-auto shadow-sm">
+        <div className="p-12 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm text-slate-600 dark:text-slate-400 space-y-4 max-w-xl mx-auto">
+          <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-900/60 flex items-center justify-center mx-auto shadow-sm">
             <ShieldCheck className="w-6 h-6" />
           </div>
           <div className="space-y-1">
-            <h3 className="font-headings text-base font-bold text-slate-900">Tools in Development</h3>
-            <p className="font-body text-xs sm:text-sm text-slate-500 leading-relaxed">
-              Utilities for this category are currently being built and tested for upcoming release phases.
+            <h3 className="font-headings text-base font-bold text-slate-900 dark:text-slate-100">
+              Tools in Development
+            </h3>
+            <p className="font-body text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+              Utilities for this category are being built and tested for upcoming phases.
             </p>
           </div>
-          <div className="pt-2">
-            <Link
-              href="/tools"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800 transition-colors shadow-sm"
-            >
-              <span>Browse All Live Utilities</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
+          <Link
+            href="/tools"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors shadow-sm"
+          >
+            Browse All Live Utilities
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
       ) : (
-        <div className="p-12 text-center bg-slate-50 rounded-3xl border border-slate-200 text-slate-500 space-y-3">
-          <p className="text-sm font-semibold text-slate-700">No tools found matching your filter criteria.</p>
+        <div className="p-12 text-center bg-slate-50 dark:bg-slate-900/60 rounded-2xl border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 space-y-3">
+          <p className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+            No tools found matching your filter.
+          </p>
           <button
             type="button"
             onClick={() => {
               setSelectedCategory("all");
               setSearchQuery("");
             }}
-            className="text-xs text-blue-600 hover:underline font-bold focus:outline-none"
+            className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-bold focus:outline-none"
           >
             Reset Filters
           </button>

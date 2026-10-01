@@ -12,7 +12,7 @@ const BASE_ITEMS: TickerItem[] = [
   { text: "PDF Documents", colorClass: "bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 font-extrabold" },
   { text: "Image Converters", colorClass: "bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 via-teal-500 to-emerald-500 font-extrabold" },
   { text: "Document Tools", colorClass: "bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-sky-500 to-emerald-500 font-extrabold" },
-  { text: "Security Utilities", colorClass: "bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-blue-800 to-indigo-900 font-extrabold" },
+  { text: "Security Utilities", colorClass: "bg-clip-text text-transparent bg-gradient-to-r from-slate-900 dark:from-slate-100 via-blue-800 dark:via-blue-300 to-indigo-900 dark:to-indigo-300 font-extrabold" },
   { text: "Web Converters", colorClass: "bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 font-extrabold" },
 ];
 
@@ -89,7 +89,7 @@ export const HeroHeadlineTicker: React.FC<HeroHeadlineTickerProps> = ({
 
   return (
     <h1
-      className={`font-headings text-[24px] xs:text-3xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 leading-[1.18] tracking-tight ${
+      className={`font-headings text-[24px] xs:text-3xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-white leading-[1.18] tracking-tight ${
         centered ? "text-center" : "text-left"
       } ${className}`}
     >

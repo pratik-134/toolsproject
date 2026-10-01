@@ -11,17 +11,17 @@ const buttonVariants = cva(
         default:
           "bg-gradient-to-r from-[#3B82F6] to-[#0EA5E9] text-white shadow-xs hover:opacity-95 hover:shadow-sm active:scale-[0.99]",
         secondary:
-          "bg-[#0F172A] text-white shadow-xs hover:bg-[#1E293B] active:bg-[#0F172A]",
+          "bg-[#0F172A] text-white shadow-xs hover:bg-[#1E293B] active:bg-[#0F172A] dark:bg-slate-800 dark:hover:bg-slate-700",
         outline:
-          "bg-white text-slate-800 border border-slate-200 hover:bg-[#F8FAFC] hover:text-slate-900 active:bg-slate-100 shadow-2xs",
+          "bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-800 hover:bg-[#F8FAFC] dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white active:bg-slate-100 dark:active:bg-slate-800 shadow-2xs",
         glass:
-          "bg-white/90 backdrop-blur-md text-slate-800 border border-slate-200 hover:bg-white active:bg-slate-50",
+          "bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-800 hover:bg-white dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white active:bg-slate-50 dark:active:bg-slate-900",
         destructive:
           "bg-red-600 text-white shadow-xs hover:bg-red-700 active:bg-red-800",
         ghost:
-          "text-slate-600 hover:text-slate-900 hover:bg-slate-100 active:bg-slate-200/70",
+          "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 active:bg-slate-200/70 dark:active:bg-slate-700",
         link:
-          "text-[#3B82F6] underline-offset-4 hover:underline hover:text-[#2563EB] font-semibold",
+          "text-[#3B82F6] dark:text-blue-400 underline-offset-4 hover:underline hover:text-[#2563EB] dark:hover:text-blue-300 font-semibold",
       },
       size: {
         default: "h-10 px-5 py-2.5",

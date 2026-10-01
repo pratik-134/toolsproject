@@ -515,6 +515,58 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     ssr: false,
     loading: () => <ToolLoadingState name="Professional In-Browser PDF Editor" />,
   }),
+  "invoice-receipt-generator": dynamic(() => import("@/components/tools/phase3/invoice-generator"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Invoice & Receipt Generator" />,
+  }),
+  "estimate-quote-builder": dynamic(() => import("@/components/tools/phase3/estimate-quote-builder"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Estimate & Quote Builder" />,
+  }),
+  "certificate-diploma-generator": dynamic(() => import("@/components/tools/phase3/certificate-generator"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Certificate & Diploma Generator" />,
+  }),
+  "proposal-builder": dynamic(() => import("@/components/tools/phase3/proposal-builder"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Proposal & Agreement Builder" />,
+  }),
+  "desktop-screen-recorder": dynamic(() => import("@/components/tools/phase3/desktop-screen-recorder"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Full Desktop Screen Recorder" />,
+  }),
+  "web-tab-recorder": dynamic(() => import("@/components/tools/phase3/web-tab-recorder"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Web Tab Recorder" />,
+  }),
+  "webcam-overlay-recorder": dynamic(() => import("@/components/tools/phase3/webcam-overlay-recorder"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Webcam & Screen Overlay Recorder" />,
+  }),
+  "social-post-maker": dynamic(() => import("@/components/tools/phase3/social-post-maker"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Social Media Post Maker" />,
+  }),
+  "story-reels-maker": dynamic(() => import("@/components/tools/phase3/story-reels-maker"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Story & Reels Canvas Maker" />,
+  }),
+  "chart-graph-visualizer": dynamic(() => import("@/components/tools/phase3/chart-graph-visualizer"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Chart & Graph Visualizer" />,
+  }),
+  "meme-caption-generator": dynamic(() => import("@/components/tools/phase3/meme-caption-generator"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Meme Caption Generator" />,
+  }),
+  "latex-editor": dynamic(() => import("@/components/tools/phase3/latex-editor"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="LaTeX Equation & Paper Editor" />,
+  }),
+  "camera-to-pdf-scanner": dynamic(() => import("@/components/tools/phase3/camera-to-pdf-scanner"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Camera to PDF Scanner" />,
+  }),
 };
 
 function ToolLoadingState({ name }: { name: string }) {

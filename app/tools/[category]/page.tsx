@@ -13,9 +13,7 @@ import { ToolCardGrid } from "@/components/tools/ToolCardGrid";
 import {
   ShieldCheck,
   ChevronRight,
-  ArrowRight,
   Sparkles,
-  Clock,
   FileText,
   Image as ImageIcon,
   Lock,
@@ -82,63 +80,76 @@ export default async function CategoryHubPage({ params }: CategoryPageProps) {
   const CategoryIcon = CATEGORY_ICON_MAP[category.id] || Wrench;
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F8F9FA] text-[#0F172A] selection:bg-blue-500/20">
+    <div className="flex min-h-screen flex-col bg-[#F8F9FA] dark:bg-slate-950 text-[#0F172A] dark:text-slate-100 selection:bg-blue-500/20">
       <Navbar />
 
       <main className="flex-1 pb-16">
-        {/* Category Header */}
-        <section className="bg-white border-b border-slate-200/80 py-8 sm:py-12">
-          <div className="max-w-container mx-auto px-4 sm:px-6 space-y-4">
-            <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-slate-500">
-              <Link href="/" className="hover:text-slate-900 transition-colors">
-                Home
-              </Link>
-              <ChevronRight className="h-3 w-3 text-slate-400" />
-              <Link href="/tools" className="hover:text-slate-900 transition-colors">
-                Tools
-              </Link>
-              <ChevronRight className="h-3 w-3 text-slate-400" />
-              <span className="font-semibold" style={{ color: theme.primary }}>
-                {category.shortName}
-              </span>
+        {/* Category Header — tinted band */}
+        <section
+          className="relative border-b border-slate-200/80 dark:border-slate-800 py-10 sm:py-14 overflow-hidden"
+          style={{ backgroundColor: theme.tint }}
+        >
+          {/* Watermark */}
+          <div
+            className="absolute -right-8 -top-8 pointer-events-none opacity-[0.10] -rotate-12 select-none"
+            style={{ color: theme.primary }}
+            aria-hidden="true"
+          >
+            <CategoryIcon className="w-56 h-56" strokeWidth={1} />
+          </div>
+
+          <div className="max-w-container mx-auto px-4 sm:px-6 relative z-10 space-y-4">
+            {/* Breadcrumb */}
+            <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+              <Link href="/" className="hover:text-slate-900 dark:hover:text-slate-100 transition-colors">Home</Link>
+              <ChevronRight className="h-3 w-3 text-slate-400 dark:text-slate-600" />
+              <Link href="/tools" className="hover:text-slate-900 dark:hover:text-slate-100 transition-colors">Tools</Link>
+              <ChevronRight className="h-3 w-3 text-slate-400 dark:text-slate-600" />
+              <span className="font-semibold" style={{ color: theme.primary }}>{category.shortName}</span>
             </nav>
 
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div className="flex items-center gap-3.5">
+              <div className="flex items-center gap-4">
+                {/* Frosted icon tile */}
                 <div
-                  className="w-12 h-12 rounded-2xl border flex items-center justify-center shrink-0 shadow-sm"
+                  className="w-14 h-14 rounded-2xl border-2 flex items-center justify-center shrink-0 shadow-md"
                   style={{
-                    backgroundColor: theme.tint,
+                    backgroundColor: "rgba(255,255,255,0.85)",
                     borderColor: theme.border,
                     color: theme.primary,
                   }}
                 >
-                  <CategoryIcon className="w-6 h-6" strokeWidth={1.75} aria-hidden="true" />
+                  <CategoryIcon className="w-7 h-7" strokeWidth={1.75} aria-hidden="true" />
                 </div>
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-1.5 h-8 rounded-full shrink-0"
-                    style={{ backgroundColor: theme.primary }}
-                    aria-hidden="true"
-                  />
-                  <h1 className="font-headings text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
+                <div>
+                  <h1 className="font-headings text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 dark:text-slate-100 tracking-tight">
                     {category.name}
                   </h1>
+                  <p className="font-body text-slate-500 dark:text-slate-400 text-sm leading-relaxed max-w-xl mt-1">
+                    {category.description}
+                  </p>
                 </div>
               </div>
 
-              {/* Uniform Security Privacy Badge */}
-              <div
-                className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 font-body text-xs font-medium text-slate-600 shadow-sm shrink-0 self-start sm:self-auto"
-              >
-                <span className="text-emerald-500 text-[10px] leading-none">●</span>
-                <span>Runs locally · zero uploads</span>
+              {/* Stat badges */}
+              <div className="flex items-center gap-2 shrink-0 self-start sm:self-auto flex-wrap">
+                <span
+                  className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold shadow-sm"
+                  style={{
+                    backgroundColor: "rgba(255,255,255,0.85)",
+                    borderColor: theme.border,
+                    color: theme.primary,
+                  }}
+                >
+                  <Sparkles className="w-3 h-3" />
+                  {liveTools.length} live {liveTools.length === 1 ? "tool" : "tools"}
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-white/85 px-3 py-1.5 text-xs font-medium text-emerald-700 shadow-sm">
+                  <ShieldCheck className="w-3 h-3" />
+                  In-browser only
+                </span>
               </div>
             </div>
-
-            <p className="font-body text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl">
-              {category.description}
-            </p>
           </div>
         </section>
 

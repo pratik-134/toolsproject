@@ -1,3 +1,4 @@
+import "./patch-node24";
 import React from "react";
 import { pdf, Document } from "@react-pdf/renderer";
 import { initialResumeData } from "../lib/schema";

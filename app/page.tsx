@@ -45,7 +45,7 @@ export default function HomePage() {
   const faqSchema = generateFAQPageSchema([...RESUME_FAQS, ...TOOLS_FAQS]);
 
   return (
-    <div className="flex min-h-screen flex-col bg-white text-text-primary selection:bg-blue-500/20 selection:text-slate-900">
+    <div className="flex min-h-screen flex-col bg-white dark:bg-slate-950 text-text-primary selection:bg-blue-500/20 selection:text-slate-900">
       {/* Structured Data JSON-LD for Search Engines */}
       <script
         type="application/ld+json"
@@ -74,7 +74,7 @@ export default function HomePage() {
         {/* ========================================================================= */}
         <section
           id="templates"
-          className="scroll-mt-20 sm:scroll-mt-24 bg-gradient-to-b from-blue-50/40 via-slate-50/60 to-white py-section-py-mob md:py-section-py-tab lg:py-section-py relative overflow-hidden"
+          className="scroll-mt-20 sm:scroll-mt-24 bg-gradient-to-b from-blue-50/40 via-slate-50/60 to-white dark:from-slate-950 dark:via-slate-900/60 dark:to-slate-950 py-section-py-mob md:py-section-py-tab lg:py-section-py relative overflow-hidden"
         >
           <GridPattern size={56} strokeOpacity={0.025} strokeColor="#3B82F6" />
 
@@ -85,13 +85,13 @@ export default function HomePage() {
             <Reveal variant="fade-up">
               <div className="flex flex-col md:flex-row md:items-end justify-between mb-section-mb-mob md:mb-12 lg:mb-section-mb gap-6">
                 <div>
-                  <span className="font-body text-xs font-medium text-slate-700 bg-slate-100/90 px-3 py-1 rounded-full inline-block mb-2">
+                  <span className="font-body text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100/90 dark:bg-slate-900/90 px-3 py-1 rounded-full inline-block mb-2">
                     ✦ 20 hand-crafted styles · Recruiter-tested & ATS-safe
                   </span>
-                  <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900">
+                  <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 dark:text-slate-100">
                     Designed for recruiters, tested against ATS parsers.
                   </h2>
-                  <p className="font-body text-subtitle text-slate-600 mt-2 max-w-2xl">
+                  <p className="font-body text-subtitle text-slate-600 dark:text-slate-400 mt-2 max-w-2xl">
                     Choose from 20 distinct design styles. Switch templates at any point
                     without losing a single word of your data.
                   </p>
@@ -113,7 +113,7 @@ export default function HomePage() {
         </section>
 
         {/* Dynamic Zig-Zag Section Wave Divider */}
-        <ModernWaveDivider variant="zigzag" fillColor="fill-slate-50/70" />
+        <ModernWaveDivider variant="zigzag" fillColor="fill-slate-50/70" className="dark:hidden" />
 
         {/* ========================================================================= */}
         {/* 4. Comparison Section — High-Impact Dark Navy & Vibrant Accent Feature    */}
@@ -299,7 +299,7 @@ export default function HomePage() {
         {/* ========================================================================= */}
         <section
           id="features"
-          className="scroll-mt-20 sm:scroll-mt-24 bg-gradient-to-b from-white via-slate-50/70 to-blue-50/20 text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative overflow-hidden"
+          className="scroll-mt-20 sm:scroll-mt-24 bg-gradient-to-b from-white via-slate-50/70 to-blue-50/20 dark:from-slate-950 dark:via-slate-900/60 dark:to-slate-950 text-slate-900 dark:text-slate-100 py-section-py-mob md:py-section-py-tab lg:py-section-py relative overflow-hidden"
         >
           <DotPattern size={28} dotOpacity={0.035} dotColor="#0F172A" />
 
@@ -310,13 +310,13 @@ export default function HomePage() {
             {/* Section Header */}
             <Reveal variant="fade-up">
               <div className="text-center max-w-3xl mx-auto">
-                <span className="font-body text-xs font-medium text-slate-700 bg-slate-100/90 px-3.5 py-1 rounded-full inline-block mb-3">
+                <span className="font-body text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100/90 dark:bg-slate-900/90 px-3.5 py-1 rounded-full inline-block mb-3">
                   ✦ Under the hood · Built for applicants, not data brokers
                 </span>
-                <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900">
+                <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 dark:text-slate-100">
                   Engineered for real careers. Backed by client-side intelligence.
                 </h2>
-                <p className="font-body text-subtitle text-slate-600 mt-3">
+                <p className="font-body text-subtitle text-slate-600 dark:text-slate-400 mt-3">
                   Native vector PDF compilation, client-side data isolation, strict ATS compliance, and instant AI bullet point polishing—completely private on your device.
                 </p>
               </div>
@@ -326,39 +326,39 @@ export default function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
               {/* Block 1: Vector PDF Engine */}
               <Reveal variant="fade-up" delay={100} className="h-full">
-                <div className="rounded-2xl border border-slate-100/80 bg-white p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-md hover:border-blue-200/60 transition-all flex flex-col justify-between h-full">
+                <div className="rounded-2xl border border-slate-100/80 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-md hover:border-blue-200/60 dark:hover:border-blue-500/40 transition-all flex flex-col justify-between h-full">
                   <div className="space-y-3.5">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-800 text-blue-600 dark:text-blue-400">
                       <Cpu className="h-5 w-5" />
                     </div>
                     <div>
-                      <span className="text-[11px] font-headings font-bold text-blue-600 uppercase tracking-wider">
+                      <span className="text-[11px] font-headings font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
                         Core Architecture
                       </span>
-                      <h3 className="font-headings text-xl font-bold text-slate-900 mt-0.5">
+                      <h3 className="font-headings text-xl font-bold text-slate-900 dark:text-slate-100 mt-0.5">
                         In-Browser Vector PDF Compilation Engine
                       </h3>
                     </div>
-                    <p className="font-body text-sm text-slate-600 leading-relaxed">
+                    <p className="font-body text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                       Compiles print-ready vector PDF documents directly inside browser memory with pin-sharp typography and zero server latency.
                     </p>
                   </div>
 
-                  <div className="pt-5 mt-5 border-t border-slate-100 grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs font-semibold text-slate-700">
-                    <div className="bg-slate-50 border border-slate-200/80 rounded-lg p-2">
-                      <span className="block text-blue-600 font-headings text-sm font-bold font-mono">0 ms</span>
+                  <div className="pt-5 mt-5 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs font-semibold text-slate-700 dark:text-slate-300">
+                    <div className="bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 rounded-lg p-2">
+                      <span className="block text-blue-600 dark:text-blue-400 font-headings text-sm font-bold font-mono">0 ms</span>
                       Server Wait
                     </div>
-                    <div className="bg-slate-50 border border-slate-200/80 rounded-lg p-2">
-                      <span className="block text-blue-600 font-headings text-sm font-bold font-mono">300 DPI</span>
+                    <div className="bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 rounded-lg p-2">
+                      <span className="block text-blue-600 dark:text-blue-400 font-headings text-sm font-bold font-mono">300 DPI</span>
                       Resolution
                     </div>
-                    <div className="bg-slate-50 border border-slate-200/80 rounded-lg p-2">
-                      <span className="block text-blue-600 font-headings text-sm font-bold font-mono">A4</span>
+                    <div className="bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 rounded-lg p-2">
+                      <span className="block text-blue-600 dark:text-blue-400 font-headings text-sm font-bold font-mono">A4</span>
                       Print Standard
                     </div>
-                    <div className="bg-slate-50 border border-slate-200/80 rounded-lg p-2">
-                      <span className="block text-blue-600 font-headings text-sm font-bold">Embedded</span>
+                    <div className="bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 rounded-lg p-2">
+                      <span className="block text-blue-600 dark:text-blue-400 font-headings text-sm font-bold">Embedded</span>
                       Web Fonts
                     </div>
                   </div>
@@ -367,94 +367,94 @@ export default function HomePage() {
 
               {/* Block 2: 100% Privacy by Default */}
               <Reveal variant="fade-up" delay={150} className="h-full">
-                <div className="rounded-2xl border border-slate-100/80 bg-white p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-md hover:border-blue-200/60 transition-all flex flex-col justify-between h-full">
+                <div className="rounded-2xl border border-slate-100/80 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-md hover:border-blue-200/60 dark:hover:border-blue-500/40 transition-all flex flex-col justify-between h-full">
                   <div className="space-y-3.5">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-800 text-blue-600 dark:text-blue-400">
                       <ShieldCheck className="h-5 w-5" />
                     </div>
                     <div>
-                      <span className="text-[11px] font-headings font-bold text-blue-600 uppercase tracking-wider">
+                      <span className="text-[11px] font-headings font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
                         Client-Side Isolation
                       </span>
-                      <h3 className="font-headings text-xl font-bold text-slate-900 mt-0.5">
+                      <h3 className="font-headings text-xl font-bold text-slate-900 dark:text-slate-100 mt-0.5">
                         <span className="font-mono">100%</span> Privacy by Default
                       </h3>
                     </div>
-                    <p className="font-body text-sm text-slate-600 leading-relaxed">
+                    <p className="font-body text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                       Your personal contact info, achievements, and drafts remain isolated in local device storage—never uploaded to external servers.
                     </p>
                   </div>
 
-                  <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                    <span className="inline-flex items-center gap-1.5 text-slate-600 font-medium bg-slate-50 border border-slate-200/80 px-2.5 py-1 rounded-full text-[11px]">
+                  <div className="pt-5 mt-5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+                    <span className="inline-flex items-center gap-1.5 text-slate-600 dark:text-slate-300 font-medium bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 px-2.5 py-1 rounded-full text-[11px]">
                       <span className="font-mono">0 Bytes</span> uploaded
                     </span>
-                    <span className="font-body text-[11px] font-medium text-slate-500">Local Sandbox Architecture</span>
+                    <span className="font-body text-[11px] font-medium text-slate-500 dark:text-slate-400">Local Sandbox Architecture</span>
                   </div>
                 </div>
               </Reveal>
 
               {/* Block 3: PDF & DOCX Multi-Format */}
               <Reveal variant="fade-up" delay={200} className="h-full">
-                <div className="rounded-2xl border border-slate-100/80 bg-white p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-md hover:border-blue-200/60 transition-all flex flex-col justify-between h-full">
+                <div className="rounded-2xl border border-slate-100/80 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-md hover:border-blue-200/60 dark:hover:border-blue-500/40 transition-all flex flex-col justify-between h-full">
                   <div className="space-y-3.5">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-800 text-blue-600 dark:text-blue-400">
                       <FileUp className="h-5 w-5" />
                     </div>
                     <div>
-                      <span className="text-[11px] font-headings font-bold text-blue-600 uppercase tracking-wider">
+                      <span className="text-[11px] font-headings font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
                         Document Interoperability
                       </span>
-                      <h3 className="font-headings text-xl font-bold text-slate-900 mt-0.5">
+                      <h3 className="font-headings text-xl font-bold text-slate-900 dark:text-slate-100 mt-0.5">
                         PDF & DOCX Export & Import
                       </h3>
                     </div>
-                    <p className="font-body text-sm text-slate-600 leading-relaxed">
+                    <p className="font-body text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                       Import and export between vector-clean PDF and editable Word (.docx) formats with lossless layout fidelity.
                     </p>
                   </div>
 
-                  <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                    <span className="inline-flex items-center gap-1.5 text-slate-600 font-medium bg-slate-50 border border-slate-200/80 px-2.5 py-1 rounded-full text-[11px]">
+                  <div className="pt-5 mt-5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+                    <span className="inline-flex items-center gap-1.5 text-slate-600 dark:text-slate-300 font-medium bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 px-2.5 py-1 rounded-full text-[11px]">
                       Bi-directional DOCX & PDF
                     </span>
-                    <span className="font-body text-[11px] font-medium text-slate-500">Lossless Formatting</span>
+                    <span className="font-body text-[11px] font-medium text-slate-500 dark:text-slate-400">Lossless Formatting</span>
                   </div>
                 </div>
               </Reveal>
 
               {/* Block 4: Custom Sections & ATS Verification */}
               <Reveal variant="fade-up" delay={250} className="h-full">
-                <div className="rounded-2xl border border-slate-100/80 bg-white p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-md hover:border-blue-200/60 transition-all flex flex-col justify-between h-full">
+                <div className="rounded-2xl border border-slate-100/80 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] hover:shadow-md hover:border-blue-200/60 dark:hover:border-blue-500/40 transition-all flex flex-col justify-between h-full">
                   <div className="space-y-3.5">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-800 text-blue-600 dark:text-blue-400">
                       <Layers className="h-5 w-5" />
                     </div>
                     <div>
-                      <span className="text-[11px] font-headings font-bold text-blue-600 uppercase tracking-wider">
+                      <span className="text-[11px] font-headings font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
                         Applicant Tracking
                       </span>
-                      <h3 className="font-headings text-xl font-bold text-slate-900 mt-0.5">
+                      <h3 className="font-headings text-xl font-bold text-slate-900 dark:text-slate-100 mt-0.5">
                         Custom Sections & ATS Verification
                       </h3>
                     </div>
-                    <p className="font-body text-sm text-slate-600 leading-relaxed">
+                    <p className="font-body text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                       Every layout adheres to standardized semantic heading hierarchies and linear text flows verified against major enterprise ATS parsers.
                     </p>
                   </div>
 
-                  <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                    <span className="inline-flex items-center gap-1.5 text-slate-600 font-medium bg-slate-50 border border-slate-200/80 px-2.5 py-1 rounded-full text-[11px]">
+                  <div className="pt-5 mt-5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+                    <span className="inline-flex items-center gap-1.5 text-slate-600 dark:text-slate-300 font-medium bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 px-2.5 py-1 rounded-full text-[11px]">
                       <span className="font-mono">100%</span> parser safe
                     </span>
-                    <span className="font-body text-[11px] font-medium text-slate-500">Custom Category Builder</span>
+                    <span className="font-body text-[11px] font-medium text-slate-500 dark:text-slate-400">Custom Category Builder</span>
                   </div>
                 </div>
               </Reveal>
             </div>
 
             {/* Part B: Live AI Bullet Point Enhancer Demo */}
-            <div className="pt-8 border-t border-slate-200/80">
+            <div className="pt-8 border-t border-slate-200/80 dark:border-slate-800">
               <Reveal variant="fade-up">
                 <AiAssistantShowcase />
               </Reveal>
@@ -465,7 +465,7 @@ export default function HomePage() {
         {/* ========================================================================= */}
         {/* 7. ATS Analyzer Section — Analytical Dashboard View with Heuristics       */}
         {/* ========================================================================= */}
-        <section className="bg-gradient-to-b from-blue-50/20 via-slate-50 to-emerald-50/20 text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative overflow-hidden">
+        <section className="bg-gradient-to-b from-blue-50/20 via-slate-50 to-emerald-50/20 dark:from-slate-950 dark:via-slate-900/40 dark:to-slate-950 text-slate-900 dark:text-slate-100 py-section-py-mob md:py-section-py-tab lg:py-section-py relative overflow-hidden">
           <GridPattern size={40} strokeOpacity={0.025} strokeColor="#0F172A" />
 
           <div className="max-w-container mx-auto px-4 sm:px-6 relative z-10">
@@ -476,24 +476,24 @@ export default function HomePage() {
         </section>
 
         {/* Curved Section Wave Divider */}
-        <ModernWaveDivider variant="curved" fillColor="fill-sky-50/40" />
+        <ModernWaveDivider variant="curved" fillColor="fill-sky-50/40" className="dark:hidden" />
 
         {/* ========================================================================= */}
         {/* 8. Privacy Section — Light Canvas, Privacy-First Trust Pillars            */}
         {/* ========================================================================= */}
-        <section className="bg-gradient-to-br from-sky-50/40 via-white to-teal-50/30 text-slate-900 py-section-py-mob md:py-section-py-tab lg:py-section-py relative overflow-hidden">
+        <section className="bg-gradient-to-br from-sky-50/40 via-white to-teal-50/30 dark:from-slate-950 dark:via-slate-900/60 dark:to-slate-950 text-slate-900 dark:text-slate-100 py-section-py-mob md:py-section-py-tab lg:py-section-py relative overflow-hidden">
           <DotPattern size={28} dotOpacity={0.03} dotColor="#0F172A" />
 
           <div className="max-w-container mx-auto px-4 sm:px-6 relative z-10 text-center space-y-12">
             <Reveal variant="fade-up">
               <div className="max-w-3xl mx-auto space-y-4">
-                <span className="font-body text-xs font-medium text-slate-700 bg-slate-100/90 px-3.5 py-1 rounded-full inline-block">
+                <span className="font-body text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100/90 dark:bg-slate-900/90 px-3.5 py-1 rounded-full inline-block">
                   ✦ Privacy by architecture · Zero servers, zero cookies
                 </span>
-                <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 font-bold">
+                <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 dark:text-slate-100 font-bold">
                   Your career data belongs solely to you.
                 </h2>
-                <p className="font-body text-subtitle text-slate-600 leading-relaxed max-w-2xl mx-auto">
+                <p className="font-body text-subtitle text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto">
                   A resume contains your home address, personal phone number, employment
                   dates, and career history. We believe that data should never sit in an
                   unnecessary cloud database.
@@ -504,14 +504,14 @@ export default function HomePage() {
             {/* 3 Light Privacy Pillars */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left max-w-5xl mx-auto">
               <Reveal variant="fade-up" delay={100}>
-                <div className="rounded-xl border border-slate-100/80 bg-white p-6 hover:border-blue-200/60 hover:shadow-md shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] transition-all space-y-3 h-full">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 border border-blue-100 text-blue-600">
+                <div className="rounded-xl border border-slate-100/80 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 hover:border-blue-200/60 dark:hover:border-blue-500/40 hover:shadow-md shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] transition-all space-y-3 h-full">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-800 text-blue-600 dark:text-blue-400">
                     <HardDrive className="h-5 w-5" />
                   </div>
-                  <h4 className="font-headings text-lg font-bold text-slate-900">
+                  <h4 className="font-headings text-lg font-bold text-slate-900 dark:text-slate-100">
                     100% Local Storage
                   </h4>
-                  <p className="font-body text-small text-slate-500 leading-relaxed">
+                  <p className="font-body text-small text-slate-500 dark:text-slate-400 leading-relaxed">
                     Your resume data is stored exclusively inside your own browser's
                     indexed storage. When you close the tab, your draft stays on your
                     computer.
@@ -520,14 +520,14 @@ export default function HomePage() {
               </Reveal>
 
               <Reveal variant="fade-up" delay={200}>
-                <div className="rounded-xl border border-slate-100/80 bg-white p-6 hover:border-blue-200/60 hover:shadow-md shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] transition-all space-y-3 h-full">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 border border-blue-100 text-blue-600">
+                <div className="rounded-xl border border-slate-100/80 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 hover:border-blue-200/60 dark:hover:border-blue-500/40 hover:shadow-md shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] transition-all space-y-3 h-full">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-800 text-blue-600 dark:text-blue-400">
                     <Lock className="h-5 w-5" />
                   </div>
-                  <h4 className="font-headings text-lg font-bold text-slate-900">
+                  <h4 className="font-headings text-lg font-bold text-slate-900 dark:text-slate-100">
                     Zero Account Registration
                   </h4>
-                  <p className="font-body text-small text-slate-500 leading-relaxed">
+                  <p className="font-body text-small text-slate-500 dark:text-slate-400 leading-relaxed">
                     No passwords to create or leak. No mandatory email submissions, and
                     no promotional newsletters flooding your personal inbox.
                   </p>
@@ -535,14 +535,14 @@ export default function HomePage() {
               </Reveal>
 
               <Reveal variant="fade-up" delay={300}>
-                <div className="rounded-xl border border-slate-100/80 bg-white p-6 hover:border-blue-200/60 hover:shadow-md shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] transition-all space-y-3 h-full">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 border border-blue-100 text-blue-600">
+                <div className="rounded-xl border border-slate-100/80 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 hover:border-blue-200/60 dark:hover:border-blue-500/40 hover:shadow-md shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] transition-all space-y-3 h-full">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-800 text-blue-600 dark:text-blue-400">
                     <ShieldCheck className="h-5 w-5" />
                   </div>
-                  <h4 className="font-headings text-lg font-bold text-slate-900">
+                  <h4 className="font-headings text-lg font-bold text-slate-900 dark:text-slate-100">
                     Zero Data Brokerage
                   </h4>
-                  <p className="font-body text-small text-slate-500 leading-relaxed">
+                  <p className="font-body text-small text-slate-500 dark:text-slate-400 leading-relaxed">
                     We never scrape, analyze, or sell your professional information to
                     recruiters, third-party advertisers, or external AI models.
                   </p>
@@ -557,19 +557,19 @@ export default function HomePage() {
         {/* ========================================================================= */}
         <section
           id="faq"
-          className="scroll-mt-20 sm:scroll-mt-24 py-section-py-mob md:py-section-py-tab lg:py-section-py bg-gradient-to-b from-slate-50/80 via-white to-blue-50/20 relative overflow-hidden"
+          className="scroll-mt-20 sm:scroll-mt-24 py-section-py-mob md:py-section-py-tab lg:py-section-py bg-gradient-to-b from-slate-50/80 via-white to-blue-50/20 dark:from-slate-950 dark:via-slate-900/60 dark:to-slate-950 relative overflow-hidden"
         >
           <div className="max-w-container mx-auto px-4 sm:px-6 space-y-12">
             {/* Header */}
             <Reveal variant="fade-up">
               <div className="text-center space-y-4 max-w-2xl mx-auto">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-100/80 border-0 px-3.5 py-1 font-body text-xs font-medium text-slate-600">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-100/80 dark:bg-slate-900/90 border border-slate-200/60 dark:border-slate-800 px-3.5 py-1 font-body text-xs font-medium text-slate-600 dark:text-slate-300">
                   ✦ Common questions · Clear, straight answers
                 </span>
-                <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 [&>span]:text-blue-600">
+                <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 dark:text-slate-100 [&>span]:text-blue-600 dark:[&>span]:text-blue-400">
                   Everything you need to know about <span>Cleartrix</span>
                 </h2>
-                <p className="font-body text-body text-slate-600 leading-relaxed">
+                <p className="font-body text-body text-slate-600 dark:text-slate-400 leading-relaxed">
                   Clear, transparent answers. No hidden terms, no bait-and-switch billing,
                   and zero marketing gimmicks.
                 </p>
@@ -622,19 +622,19 @@ export default function HomePage() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="bg-slate-800/80 hover:bg-slate-800 text-slate-200 border-slate-700 px-7 py-3.5 rounded-xl min-h-[48px] text-base font-semibold shadow-xs gap-2"
+                    className="bg-slate-800 hover:bg-slate-700 text-white hover:text-white border-slate-700 hover:border-slate-600 px-7 py-3.5 rounded-xl min-h-[48px] text-base font-semibold shadow-xs gap-2 transition-all"
                   >
                     <Sparkles className="h-4 w-4 text-cyan-300" />
-                    Explore {totalTools} Tools
+                    <span>Explore {totalTools} Tools</span>
                   </Button>
                 </Link>
                 <a href="#templates">
                   <Button
                     variant="ghost"
                     size="lg"
-                    className="text-slate-400 hover:text-white px-6 py-3.5 rounded-xl min-h-[48px] text-base font-medium"
+                    className="text-slate-300 hover:text-white hover:bg-slate-800/90 px-6 py-3.5 rounded-xl min-h-[48px] text-base font-medium transition-all"
                   >
-                    Browse 20+ Templates
+                    <span>Browse 20+ Templates</span>
                   </Button>
                 </a>
               </div>

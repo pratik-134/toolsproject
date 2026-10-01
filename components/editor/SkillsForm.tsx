@@ -109,9 +109,9 @@ export const SkillsForm: React.FC<SkillsFormProps> = ({ sectionId }) => {
                 variant="outline"
                 size="sm"
                 onClick={() => setIsAiModalOpen(true)}
-                className="h-9 gap-1.5 text-xs text-blue-700 bg-blue-50 hover:bg-blue-100 hover:text-blue-800 font-medium rounded-lg border border-blue-200 shrink-0 transition-colors"
+                className="h-9 gap-1.5 text-xs text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-900/50 hover:text-blue-800 dark:hover:text-blue-200 font-medium rounded-lg border border-blue-200 dark:border-blue-800 shrink-0 transition-colors"
               >
-                <Sparkles className="h-3.5 w-3.5 text-blue-600" /> AI Suggest Skills
+                <Sparkles className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" /> AI Suggest Skills
               </Button>
             )}
           </div>
@@ -125,7 +125,7 @@ export const SkillsForm: React.FC<SkillsFormProps> = ({ sectionId }) => {
               return (
                 <div
                   key={skill.id}
-                  className="flex items-center justify-between gap-2 rounded-lg border border-slate-200 bg-slate-50/40 hover:bg-white hover:border-blue-200 px-3 py-1.5 shadow-xs transition-colors"
+                  className="flex items-center justify-between gap-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50/40 dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800 hover:border-blue-200 dark:hover:border-blue-800 px-3 py-1.5 shadow-xs transition-colors"
                 >
                   <Input
                     disabled={isLocked}
@@ -133,7 +133,7 @@ export const SkillsForm: React.FC<SkillsFormProps> = ({ sectionId }) => {
                     onChange={(e) =>
                       updateSectionItem(sectionId, skill.id, { name: e.target.value })
                     }
-                    className="h-7 text-xs font-medium text-slate-900 border-transparent hover:border-slate-200 focus:border-blue-500 bg-transparent flex-1"
+                    className="h-7 text-xs font-medium text-slate-900 dark:text-white border-transparent hover:border-slate-200 dark:hover:border-slate-700 focus:border-blue-500 bg-transparent flex-1"
                   />
 
                   <select
@@ -144,7 +144,7 @@ export const SkillsForm: React.FC<SkillsFormProps> = ({ sectionId }) => {
                         level: e.target.value as any,
                       })
                     }
-                    className="rounded-md border border-slate-200 bg-white px-2 py-0.5 text-xs font-medium text-slate-700 focus:outline-none focus:ring-1 focus:ring-blue-500/20 shrink-0"
+                    className="rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-2 py-0.5 text-xs font-medium text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-1 focus:ring-blue-500/20 shrink-0"
                   >
                     <option value="none">No label</option>
                     <option value="beginner">Beginner</option>
@@ -159,7 +159,7 @@ export const SkillsForm: React.FC<SkillsFormProps> = ({ sectionId }) => {
                       size="icon"
                       disabled={!canSkillMoveUp || isLocked}
                       onClick={() => moveSectionItem(sectionId, skill.id, "up")}
-                      className="h-7 w-7 text-slate-400 hover:text-slate-700 hover:bg-slate-100 disabled:opacity-20 rounded-md transition-colors"
+                      className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 rounded-md transition-colors"
                       title="Move Skill Up"
                     >
                       <ArrowUp className="h-3 w-3" />
@@ -169,7 +169,7 @@ export const SkillsForm: React.FC<SkillsFormProps> = ({ sectionId }) => {
                       size="icon"
                       disabled={!canSkillMoveDown || isLocked}
                       onClick={() => moveSectionItem(sectionId, skill.id, "down")}
-                      className="h-7 w-7 text-slate-400 hover:text-slate-700 hover:bg-slate-100 disabled:opacity-20 rounded-md transition-colors"
+                      className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 rounded-md transition-colors"
                       title="Move Skill Down"
                     >
                       <ArrowDown className="h-3 w-3" />
@@ -180,7 +180,7 @@ export const SkillsForm: React.FC<SkillsFormProps> = ({ sectionId }) => {
                         variant="ghost"
                         size="icon"
                         onClick={() => removeSectionItem(sectionId, skill.id)}
-                        className="h-7 w-7 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
+                        className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/50 rounded-md transition-colors"
                       >
                         <Trash2 className="h-3 w-3" />
                       </Button>

@@ -47,27 +47,27 @@ export const TemplatePicker: React.FC<TemplatePickerProps> = ({ isOpen, onClose 
       />
 
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 backdrop-blur-xs p-2 sm:p-6 overflow-y-auto">
-        <div className="relative w-full max-w-6xl rounded-lg border border-slate-200 bg-white p-3.5 sm:p-6 shadow-2xl flex flex-col max-h-[92vh]">
+        <div className="relative w-full max-w-6xl rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3.5 sm:p-6 shadow-2xl flex flex-col max-h-[92vh]">
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3 sm:pb-4 shrink-0">
+          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3 sm:pb-4 shrink-0">
             <div className="flex items-center gap-2.5 sm:gap-3">
-              <div className="p-2 sm:p-2.5 rounded-lg bg-blue-50 border border-blue-200 text-blue-600">
-                <LayoutTemplate className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
+              <div className="p-2 sm:p-2.5 rounded-lg bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-900 text-blue-600 dark:text-blue-400">
+                <LayoutTemplate className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 dark:text-blue-400" />
               </div>
               <div>
-                <h3 className="font-headings text-base sm:text-lg font-bold text-slate-900 leading-tight">Select Resume Template</h3>
-                <p className="hidden xs:block font-body text-xs text-slate-500 mt-0.5">
+                <h3 className="font-headings text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-tight">Select Resume Template</h3>
+                <p className="hidden xs:block font-body text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                   Every template is 100% free with zero paywalls. Hover or tap to preview your live resume data.
                 </p>
               </div>
             </div>
-            <Button variant="ghost" size="icon" onClick={onClose} className="h-8 w-8 text-slate-400 hover:text-slate-700 rounded-md">
+            <Button variant="ghost" size="icon" onClick={onClose} className="h-8 w-8 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 rounded-md">
               <X className="h-4 w-4" />
             </Button>
           </div>
 
           {/* Category Filter Tabs */}
-          <div className="flex items-center gap-2 border-b border-slate-100 py-3 shrink-0 overflow-x-auto">
+          <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 py-3 shrink-0 overflow-x-auto">
             {(
               [
                 { id: "all", label: "All Templates (20)" },
@@ -83,7 +83,7 @@ export const TemplatePicker: React.FC<TemplatePickerProps> = ({ isOpen, onClose 
                 className={`rounded-md px-4 py-1.5 text-xs font-bold transition-all shrink-0 ${
                   selectedCategory === tab.id
                     ? "bg-blue-600 text-white shadow-xs"
-                    : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900 border border-slate-200"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700"
                 }`}
               >
                 {tab.label}
@@ -102,12 +102,12 @@ export const TemplatePicker: React.FC<TemplatePickerProps> = ({ isOpen, onClose 
                     key={template.id}
                     className={`group relative rounded-lg border p-3 flex flex-col justify-between transition-all duration-200 ${
                       isSelected
-                        ? "border-blue-500 ring-2 ring-blue-500/20 bg-blue-50/20 shadow-xs"
-                        : "border-slate-200 hover:border-blue-300 hover:shadow-xs bg-white"
+                        ? "border-blue-500 ring-2 ring-blue-500/20 bg-blue-50/20 dark:bg-blue-950/20 shadow-xs"
+                        : "border-slate-200 dark:border-slate-800 hover:border-blue-300 dark:hover:border-blue-500 hover:shadow-xs bg-white dark:bg-slate-900"
                     }`}
                   >
                     {/* Live Thumbnail Box with Hover Actions */}
-                    <div className="relative rounded-md overflow-hidden mb-3 border border-slate-200 bg-white">
+                    <div className="relative rounded-md overflow-hidden mb-3 border border-slate-200 dark:border-slate-700 bg-white">
                       <TemplateThumbnail templateId={template.id} data={resumeData} />
 
                       {/* Hover Overlay */}
@@ -140,7 +140,7 @@ export const TemplatePicker: React.FC<TemplatePickerProps> = ({ isOpen, onClose 
                     {/* Card Content Info */}
                     <div>
                       <div className="flex items-center justify-between mb-1">
-                        <h4 className="font-headings text-sm font-bold text-slate-900">
+                        <h4 className="font-headings text-sm font-bold text-slate-900 dark:text-white">
                           {template.name}
                         </h4>
                         {isSelected && (
@@ -150,15 +150,15 @@ export const TemplatePicker: React.FC<TemplatePickerProps> = ({ isOpen, onClose 
                         )}
                       </div>
 
-                      <p className="font-body text-xs text-slate-500 line-clamp-2 leading-relaxed mb-2">
+                      <p className="font-body text-xs text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed mb-2">
                         {template.description}
                       </p>
                     </div>
 
                     {/* Footer Badges */}
-                    <div className="flex flex-wrap items-center justify-between gap-1 pt-2 border-t border-slate-100 mt-auto text-[10px] text-slate-500">
+                    <div className="flex flex-wrap items-center justify-between gap-1 pt-2 border-t border-slate-100 dark:border-slate-800 mt-auto text-[10px] text-slate-500 dark:text-slate-400">
                       <span className="font-medium">{template.fontName}</span>
-                      <span className="capitalize text-slate-700 font-bold bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
+                      <span className="capitalize text-slate-700 dark:text-slate-300 font-bold bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-700">
                         {template.category}
                       </span>
                     </div>
@@ -169,9 +169,9 @@ export const TemplatePicker: React.FC<TemplatePickerProps> = ({ isOpen, onClose 
           </div>
 
           {/* Modal Footer */}
-          <div className="border-t border-slate-100 pt-3 flex justify-between items-center shrink-0">
-            <span className="font-body text-xs text-slate-500">
-              Current Template: <strong className="text-slate-900 font-bold">{TEMPLATES_REGISTRY[resumeData.theme.templateId]?.name || "Modern"}</strong>
+          <div className="border-t border-slate-100 dark:border-slate-800 pt-3 flex justify-between items-center shrink-0">
+            <span className="font-body text-xs text-slate-500 dark:text-slate-400">
+              Current Template: <strong className="text-slate-900 dark:text-white font-bold">{TEMPLATES_REGISTRY[resumeData.theme.templateId]?.name || "Modern"}</strong>
             </span>
             <Button size="sm" onClick={onClose} className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold rounded-lg px-5 shadow-xs transition-colors">
               Done

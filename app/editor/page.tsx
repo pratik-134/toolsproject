@@ -112,7 +112,7 @@ export default function EditorPage() {
   }, [undo, redo, canUndo, canRedo]);
 
   return (
-    <div className="flex h-screen w-full flex-col overflow-hidden bg-slate-50 font-body text-slate-900 antialiased">
+    <div className="flex h-screen w-full flex-col overflow-hidden bg-slate-50 dark:bg-slate-950 font-body text-slate-900 dark:text-slate-100 antialiased">
       <Suspense fallback={null}>
         <ResumeRouteGuard />
       </Suspense>
@@ -139,28 +139,28 @@ export default function EditorPage() {
       </div>
 
       {/* Mobile Controls Toolbar (Switcher + Quick Actions for Templates, Design, ATS) */}
-      <div className="flex flex-col border-b border-slate-200 bg-white p-2 lg:hidden no-print gap-1.5 shadow-2xs">
+      <div className="flex flex-col border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2 lg:hidden no-print gap-1.5 shadow-2xs">
         {/* Mobile Tab Switcher */}
-        <div className="flex w-full max-w-md mx-auto rounded-lg bg-slate-100 p-1 border border-slate-200/80">
+        <div className="flex w-full max-w-md mx-auto rounded-lg bg-slate-100 dark:bg-slate-800 p-1 border border-slate-200/80 dark:border-slate-700">
           <button
             onClick={() => setMobileTab("edit")}
             className={`flex-1 py-1.5 text-xs font-medium rounded-md flex items-center justify-center gap-1.5 transition-all ${
               mobileTab === "edit"
-                ? "bg-white text-slate-900 shadow-xs font-semibold"
-                : "text-slate-500 hover:text-slate-900"
+                ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-xs font-semibold"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
             }`}
           >
-            <Edit3 className="h-3.5 w-3.5 text-blue-600" /> Edit Form
+            <Edit3 className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" /> Edit Form
           </button>
           <button
             onClick={() => setMobileTab("preview")}
             className={`flex-1 py-1.5 text-xs font-medium rounded-md flex items-center justify-center gap-1.5 transition-all ${
               mobileTab === "preview"
-                ? "bg-white text-slate-900 shadow-xs font-semibold"
-                : "text-slate-500 hover:text-slate-900"
+                ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-xs font-semibold"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
             }`}
           >
-            <Eye className="h-3.5 w-3.5 text-blue-600" /> Live Preview
+            <Eye className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" /> Live Preview
           </button>
         </div>
 
@@ -169,20 +169,20 @@ export default function EditorPage() {
           <button
             type="button"
             onClick={() => setTemplatePickerOpen(true)}
-            className="flex-1 min-w-0 flex items-center justify-center gap-1 text-xs font-semibold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 py-1.5 px-2 rounded-lg transition-all"
+            className="flex-1 min-w-0 flex items-center justify-center gap-1 text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 py-1.5 px-2 rounded-lg transition-all"
             title="Change Template"
           >
-            <LayoutTemplate className="h-3.5 w-3.5 text-blue-600 shrink-0" />
+            <LayoutTemplate className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
             <span className="truncate">{currentTemplate?.name || "Templates"}</span>
           </button>
 
           <button
             type="button"
             onClick={() => setPageSettingsOpen(true)}
-            className="flex-1 min-w-0 flex items-center justify-center gap-1 text-xs font-semibold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 py-1.5 px-2 rounded-lg transition-all"
+            className="flex-1 min-w-0 flex items-center justify-center gap-1 text-xs font-semibold text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 py-1.5 px-2 rounded-lg transition-all"
             title="Formatting & Design Settings"
           >
-            <Sliders className="h-3.5 w-3.5 text-blue-600 shrink-0" />
+            <Sliders className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
             <span>Design</span>
           </button>
 
@@ -191,10 +191,10 @@ export default function EditorPage() {
             onClick={() => setAtsAuditOpen(true)}
             className={`flex-1 min-w-0 flex items-center justify-center gap-1 text-xs font-semibold py-1.5 px-2 rounded-lg border transition-all ${
               completeness >= 80
-                ? "bg-blue-50 text-blue-700 border-blue-200"
+                ? "bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800"
                 : completeness >= 50
-                ? "bg-amber-50 text-amber-700 border-amber-200"
-                : "bg-slate-100 text-slate-700 border-slate-200"
+                ? "bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800"
+                : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700"
             }`}
             title="ATS Compatibility Score"
           >
@@ -208,7 +208,7 @@ export default function EditorPage() {
       <div className="flex flex-1 overflow-hidden">
         {/* Left Form Editor Column */}
         <div
-          className={`w-full lg:w-[48%] xl:w-[45%] h-full overflow-y-auto border-r border-slate-200 bg-slate-50 p-4 sm:p-6 space-y-4 no-print ${
+          className={`w-full lg:w-[48%] xl:w-[45%] h-full overflow-y-auto border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-4 sm:p-6 space-y-4 no-print ${
             mobileTab === "preview" ? "hidden lg:block" : "block"
           }`}
         >
@@ -241,7 +241,7 @@ export default function EditorPage() {
 
         {/* Right Live Preview Canvas */}
         <div
-          className={`w-full lg:w-[52%] xl:w-[55%] h-full overflow-y-auto bg-slate-100 ${
+          className={`w-full lg:w-[52%] xl:w-[55%] h-full overflow-y-auto bg-slate-100 dark:bg-slate-900 ${
             mobileTab === "edit" ? "hidden lg:block" : "block"
           }`}
         >

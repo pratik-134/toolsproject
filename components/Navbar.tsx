@@ -19,6 +19,8 @@ import {
 import { TOOLS } from "@/lib/registry/tools";
 
 import { CommandPalette } from "@/components/tools/CommandPalette";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { KbdShortcut } from "@/components/ui/KbdShortcut";
 import { Search } from "lucide-react";
 
 const ANNOUNCEMENT_STORAGE_KEY = "ct_announcement_dismissed_v1";
@@ -125,7 +127,7 @@ export const Navbar: React.FC = () => {
         </Link>
 
         {/* Trust Pill (Desktop only) */}
-        <span className="hidden xl:inline-flex items-center gap-1.5 rounded-full bg-blue-50/80 border border-blue-100 px-3 py-1 font-body text-xs font-semibold text-blue-700 shrink-0 shadow-2xs">
+        <span className="hidden xl:inline-flex items-center gap-1.5 rounded-full bg-blue-50/80 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-900/60 px-3 py-1 font-body text-xs font-semibold text-blue-700 dark:text-blue-300 shrink-0 shadow-2xs">
           ✦ Open & private · zero paywalls
         </span>
       </div>
@@ -133,68 +135,69 @@ export const Navbar: React.FC = () => {
       {/* Center Navigation Links */}
       <nav
         aria-label="Main Navigation"
-        className="hidden md:flex items-center gap-5 lg:gap-8 font-body text-xs lg:text-sm font-semibold text-slate-700 shrink-0"
+        className="hidden md:flex items-center gap-5 lg:gap-8 font-body text-xs lg:text-sm font-semibold text-slate-700 dark:text-slate-200 shrink-0"
       >
         <Link
           href="/tools"
-          className="inline-flex items-center gap-1.5 hover:text-blue-600 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group font-semibold text-slate-700"
+          className="inline-flex items-center gap-1.5 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group font-semibold text-slate-700 dark:text-slate-200"
         >
           <span>Tools</span>
-          <span className="text-[10px] font-bold text-blue-600 bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-full">
+          <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/80 border border-blue-100 dark:border-blue-900/80 px-2 py-0.5 rounded-full">
             {TOOLS.length}
           </span>
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full" />
         </Link>
         <Link
           href="/#templates"
-          className="hover:text-blue-600 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group"
+          className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group"
         >
           Templates
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full" />
         </Link>
         <Link
           href="/#comparison"
-          className="hover:text-blue-600 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group hidden lg:inline-block"
+          className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group hidden lg:inline-block"
         >
           Comparison
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full" />
         </Link>
         <Link
           href="/#features"
-          className="hover:text-blue-600 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group"
+          className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group"
         >
           Features
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full" />
         </Link>
         <Link
           href="/dashboard"
-          className="hover:text-blue-600 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group"
+          className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group"
         >
           My Resumes
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full" />
         </Link>
         <Link
           href="/#faq"
-          className="hover:text-blue-600 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group"
+          className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group"
         >
           FAQ
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full" />
         </Link>
       </nav>
 
-      {/* Right Area: Action CTA & Mobile Hamburger Button */}
+      {/* Right Area: Action CTA & Theme Toggle & Mobile Hamburger Button */}
       <div className="flex items-center gap-2 sm:gap-3 shrink-0">
         <button
           type="button"
           onClick={() => setIsSearchOpen(true)}
-          className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600 text-xs font-semibold transition-all"
+          className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold transition-all"
         >
-          <Search className="h-3.5 w-3.5 text-slate-500" />
+          <Search className="h-3.5 w-3.5 text-slate-500 dark:text-slate-400" />
           <span>Search</span>
-          <kbd className="hidden md:inline-block px-1.5 py-0.5 text-[10px] font-mono font-bold bg-white border border-slate-300 rounded text-slate-500">
-            ⌘K
-          </kbd>
+          <KbdShortcut shortcut="K" className="hidden md:inline-flex text-[10px]" />
         </button>
+
+        {/* Header Theme Toggle (Dark/Light Switch) */}
+        <ThemeToggle />
 
         <Link href="/editor" onClick={handleLinkClick}>
           <Button
@@ -215,12 +218,12 @@ export const Navbar: React.FC = () => {
           aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isOpen}
           aria-controls="mobile-navigation-drawer"
-          className="md:hidden flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/90 bg-slate-50 text-slate-700 hover:text-blue-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 active:scale-95 transition-all shrink-0"
+          className="md:hidden flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/90 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 active:scale-95 transition-all shrink-0"
         >
           {isOpen ? (
-            <X className="h-4 w-4 text-slate-900" />
+            <X className="h-4 w-4 text-slate-900 dark:text-white" />
           ) : (
-            <Menu className="h-4 w-4 text-slate-700" />
+            <Menu className="h-4 w-4 text-slate-700 dark:text-slate-200" />
           )}
         </button>
       </div>
@@ -231,7 +234,7 @@ export const Navbar: React.FC = () => {
     <div
       id="mobile-navigation-drawer"
       ref={menuRef}
-      className={`md:hidden absolute top-full left-0 right-0 z-50 bg-white border-b border-slate-200 shadow-xl overflow-hidden transition-all duration-300 ease-in-out ${
+      className={`md:hidden absolute top-full left-0 right-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden transition-all duration-300 ease-in-out ${
         isOpen
           ? "max-h-[85vh] opacity-100 p-4 space-y-3 overflow-y-auto"
           : "max-h-0 opacity-0 pointer-events-none p-0 border-transparent"
@@ -241,13 +244,13 @@ export const Navbar: React.FC = () => {
         <Link
           href="/tools"
           onClick={handleLinkClick}
-          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-blue-50/50 transition-colors"
+          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-slate-800 transition-colors"
         >
           <span className="flex items-center gap-2.5">
-            <Wrench className="h-4 w-4 text-blue-600" />
+            <Wrench className="h-4 w-4 text-blue-600 dark:text-blue-400" />
             <span>Tools & Utilities</span>
           </span>
-          <span className="text-[10px] font-medium text-slate-500 bg-slate-100 border border-slate-200/70 px-2 py-0.5 rounded-full">
+          <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 border border-slate-200/70 dark:border-slate-700 px-2 py-0.5 rounded-full">
             {TOOLS.length} tools
           </span>
         </Link>
@@ -255,13 +258,13 @@ export const Navbar: React.FC = () => {
         <Link
           href="/#templates"
           onClick={handleLinkClick}
-          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-blue-50/50 transition-colors"
+          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-slate-800 transition-colors"
         >
           <span className="flex items-center gap-2.5">
-            <LayoutTemplate className="h-4 w-4 text-blue-600" />
+            <LayoutTemplate className="h-4 w-4 text-blue-600 dark:text-blue-400" />
             <span>Resume Templates</span>
           </span>
-          <span className="text-[10px] font-medium text-slate-500 bg-slate-100 border border-slate-200/70 px-2 py-0.5 rounded-full">
+          <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 border border-slate-200/70 dark:border-slate-700 px-2 py-0.5 rounded-full">
             20 styles
           </span>
         </Link>
@@ -269,13 +272,13 @@ export const Navbar: React.FC = () => {
         <Link
           href="/#features"
           onClick={handleLinkClick}
-          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-blue-50/50 transition-colors"
+          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-slate-800 transition-colors"
         >
           <span className="flex items-center gap-2.5">
-            <Sparkles className="h-4 w-4 text-blue-600" />
+            <Sparkles className="h-4 w-4 text-blue-600 dark:text-blue-400" />
             <span>Features & PDF Engine</span>
           </span>
-          <span className="text-[10px] font-medium text-slate-500 bg-slate-100 border border-slate-200/70 px-2 py-0.5 rounded-full">
+          <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 border border-slate-200/70 dark:border-slate-700 px-2 py-0.5 rounded-full">
             Vector A4
           </span>
         </Link>
@@ -283,13 +286,13 @@ export const Navbar: React.FC = () => {
         <Link
           href="/#comparison"
           onClick={handleLinkClick}
-          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-blue-50/50 transition-colors"
+          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-slate-800 transition-colors"
         >
           <span className="flex items-center gap-2.5">
-            <CheckCircle2 className="h-4 w-4 text-blue-600" />
+            <CheckCircle2 className="h-4 w-4 text-blue-600 dark:text-blue-400" />
             <span>Why Cleartrix? (Comparison)</span>
           </span>
-          <span className="text-[10px] font-medium text-slate-500 bg-slate-100 border border-slate-200/70 px-2 py-0.5 rounded-full">
+          <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 border border-slate-200/70 dark:border-slate-700 px-2 py-0.5 rounded-full">
             Zero paywall
           </span>
         </Link>
@@ -297,13 +300,13 @@ export const Navbar: React.FC = () => {
         <Link
           href="/dashboard"
           onClick={handleLinkClick}
-          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-blue-50/50 transition-colors"
+          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-slate-800 transition-colors"
         >
           <span className="flex items-center gap-2.5">
-            <FileText className="h-4 w-4 text-blue-600" />
+            <FileText className="h-4 w-4 text-blue-600 dark:text-blue-400" />
             <span>My Resumes</span>
           </span>
-          <span className="text-[10px] font-medium text-slate-500 bg-slate-100 border border-slate-200/70 px-2 py-0.5 rounded-full">
+          <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 border border-slate-200/70 dark:border-slate-700 px-2 py-0.5 rounded-full">
             Dashboard
           </span>
         </Link>
@@ -311,25 +314,30 @@ export const Navbar: React.FC = () => {
         <Link
           href="/#faq"
           onClick={handleLinkClick}
-          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-semibold text-slate-700 hover:text-blue-600 hover:bg-blue-50/50 transition-colors"
+          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-slate-800 transition-colors"
         >
           <span className="flex items-center gap-2.5">
-            <FileText className="h-4 w-4 text-blue-600" />
+            <FileText className="h-4 w-4 text-blue-600 dark:text-blue-400" />
             <span>Frequently Asked Questions</span>
           </span>
-          <span className="text-[10px] font-medium text-slate-500 bg-slate-100 border border-slate-200/70 px-2 py-0.5 rounded-full">
+          <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 border border-slate-200/70 dark:border-slate-700 px-2 py-0.5 rounded-full">
             FAQ
           </span>
         </Link>
       </nav>
 
-      <div className="rounded-xl border border-slate-200 bg-slate-50/80 p-3 flex items-start gap-2.5">
-        <div className="text-[11px] text-slate-700 leading-relaxed">
-          <p className="font-semibold text-slate-800">Free forever · no account needed</p>
-          <p className="text-[10px] text-slate-500 mt-0.5">
+      <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-800/60 p-3 flex items-start gap-2.5">
+        <div className="text-[11px] text-slate-700 dark:text-slate-300 leading-relaxed">
+          <p className="font-semibold text-slate-800 dark:text-slate-100">Free forever · no account needed</p>
+          <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
             Runs in your browser. No paywalls, watermarks, or tracking cookies.
           </p>
         </div>
+      </div>
+
+      {/* Mobile Drawer Theme Toggle */}
+      <div className="pt-1">
+        <ThemeToggle showLabel className="w-full justify-between py-2 px-3.5 bg-slate-50 dark:bg-slate-800/80 border-slate-200 dark:border-slate-700" />
       </div>
 
       <div className="pt-1">
@@ -416,9 +424,9 @@ export const Navbar: React.FC = () => {
 
       {/* 2. Full-Width Sticky Navbar */}
       <header
-        className={`sticky top-0 z-50 w-full bg-white transition-all duration-300 ${
+        className={`sticky top-0 z-50 w-full bg-white dark:bg-slate-900 transition-all duration-300 ${
           isScrolled
-            ? "border-b border-slate-200/80 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.08)]"
+            ? "border-b border-slate-200/80 dark:border-slate-800 shadow-[0_4px_20px_-4px_rgba(15,23,42,0.08)]"
             : "border-b border-transparent shadow-none"
         }`}
       >

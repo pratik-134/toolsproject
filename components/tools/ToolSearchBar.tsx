@@ -19,6 +19,7 @@ import {
 import { getLiveTools } from "@/lib/registry/tools";
 import { ToolDefinition, CategoryId } from "@/lib/registry/types";
 import { getCategoryTheme } from "@/lib/category-theme";
+import { KbdShortcut } from "@/components/ui/KbdShortcut";
 
 const CATEGORY_ICON_MAP: Record<CategoryId, React.ElementType> = {
   "document-pdf": FileText,
@@ -220,10 +221,10 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
           }}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          className={`w-full bg-white text-slate-900 placeholder:text-slate-400 transition-all font-body ${
+          className={`w-full bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-all font-body ${
             isLarge
-              ? "pl-12 sm:pl-14 pr-16 py-3.5 sm:py-4 rounded-2xl border-2 border-slate-200/90 shadow-xs hover:border-slate-300 hover:shadow-sm text-sm sm:text-base focus:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500/10"
-              : "pl-10 pr-14 py-2 rounded-xl border border-slate-200 bg-white/90 backdrop-blur-xs text-xs sm:text-sm shadow-2xs hover:border-slate-300 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              ? "pl-12 sm:pl-14 pr-16 py-3.5 sm:py-4 rounded-2xl border-2 border-slate-200/90 dark:border-slate-800 shadow-xs hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-sm text-sm sm:text-base focus:border-blue-600 dark:focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/10"
+              : "pl-10 pr-14 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xs text-xs sm:text-sm shadow-2xs hover:border-slate-300 dark:hover:border-slate-700 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
           }`}
           role="combobox"
           aria-autocomplete="list"
@@ -239,7 +240,7 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
               setQuery("");
               setIsOpen(false);
             }}
-            className={`absolute top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 ${
+            className={`absolute top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 ${
               isLarge ? "right-4 text-base p-1" : "right-3 text-xs px-1"
             }`}
             title="Clear search"
@@ -252,13 +253,10 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
               isLarge ? "right-4" : "right-3"
             }`}
           >
-            <kbd
-              className={`inline-flex items-center gap-0.5 font-mono font-medium text-slate-400 bg-slate-100 border border-slate-200/80 rounded shadow-2xs ${
-                isLarge ? "px-2 py-1 text-xs" : "px-1.5 py-0.5 text-[10px]"
-              }`}
-            >
-              <span className={isLarge ? "text-xs" : "text-[11px]"}>⌘</span>K
-            </kbd>
+            <KbdShortcut
+              shortcut="K"
+              className={isLarge ? "px-2 py-1 text-xs" : "px-1.5 py-0.5 text-[10px]"}
+            />
           </div>
         )}
       </div>
@@ -268,11 +266,11 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
         <div
           id="tool-search-results-listbox"
           role="listbox"
-          className="absolute left-0 right-0 top-full mt-2 bg-white rounded-2xl border border-slate-200/90 shadow-2xl overflow-hidden z-50 animate-fade-in font-body max-h-[75vh] sm:max-h-[440px] overflow-y-auto overscroll-contain"
+          className="absolute left-0 right-0 top-full mt-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-2xl overflow-hidden z-50 animate-fade-in font-body max-h-[75vh] sm:max-h-[440px] overflow-y-auto overscroll-contain"
         >
           {results.length > 0 ? (
-            <div className="py-1 divide-y divide-slate-100">
-              <div className="px-3.5 sm:px-4 py-2 bg-slate-50/80 text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center justify-between">
+            <div className="py-1 divide-y divide-slate-100 dark:divide-slate-800">
+              <div className="px-3.5 sm:px-4 py-2 bg-slate-50/80 dark:bg-slate-800/80 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center justify-between">
                 <span>Matching Tools ({results.length})</span>
                 <span className="text-[10px] text-slate-400 font-normal hidden xs:inline">
                   Press Enter to open #1
@@ -293,7 +291,7 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
                     onClick={() => handleSelectTool(tool)}
                     onMouseEnter={() => setSelectedIndex(idx)}
                     className={`w-full flex items-center justify-between px-3.5 sm:px-4 py-2.5 sm:py-3 text-left text-xs sm:text-sm transition-colors ${
-                      isSelected ? "bg-blue-50/70 text-blue-900" : "text-slate-700 hover:bg-slate-50/80"
+                      isSelected ? "bg-blue-50/70 dark:bg-blue-950/60 text-blue-900 dark:text-blue-200" : "text-slate-700 dark:text-slate-200 hover:bg-slate-50/80 dark:hover:bg-slate-800/60"
                     }`}
                   >
                     <div className="flex items-center gap-3 min-w-0 pr-2">
@@ -303,10 +301,10 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
                         <IconComponent className="h-4 w-4" />
                       </div>
                       <div className="min-w-0">
-                        <p className="font-semibold text-slate-900 truncate text-xs sm:text-sm">
+                        <p className="font-semibold text-slate-900 dark:text-slate-100 truncate text-xs sm:text-sm">
                           {tool.name}
                         </p>
-                        <p className="text-[11px] text-slate-400 truncate">
+                        <p className="text-[11px] text-slate-400 dark:text-slate-400 truncate">
                           {tool.seo.description}
                         </p>
                       </div>
@@ -317,7 +315,7 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
                       >
                         {CATEGORY_LABEL_MAP[tool.category] || tool.category}
                       </span>
-                      <ArrowRight className="h-3.5 w-3.5 text-slate-400" />
+                      <ArrowRight className="h-3.5 w-3.5 text-slate-400 dark:text-slate-500" />
                     </div>
                   </button>
                 );
@@ -325,22 +323,22 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
               <Link
                 href={`/tools?q=${encodeURIComponent(query.trim())}`}
                 onClick={() => setIsOpen(false)}
-                className="block px-4 py-2.5 text-center text-xs font-semibold text-blue-600 hover:bg-blue-50/50 transition-colors"
+                className="block px-4 py-2.5 text-center text-xs font-semibold text-blue-600 dark:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-slate-800/60 transition-colors"
               >
                 See all results for &quot;{query}&quot; →
               </Link>
             </div>
           ) : (
             <div className="p-5 text-center space-y-2">
-              <p className="text-xs sm:text-sm text-slate-500">
-                No direct tool match for &quot;<span className="font-semibold text-slate-700">{query}</span>&quot;
+              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                No direct tool match for &quot;<span className="font-semibold text-slate-700 dark:text-slate-200">{query}</span>&quot;
               </p>
               <Link
                 href={`/tools?q=${encodeURIComponent(query.trim())}`}
                 onClick={() => setIsOpen(false)}
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline"
               >
-                <Sparkles className="h-3.5 w-3.5 text-blue-600" />
+                <Sparkles className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
                 <span>Search all 111 tools directory</span>
               </Link>
             </div>

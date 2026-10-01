@@ -21,31 +21,31 @@ export const DeleteResumeModal: React.FC<DeleteResumeModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 backdrop-blur-xs p-4 animate-fade-in">
-      <div className="relative w-full max-w-md rounded-lg border border-slate-200 bg-white p-6 shadow-2xl space-y-5">
+      <div className="relative w-full max-w-md rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-2xl space-y-5">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 transition-colors"
+          className="absolute top-4 right-4 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors"
           aria-label="Close modal"
         >
           <X className="h-5 w-5" />
         </button>
 
         <div className="flex items-center gap-3.5">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-900/60 text-red-600 dark:text-red-400">
             <AlertTriangle className="h-5 w-5" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-slate-900">Delete Resume?</h3>
-            <p className="text-xs text-slate-500">Permanent action • Zero recovery</p>
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">Delete Resume?</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Permanent action • Zero recovery</p>
           </div>
         </div>
 
-        <div className="rounded-lg border border-red-100 bg-red-50/50 p-3.5 text-xs text-slate-600 leading-relaxed space-y-1.5">
+        <div className="rounded-lg border border-red-100 dark:border-red-900/60 bg-red-50/50 dark:bg-red-950/30 p-3.5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed space-y-1.5">
           <p>
             Are you sure you want to delete{" "}
-            <strong className="text-slate-900">&ldquo;{resumeTitle}&rdquo;</strong>?
+            <strong className="text-slate-900 dark:text-slate-100">&ldquo;{resumeTitle}&rdquo;</strong>?
           </p>
-          <p className="text-red-700 font-medium">
+          <p className="text-red-700 dark:text-red-300 font-medium">
             Because Cleartrix runs 100% client-side in your browser, deleted resumes cannot be restored from a server backup.
           </p>
         </div>
@@ -56,7 +56,7 @@ export const DeleteResumeModal: React.FC<DeleteResumeModalProps> = ({
             variant="outline"
             size="sm"
             onClick={onClose}
-            className="rounded-lg px-4 text-xs font-semibold border-slate-200 text-slate-700 hover:bg-slate-50"
+            className="rounded-lg px-4 text-xs font-semibold border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
           >
             Cancel
           </Button>

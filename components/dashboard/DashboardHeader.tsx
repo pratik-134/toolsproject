@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useResumeIndexStore } from "@/lib/store/use-resume-index-store";
 import { BrandLogo } from "@/components/BrandLogo";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import {
   Plus,
   FileUp,
@@ -39,7 +40,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between bg-white px-3 sm:px-8 select-none shadow-md">
+    <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-slate-800 px-3 sm:px-8 select-none shadow-md">
       {/* Left: Brand & Dashboard Title */}
       <div className="flex items-center gap-3">
         <Link href="/" className="group" title="Cleartrix Resume Builder Home">
@@ -47,10 +48,10 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         </Link>
         <Link
           href="/tools"
-          className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-slate-100 transition-colors border border-slate-200"
+          className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-700"
           title="Browse all 111+ in-browser privacy tools"
         >
-          <Sparkles className="h-3.5 w-3.5 text-blue-600" />
+          <Sparkles className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
           <span>All 111+ Tools</span>
         </Link>
       </div>
@@ -61,15 +62,15 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         <div
           className={`hidden lg:flex items-center gap-1.5 px-3 py-1 rounded-lg border text-xs font-medium ${
             isStorageQuotaExceeded
-              ? "bg-amber-50 text-amber-700 border-amber-200 animate-pulse"
-              : "bg-slate-50 text-slate-600 border-slate-200"
+              ? "bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-900 animate-pulse"
+              : "bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700"
           }`}
           title="Cleartrix stores all your resume data exclusively in your browser memory and local storage. Zero data leaves your machine."
         >
-          <HardDrive className="h-3.5 w-3.5 text-slate-500" />
+          <HardDrive className="h-3.5 w-3.5 text-slate-500 dark:text-slate-400" />
           <span>Storage: {storageUsage.formattedUsed} used</span>
-          <span className="text-slate-300">•</span>
-          <span className="text-blue-600 font-semibold">100% Private</span>
+          <span className="text-slate-300 dark:text-slate-600">•</span>
+          <span className="text-blue-600 dark:text-blue-400 font-semibold">100% Private</span>
         </div>
 
         {/* Export All Backup JSON */}
@@ -80,9 +81,9 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
             size="sm"
             onClick={onExportBackup}
             title="Download JSON backup of all your resumes"
-            className="hidden sm:inline-flex rounded-lg px-2.5 sm:px-3 h-9 text-xs font-semibold text-slate-700 border-slate-200 hover:bg-slate-50 gap-1.5"
+            className="hidden sm:inline-flex rounded-lg px-2.5 sm:px-3 h-9 text-xs font-semibold text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 gap-1.5"
           >
-            <Download className="h-3.5 w-3.5 text-slate-600" />
+            <Download className="h-3.5 w-3.5 text-slate-600 dark:text-slate-400" />
             <span>Export JSON</span>
           </Button>
         )}
@@ -96,9 +97,9 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
               size="sm"
               onClick={() => backupInputRef.current?.click()}
               title="Restore resumes from a JSON backup file"
-              className="hidden sm:inline-flex rounded-lg px-2.5 sm:px-3 h-9 text-xs font-semibold text-slate-700 border-slate-200 hover:bg-slate-50 gap-1.5"
+              className="hidden sm:inline-flex rounded-lg px-2.5 sm:px-3 h-9 text-xs font-semibold text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 gap-1.5"
             >
-              <Upload className="h-3.5 w-3.5 text-slate-600" />
+              <Upload className="h-3.5 w-3.5 text-slate-600 dark:text-slate-400" />
               <span>Restore Backup</span>
             </Button>
             <input
@@ -117,12 +118,15 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           variant="outline"
           size="sm"
           onClick={onImportResume}
-          className="rounded-lg px-2.5 sm:px-3.5 h-9 text-xs font-semibold text-slate-700 border-slate-200 hover:bg-slate-50 hover:text-slate-900 gap-1.5"
+          className="rounded-lg px-2.5 sm:px-3.5 h-9 text-xs font-semibold text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white gap-1.5"
         >
-          <FileUp className="h-3.5 w-3.5 text-blue-600" />
+          <FileUp className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
           <span className="hidden sm:inline">Import Resume</span>
           <span className="sm:hidden">Import</span>
         </Button>
+
+        {/* Theme Toggle Button */}
+        <ThemeToggle />
 
         {/* New Resume Primary Button */}
         <Button

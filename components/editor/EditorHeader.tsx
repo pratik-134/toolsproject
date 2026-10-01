@@ -14,6 +14,8 @@ import { OutlineNavigator } from "./OutlineNavigator";
 import { CommandPalette } from "./CommandPalette";
 import { ResumeImportModal } from "@/components/import/ResumeImportModal";
 import { ResumeSwitcherDropdown } from "./ResumeSwitcherDropdown";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { KbdShortcut } from "@/components/ui/KbdShortcut";
 import {
   Undo2,
   Redo2,
@@ -129,14 +131,14 @@ export const EditorHeader: React.FC = () => {
       <ResumeImportModal />
 
       {/* Header Toolbar */}
-      <header className="sticky top-0 z-30 flex h-14 w-full items-center justify-between bg-white text-slate-900 shadow-md px-2 sm:px-4 select-none">
+      <header className="sticky top-0 z-30 flex h-14 w-full items-center justify-between bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 border-b border-slate-200/80 dark:border-slate-800 shadow-md px-2 sm:px-4 select-none">
         {/* Left: Home/Dashboard, Switcher/Title, Autosave Status */}
         <div className="flex items-center gap-1.5 sm:gap-2.5 min-w-0">
           <Link href="/dashboard">
             <Button
               variant="ghost"
               size="sm"
-              className="h-8 gap-1.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100 px-2.5 rounded-lg font-medium"
+              className="h-8 gap-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 px-2.5 rounded-lg font-medium"
               title="Return to My Resumes Dashboard"
             >
               <ArrowLeft className="h-4 w-4" />
@@ -144,7 +146,7 @@ export const EditorHeader: React.FC = () => {
             </Button>
           </Link>
 
-          <div className="h-4 w-[1px] bg-slate-200" />
+          <div className="h-4 w-[1px] bg-slate-200 dark:bg-slate-700" />
 
           {/* Interactive Resume Switcher & Inline Renamer */}
           <ResumeSwitcherDropdown />
@@ -152,12 +154,12 @@ export const EditorHeader: React.FC = () => {
           {/* Autosave Status */}
           <div className="hidden xl:flex items-center gap-1.5 text-xs text-slate-400 pl-1">
             {saveStatus === "saved" ? (
-              <div className="flex items-center gap-1.5 text-slate-600 font-medium text-[11px] bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md">
+              <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300 font-medium text-[11px] bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2 py-0.5 rounded-md">
                 <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
                 <span>Saved</span>
               </div>
             ) : (
-              <div className="flex items-center gap-1.5 text-amber-600 font-medium text-[11px] bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md">
+              <div className="flex items-center gap-1.5 text-amber-600 dark:text-amber-400 font-medium text-[11px] bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900 px-2 py-0.5 rounded-md">
                 <Clock className="h-3 w-3 animate-spin" />
                 <span>Saving...</span>
               </div>
@@ -170,20 +172,20 @@ export const EditorHeader: React.FC = () => {
           {/* Template Picker Pill */}
           <button
             onClick={() => setTemplatePickerOpen(true)}
-            className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 bg-slate-50 hover:bg-slate-100 hover:text-slate-900 border border-slate-200 px-3 py-1.5 rounded-lg transition-all shadow-xs"
+            className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-lg transition-all shadow-xs"
             title="Choose template from 20+ professional designs"
           >
-            <LayoutTemplate className="h-3.5 w-3.5 text-blue-600" />
+            <LayoutTemplate className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
             <span>{currentTemplate?.name || "Templates"}</span>
           </button>
 
           {/* Design & Layout Pill */}
           <button
             onClick={() => setPageSettingsOpen(true)}
-            className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 bg-slate-50 hover:bg-slate-100 hover:text-slate-900 border border-slate-200 px-3 py-1.5 rounded-lg transition-all shadow-xs"
+            className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-lg transition-all shadow-xs"
             title="Customize margins, density, typography and colors"
           >
-            <Sliders className="h-3.5 w-3.5 text-blue-600" />
+            <Sliders className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
             <span>Design</span>
           </button>
 
@@ -192,14 +194,14 @@ export const EditorHeader: React.FC = () => {
             onClick={() => setAtsAuditOpen(true)}
             className={`flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-lg border shadow-xs transition-all hover:scale-102 ${
               completeness >= 80
-                ? "bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100"
+                ? "bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-900 hover:bg-blue-100 dark:hover:bg-blue-950"
                 : completeness >= 50
-                ? "bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100"
-                : "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200"
+                ? "bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-900 hover:bg-amber-100 dark:hover:bg-amber-950"
+                : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700"
             }`}
             title="Open ATS Quality Audit Panel"
           >
-            <ShieldCheck className={`h-3.5 w-3.5 ${completeness >= 80 ? "text-blue-600" : completeness >= 50 ? "text-amber-600" : "text-slate-500"}`} />
+            <ShieldCheck className={`h-3.5 w-3.5 ${completeness >= 80 ? "text-blue-600 dark:text-blue-400" : completeness >= 50 ? "text-amber-600 dark:text-amber-400" : "text-slate-500"}`} />
             <span>ATS: {completeness}%</span>
           </button>
         </div>
@@ -209,35 +211,33 @@ export const EditorHeader: React.FC = () => {
           {/* Import Resume Pill */}
           <button
             onClick={() => setImportModalOpen(true)}
-            className="flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg px-2 sm:px-2.5 py-1 text-xs text-slate-700 hover:text-slate-900 transition-all shadow-xs"
+            className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-lg px-2 sm:px-2.5 py-1 text-xs text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white transition-all shadow-xs"
             title="Import existing PDF or DOCX resume"
           >
-            <FileUp className="h-3.5 w-3.5 text-blue-600" />
+            <FileUp className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
             <span className="hidden xs:inline font-semibold text-xs">Import</span>
           </button>
 
           {/* Quick Actions Search Pill (Ctrl+K) */}
           <button
             onClick={() => setCommandPaletteOpen(true)}
-            className="hidden sm:flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg px-2.5 py-1 text-xs text-slate-600 hover:text-slate-900 transition-all shadow-xs"
+            className="hidden sm:flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1 text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all shadow-xs"
             title="Open Command Palette (Ctrl+K)"
           >
             <Search className="h-3.5 w-3.5 text-slate-400" />
             <span className="hidden lg:inline font-medium text-xs">Search</span>
-            <kbd className="text-[10px] font-mono bg-white px-1.5 py-0.2 rounded border border-slate-200 text-slate-500 shadow-2xs">
-              ⌘K
-            </kbd>
+            <KbdShortcut shortcut="K" className="text-[10px]" />
           </button>
 
           {/* Undo / Redo Segment */}
-          <div className="flex items-center rounded-lg border border-slate-200 bg-slate-100/60 p-0.5">
+          <div className="flex items-center rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100/60 dark:bg-slate-800/60 p-0.5">
             <Button
               variant="ghost"
               size="icon"
               onClick={undo}
               disabled={!canUndo()}
               title="Undo (Ctrl+Z)"
-              className="h-7 w-7 text-slate-600 hover:text-slate-900 hover:bg-white disabled:opacity-30 rounded-md"
+              className="h-7 w-7 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 disabled:opacity-30 rounded-md"
             >
               <Undo2 className="h-3.5 w-3.5" />
             </Button>
@@ -247,7 +247,7 @@ export const EditorHeader: React.FC = () => {
               onClick={redo}
               disabled={!canRedo()}
               title="Redo (Ctrl+Y)"
-              className="h-7 w-7 text-slate-600 hover:text-slate-900 hover:bg-white disabled:opacity-30 rounded-md"
+              className="h-7 w-7 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-slate-700 disabled:opacity-30 rounded-md"
             >
               <Redo2 className="h-3.5 w-3.5" />
             </Button>
@@ -260,8 +260,8 @@ export const EditorHeader: React.FC = () => {
             onClick={toggleOutline}
             className={`h-8 w-8 rounded-lg transition-all ${
               isOutlineOpen
-                ? "bg-blue-50 text-blue-600 border border-blue-200 font-bold"
-                : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                ? "bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-900 font-bold"
+                : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
             }`}
             title="Toggle Section Outline"
           >
@@ -275,13 +275,16 @@ export const EditorHeader: React.FC = () => {
             onClick={toggleFocusMode}
             className={`h-8 w-8 rounded-lg hidden lg:flex transition-all ${
               isFocusMode
-                ? "bg-slate-900 text-white"
-                : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                ? "bg-slate-900 dark:bg-blue-600 text-white"
+                : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
             }`}
             title={isFocusMode ? "Exit Focus Mode" : "Focus Mode"}
           >
             {isFocusMode ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
           </Button>
+
+          {/* Theme Toggle */}
+          <ThemeToggle />
 
           {/* Export PDF Button */}
           <Button
@@ -310,7 +313,7 @@ export const EditorHeader: React.FC = () => {
             variant="outline"
             onClick={handleExportDocx}
             disabled={isExportingPdf || isExportingDocx}
-            className="h-8 sm:h-9 gap-1.5 font-semibold text-slate-700 bg-white hover:bg-slate-50 hover:text-slate-900 border-slate-200 rounded-lg px-2 sm:px-3 shadow-xs transition-all active:scale-[0.98]"
+            className="h-8 sm:h-9 gap-1.5 font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white border-slate-200 dark:border-slate-700 rounded-lg px-2 sm:px-3 shadow-xs transition-all active:scale-[0.98]"
             title="Download fully editable native Word (.docx) document"
           >
             {isExportingDocx ? (
@@ -332,7 +335,7 @@ export const EditorHeader: React.FC = () => {
             variant="ghost"
             size="icon"
             onClick={() => window.print()}
-            className="h-8 w-8 text-slate-500 hover:text-slate-900 hover:bg-slate-100 hidden sm:flex rounded-lg"
+            className="h-8 w-8 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 hidden sm:flex rounded-lg"
             title="Print or Save via Browser Dialog"
           >
             <Printer className="h-4 w-4" />

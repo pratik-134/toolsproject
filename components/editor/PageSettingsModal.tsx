@@ -45,18 +45,18 @@ export const PageSettingsModal: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/40 backdrop-blur-xs p-3 sm:p-4 animate-in fade-in duration-150 no-print">
-      <div className="w-full max-w-lg bg-white text-slate-900 border border-slate-200 rounded-lg p-4 sm:p-6 shadow-2xl space-y-4 sm:space-y-5 select-none max-h-[92vh] flex flex-col">
+      <div className="w-full max-w-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-800 rounded-lg p-4 sm:p-6 shadow-2xl space-y-4 sm:space-y-5 select-none max-h-[92vh] flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-lg bg-blue-50 border border-blue-200 text-blue-600">
-              <Sliders className="h-4 w-4 text-blue-600" />
+            <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-900 text-blue-600 dark:text-blue-400">
+              <Sliders className="h-4 w-4 text-blue-600 dark:text-blue-400" />
             </div>
             <div>
-              <h3 className="font-semibold text-base text-slate-900">
+              <h3 className="font-semibold text-base text-slate-900 dark:text-white">
                 Page Setup & Formatting
               </h3>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Synchronized live between browser preview and exported PDF
               </p>
             </div>
@@ -65,7 +65,7 @@ export const PageSettingsModal: React.FC = () => {
             variant="ghost"
             size="icon"
             onClick={() => setPageSettingsOpen(false)}
-            className="h-8 w-8 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-md"
+            className="h-8 w-8 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md"
           >
             <X className="h-4 w-4" />
           </Button>
@@ -74,9 +74,9 @@ export const PageSettingsModal: React.FC = () => {
         <div className="space-y-4 max-h-[70vh] overflow-y-auto pr-1 text-xs">
           {/* 1. Spacing & Density */}
           <div className="space-y-2">
-            <label className="font-semibold text-slate-800 flex items-center gap-1.5">
+            <label className="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
               <span>Layout Density</span>
-              <span className="text-[10px] text-slate-400 font-normal">
+              <span className="text-[10px] text-slate-400 dark:text-slate-500 font-normal">
                 (Section & item spacing)
               </span>
             </label>
@@ -91,12 +91,12 @@ export const PageSettingsModal: React.FC = () => {
                   onClick={() => updateTheme({ density: d.id as any })}
                   className={`p-2.5 rounded-lg border text-left transition-all ${
                     theme.density === d.id
-                      ? "border-blue-600 bg-blue-50 text-blue-700 shadow-xs"
-                      : "border-slate-200 bg-slate-50/60 text-slate-700 hover:bg-slate-100 hover:border-slate-300"
+                      ? "border-blue-600 dark:border-blue-500 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 shadow-xs"
+                      : "border-slate-200 dark:border-slate-700 bg-slate-50/60 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600"
                   }`}
                 >
                   <div className="font-semibold text-xs">{d.name}</div>
-                  <div className={`text-[10px] mt-0.5 ${theme.density === d.id ? "text-blue-600" : "text-slate-400"}`}>
+                  <div className={`text-[10px] mt-0.5 ${theme.density === d.id ? "text-blue-600 dark:text-blue-400" : "text-slate-400 dark:text-slate-500"}`}>
                     {d.desc}
                   </div>
                 </button>
@@ -106,9 +106,9 @@ export const PageSettingsModal: React.FC = () => {
 
           {/* 2. Margin Profile */}
           <div className="space-y-2">
-            <label className="font-semibold text-slate-800 flex items-center gap-1.5">
+            <label className="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
               <span>Printable Margins</span>
-              <span className="text-[10px] text-slate-400 font-normal">
+              <span className="text-[10px] text-slate-400 dark:text-slate-500 font-normal">
                 (A4 sheet border padding)
               </span>
             </label>
@@ -123,12 +123,12 @@ export const PageSettingsModal: React.FC = () => {
                   onClick={() => updateTheme({ marginSize: m.id as any })}
                   className={`p-2.5 rounded-lg border text-left transition-all ${
                     theme.marginSize === m.id
-                      ? "border-blue-600 bg-blue-50 text-blue-700 shadow-xs"
-                      : "border-slate-200 bg-slate-50/60 text-slate-700 hover:bg-slate-100 hover:border-slate-300"
+                      ? "border-blue-600 dark:border-blue-500 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 shadow-xs"
+                      : "border-slate-200 dark:border-slate-700 bg-slate-50/60 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600"
                   }`}
                 >
                   <div className="font-semibold text-xs">{m.name}</div>
-                  <div className={`text-[10px] mt-0.5 ${theme.marginSize === m.id ? "text-blue-600" : "text-slate-400"}`}>
+                  <div className={`text-[10px] mt-0.5 ${theme.marginSize === m.id ? "text-blue-600 dark:text-blue-400" : "text-slate-400 dark:text-slate-500"}`}>
                     {m.desc}
                   </div>
                 </button>
@@ -138,8 +138,8 @@ export const PageSettingsModal: React.FC = () => {
 
           {/* 3. Typography Pairing */}
           <div className="space-y-2">
-            <label className="font-semibold text-slate-800 flex items-center gap-1.5">
-              <Type className="h-3.5 w-3.5 text-slate-500" />
+            <label className="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+              <Type className="h-3.5 w-3.5 text-slate-500 dark:text-slate-400" />
               <span>Typography Pairing</span>
             </label>
             <div className="space-y-1.5">
@@ -149,15 +149,15 @@ export const PageSettingsModal: React.FC = () => {
                   onClick={() => updateTheme({ fontPair: f.id as any })}
                   className={`w-full p-2.5 rounded-lg border text-left flex items-center justify-between transition-all ${
                     theme.fontPair === f.id
-                      ? "border-blue-600 bg-blue-50 font-medium text-slate-900 shadow-2xs"
-                      : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:border-slate-300"
+                      ? "border-blue-600 dark:border-blue-500 bg-blue-50 dark:bg-blue-950/40 font-medium text-slate-900 dark:text-white shadow-2xs"
+                      : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600"
                   }`}
                 >
                   <div>
-                    <div className="font-semibold text-xs text-slate-900">{f.name}</div>
-                    <div className="text-[10px] text-slate-500">{f.desc}</div>
+                    <div className="font-semibold text-xs text-slate-900 dark:text-white">{f.name}</div>
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400">{f.desc}</div>
                   </div>
-                  {theme.fontPair === f.id && <Check className="h-4 w-4 text-blue-600" />}
+                  {theme.fontPair === f.id && <Check className="h-4 w-4 text-blue-600 dark:text-blue-400" />}
                 </button>
               ))}
             </div>
@@ -165,18 +165,18 @@ export const PageSettingsModal: React.FC = () => {
 
           {/* 4. Accent Color Selection */}
           <div className="space-y-2">
-            <label className="font-semibold text-slate-800 flex items-center gap-1.5">
-              <Palette className="h-3.5 w-3.5 text-slate-500" />
+            <label className="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+              <Palette className="h-3.5 w-3.5 text-slate-500 dark:text-slate-400" />
               <span>Accent Color</span>
             </label>
-            <div className="flex flex-wrap items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+            <div className="flex flex-wrap items-center gap-2 bg-slate-50 dark:bg-slate-800/60 p-3 rounded-lg border border-slate-200 dark:border-slate-700">
               {ACCENT_COLORS.map((c) => (
                 <button
                   key={c.hex}
                   onClick={() => updateTheme({ accentColor: c.hex })}
                   className={`h-6 w-6 rounded-full transition-transform ${
                     theme.accentColor === c.hex
-                      ? "scale-110 ring-2 ring-blue-600 ring-offset-2 ring-offset-white"
+                      ? "scale-110 ring-2 ring-blue-600 dark:ring-blue-400 ring-offset-2 ring-offset-white dark:ring-offset-slate-900"
                       : "hover:scale-110 opacity-80"
                   }`}
                   style={{ backgroundColor: c.hex }}
@@ -186,35 +186,35 @@ export const PageSettingsModal: React.FC = () => {
 
               {/* Custom Hex Input */}
               <div className="ml-auto flex items-center gap-1.5">
-                <span className="text-[11px] text-slate-400">Hex:</span>
+                <span className="text-[11px] text-slate-400 dark:text-slate-500">Hex:</span>
                 <input
                   type="text"
                   value={theme.accentColor}
                   onChange={(e) => updateTheme({ accentColor: e.target.value })}
                   maxLength={7}
-                  className="w-20 bg-white text-slate-900 text-xs font-mono border border-slate-200 rounded-md px-2 py-0.5 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  className="w-20 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-mono border border-slate-200 dark:border-slate-700 rounded-md px-2 py-0.5 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 />
               </div>
             </div>
           </div>
 
           {/* 5. Toggles */}
-          <div className="space-y-2 pt-2 border-t border-slate-100">
+          <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
             <label className="flex items-center justify-between cursor-pointer py-1">
-              <span className="font-medium text-slate-800">Display Contact & Header Icons</span>
+              <span className="font-medium text-slate-800 dark:text-slate-200">Display Contact & Header Icons</span>
               <input
                 type="checkbox"
                 checked={theme.showIcons ?? true}
                 onChange={(e) => updateTheme({ showIcons: e.target.checked })}
-                className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                className="h-4 w-4 rounded border-slate-300 dark:border-slate-700 text-blue-600 focus:ring-blue-500 cursor-pointer"
               />
             </label>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs">
-          <span className="text-slate-400">Changes are saved automatically</span>
+        <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800 text-xs">
+          <span className="text-slate-400 dark:text-slate-500">Changes are saved automatically</span>
           <Button
             onClick={() => setPageSettingsOpen(false)}
             className="h-8 text-xs bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 font-bold rounded-lg px-4 transition-colors shadow-xs"

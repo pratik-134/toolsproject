@@ -71,8 +71,8 @@ export const GenericSectionForm: React.FC<GenericSectionFormProps> = ({
               key={item.id}
               className={`rounded-lg border transition-all duration-200 ${
                 isLocked
-                  ? "border-amber-200 bg-amber-50/30 p-3.5"
-                  : "border-slate-200 bg-slate-50/40 p-3.5 hover:bg-white hover:border-blue-200 shadow-xs"
+                  ? "border-amber-200 dark:border-amber-800 bg-amber-50/30 dark:bg-amber-950/30 p-3.5"
+                  : "border-slate-200 dark:border-slate-800 bg-slate-50/40 dark:bg-slate-800/40 p-3.5 hover:bg-white dark:hover:bg-slate-800 hover:border-blue-200 dark:hover:border-blue-800 shadow-xs"
               }`}
             >
               {/* Item Summary Header */}
@@ -81,13 +81,13 @@ export const GenericSectionForm: React.FC<GenericSectionFormProps> = ({
                 onClick={() => setExpandedItemId(isItemExpanded ? null : item.id)}
               >
                 <div className="flex items-center gap-2 min-w-0 flex-1">
-                  <div className="cursor-grab text-slate-400 hover:text-slate-600 shrink-0">
+                  <div className="cursor-grab text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 shrink-0">
                     <GripVertical className="h-3.5 w-3.5" />
                   </div>
-                  <span className="rounded-md bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-mono px-2 py-0.5">
+                  <span className="rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-[10px] font-mono px-2 py-0.5">
                     #{idx + 1}
                   </span>
-                  <span className="text-sm font-semibold text-slate-900 truncate">
+                  <span className="text-sm font-semibold text-slate-900 dark:text-white truncate">
                     {item.title || item.name || item.language || item.organization || "Entry"}
                   </span>
                 </div>
@@ -107,7 +107,7 @@ export const GenericSectionForm: React.FC<GenericSectionFormProps> = ({
 
               {/* Detailed Fields (Expandable) */}
               {isItemExpanded && (
-                <div className="space-y-2.5 pt-2.5 border-t border-slate-100">
+                <div className="space-y-2.5 pt-2.5 border-t border-slate-100 dark:border-slate-800">
                   {/* Certifications fields */}
                   {section.type === "certifications" && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -163,7 +163,7 @@ export const GenericSectionForm: React.FC<GenericSectionFormProps> = ({
                         onChange={(e) =>
                           updateSectionItem(sectionId, item.id, { fluency: e.target.value })
                         }
-                        className="rounded-md border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-800 shadow-xs focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                        className="rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-xs font-medium text-slate-800 dark:text-slate-100 shadow-xs focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                       >
                         <option value="Native">Native</option>
                         <option value="Fluent">Fluent</option>
@@ -216,9 +216,9 @@ export const GenericSectionForm: React.FC<GenericSectionFormProps> = ({
             variant="outline"
             size="sm"
             onClick={() => addSectionItem(sectionId)}
-            className="w-full gap-1.5 border-dashed border-slate-300 bg-white text-slate-700 hover:bg-blue-50/40 hover:border-blue-300 hover:text-blue-700 rounded-lg font-medium shadow-xs transition-all h-9"
+            className="w-full gap-1.5 border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-blue-50/40 dark:hover:bg-blue-950/40 hover:border-blue-300 dark:hover:border-blue-700 hover:text-blue-700 dark:hover:text-blue-300 rounded-lg font-medium shadow-xs transition-all h-9"
           >
-            <Plus className="h-4 w-4 text-blue-600" /> Add Item to {section.title}
+            <Plus className="h-4 w-4 text-blue-600 dark:text-blue-400" /> Add Item to {section.title}
           </Button>
         )}
       </div>

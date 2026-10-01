@@ -22,7 +22,7 @@ export const ModernWaveDivider: React.FC<ModernWaveDividerProps> = ({
   if (variant === "zigzag") {
     return (
       <div
-        className={`w-full overflow-hidden leading-none pointer-events-none select-none ${className}`}
+        className={`w-full overflow-hidden leading-none pointer-events-none select-none dark:hidden ${className}`}
         aria-hidden="true"
       >
         <svg
@@ -47,7 +47,7 @@ export const ModernWaveDivider: React.FC<ModernWaveDividerProps> = ({
 
   return (
     <div
-      className={`w-full overflow-hidden leading-none pointer-events-none select-none ${className}`}
+      className={`w-full overflow-hidden leading-none pointer-events-none select-none dark:hidden ${className}`}
       aria-hidden="true"
     >
       <svg

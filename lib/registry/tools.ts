@@ -3940,7 +3940,7 @@ export const TOOLS: ToolDefinition[] = [
         { q: "Will the original video file be modified?", a: "No. Your original video file remains untouched on your computer." }
       ]
     },
-    related: ["wav-to-mp3", "mov-to-mp4", "pdf-to-text", "video-converter"]
+    related: ["wav-to-mp3", "mov-to-mp4", "webm-to-mp4", "m4a-to-mp3"]
   },
   {
     slug: "mov-to-mp4",
@@ -3961,7 +3961,7 @@ export const TOOLS: ToolDefinition[] = [
         { q: "Does this tool support 4K MOV videos?", a: "Yes. In-browser processing handles 1080p and 4K MOV clips efficiently." }
       ]
     },
-    related: ["mp4-to-mp3", "wav-to-mp3", "heic-to-jpg", "video-converter"]
+    related: ["mp4-to-mp3", "webm-to-mp4", "heic-to-jpg", "gif-to-mp4"]
   },
   {
     slug: "wav-to-mp3",
@@ -3982,7 +3982,7 @@ export const TOOLS: ToolDefinition[] = [
         { q: "Can I convert large WAV audio recordings?", a: "Yes. The browser engine processes long voice recordings and music tracks smoothly." }
       ]
     },
-    related: ["mp4-to-mp3", "mov-to-mp4", "pdf-to-text", "audio-converter"]
+    related: ["mp4-to-mp3", "flac-to-mp3", "m4a-to-mp3", "ogg-to-mp3"]
   },
 
   /* =========================================================================
@@ -4497,6 +4497,279 @@ export const TOOLS: ToolDefinition[] = [
     },
     related: ["csv-to-excel", "xml-to-csv", "csv-json-converter"]
   },
+  {
+    slug: "invoice-receipt-generator",
+    name: "Invoice & Receipt Generator",
+    category: "builders",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Invoice & Receipt Generator — Free In-Browser PDF Creator",
+      description: "Create and download professional client invoices and receipts in your browser. Complete with line items, tax, discounts, and logo. 100% private.",
+      h1: "Free Professional Invoice & Receipt Generator",
+      intro: "Build polished, print-ready business invoices and payment receipts with instant vector PDF preview. No registration required and your financial data never leaves your device.",
+      faq: [
+        { q: "Is my client and financial billing data kept private?", a: "Yes. All invoice generation, totals calculations, and logo rendering happen 100% locally in your browser memory." },
+        { q: "Can I save my invoice draft and edit it later?", a: "Yes. Your invoice draft auto-saves locally in browser storage so you can resume editing anytime." },
+        { q: "Does this invoice generator support multiple currencies and taxes?", a: "Yes. You can select USD, EUR, GBP, INR, CAD, AUD, and custom currency symbols alongside custom tax and discount rates." },
+        { q: "How do I download or print the completed invoice?", a: "Click the 'Print / Save PDF' button to produce a crisp, vector-standard PDF document or print directly." }
+      ]
+    },
+    related: ["estimate-quote-builder", "proposal-builder", "resume-builder", "sales-tax-calculator"]
+  },
+  {
+    slug: "estimate-quote-builder",
+    name: "Estimate & Quote Builder",
+    category: "builders",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Estimate & Quote Builder — Free Client Proposal Generator",
+      description: "Generate professional project estimates and client price quotations in your browser. Itemized scopes, hourly/fixed rates, and PDF export. 100% private.",
+      h1: "Free Project Estimate & Quote Builder",
+      intro: "Create clear, credible project estimates and formal price quotations with milestone deliverables, terms of agreement, and instant PDF download.",
+      faq: [
+        { q: "Can I set hourly and fixed-rate deliverables?", a: "Yes. You can specify hours, days, units, or fixed fees per line item with automated subtotaling." },
+        { q: "Are quotes saved locally on my device?", a: "Yes. Drafts are safely stored in your browser localStorage with zero server uploads." },
+        { q: "Can I customize the estimate validity period?", a: "Yes. You can specify issue dates and expiration terms (e.g. 30 days) directly in the editor." },
+        { q: "Can I convert the estimate into an invoice later?", a: "Yes. You can transfer project figures seamlessly to our Invoice Generator tool." }
+      ]
+    },
+    related: ["invoice-receipt-generator", "proposal-builder", "resume-builder", "freelance-rate-calculator"]
+  },
+  {
+    slug: "certificate-diploma-generator",
+    name: "Certificate & Diploma Generator",
+    category: "builders",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Certificate & Diploma Generator — Free A4 PDF Maker",
+      description: "Design and export prestigious achievement certificates, diplomas, and awards with custom borders, signatures, and seals. 100% client-side.",
+      h1: "Free Certificate & Diploma Generator",
+      intro: "Generate authentic, high-resolution landscape A4 achievement certificates and diplomas with elegant borders, verification serials, and custom signatures.",
+      faq: [
+        { q: "What templates are available for certificates?", a: "Choose from Classic Gold, Modern Minimalist, Tech Achievement, and Royal Navy crest designs." },
+        { q: "Can I upload a real signatory signature?", a: "Yes. You can upload a transparent PNG signature or display elegant calligraphy cursive text." },
+        { q: "Does the certificate output in high-resolution print quality?", a: "Yes. It renders to high-DPI vector landscape A4 dimensions ready for framing or distribution." },
+        { q: "Are student and recipient names kept private?", a: "100% private. All generation runs inside your browser sandbox with zero network telemetry." }
+      ]
+    },
+    related: ["invoice-receipt-generator", "proposal-builder", "resume-builder", "image-watermarker"]
+  },
+  {
+    slug: "proposal-builder",
+    name: "Proposal & Agreement Builder",
+    category: "builders",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Business Proposal Builder — Free In-Browser Proposal Maker",
+      description: "Craft winning business and technical proposals with executive summaries, deliverable milestones, pricing tables, and terms. 100% local.",
+      h1: "Free Business Proposal & Agreement Builder",
+      intro: "Build structured, persuasive commercial proposals complete with problem statements, proposed solutions, timeline roadmaps, and pricing tables.",
+      faq: [
+        { q: "What sections are included in the proposal template?", a: "Executive summary, problem statement, proposed technical solution, delivery milestones, and commercial pricing table." },
+        { q: "Can I print or save the proposal as a PDF?", a: "Yes. Use the Print / Save PDF feature to export a cleanly formatted multi-page business document." },
+        { q: "Is sensitive client pitch information uploaded to any server?", a: "Never. All text, milestones, and financial numbers are processed solely in local browser memory." },
+        { q: "Can I customize the commercial milestone pricing?", a: "Yes. Easily add, adjust, or remove milestone deliverables with automatic investment totals." }
+      ]
+    },
+    related: ["estimate-quote-builder", "invoice-receipt-generator", "resume-builder", "direct-docx-editor"]
+  },
+  {
+    slug: "desktop-screen-recorder",
+    name: "Full Desktop Screen Recorder",
+    category: "video",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Full Desktop Screen Recorder — Free In-Browser Video Capture",
+      description: "Record your entire computer desktop, windows, and applications with microphone audio directly in your browser. Export to WebM with zero watermark.",
+      h1: "Free Desktop Screen Recorder (No Sign-Up)",
+      intro: "Capture high-definition desktop screen recordings with optional microphone voiceover and system audio. No software install, no watermark, and files never leave your device.",
+      faq: [
+        { q: "Is there any time limit on desktop recordings?", a: "No arbitrary limits. You can record as long as your device RAM and local storage allow." },
+        { q: "Are my screen recordings uploaded to any cloud server?", a: "No. Video frames are encoded strictly in your browser RAM using the native MediaRecorder API." },
+        { q: "Can I record microphone narration alongside screen video?", a: "Yes. Toggle the microphone button to mix your voice directly into the recording stream." },
+        { q: "What file format is exported?", a: "Recordings are exported as high-quality WebM video files compatible with all modern video players and editors." }
+      ]
+    },
+    related: ["web-tab-recorder", "webcam-overlay-recorder", "webm-to-mp4", "mp4-to-mp3"]
+  },
+  {
+    slug: "web-tab-recorder",
+    name: "Web Tab Recorder",
+    category: "video",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Web Tab Recorder — Free In-Browser Single Tab Video Capture",
+      description: "Capture crisp browser tab recordings with internal tab audio and microphone narration. Instant WebM download with 100% local privacy.",
+      h1: "Free Browser Tab Screen Recorder",
+      intro: "Record individual browser tabs without capturing your desktop clutter or notifications. Includes tab sound capture and microphone commentary.",
+      faq: [
+        { q: "Can I capture audio playing inside the browser tab?", a: "Yes. Tab audio capture records audio streams playing in web applications, videos, or games." },
+        { q: "Will other open windows or notifications be captured?", a: "No. Tab recording isolates only the selected tab, keeping the rest of your computer private." },
+        { q: "Do I need to install any browser extension?", a: "No extensions required. Tab recording uses the standard browser getDisplayMedia API." },
+        { q: "Can I pause and resume my tab recording?", a: "Yes. Seamlessly pause and resume recording whenever needed before downloading." }
+      ]
+    },
+    related: ["desktop-screen-recorder", "webcam-overlay-recorder", "webm-to-mp4", "mp4-to-mp3"]
+  },
+  {
+    slug: "webcam-overlay-recorder",
+    name: "Webcam & Screen Overlay Recorder",
+    category: "video",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Webcam Overlay Recorder — Free PiP Screen Recorder",
+      description: "Record your screen with a circular or rounded webcam overlay bubble. Movable corners, adjustable sizes, and zero watermark. 100% private.",
+      h1: "Free Webcam & Screen Overlay Recorder (PiP)",
+      intro: "Create engaging presentations, tutorials, and code walkthroughs with your live facecam overlay composited over screen video in real-time.",
+      faq: [
+        { q: "Can I move the webcam overlay bubble to different corners?", a: "Yes. Position your webcam bubble in the bottom-right, bottom-left, top-right, or top-left corners." },
+        { q: "Can I resize or change the shape of the webcam bubble?", a: "Yes. Choose between small, medium, and large bubble sizes, and circular or rounded rectangular shapes." },
+        { q: "How is the video composited without server processing?", a: "Both video streams are composited in real-time using high-performance HTML5 Canvas APIs in your browser." },
+        { q: "Does it record both microphone audio and screen audio?", a: "Yes. Microphone speech and computer audio are combined into the recorded WebM output." }
+      ]
+    },
+    related: ["desktop-screen-recorder", "web-tab-recorder", "webm-to-mp4", "mp4-to-mp3"]
+  },
+  {
+    slug: "social-post-maker",
+    name: "Social Media Post Maker",
+    category: "image",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Social Media Post Maker — Free 1:1 and 4:5 Canvas Designer",
+      description: "Design scroll-stopping social media feed graphics for Instagram, LinkedIn, and Twitter in 1:1 Square and 4:5 Portrait. 100% in-browser.",
+      h1: "Free Social Media Post Canvas Maker",
+      intro: "Craft crisp, on-brand social media graphics with custom typography, vibrant gradient palettes, and background photo overlays with instant 1080p export.",
+      faq: [
+        { q: "What aspect ratios are supported?", a: "Supports 1:1 Square (1080x1080) for Instagram & LinkedIn, and 4:5 Portrait (1080x1350) for vertical feeds." },
+        { q: "Can I upload custom background photos?", a: "Yes. Upload photos directly from your device; they are rendered on local canvas with zero upload." },
+        { q: "What file formats can I export?", a: "Export master high-resolution PNG or compressed JPG images ready for social upload." },
+        { q: "Can I customize font size, colors, and alignments?", a: "Yes. Full control over headline font sizes, text alignments, category badges, and author handles." }
+      ]
+    },
+    related: ["story-reels-maker", "meme-caption-generator", "aspect-ratio-cropper", "canvas-resizer"]
+  },
+  {
+    slug: "story-reels-maker",
+    name: "Story & Reels Canvas Maker",
+    category: "image",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Story & Reels Canvas Maker — Free 9:16 Graphic Creator",
+      description: "Create engaging 9:16 vertical stories for Instagram Stories, TikTok, YouTube Shorts, and Facebook. Custom stickers, CTA cards, and PNG export.",
+      h1: "Free 9:16 Story & Reels Canvas Maker",
+      intro: "Design vibrant vertical 9:16 story cards with highlight stickers, callouts, and call-to-action badges optimized for mobile viewing.",
+      faq: [
+        { q: "What is the output resolution?", a: "The canvas renders at standard 1080 x 1920 pixels (9:16 ratio) for crisp mobile display." },
+        { q: "Can I include interactive sticker badges like 'Link in Bio'?", a: "Yes. Choose from multiple sticker presets including 'New Post', 'Link in Bio', and 'Tap Here'." },
+        { q: "Do my design assets get sent to a server?", a: "No. Everything renders in client-side HTML Canvas memory with zero network requests." },
+        { q: "Can I use custom background images?", a: "Yes. Upload any portrait or landscape photo to use as a stylized background." }
+      ]
+    },
+    related: ["social-post-maker", "meme-caption-generator", "aspect-ratio-cropper", "canvas-resizer"]
+  },
+  {
+    slug: "chart-graph-visualizer",
+    name: "Chart & Graph Visualizer",
+    category: "image",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Chart & Graph Visualizer — Free Bar, Line & Pie Charts",
+      description: "Paste CSV data or type metrics to generate beautiful bar charts, line graphs, and pie charts. Export to retina-quality PNG. 100% private.",
+      h1: "Free Chart & Graph Visualizer",
+      intro: "Transform spreadsheets and metrics into clean presentation-ready bar charts, trend lines, and pie charts in seconds with zero tracking.",
+      faq: [
+        { q: "Can I paste raw CSV data from Excel or Google Sheets?", a: "Yes. Simply paste comma-separated or tab-separated data points to update the graph instantly." },
+        { q: "What chart types are available?", a: "Includes vertical Bar Charts, smoothed Line Charts, and proportional Pie / Donut Charts." },
+        { q: "Is financial or confidential company data uploaded anywhere?", a: "No. All chart math and rendering run 100% locally in your browser sandbox." },
+        { q: "What resolution is the exported chart image?", a: "Charts export as crisp 1200 x 750 pixel retina PNG images perfect for slides and reports." }
+      ]
+    },
+    related: ["social-post-maker", "csv-json-converter", "excel-to-json-csv", "percentage-calculator"]
+  },
+  {
+    slug: "meme-caption-generator",
+    name: "Meme Caption Generator",
+    category: "image",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Meme Caption Generator — Free In-Browser Meme Maker",
+      description: "Create funny memes with classic top and bottom captions, customizable stroke outlines, font sizes, and instant PNG download. No watermarks.",
+      h1: "Free Online Meme Caption Generator",
+      intro: "Add iconic top and bottom Impact captions to photos with authentic black text outlines, customizable font sizes, and zero watermarks.",
+      faq: [
+        { q: "Can I upload my own custom photo or screenshot?", a: "Yes. Upload any JPG, PNG, or WebP image to apply meme captions immediately." },
+        { q: "Does Cleartrix add a watermark to created memes?", a: "No. All memes generated are completely clean with zero watermarks or branding." },
+        { q: "Can I adjust the black outline stroke thickness?", a: "Yes. Sliders allow full control over stroke width, text fill color, and font scale." },
+        { q: "Are uploaded images stored on any server?", a: "No. Images are rendered purely inside your local browser HTML Canvas." }
+      ]
+    },
+    related: ["social-post-maker", "story-reels-maker", "image-watermarker", "aspect-ratio-cropper"]
+  },
+  {
+    slug: "latex-editor",
+    name: "LaTeX Equation & Paper Editor",
+    category: "document-pdf",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "LaTeX Equation Editor — Free MathML & Vector Math",
+      description: "Write, validate, and preview LaTeX formulas with instant semantic MathML rendering, symbol palettes, and SVG/PDF export. 100% client-side.",
+      h1: "Free LaTeX Equation & Paper Editor",
+      intro: "Compose complex mathematical equations, matrices, and scientific papers with real-time MathML rendering, bracket error validation, and vector export.",
+      faq: [
+        { q: "What math symbols are supported?", a: "Fractions, square roots, integrals, summations, matrices, limits, and all standard Greek letters." },
+        { q: "Can I export equations as scalable vector SVG images?", a: "Yes. Export formulas directly as high-resolution SVG or print/save as vector PDF." },
+        { q: "Does the editor check for bracket errors?", a: "Yes. Built-in syntax validation flags unclosed or mismatched brackets in real-time." },
+        { q: "Does this require a server-side LaTeX compiler?", a: "No. Cleartrix renders equations using client-side semantic MathML and vector SVG in-browser." }
+      ]
+    },
+    related: ["markdown-to-pdf", "pdf-merger", "scientific-calculator", "direct-html-editor"]
+  },
+  {
+    slug: "camera-to-pdf-scanner",
+    name: "Camera to PDF Scanner",
+    category: "document-pdf",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Camera to PDF Scanner — Free Mobile & Web Document Digitizer",
+      description: "Snap paper documents with your webcam or phone camera, apply contrast/grayscale clean-up filters, and compile into multi-page A4 PDFs. 100% private.",
+      h1: "Free Camera to PDF Document Scanner",
+      intro: "Digitize physical paperwork, receipts, and notes using your device camera with document enhancement filters and instant multi-page PDF compilation.",
+      faq: [
+        { q: "Can I capture multiple pages into a single PDF document?", a: "Yes. Snap as many pages as needed, reorder or rotate them, and compile them into one PDF." },
+        { q: "What document enhancement filters are available?", a: "Includes Grayscale, High-Contrast Black & White (for crisp document text), and Enhanced Vivid." },
+        { q: "Are captured document pictures sent to the cloud?", a: "Never. Camera frames are processed strictly in your local device memory using pdf-lib." },
+        { q: "Can I also upload existing photos from my phone gallery?", a: "Yes. You can upload photos directly if you already took pictures of your paperwork." }
+      ]
+    },
+    related: ["image-to-text", "pdf-merger", "batch-image-compressor", "jpg-to-pdf"]
+  }
 ];
 
 /* Helper Query Functions */
