@@ -119,6 +119,20 @@ interface PdfEditorStore {
   // Tier 2: Security & Metadata (4 functions)
   setMetadata: (metadata: Partial<PdfMetadata>) => void;
   setSecurity: (security: Partial<SecurityConfig>) => void;
+
+  // Tier 3: Advanced, OCR & Comparison (17 functions)
+  comparisonPdfBytes: Uint8Array | null;
+  comparisonFileName: string | null;
+  comparisonPages: PageMeta[];
+  isComparisonActive: boolean;
+  ocrResults: import("./types").OcrPageResult[];
+  isOcrRunning: boolean;
+  ocrProgress: number;
+
+  setComparisonDocument: (bytes: Uint8Array | null, name: string | null, pages: PageMeta[]) => void;
+  toggleComparison: (active?: boolean) => void;
+  setOcrResults: (results: import("./types").OcrPageResult[]) => void;
+  setOcrRunning: (running: boolean, progress?: number) => void;
 }
 
 export const usePdfEditorStore = create<PdfEditorStore>((set, get) => {
@@ -184,6 +198,13 @@ export const usePdfEditorStore = create<PdfEditorStore>((set, get) => {
     bates: null,
     headerFooter: null,
     pageBackground: null,
+    comparisonPdfBytes: null,
+    comparisonFileName: null,
+    comparisonPages: [],
+    isComparisonActive: false,
+    ocrResults: [],
+    isOcrRunning: false,
+    ocrProgress: 0,
     past: [],
     future: [],
 
@@ -608,6 +629,30 @@ export const usePdfEditorStore = create<PdfEditorStore>((set, get) => {
           },
         },
       }));
+    },
+
+    // --- TIER 3: ADVANCED, OCR & COMPARISON ---
+    setComparisonDocument: (bytes, name, pages) => {
+      set({
+        comparisonPdfBytes: bytes,
+        comparisonFileName: name,
+        comparisonPages: pages,
+        isComparisonActive: Boolean(bytes),
+      });
+    },
+
+    toggleComparison: (active) => {
+      set((state) => ({
+        isComparisonActive: active !== undefined ? active : !state.isComparisonActive,
+      }));
+    },
+
+    setOcrResults: (results) => {
+      set({ ocrResults: results });
+    },
+
+    setOcrRunning: (running, progress = 0) => {
+      set({ isOcrRunning: running, ocrProgress: progress });
     },
   };
 });

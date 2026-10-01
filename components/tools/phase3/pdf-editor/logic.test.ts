@@ -371,7 +371,87 @@ export async function runTests(): Promise<boolean> {
   }
   console.log("✓ Test 8: Document Flattener successfully merged all AcroForms into static page vectors.");
 
-  console.log("\nAll Tier 1 & Tier 2 PDF Editor tests passed cleanly!");
+  // ==========================================
+  // TIER 3 TESTS: HEAVY MODULES & CONVERSIONS
+  // ==========================================
+  console.log("\nStarting Tier 3 PDF Editor Advanced & Conversion tests...");
+
+  // Test 9: Conversions (PDF to Text, HTML, CSV, DOCX)
+  const { loadPdfDocument } = await import("./logic");
+  const { rawPdf } = await loadPdfDocument(demoBytes);
+
+  const {
+    exportPdfToText,
+    exportPdfToHtml,
+    exportPdfToExcel,
+    exportPdfToDocx,
+  } = await import("./conversion");
+
+  const plainText = await exportPdfToText(rawPdf);
+  if (!plainText.includes("Page 1") || !plainText.includes("AGREEMENT")) {
+    throw new Error("exportPdfToText failed to extract document text");
+  }
+  console.log("✓ Test 9a: PDF to Plain Text extraction verified.");
+
+  const htmlDoc = await exportPdfToHtml(rawPdf, "Contract.pdf");
+  if (!htmlDoc.includes("<!DOCTYPE html>") || !htmlDoc.includes("pdf-page")) {
+    throw new Error("exportPdfToHtml failed to generate valid HTML document");
+  }
+  console.log("✓ Test 9b: PDF to HTML structure verified.");
+
+  const csvBlob = await exportPdfToExcel(rawPdf, "Contract.pdf");
+  if (!csvBlob || csvBlob.size === 0) {
+    throw new Error("exportPdfToExcel generated empty CSV blob");
+  }
+  console.log(`✓ Test 9c: PDF to Excel/CSV tabular conversion verified (${csvBlob.size} bytes).`);
+
+  const docxBlob = await exportPdfToDocx(rawPdf, "Contract.pdf");
+  if (!docxBlob || docxBlob.size === 0) {
+    throw new Error("exportPdfToDocx generated empty DOCX blob");
+  }
+  console.log(`✓ Test 9d: PDF to Word (.docx) conversion verified (${docxBlob.size} bytes).`);
+
+  // Test 10: Searchable PDF Generation
+  const { createSearchablePdf } = await import("./ocr");
+  const mockOcrResults: import("./types").OcrPageResult[] = [
+    {
+      pageIndex: 0,
+      fullText: "Scanned Contract Invoice",
+      words: [
+        { text: "Scanned", x: 50, y: 100, width: 60, height: 16, confidence: 95 },
+        { text: "Contract", x: 120, y: 100, width: 70, height: 16, confidence: 98 },
+        { text: "Invoice", x: 200, y: 100, width: 55, height: 16, confidence: 94 },
+      ],
+    },
+  ];
+
+  const searchablePdfBytes = await createSearchablePdf(demoBytes, mockOcrResults);
+  const loadedSearchable = await PDFDocument.load(searchablePdfBytes);
+  if (loadedSearchable.getPageCount() !== 3) {
+    throw new Error("Searchable PDF page count mismatch");
+  }
+  console.log("✓ Test 10: Searchable PDF engine successfully baked invisible vector text layer.");
+
+  // Test 11: Find & Replace Overlay Generator
+  const { generateFindAndReplaceElements } = await import("./comparison");
+  const mockMatches = [
+    { pageIndex: 0, x: 100, y: 150, width: 80, height: 18, text: "Acme Corp" },
+  ];
+
+  const { whiteouts, replacementTexts } = generateFindAndReplaceElements(
+    mockMatches,
+    "ClearTrix Enterprise"
+  );
+
+  if (whiteouts.length !== 1 || replacementTexts.length !== 1) {
+    throw new Error("Find & Replace element generation failed");
+  }
+  if (whiteouts[0]?.type !== "whiteout" || replacementTexts[0]?.text !== "ClearTrix Enterprise") {
+    throw new Error("Find & Replace elements mismatch");
+  }
+  console.log("✓ Test 11: Find & Replace overlay generator created exact match whiteouts and replacements.");
+
+  console.log("\nAll Tier 1, Tier 2, and Tier 3 PDF Editor tests passed cleanly!");
   return true;
 }
 

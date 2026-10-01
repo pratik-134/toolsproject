@@ -38,6 +38,11 @@ import {
   Search,
   FileDown,
   FileCheck,
+  Sparkles,
+  ScanText,
+  GitCompare,
+  Replace,
+  FileSpreadsheet,
 } from "lucide-react";
 import { usePdfEditorStore } from "../store";
 import { EditorTool } from "../types";
@@ -49,6 +54,10 @@ interface ToolbarProps {
   onExtractPagesClick: () => void;
   onOpenSearchRedact: () => void;
   onOpenSecurityModal: () => void;
+  onOpenConvertModal?: () => void;
+  onOpenOcrModal?: () => void;
+  onOpenCompareModal?: () => void;
+  onOpenFindReplaceModal?: () => void;
   onExportFormData: (format: "json" | "fdf") => void;
   onImportFormDataClick: () => void;
   onFlattenClick: (target: "forms" | "annotations" | "all") => void;
@@ -67,6 +76,10 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   onExtractPagesClick,
   onOpenSearchRedact,
   onOpenSecurityModal,
+  onOpenConvertModal,
+  onOpenOcrModal,
+  onOpenCompareModal,
+  onOpenFindReplaceModal,
   onExportFormData,
   onImportFormDataClick,
   onFlattenClick,
@@ -399,6 +412,15 @@ export const Toolbar: React.FC<ToolbarProps> = ({
               <Link2 className="w-3.5 h-3.5" />
               <span>Add Link</span>
             </button>
+
+            <button
+              onClick={onOpenFindReplaceModal}
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-md hover:bg-muted text-foreground transition-colors"
+              title="Find and Replace Text in Document"
+            >
+              <Replace className="w-3.5 h-3.5" />
+              <span>Find & Replace</span>
+            </button>
           </>
         )}
 
@@ -630,6 +652,48 @@ export const Toolbar: React.FC<ToolbarProps> = ({
               title="Bake All Annotations into Static Page Content"
             >
               <span>Flatten Annotations</span>
+            </button>
+          </>
+        )}
+
+        {/* Mode: CONVERT */}
+        {mode === "convert" && (
+          <>
+            <button
+              onClick={onOpenConvertModal}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 font-medium transition-colors"
+              title="Open Document Conversion Engine"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Format Converters (10 formats)</span>
+            </button>
+          </>
+        )}
+
+        {/* Mode: OCR */}
+        {mode === "ocr" && (
+          <>
+            <button
+              onClick={onOpenOcrModal}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 font-medium transition-colors"
+              title="Run Optical Character Recognition & Create Searchable PDF"
+            >
+              <ScanText className="w-3.5 h-3.5" />
+              <span>Extract Text & Make Searchable</span>
+            </button>
+          </>
+        )}
+
+        {/* Mode: COMPARE */}
+        {mode === "compare" && (
+          <>
+            <button
+              onClick={onOpenCompareModal}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 font-medium transition-colors"
+              title="Compare Two PDF Versions Side-by-Side or with Diff Heatmap"
+            >
+              <GitCompare className="w-3.5 h-3.5" />
+              <span>Compare Two PDFs</span>
             </button>
           </>
         )}

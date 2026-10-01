@@ -8,6 +8,9 @@ import {
   FormInput,
   ShieldAlert,
   Lock,
+  Sparkles,
+  ScanText,
+  GitCompare,
 } from "lucide-react";
 import { usePdfEditorStore } from "../store";
 import { EditorMode } from "../types";
@@ -24,6 +27,9 @@ export const ModeTabs: React.FC = () => {
     { id: "sign", label: "Fill & Sign", icon: FileSignature },
     { id: "stamp", label: "Stamps & Numbers", icon: Stamp },
     { id: "security", label: "Security & Metadata", icon: Lock },
+    { id: "convert", label: "Convert & Export", icon: Sparkles },
+    { id: "ocr", label: "OCR Tools", icon: ScanText },
+    { id: "compare", label: "Compare Versions", icon: GitCompare },
   ];
 
   return (

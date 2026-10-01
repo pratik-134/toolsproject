@@ -6,7 +6,10 @@ export type EditorMode =
   | "stamp"
   | "forms"
   | "redact"
-  | "security";
+  | "security"
+  | "convert"
+  | "ocr"
+  | "compare";
 
 export type EditorTool =
   | "select"
@@ -225,3 +228,35 @@ export interface DocumentHistoryEntry {
   headerFooter: HeaderFooterConfig | null;
   pageBackground: PageBackgroundConfig | null;
 }
+
+// Tier 3 Types
+export interface OcrWordBox {
+  text: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  confidence: number;
+}
+
+export interface OcrPageResult {
+  pageIndex: number;
+  fullText: string;
+  words: OcrWordBox[];
+}
+
+export interface ComparisonDiff {
+  pageIndex: number;
+  diffScore: number;
+  diffCanvasDataUrl?: string;
+}
+
+export type ConversionTarget =
+  | "docx"
+  | "xlsx"
+  | "pptx"
+  | "jpg"
+  | "png"
+  | "txt"
+  | "html";
+

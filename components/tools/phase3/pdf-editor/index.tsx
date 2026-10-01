@@ -36,6 +36,10 @@ import { PropertiesSidebar } from "./ui/PropertiesSidebar";
 import { SignatureModal } from "./ui/SignatureModal";
 import { SearchRedactModal } from "./ui/SearchRedactModal";
 import { SecurityModal } from "./ui/SecurityModal";
+import { ConvertModal } from "./ui/ConvertModal";
+import { OcrModal } from "./ui/OcrModal";
+import { CompareModal } from "./ui/CompareModal";
+import { FindReplaceModal } from "./ui/FindReplaceModal";
 import { MobileToolbar } from "./ui/MobileToolbar";
 import { ContentElement, AnnotationObject } from "./types";
 
@@ -95,6 +99,10 @@ export default function PdfEditor() {
   const [signatureInitialTab, setSignatureInitialTab] = useState<"draw" | "type" | "upload" | "initials">("draw");
   const [isSearchRedactOpen, setIsSearchRedactOpen] = useState(false);
   const [isSecurityModalOpen, setIsSecurityModalOpen] = useState(false);
+  const [isConvertModalOpen, setIsConvertModalOpen] = useState(false);
+  const [isOcrModalOpen, setIsOcrModalOpen] = useState(false);
+  const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
+  const [isFindReplaceModalOpen, setIsFindReplaceModalOpen] = useState(false);
 
   const openFileInputRef = useRef<HTMLInputElement | null>(null);
   const mergeFileInputRef = useRef<HTMLInputElement | null>(null);
@@ -557,6 +565,10 @@ export default function PdfEditor() {
         onExtractPagesClick={handleExtractPages}
         onOpenSearchRedact={() => setIsSearchRedactOpen(true)}
         onOpenSecurityModal={() => setIsSecurityModalOpen(true)}
+        onOpenConvertModal={() => setIsConvertModalOpen(true)}
+        onOpenOcrModal={() => setIsOcrModalOpen(true)}
+        onOpenCompareModal={() => setIsCompareModalOpen(true)}
+        onOpenFindReplaceModal={() => setIsFindReplaceModalOpen(true)}
         onExportFormData={(format) => {
           if (format === "json") {
             exportFormDataToJson(formFields, fileName);
@@ -645,6 +657,37 @@ export default function PdfEditor() {
       <SecurityModal
         isOpen={isSecurityModalOpen}
         onClose={() => setIsSecurityModalOpen(false)}
+      />
+
+      {/* Tier 3: Document Format Conversion Modal */}
+      <ConvertModal
+        isOpen={isConvertModalOpen}
+        onClose={() => setIsConvertModalOpen(false)}
+        rawPdfDoc={rawPdfDoc}
+        fileName={fileName}
+        onLoadNewPdf={(bytes, name) => handleLoadPdf(bytes, name)}
+      />
+
+      {/* Tier 3: OCR Text Recognition & Searchable PDF Modal */}
+      <OcrModal
+        isOpen={isOcrModalOpen}
+        onClose={() => setIsOcrModalOpen(false)}
+        rawPdfDoc={rawPdfDoc}
+      />
+
+      {/* Tier 3: Visual PDF Comparison Modal */}
+      <CompareModal
+        isOpen={isCompareModalOpen}
+        onClose={() => setIsCompareModalOpen(false)}
+        rawPdfDocA={rawPdfDoc}
+        fileNameA={fileName}
+      />
+
+      {/* Tier 3: Find & Replace Text Modal */}
+      <FindReplaceModal
+        isOpen={isFindReplaceModalOpen}
+        onClose={() => setIsFindReplaceModalOpen(false)}
+        rawPdfDoc={rawPdfDoc}
       />
 
       {/* Hidden File Input for Opening New PDF */}
