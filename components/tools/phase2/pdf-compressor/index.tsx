@@ -24,6 +24,8 @@ import { PDFDocument } from "pdf-lib";
 import { getHandoff, clearHandoff, HandoffFile } from "@/lib/tool-chains";
 import { ToolHandoffBanner } from "@/components/tools/chaining/tool-chain-banner";
 import { ToolChainActions } from "@/components/tools/chaining/tool-chain-actions";
+import { BatchItem, runBatchPool, createZipBlob, triggerBlobDownload } from "@/lib/batch-processor";
+import { BatchWorkspace } from "@/components/tools/batch/batch-workspace";
 
 export default function PdfCompressorTool() {
   const [fileBuffer, setFileBuffer] = useState<Uint8Array | null>(null);
@@ -31,6 +33,10 @@ export default function PdfCompressorTool() {
   const [fileSize, setFileSize] = useState<number>(0);
   const [pageCount, setPageCount] = useState<number>(0);
   const [incomingHandoff, setIncomingHandoff] = useState<HandoffFile | null>(null);
+
+  // Batch Mode States
+  const [batchItems, setBatchItems] = useState<BatchItem<CompressResult>[]>([]);
+  const [isBatchProcessing, setIsBatchProcessing] = useState(false);
 
   const [stripMetadata, setStripMetadata] = useState(true);
   const [useObjectStreams, setUseObjectStreams] = useState(true);
@@ -55,6 +61,7 @@ export default function PdfCompressorTool() {
         setPageCount(doc.getPageCount());
         setResult(null);
         setDownloadUrl(null);
+        setBatchItems([]);
         setIncomingHandoff(handoff);
       } catch (err: any) {
         console.warn("[PdfCompressor] Failed to pre-load chained PDF", err);
@@ -75,11 +82,8 @@ export default function PdfCompressorTool() {
     setIncomingHandoff(null);
   };
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const loadSingleFile = async (file: File) => {
     setError(null);
-
     try {
       const arrayBuf = await file.arrayBuffer();
       const buffer = new Uint8Array(arrayBuf);
@@ -91,12 +95,137 @@ export default function PdfCompressorTool() {
       setPageCount(doc.getPageCount());
       setResult(null);
       setDownloadUrl(null);
+      setBatchItems([]);
     } catch (err: any) {
       setError(`Failed to read PDF: ${err?.message || "Invalid or encrypted file"}`);
+    }
+  };
+
+  const loadBatchFiles = (selectedFiles: File[]) => {
+    setError(null);
+    const pdfs = selectedFiles.filter(
+      (f) => f.type === "application/pdf" || f.name.toLowerCase().endsWith(".pdf")
+    );
+    if (pdfs.length === 0) {
+      setError("Please select valid PDF documents.");
+      return;
+    }
+    const newItems: BatchItem<CompressResult>[] = pdfs.map((file) => ({
+      id: `batch_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+      file,
+      name: file.name,
+      size: file.size,
+      status: "idle",
+      progress: 0,
+    }));
+    setBatchItems(newItems);
+    setFileBuffer(null);
+    setResult(null);
+    setDownloadUrl(null);
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
+    const first = files[0];
+    if (files.length === 1 && first) {
+      loadSingleFile(first);
+    } else {
+      loadBatchFiles(files);
     }
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    const files = Array.from(e.dataTransfer.files || []);
+    if (files.length === 0) return;
+    const first = files[0];
+    if (files.length === 1 && first) {
+      loadSingleFile(first);
+    } else {
+      loadBatchFiles(files);
+    }
+  };
+
+  const handleBatchCompress = async () => {
+    if (batchItems.length === 0) return;
+    setIsBatchProcessing(true);
+    try {
+      await runBatchPool(
+        batchItems,
+        async (item, onProgress) => {
+          onProgress(25);
+          const arrayBuf = await item.file.arrayBuffer();
+          const buffer = new Uint8Array(arrayBuf);
+          onProgress(60);
+          const res = await compressPdf(buffer, {
+            stripMetadata,
+            useObjectStreams,
+          });
+          onProgress(100);
+          return res;
+        },
+        {
+          concurrency: 3,
+          onItemStart: (_item, index) => {
+            setBatchItems((prev) =>
+              prev.map((it, idx) =>
+                idx === index ? { ...it, status: "processing", progress: 0 } : it
+              )
+            );
+          },
+          onItemProgress: (_item, index, progress) => {
+            setBatchItems((prev) =>
+              prev.map((it, idx) =>
+                idx === index ? { ...it, progress } : it
+              )
+            );
+          },
+          onItemComplete: (_item, index, res) => {
+            setBatchItems((prev) =>
+              prev.map((it, idx) =>
+                idx === index
+                  ? { ...it, status: "done", progress: 100, result: res }
+                  : it
+              )
+            );
+          },
+          onItemError: (_item, index, err) => {
+            setBatchItems((prev) =>
+              prev.map((it, idx) =>
+                idx === index
+                  ? { ...it, status: "error", error: err.message || "Failed" }
+                  : it
+              )
+            );
+          },
+        }
+      );
+    } finally {
+      setIsBatchProcessing(false);
+    }
+  };
+
+  const downloadBatchItem = (item: BatchItem<CompressResult>) => {
+    if (!item.result) return;
+    const blob = new Blob([item.result.data as unknown as BlobPart], {
+      type: "application/pdf",
+    });
+    triggerBlobDownload(blob, `compressed-${item.name}`);
+  };
+
+  const downloadBatchZip = async () => {
+    const completed = batchItems.filter((i) => i.status === "done" && i.result);
+    if (completed.length === 0) return;
+    const filesToZip = completed.map((i) => ({
+      name: `compressed-${i.name}`,
+      data: i.result!.data,
+    }));
+    const zipBlob = await createZipBlob(filesToZip);
+    triggerBlobDownload(zipBlob, `compressed-pdfs-${Date.now()}.zip`);
   };
 
   const handleLoadSample = async () => {
@@ -189,33 +318,56 @@ export default function PdfCompressorTool() {
         />
       )}
 
-      {/* Upload Zone */}
-      {!fileBuffer ? (
-        <div
-          onClick={() => fileInputRef.current?.click()}
-          className="border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-400 bg-slate-50/50 dark:bg-slate-900/50 rounded-2xl p-8 text-center cursor-pointer transition-all hover:bg-indigo-50/20 dark:hover:bg-indigo-950/20"
-        >
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".pdf,application/pdf"
-            onChange={handleFileUpload}
-            className="hidden"
-          />
-          <div className="flex flex-col items-center gap-3">
-            <div className="w-14 h-14 rounded-2xl bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shadow-inner">
-              <Minimize2 className="w-7 h-7" />
+      {batchItems.length > 0 ? (
+        <BatchWorkspace<CompressResult>
+          title="Batch PDF Compression"
+          actionLabel="Compress All PDFs"
+          items={batchItems}
+          isProcessing={isBatchProcessing}
+          onProcessAll={handleBatchCompress}
+          onClear={() => setBatchItems([])}
+          onDownloadItem={downloadBatchItem}
+          onDownloadAllZip={downloadBatchZip}
+          renderItemStats={(item) =>
+            item.result ? (
+              <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
+                • Saved {item.result.savingsPercent}% ({formatFileSize(item.result.savingsBytes)})
+              </span>
+            ) : null
+          }
+        />
+      ) : (
+        <>
+          {/* Upload Zone */}
+          {!fileBuffer ? (
+            <div
+              onClick={() => fileInputRef.current?.click()}
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={handleDrop}
+              className="border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-400 bg-slate-50/50 dark:bg-slate-900/50 rounded-2xl p-8 text-center cursor-pointer transition-all hover:bg-indigo-50/20 dark:hover:bg-indigo-950/20"
+            >
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".pdf,application/pdf"
+                multiple
+                onChange={handleFileUpload}
+                className="hidden"
+              />
+              <div className="flex flex-col items-center gap-3">
+                <div className="w-14 h-14 rounded-2xl bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shadow-inner">
+                  <Minimize2 className="w-7 h-7" />
+                </div>
+                <div>
+                  <p className="text-base font-semibold text-slate-800 dark:text-slate-200">
+                    Click to upload or drag & drop one or multiple PDFs
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                    Multi-file worker pool (3 concurrent) • ZIP packaging • 100% in-browser memory
+                  </p>
+                </div>
+              </div>
             </div>
-            <div>
-              <p className="text-base font-semibold text-slate-800 dark:text-slate-200">
-                Click to upload or drag & drop a PDF
-              </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                Shrink PDF file size through stream compression and metadata optimization.
-              </p>
-            </div>
-          </div>
-        </div>
       ) : (
         /* File Card */
         <div className="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl flex items-center justify-between shadow-sm">
@@ -357,6 +509,8 @@ export default function PdfCompressorTool() {
             />
           )}
         </div>
+      )}
+        </>
       )}
     </div>
   );
