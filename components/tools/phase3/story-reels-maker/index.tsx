@@ -17,6 +17,10 @@ import {
   Upload,
   Palette,
   Sparkles,
+  Link2,
+  Hand,
+  Flame,
+  Megaphone,
 } from "lucide-react";
 
 export default function StoryReelsMakerTool() {
@@ -201,21 +205,35 @@ export default function StoryReelsMakerTool() {
               <Sparkles className="w-3.5 h-3.5 text-amber-500" /> Story Highlight Sticker
             </h4>
             <div className="flex flex-wrap gap-2">
-              {STORY_STICKERS.map((st) => (
-                <button
-                  key={st.id}
-                  type="button"
-                  onClick={() => setConfig((prev) => ({ ...prev, activeStickerId: st.id }))}
-                  className={`px-3 py-1.5 text-xs font-bold rounded-full transition-all ${
-                    config.activeStickerId === st.id
-                      ? "ring-2 ring-slate-900 dark:ring-white scale-105"
-                      : "opacity-75 hover:opacity-100"
-                  }`}
-                  style={{ backgroundColor: st.color, color: "#ffffff" }}
-                >
-                  {st.label}
-                </button>
-              ))}
+              {STORY_STICKERS.map((st) => {
+                const IconComponent =
+                  st.iconName === "Sparkles"
+                    ? Sparkles
+                    : st.iconName === "Link2"
+                    ? Link2
+                    : st.iconName === "Hand"
+                    ? Hand
+                    : st.iconName === "Flame"
+                    ? Flame
+                    : Megaphone;
+
+                return (
+                  <button
+                    key={st.id}
+                    type="button"
+                    onClick={() => setConfig((prev) => ({ ...prev, activeStickerId: st.id }))}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-full transition-all ${
+                      config.activeStickerId === st.id
+                        ? "ring-2 ring-slate-900 dark:ring-white scale-105"
+                        : "opacity-75 hover:opacity-100"
+                    }`}
+                    style={{ backgroundColor: st.color, color: "#ffffff" }}
+                  >
+                    <IconComponent className="w-3.5 h-3.5 shrink-0" />
+                    <span>{st.label}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
 

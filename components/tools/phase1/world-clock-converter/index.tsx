@@ -7,6 +7,7 @@ import {
   CityTimezone,
   ConvertedTimeItem,
 } from "./logic";
+import { CountryFlagIcon } from "./CountryFlagIcon";
 import {
   Clock,
   Globe,
@@ -115,7 +116,7 @@ export default function WorldClockConverterTool() {
             >
               {POPULAR_CITIES.map((c) => (
                 <option key={c.id} value={c.iana}>
-                  {c.flag} {c.city} — {c.country} (UTC{c.utcOffset >= 0 ? `+${c.utcOffset}` : c.utcOffset})
+                  {c.city} — {c.country} (UTC{c.utcOffset >= 0 ? `+${c.utcOffset}` : c.utcOffset})
                 </option>
               ))}
             </select>
@@ -197,9 +198,10 @@ export default function WorldClockConverterTool() {
               {/* City Header */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="text-xl" role="img" aria-label={item.city.country}>
-                    {item.city.flag}
-                  </span>
+                  <CountryFlagIcon
+                    countryCode={item.city.id}
+                    className="w-6 h-4 rounded-xs shadow-2xs shrink-0 border border-slate-200"
+                  />
                   <div>
                     <h3 className="text-sm font-bold text-slate-900 leading-tight">
                       {item.city.city}

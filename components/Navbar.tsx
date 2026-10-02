@@ -128,7 +128,8 @@ export const Navbar: React.FC = () => {
 
         {/* Trust Pill (Desktop only) */}
         <span className="hidden xl:inline-flex items-center gap-1.5 rounded-full bg-blue-50/80 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-900/60 px-3 py-1 font-body text-xs font-semibold text-blue-700 dark:text-blue-300 shrink-0 shadow-2xs">
-          ✦ Open & private · zero paywalls
+          <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+          <span>Open & private · zero paywalls</span>
         </span>
       </div>
 

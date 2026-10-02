@@ -91,12 +91,12 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <h2 id="verification-checklist">5. Pre-Submission Verification Checklist</h2>
 <p>Before submitting your job application, run through this quick checklist:</p>
-<ul>
-  <li>✔ Text is selectable and copy-pasteable in any standard PDF reader.</li>
-  <li>✔ Personal email and telephone are correctly detected.</li>
-  <li>✔ Core keywords from the target job description appear naturally in your experience.</li>
-  <li>✔ Dates are ordered chronologically with the most recent position on top.</li>
-  <li>✔ Verified through a client-side ATS auditor before uploading.</li>
+<ul class="checklist">
+  <li><svg class="check-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display:inline;color:#10b981;margin-right:6px;vertical-align:-2px"><polyline points="20 6 9 17 4 12"></polyline></svg>Text is selectable and copy-pasteable in any standard PDF reader.</li>
+  <li><svg class="check-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display:inline;color:#10b981;margin-right:6px;vertical-align:-2px"><polyline points="20 6 9 17 4 12"></polyline></svg>Personal email and telephone are correctly detected.</li>
+  <li><svg class="check-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display:inline;color:#10b981;margin-right:6px;vertical-align:-2px"><polyline points="20 6 9 17 4 12"></polyline></svg>Core keywords from the target job description appear naturally in your experience.</li>
+  <li><svg class="check-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display:inline;color:#10b981;margin-right:6px;vertical-align:-2px"><polyline points="20 6 9 17 4 12"></polyline></svg>Dates are ordered chronologically with the most recent position on top.</li>
+  <li><svg class="check-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display:inline;color:#10b981;margin-right:6px;vertical-align:-2px"><polyline points="20 6 9 17 4 12"></polyline></svg>Verified through a client-side ATS auditor before uploading.</li>
 </ul>
 
 <div class="callout callout-info">

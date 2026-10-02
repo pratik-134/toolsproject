@@ -79,7 +79,8 @@ export const ToolsMegaSection: React.FC = () => {
       <div className="max-w-container mx-auto px-4 sm:px-6 text-center relative z-10">
         <div className="inline-flex items-center gap-2 rounded-full bg-slate-100/90 dark:bg-slate-900/90 border border-slate-300/80 dark:border-slate-800 px-4 py-1.5 font-body text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 shadow-2xs mb-4">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>✦ Privacy Utility Suite · {totalCount} Tools Running in Browser</span>
+          <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
+          <span>Privacy Utility Suite · {totalCount} Tools Running in Browser</span>
         </div>
 
         <h2 className="font-headings text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">

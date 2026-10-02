@@ -44,7 +44,7 @@ export const BRAND = {
 
   /** Badges & Trust Guarantees */
   badges: {
-    trustPill: "✦ Open & private · zero paywalls",
+    trustPill: "Open & private · zero paywalls",
     securityBadge: "● Runs locally · zero uploads",
     freeTag: "100% Free & Private",
     zeroUploads: "100% Free, Zero Uploads & Zero Server Storage",

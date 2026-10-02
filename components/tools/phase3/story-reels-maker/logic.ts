@@ -15,12 +15,19 @@ export const STORY_DIMENSIONS: StoryDimensions = {
   aspectRatio: "9:16",
 };
 
-export const STORY_STICKERS = [
-  { id: "new-post", label: "✨ NEW POST", color: "#ec4899" },
-  { id: "link-in-bio", label: "🔗 LINK IN BIO", color: "#3b82f6" },
-  { id: "swipe-up", label: "👆 TAP HERE", color: "#10b981" },
-  { id: "special-offer", label: "🔥 LIMITED OFFER", color: "#f97316" },
-  { id: "announcement", label: "📢 BIG NEWS", color: "#8b5cf6" },
+export interface StorySticker {
+  id: string;
+  label: string;
+  iconName: "Sparkles" | "Link2" | "Hand" | "Flame" | "Megaphone";
+  color: string;
+}
+
+export const STORY_STICKERS: StorySticker[] = [
+  { id: "new-post", label: "NEW POST", iconName: "Sparkles", color: "#ec4899" },
+  { id: "link-in-bio", label: "LINK IN BIO", iconName: "Link2", color: "#3b82f6" },
+  { id: "swipe-up", label: "TAP HERE", iconName: "Hand", color: "#10b981" },
+  { id: "special-offer", label: "LIMITED OFFER", iconName: "Flame", color: "#f97316" },
+  { id: "announcement", label: "BIG NEWS", iconName: "Megaphone", color: "#8b5cf6" },
 ];
 
 export interface StoryConfig {

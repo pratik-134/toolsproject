@@ -9,19 +9,19 @@ export interface CityTimezone {
 
 export const POPULAR_CITIES: CityTimezone[] = [
   { id: "utc", city: "UTC", country: "Coordinated Universal Time", iana: "UTC", flag: "UTC", utcOffset: 0 },
-  { id: "london", city: "London", country: "United Kingdom", iana: "Europe/London", flag: "🇬🇧", utcOffset: 0 },
-  { id: "newyork", city: "New York", country: "United States (ET)", iana: "America/New_York", flag: "🇺🇸", utcOffset: -5 },
-  { id: "sanfrancisco", city: "San Francisco", country: "United States (PT)", iana: "America/Los_Angeles", flag: "🇺🇸", utcOffset: -8 },
-  { id: "tokyo", city: "Tokyo", country: "Japan", iana: "Asia/Tokyo", flag: "🇯🇵", utcOffset: 9 },
-  { id: "sydney", city: "Sydney", country: "Australia (AEST)", iana: "Australia/Sydney", flag: "🇦🇺", utcOffset: 10 },
-  { id: "paris", city: "Paris", country: "France (CET)", iana: "Europe/Paris", flag: "🇫🇷", utcOffset: 1 },
-  { id: "berlin", city: "Berlin", country: "Germany (CET)", iana: "Europe/Berlin", flag: "🇩🇪", utcOffset: 1 },
-  { id: "newdelhi", city: "New Delhi", country: "India (IST)", iana: "Asia/Kolkata", flag: "🇮🇳", utcOffset: 5.5 },
-  { id: "dubai", city: "Dubai", country: "United Arab Emirates", iana: "Asia/Dubai", flag: "🇦🇪", utcOffset: 4 },
-  { id: "singapore", city: "Singapore", country: "Singapore", iana: "Asia/Singapore", flag: "🇸🇬", utcOffset: 8 },
-  { id: "hongkong", city: "Hong Kong", country: "Hong Kong", iana: "Asia/Hong_Kong", flag: "🇭🇰", utcOffset: 8 },
-  { id: "toronto", city: "Toronto", country: "Canada (ET)", iana: "America/Toronto", flag: "🇨🇦", utcOffset: -5 },
-  { id: "saopaulo", city: "São Paulo", country: "Brazil", iana: "America/Sao_Paulo", flag: "🇧🇷", utcOffset: -3 },
+  { id: "london", city: "London", country: "United Kingdom", iana: "Europe/London", flag: "GB", utcOffset: 0 },
+  { id: "newyork", city: "New York", country: "United States (ET)", iana: "America/New_York", flag: "US", utcOffset: -5 },
+  { id: "sanfrancisco", city: "San Francisco", country: "United States (PT)", iana: "America/Los_Angeles", flag: "US", utcOffset: -8 },
+  { id: "tokyo", city: "Tokyo", country: "Japan", iana: "Asia/Tokyo", flag: "JP", utcOffset: 9 },
+  { id: "sydney", city: "Sydney", country: "Australia (AEST)", iana: "Australia/Sydney", flag: "AU", utcOffset: 10 },
+  { id: "paris", city: "Paris", country: "France (CET)", iana: "Europe/Paris", flag: "FR", utcOffset: 1 },
+  { id: "berlin", city: "Berlin", country: "Germany (CET)", iana: "Europe/Berlin", flag: "DE", utcOffset: 1 },
+  { id: "newdelhi", city: "New Delhi", country: "India (IST)", iana: "Asia/Kolkata", flag: "IN", utcOffset: 5.5 },
+  { id: "dubai", city: "Dubai", country: "United Arab Emirates", iana: "Asia/Dubai", flag: "AE", utcOffset: 4 },
+  { id: "singapore", city: "Singapore", country: "Singapore", iana: "Asia/Singapore", flag: "SG", utcOffset: 8 },
+  { id: "hongkong", city: "Hong Kong", country: "Hong Kong", iana: "Asia/Hong_Kong", flag: "HK", utcOffset: 8 },
+  { id: "toronto", city: "Toronto", country: "Canada (ET)", iana: "America/Toronto", flag: "CA", utcOffset: -5 },
+  { id: "saopaulo", city: "São Paulo", country: "Brazil", iana: "America/Sao_Paulo", flag: "BR", utcOffset: -3 },
 ];
 
 export interface ConvertedTimeItem {

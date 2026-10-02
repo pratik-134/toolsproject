@@ -85,8 +85,9 @@ export default function HomePage() {
             <Reveal variant="fade-up">
               <div className="flex flex-col md:flex-row md:items-end justify-between mb-section-mb-mob md:mb-12 lg:mb-section-mb gap-6">
                 <div>
-                  <span className="font-body text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100/90 dark:bg-slate-900/90 px-3 py-1 rounded-full inline-block mb-2">
-                    ✦ 20 hand-crafted styles · Recruiter-tested & ATS-safe
+                  <span className="font-body text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100/90 dark:bg-slate-900/90 px-3 py-1 rounded-full inline-flex items-center gap-1.5 mb-2">
+                    <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                    <span>20 hand-crafted styles · Recruiter-tested & ATS-safe</span>
                   </span>
                   <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 dark:text-slate-100">
                     Designed for recruiters, tested against ATS parsers.
@@ -130,8 +131,9 @@ export default function HomePage() {
           <div className="max-w-container mx-auto px-4 sm:px-6 text-center relative z-10">
             <Reveal variant="fade-up">
               <div className="mb-section-mb-mob md:mb-12 lg:mb-section-mb max-w-3xl mx-auto space-y-3">
-                <span className="font-body text-xs font-semibold text-cyan-300 bg-blue-500/20 border border-blue-500/30 px-3.5 py-1 rounded-full inline-block shadow-xs">
-                  ✦ The honest truth · Why job seekers leave traditional builders
+                <span className="font-body text-xs font-semibold text-cyan-300 bg-blue-500/20 border border-blue-500/30 px-3.5 py-1 rounded-full inline-flex items-center gap-1.5 shadow-xs">
+                  <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>The honest truth · Why job seekers leave traditional builders</span>
                 </span>
                 <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-white font-black tracking-tight">
                   Why job seekers are ditching traditional resume builders.
@@ -310,8 +312,9 @@ export default function HomePage() {
             {/* Section Header */}
             <Reveal variant="fade-up">
               <div className="text-center max-w-3xl mx-auto">
-                <span className="font-body text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100/90 dark:bg-slate-900/90 px-3.5 py-1 rounded-full inline-block mb-3">
-                  ✦ Under the hood · Built for applicants, not data brokers
+                <span className="font-body text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100/90 dark:bg-slate-900/90 px-3.5 py-1 rounded-full inline-flex items-center gap-1.5 mb-3">
+                  <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                  <span>Under the hood · Built for applicants, not data brokers</span>
                 </span>
                 <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 dark:text-slate-100">
                   Engineered for real careers. Backed by client-side intelligence.
@@ -487,8 +490,9 @@ export default function HomePage() {
           <div className="max-w-container mx-auto px-4 sm:px-6 relative z-10 text-center space-y-12">
             <Reveal variant="fade-up">
               <div className="max-w-3xl mx-auto space-y-4">
-                <span className="font-body text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100/90 dark:bg-slate-900/90 px-3.5 py-1 rounded-full inline-block">
-                  ✦ Privacy by architecture · Zero servers, zero cookies
+                <span className="font-body text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100/90 dark:bg-slate-900/90 px-3.5 py-1 rounded-full inline-flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                  <span>Privacy by architecture · Zero servers, zero cookies</span>
                 </span>
                 <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 dark:text-slate-100 font-bold">
                   Your career data belongs solely to you.
@@ -564,7 +568,8 @@ export default function HomePage() {
             <Reveal variant="fade-up">
               <div className="text-center space-y-4 max-w-2xl mx-auto">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-100/80 dark:bg-slate-900/90 border border-slate-200/60 dark:border-slate-800 px-3.5 py-1 font-body text-xs font-medium text-slate-600 dark:text-slate-300">
-                  ✦ Common questions · Clear, straight answers
+                  <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                  <span>Common questions · Clear, straight answers</span>
                 </span>
                 <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 dark:text-slate-100 [&>span]:text-blue-600 dark:[&>span]:text-blue-400">
                   Everything you need to know about <span>Cleartrix</span>
@@ -591,7 +596,8 @@ export default function HomePage() {
           <div className="max-w-container mx-auto px-4 sm:px-6 space-y-6 relative z-10">
             <Reveal variant="fade-up">
               <div className="inline-flex items-center gap-2 rounded-full bg-blue-500/15 border border-blue-500/30 px-4 py-1.5 font-body text-xs font-semibold text-cyan-300 shadow-xs">
-                ✦ Start in seconds · No account or payment needed
+                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                <span>Start in seconds · No account or payment needed</span>
               </div>
             </Reveal>
 
