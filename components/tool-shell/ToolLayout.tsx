@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { ToolMetadata } from "@/lib/registry/types";
 import { getCategoryById } from "@/lib/registry/categories";
@@ -12,6 +12,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { RelatedToolsDrawer } from "@/components/tools/RelatedToolsDrawer";
 import { BRAND } from "@/lib/brand";
+import { useToolsPreferenceStore } from "@/lib/store/use-tools-preference-store";
 import {
   ShieldCheck,
   ChevronRight,
@@ -20,6 +21,8 @@ import {
   ArrowRight,
   AlertTriangle,
   Layers,
+  Star,
+  Sparkles,
   FileText,
   Image as ImageIcon,
   Lock,
@@ -57,6 +60,14 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
   const theme = getCategoryTheme(tool.category);
   const CategoryIcon = CATEGORY_ICON_MAP[tool.category] || Layers;
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  const { addRecent, toggleFavorite, isFavorite } = useToolsPreferenceStore();
+  const [isFav, setIsFav] = useState(false);
+
+  useEffect(() => {
+    addRecent(tool.slug);
+    setIsFav(isFavorite(tool.slug));
+  }, [tool.slug, addRecent, isFavorite]);
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -122,6 +133,17 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                 <h1 className="text-[22px] xs:text-[26px] sm:text-[34px] leading-[1.2] font-bold text-[#0F172A] dark:text-slate-100 tracking-[-0.02em]">
                   {tool.seo.h1 || tool.name}
                 </h1>
+                <button
+                  type="button"
+                  onClick={() => {
+                    toggleFavorite(tool.slug);
+                    setIsFav(!isFav);
+                  }}
+                  className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-400 hover:text-amber-400 shrink-0"
+                  title={isFav ? "Remove from Pinned Favorites" : "Pin to Favorites"}
+                >
+                  <Star className={`w-5 h-5 ${isFav ? "fill-amber-400 text-amber-400" : ""}`} />
+                </button>
               </div>
 
               {/* Privacy badge & Trust line */}
@@ -180,6 +202,32 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                 {children}
               </div>
             </ToolContextProvider>
+
+            {/* Recommended Next Step in Workflow */}
+            {relatedTools.length > 0 && relatedTools[0] && (
+              <div className="max-w-7xl mx-auto bg-gradient-to-r from-blue-50/80 via-indigo-50/40 to-slate-50 dark:from-slate-900/90 dark:via-blue-950/20 dark:to-slate-900 border border-blue-200/80 dark:border-blue-900/50 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-blue-600/10 dark:bg-blue-400/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                    <Sparkles className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">
+                      Recommended Next Step
+                    </div>
+                    <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">
+                      Continue your workflow with <strong>{relatedTools[0].name}</strong>.
+                    </p>
+                  </div>
+                </div>
+                <Link
+                  href={getToolUrl(relatedTools[0])}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors shadow-xs self-start sm:self-auto shrink-0"
+                >
+                  <span>Open Next Tool</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            )}
 
             {/* Disclaimer */}
             {tool.disclaimer && (
@@ -343,6 +391,32 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                   {children}
                 </div>
               </ToolContextProvider>
+
+              {/* Recommended Next Step in Workflow */}
+              {relatedTools.length > 0 && relatedTools[0] && (
+                <div className="bg-gradient-to-r from-blue-50/80 via-indigo-50/40 to-slate-50 dark:from-slate-900/90 dark:via-blue-950/20 dark:to-slate-900 border border-blue-200/80 dark:border-blue-900/50 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-blue-600/10 dark:bg-blue-400/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                      <Sparkles className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-[11px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">
+                        Recommended Next Step
+                      </div>
+                      <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">
+                        Continue your workflow with <strong>{relatedTools[0].name}</strong>.
+                      </p>
+                    </div>
+                  </div>
+                  <Link
+                    href={getToolUrl(relatedTools[0])}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors shadow-xs self-start sm:self-auto shrink-0"
+                  >
+                    <span>Open Next Tool</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              )}
 
               {/* Disclaimer */}
               {tool.disclaimer && (

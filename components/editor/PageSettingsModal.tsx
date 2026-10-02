@@ -72,6 +72,40 @@ export const PageSettingsModal: React.FC = () => {
         </div>
 
         <div className="space-y-4 max-h-[70vh] overflow-y-auto pr-1 text-xs">
+          {/* ⚡ 1-Click One-Page Fit Optimizer */}
+          <div className="p-3 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50/50 dark:from-blue-950/40 dark:to-indigo-950/20 border border-blue-200 dark:border-blue-900/60 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5">
+              <div className="p-1.5 rounded-lg bg-blue-600 text-white shrink-0 shadow-xs">
+                <Sparkles className="h-4 w-4" />
+              </div>
+              <div>
+                <div className="font-semibold text-xs text-blue-950 dark:text-blue-200">
+                  Smart 1-Page Fit Auto-Tuner
+                </div>
+                <div className="text-[10px] text-blue-800/80 dark:text-blue-300">
+                  Auto-condense spacing & margins to keep content on 1 single page
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                if (theme.density === "compact" && theme.marginSize === "narrow") {
+                  updateTheme({ density: "comfortable", marginSize: "normal" });
+                } else {
+                  updateTheme({ density: "compact", marginSize: "narrow" });
+                }
+              }}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all shrink-0 ${
+                theme.density === "compact" && theme.marginSize === "narrow"
+                  ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs"
+                  : "bg-blue-600 hover:bg-blue-700 text-white shadow-xs"
+              }`}
+            >
+              {theme.density === "compact" && theme.marginSize === "narrow" ? "✓ 1-Page Active" : "Apply 1-Page Fit"}
+            </button>
+          </div>
+
           {/* 1. Spacing & Density */}
           <div className="space-y-2">
             <label className="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">

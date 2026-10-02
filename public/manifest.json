@@ -1,0 +1,22 @@
+{
+  "name": "ClearTrix — 100% In-Browser Privacy Tools & ATS Resume Builder",
+  "short_name": "ClearTrix",
+  "description": "168+ free, private in-browser document, developer, media, and calculator tools with zero server file uploads.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F172A",
+  "theme_color": "#2563EB",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

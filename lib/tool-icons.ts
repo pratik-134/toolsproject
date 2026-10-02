@@ -53,6 +53,7 @@ import {
   FileCheck,
   FileCheck2,
   Cloud,
+  Terminal,
   LucideIcon,
 } from "lucide-react";
 import { ToolDefinition } from "@/lib/registry/types";
@@ -92,6 +93,8 @@ export function getToolIcon(tool: ToolDefinition): LucideIcon {
   if (slug.includes("diff") || slug.includes("compare")) return GitCompare;
   if (slug.includes("regex")) return Regex;
   if (slug.includes("jwt") || slug.includes("token")) return KeyRound;
+  if (slug.includes("cron")) return Clock;
+  if (slug.includes("curl")) return Terminal;
 
   // Everyday Utilities
   if (slug.includes("word-counter") || slug.includes("character")) return Type;

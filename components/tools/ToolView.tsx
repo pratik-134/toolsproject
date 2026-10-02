@@ -579,6 +579,18 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     ssr: false,
     loading: () => <ToolLoadingState name="PDF Page Numberer" />,
   }),
+  "cron-expression-builder": dynamic(() => import("@/components/tools/phase3/cron-expression-builder"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Cron Expression Builder & Explainer" />,
+  }),
+  "curl-to-code-converter": dynamic(() => import("@/components/tools/phase3/curl-to-code-converter"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="cURL to Code Converter" />,
+  }),
+  "salary-tax-calculator": dynamic(() => import("@/components/tools/phase3/salary-tax-calculator"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="2026 Salary & Tax Calculator" />,
+  }),
 };
 
 function ToolLoadingState({ name }: { name: string }) {

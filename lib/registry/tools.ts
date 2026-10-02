@@ -4830,6 +4830,66 @@ export const TOOLS: ToolDefinition[] = [
       ]
     },
     related: ["pdf-bates-stamper", "pdf-merger", "pdf-page-organizer", "pdf-watermark-tool"]
+  },
+  {
+    slug: "cron-expression-builder",
+    name: "Cron Expression Builder & Explainer",
+    category: "developer",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Free Cron Expression Builder — Generate & Explain Crontab Schedules",
+      description: "Build, validate, and translate 5-part cron schedule expressions into plain English. Instant previews of upcoming runs, GitHub Actions, and Linux crontab syntax.",
+      h1: "Free Cron Expression Builder & Schedule Explainer",
+      intro: "Construct and debug crontab expressions visually in your browser. Translate cryptic cron syntax into plain English and copy pre-formatted triggers for GitHub Actions and Linux.",
+      faq: [
+        { q: "What do the 5 parts of a standard cron expression represent?", a: "They represent: Minute (0-59), Hour (0-23), Day of Month (1-31), Month (1-12), and Day of Week (0-6 starting Sunday)." },
+        { q: "Can I copy triggers for GitHub Actions or Linux crontab?", a: "Yes. ClearTrix automatically generates syntax for GitHub Actions workflows, Linux crontab entries, and Kubernetes CronJobs." },
+        { q: "Does this schedule generator run in my browser?", a: "Yes. All parsing, forward run projections, and explanations are computed 100% locally in your browser memory." }
+      ]
+    },
+    related: ["regex-tester", "date-calculator", "time-zone-converter", "json-formatter"]
+  },
+  {
+    slug: "curl-to-code-converter",
+    name: "cURL to Code Converter",
+    category: "developer",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Free cURL to Code Converter — Transpile cURL to Fetch, Python, Go, Rust",
+      description: "Convert cURL commands to JavaScript fetch, Axios, Python requests, Go, and Rust online. 100% in-browser privacy with zero API key leaks.",
+      h1: "Free Client-Side cURL to Code Converter",
+      intro: "Paste any raw cURL terminal command and convert it into clean, modern code for JavaScript (Fetch & Axios), Python, Go, and Rust with zero server transmission.",
+      faq: [
+        { q: "Are secret API keys or bearer tokens sent to a remote server?", a: "No. Unlike other online converters that inspect HTTP requests on backend servers, ClearTrix runs the parser 100% locally in your browser memory." },
+        { q: "Which programming languages and HTTP libraries are supported?", a: "Supports JavaScript / TypeScript (native Fetch & Axios), Python (requests), Go (net/http), and Rust (reqwest)." },
+        { q: "Does it support custom headers, request bodies, and authentication?", a: "Yes, it parses -H headers, -d / --data JSON payloads, and -u basic auth credentials automatically." }
+      ]
+    },
+    related: ["jwt-decoder", "url-encoder", "json-formatter", "base64-converter"]
+  },
+  {
+    slug: "salary-tax-calculator",
+    name: "2026 Salary & Take-Home Tax Calculator",
+    category: "calculators",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "2026 Salary Take-Home Tax Calculator — Net Pay & IRS Brackets",
+      description: "Calculate your 2026 take-home pay, federal tax brackets, FICA, state tax, and 401(k) deductions online. 100% private in-browser salary calculator.",
+      h1: "Free 2026 Salary & Take-Home Pay Tax Calculator",
+      intro: "Estimate your true take-home pay with 2026 IRS federal brackets, FICA social security caps, state income tax, and pre-tax retirement deductions.",
+      faq: [
+        { q: "Are 2026 federal income tax brackets and standard deductions included?", a: "Yes. Updated with 2026 IRS inflation-adjusted brackets, standard deduction ($15,000 single), and the $176,100 Social Security wage base." },
+        { q: "Can I see monthly, bi-weekly, and hourly pay breakdowns?", a: "Yes. View annual, monthly, semi-monthly, bi-weekly (every 2 weeks), weekly, and hourly equivalent take-home pay." },
+        { q: "Is my personal salary data transmitted to any external server?", a: "Never. All calculations are executed strictly in your local browser sandbox." }
+      ]
+    },
+    related: ["compound-interest-calculator", "percentage-calculator", "discount-calculator", "roi-calculator"]
   }
 ];
 

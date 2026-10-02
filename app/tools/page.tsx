@@ -9,6 +9,7 @@ import { CATEGORY_ICON_MAP } from "@/lib/tool-icons";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ToolsDirectoryClient } from "@/components/tools/ToolsDirectoryClient";
+import { ToolsShelf } from "@/components/tools/ToolsShelf";
 import { ArrowRight, Sparkles, Wrench } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -42,6 +43,9 @@ export default function ToolsHubPage() {
             </p>
           </div>
         </section>
+
+        {/* Dynamic User Shelf: Favorites & Recents */}
+        <ToolsShelf />
 
         {/* Browse by Category */}
         <section className="max-w-container mx-auto px-4 sm:px-6 pt-12">
