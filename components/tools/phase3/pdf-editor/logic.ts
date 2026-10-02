@@ -40,9 +40,9 @@ export async function loadPdfDocument(
     const viewport = page.getViewport({ scale: 1 });
     const rotation = (page.rotate % 360) as 0 | 90 | 180 | 270;
 
-    // Render low-res thumbnail preview
+    // Render low-res thumbnail preview (immediate for first 16 pages to avoid UI lockup on large multi-page PDFs)
     let thumbUrl: string | null = null;
-    if (typeof document !== "undefined") {
+    if (typeof document !== "undefined" && i <= 16) {
       try {
         const thumbScale = Math.min(180 / viewport.width, 240 / viewport.height);
         const thumbViewport = page.getViewport({ scale: thumbScale });

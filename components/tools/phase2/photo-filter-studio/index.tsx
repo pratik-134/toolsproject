@@ -104,27 +104,48 @@ export default function PhotoFilterStudioTool() {
     reader.readAsDataURL(file);
   };
 
-  // Re-render canvas with applied filters
+  // Re-render preview canvas with applied filters (optimized to max 1280px for instant 60fps sliders)
   useEffect(() => {
     if (!imageSrc) return;
 
+    let isCancelled = false;
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.onload = () => {
+      if (isCancelled) return;
+      const MAX_PREVIEW = 1280;
+      let w = img.naturalWidth || 800;
+      let h = img.naturalHeight || 600;
+      if (w > MAX_PREVIEW || h > MAX_PREVIEW) {
+        if (w > h) {
+          h = Math.round((h * MAX_PREVIEW) / w);
+          w = MAX_PREVIEW;
+        } else {
+          w = Math.round((w * MAX_PREVIEW) / h);
+          h = MAX_PREVIEW;
+        }
+      }
+
       const canvas = document.createElement("canvas");
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
+      canvas.width = w;
+      canvas.height = h;
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
       const filterStr = isComparing ? "none" : buildCssFilterString(adjustments);
       ctx.filter = filterStr;
-      ctx.drawImage(img, 0, 0);
+      ctx.drawImage(img, 0, 0, w, h);
 
       const dataUrl = canvas.toDataURL(outputFormat, quality);
-      setPreviewUrl(dataUrl);
+      if (!isCancelled) {
+        setPreviewUrl(dataUrl);
+      }
     };
     img.src = imageSrc;
+
+    return () => {
+      isCancelled = true;
+    };
   }, [imageSrc, adjustments, isComparing, outputFormat, quality]);
 
   const handleSelectPreset = (presetId: string) => {
@@ -143,14 +164,30 @@ export default function PhotoFilterStudioTool() {
   };
 
   const handleDownload = () => {
-    if (!previewUrl) return;
-    const ext = outputFormat === "image/png" ? "png" : outputFormat === "image/jpeg" ? "jpg" : "webp";
-    const a = document.createElement("a");
-    a.href = previewUrl;
-    a.download = `${imageName}-${activePreset}.${ext}`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    if (!imageSrc) return;
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      const filterStr = isComparing ? "none" : buildCssFilterString(adjustments);
+      ctx.filter = filterStr;
+      ctx.drawImage(img, 0, 0);
+
+      const fullDataUrl = canvas.toDataURL(outputFormat, quality);
+      const ext = outputFormat === "image/png" ? "png" : outputFormat === "image/jpeg" ? "jpg" : "webp";
+      const a = document.createElement("a");
+      a.href = fullDataUrl;
+      a.download = `${imageName}-${activePreset}.${ext}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    };
+    img.src = imageSrc;
   };
 
   return (

@@ -78,7 +78,7 @@ export default function QRScannerTool() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const scanIntervalRef = useRef<number | null>(null);
 
@@ -121,18 +121,32 @@ export default function QRScannerTool() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    canvas.width = img.naturalWidth || img.width;
-    canvas.height = img.naturalHeight || img.height;
+    // Rescale high-res uploads (e.g. 10MB phone camera images) to max 1280px
+    const MAX_DIM = 1280;
+    let w = img.naturalWidth || img.width;
+    let h = img.naturalHeight || img.height;
+    if (w > MAX_DIM || h > MAX_DIM) {
+      if (w > h) {
+        h = Math.round((h * MAX_DIM) / w);
+        w = MAX_DIM;
+      } else {
+        w = Math.round((w * MAX_DIM) / h);
+        h = MAX_DIM;
+      }
+    }
+
+    canvas.width = w;
+    canvas.height = h;
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
     if (!ctx) return;
 
-    ctx.drawImage(img, 0, 0);
-    const rawData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, w, h);
+    const rawData = ctx.getImageData(0, 0, w, h);
 
     processImageData(
       {
-        width: canvas.width,
-        height: canvas.height,
+        width: w,
+        height: h,
         data: rawData.data,
       },
       name
@@ -167,40 +181,57 @@ export default function QRScannerTool() {
   const startCamera = async () => {
     setCameraError(null);
     try {
+      if (!navigator?.mediaDevices?.getUserMedia) {
+        setCameraError("Camera access is not supported in this browser.");
+        return;
+      }
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: "environment", width: { ideal: 1280 } },
       });
       streamRef.current = stream;
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        await videoRef.current.play();
-        setCameraActive(true);
+      setCameraActive(true);
 
-        scanIntervalRef.current = window.setInterval(() => {
-          if (!videoRef.current || !canvasRef.current) return;
-          const v = videoRef.current;
-          const c = canvasRef.current;
-          if (v.readyState !== v.HAVE_ENOUGH_DATA) return;
-
-          c.width = v.videoWidth;
-          c.height = v.videoHeight;
-          const ctx = c.getContext("2d", { willReadFrequently: true });
-          if (!ctx) return;
-
-          ctx.drawImage(v, 0, 0, c.width, c.height);
-          const raw = ctx.getImageData(0, 0, c.width, c.height);
-          const res = scanQRCode({
-            width: c.width,
-            height: c.height,
-            data: raw.data,
-          });
-
-          if (res.found && res.text) {
-            setScanResult(res);
-            stopCamera();
+      const setupStreamToVideo = () => {
+        if (videoRef.current && streamRef.current) {
+          if (videoRef.current.srcObject !== streamRef.current) {
+            videoRef.current.srcObject = streamRef.current;
           }
-        }, 300);
+          videoRef.current.play().catch(() => {});
+        }
+      };
+
+      setupStreamToVideo();
+      setTimeout(setupStreamToVideo, 50);
+      setTimeout(setupStreamToVideo, 200);
+
+      if (scanIntervalRef.current) {
+        window.clearInterval(scanIntervalRef.current);
       }
+
+      scanIntervalRef.current = window.setInterval(() => {
+        if (!videoRef.current || !canvasRef.current) return;
+        const v = videoRef.current;
+        const c = canvasRef.current;
+        if (v.readyState < 2) return;
+
+        c.width = v.videoWidth || 640;
+        c.height = v.videoHeight || 480;
+        const ctx = c.getContext("2d", { willReadFrequently: true });
+        if (!ctx) return;
+
+        ctx.drawImage(v, 0, 0, c.width, c.height);
+        const raw = ctx.getImageData(0, 0, c.width, c.height);
+        const res = scanQRCode({
+          width: c.width,
+          height: c.height,
+          data: raw.data,
+        });
+
+        if (res.found && res.text) {
+          setScanResult(res);
+          stopCamera();
+        }
+      }, 300);
     } catch {
       setCameraError(
         "Camera access denied or unavailable. Please grant permission or upload an image."
@@ -538,8 +569,15 @@ export default function QRScannerTool() {
       {activeTab === "camera" && (
         <div className="relative overflow-hidden rounded-2xl bg-black border border-slate-800 aspect-video max-h-96 flex items-center justify-center">
           <video
-            ref={videoRef}
+            ref={(el) => {
+              videoRef.current = el;
+              if (el && streamRef.current && el.srcObject !== streamRef.current) {
+                el.srcObject = streamRef.current;
+                el.play().catch(() => {});
+              }
+            }}
             playsInline
+            autoPlay
             muted
             className={`w-full h-full object-cover ${cameraActive ? "block" : "hidden"}`}
           />

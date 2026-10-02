@@ -48,9 +48,23 @@ export default function CameraToPdfScannerTool() {
     };
   }, [stopCamera]);
 
+  // Ensure video element receives stream when cameraActive becomes true
+  useEffect(() => {
+    if (cameraActive && videoRef.current && streamRef.current) {
+      if (videoRef.current.srcObject !== streamRef.current) {
+        videoRef.current.srcObject = streamRef.current;
+        videoRef.current.play().catch((err) => console.warn("Camera play error:", err));
+      }
+    }
+  }, [cameraActive]);
+
   const startCamera = async () => {
     setErrorMessage(null);
     try {
+      if (!navigator?.mediaDevices?.getUserMedia) {
+        setErrorMessage("Camera access is not supported in this browser.");
+        return;
+      }
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
           facingMode: { ideal: "environment" },
@@ -59,15 +73,17 @@ export default function CameraToPdfScannerTool() {
         },
       });
       streamRef.current = stream;
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        await videoRef.current.play();
-      }
       setCameraActive(true);
+      setTimeout(() => {
+        if (videoRef.current && streamRef.current) {
+          videoRef.current.srcObject = streamRef.current;
+          videoRef.current.play().catch(() => {});
+        }
+      }, 50);
     } catch (err: unknown) {
       const error = err as Error;
-      if (error?.name === "NotAllowedError") {
-        setErrorMessage("Camera access permission was denied.");
+      if (error?.name === "NotAllowedError" || error?.name === "PermissionDeniedError") {
+        setErrorMessage("Camera access permission was denied. Please allow camera permissions in browser settings.");
       } else {
         setErrorMessage(error?.message || "Failed to initialize camera device.");
       }
@@ -88,33 +104,72 @@ export default function CameraToPdfScannerTool() {
     const dataUrl = canvas.toDataURL("image/jpeg", 0.92);
 
     const newPage: ScannedPage = {
-      id: `page-${Date.now()}`,
+      id: `page-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
       dataUrl,
       filter: "normal",
       rotation: 0,
     };
 
-    setPages((prev) => [...prev, newPage]);
-    setSelectedPageIndex(pages.length);
+    setPages((prev) => {
+      const nextPages = [...prev, newPage];
+      setSelectedPageIndex(nextPages.length - 1);
+      return nextPages;
+    });
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const dataUrl = event.target?.result as string;
-      const newPage: ScannedPage = {
-        id: `page-${Date.now()}`,
-        dataUrl,
-        filter: "normal",
-        rotation: 0,
+    Array.from(files).forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const rawSrc = event.target?.result as string;
+        if (!rawSrc) return;
+
+        const img = new Image();
+        img.onload = () => {
+          const MAX_DIM = 2048;
+          let w = img.naturalWidth || img.width;
+          let h = img.naturalHeight || img.height;
+          let finalDataUrl = rawSrc;
+
+          if (w > MAX_DIM || h > MAX_DIM) {
+            if (w > h) {
+              h = Math.round((h * MAX_DIM) / w);
+              w = MAX_DIM;
+            } else {
+              w = Math.round((w * MAX_DIM) / h);
+              h = MAX_DIM;
+            }
+            const canvas = document.createElement("canvas");
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext("2d");
+            if (ctx) {
+              ctx.drawImage(img, 0, 0, w, h);
+              finalDataUrl = canvas.toDataURL("image/jpeg", 0.92);
+            }
+          }
+
+          const newPage: ScannedPage = {
+            id: `page-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
+            dataUrl: finalDataUrl,
+            filter: "normal",
+            rotation: 0,
+          };
+
+          setPages((prev) => {
+            const nextPages = [...prev, newPage];
+            setSelectedPageIndex(nextPages.length - 1);
+            return nextPages;
+          });
+        };
+        img.src = rawSrc;
       };
-      setPages((prev) => [...prev, newPage]);
-      setSelectedPageIndex(pages.length);
-    };
-    reader.readAsDataURL(file);
+      reader.readAsDataURL(file);
+    });
+    e.target.value = "";
   };
 
   const setPageFilter = (index: number, filter: ScanFilterType) => {
@@ -255,7 +310,19 @@ export default function CameraToPdfScannerTool() {
         <div className="lg:col-span-8 space-y-4">
           <div className="relative rounded-2xl overflow-hidden bg-slate-950 aspect-[4/3] max-w-2xl mx-auto shadow-2xl flex items-center justify-center border border-slate-800">
             {cameraActive ? (
-              <video ref={videoRef} playsInline autoPlay muted className="w-full h-full object-cover" />
+              <video
+                ref={(el) => {
+                  videoRef.current = el;
+                  if (el && streamRef.current && el.srcObject !== streamRef.current) {
+                    el.srcObject = streamRef.current;
+                    el.play().catch(() => {});
+                  }
+                }}
+                playsInline
+                autoPlay
+                muted
+                className="w-full h-full object-cover"
+              />
             ) : activePage ? (
               <div
                 className="w-full h-full flex items-center justify-center p-4"

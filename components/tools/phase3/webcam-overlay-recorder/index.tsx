@@ -320,9 +320,21 @@ export default function WebcamOverlayRecorderTool() {
 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-6">
-      {/* Hidden helper videos */}
-      <video ref={screenVideoRef} playsInline muted className="hidden" />
-      <video ref={webcamVideoRef} playsInline muted className="hidden" />
+      {/* Offscreen active helper video elements for canvas rendering (must not use display:none or frames stop decoding) */}
+      <video
+        ref={screenVideoRef}
+        playsInline
+        muted
+        autoPlay
+        style={{ position: "fixed", top: "-9999px", left: "-9999px", width: "320px", height: "240px", opacity: 0, pointerEvents: "none" }}
+      />
+      <video
+        ref={webcamVideoRef}
+        playsInline
+        muted
+        autoPlay
+        style={{ position: "fixed", top: "-9999px", left: "-9999px", width: "320px", height: "240px", opacity: 0, pointerEvents: "none" }}
+      />
 
       {/* Privacy Notice */}
       <div className="flex items-center justify-between px-4 py-2.5 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 rounded-lg text-xs text-emerald-800 dark:text-emerald-300">

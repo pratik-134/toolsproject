@@ -103,8 +103,8 @@ export const ResumeImportModal: React.FC<ResumeImportModalProps> = ({
       return;
     }
 
-    if (file.size > 10 * 1024 * 1024) {
-      setErrorMessage("File exceeds the 10MB limit. Please upload a smaller document.");
+    if (file.size > 25 * 1024 * 1024) {
+      setErrorMessage("File exceeds the 25MB limit. Please upload a smaller document.");
       setStep("error");
       return;
     }
@@ -347,7 +347,7 @@ export const ResumeImportModal: React.FC<ResumeImportModalProps> = ({
                   <span className="text-blue-600 dark:text-blue-400 underline underline-offset-2">browse</span>
                 </p>
                 <p className="text-xs text-slate-500 dark:text-slate-400 text-center mb-4">
-                  Supports .PDF and .DOCX files up to 10MB
+                  Supports .PDF and .DOCX files up to 25MB
                 </p>
 
                 <div className="flex flex-wrap items-center justify-center gap-3 text-[11px] text-slate-500 dark:text-slate-400">

@@ -8,7 +8,7 @@ export * from "./types";
 export { normalizeExtractedText, segmentResumeText } from "./parse-resume-text";
 export { mapBlocksToResumeData } from "./map-to-schema";
 
-const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024; // 10MB
+const MAX_FILE_SIZE_BYTES = 25 * 1024 * 1024; // 25MB
 
 /**
  * Validates the uploaded file and extracts its structured resume data.
@@ -20,7 +20,7 @@ export async function parseResumeFile(
 ): Promise<ParsedResumeResult> {
   // Validate file size
   if (file.size > MAX_FILE_SIZE_BYTES) {
-    throw new Error("File exceeds the 10MB limit. Please upload a smaller PDF or DOCX file.");
+    throw new Error("File exceeds the 25MB limit. Please upload a smaller PDF or DOCX file.");
   }
 
   // Validate extension and type
