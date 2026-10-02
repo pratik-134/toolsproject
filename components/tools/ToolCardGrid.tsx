@@ -153,6 +153,7 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
                 style={{
                   "--cat-primary": theme.primary,
                   "--cat-border": theme.border,
+                  "--cat-tint": theme.tint,
                   "--cat-glow": theme.glow,
                 } as React.CSSProperties}
               >
@@ -167,12 +168,7 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
                   <div className="flex items-start justify-between gap-3">
                     {/* Icon tile */}
                     <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border transition-all duration-300 group-hover:scale-105"
-                      style={{
-                        backgroundColor: theme.tint,
-                        borderColor: theme.border,
-                        color: theme.primary,
-                      }}
+                      className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border transition-all duration-300 group-hover:scale-105 bg-[var(--cat-tint)] dark:bg-slate-800/90 border-[var(--cat-border)] dark:border-slate-700 text-[var(--cat-primary)] dark:text-white"
                     >
                       <ToolIcon className="w-6 h-6" strokeWidth={1.75} aria-hidden="true" />
                     </div>
@@ -180,12 +176,7 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
                     {/* Category badge */}
                     {!isSingleCategoryHub && categoryDef && (
                       <span
-                        className="text-xs font-bold px-2.5 py-0.5 rounded-full border shrink-0 mt-0.5 leading-tight"
-                        style={{
-                          backgroundColor: theme.tint,
-                          borderColor: theme.border,
-                          color: theme.primary,
-                        }}
+                        className="text-xs font-bold px-2.5 py-0.5 rounded-full border shrink-0 mt-0.5 leading-tight bg-[var(--cat-tint)] dark:bg-slate-800 border-[var(--cat-border)] dark:border-slate-700 text-[var(--cat-primary)] dark:text-slate-200"
                       >
                         {categoryDef.shortName}
                       </span>

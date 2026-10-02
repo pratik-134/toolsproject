@@ -74,17 +74,17 @@ export default function ToolsHubPage() {
                   style={{
                     "--cat-primary": theme.primary,
                     "--cat-border": theme.border,
+                    "--cat-tint": theme.tint,
                     "--cat-glow": theme.glow,
                   } as React.CSSProperties}
                 >
                   {/* Tinted header band */}
                   <div
-                    className="relative px-6 pt-6 pb-5 overflow-hidden"
-                    style={{ backgroundColor: theme.tint }}
+                    className="relative px-6 pt-6 pb-5 overflow-hidden bg-[var(--cat-tint)] dark:bg-slate-800/60 dark:border-b dark:border-slate-800 transition-colors"
                   >
                     {/* Watermark */}
                     <div
-                      className="absolute -right-5 -top-5 pointer-events-none opacity-[0.13] -rotate-12 transition-all duration-500 ease-out group-hover:scale-110 group-hover:opacity-[0.20] group-hover:-rotate-6 select-none"
+                      className="absolute -right-5 -top-5 pointer-events-none opacity-[0.13] dark:opacity-[0.08] -rotate-12 transition-all duration-500 ease-out group-hover:scale-110 group-hover:opacity-[0.20] group-hover:-rotate-6 select-none"
                       style={{ color: theme.primary }}
                       aria-hidden="true"
                     >
@@ -93,12 +93,7 @@ export default function ToolsHubPage() {
 
                     {/* Icon tile */}
                     <div
-                      className="relative z-10 w-12 h-12 rounded-xl flex items-center justify-center border shadow-sm transition-all duration-300 group-hover:scale-105"
-                      style={{
-                        backgroundColor: "rgba(255,255,255,0.80)",
-                        borderColor: theme.border,
-                        color: theme.primary,
-                      }}
+                      className="relative z-10 w-12 h-12 rounded-xl flex items-center justify-center border shadow-xs transition-all duration-300 group-hover:scale-105 bg-white/80 dark:bg-slate-900/90 border-[var(--cat-border)] dark:border-slate-700 text-[var(--cat-primary)] dark:text-white"
                     >
                       <IconComp className="w-6 h-6" strokeWidth={1.75} aria-hidden="true" />
                     </div>
@@ -117,12 +112,7 @@ export default function ToolsHubPage() {
                   {/* Footer */}
                   <div className="px-6 pb-5 pt-3 flex items-center justify-between gap-2 border-t border-slate-100 dark:border-slate-800 mt-auto">
                     <span
-                      className="text-xs font-bold px-3 py-1 rounded-full border"
-                      style={{
-                        backgroundColor: theme.tint,
-                        borderColor: theme.border,
-                        color: theme.primary,
-                      }}
+                      className="text-xs font-bold px-3 py-1 rounded-full border bg-[var(--cat-tint)] dark:bg-slate-800 border-[var(--cat-border)] dark:border-slate-700 text-[var(--cat-primary)] dark:text-slate-200"
                     >
                       {toolCount > 0
                         ? `${toolCount} ${toolCount === 1 ? "tool" : "tools"}`

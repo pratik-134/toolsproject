@@ -109,19 +109,13 @@ export const UploadBox: React.FC<UploadBoxProps> = ({
       >
         {/* Stroke icon chip with categorical theme */}
         <div
-          className="p-2.5 rounded-[8px] border flex items-center justify-center"
+          className="p-2.5 rounded-[8px] border flex items-center justify-center bg-[var(--box-tint)] dark:bg-slate-800 border-[var(--box-border)] dark:border-slate-700 text-[var(--box-primary)] dark:text-blue-400"
           style={
-            theme
-              ? {
-                  backgroundColor: theme.tint,
-                  borderColor: theme.border,
-                  color: theme.primary,
-                }
-              : {
-                  backgroundColor: "#EFF6FF",
-                  borderColor: "#BFDBFE",
-                  color: "#1D4ED8",
-                }
+            {
+              "--box-tint": theme ? theme.tint : "#EFF6FF",
+              "--box-border": theme ? theme.border : "#BFDBFE",
+              "--box-primary": theme ? theme.primary : "#1D4ED8",
+            } as React.CSSProperties
           }
         >
           <UploadCloud

@@ -140,12 +140,12 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
               {category && (
                 <span
                   className="inline-flex items-center gap-1.5 rounded-[6px]
-                    px-2.5 py-0.5 text-[11px] font-semibold tracking-[0.05em] uppercase border"
+                    px-2.5 py-0.5 text-[11px] font-semibold tracking-[0.05em] uppercase border bg-[var(--cat-tint)] dark:bg-slate-800 border-[var(--cat-border)] dark:border-slate-700 text-[var(--cat-primary)] dark:text-slate-200"
                   style={{
-                    backgroundColor: theme.tint,
-                    borderColor: theme.border,
-                    color: theme.primary,
-                  }}
+                    "--cat-tint": theme.tint,
+                    "--cat-border": theme.border,
+                    "--cat-primary": theme.primary,
+                  } as React.CSSProperties}
                 >
                   <CategoryIcon className="h-3 w-3" strokeWidth={1.75} aria-hidden="true" />
                   {category.shortName}
@@ -288,22 +288,22 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center gap-1.5">
                               <div
-                                className="h-6 w-6 rounded-[6px] border flex items-center justify-center shrink-0"
+                                className="h-6 w-6 rounded-[6px] border flex items-center justify-center shrink-0 bg-[var(--rel-tint)] dark:bg-slate-800 border-[var(--rel-border)] dark:border-slate-700 text-[var(--rel-primary)] dark:text-white"
                                 style={{
-                                  backgroundColor: relTheme.tint,
-                                  borderColor: relTheme.border,
-                                  color: relTheme.primary,
-                                }}
+                                  "--rel-tint": relTheme.tint,
+                                  "--rel-border": relTheme.border,
+                                  "--rel-primary": relTheme.primary,
+                                } as React.CSSProperties}
                               >
                                 <RelIcon className="h-3.5 w-3.5" strokeWidth={1.75} aria-hidden="true" />
                               </div>
                               <span
-                                className="inline-block px-2 py-0.5 rounded-[6px] text-[10px] font-semibold tracking-[0.05em] uppercase border"
+                                className="inline-block px-2 py-0.5 rounded-[6px] text-[10px] font-semibold tracking-[0.05em] uppercase border bg-[var(--rel-tint)] dark:bg-slate-800 border-[var(--rel-border)] dark:border-slate-700 text-[var(--rel-primary)] dark:text-slate-200"
                                 style={{
-                                  backgroundColor: relTheme.tint,
-                                  borderColor: relTheme.border,
-                                  color: relTheme.primary,
-                                }}
+                                  "--rel-tint": relTheme.tint,
+                                  "--rel-border": relTheme.border,
+                                  "--rel-primary": relTheme.primary,
+                                } as React.CSSProperties}
                               >
                                 {rel.category.replace("-", " ")}
                               </span>
@@ -451,22 +451,22 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                             <div className="flex items-center justify-between mb-2">
                               <div className="flex items-center gap-1.5">
                                 <div
-                                  className="h-6 w-6 rounded-[6px] border flex items-center justify-center shrink-0"
+                                  className="h-6 w-6 rounded-[6px] border flex items-center justify-center shrink-0 bg-[var(--rel-tint)] dark:bg-slate-800 border-[var(--rel-border)] dark:border-slate-700 text-[var(--rel-primary)] dark:text-white"
                                   style={{
-                                    backgroundColor: relTheme.tint,
-                                    borderColor: relTheme.border,
-                                    color: relTheme.primary,
-                                  }}
+                                    "--rel-tint": relTheme.tint,
+                                    "--rel-border": relTheme.border,
+                                    "--rel-primary": relTheme.primary,
+                                  } as React.CSSProperties}
                                 >
                                   <RelIcon className="h-3.5 w-3.5" strokeWidth={1.75} aria-hidden="true" />
                                 </div>
                                 <span
-                                  className="inline-block px-2 py-0.5 rounded-[6px] text-[10px] font-semibold tracking-[0.05em] uppercase border"
+                                  className="inline-block px-2 py-0.5 rounded-[6px] text-[10px] font-semibold tracking-[0.05em] uppercase border bg-[var(--rel-tint)] dark:bg-slate-800 border-[var(--rel-border)] dark:border-slate-700 text-[var(--rel-primary)] dark:text-slate-200"
                                   style={{
-                                    backgroundColor: relTheme.tint,
-                                    borderColor: relTheme.border,
-                                    color: relTheme.primary,
-                                  }}
+                                    "--rel-tint": relTheme.tint,
+                                    "--rel-border": relTheme.border,
+                                    "--rel-primary": relTheme.primary,
+                                  } as React.CSSProperties}
                                 >
                                   {rel.category.replace("-", " ")}
                                 </span>
