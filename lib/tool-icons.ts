@@ -91,6 +91,7 @@ export function getToolIcon(tool: ToolDefinition): LucideIcon {
   if (slug.includes("html") || slug.includes("css") || slug.includes("beautifier")) return Code;
   if (slug.includes("diff") || slug.includes("compare")) return GitCompare;
   if (slug.includes("regex")) return Regex;
+  if (slug.includes("jwt") || slug.includes("token")) return KeyRound;
 
   // Everyday Utilities
   if (slug.includes("word-counter") || slug.includes("character")) return Type;
@@ -116,8 +117,9 @@ export function getToolIcon(tool: ToolDefinition): LucideIcon {
   if (slug.includes("watermark")) return Sparkles;
 
   // PDF & Documents
-  if (slug.includes("ats")) return FileCheck;
+  if (slug.includes("ats") || slug.includes("keyword")) return FileCheck;
   if (slug.includes("merge") || slug.includes("split") || slug.includes("organize")) return FileDiff;
+  if (slug.includes("numberer") || slug.includes("bates")) return Hash;
   if (slug.includes("form") || slug.includes("signer")) return FileCheck2;
 
   // Calculators

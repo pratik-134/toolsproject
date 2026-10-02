@@ -4769,6 +4769,67 @@ export const TOOLS: ToolDefinition[] = [
       ]
     },
     related: ["image-to-text", "pdf-merger", "batch-image-compressor", "jpg-to-pdf"]
+  },
+  {
+    slug: "jwt-decoder",
+    name: "JSON Web Token (JWT) Decoder",
+    category: "developer",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Free JWT Decoder — Inspect & Decode JSON Web Tokens In-Browser",
+      description: "Decode and inspect JSON Web Tokens (JWT) client-side with complete privacy. View header, payload claims, expiration countdown, and signature without server transmission.",
+      h1: "Free Client-Side JSON Web Token (JWT) Decoder",
+      intro: "Inspect and decode JWT tokens instantly in your browser. Verify token claims, expiration timestamps, and algorithms with 100% in-browser privacy.",
+      faq: [
+        { q: "Is it safe to paste confidential production JWT tokens into this decoder?", a: "Yes. Unlike online decoders that log requests, ClearTrix decodes tokens 100% locally in your browser memory using Base64URL decoding. No tokens are logged or sent to any server." },
+        { q: "Can this tool verify token cryptographic signatures?", a: "This decoder checks token formatting, expiry, and decodes the claims header and payload. Cryptographic signature verification against private keys is kept offline to protect secret keys." },
+        { q: "Does it convert timestamps into readable dates?", a: "Yes, standard Unix epoch claims including exp (expiration), iat (issued at), and nbf (not before) are automatically translated into human-readable local dates and live countdowns." }
+      ]
+    },
+    related: ["base64-converter", "hash-generator", "hmac-generator", "url-encoder"]
+  },
+  {
+    slug: "job-keyword-matcher",
+    name: "Job Description Keyword Matcher",
+    category: "document-pdf",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "ATS Job Keyword Matcher — Compare Resume vs Job Description Free",
+      description: "Analyze your resume against any job description to identify missing ATS keywords, critical skills, and action verbs. Boost your interview rate with 100% client-side privacy.",
+      h1: "ATS Job Description Keyword Matcher & Gap Analyzer",
+      intro: "Scan and compare your resume against target job requirements. Instantly discover keyword matches, missing qualifications, and strong action verbs to beat Applicant Tracking Systems.",
+      faq: [
+        { q: "How does the ATS keyword matcher calculate the match percentage?", a: "It extracts key terms, required skills, and core action verbs from the job description, then scans your resume text to compute match frequency, keyword density, and missing gaps." },
+        { q: "Can I directly load my resume from the ClearTrix Resume Builder?", a: "Yes! Click the 'Load Active Resume' button to automatically import your active draft from the ClearTrix builder with one click." },
+        { q: "Is my resume or the job posting uploaded to a cloud server?", a: "No. All text processing and keyword extraction algorithms execute strictly inside your local browser tab." }
+      ]
+    },
+    related: ["ats-score-checker", "action-verb-suggester", "word-counter", "resume-keyword-optimizer"]
+  },
+  {
+    slug: "pdf-page-numberer",
+    name: "PDF Page Numberer",
+    category: "document-pdf",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    heavyDeps: ["pdf-lib"],
+    seo: {
+      title: "Free PDF Page Numberer — Add Page Numbers to PDF Online In-Browser",
+      description: "Add customizable page numbers, running headers, or footers to any PDF document. Choose positions, formats, font sizes, and skip cover pages. 100% private.",
+      h1: "Free Client-Side PDF Page Numberer",
+      intro: "Add page numbering to your PDF documents directly in your browser. Customize positions, numbering styles, start offsets, and margins with zero server uploads.",
+      faq: [
+        { q: "What numbering formats are supported?", a: "You can choose between 'Page X of Y', 'Page X', 'X / Y', or simple numbers 'X', with custom starting numbers and offsets." },
+        { q: "Can I skip numbering on the cover page?", a: "Yes. Toggle the 'Skip first page' option to leave your title or cover page clean without numbers." },
+        { q: "Are my uploaded PDFs sent to any external server?", a: "Never. All page modifications and vector rendering occur 100% client-side inside your browser via pdf-lib." }
+      ]
+    },
+    related: ["pdf-bates-stamper", "pdf-merger", "pdf-page-organizer", "pdf-watermark-tool"]
   }
 ];
 

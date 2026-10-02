@@ -34,11 +34,11 @@ async function runE2eTestSuite() {
   console.log("==================================================================\n");
 
   // ==========================================================================
-  // STAGE 1: Route Integrity & Metadata for All 162 Tools & All Category Hubs
+  // STAGE 1: Route Integrity & Metadata for All 165 Tools & All Category Hubs
   // ==========================================================================
   console.log("▶ STAGE 1: Testing Route Integrity & Metadata Generation...");
   const allTools = getAllTools();
-  assert(allTools.length === 162, `Expected 162 tools, found ${allTools.length}`);
+  assert(allTools.length === 165, `Expected 165 tools, found ${allTools.length}`);
 
   let metadataCount = 0;
   for (const tool of allTools) {
@@ -69,7 +69,7 @@ async function runE2eTestSuite() {
 
     metadataCount++;
   }
-  console.log(`✅ Stage 1.1: All ${metadataCount}/162 tool routes, SEO metadata, and FAQs verified!`);
+  console.log(`✅ Stage 1.1: All ${metadataCount}/165 tool routes, SEO metadata, and FAQs verified!`);
 
   // Verify all category hubs
   const categoryList = Object.values(CATEGORIES);

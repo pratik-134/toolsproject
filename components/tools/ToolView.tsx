@@ -567,6 +567,18 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     ssr: false,
     loading: () => <ToolLoadingState name="Camera to PDF Scanner" />,
   }),
+  "jwt-decoder": dynamic(() => import("@/components/tools/phase3/jwt-decoder"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="JSON Web Token (JWT) Decoder" />,
+  }),
+  "job-keyword-matcher": dynamic(() => import("@/components/tools/phase3/job-keyword-matcher"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Job Description Keyword Matcher" />,
+  }),
+  "pdf-page-numberer": dynamic(() => import("@/components/tools/phase3/pdf-page-numberer"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="PDF Page Numberer" />,
+  }),
 };
 
 function ToolLoadingState({ name }: { name: string }) {
