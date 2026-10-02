@@ -17,6 +17,9 @@ import { PageMeta, AnnotationObject } from "../components/tools/phase3/pdf-edito
 import { hexToRgb, rgbToHex, rgbToHsl, rgbToCmyk } from "../components/tools/engines/ColorConverterEngine";
 import { tsvToCsv, parseCsv, csvToXlsxBlob } from "../components/tools/engines/DataTransformEngine";
 import { jsonToTypeScript, textToBinary, binaryToText, numberToWords, numberToRoman } from "../components/tools/engines/TextTransformEngine";
+import { getAllPosts } from "../lib/blog/posts";
+import { generateMetadata as generateBlogMetadata } from "../app/blog/[slug]/page";
+import { BRAND } from "../lib/brand";
 
 // Test assertion helper
 function assert(condition: boolean, message: string) {
@@ -77,7 +80,28 @@ async function runE2eTestSuite() {
     }
     assert(!!cat.name && !!cat.description, `Category ${cat.id} missing name or description`);
   }
-  console.log(`✅ Stage 1.2: All ${categoryList.length} Category Hubs verified!\n`);
+  console.log(`✅ Stage 1.2: All ${categoryList.length} Category Hubs verified!`);
+
+  // Verify Blog System (List + All Detail Pages)
+  const allBlogPosts = getAllPosts();
+  assert(allBlogPosts.length >= 6, `Expected at least 6 blog posts, found ${allBlogPosts.length}`);
+  for (const post of allBlogPosts) {
+    assert(!!post.title && post.title.length > 10, `Blog post ${post.slug} has invalid title`);
+    assert(!!post.excerpt && post.excerpt.length > 20, `Blog post ${post.slug} has invalid excerpt`);
+    assert(!!post.category, `Blog post ${post.slug} missing category`);
+    assert(post.tableOfContents.length > 0, `Blog post ${post.slug} missing TOC`);
+    for (const toc of post.tableOfContents) {
+      assert(post.contentHtml.includes(toc.id), `TOC anchor #${toc.id} not found in content of ${post.slug}`);
+    }
+    // Verify metadata generation
+    const blogMeta = await generateBlogMetadata({ params: Promise.resolve({ slug: post.slug }) });
+    assert(
+      !!blogMeta.title && typeof blogMeta.title === "string" && blogMeta.title.includes(BRAND.name),
+      `Invalid blog metadata title for ${post.slug}`
+    );
+    assert(!!blogMeta.description, `Invalid blog metadata description for ${post.slug}`);
+  }
+  console.log(`✅ Stage 1.3: All ${allBlogPosts.length} Blog Posts, TOCs, and metadata verified!\n`);
 
   // ==========================================================================
   // STAGE 2: Navigation, Search Indexing & Command Palette Filtering

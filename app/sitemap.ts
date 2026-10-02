@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { BRAND } from "@/lib/brand";
 import { CATEGORY_LIST } from "@/lib/registry/categories";
 import { getAllTools } from "@/lib/registry/tools";
+import { getAllPosts } from "@/lib/blog/posts";
 
 const TEMPLATE_IDS = [
   "modern",
@@ -97,5 +98,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...coreRoutes, ...categoryRoutes, ...toolRoutes, ...templateRoutes];
+  // Blog routes
+  const blogRoutes: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: currentDate,
+      changeFrequency: "daily",
+      priority: 0.85,
+    },
+    ...getAllPosts().map((post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: new Date(post.publishedAt),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
+  ];
+
+  return [...coreRoutes, ...categoryRoutes, ...toolRoutes, ...templateRoutes, ...blogRoutes];
 }

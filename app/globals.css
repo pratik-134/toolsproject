@@ -318,3 +318,237 @@
     min-height: 0 !important;
   }
 }
+
+/* =========================================================================
+   Blog Article Typography & Prose Styles
+   ========================================================================= */
+.blog-prose {
+  color: #334155;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.dark .blog-prose {
+  color: #CBD5E1;
+}
+
+.blog-prose .lead {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  font-weight: 500;
+  color: #1E293B;
+  margin-bottom: 1.5rem;
+}
+
+.dark .blog-prose .lead {
+  color: #F1F5F9;
+}
+
+.blog-prose h2 {
+  font-family: var(--font-headings), system-ui, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin-top: 2.25rem;
+  margin-bottom: 1rem;
+  scroll-margin-top: 6rem;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 640px) {
+  .blog-prose h2 {
+    font-size: 1.75rem;
+  }
+}
+
+.dark .blog-prose h2 {
+  color: #F8FAFC;
+}
+
+.blog-prose h3 {
+  font-family: var(--font-headings), system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0F172A;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+  scroll-margin-top: 6rem;
+}
+
+.dark .blog-prose h3 {
+  color: #F1F5F9;
+}
+
+.blog-prose p {
+  margin-bottom: 1.25rem;
+}
+
+.blog-prose strong {
+  font-weight: 600;
+  color: #0F172A;
+}
+
+.dark .blog-prose strong {
+  color: #FFFFFF;
+}
+
+.blog-prose ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.blog-prose ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.blog-prose li {
+  margin-bottom: 0.5rem;
+  line-height: 1.65;
+}
+
+.blog-prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875em;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.375rem;
+  background-color: #F1F5F9;
+  color: #2563EB;
+}
+
+.dark .blog-prose code {
+  background-color: #1E293B;
+  color: #60A5FA;
+}
+
+.blog-prose pre {
+  background-color: #0F172A;
+  color: #F8FAFC;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  overflow-x: auto;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #1E293B;
+}
+
+.dark .blog-prose pre {
+  background-color: #020617;
+  border-color: #1E293B;
+}
+
+.blog-prose pre code {
+  background-color: transparent !important;
+  color: inherit !important;
+  padding: 0 !important;
+  font-size: 0.875rem;
+}
+
+.blog-prose kbd {
+  display: inline-block;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  color: #475569;
+  background-color: #F8FAFC;
+  border: 1px solid #CBD5E1;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+}
+
+.dark .blog-prose kbd {
+  color: #94A3B8;
+  background-color: #1E293B;
+  border-color: #334155;
+}
+
+.blog-prose .callout {
+  padding: 1.25rem;
+  border-radius: 1rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.blog-prose .callout-tip {
+  background-color: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  color: #166534;
+}
+
+.dark .blog-prose .callout-tip {
+  background-color: rgba(6, 78, 59, 0.2);
+  border-color: rgba(6, 95, 70, 0.4);
+  color: #86EFAC;
+}
+
+.blog-prose .callout-warning {
+  background-color: #FFFBEB;
+  border: 1px solid #FDE68A;
+  color: #92400E;
+}
+
+.dark .blog-prose .callout-warning {
+  background-color: rgba(120, 53, 15, 0.2);
+  border-color: rgba(146, 64, 14, 0.4);
+  color: #FCD34D;
+}
+
+.blog-prose .callout-info {
+  background-color: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  color: #1E40AF;
+}
+
+.dark .blog-prose .callout-info {
+  background-color: rgba(30, 58, 138, 0.2);
+  border-color: rgba(30, 64, 175, 0.4);
+  color: #93C5FD;
+}
+
+.blog-prose .comparison-table {
+  overflow-x: auto;
+  border-radius: 1rem;
+  border: 1px solid #E2E8F0;
+  margin-top: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.dark .blog-prose .comparison-table {
+  border-color: #334155;
+}
+
+.blog-prose .comparison-table table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.blog-prose .comparison-table th {
+  background-color: #F8FAFC;
+  padding: 0.875rem 1rem;
+  font-weight: 700;
+  color: #0F172A;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.dark .blog-prose .comparison-table th {
+  background-color: #1E293B;
+  color: #F8FAFC;
+  border-color: #334155;
+}
+
+.blog-prose .comparison-table td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid #F1F5F9;
+  vertical-align: top;
+}
+
+.dark .blog-prose .comparison-table td {
+  border-color: #1E293B;
+}
