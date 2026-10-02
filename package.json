@@ -24,7 +24,9 @@
     "test:batch": "tsx scripts/test-batch-processor.ts",
     "test:presets": "tsx scripts/test-preset-urls.ts",
     "test:privacy": "tsx scripts/test-privacy.ts",
-    "test:e2e": "tsx scripts/test-e2e-all.ts",
+    "test:verification:unit": "tsx scripts/test-verification-unit.ts",
+    "test:verification:e2e": "tsx scripts/test-verification-e2e.ts",
+    "test:verification": "tsx scripts/test-verification-unit.ts && tsx scripts/test-verification-e2e.ts",
     "check": "npm run typecheck && npm run test:schema && npm run test:pdf && npm run test:import && npm run test:docx && npm run test:resumes && npm run test:registry && npm run test:tools && npm run test:chains && npm run test:batch && npm run test:presets && npm run test:privacy && npm run test:e2e"
   },
   "dependencies": {
@@ -61,6 +63,7 @@
     "zustand": "^4.5.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@types/node": "^20.19.43",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
