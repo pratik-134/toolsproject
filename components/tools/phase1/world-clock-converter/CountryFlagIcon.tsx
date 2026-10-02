@@ -9,7 +9,7 @@ interface CountryFlagIconProps {
 
 export const CountryFlagIcon: React.FC<CountryFlagIconProps> = ({
   countryCode,
-  className = "w-5 h-3.5 rounded-xs object-cover shadow-2xs inline-block shrink-0",
+  className = "w-5 h-3.5 rounded-xs object-cover shadow-2xs inline-block shrink-0 border border-slate-200 dark:border-slate-700",
 }) => {
   const code = countryCode.toLowerCase();
 

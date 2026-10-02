@@ -80,23 +80,23 @@ export default function WorldClockConverterTool() {
   return (
     <div className="space-y-6">
       {/* Top Controls: Base Configuration */}
-      <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-xs space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
-          <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
-            <Globe className="w-4 h-4 text-blue-600" />
+      <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-5 shadow-xs space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3">
+          <h2 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider flex items-center gap-2">
+            <Globe className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             Base Reference Time & Location
           </h2>
           <div className="flex items-center gap-2">
             <button
               onClick={handleSetCurrentTime}
-              className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg transition"
+              className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 dark:text-blue-300 dark:bg-blue-950/60 dark:hover:bg-blue-900/60 rounded-lg transition"
             >
               <Clock className="w-3.5 h-3.5" />
               Set to Current Time
             </button>
             <button
               onClick={() => setUse24Hour(!use24Hour)}
-              className="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-700 transition"
+              className="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-700 dark:border-slate-700 dark:hover:bg-slate-800 dark:text-slate-300 transition"
             >
               {use24Hour ? "24-Hour" : "12-Hour (AM/PM)"}
             </button>
@@ -106,13 +106,13 @@ export default function WorldClockConverterTool() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {/* Base Timezone */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
               Reference City / Timezone
             </label>
             <select
               value={baseIana}
               onChange={(e) => setBaseIana(e.target.value)}
-              className="w-full px-3 py-2 text-xs font-bold rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 text-slate-900 bg-white"
+              className="w-full px-3 py-2 text-xs font-bold rounded-lg border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-800"
             >
               {POPULAR_CITIES.map((c) => (
                 <option key={c.id} value={c.iana}>
@@ -124,42 +124,42 @@ export default function WorldClockConverterTool() {
 
           {/* Base Date */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
               Date
             </label>
             <input
               type="date"
               value={baseDate}
               onChange={(e) => setBaseDate(e.target.value)}
-              className="w-full px-3 py-2 text-xs font-semibold rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 text-slate-900"
+              className="w-full px-3 py-2 text-xs font-semibold rounded-lg border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-800"
             />
           </div>
 
           {/* Base Time */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
               Time
             </label>
             <input
               type="time"
               value={baseTime}
               onChange={(e) => setBaseTime(e.target.value)}
-              className="w-full px-3 py-2 text-xs font-bold rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 text-slate-900 font-mono"
+              className="w-full px-3 py-2 text-xs font-bold rounded-lg border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-800 font-mono"
             />
           </div>
         </div>
       </div>
 
       {/* Search & Actions Ribbon */}
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-white border border-slate-200/80 rounded-2xl p-4 shadow-xs">
+      <div className="flex flex-wrap items-center justify-between gap-3 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-4 shadow-xs">
         <div className="relative flex-1 min-w-[200px] max-w-sm">
-          <Search className="absolute inset-y-0 left-0 pl-3 flex items-center w-4 h-4 text-slate-400 pointer-events-none" />
+          <Search className="absolute inset-y-0 left-0 pl-3 flex items-center w-4 h-4 text-slate-400 dark:text-slate-500 pointer-events-none" />
           <input
             type="text"
             placeholder="Search city, country, or zone..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -191,8 +191,8 @@ export default function WorldClockConverterTool() {
               key={item.city.id}
               className={`p-5 rounded-2xl border transition relative space-y-3 ${
                 isBase
-                  ? "bg-gradient-to-br from-blue-50/70 via-white to-indigo-50/70 border-blue-300 shadow-sm ring-1 ring-blue-400"
-                  : "bg-white border-slate-200/80 hover:border-slate-300 shadow-xs"
+                  ? "bg-gradient-to-br from-blue-50/70 via-white to-indigo-50/70 dark:from-blue-950/40 dark:via-slate-900 dark:to-indigo-950/40 border-blue-300 dark:border-blue-700 shadow-sm ring-1 ring-blue-400 dark:ring-blue-600"
+                  : "bg-white dark:bg-slate-900 border-slate-200/80 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 shadow-xs"
               }`}
             >
               {/* City Header */}
@@ -200,13 +200,13 @@ export default function WorldClockConverterTool() {
                 <div className="flex items-center gap-2">
                   <CountryFlagIcon
                     countryCode={item.city.id}
-                    className="w-6 h-4 rounded-xs shadow-2xs shrink-0 border border-slate-200"
+                    className="w-6 h-4 rounded-xs shadow-2xs shrink-0 border border-slate-200 dark:border-slate-700"
                   />
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900 leading-tight">
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 leading-tight">
                       {item.city.city}
                     </h3>
-                    <p className="text-[11px] text-slate-400 truncate max-w-[150px]">
+                    <p className="text-[11px] text-slate-400 dark:text-slate-400 truncate max-w-[150px]">
                       {item.city.country}
                     </p>
                   </div>
@@ -216,10 +216,10 @@ export default function WorldClockConverterTool() {
                 <span
                   className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                     item.dayDelta === "Same Day"
-                      ? "bg-slate-100 text-slate-600"
+                      ? "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300"
                       : item.dayDelta === "+1 Day"
-                      ? "bg-purple-100 text-purple-700"
-                      : "bg-amber-100 text-amber-700"
+                      ? "bg-purple-100 text-purple-700 dark:bg-purple-950/60 dark:text-purple-300"
+                      : "bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300"
                   }`}
                 >
                   {item.dayDelta}
@@ -228,27 +228,27 @@ export default function WorldClockConverterTool() {
 
               {/* Time Display */}
               <div className="flex items-baseline justify-between pt-1">
-                <div className="text-2xl font-black text-slate-900 font-mono tracking-tight">
+                <div className="text-2xl font-black text-slate-900 dark:text-slate-100 font-mono tracking-tight">
                   {time}
                 </div>
-                <div className="text-xs font-semibold text-slate-500 font-mono">
+                <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 font-mono">
                   {diffStr}
                 </div>
               </div>
 
               {/* Date & Business Hours Status */}
-              <div className="flex items-center justify-between border-t border-slate-100 pt-2.5 text-xs">
-                <span className="text-slate-500 font-medium text-[11px]">
+              <div className="flex items-center justify-between border-t border-slate-100 dark:border-slate-800 pt-2.5 text-xs">
+                <span className="text-slate-500 dark:text-slate-400 font-medium text-[11px]">
                   {item.dateFormatted}
                 </span>
 
                 {item.isBusinessHours ? (
-                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">
-                    <Sun className="w-3 h-3 text-emerald-500" />
+                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-0.5 rounded-md">
+                    <Sun className="w-3 h-3 text-emerald-500 dark:text-emerald-400" />
                     Work Hours
                   </span>
                 ) : (
-                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-400 bg-slate-50 px-2 py-0.5 rounded-md">
+                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-400 bg-slate-50 dark:bg-slate-800 dark:text-slate-400 px-2 py-0.5 rounded-md">
                     <Moon className="w-3 h-3 text-slate-400" />
                     Off Hours
                   </span>
