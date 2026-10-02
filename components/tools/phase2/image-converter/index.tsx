@@ -30,6 +30,8 @@ import { ToolHandoffBanner } from "@/components/tools/chaining/tool-chain-banner
 import { ToolChainActions } from "@/components/tools/chaining/tool-chain-actions";
 import { BatchItem, runBatchPool, createZipBlob, triggerBlobDownload } from "@/lib/batch-processor";
 import { BatchWorkspace } from "@/components/tools/batch/batch-workspace";
+import { parseImageConverterHash, serializeImageConverterHash } from "@/lib/preset-urls";
+import { PresetShareButton } from "@/components/tools/presets/preset-share-button";
 
 export default function ImageConverterTool() {
   const [sourceFile, setSourceFile] = useState<File | null>(null);
@@ -54,9 +56,20 @@ export default function ImageConverterTool() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-detect and pre-load chained file handoff
+  // Auto-detect URL preset & pre-load chained file handoff
   useEffect(() => {
     let isMounted = true;
+
+    // 1. Sanitize & apply preset settings from URL hash (#)
+    if (typeof window !== "undefined" && window.location.hash) {
+      const preset = parseImageConverterHash(window.location.hash);
+      if (preset.format) setTargetFormat(preset.format);
+      if (preset.quality !== undefined) setQuality(preset.quality);
+      if (preset.scale !== undefined) setScale(preset.scale);
+      if (preset.bgColor) setBgColor(preset.bgColor);
+    }
+
+    // 2. Chained file handoff
     getHandoff("image-converter").then((handoff) => {
       if (!isMounted || !handoff) return;
       try {
@@ -407,11 +420,14 @@ export default function ImageConverterTool() {
         <div className="space-y-6">
           {/* Format Settings for Batch */}
           <div className="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs space-y-4">
-            <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
-              <Sliders className="h-4 w-4 text-blue-600" />
-              <h3 className="font-headings text-sm font-bold text-slate-900 dark:text-slate-100">
-                Batch Target Format
-              </h3>
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+              <div className="flex items-center gap-2">
+                <Sliders className="h-4 w-4 text-blue-600" />
+                <h3 className="font-headings text-sm font-bold text-slate-900 dark:text-slate-100">
+                  Batch Target Format
+                </h3>
+              </div>
+              <PresetShareButton hashString={serializeImageConverterHash({ format: targetFormat })} />
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
               {(Object.keys(FORMAT_DETAILS) as SupportedImageFormat[]).map((fmt) => {
@@ -524,11 +540,21 @@ export default function ImageConverterTool() {
 
           {/* Conversion Settings Panel */}
           <div className="p-6 rounded-2xl border border-slate-200 bg-white shadow-xs space-y-6">
-            <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
-              <Sliders className="h-4 w-4 text-blue-600" />
-              <h3 className="font-headings text-sm font-bold text-slate-900">
-                Conversion Parameters
-              </h3>
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div className="flex items-center gap-2">
+                <Sliders className="h-4 w-4 text-blue-600" />
+                <h3 className="font-headings text-sm font-bold text-slate-900">
+                  Conversion Parameters
+                </h3>
+              </div>
+              <PresetShareButton
+                hashString={serializeImageConverterHash({
+                  format: targetFormat,
+                  quality,
+                  scale,
+                  bgColor,
+                })}
+              />
             </div>
 
             {/* Target Format Pills */}

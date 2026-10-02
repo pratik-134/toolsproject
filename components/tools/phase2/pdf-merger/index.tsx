@@ -23,6 +23,8 @@ import {
 import { getHandoff, clearHandoff, HandoffFile } from "@/lib/tool-chains";
 import { ToolHandoffBanner } from "@/components/tools/chaining/tool-chain-banner";
 import { ToolChainActions } from "@/components/tools/chaining/tool-chain-actions";
+import { parsePdfMergerHash, serializePdfMergerHash } from "@/lib/preset-urls";
+import { PresetShareButton } from "@/components/tools/presets/preset-share-button";
 
 export default function PdfMergerTool() {
   const [files, setFiles] = useState<PdfFileInfo[]>([]);
@@ -37,9 +39,19 @@ export default function PdfMergerTool() {
   const [copied, setCopied] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-detect and pre-load chained file handoff
+  // Auto-detect URL preset & pre-load chained file handoff
   React.useEffect(() => {
     let isMounted = true;
+
+    // 1. Sanitize & apply preset settings from URL hash (#)
+    if (typeof window !== "undefined" && window.location.hash) {
+      const preset = parsePdfMergerHash(window.location.hash);
+      if (preset.outputFileName) {
+        setOutputFileName(preset.outputFileName);
+      }
+    }
+
+    // 2. Chained file handoff
     getHandoff("pdf-merger").then(async (handoff) => {
       if (!isMounted || !handoff) return;
       try {
@@ -363,9 +375,12 @@ export default function PdfMergerTool() {
           <div className="p-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl space-y-4">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="w-full sm:w-auto flex-1">
-                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">
-                  Merged PDF Filename
-                </label>
+                <div className="flex items-center justify-between mb-1">
+                  <label className="block text-xs font-medium text-slate-600 dark:text-slate-400">
+                    Merged PDF Filename
+                  </label>
+                  <PresetShareButton hashString={serializePdfMergerHash({ outputFileName })} />
+                </div>
                 <input
                   type="text"
                   value={outputFileName}

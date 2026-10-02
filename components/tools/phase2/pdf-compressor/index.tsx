@@ -26,6 +26,8 @@ import { ToolHandoffBanner } from "@/components/tools/chaining/tool-chain-banner
 import { ToolChainActions } from "@/components/tools/chaining/tool-chain-actions";
 import { BatchItem, runBatchPool, createZipBlob, triggerBlobDownload } from "@/lib/batch-processor";
 import { BatchWorkspace } from "@/components/tools/batch/batch-workspace";
+import { parsePdfCompressorHash, serializePdfCompressorHash } from "@/lib/preset-urls";
+import { PresetShareButton } from "@/components/tools/presets/preset-share-button";
 
 export default function PdfCompressorTool() {
   const [fileBuffer, setFileBuffer] = useState<Uint8Array | null>(null);
@@ -48,9 +50,22 @@ export default function PdfCompressorTool() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-detect and pre-load chained file handoff
+  // Auto-detect URL preset & pre-load chained file handoff
   React.useEffect(() => {
     let isMounted = true;
+
+    // 1. Sanitize & apply preset settings from URL hash (#)
+    if (typeof window !== "undefined" && window.location.hash) {
+      const preset = parsePdfCompressorHash(window.location.hash);
+      if (preset.stripMetadata !== undefined) {
+        setStripMetadata(preset.stripMetadata);
+      }
+      if (preset.useObjectStreams !== undefined) {
+        setUseObjectStreams(preset.useObjectStreams);
+      }
+    }
+
+    // 2. Chained file handoff
     getHandoff("pdf-compressor").then(async (handoff) => {
       if (!isMounted || !handoff) return;
       try {
@@ -405,9 +420,12 @@ export default function PdfCompressorTool() {
       {/* Compression Options */}
       {fileBuffer && (
         <div className="p-5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl space-y-4">
-          <h4 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-            Optimization Settings
-          </h4>
+          <div className="flex items-center justify-between">
+            <h4 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              Optimization Settings
+            </h4>
+            <PresetShareButton hashString={serializePdfCompressorHash({ stripMetadata, useObjectStreams })} />
+          </div>
 
           <div className="space-y-3">
             <label className="flex items-center gap-3 p-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl cursor-pointer">
