@@ -19,9 +19,10 @@ export const CleartrixIcon: React.FC<CleartrixIconProps> = ({
   className = "",
   hasContainer = false,
 }) => {
+  const hasCustomSizeClass = className.includes("w-") || className.includes("h-");
   return (
     <div
-      style={{ width: size, height: size }}
+      style={hasCustomSizeClass ? undefined : { width: size, height: size }}
       className={`relative shrink-0 flex items-center justify-center select-none rounded-full overflow-hidden ${
         hasContainer ? "bg-[#0F172A] p-[10%] shadow-xs" : ""
       } ${className}`}
@@ -113,11 +114,11 @@ export const CleartrixLogo: React.FC<CleartrixLogoProps> = ({
 
   // Default: Horizontal Lockup (Icon + ClearTrix Wordmark)
   return (
-    <div className={`flex items-center gap-2.5 sm:gap-3 ${className}`}>
-      <CleartrixIcon size={size} />
+    <div className={`flex items-center gap-2 sm:gap-2.5 ${className}`}>
+      <CleartrixIcon size={size} className="w-7 h-7 sm:w-[34px] sm:h-[34px]" />
 
       <div className="flex flex-col text-left justify-center">
-        <div className="flex items-baseline font-headings text-lg sm:text-xl font-bold tracking-[-0.02em] leading-none">
+        <div className="flex items-baseline font-headings text-[16px] sm:text-xl font-bold tracking-[-0.02em] leading-none">
           <span className={clearTextColor}>{BRAND.brandPrefix}</span>
           <span className="bg-gradient-to-r from-[#0EA5E9] to-[#06D6A0] bg-clip-text text-transparent">
             {BRAND.brandSuffix}
