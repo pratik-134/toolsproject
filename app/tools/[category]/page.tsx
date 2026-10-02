@@ -41,6 +41,9 @@ const CATEGORY_ICON_MAP: Record<CategoryId, React.ElementType> = {
   calculators: Calculator,
 };
 
+import { constructToolMetadata } from "@/lib/seo/metadata";
+import { generateCategoryJsonLd } from "@/lib/seo/jsonld";
+
 interface CategoryPageProps {
   params: Promise<{
     category: string;
@@ -60,10 +63,18 @@ export async function generateMetadata({
   const category = getCategoryById(catId);
   if (!category) return {};
 
-  return {
-    title: `${category.name} — 100% Free & Private | ${BRAND.name}`,
+  return constructToolMetadata({
+    title: `${category.name} Tools — 100% Free & Private`,
     description: category.description,
-  };
+    categorySlug: category.id,
+    keywords: [
+      category.name,
+      `${category.name} tools`,
+      "free online tools",
+      "privacy first",
+      "no upload",
+    ],
+  });
 }
 
 export default async function CategoryHubPage({ params }: CategoryPageProps) {
@@ -78,9 +89,14 @@ export default async function CategoryHubPage({ params }: CategoryPageProps) {
   const tools = getToolsByCategory(catId as CategoryId);
   const liveTools = tools.filter((t) => t.status === "live");
   const CategoryIcon = CATEGORY_ICON_MAP[category.id] || Wrench;
+  const categorySchema = generateCategoryJsonLd(category, liveTools);
 
   return (
     <div className="flex min-h-screen flex-col bg-[#F8F9FA] dark:bg-slate-950 text-[#0F172A] dark:text-slate-100 selection:bg-blue-500/20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(categorySchema) }}
+      />
       <Navbar />
 
       <main className="flex-1 pb-16">

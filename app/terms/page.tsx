@@ -6,17 +6,20 @@ import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { FileText, ArrowRight, CheckCircle2 } from "lucide-react";
 
-export const metadata: Metadata = {
+import { constructToolMetadata } from "@/lib/seo/metadata";
+
+export const metadata: Metadata = constructToolMetadata({
   title: `Terms of Service — ${BRAND.name}`,
   description:
     `Review the Terms of Service for ${BRAND.name}. Learn about our 100% free web utilities, user content ownership, client-side architecture, and privacy-first commitments.`,
+  slug: "/terms",
   keywords: [
     "Cleartrix terms of service",
     "free web tools terms",
     "content ownership",
     "client-side privacy terms",
   ],
-};
+});
 
 export default function TermsPage() {
   return (

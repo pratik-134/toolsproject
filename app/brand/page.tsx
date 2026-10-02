@@ -1,11 +1,21 @@
 import { BrandLogoPresentation } from "@/components/brand/BrandLogoPresentation";
 import { Navbar } from "@/components/Navbar";
 
-export const metadata = {
-  title: "Brand Guidelines & Logo System | Cleartrix",
+import { constructToolMetadata } from "@/lib/seo/metadata";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = constructToolMetadata({
+  title: "Brand Guidelines & Logo System",
   description:
     "Official brand assets, vector logo marks, color tokens, and typography guidelines for Cleartrix.",
-};
+  slug: "/brand",
+  keywords: [
+    "Cleartrix brand assets",
+    "Cleartrix logos",
+    "vector brand kit",
+    "color tokens",
+  ],
+});
 
 export default function BrandPage() {
   return (

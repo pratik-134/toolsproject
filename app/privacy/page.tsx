@@ -6,10 +6,13 @@ import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { ShieldCheck, Lock, ArrowRight, EyeOff } from "lucide-react";
 
-export const metadata: Metadata = {
+import { constructToolMetadata } from "@/lib/seo/metadata";
+
+export const metadata: Metadata = constructToolMetadata({
   title: `Privacy Policy — ${BRAND.name} & ${BRAND.resumeProduct.name}`,
   description:
     `${BRAND.name} is built on a 100% client-side privacy architecture. Learn how our platform guarantees zero server storage of user files, no tracking cookies, and complete local execution.`,
+  slug: "/privacy",
   keywords: [
     "cleartrix privacy policy",
     "private web tools",
@@ -17,7 +20,7 @@ export const metadata: Metadata = {
     "gdpr compliant tools",
     "no tracking resume builder",
   ],
-};
+});
 
 export default function PrivacyPage() {
   return (

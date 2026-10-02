@@ -47,6 +47,14 @@ export const metadata: Metadata = {
     description: BRAND.description,
     url: siteUrl,
     siteName: BRAND.name,
+    images: [
+      {
+        url: "/icon.png",
+        width: 512,
+        height: 512,
+        alt: `${BRAND.name} — ${BRAND.tagline}`,
+      },
+    ],
     locale: "en_US",
     type: "website",
   },
@@ -54,6 +62,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${BRAND.name} — ${BRAND.tagline}`,
     description: BRAND.description,
+    images: ["/icon.png"],
+    creator: BRAND.twitterHandle,
   },
   icons: {
     icon: [

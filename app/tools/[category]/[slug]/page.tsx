@@ -5,6 +5,8 @@ import { BRAND } from "@/lib/brand";
 import { getAllTools, getToolBySlug } from "@/lib/registry/tools";
 import { ToolLayout } from "@/components/tool-shell/ToolLayout";
 import { ToolView } from "@/components/tools/ToolView";
+import { constructToolMetadata } from "@/lib/seo/metadata";
+import { generateToolJsonLd } from "@/lib/seo/jsonld";
 
 interface ToolPageProps {
   params: Promise<{
@@ -26,19 +28,24 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: ToolPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { category, slug } = await params;
   const tool = getToolBySlug(slug);
   if (!tool) return {};
 
-  return {
-    title: `${tool.seo.title} | ${BRAND.name}`,
+  return constructToolMetadata({
+    title: tool.seo.title,
     description: tool.seo.description,
-    openGraph: {
-      title: `${tool.seo.title} | ${BRAND.name}`,
-      description: tool.seo.description,
-      type: "website",
-    },
-  };
+    slug: tool.slug,
+    categorySlug: tool.category,
+    keywords: [
+      tool.name,
+      tool.category,
+      `${tool.name} free online`,
+      `${tool.name} private in-browser`,
+      "no upload",
+      "zero tracking",
+    ],
+  });
 }
 
 export default async function DynamicToolPage({ params }: ToolPageProps) {
@@ -49,9 +56,17 @@ export default async function DynamicToolPage({ params }: ToolPageProps) {
     notFound();
   }
 
+  const toolSchema = generateToolJsonLd(tool);
+
   return (
-    <ToolLayout tool={tool}>
-      <ToolView slug={slug} />
-    </ToolLayout>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(toolSchema) }}
+      />
+      <ToolLayout tool={tool}>
+        <ToolView slug={slug} />
+      </ToolLayout>
+    </>
   );
 }

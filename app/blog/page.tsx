@@ -8,17 +8,20 @@ import { getAllPosts, getAllCategories } from "@/lib/blog/posts";
 import { BlogListClient } from "@/components/blog/BlogListClient";
 import { ShieldCheck, Sparkles, ArrowRight, Layers } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: `Blog & Engineering Guides — Client-Side Privacy, ATS & PDF | ${BRAND.name}`,
+import { constructToolMetadata } from "@/lib/seo/metadata";
+
+export const metadata: Metadata = constructToolMetadata({
+  title: "Blog & Engineering Guides — Client-Side Privacy, ATS & PDF",
   description:
     "Comprehensive guides, technical deep dives, and tutorials on ATS resume optimization, true vector PDF redaction, client-side data privacy, and developer tools.",
-  openGraph: {
-    title: `ClearTrix Blog — Engineering Guides & Privacy-First Tutorials`,
-    description:
-      "Deep dives into ATS resume optimization, true PDF redaction, browser sandboxing, and data transformation tools.",
-    type: "website",
-  },
-};
+  slug: "/blog",
+  keywords: [
+    "ClearTrix engineering blog",
+    "ATS resume guides",
+    "PDF redaction tutorials",
+    "client-side privacy technical guides",
+  ],
+});
 
 export default function BlogPage() {
   const posts = getAllPosts();

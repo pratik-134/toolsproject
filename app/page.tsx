@@ -37,16 +37,25 @@ import {
 } from "lucide-react";
 
 import { getAllTools } from "@/lib/registry/tools";
-import { generateWebApplicationSchema, generateFAQPageSchema } from "@/lib/seo/jsonld";
+import {
+  generateWebApplicationSchema,
+  generateFAQPageSchema,
+  generateWebsiteOrganizationSchema,
+} from "@/lib/seo/jsonld";
 
 export default function HomePage() {
   const totalTools = getAllTools().length;
   const webAppSchema = generateWebApplicationSchema();
   const faqSchema = generateFAQPageSchema([...RESUME_FAQS, ...TOOLS_FAQS]);
+  const organizationSchema = generateWebsiteOrganizationSchema();
 
   return (
     <div className="flex min-h-screen flex-col bg-white dark:bg-slate-950 text-text-primary selection:bg-blue-500/20 selection:text-slate-900">
       {/* Structured Data JSON-LD for Search Engines */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}

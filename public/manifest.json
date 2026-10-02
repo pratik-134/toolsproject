@@ -3,7 +3,10 @@
   "short_name": "ClearTrix",
   "description": "168+ free, private in-browser document, developer, media, and calculator tools with zero server file uploads.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "any",
+  "categories": ["utilities", "productivity", "business", "developer"],
   "background_color": "#0F172A",
   "theme_color": "#2563EB",
   "icons": [
@@ -17,6 +20,29 @@
       "src": "/apple-icon.png",
       "sizes": "180x180",
       "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "ATS Resume Builder",
+      "short_name": "Resume Builder",
+      "description": "Build executive-grade ATS resumes with 20 professional templates.",
+      "url": "/editor",
+      "icons": [{ "src": "/icon.png", "sizes": "512x512" }]
+    },
+    {
+      "name": "All Tools Hub",
+      "short_name": "Tools",
+      "description": "Browse 168+ free client-side privacy tools.",
+      "url": "/tools",
+      "icons": [{ "src": "/icon.png", "sizes": "512x512" }]
+    },
+    {
+      "name": "PDF Studio Editor",
+      "short_name": "PDF Editor",
+      "description": "Edit, merge, compress, sign, and convert PDFs in browser.",
+      "url": "/tools/document-pdf/pdf-editor",
+      "icons": [{ "src": "/icon.png", "sizes": "512x512" }]
     }
   ]
 }

@@ -4808,7 +4808,7 @@ export const TOOLS: ToolDefinition[] = [
         { q: "Is my resume or the job posting uploaded to a cloud server?", a: "No. All text processing and keyword extraction algorithms execute strictly inside your local browser tab." }
       ]
     },
-    related: ["ats-score-checker", "action-verb-suggester", "word-counter", "resume-keyword-optimizer"]
+    related: ["ats-resume-checker", "resume-builder", "word-counter", "resume-import-viewer"]
   },
   {
     slug: "pdf-page-numberer",
@@ -4829,7 +4829,7 @@ export const TOOLS: ToolDefinition[] = [
         { q: "Are my uploaded PDFs sent to any external server?", a: "Never. All page modifications and vector rendering occur 100% client-side inside your browser via pdf-lib." }
       ]
     },
-    related: ["pdf-bates-stamper", "pdf-merger", "pdf-page-organizer", "pdf-watermark-tool"]
+    related: ["pdf-bates-stamper", "pdf-merger", "pdf-page-organizer", "pdf-flattener"]
   },
   {
     slug: "cron-expression-builder",
@@ -4849,7 +4849,7 @@ export const TOOLS: ToolDefinition[] = [
         { q: "Does this schedule generator run in my browser?", a: "Yes. All parsing, forward run projections, and explanations are computed 100% locally in your browser memory." }
       ]
     },
-    related: ["regex-tester", "date-calculator", "time-zone-converter", "json-formatter"]
+    related: ["regex-tester", "date-calculator", "curl-to-code-converter", "json-formatter"]
   },
   {
     slug: "curl-to-code-converter",

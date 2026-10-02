@@ -11,17 +11,33 @@ import { Footer } from "@/components/Footer";
 import { ToolsDirectoryClient } from "@/components/tools/ToolsDirectoryClient";
 import { ToolsShelf } from "@/components/tools/ToolsShelf";
 import { ArrowRight, Sparkles, Wrench } from "lucide-react";
+import { constructToolMetadata } from "@/lib/seo/metadata";
+import { generateToolsHubJsonLd } from "@/lib/seo/jsonld";
 
-export const metadata: Metadata = {
-  title: `Free Privacy-First Online Tools Hub | ${BRAND.name}`,
+export const metadata: Metadata = constructToolMetadata({
+  title: "Free Privacy-First Online Tools Hub",
   description: BRAND.description,
-};
+  slug: "/tools",
+  keywords: [
+    "free online tools directory",
+    "privacy-first utilities",
+    "pdf tools",
+    "developer tools",
+    "calculators",
+    "image converter",
+  ],
+});
 
 export default function ToolsHubPage() {
   const allTools = getAllTools();
+  const hubSchema = generateToolsHubJsonLd(allTools);
 
   return (
     <div className="flex min-h-screen flex-col bg-[#F8FAFC] dark:bg-slate-950 text-[#0F172A] dark:text-slate-100 selection:bg-blue-500/20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(hubSchema) }}
+      />
       <Navbar />
 
       <main className="flex-1 pb-20">
