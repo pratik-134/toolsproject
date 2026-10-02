@@ -25,11 +25,15 @@ import {
   FileCheck,
   Sparkles,
 } from "lucide-react";
+import { getHandoff, clearHandoff, handoffToFile, HandoffFile } from "@/lib/tool-chains";
+import { ToolHandoffBanner } from "@/components/tools/chaining/tool-chain-banner";
+import { ToolChainActions } from "@/components/tools/chaining/tool-chain-actions";
 
 export default function ImageConverterTool() {
   const [sourceFile, setSourceFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [sourceDimensions, setSourceDimensions] = useState<{ width: number; height: number } | null>(null);
+  const [incomingHandoff, setIncomingHandoff] = useState<HandoffFile | null>(null);
 
   const [targetFormat, setTargetFormat] = useState<SupportedImageFormat>("webp");
   const [quality, setQuality] = useState<number>(90); // 10 to 100
@@ -43,6 +47,34 @@ export default function ImageConverterTool() {
   const [error, setError] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Auto-detect and pre-load chained file handoff
+  useEffect(() => {
+    let isMounted = true;
+    getHandoff("image-converter").then((handoff) => {
+      if (!isMounted || !handoff) return;
+      try {
+        const file = handoffToFile(handoff);
+        loadFile(file);
+        setIncomingHandoff(handoff);
+      } catch (err: any) {
+        console.warn("[ImageConverter] Failed to pre-load chained image", err);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleClearHandoff = async () => {
+    await clearHandoff("image-converter");
+    setIncomingHandoff(null);
+    handleReset();
+  };
+
+  const handleDismissHandoff = () => {
+    setIncomingHandoff(null);
+  };
 
   // Clean up object URLs on unmount or file change
   useEffect(() => {
@@ -228,6 +260,16 @@ export default function ImageConverterTool() {
             <strong className="font-semibold">Conversion Error:</strong> {error}
           </div>
         </div>
+      )}
+
+      {/* Chained File Handoff Banner */}
+      {incomingHandoff && (
+        <ToolHandoffBanner
+          handoff={incomingHandoff}
+          onClear={handleClearHandoff}
+          onDismiss={handleDismissHandoff}
+          formatSize={formatBytes}
+        />
       )}
 
       {/* Upload Box */}
@@ -540,6 +582,13 @@ export default function ImageConverterTool() {
                   Convert Another Image
                 </Button>
               </div>
+
+              <ToolChainActions
+                sourceToolSlug="image-converter"
+                fileName={getFilenameWithExtension(sourceFile.name, FORMAT_DETAILS[targetFormat].ext)}
+                mimeType={convertedBlob.type || `image/${targetFormat}`}
+                fileData={convertedBlob}
+              />
             </div>
           )}
         </div>

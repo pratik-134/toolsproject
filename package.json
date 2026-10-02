@@ -20,9 +20,10 @@
     "test:resumes": "tsx scripts/test-multi-resume-store.ts",
     "test:registry": "tsx scripts/test-registry.ts",
     "test:tools": "tsx scripts/test-tools.ts",
+    "test:chains": "tsx scripts/test-tool-chains.ts",
     "test:privacy": "tsx scripts/test-privacy.ts",
     "test:e2e": "tsx scripts/test-e2e-all.ts",
-    "check": "npm run typecheck && npm run test:schema && npm run test:pdf && npm run test:import && npm run test:docx && npm run test:resumes && npm run test:registry && npm run test:tools && npm run test:privacy && npm run test:e2e"
+    "check": "npm run typecheck && npm run test:schema && npm run test:pdf && npm run test:import && npm run test:docx && npm run test:resumes && npm run test:registry && npm run test:tools && npm run test:chains && npm run test:privacy && npm run test:e2e"
   },
   "dependencies": {
     "@ffmpeg/ffmpeg": "^0.12.15",

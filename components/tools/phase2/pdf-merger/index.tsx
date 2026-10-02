@@ -20,17 +20,64 @@ import {
   mergePdfs,
   PdfFileInfo,
 } from "./logic";
+import { getHandoff, clearHandoff, HandoffFile } from "@/lib/tool-chains";
+import { ToolHandoffBanner } from "@/components/tools/chaining/tool-chain-banner";
+import { ToolChainActions } from "@/components/tools/chaining/tool-chain-actions";
 
 export default function PdfMergerTool() {
   const [files, setFiles] = useState<PdfFileInfo[]>([]);
   const [outputFileName, setOutputFileName] = useState("merged-document.pdf");
   const [isMerging, setIsMerging] = useState(false);
   const [mergedPdfUrl, setMergedPdfUrl] = useState<string | null>(null);
+  const [mergedBuffer, setMergedBuffer] = useState<Uint8Array | null>(null);
   const [mergedSize, setMergedSize] = useState<number | null>(null);
   const [mergedPageCount, setMergedPageCount] = useState<number | null>(null);
+  const [incomingHandoff, setIncomingHandoff] = useState<HandoffFile | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Auto-detect and pre-load chained file handoff
+  React.useEffect(() => {
+    let isMounted = true;
+    getHandoff("pdf-merger").then(async (handoff) => {
+      if (!isMounted || !handoff) return;
+      try {
+        const pageCount = await getPdfPageCount(handoff.buffer);
+        const newEntry: PdfFileInfo = {
+          id: handoff.id,
+          name: handoff.name,
+          size: handoff.size,
+          pageCount,
+          buffer: handoff.buffer,
+        };
+        setFiles((prev) => {
+          if (prev.some((f) => f.id === handoff.id || (f.name === handoff.name && f.size === handoff.size))) {
+            return prev;
+          }
+          return [...prev, newEntry];
+        });
+        setIncomingHandoff(handoff);
+      } catch (err: any) {
+        console.warn("[PdfMerger] Failed to pre-load chained PDF", err);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleClearHandoff = async () => {
+    await clearHandoff("pdf-merger");
+    if (incomingHandoff) {
+      setFiles((prev) => prev.filter((f) => f.id !== incomingHandoff.id));
+    }
+    setIncomingHandoff(null);
+  };
+
+  const handleDismissHandoff = () => {
+    setIncomingHandoff(null);
+  };
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = e.target.files;
@@ -149,6 +196,7 @@ export default function PdfMergerTool() {
       const url = URL.createObjectURL(blob);
 
       setMergedPdfUrl(url);
+      setMergedBuffer(mergedBytes);
       setMergedSize(mergedBytes.length);
       setMergedPageCount(totalPages);
     } catch (err: any) {
@@ -195,6 +243,16 @@ export default function PdfMergerTool() {
           Load Demo Sample
         </button>
       </div>
+
+      {/* Chained File Handoff Banner */}
+      {incomingHandoff && (
+        <ToolHandoffBanner
+          handoff={incomingHandoff}
+          onClear={handleClearHandoff}
+          onDismiss={handleDismissHandoff}
+          formatSize={formatFileSize}
+        />
+      )}
 
       {/* Upload Zone */}
       <div
@@ -367,6 +425,15 @@ export default function PdfMergerTool() {
               Download {outputFileName.endsWith(".pdf") ? outputFileName : `${outputFileName}.pdf`}
             </button>
           </div>
+
+          {mergedBuffer && (
+            <ToolChainActions
+              sourceToolSlug="pdf-merger"
+              fileName={outputFileName.endsWith(".pdf") ? outputFileName : `${outputFileName}.pdf`}
+              mimeType="application/pdf"
+              fileData={mergedBuffer}
+            />
+          )}
         </div>
       )}
     </div>

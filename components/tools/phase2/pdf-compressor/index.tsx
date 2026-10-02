@@ -21,12 +21,16 @@ import {
   CompressResult,
 } from "./logic";
 import { PDFDocument } from "pdf-lib";
+import { getHandoff, clearHandoff, HandoffFile } from "@/lib/tool-chains";
+import { ToolHandoffBanner } from "@/components/tools/chaining/tool-chain-banner";
+import { ToolChainActions } from "@/components/tools/chaining/tool-chain-actions";
 
 export default function PdfCompressorTool() {
   const [fileBuffer, setFileBuffer] = useState<Uint8Array | null>(null);
   const [fileName, setFileName] = useState<string>("");
   const [fileSize, setFileSize] = useState<number>(0);
   const [pageCount, setPageCount] = useState<number>(0);
+  const [incomingHandoff, setIncomingHandoff] = useState<HandoffFile | null>(null);
 
   const [stripMetadata, setStripMetadata] = useState(true);
   const [useObjectStreams, setUseObjectStreams] = useState(true);
@@ -37,6 +41,39 @@ export default function PdfCompressorTool() {
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Auto-detect and pre-load chained file handoff
+  React.useEffect(() => {
+    let isMounted = true;
+    getHandoff("pdf-compressor").then(async (handoff) => {
+      if (!isMounted || !handoff) return;
+      try {
+        const doc = await PDFDocument.load(handoff.buffer, { ignoreEncryption: true });
+        setFileBuffer(handoff.buffer);
+        setFileName(handoff.name);
+        setFileSize(handoff.size);
+        setPageCount(doc.getPageCount());
+        setResult(null);
+        setDownloadUrl(null);
+        setIncomingHandoff(handoff);
+      } catch (err: any) {
+        console.warn("[PdfCompressor] Failed to pre-load chained PDF", err);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleClearHandoff = async () => {
+    await clearHandoff("pdf-compressor");
+    setIncomingHandoff(null);
+    resetAll();
+  };
+
+  const handleDismissHandoff = () => {
+    setIncomingHandoff(null);
+  };
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -141,6 +178,16 @@ export default function PdfCompressorTool() {
           Load Demo PDF
         </button>
       </div>
+
+      {/* Chained File Handoff Banner */}
+      {incomingHandoff && (
+        <ToolHandoffBanner
+          handoff={incomingHandoff}
+          onClear={handleClearHandoff}
+          onDismiss={handleDismissHandoff}
+          formatSize={formatFileSize}
+        />
+      )}
 
       {/* Upload Zone */}
       {!fileBuffer ? (
@@ -300,6 +347,15 @@ export default function PdfCompressorTool() {
               Download Compressed PDF
             </a>
           </div>
+
+          {result && result.data && (
+            <ToolChainActions
+              sourceToolSlug="pdf-compressor"
+              fileName={`compressed-${fileName || "document.pdf"}`}
+              mimeType="application/pdf"
+              fileData={result.data}
+            />
+          )}
         </div>
       )}
     </div>
