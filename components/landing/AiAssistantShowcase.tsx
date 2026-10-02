@@ -142,7 +142,7 @@ export const AiAssistantShowcase: React.FC = () => {
             </div>
 
             {/* Role Pills */}
-            <div className="flex items-center gap-1.5">
+            <div className="flex flex-wrap items-center gap-1.5">
               {EXAMPLES.map((ex, i) => (
                 <button
                   key={ex.role}
@@ -163,7 +163,7 @@ export const AiAssistantShowcase: React.FC = () => {
           <div className="space-y-4">
             {/* Before Box */}
             <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/40 p-4 relative text-left">
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                 <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full bg-amber-400" />
                   Original User Draft (Passive & Vague)
@@ -187,7 +187,7 @@ export const AiAssistantShowcase: React.FC = () => {
 
             {/* After Box */}
             <div className="rounded-xl border-2 border-blue-500/40 dark:border-blue-500/50 bg-blue-50/30 dark:bg-blue-950/30 p-4 relative text-left shadow-xs">
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                 <span className="text-[11px] font-bold uppercase tracking-wider text-blue-800 dark:text-blue-300 flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
                   Optimized for ATS & Hiring Managers

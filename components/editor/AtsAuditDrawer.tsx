@@ -216,7 +216,7 @@ export const AtsAuditDrawer: React.FC = () => {
           </div>
 
           {/* Score Badge Banner */}
-          <div className="mt-4 p-4 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/50 flex items-center justify-between">
+          <div className="mt-4 p-4 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/50 flex flex-wrap items-center justify-between gap-2">
             <div>
               <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Overall ATS Score</span>
               <span className={`text-3xl font-extrabold tracking-tight ${gradeColor}`}>

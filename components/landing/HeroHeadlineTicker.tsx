@@ -89,7 +89,7 @@ export const HeroHeadlineTicker: React.FC<HeroHeadlineTickerProps> = ({
 
   return (
     <h1
-      className={`font-headings text-[24px] xs:text-3xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-white leading-[1.18] tracking-tight ${
+      className={`font-headings text-[21px] xs:text-[25px] sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-[1.2] tracking-tight ${
         centered ? "text-center" : "text-left"
       } ${className}`}
     >

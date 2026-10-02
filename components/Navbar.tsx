@@ -79,7 +79,7 @@ export const Navbar: React.FC = () => {
   // Close mobile menu on resize to >= 768px (md breakpoint)
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) {
+      if (window.innerWidth >= 1024) {
         setIsOpen(false);
       }
     };
@@ -136,7 +136,7 @@ export const Navbar: React.FC = () => {
       {/* Center Navigation Links */}
       <nav
         aria-label="Main Navigation"
-        className="hidden md:flex items-center gap-5 lg:gap-8 font-body text-xs lg:text-sm font-semibold text-slate-700 dark:text-slate-200 shrink-0"
+        className="hidden lg:flex items-center gap-5 xl:gap-8 font-body text-xs lg:text-sm font-semibold text-slate-700 dark:text-slate-200 shrink-0"
       >
         <Link
           href="/tools"
@@ -219,14 +219,14 @@ export const Navbar: React.FC = () => {
           </Button>
         </Link>
 
-        {/* Mobile Hamburger Menu Toggle Button (< 768px) */}
+        {/* Mobile Hamburger Menu Toggle Button (< 1024px) */}
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isOpen}
           aria-controls="mobile-navigation-drawer"
-          className="md:hidden flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/90 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 active:scale-95 transition-all shrink-0"
+          className="lg:hidden flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/90 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 active:scale-95 transition-all shrink-0"
         >
           {isOpen ? (
             <X className="h-4 w-4 text-slate-900 dark:text-white" />
@@ -242,7 +242,7 @@ export const Navbar: React.FC = () => {
     <div
       id="mobile-navigation-drawer"
       ref={menuRef}
-      className={`md:hidden absolute top-full left-0 right-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden transition-all duration-300 ease-in-out ${
+      className={`lg:hidden absolute top-full left-0 right-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden transition-all duration-300 ease-in-out ${
         isOpen
           ? "max-h-[85vh] opacity-100 p-4 space-y-3 overflow-y-auto"
           : "max-h-0 opacity-0 pointer-events-none p-0 border-transparent"
@@ -462,7 +462,7 @@ export const Navbar: React.FC = () => {
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
-          className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40 md:hidden animate-fade-in"
+          className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40 lg:hidden animate-fade-in"
           aria-hidden="true"
         />
       )}

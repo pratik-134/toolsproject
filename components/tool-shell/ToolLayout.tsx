@@ -119,7 +119,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                   style={{ backgroundColor: theme.primary }}
                   aria-hidden="true"
                 />
-                <h1 className="text-[28px] sm:text-[34px] leading-[1.2] font-bold text-[#0F172A] dark:text-slate-100 tracking-[-0.02em]">
+                <h1 className="text-[22px] xs:text-[26px] sm:text-[34px] leading-[1.2] font-bold text-[#0F172A] dark:text-slate-100 tracking-[-0.02em]">
                   {tool.seo.h1 || tool.name}
                 </h1>
               </div>
@@ -128,10 +128,11 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
               <div
                 className="inline-flex items-center gap-1.5 rounded-[6px]
                   border border-[#BFDBFE] dark:border-blue-900/60 bg-[#EFF6FF] dark:bg-blue-950/40 text-[#1D4ED8] dark:text-blue-300 px-2.5 py-1 text-[11px] font-semibold tracking-[0.05em] uppercase shrink-0
-                  self-start sm:self-auto"
+                  self-start sm:self-auto max-w-full"
               >
                 <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-[#1D4ED8] dark:text-blue-300" strokeWidth={1.75} aria-hidden="true" />
-                <span>Files never leave your browser • 100% Client-Side</span>
+                <span className="hidden xs:inline">Files never leave your browser • 100% Client-Side</span>
+                <span className="xs:hidden">100% Client-Side • In-Browser</span>
               </div>
             </div>
 
@@ -156,7 +157,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
               </p>
               {tool.category === "document-pdf" && tool.slug !== "pdf-editor" && (
                 <div className="pt-1">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-900/60 text-blue-700 dark:text-blue-300 text-xs font-medium">
+                  <div className="inline-flex flex-wrap items-center gap-1.5 sm:gap-2 px-3 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-900/60 text-blue-700 dark:text-blue-300 text-xs font-medium">
                     <span>Looking for complete multi-page editing, signatures, and annotations?</span>
                     <Link
                       href="/tools/document-pdf/pdf-editor"

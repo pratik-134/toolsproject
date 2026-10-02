@@ -118,7 +118,7 @@ export default async function CategoryHubPage({ params }: CategoryPageProps) {
             </nav>
 
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div className="flex items-center gap-4">
+              <div className="flex items-start sm:items-center gap-3 sm:gap-4">
                 {/* Frosted icon tile */}
                 <div
                   className="w-14 h-14 rounded-2xl border-2 flex items-center justify-center shrink-0 shadow-md bg-white/85 dark:bg-slate-800 border-[var(--cat-border)] dark:border-slate-700 text-[var(--cat-primary)] dark:text-white"

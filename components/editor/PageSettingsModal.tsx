@@ -185,14 +185,14 @@ export const PageSettingsModal: React.FC = () => {
               ))}
 
               {/* Custom Hex Input */}
-              <div className="ml-auto flex items-center gap-1.5">
-                <span className="text-[11px] text-slate-400 dark:text-slate-500">Hex:</span>
+              <div className="w-full sm:w-auto sm:ml-auto flex items-center justify-between sm:justify-start gap-1.5 pt-1.5 sm:pt-0 border-t sm:border-t-0 border-slate-200/60 dark:border-slate-700/60">
+                <span className="text-[11px] text-slate-400 dark:text-slate-500">Custom Hex:</span>
                 <input
                   type="text"
                   value={theme.accentColor}
                   onChange={(e) => updateTheme({ accentColor: e.target.value })}
                   maxLength={7}
-                  className="w-20 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-mono border border-slate-200 dark:border-slate-700 rounded-md px-2 py-0.5 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  className="w-24 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-mono border border-slate-200 dark:border-slate-700 rounded-md px-2 py-1 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 />
               </div>
             </div>

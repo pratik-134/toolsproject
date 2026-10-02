@@ -83,22 +83,23 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, isFeatured = false }) 
             </div>
 
             <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between mt-6">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 font-bold flex items-center justify-center text-sm">
+              <div className="flex items-center gap-3 min-w-0 pr-2">
+                <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 font-bold flex items-center justify-center text-sm shrink-0">
                   {post.author.name.charAt(0)}
                 </div>
-                <div>
-                  <div className="text-xs font-bold text-slate-900 dark:text-slate-100">
+                <div className="min-w-0 truncate">
+                  <div className="text-xs font-bold text-slate-900 dark:text-slate-100 truncate">
                     {post.author.name}
                   </div>
-                  <div className="text-[11px] text-slate-500 dark:text-slate-400">
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
                     {post.author.role}
                   </div>
                 </div>
               </div>
 
-              <span className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 group-hover:translate-x-1 transition-transform">
-                <span>Read Full Guide</span>
+              <span className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 group-hover:translate-x-1 transition-transform shrink-0">
+                <span className="hidden xs:inline">Read Full Guide</span>
+                <span className="xs:hidden">Read</span>
                 <ArrowRight className="w-4 h-4" />
               </span>
             </div>
@@ -149,16 +150,16 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, isFeatured = false }) 
         </div>
 
         <div className="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold flex items-center justify-center text-xs">
+          <div className="flex items-center gap-2.5 min-w-0 pr-2">
+            <div className="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold flex items-center justify-center text-xs shrink-0">
               {post.author.name.charAt(0)}
             </div>
-            <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+            <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 truncate">
               {post.author.name}
             </span>
           </div>
 
-          <span className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 dark:text-blue-400 group-hover:translate-x-1 transition-transform">
+          <span className="inline-flex items-center gap-1 text-xs font-bold text-blue-600 dark:text-blue-400 group-hover:translate-x-1 transition-transform shrink-0">
             <span>Read</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </span>

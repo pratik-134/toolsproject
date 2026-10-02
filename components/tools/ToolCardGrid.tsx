@@ -86,7 +86,7 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
       {/* Category Pills Filter */}
       {showCategoryFilter && (
         <div
-          className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none"
+          className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none no-scrollbar"
           aria-label="Category filter"
         >
           <button

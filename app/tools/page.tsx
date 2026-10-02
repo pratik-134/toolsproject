@@ -45,7 +45,7 @@ export default function ToolsHubPage() {
 
         {/* Browse by Category */}
         <section className="max-w-container mx-auto px-4 sm:px-6 pt-12">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
             <div>
               <h2 className="font-headings text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
                 Browse by Category

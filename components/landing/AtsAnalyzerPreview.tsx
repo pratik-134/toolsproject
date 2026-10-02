@@ -168,7 +168,7 @@ export const AtsAnalyzerPreview: React.FC = () => {
                   <Check className="h-3.5 w-3.5 stroke-[3]" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between gap-2">
+                  <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-1.5 sm:gap-2">
                     <span className="font-headings text-xs font-bold text-slate-900 dark:text-white">
                       {check.title}
                     </span>

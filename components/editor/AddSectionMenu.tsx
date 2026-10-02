@@ -69,7 +69,7 @@ export const AddSectionMenu: React.FC = () => {
         </Button>
       ) : (
         <div className="space-y-3.5">
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-left">
+          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-2 text-left">
             {SECTION_OPTIONS.map((opt) => {
               const Icon = opt.icon;
               const alreadyExists = existingTypes.has(opt.type) && opt.type !== "custom";

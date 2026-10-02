@@ -43,18 +43,19 @@ export const LivePreview: React.FC = () => {
   const [showGrid, setShowGrid] = useState<boolean>(false);
   const [showPageBreaks, setShowPageBreaks] = useState<boolean>(true);
   const [pageCount, setPageCount] = useState<number>(1);
+  const [canvasHeight, setCanvasHeight] = useState<number>(A4_HEIGHT_PX);
 
   const canvasRef = useRef<HTMLDivElement>(null);
   const scale = zoomLevel / 100;
 
   const layout = getComputedResumeLayout(resumeData.theme);
 
-  // Auto-fit scale to viewport width on mobile/tablet screens (< 768px)
+  // Auto-fit scale to viewport width on mobile/tablet screens (< 1024px)
   useEffect(() => {
     const handleAutoFit = () => {
       if (typeof window === "undefined") return;
-      if (window.innerWidth < 768) {
-        const padding = 32;
+      if (window.innerWidth < 1024) {
+        const padding = window.innerWidth < 640 ? 24 : 48;
         const availableWidth = window.innerWidth - padding;
         const targetZoom = Math.max(30, Math.min(100, Math.round((availableWidth / A4_WIDTH_PX) * 100)));
         setZoomLevel(targetZoom);
@@ -68,7 +69,7 @@ export const LivePreview: React.FC = () => {
 
   const handleFitToScreen = () => {
     if (typeof window === "undefined") return;
-    const padding = window.innerWidth < 640 ? 32 : 64;
+    const padding = window.innerWidth < 640 ? 24 : 64;
     const availableWidth = window.innerWidth - padding;
     const targetZoom = Math.max(30, Math.min(120, Math.round((availableWidth / A4_WIDTH_PX) * 100)));
     setZoomLevel(targetZoom);
@@ -78,6 +79,7 @@ export const LivePreview: React.FC = () => {
   useEffect(() => {
     if (canvasRef.current) {
       const actualHeight = canvasRef.current.offsetHeight;
+      setCanvasHeight(actualHeight);
       const computedPages = Math.max(1, Math.ceil(actualHeight / A4_HEIGHT_PX));
       setPageCount(computedPages);
     }
@@ -190,13 +192,19 @@ export const LivePreview: React.FC = () => {
         } justify-center`}
       >
         {/* DOM Live Preview Column */}
-        <div className="flex flex-col items-center">
+        <div
+          className="flex flex-col items-center transition-all duration-200"
+          style={{
+            width: `${Math.round(A4_WIDTH_PX * scale)}px`,
+            height: `${Math.round(canvasHeight * scale)}px`,
+          }}
+        >
           {/* Scaled A4 Container */}
           <div
-            className="transition-transform duration-200 ease-out origin-top relative"
+            className="transition-transform duration-200 ease-out origin-top-left relative"
             style={{
               transform: `scale(${scale})`,
-              transformOrigin: "top center",
+              transformOrigin: "top left",
               width: `${A4_WIDTH_PX}px`,
             }}
           >

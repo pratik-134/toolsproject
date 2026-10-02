@@ -111,28 +111,23 @@ export const ToolsMegaSection: React.FC = () => {
                 style={{
                   "--cat-primary": color.primary,
                   "--cat-border": color.border,
+                  "--cat-tint": color.tint,
                   "--cat-glow": color.glow,
                 } as React.CSSProperties}
               >
                 {/* Tinted header band with watermark */}
                 <div
-                  className="relative px-5 pt-5 pb-4 overflow-hidden"
-                  style={{ backgroundColor: color.tint }}
+                  className="relative px-5 pt-5 pb-4 overflow-hidden bg-[var(--cat-tint)] dark:bg-slate-800/60 dark:border-b dark:border-slate-800 transition-colors"
                 >
                   <div
-                    className="absolute -right-4 -top-4 pointer-events-none opacity-[0.14] -rotate-12 transition-all duration-500 ease-out group-hover:scale-110 group-hover:opacity-[0.20] group-hover:-rotate-6 select-none"
+                    className="absolute -right-4 -top-4 pointer-events-none opacity-[0.14] dark:opacity-[0.08] -rotate-12 transition-all duration-500 ease-out group-hover:scale-110 group-hover:opacity-[0.20] group-hover:-rotate-6 select-none"
                     style={{ color: color.primary }}
                     aria-hidden="true"
                   >
                     <Icon className="w-28 h-28" strokeWidth={1.25} />
                   </div>
                   <div
-                    className="relative z-10 w-12 h-12 rounded-xl flex items-center justify-center border shadow-sm transition-all duration-300 group-hover:scale-105"
-                    style={{
-                      backgroundColor: "rgba(255,255,255,0.75)",
-                      borderColor: color.border,
-                      color: color.primary,
-                    }}
+                    className="relative z-10 w-12 h-12 rounded-xl flex items-center justify-center border shadow-xs transition-all duration-300 group-hover:scale-105 bg-white/80 dark:bg-slate-900/90 border-[var(--cat-border)] dark:border-slate-700 text-[var(--cat-primary)] dark:text-white"
                   >
                     <Icon className="w-6 h-6" strokeWidth={1.75} />
                   </div>
@@ -151,12 +146,7 @@ export const ToolsMegaSection: React.FC = () => {
                 {/* Footer */}
                 <div className="px-5 pb-4 pt-3 flex items-center justify-between gap-2 border-t border-slate-100 dark:border-slate-800 mt-auto">
                   <span
-                    className="text-xs font-bold px-3 py-1 rounded-full border"
-                    style={{
-                      backgroundColor: color.tint,
-                      borderColor: color.border,
-                      color: color.primary,
-                    }}
+                    className="text-xs font-bold px-3 py-1 rounded-full border bg-[var(--cat-tint)] dark:bg-slate-800 border-[var(--cat-border)] dark:border-slate-700 text-[var(--cat-primary)] dark:text-slate-200"
                   >
                     {card.count}
                   </span>

@@ -181,7 +181,7 @@ export default function TermsPage() {
             <span className="font-headings font-bold text-slate-900 dark:text-white">{BRAND.name}</span>
             <span className="text-slate-500 dark:text-slate-400">— {BRAND.tagline}</span>
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-6 gap-y-2">
             <Link href="/" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home</Link>
             <Link href="/tools" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Tools</Link>
             <Link href="/privacy" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Privacy Policy</Link>

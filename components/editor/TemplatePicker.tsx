@@ -67,7 +67,7 @@ export const TemplatePicker: React.FC<TemplatePickerProps> = ({ isOpen, onClose 
           </div>
 
           {/* Category Filter Tabs */}
-          <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 py-3 shrink-0 overflow-x-auto">
+          <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 py-3 shrink-0 overflow-x-auto no-scrollbar">
             {(
               [
                 { id: "all", label: "All Templates (20)" },
@@ -100,7 +100,8 @@ export const TemplatePicker: React.FC<TemplatePickerProps> = ({ isOpen, onClose 
                 return (
                   <div
                     key={template.id}
-                    className={`group relative rounded-lg border p-3 flex flex-col justify-between transition-all duration-200 ${
+                    onClick={() => handleSelectTemplate(template.id)}
+                    className={`group relative rounded-lg border p-3 flex flex-col justify-between transition-all duration-200 cursor-pointer ${
                       isSelected
                         ? "border-blue-500 ring-2 ring-blue-500/20 bg-blue-50/20 dark:bg-blue-950/20 shadow-xs"
                         : "border-slate-200 dark:border-slate-800 hover:border-blue-300 dark:hover:border-blue-500 hover:shadow-xs bg-white dark:bg-slate-900"
@@ -115,14 +116,20 @@ export const TemplatePicker: React.FC<TemplatePickerProps> = ({ isOpen, onClose 
                         <Button
                           size="sm"
                           variant="secondary"
-                          onClick={() => setPreviewingTemplate(template)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setPreviewingTemplate(template);
+                          }}
                           className="w-full gap-1.5 text-xs font-bold h-8 shadow-xs rounded-md bg-white text-slate-900 hover:bg-slate-100"
                         >
                           <Eye className="h-3.5 w-3.5" /> Full Size
                         </Button>
                         <Button
                           size="sm"
-                          onClick={() => handleSelectTemplate(template.id)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleSelectTemplate(template.id);
+                          }}
                           className="w-full gap-1.5 text-xs font-bold h-8 shadow-xs rounded-md bg-blue-600 hover:bg-blue-700 text-white"
                         >
                           <Check className="h-3.5 w-3.5" /> {isSelected ? "Active" : "Apply"}

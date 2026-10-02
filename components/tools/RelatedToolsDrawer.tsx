@@ -77,11 +77,11 @@ export const RelatedToolsDrawer: React.FC<RelatedToolsDrawerProps> = ({
           onClick={() => setIsMobileSheetOpen(true)}
           className="w-full bg-slate-900 text-white rounded-2xl p-3 shadow-xl border border-slate-700/80 flex items-center justify-between font-semibold text-xs transition-all active:scale-[0.98]"
         >
-          <span className="flex items-center gap-2">
-            <Grid className="h-4 w-4 text-blue-400" />
-            <span>Switch Tool ({categoryDef?.shortName || "Category"})</span>
+          <span className="flex items-center gap-2 min-w-0 pr-2">
+            <Grid className="h-4 w-4 text-blue-400 shrink-0" />
+            <span className="truncate">Switch Tool ({categoryDef?.shortName || "Category"})</span>
           </span>
-          <span className="flex items-center gap-1 text-[11px] text-blue-400 font-bold bg-slate-800 px-2.5 py-1 rounded-xl">
+          <span className="flex items-center gap-1 text-[11px] text-blue-400 font-bold bg-slate-800 px-2.5 py-1 rounded-xl shrink-0">
             <span>{relatedTools.length} Available</span>
             <ChevronUp className="h-3.5 w-3.5" />
           </span>

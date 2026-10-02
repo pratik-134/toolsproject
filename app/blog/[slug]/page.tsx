@@ -132,7 +132,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <header className="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50 py-10 sm:py-14">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             {/* Top Navigation & Breadcrumbs */}
-            <div className="flex items-center justify-between gap-4 mb-6">
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
               <Link
                 href="/blog"
                 className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
