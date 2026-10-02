@@ -45,7 +45,7 @@ export function ToolHandoffBanner({
                 </span>
               )}
             </div>
-            <p className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 truncate mt-0.5">
+            <p className="text-[15px] font-semibold text-slate-900 dark:text-slate-100 truncate mt-0.5">
               {handoff.name} <span className="font-normal text-slate-500">({displaySize})</span>
             </p>
           </div>
@@ -55,10 +55,10 @@ export function ToolHandoffBanner({
           <button
             type="button"
             onClick={onClear}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-rose-200 dark:border-rose-900/60 bg-white dark:bg-slate-900 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 text-xs font-semibold shadow-2xs transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-rose-200 dark:border-rose-900/60 bg-white dark:bg-slate-900 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 text-[16px] font-semibold shadow-2xs transition-colors"
             title="Clear handoff file and start fresh"
           >
-            <Trash2 className="w-3.5 h-3.5" />
+            <Trash2 className="w-4 h-4" />
             Clear files
           </button>
           <button

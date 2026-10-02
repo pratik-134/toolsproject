@@ -313,14 +313,16 @@ export default function PdfCompressorTool() {
             <strong>100% Client-Side Privacy:</strong> PDF compression runs completely in browser memory. Documents are never transmitted over the internet.
           </span>
         </div>
-        <button
-          onClick={handleLoadSample}
-          disabled={isProcessing}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium text-xs shadow-sm transition-colors whitespace-nowrap"
-        >
-          <Sparkles className="w-3.5 h-3.5" />
-          Load Demo PDF
-        </button>
+        {process.env.NODE_ENV !== "production" && (
+          <button
+            onClick={handleLoadSample}
+            disabled={isProcessing}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium text-xs shadow-sm transition-colors whitespace-nowrap"
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            Load Demo PDF
+          </button>
+        )}
       </div>
 
       {/* Chained File Handoff Banner */}

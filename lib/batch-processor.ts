@@ -20,8 +20,25 @@ export interface BatchItem<TOutput = any> {
   error?: string;
 }
 
+export const DEFAULT_MAX_BATCH_BYTES = 50 * 1024 * 1024; // 50MB
+
+export function checkBatchMemoryLimit(
+  totalBytes: number,
+  maxBytes = DEFAULT_MAX_BATCH_BYTES
+): { valid: boolean; error?: string } {
+  if (totalBytes > maxBytes) {
+    return {
+      valid: false,
+      error: `Batch exceeds total memory limit of ${(maxBytes / (1024 * 1024)).toFixed(0)}MB. Please reduce file count or sizes to prevent browser crash.`,
+    };
+  }
+  return { valid: true };
+}
+
 export interface BatchPoolOptions<TInput, TOutput> {
   concurrency?: number; // Default: 3 (balanced for mobile & desktop memory)
+  maxTotalBytes?: number;
+  getItemSize?: (item: TInput) => number;
   onItemStart?: (item: TInput, index: number) => void;
   onItemProgress?: (item: TInput, index: number, progress: number) => void;
   onItemComplete?: (item: TInput, index: number, result: TOutput) => void;
@@ -36,6 +53,15 @@ export async function runBatchPool<TInput, TOutput>(
   taskFn: (item: TInput, onProgress: (pct: number) => void) => Promise<TOutput>,
   options: BatchPoolOptions<TInput, TOutput> = {}
 ): Promise<Array<{ item: TInput; success: boolean; result?: TOutput; error?: Error }>> {
+  if (options.getItemSize) {
+    const totalBytes = items.reduce((sum, it) => sum + (options.getItemSize!(it) || 0), 0);
+    const limit = options.maxTotalBytes ?? DEFAULT_MAX_BATCH_BYTES;
+    const check = checkBatchMemoryLimit(totalBytes, limit);
+    if (!check.valid) {
+      throw new Error(check.error);
+    }
+  }
+
   const concurrency = Math.max(1, Math.min(4, options.concurrency ?? 3));
   const results: Array<{ item: TInput; success: boolean; result?: TOutput; error?: Error }> = new Array(
     items.length
@@ -76,14 +102,32 @@ export async function runBatchPool<TInput, TOutput>(
 
 /**
  * Creates a self-hosted client-side ZIP archive containing the provided files
+ * Automatic duplicate filename resolution with (1), (2) suffixes and ignores failed items
  */
 export async function createZipBlob(
-  files: Array<{ name: string; data: Uint8Array | Blob | ArrayBuffer }>
+  files: Array<{ name: string; data?: Uint8Array | Blob | ArrayBuffer | null }>
 ): Promise<Blob> {
   const zip = new JSZip();
+  const seenNames = new Map<string, number>();
 
   for (const f of files) {
-    zip.file(f.name, f.data);
+    if (!f.data) continue; // Skip failed or missing items
+
+    let finalName = f.name;
+    const count = seenNames.get(f.name) || 0;
+    if (count > 0) {
+      const lastDot = f.name.lastIndexOf(".");
+      if (lastDot > 0) {
+        const base = f.name.slice(0, lastDot);
+        const ext = f.name.slice(lastDot);
+        finalName = `${base} (${count})${ext}`;
+      } else {
+        finalName = `${f.name} (${count})`;
+      }
+    }
+    seenNames.set(f.name, count + 1);
+
+    zip.file(finalName, f.data);
   }
 
   return await zip.generateAsync({

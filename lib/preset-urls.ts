@@ -19,10 +19,6 @@ export interface PdfCompressorSettings {
   useObjectStreams?: boolean;
 }
 
-export interface PdfMergerSettings {
-  outputFileName?: string;
-}
-
 /**
  * Sanitize a string to prevent XSS or dangerous input
  */
@@ -51,23 +47,25 @@ export function parseImageConverterHash(hash: string): ImageConverterSettings {
 
   const format = params.get("format")?.toLowerCase();
   const validFormats = ["webp", "jpeg", "png", "bmp", "ico", "svg"];
-  if (format && validFormats.includes(format)) {
-    result.format = format as ImageConverterSettings["format"];
+  if (format) {
+    result.format = validFormats.includes(format)
+      ? (format as ImageConverterSettings["format"])
+      : "webp";
   }
 
   const quality = params.get("quality");
   if (quality) {
     const q = parseInt(quality, 10);
-    if (!isNaN(q) && q >= 10 && q <= 100) {
-      result.quality = q;
+    if (!isNaN(q)) {
+      result.quality = Math.max(10, Math.min(100, q));
     }
   }
 
   const scale = params.get("scale");
   if (scale) {
     const s = parseInt(scale, 10);
-    if (!isNaN(s) && s >= 25 && s <= 200) {
-      result.scale = s;
+    if (!isNaN(s)) {
+      result.scale = Math.max(25, Math.min(200, s));
     }
   }
 
@@ -128,8 +126,12 @@ export function serializePdfCompressorHash(settings: PdfCompressorSettings): str
   return params.toString();
 }
 
+export interface PdfMergerSettings {
+  autoRotate?: boolean;
+}
+
 /**
- * Parse & sanitize PDF Merger preset from URL hash
+ * Parse & sanitize PDF Merger preset from URL hash (Settings only, zero file names)
  */
 export function parsePdfMergerHash(hash: string): PdfMergerSettings {
   if (!hash) return {};
@@ -137,24 +139,20 @@ export function parsePdfMergerHash(hash: string): PdfMergerSettings {
   const params = new URLSearchParams(cleaned);
   const result: PdfMergerSettings = {};
 
-  const filename = params.get("filename");
-  if (filename) {
-    const safe = sanitizeString(filename, 80);
-    if (safe.length > 0) {
-      result.outputFileName = safe.endsWith(".pdf") ? safe : `${safe}.pdf`;
-    }
+  if (params.has("autoRotate")) {
+    result.autoRotate = params.get("autoRotate") === "true";
   }
 
   return result;
 }
 
 /**
- * Serialize PDF Merger settings to URL hash string
+ * Serialize PDF Merger settings to URL hash string (Settings only, zero file names)
  */
 export function serializePdfMergerHash(settings: PdfMergerSettings): string {
   const params = new URLSearchParams();
-  if (settings.outputFileName) {
-    params.set("filename", sanitizeString(settings.outputFileName, 80));
+  if (settings.autoRotate !== undefined) {
+    params.set("autoRotate", String(settings.autoRotate));
   }
   return params.toString();
 }
@@ -168,8 +166,16 @@ export async function copyPresetUrl(hashString: string): Promise<string> {
   url.hash = hashString ? `#${hashString}` : "";
   const fullUrl = url.toString();
 
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    await navigator.clipboard.writeText(fullUrl);
+  try {
+    if (typeof navigator !== "undefined" && navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(fullUrl);
+    }
+  } catch {
+    // Fallback if clipboard permission is restricted
+  }
+
+  if (typeof window !== "undefined") {
+    window.location.hash = hashString ? `#${hashString}` : "";
   }
 
   return fullUrl;

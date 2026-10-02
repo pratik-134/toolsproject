@@ -46,9 +46,7 @@ export default function PdfMergerTool() {
     // 1. Sanitize & apply preset settings from URL hash (#)
     if (typeof window !== "undefined" && window.location.hash) {
       const preset = parsePdfMergerHash(window.location.hash);
-      if (preset.outputFileName) {
-        setOutputFileName(preset.outputFileName);
-      }
+      // Safe preset settings
     }
 
     // 2. Chained file handoff
@@ -246,14 +244,16 @@ export default function PdfMergerTool() {
             <strong>100% Client-Side Privacy:</strong> Your PDF documents are merged directly in your browser RAM. Files never leave your computer.
           </span>
         </div>
-        <button
-          onClick={handleLoadSample}
-          disabled={isMerging}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium text-xs shadow-sm transition-colors whitespace-nowrap"
-        >
-          <Sparkles className="w-3.5 h-3.5" />
-          Load Demo Sample
-        </button>
+        {process.env.NODE_ENV !== "production" && (
+          <button
+            onClick={handleLoadSample}
+            disabled={isMerging}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium text-xs shadow-sm transition-colors whitespace-nowrap"
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            Load Demo Sample
+          </button>
+        )}
       </div>
 
       {/* Chained File Handoff Banner */}
@@ -379,7 +379,7 @@ export default function PdfMergerTool() {
                   <label className="block text-xs font-medium text-slate-600 dark:text-slate-400">
                     Merged PDF Filename
                   </label>
-                  <PresetShareButton hashString={serializePdfMergerHash({ outputFileName })} />
+                  <PresetShareButton hashString={serializePdfMergerHash({ autoRotate: true })} />
                 </div>
                 <input
                   type="text"

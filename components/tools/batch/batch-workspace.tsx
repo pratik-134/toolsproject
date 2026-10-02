@@ -54,21 +54,34 @@ export function BatchWorkspace<TOutput>({
     return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
   };
 
+  const totalBytes = items.reduce((sum, item) => sum + (item.size || 0), 0);
+  const isOverMemoryLimit = totalBytes > 50 * 1024 * 1024;
+
   return (
     <div className="space-y-6">
+      {/* Memory limit warning */}
+      {isOverMemoryLimit && (
+        <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-amber-800 dark:amber-200 flex items-center gap-3">
+          <AlertCircle className="w-5 h-5 shrink-0 text-amber-600 dark:text-amber-400" />
+          <p className="text-[15px] leading-relaxed">
+            <strong>Memory Warning:</strong> Total batch size ({formatBytes(totalBytes)}) exceeds the recommended 50MB device memory limit. Processing may be throttled to prevent browser tabs from running out of memory.
+          </p>
+        </div>
+      )}
+
       {/* Batch Header & Controls */}
       <div className="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300">
+              <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300">
                 Batch Mode
               </span>
-              <span className="text-xs text-slate-500 dark:text-slate-400">
+              <span className="text-[15px] text-slate-500 dark:text-slate-400">
                 Worker Pool: 3 Parallel Tasks
               </span>
             </div>
-            <h3 className="font-headings text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 mt-1">
+            <h3 className="font-headings text-lg font-bold text-slate-900 dark:text-slate-100 mt-1">
               {title} ({totalCount} files queued)
             </h3>
           </div>
@@ -78,9 +91,9 @@ export function BatchWorkspace<TOutput>({
               type="button"
               onClick={onClear}
               disabled={isProcessing}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-[16px] font-semibold text-slate-600 dark:text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors disabled:opacity-50"
             >
-              <Trash2 className="w-3.5 h-3.5" />
+              <Trash2 className="w-4 h-4" />
               Clear Queue
             </button>
 
@@ -89,7 +102,7 @@ export function BatchWorkspace<TOutput>({
                 type="button"
                 onClick={onDownloadAllZip}
                 disabled={isProcessing}
-                className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all disabled:opacity-50"
+                className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-[16px] font-bold shadow-xs transition-all disabled:opacity-50"
               >
                 <Archive className="w-4 h-4" />
                 Download All as ZIP ({completedCount})
@@ -99,8 +112,8 @@ export function BatchWorkspace<TOutput>({
             <button
               type="button"
               onClick={onProcessAll}
-              disabled={isProcessing || completedCount === totalCount}
-              className="inline-flex items-center gap-2 px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all disabled:opacity-50"
+              disabled={isProcessing || completedCount === totalCount || isOverMemoryLimit}
+              className="inline-flex items-center gap-2 px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-[16px] font-bold shadow-xs transition-all disabled:opacity-50"
             >
               {isProcessing ? (
                 <>
@@ -120,7 +133,7 @@ export function BatchWorkspace<TOutput>({
         {/* Overall Progress Meter */}
         {isProcessing && (
           <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
-            <div className="flex items-center justify-between text-xs text-slate-600 dark:text-slate-400 mb-1.5">
+            <div className="flex items-center justify-between text-[15px] text-slate-600 dark:text-slate-400 mb-1.5">
               <span>Batch Progress: {completedCount} / {totalCount} completed</span>
               <span className="font-bold text-indigo-600 dark:text-indigo-400">{overallProgress}%</span>
             </div>
@@ -146,10 +159,10 @@ export function BatchWorkspace<TOutput>({
                 {idx + 1}
               </div>
               <div className="min-w-0">
-                <p className="text-sm font-semibold text-slate-900 dark:text-slate-100 truncate">
+                <p className="text-[15px] font-semibold text-slate-900 dark:text-slate-100 truncate">
                   {item.name}
                 </p>
-                <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                <div className="flex items-center gap-2 text-[15px] text-slate-500 dark:text-slate-400 mt-0.5">
                   <span>{formatBytes(item.size)}</span>
                   {renderItemStats && renderItemStats(item)}
                 </div>

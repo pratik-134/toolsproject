@@ -52,25 +52,22 @@ async function runTests() {
   assert.strictEqual(parsedComp.stripMetadata, false);
   assert.strictEqual(parsedComp.useObjectStreams, true);
 
-  // 4. PDF Merger: Filename sanitization
+  // 4. PDF Merger: Settings only (autoRotate, never filenames)
   const mergerSettings = {
-    outputFileName: "Q3_Report_Final.pdf",
+    autoRotate: true,
   };
   const mergerHash = serializePdfMergerHash(mergerSettings);
-  assert.strictEqual(mergerHash, "filename=Q3_Report_Final.pdf");
+  assert.strictEqual(mergerHash, "autoRotate=true");
 
   const parsedMerger = parsePdfMergerHash(`#${mergerHash}`);
-  assert.strictEqual(parsedMerger.outputFileName, "Q3_Report_Final.pdf");
+  assert.strictEqual(parsedMerger.autoRotate, true);
 
-  // Filename injection sanitization
-  const injectionHash = "#filename=<script>alert('xss')</script>bad/path/file";
+  // Filename injection must be completely ignored (privacy invariant: zero filenames in URLs)
+  const injectionHash = "#filename=<script>alert('xss')</script>bad/path/file&autoRotate=false";
   const sanitizedMerger = parsePdfMergerHash(injectionHash);
-  assert.ok(
-    !sanitizedMerger.outputFileName?.includes("<") &&
-    !sanitizedMerger.outputFileName?.includes(">") &&
-    !sanitizedMerger.outputFileName?.includes("/"),
-    "Filename must strip illegal characters"
-  );
+  assert.strictEqual((sanitizedMerger as any).outputFileName, undefined);
+  assert.strictEqual((sanitizedMerger as any).filename, undefined);
+  assert.strictEqual(sanitizedMerger.autoRotate, false);
 
   console.log("All Shareable Preset URLs tests passed successfully!");
 }

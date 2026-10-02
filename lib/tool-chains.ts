@@ -8,11 +8,14 @@
 
 import { getToolUrl, getToolBySlug } from "@/lib/registry/tools";
 
-export const ENABLE_TOOL_CHAINING = true;
+export let ENABLE_TOOL_CHAINING = true;
+export function _setEnableToolChaining(val: boolean) {
+  ENABLE_TOOL_CHAINING = val;
+}
 
 const DB_NAME = "cleartrix_file_chains_v1";
 const STORE_NAME = "handoffs";
-const EXPIRY_MS = 15 * 60 * 1000; // 15 minutes TTL
+export const EXPIRY_MS = 15 * 60 * 1000; // 15 minutes TTL
 
 export interface HandoffFile {
   id: string;
@@ -30,6 +33,25 @@ export interface ToolChainSuggestion {
   label: string;
   description: string;
   url: string;
+}
+
+export const TOOL_ACCEPTED_MIMES: Record<string, string[]> = {
+  "pdf-merger": ["application/pdf"],
+  "pdf-compressor": ["application/pdf"],
+  "pdf-encryptor": ["application/pdf"],
+  "pdf-page-rotator": ["application/pdf"],
+  "pdf-to-png": ["application/pdf"],
+  "image-converter": ["image/png", "image/jpeg", "image/webp", "image/bmp", "image/x-icon", "image/svg+xml"],
+  "exif-stripper": ["image/png", "image/jpeg", "image/webp", "image/bmp", "image/x-icon", "image/svg+xml"],
+  "image-watermarker": ["image/png", "image/jpeg", "image/webp", "image/bmp", "image/x-icon", "image/svg+xml"],
+  "image-rotator-flipper": ["image/png", "image/jpeg", "image/webp", "image/bmp", "image/x-icon", "image/svg+xml"],
+};
+
+export function isMimeAccepted(targetToolSlug: string, mimeType: string): boolean {
+  const accepted = TOOL_ACCEPTED_MIMES[targetToolSlug];
+  if (!accepted) return true; // generic tools
+  const normalizedMime = mimeType.toLowerCase();
+  return accepted.some((m) => normalizedMime.startsWith(m.toLowerCase()) || m === normalizedMime);
 }
 
 // In-memory cache for ultra-fast single-page transitions
@@ -94,6 +116,16 @@ export async function saveHandoff(
   },
   targetToolSlug: string
 ): Promise<HandoffFile> {
+  if (!ENABLE_TOOL_CHAINING) {
+    throw new Error("Tool chaining is currently disabled via feature flag");
+  }
+
+  if (!isMimeAccepted(targetToolSlug, file.type)) {
+    throw new Error(
+      `Incompatible handoff: Tool "${targetToolSlug}" cannot accept file type "${file.type}"`
+    );
+  }
+
   const buffer = await toUint8Array(file.data);
 
   const payload: HandoffFile = {
@@ -130,10 +162,14 @@ export async function saveHandoff(
  * Retrieve a pending handoff file for a tool
  */
 export async function getHandoff(targetToolSlug: string): Promise<HandoffFile | null> {
+  if (!ENABLE_TOOL_CHAINING) return null;
   const now = Date.now();
 
   // 1. Check in-memory cache first
   if (inMemoryHandoff && inMemoryHandoff.targetToolSlug === targetToolSlug) {
+    if (!isMimeAccepted(targetToolSlug, inMemoryHandoff.type)) {
+      return null;
+    }
     if (now - inMemoryHandoff.createdAt < EXPIRY_MS) {
       return inMemoryHandoff;
     }
@@ -154,6 +190,12 @@ export async function getHandoff(targetToolSlug: string): Promise<HandoffFile | 
       req.onsuccess = () => {
         const result = req.result as HandoffFile | undefined;
         if (!result) {
+          resolve(null);
+          return;
+        }
+
+        if (!isMimeAccepted(targetToolSlug, result.type)) {
+          clearHandoff(targetToolSlug);
           resolve(null);
           return;
         }
@@ -206,7 +248,7 @@ export async function clearHandoff(targetToolSlug?: string): Promise<void> {
 /**
  * Suggestions for chaining after a tool finishes processing
  */
-const CHAIN_GRAPH: Record<string, Array<{ targetSlug: string; label: string; description: string }>> = {
+export const CHAIN_GRAPH: Record<string, Array<{ targetSlug: string; label: string; description: string }>> = {
   "pdf-merger": [
     {
       targetSlug: "pdf-compressor",
@@ -264,6 +306,7 @@ const CHAIN_GRAPH: Record<string, Array<{ targetSlug: string; label: string; des
  * Get intelligent chain suggestions for a source tool
  */
 export function getChainSuggestions(sourceToolSlug: string): ToolChainSuggestion[] {
+  if (!ENABLE_TOOL_CHAINING) return [];
   const suggestions = CHAIN_GRAPH[sourceToolSlug] || [];
   return suggestions.map((s) => ({
     targetSlug: s.targetSlug,
@@ -282,4 +325,8 @@ export function handoffToFile(handoff: HandoffFile): File {
     type: handoff.type,
     lastModified: handoff.createdAt,
   });
+}
+
+export function _testSetHandoff(handoff: HandoffFile | null) {
+  inMemoryHandoff = handoff;
 }

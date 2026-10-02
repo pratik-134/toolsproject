@@ -51,15 +51,15 @@ export function ToolChainActions({
         <div className="p-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400">
           <Layers className="w-4 h-4" />
         </div>
-        <h4 className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200">
+        <h4 className="text-base font-bold text-slate-800 dark:text-slate-200">
           Next Step: 1-Click Pipeline Chaining
         </h4>
-        <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60">
+        <span className="text-xs font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60">
           Zero Upload
         </span>
       </div>
 
-      <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">
+      <p className="text-[15px] leading-relaxed text-slate-600 dark:text-slate-400 mb-3">
         Send this output file directly into another tool in memory without downloading or re-uploading:
       </p>
 
@@ -72,27 +72,27 @@ export function ToolChainActions({
               type="button"
               disabled={Boolean(navigatingSlug)}
               onClick={() => handleChainClick(sug)}
-              className="flex flex-col justify-between p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-indigo-400 dark:hover:border-indigo-600 hover:bg-indigo-50/40 dark:hover:bg-indigo-950/30 text-left transition-all group disabled:opacity-60"
+              className="flex flex-col justify-between p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-indigo-400 dark:hover:border-indigo-600 hover:bg-indigo-50/40 dark:hover:bg-indigo-950/30 text-left transition-all group disabled:opacity-60 text-[16px]"
             >
               <div>
-                <p className="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                <p className="text-[16px] font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                   {sug.label}
                 </p>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-2">
+                <p className="text-[15px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
                   {sug.description}
                 </p>
               </div>
 
-              <div className="mt-2.5 flex items-center gap-1 text-[11px] font-semibold text-indigo-600 dark:text-indigo-400">
+              <div className="mt-3 flex items-center gap-1.5 text-[16px] font-semibold text-indigo-600 dark:text-indigo-400">
                 {isLoading ? (
                   <>
-                    <RefreshCw className="w-3 h-3 animate-spin" />
+                    <RefreshCw className="w-4 h-4 animate-spin" />
                     <span>Handoff in memory...</span>
                   </>
                 ) : (
                   <>
                     <span>Chain file</span>
-                    <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </>
                 )}
               </div>
