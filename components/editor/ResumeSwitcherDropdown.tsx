@@ -67,7 +67,7 @@ export const ResumeSwitcherDropdown: React.FC = () => {
 
   return (
     <>
-      <div ref={containerRef} className="relative flex items-center min-w-0">
+      <div ref={containerRef} className="relative flex items-center min-w-0 shrink">
         {isEditingTitle ? (
           <input
             type="text"
@@ -82,14 +82,14 @@ export const ResumeSwitcherDropdown: React.FC = () => {
               }
             }}
             autoFocus
-            className="rounded-md border border-blue-300 dark:border-blue-600 bg-white dark:bg-slate-800 px-2 py-1 text-xs sm:text-sm font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 max-w-[85px] xs:max-w-[130px] sm:max-w-[200px]"
+            className="rounded-md border border-blue-300 dark:border-blue-600 bg-white dark:bg-slate-800 px-2 py-1 text-xs sm:text-sm font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 max-w-[80px] xs:max-w-[110px] sm:max-w-[180px]"
           />
         ) : (
-          <div className="flex items-center gap-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 p-0.5 transition-colors">
+          <div className="flex items-center gap-0.5 sm:gap-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 p-0.5 transition-colors min-w-0">
             <button
               type="button"
               onClick={() => setIsEditingTitle(true)}
-              className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate max-w-[85px] xs:max-w-[130px] sm:max-w-[170px] md:max-w-[220px] px-1.5 py-1 text-left"
+              className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate max-w-[80px] xs:max-w-[110px] sm:max-w-[160px] md:max-w-[200px] px-1 py-0.5 text-left"
               title="Click to rename"
             >
               {resumeData.title || "Untitled Resume"}
@@ -97,7 +97,7 @@ export const ResumeSwitcherDropdown: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
-              className="p-1 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 rounded-md transition-colors"
+              className="p-1 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 rounded-md transition-colors shrink-0"
               title="Switch resume"
               aria-label="Switch resume"
             >

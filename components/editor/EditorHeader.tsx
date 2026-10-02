@@ -133,26 +133,26 @@ export const EditorHeader: React.FC = () => {
       {/* Header Toolbar */}
       <header className="sticky top-0 z-30 flex h-14 w-full items-center justify-between bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 border-b border-slate-200/80 dark:border-slate-800 shadow-md px-2 sm:px-4 select-none">
         {/* Left: Home/Dashboard, Switcher/Title, Autosave Status */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 min-w-0">
+        <div className="flex items-center gap-1 sm:gap-2 min-w-0 shrink">
           <Link href="/dashboard">
             <Button
               variant="ghost"
               size="sm"
-              className="h-8 gap-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 px-2.5 rounded-lg font-medium"
+              className="h-8 w-8 sm:w-auto p-0 sm:px-2.5 sm:gap-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg font-medium shrink-0"
               title="Return to My Resumes Dashboard"
             >
               <ArrowLeft className="h-4 w-4" />
-              <span className="hidden md:inline text-xs font-semibold">Resumes</span>
+              <span className="hidden sm:inline text-xs font-semibold">Resumes</span>
             </Button>
           </Link>
 
-          <div className="h-4 w-[1px] bg-slate-200 dark:bg-slate-700" />
+          <div className="hidden sm:block h-4 w-[1px] bg-slate-200 dark:bg-slate-700 shrink-0" />
 
           {/* Interactive Resume Switcher & Inline Renamer */}
           <ResumeSwitcherDropdown />
 
           {/* Autosave Status */}
-          <div className="hidden xl:flex items-center gap-1.5 text-xs text-slate-400 pl-1">
+          <div className="hidden 2xl:flex items-center gap-1.5 text-xs text-slate-400 pl-1 shrink-0">
             {saveStatus === "saved" ? (
               <div className="flex items-center gap-1.5 text-slate-600 dark:text-slate-300 font-medium text-[11px] bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2 py-0.5 rounded-md">
                 <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
@@ -167,32 +167,32 @@ export const EditorHeader: React.FC = () => {
           </div>
         </div>
 
-        {/* Center: Clean Navigation Pills (Templates, Design Setup, ATS Score) */}
-        <div className="hidden md:flex items-center gap-1.5 lg:gap-2">
+        {/* Center: Clean Navigation Pills (Templates, Design Setup, ATS Score) — Visible on desktop >= xl to prevent tablet collisions */}
+        <div className="hidden xl:flex items-center gap-1.5 lg:gap-2 shrink-0">
           {/* Template Picker Pill */}
           <button
             onClick={() => setTemplatePickerOpen(true)}
-            className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-lg transition-all shadow-xs"
+            className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-lg transition-all shadow-2xs"
             title="Choose template from 20+ professional designs"
           >
-            <LayoutTemplate className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
+            <LayoutTemplate className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
             <span>{currentTemplate?.name || "Templates"}</span>
           </button>
 
           {/* Design & Layout Pill */}
           <button
             onClick={() => setPageSettingsOpen(true)}
-            className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-lg transition-all shadow-xs"
+            className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-lg transition-all shadow-2xs"
             title="Customize margins, density, typography and colors"
           >
-            <Sliders className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
+            <Sliders className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
             <span>Design</span>
           </button>
 
           {/* ATS Audit Score Trigger Button */}
           <button
             onClick={() => setAtsAuditOpen(true)}
-            className={`flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-lg border shadow-xs transition-all hover:scale-102 ${
+            className={`flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1.5 rounded-lg border shadow-2xs transition-all hover:scale-102 ${
               completeness >= 80
                 ? "bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-900 hover:bg-blue-100 dark:hover:bg-blue-950"
                 : completeness >= 50
@@ -201,36 +201,36 @@ export const EditorHeader: React.FC = () => {
             }`}
             title="Open ATS Quality Audit Panel"
           >
-            <ShieldCheck className={`h-3.5 w-3.5 ${completeness >= 80 ? "text-blue-600 dark:text-blue-400" : completeness >= 50 ? "text-amber-600 dark:text-amber-400" : "text-slate-500"}`} />
+            <ShieldCheck className={`h-3.5 w-3.5 shrink-0 ${completeness >= 80 ? "text-blue-600 dark:text-blue-400" : completeness >= 50 ? "text-amber-600 dark:text-amber-400" : "text-slate-500"}`} />
             <span>ATS: {completeness}%</span>
           </button>
         </div>
 
         {/* Right: Tools & Export CTA */}
-        <div className="flex items-center gap-1 sm:gap-1.5">
+        <div className="flex items-center gap-1 sm:gap-1.5 shrink-0 ml-auto">
           {/* Import Resume Pill */}
           <button
             onClick={() => setImportModalOpen(true)}
-            className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-lg px-2 sm:px-2.5 py-1 text-xs text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white transition-all shadow-xs"
+            className="h-8 px-2 sm:px-2.5 flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-lg text-xs text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white transition-all shadow-2xs shrink-0"
             title="Import existing PDF or DOCX resume"
           >
-            <FileUp className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
-            <span className="hidden xs:inline font-semibold text-xs">Import</span>
+            <FileUp className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
+            <span className="hidden sm:inline font-semibold text-xs">Import</span>
           </button>
 
           {/* Quick Actions Search Pill (Ctrl+K) */}
           <button
             onClick={() => setCommandPaletteOpen(true)}
-            className="hidden sm:flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1 text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all shadow-xs"
+            className="hidden lg:flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1 text-xs text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all shadow-2xs shrink-0"
             title="Open Command Palette (Ctrl+K)"
           >
-            <Search className="h-3.5 w-3.5 text-slate-400" />
-            <span className="hidden lg:inline font-medium text-xs">Search</span>
+            <Search className="h-3.5 w-3.5 text-slate-400 shrink-0" />
+            <span className="hidden xl:inline font-medium text-xs">Search</span>
             <KbdShortcut shortcut="K" className="text-[10px]" />
           </button>
 
           {/* Undo / Redo Segment */}
-          <div className="flex items-center rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100/60 dark:bg-slate-800/60 p-0.5">
+          <div className="hidden xs:flex items-center rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100/60 dark:bg-slate-800/60 p-0.5 shrink-0">
             <Button
               variant="ghost"
               size="icon"
@@ -258,7 +258,7 @@ export const EditorHeader: React.FC = () => {
             variant="ghost"
             size="icon"
             onClick={toggleOutline}
-            className={`h-8 w-8 rounded-lg transition-all ${
+            className={`h-8 w-8 rounded-lg hidden lg:flex shrink-0 transition-all ${
               isOutlineOpen
                 ? "bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-900 font-bold"
                 : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
@@ -273,7 +273,7 @@ export const EditorHeader: React.FC = () => {
             variant="ghost"
             size="icon"
             onClick={toggleFocusMode}
-            className={`h-8 w-8 rounded-lg hidden lg:flex transition-all ${
+            className={`h-8 w-8 rounded-lg hidden xl:flex shrink-0 transition-all ${
               isFocusMode
                 ? "bg-slate-900 dark:bg-blue-600 text-white"
                 : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
@@ -284,25 +284,27 @@ export const EditorHeader: React.FC = () => {
           </Button>
 
           {/* Theme Toggle */}
-          <ThemeToggle />
+          <div className="shrink-0">
+            <ThemeToggle />
+          </div>
 
           {/* Export PDF Button */}
           <Button
             size="sm"
             onClick={handleExportPdf}
             disabled={isExportingPdf || isExportingDocx}
-            className="h-8 sm:h-9 gap-1.5 font-bold bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 rounded-lg px-2.5 sm:px-3.5 shadow-xs transition-all active:scale-[0.98]"
+            className="h-8 gap-1 font-bold bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 rounded-lg px-2 sm:px-3 shadow-xs transition-all active:scale-[0.98] shrink-0"
             title="Download High-Resolution Vector PDF"
           >
             {isExportingPdf ? (
               <>
                 <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                <span className="hidden sm:inline text-xs">Generating...</span>
+                <span className="hidden sm:inline text-xs">...</span>
               </>
             ) : (
               <>
                 <Download className="h-3.5 w-3.5" />
-                <span className="text-xs font-bold"><span className="hidden xs:inline">Export </span>PDF</span>
+                <span className="text-xs font-bold"><span className="hidden sm:inline">Export </span>PDF</span>
               </>
             )}
           </Button>
@@ -313,19 +315,19 @@ export const EditorHeader: React.FC = () => {
             variant="outline"
             onClick={handleExportDocx}
             disabled={isExportingPdf || isExportingDocx}
-            className="h-8 sm:h-9 gap-1.5 font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white border-slate-200 dark:border-slate-700 rounded-lg px-2 sm:px-3 shadow-xs transition-all active:scale-[0.98]"
+            className="h-8 gap-1 font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white border-slate-200 dark:border-slate-700 rounded-lg px-2 sm:px-2.5 shadow-xs transition-all active:scale-[0.98] shrink-0"
             title="Download fully editable native Word (.docx) document"
           >
             {isExportingDocx ? (
               <>
                 <Loader2 className="h-3.5 w-3.5 animate-spin text-blue-600" />
-                <span className="hidden sm:inline text-xs">Generating...</span>
+                <span className="hidden sm:inline text-xs">...</span>
               </>
             ) : (
               <>
                 <FileDown className="h-3.5 w-3.5 text-blue-600" />
-                <span className="text-xs font-semibold hidden sm:inline">Word (.docx)</span>
-                <span className="text-xs font-semibold sm:hidden">DOCX</span>
+                <span className="text-xs font-semibold hidden md:inline">Word</span>
+                <span className="text-xs font-semibold md:hidden">DOCX</span>
               </>
             )}
           </Button>
@@ -335,7 +337,7 @@ export const EditorHeader: React.FC = () => {
             variant="ghost"
             size="icon"
             onClick={() => window.print()}
-            className="h-8 w-8 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 hidden sm:flex rounded-lg"
+            className="h-8 w-8 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 hidden xl:flex rounded-lg shrink-0"
             title="Print or Save via Browser Dialog"
           >
             <Printer className="h-4 w-4" />

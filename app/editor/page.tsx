@@ -138,10 +138,10 @@ export default function EditorPage() {
         )}
       </div>
 
-      {/* Mobile Controls Toolbar (Switcher + Quick Actions for Templates, Design, ATS) */}
-      <div className="flex flex-col border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2 lg:hidden no-print gap-1.5 shadow-2xs">
-        {/* Mobile Tab Switcher */}
-        <div className="flex w-full max-w-md mx-auto rounded-lg bg-slate-100 dark:bg-slate-800 p-1 border border-slate-200/80 dark:border-slate-700">
+      {/* Mobile & Tablet Controls Toolbar (Tab Switcher + Quick Actions for Templates, Design, ATS) */}
+      <div className="flex flex-col border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-2 xl:hidden no-print gap-1.5 shadow-2xs">
+        {/* Mobile Tab Switcher: shown only on < lg because >= lg has split-screen */}
+        <div className="flex lg:hidden w-full max-w-md mx-auto rounded-lg bg-slate-100 dark:bg-slate-800 p-1 border border-slate-200/80 dark:border-slate-700">
           <button
             onClick={() => setMobileTab("edit")}
             className={`flex-1 py-1.5 text-xs font-medium rounded-md flex items-center justify-center gap-1.5 transition-all ${
@@ -164,8 +164,8 @@ export default function EditorPage() {
           </button>
         </div>
 
-        {/* Mobile Quick Action Buttons (Visible only on < md because >= md has these in EditorHeader) */}
-        <div className="flex md:hidden items-center justify-between gap-1.5 max-w-md mx-auto w-full pt-0.5">
+        {/* Quick Action Buttons for Templates, Design, and ATS (Visible on < xl to avoid header crowding) */}
+        <div className="flex items-center justify-between gap-1.5 max-w-md mx-auto w-full pt-0.5">
           <button
             type="button"
             onClick={() => setTemplatePickerOpen(true)}
