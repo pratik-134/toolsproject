@@ -1,4 +1,9 @@
-import { BlogPost } from "./types";
+import { BlogPost, BlogAuthor } from "./types";
+
+export const BLOG_AUTHOR: BlogAuthor = {
+  name: "Pratik Kumawat",
+  role: "Founder & Creator",
+};
 
 export const BLOG_POSTS: BlogPost[] = [
   {
@@ -9,10 +14,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Career & Resume",
     publishedAt: "2026-09-28",
     readingTime: "7 min read",
-    author: {
-      name: "Marcus Vance",
-      role: "Lead Talent Strategist & Career Engineer",
-    },
+    author: BLOG_AUTHOR,
     coverGradient: "from-blue-600 via-indigo-600 to-sky-500",
     tags: ["ATS Resume", "Career Tips", "Job Hunting", "Resume Builder"],
     featured: true,
@@ -110,10 +112,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Privacy & Security",
     publishedAt: "2026-09-27",
     readingTime: "6 min read",
-    author: {
-      name: "Elena Rostova",
-      role: "Information Security Architect",
-    },
+    author: BLOG_AUTHOR,
     coverGradient: "from-rose-600 via-red-600 to-amber-500",
     tags: ["PDF Security", "Data Privacy", "Redaction", "Cybersecurity"],
     featured: false,
@@ -186,10 +185,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Privacy & Security",
     publishedAt: "2026-09-26",
     readingTime: "5 min read",
-    author: {
-      name: "Dr. Alexander Chen",
-      role: "Cryptography & Web Systems Researcher",
-    },
+    author: BLOG_AUTHOR,
     coverGradient: "from-emerald-600 via-teal-600 to-cyan-500",
     tags: ["Privacy", "WebAssembly", "Security", "Browser Sandbox"],
     featured: false,
@@ -251,10 +247,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "PDF & Documents",
     publishedAt: "2026-09-25",
     readingTime: "5 min read",
-    author: {
-      name: "Sophia Martinez",
-      role: "Document Workflow Specialist",
-    },
+    author: BLOG_AUTHOR,
     coverGradient: "from-purple-600 via-violet-600 to-indigo-500",
     tags: ["PDF Tools", "Productivity", "Document Management"],
     featured: false,
@@ -308,10 +301,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Developer Tools",
     publishedAt: "2026-09-24",
     readingTime: "6 min read",
-    author: {
-      name: "Karan Patel",
-      role: "Senior Backend & Cloud Architect",
-    },
+    author: BLOG_AUTHOR,
     coverGradient: "from-amber-500 via-orange-600 to-rose-600",
     tags: ["JSON", "Developer Tools", "TypeScript", "APIs"],
     featured: false,
@@ -378,10 +368,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Data Processing",
     publishedAt: "2026-09-23",
     readingTime: "5 min read",
-    author: {
-      name: "Liam O'Connor",
-      role: "Data Engineering Specialist",
-    },
+    author: BLOG_AUTHOR,
     coverGradient: "from-blue-600 via-cyan-600 to-teal-500",
     tags: ["Data Processing", "CSV", "Excel", "Productivity"],
     featured: false,

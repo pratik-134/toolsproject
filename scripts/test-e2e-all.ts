@@ -90,6 +90,8 @@ async function runE2eTestSuite() {
     assert(!!post.excerpt && post.excerpt.length > 20, `Blog post ${post.slug} has invalid excerpt`);
     assert(!!post.category, `Blog post ${post.slug} missing category`);
     assert(post.tableOfContents.length > 0, `Blog post ${post.slug} missing TOC`);
+    assert(post.author.name === "Pratik Kumawat", `Blog post ${post.slug} has unexpected author ${post.author.name}`);
+    assert(post.author.role === "Founder & Creator", `Blog post ${post.slug} has unexpected role ${post.author.role}`);
     for (const toc of post.tableOfContents) {
       assert(post.contentHtml.includes(toc.id), `TOC anchor #${toc.id} not found in content of ${post.slug}`);
     }
