@@ -1,391 +1,424 @@
-# Cleartrix: Project Command & Transition File
+# Cleartrix: Master Project Architecture, Invariants & AI Developer Guide
 
-> **Product:** Cleartrix (umbrella brand, 175-tool privacy-first web platform)  
-> **Flagship product:** Resume Builder (formerly "Cleartrix Resume Builder", repo `cleartrix`)  
-> **Stack:** Next.js App Router, React, TypeScript, Tailwind, Zustand, Zod, Radix UI, Python (FastAPI + Pyodide for AI/media boost), Prisma/PostgreSQL (Phase 5 only)  
-> **Owner decisions still open:** domain name, trademark check, final resume-product name (see section 12)  
-
-**How to use this file**
-- **Part A (sections 1-8)** is the standing project command. Keep it in the repo root (for example as `PROJECT.md`, or copy it into `CLAUDE.md` / your AI assistant's instructions file) so every coding session follows the same rules.
-- **Part B (sections 9-13)** is the one-time transition from Cleartrix Resume Builder to Cleartrix: rename, data migration, redirects, and go-live checklist.
-- For a comprehensive technical reference, resolved engineering gotchas, 46-tool catalog log, and step-by-step AI workflows, see [`PROJECT_BLUEPRINT.md`](./PROJECT_BLUEPRINT.md).
+> **Product:** Cleartrix (`https://cleartrix.com`)  
+> **Umbrella Platform:** Privacy-first, in-browser suite of 168+ tools across 11 categories  
+> **Flagship Product:** Cleartrix Resume Builder (`/editor`, `/dashboard`) with 20 Vector PDF & Word DOCX templates  
+> **Primary Stack:** Next.js 15.5 (App Router, React 18, TypeScript 5.7, Tailwind CSS 3.4), Zustand 4.5, Zod 3.23, Radix UI primitives, Lucide Icons  
+> **AI / Media Boost:** In-browser WebAssembly (Pyodide, Web Workers, Canvas, Web Audio, Web Crypto) + Optional Server Microservice (Python FastAPI for heavyweight Phase 4 models)  
+> **Brand & Storage Configuration:** `lib/brand.ts` (`BRAND` object), `ct_` localStorage prefix with non-destructive fallback migration  
+> **Purpose of this File:** Single source of truth for all architectural invariants, design system guidelines, tool development workflows, resolved gotchas, and verification commands. Every developer and AI assistant working on this codebase must follow the rules in this document without deviation.
 
 ---
 
-# PART A: PROJECT COMMAND
+## 1. Core Mission & Non-Negotiable Invariants
 
-## 1. Mission and non-negotiable rules
+Cleartrix is one unified, lightning-fast web platform hosting 168+ everyday tools for PDFs, documents, images, developer utilities, calculators, codes, and media. The defining differentiator is **absolute privacy: user files and data are processed directly inside the client browser and never uploaded to any remote server.**
 
-Cleartrix is one fast, free website with every everyday file, text, media and calculator tool, each on its own SEO page. The differentiator is **privacy: files are processed in the browser and never uploaded.**
+### The 6 Non-Negotiable Invariants (Never Break These):
 
-**Invariants (never break these):**
-1. **No upload for client-side tools.** No `fetch`, `XMLHttpRequest`, `sendBeacon` or form POST may carry user file content or text. Only tools marked `runtime: 'server'` (Phases 4-5) may send data, and they must say so on the page.
-2. **No mandatory registration** for any Phase 1-3 tool. Accounts are optional and only for Phase 5 features.
-3. **Free means free:** no watermarks, no paywalled downloads on Phase 1-3 tools. Pro sells volume (bigger files, batch, AI credits), not basic output.
-4. **Lazy-load heavy libraries.** `@react-pdf/renderer`, `docx`, `pdfjs-dist`, `ffmpeg.wasm`, `tesseract.js` must never load on pages that do not use them.
-5. **Every tool has its own SEO page** generated from the registry.
-6. **Existing resume builder keeps working** at every step of the merge (`npm run check` must stay green).
+1. **100% In-Browser Privacy by Default (Zero Server Uploads):**
+   - For all client tools (`runtime: 'client'` or `'client-worker'`), user files and text must **never** leave device RAM.
+   - Strictly forbidden in client tools: `fetch`, `XMLHttpRequest`, `sendBeacon`, WebSockets carrying user payload, or form POSTs.
+   - Enforce Content-Security-Policy: `connect-src 'self'`.
+   - Zero telemetry tracking, zero third-party analytics pixels, zero external API logging of user content.
+   - Validated automatically on every commit via `npm run test:privacy`.
 
-## 2. Product structure
+2. **Zero Paywalls & Zero Forced Registrations:**
+   - Free means 100% free forever: zero watermarks on exported PDFs or images, zero paywalled downloads, zero trial expirations, and zero mandatory account creation for client tools.
+   - Accounts are strictly optional and reserved for future Phase 5 cloud features.
 
-| Area | Route | Notes |
-| :--- | :--- | :--- |
-| Landing (Cleartrix) | `/` | Brand hero, featured tools, privacy promise, resume builder highlight |
-| Tools hub | `/tools` | Search, categories, popular tools |
-| Category page | `/tools/[category]` | Lists tools of one category (SEO hub) |
-| Tool page | `/tools/[category]/[slug]` | One tool, generated from registry |
-| Resume Builder | `/editor`, `/dashboard` (keep as-is at first) | Optional later move to `/resume-builder/*` with 301 redirects |
-| Static pages | `/privacy`, `/terms`, `/brand` | Update text for Cleartrix |
+3. **Multi-Format Export Parity & Resume Builder Continuity:**
+   - The flagship Resume Builder (`/editor`) and its 20 professional styles maintain exact pixel-level alignment across:
+     - **Web DOM** (Live interactive preview)
+     - **Vector PDF** (`@react-pdf/renderer` rendering vector text, selectable fonts, ATS compliance)
+     - **Native Word DOCX** (`docx` library generating standard OOXML packages)
+   - Any enhancement to the platform must keep the resume builder and its tests (`npm run test:pdf`, `npm run test:docx`, `npm run test:resumes`) 100% green.
 
-**Category slugs:** `documents-pdf`, `images`, `security-privacy`, `sharing`, `codes`, `video`, `audio`, `builders`, `developer`, `utilities`, `calculators`.
+4. **Lazy-Load Heavy Libraries:**
+   - Heavy dependencies (`@react-pdf/renderer`, `docx`, `pdfjs-dist`, `pdf-lib`, `ffmpeg.wasm`, `tesseract.js`, `konva`, `xlsx`) must **NEVER** be imported into global layouts or unrelated pages.
+   - Use dynamic imports (`next/dynamic` or `import()`) only when the specific tool loads or runs.
 
-## 3. Target architecture
+5. **Registry-Driven Dynamic Architecture:**
+   - All tool pages (`/tools/[category]/[slug]`), category hubs (`/tools/[category]`), tools directory (`/tools`), navigation menus, search palettes, and `sitemap.ts` are generated dynamically from `lib/registry/tools.ts` and `lib/registry/categories.ts`.
+   - Never hand-code or hard-code static tool routes.
 
-Keep the single Next.js app now. Do not split into a monorepo until the team grows. Add these next to existing folders:
+6. **Mandatory Statutory Disclaimers:**
+   - Any tool performing financial or taxation calculations (e.g. mortgage, sales tax, inflation, salary paycheck, loan) **must** display the standard statutory financial disclaimer.
+   - Any tool calculating health or body metrics (e.g. BMI, BMR/TDEE, water intake, calories) **must** display the standard medical disclaimer.
+
+---
+
+## 2. Codebase Directory Structure
 
 ```
-app/
-  tools/
-    page.tsx                        # hub
-    [category]/page.tsx             # category hub
-    [category]/[slug]/page.tsx      # tool page (reads registry)
-components/
-  tool-shell/                       # ToolLayout, UploadBox, ProgressBar, ResultPanel, ErrorState, RelatedTools
-lib/
-  brand.ts                          # single source for name, tagline, domain, colors
-  registry/
-    types.ts                        # ToolDefinition, CategoryId
-    categories.ts                   # 11 categories
-    tools.ts                        # all 175 tools (one entry each)
-  workers/                          # worker runner (cancel, progress, memory guard)
-  storage/                          # prefixed localStorage + IndexedDB helpers
-tools/
-  <category>/<slug>/
-    index.tsx                       # UI (uses ToolLayout)
-    logic.ts                        # pure functions, unit-tested
-    logic.test.ts
+cleartrix/
+├── app/                                    # Next.js 15 App Router
+│   ├── layout.tsx                          # Root layout with Brand metadata, ThemeProvider, Toast, Header & Footer
+│   ├── page.tsx                            # Cleartrix homepage (hero, trust pill, tools showcase, templates)
+│   ├── brand/page.tsx                      # Brand guidelines, assets & palette
+│   ├── dashboard/page.tsx                  # Multi-resume manager with local drafts
+│   ├── editor/page.tsx                     # Flagship ATS Resume Builder editor workspace
+│   ├── blog/                               # Career guides and platform documentation
+│   ├── privacy/page.tsx                    # Privacy Policy & 100% client-side execution guarantees
+│   ├── terms/page.tsx                      # Terms of Service
+│   ├── sitemap.ts                          # Automated dynamic sitemap for all 168+ tools and hubs
+│   ├── robots.ts                           # Search engine crawling rules
+│   └── tools/                              # Dynamic Tools Engine
+│       ├── page.tsx                        # Complete tools directory hub (live search + category filters)
+│       ├── [category]/page.tsx             # Category SEO hub listing all tools in that category
+│       └── [category]/[slug]/page.tsx      # Tool workspace (renders dynamic ToolView)
+├── components/
+│   ├── Navbar.tsx                          # Header navbar with Mega Menu trigger, search shortcut & mobile drawer
+│   ├── NavbarMegaMenu.tsx                  # Two-pane desktop mega menu (all 11 categories + search + tools grid)
+│   ├── Footer.tsx                          # Universal footer with category sitemap & legal links
+│   ├── BrandLogo.tsx                       # Brand logo SVG component (umbrella brand & resume builder)
+│   ├── ThemeToggle.tsx                     # System/Dark/Light theme switch
+│   ├── tool-shell/                         # Reusable standardized tool UI components
+│   │   ├── ToolLayout.tsx                  # Tool container (H1, intro, privacy badge, FAQs, related tools)
+│   │   ├── UploadBox.tsx                   # Drag-and-drop file upload with 5MB in-memory guard
+│   │   ├── ProgressBar.tsx                 # Processing progress bar with cancel action
+│   │   ├── ResultPanel.tsx                 # Output action bar (Copy, Download, Reset)
+│   │   └── ErrorState.tsx                  # User-friendly error boundary & recovery card
+│   └── tools/
+│       ├── ToolView.tsx                    # Dynamic client-side tool loader & RSC boundary
+│       ├── CommandPalette.tsx              # Global Ctrl+K / Cmd+K instant tool search dialog
+│       └── phase1/                         # Shipped modular tool packages (<slug>/)
+│           └── <slug>/
+│               ├── index.tsx               # Interactive React UI component
+│               ├── logic.ts                # Pure TypeScript domain logic (no React, zero DOM)
+│               └── logic.test.ts           # Pure unit test assertions
+├── lib/
+│   ├── brand.ts                            # Canonical brand configuration (name, domain, storage prefix)
+│   ├── tool-icons.ts                       # Dynamic icon resolver and category fallback icon mappings
+│   ├── empty-module.js                     # Webpack stub aliasing optional Node modules (canvas, encoding)
+│   ├── registry/                           # Tool catalog source of truth (pure serializable data)
+│   │   ├── types.ts                        # ToolDefinition, CategoryId, CategoryDefinition
+│   │   ├── categories.ts                   # 11 category definitions with metadata and IDs
+│   │   └── tools.ts                        # Central registry containing all 168+ tool definitions
+│   ├── store/                              # State management
+│   │   ├── migrate-brand.ts                # Non-destructive localStorage key migration to ct_ prefix
+│   │   ├── storage-utils.ts                # Safe localStorage wrappers with quota guards
+│   │   ├── use-resume-store.ts             # Active resume document state, history, undo/redo
+│   │   └── use-resume-index-store.ts       # Multi-resume index CRUD
+│   ├── pdf/                                # 20 vector PDF templates (@react-pdf/renderer)
+│   ├── docx/                               # 20 native Word templates (docx OOXML package generator)
+│   └── import/                             # In-browser PDF & Word resume parser
+├── scripts/                                # Verification & Quality Assurance Suite
+│   ├── test-tools.ts                       # Unit test runner executing all tool logic.test.ts suites
+│   ├── test-registry.ts                    # Schema validator (unique slugs, categories, SEO, FAQs)
+│   ├── test-privacy.ts                     # AST/regex scanner ensuring zero network leaks in client tools
+│   ├── test-docx-templates.ts              # Validates 20 Word template packages
+│   ├── test-pdf-templates.tsx              # Validates 20 PDF templates
+│   ├── test-multi-resume-store.ts          # Validates multi-resume storage & brand migration
+│   └── test-import-parser.ts               # Validates client-side resume import
+├── prisma/schema.prisma                    # PostgreSQL database schema (for future Phase 5 accounts)
+└── PROJECT.md                              # This master documentation and architectural guide
 ```
 
-**Registry entry (one per tool):**
+---
 
-```ts
-export type Runtime = 'client' | 'client-worker' | 'server';
-export type HeavyDep = 'react-pdf' | 'docx' | 'pdfjs' | 'pdf-lib' | 'ffmpeg' | 'tesseract' | 'konva';
+## 3. The 4-File Modular Tool Pattern
 
-export interface ToolDefinition {
-  slug: string;                       // kebab-case, unique, never changes after launch
-  name: string;
-  category: CategoryId;
-  phase: 1 | 2 | 3 | 4 | 5;
-  status: 'planned' | 'in-progress' | 'live';
-  runtime: Runtime;
-  heavyDeps?: HeavyDep[];
-  seo: { title: string; description: string; h1: string; intro: string; faq: { q: string; a: string }[] };
-  related: string[];                  // slugs
-  load: () => Promise<{ default: React.ComponentType }>;   // dynamic import
-}
-```
+Every tool in Cleartrix must be built using this strict, modular 4-file pattern. Never combine domain logic with React components:
 
-The tool page, category page, hub search, navigation and `sitemap.ts` are all generated from this registry. Never hand-write a tool route.
+### 1. `components/tools/phase1/<slug>/logic.ts`
+- **Rule:** Contains **only pure TypeScript functions and interfaces**.
+- **Forbidden:** Zero React hooks, zero JSX, zero DOM manipulation, zero `window` or `document` calls.
+- **Purpose:** All mathematical, parsing, encoding, conversion, or formatting algorithms live here so they can be unit-tested in isolation in Node.js or Web Workers.
+- **Example:**
+  ```ts
+  export interface ToolInput {
+    value: string;
+    options?: { format: string };
+  }
+  export interface ToolOutput {
+    result: string;
+    metrics?: Record<string, number>;
+  }
+  export function processToolLogic(input: ToolInput): ToolOutput {
+    if (!input.value) throw new Error("Input cannot be empty");
+    return { result: input.value.trim() };
+  }
+  ```
 
-## 4. Reuse map (do not rebuild what exists)
+### 2. `components/tools/phase1/<slug>/logic.test.ts`
+- **Rule:** Exports `runTests(): boolean | Promise<boolean>`.
+- **Purpose:** Executes deterministic test vectors and edge cases (empty strings, zero, boundary numbers, corrupted inputs). Throws an informative `Error` if any assertion fails.
+- **Example:**
+  ```ts
+  import { processToolLogic } from "./logic";
 
-| Existing asset | Reuse for |
-| :--- | :--- |
-| `lib/pdf` (react-pdf) | Invoice, quote, certificate, letterhead, proposal, business card, Markdown to PDF |
-| `lib/docx` | DOCX creator/editor, cover letter, PDF to Word (basic) |
-| `lib/import` (pdfjs + mammoth) | PDF text extraction, form field extractor, public **ATS Resume Checker** |
-| ATS audit engine | Free public ATS checker page (strong SEO) |
-| Zustand + Zod patterns | Tool state, options validation |
-| Radix UI + Tailwind tokens | Tool shell UI |
-| `scripts/` test runners | Extend with `test:registry` and `test:tools` |
-| Prisma + PostgreSQL | Phase 5 accounts, billing, sharing |
+  export function runTests(): boolean {
+    const res = processToolLogic({ value: "  hello world  " });
+    if (res.result !== "hello world") {
+      throw new Error(`Expected 'hello world', got '${res.result}'`);
+    }
+    return true;
+  }
+  ```
 
-**Rule for builders (resume, invoice, certificate, poster...):** one source template rendered to DOM and PDF only. Add DOCX only where users clearly need it. Do not repeat the 3-renderer pattern for every template.
+### 3. `components/tools/phase1/<slug>/index.tsx`
+- **Rule:** Starts with `"use client";`.
+- **Features:**
+  - Fully responsive on mobile, tablet, and desktop.
+  - High-contrast Dark/Light mode support using Tailwind tokens.
+  - Preset/Sample buttons for instant user trial.
+  - One-click **Copy to Clipboard** with visual checkmark feedback.
+  - One-click **Download** button where applicable.
+  - Statutory disclaimer box if the tool calculates financial, medical, or legal data.
 
-## 4B. Python Hybrid Architecture & AI Boost (FastAPI + Pyodide)
+### 4. Registration (The 3 Connection Points)
+To connect the new tool to the application:
+1. **`lib/registry/tools.ts`**: Add tool metadata object:
+   ```ts
+   {
+     slug: "my-tool-slug",
+     name: "My Tool Name",
+     category: "developer",
+     phase: 1,
+     status: "live",
+     runtime: "client",
+     seo: {
+       title: "My Tool Name — Free Online Privacy Tool",
+       description: "Fast, in-browser privacy tool. No uploads, no account needed.",
+       h1: "Free Online My Tool",
+       intro: "Easily perform operations directly in your browser with zero data retention.",
+       faq: [
+         { q: "Is my data uploaded to a server?", a: "No. All processing happens 100% locally in your browser." },
+         { q: "Is this tool free?", a: "Yes, completely free with no limits or watermarks." },
+         { q: "Does it work offline?", a: "Yes, once loaded, it executes offline via client-side JavaScript." }
+       ]
+     },
+     related: ["json-formatter", "base64-converter"],
+   }
+   ```
+2. **`components/tools/ToolView.tsx`**: Add dynamic import into `TOOL_COMPONENTS`:
+   ```ts
+   "my-tool-slug": dynamic(() => import("@/components/tools/phase1/my-tool-slug"), {
+     ssr: false,
+     loading: () => <ToolLoadingState name="My Tool Name" />,
+   }),
+   ```
+3. **`scripts/test-tools.ts`**: Import and call the test:
+   ```ts
+   import { runTests as testMyTool } from "@/components/tools/phase1/my-tool-slug/logic.test";
+   // Inside runAllTests():
+   testMyTool();
+   ```
 
-Next.js (TypeScript) and Python form a high-performance **hybrid architecture** that balances privacy, UI speed, and deep computational/AI power:
+---
 
-```mermaid
-flowchart TD
-  User([User Browser]) -->|Instant UI & SEO| NextJS[Next.js App Router Frontend]
-  NextJS -->|Client-Side Tools 100% Privacy| BrowserWorkers[In-Browser WebAssembly & Web Workers]
-  BrowserWorkers --> PyodideWASM[Pyodide WASM: SymPy / Pandas / Client Python]
-  
-  NextJS -.->|Explicit Server AI Tools Only| FastAPI[FastAPI Microservice Backend]
-  FastAPI --> PyTorch[PyTorch / ONNX Runtime]
-  FastAPI --> AIModels[Whisper / Demucs / RemBG / Real-ESRGAN]
-  FastAPI --> DocEngines[LibreOffice Headless / PyMuPDF / PaddleOCR]
-```
+## 4. UI / UX & Design System Guidelines
 
-### 1. Why Python + Next.js is an Exceptional Strategy for Cleartrix
-- **Next.js Strengths:** Lightning-fast static prerendering (SSG), best-in-class SEO for 175 landing pages, responsive mobile UI, client-side state (Zustand), zero server cost for standard tools.
-- **Python Strengths:** Undisputed global standard for Artificial Intelligence, machine learning models, audio stem processing, computer vision, scientific math, and high-fidelity document conversion.
-- **Combined Advantage:** Keep 80%+ of everyday tools running client-side in Next.js/TypeScript with zero server costs, while unlocking heavyweight Phase 4 AI capabilities and high-fidelity conversions via a specialized Python engine.
+### Colors & Dark Mode Tokens
+- **Standard Tailwind Grays Only:** Always use standard Tailwind slate colors:
+  - Backgrounds: `bg-white dark:bg-slate-900`
+  - Cards & Panels: `bg-slate-50/80 dark:bg-slate-800/90`
+  - Borders: `border-slate-200 dark:border-slate-700/80`
+  - Body Text: `text-slate-700 dark:text-slate-200`
+  - Headings: `text-slate-900 dark:text-white`
+  - Secondary/Muted: `text-slate-500 dark:text-slate-400`
+- **STRICT PROHIBITION:** Never invent custom color classes like `slate-850` or `slate-750` that do not exist in Tailwind defaults, as they silently fail to render in production.
 
-### 2. Layer A: Client-Side Python via WebAssembly (`Pyodide`)
-- **How it works:** Runs standard Python and scientific wheels (NumPy, SymPy, Pandas) directly inside browser Web Workers using WebAssembly.
-- **Privacy benefit:** 100% client-side execution; user data never leaves device RAM.
-- **Use cases:** Symbolic algebra & calculus solver, in-browser data science tables, Python script runner/sandbox, mathematical graphing.
+### Navigation & Header Mega Menu
+- **Desktop Navigation:**
+  - "Tools" nav item triggers the two-pane **Mega Menu** (`components/NavbarMegaMenu.tsx`) on hover or click.
+  - Hovering adjacent links (*Blog, Templates, Features, My Resumes, FAQ*) automatically closes the mega menu.
+  - Click-outside and Escape key handlers dismiss the menu.
+  - `usePathname()` route listener closes all open menus upon navigation.
+- **Mega Menu Layout (`components/NavbarMegaMenu.tsx`):**
+  - **Left Pane:** Lists all 11 categories with custom icons, active state badges, and live tool counts.
+  - **Right Pane:** Categorized tools grid with individual icons, titles, descriptions, and direct deep-links.
+  - **Live In-Menu Search:** Real-time filter across all 168+ tools by name, slug, description, and category.
+  - **Footer:** In-browser WebAssembly privacy guarantee + direct link to `/tools`.
+- **Mobile Responsive Navigation (< 1024px):**
+  - Mobile hamburger drawer includes an expandable **"Tools & Utilities" accordion**.
+  - Includes mobile search input, horizontal-scrolling category pills, and direct tool links.
 
-### 3. Layer B: Server-Side AI Microservice (`FastAPI` Modern Stack)
-When a user explicitly invokes a heavyweight Phase 4 AI tool that exceeds browser WASM capabilities (100MB+ models), the request routes to a dedicated Python backend:
-- **Framework:** **FastAPI** (asynchronous ASGI, high throughput, automatic OpenAPI/Swagger documentation, strict Pydantic v2 schemas that match frontend Zod types).
-- **Core AI & Media Libraries:**
-  - **Speech-to-Text Transcription:** `faster-whisper` (CTranslate2-optimized OpenAI Whisper).
-  - **Audio Stem Separation & Vocal Removal:** `demucs` (Meta AI state-of-the-art 4-stem model).
-  - **AI Background Removal:** `rembg` / `birefnet` (deep learning alpha matting).
-  - **Super-Resolution Image Upscaling:** `Real-ESRGAN` / `Upscayl` (4x image restoration).
-  - **Computer Vision & Deskewing:** `OpenCV` + `scikit-image` (automatic edge detection & perspective flattening).
-  - **High-Fidelity Office & PDF Conversion:** Headless `LibreOffice` + `PyMuPDF` (`fitz`) + `pdf2docx`.
-  - **Document OCR:** `PaddleOCR` / `EasyOCR` for complex multi-column and multilingual document recognition.
-- **Task Queue & Concurrency:** `Redis` + `Celery` / `Arq` for asynchronous job processing with streaming progress over Server-Sent Events (SSE).
+### Brand Identity & Storage Migration
+- Canonical brand settings are in `lib/brand.ts` (`BRAND.name = "Cleartrix"`, `BRAND.domain = "https://cleartrix.com"`, `storagePrefix = "ct_"`).
+- All `localStorage` keys must use the `ct_` prefix.
+- `lib/store/migrate-brand.ts` transparently copies legacy keys upon boot without deleting them to protect existing user resume drafts.
 
-### 4. Non-Negotiable Privacy Invariant for Python Server Tools
-- **Ephemeral RAM Processing:** All incoming user media is processed in memory (`io.BytesIO`) or temporary RAM mounts (`/dev/shm`).
-- **Zero Data Retention:** Server files are wiped automatically immediately after the HTTP response stream closes. Zero disk caching, zero database storage of user files.
-- **Transparent User Consent:** Any tool powered by the server microservice must display a clear privacy badge: *"Requires ephemeral server processing. File is processed in RAM and deleted immediately upon download."*
+---
 
-## 5. Coding rules
+## 5. Solved Engineering Lessons & Gotchas
 
-- TypeScript strict. No `any` without a comment. Validate user options and imported files with Zod.
-- Tool logic lives in pure functions (`logic.ts`) so it can be unit-tested without the browser.
-- Heavy work runs in a Web Worker with progress and cancel. Cap file sizes and show a clear message above the limit.
-- Storage: `localStorage` only for small settings and resume drafts (5 MB cap); use IndexedDB for anything file-sized. All keys use the `mk_` prefix.
-- Accessibility: keyboard usable, labels on inputs, focus states, contrast checked.
-- One pdfjs version and one worker file shared by the whole app.
-- No new dependency without checking its bundle size and license. Prefer permissive licenses (MIT/Apache/BSD). Check licenses of fonts, templates and mockup images.
-- Small, reviewable commits. One tool or one refactor per PR.
+Any developer or AI modifying this codebase must adhere to these established solutions:
 
-## 6. Definition of done (every tool)
+1. **BigInt Literals Syntax:**
+   - Never use BigInt literal notation (e.g. `0n`, `32n`, `126n`) because compiler targets lower than ES2020 fail.
+   - **Always use:** `BigInt(0)`, `BigInt(32)`, `BigInt(126)`.
 
-- [ ] Registry entry complete (SEO title, description, H1, intro, at least 3 FAQs, related tools)
-- [ ] Works on Chrome, Edge, Firefox, Safari and a phone
-- [ ] Handles empty, large and corrupt input with a friendly message
-- [ ] Unit tests for `logic.ts` pass
-- [ ] No network request carries user data (verified in the browser Network tab)
-- [ ] Heavy libraries load only on this tool's page
-- [ ] Lighthouse: performance and accessibility at 90+ on the tool page
-- [ ] Disclaimer added if the tool is tax, payroll, health or legal related
-- [ ] `npm run check` is green
+2. **Strict Indexed Access (`noUncheckedIndexedAccess`):**
+   - In strict TypeScript, array or string indexing returns `T | undefined`.
+   - **Always use:** `str.charAt(0)` for strings, or `arr[0] ?? fallback` for arrays.
 
-## 7. Commands
+3. **Strict Block Function Declarations:**
+   - In strict mode, declaring `function helper() {}` inside `if`, `try`, or `switch` blocks triggers errors.
+   - **Always use arrow functions:** `const helper = () => {};`.
+
+4. **Webpack 5 Server Prerender Stub (`empty-module.js`):**
+   - Certain optional Node dependencies (e.g. `canvas`, `encoding`) fail during static page prerendering (`next build`).
+   - We alias them in `next.config.mjs` to `lib/empty-module.js` (`module.exports = {};`).
+
+5. **RSC Serialization Boundary:**
+   - Keep `lib/registry/tools.ts` strictly serializable (no React functions or JSX elements).
+   - All dynamic component loading lives in `components/tools/ToolView.tsx`.
+
+6. **PowerShell Script Execution on Windows:**
+   - Windows PowerShell restricts execution of `.ps1` scripts by default.
+   - When running build or test scripts in PowerShell, always execute via:
+     `cmd.exe /c "npm run ..."` or `node node_modules/...`
+
+7. **Git Policy:**
+   - Unless explicitly instructed by the user, keep all edits in the local working tree and do not run git commands (`git add`, `git commit`, `git push`, `git checkout`).
+
+---
+
+## 6. The 11 Platform Categories & 168+ Shipped Tools
+
+The platform contains 168 tools completely implemented and typed across 11 official categories:
+
+1. **Document & PDF (`document-pdf` — 28 tools):**  
+   `pdf-merger`, `pdf-splitter`, `pdf-compressor`, `pdf-page-rotator`, `pdf-page-organizer`, `pdf-bates-stamper`, `pdf-flattener`, `pdf-annotator`, `pdf-redaction-tool`, `pdf-form-builder`, `pdf-form-extractor`, `pdf-digital-signer`, `pdf-encryptor`, `pdf-decryptor`, `docx-to-pdf`, `pdf-to-docx`, `excel-to-pdf`, `powerpoint-to-pdf`, `markdown-to-pdf`, `html-to-pdf`, `direct-docx-editor`, `direct-txt-editor`, `direct-markdown-editor`, `direct-html-editor`, `direct-rtf-creator`, `markdown-note-maker`, `ats-resume-checker`, `resume-import-viewer`.
+
+2. **Developer, Data & Code (`developer` — 18 tools):**  
+   `json-formatter`, `base64-converter`, `csv-json-converter`, `hash-generator`, `url-encoder`, `html-beautifier`, `text-diff`, `regex-tester`, `html-entity-encoder`, `json-xml-converter`, `unicode-normalizer`, `sql-formatter`, `hmac-generator`, `json-yaml-converter`, `json-schema-validator`, `code-minifier`, `sql-dump-to-csv`, `excel-to-json-csv`.
+
+3. **Everyday Utilities (`utilities` — 11 tools):**  
+   `word-counter`, `password-generator`, `case-converter`, `lorem-generator`, `duplicate-line-remover`, `unit-converter`, `epoch-converter`, `checksum-verifier`, `chmod-calculator`, `archive-extractor`, `archive-packer`.
+
+4. **Calculators (`calculators` — 34 tools):**  
+   `mortgage-calculator`, `compound-interest-calculator`, `percentage-calculator`, `bmi-calculator`, `date-calculator`, `age-calculator`, `discount-calculator`, `base-converter`, `sales-tax-calculator`, `freelance-rate-calculator`, `calorie-calculator`, `water-intake-calculator`, `auto-loan-calculator`, `scientific-calculator`, `aspect-ratio-calculator`, `bmr-tdee-calculator`, `inflation-calculator`, `ip-subnet-calculator`, `statistics-calculator`, `fraction-simplifier`, `geometry-calculator`, `time-card-calculator`, `world-clock-converter`, `bandwidth-calculator`, `sip-calculator`, `retirement-401k-calculator`, `debt-payoff-calculator`, `roi-calculator`, `profit-margin-calculator`, `break-even-calculator`, `payroll-paycheck-calculator`, `body-fat-calculator`, `target-heart-rate-calculator`, `pregnancy-due-date-calculator`.
+
+5. **Image Tools (`image` — 11 tools):**  
+   `image-converter`, `aspect-ratio-cropper`, `canvas-resizer`, `batch-image-compressor`, `exif-stripper`, `image-base64-converter`, `svg-minifier`, `favicon-generator`, `image-rotator-flipper`, `photo-filter-studio`, `image-watermarker`.
+
+6. **Codes & Barcodes (`codes` — 4 tools):**  
+   `qr-generator`, `barcode-generator`, `barcode-scanner`, `qr-scanner`.
+
+7. **Security & Privacy (`security` — 4 tools):**  
+   `file-encryptor`, `file-decryptor`, `steganography-tool`, `metadata-stripper`.
+
+8. **Builders (`builders` — 1 tool):**  
+   `resume-builder` (Flagship ATS builder with 20 templates and 3-way DOM/PDF/Word export).
+
+9. **Video & Screen Capture (`video` — planned Phase 3):**  
+   Webcam & screen recording, video transcoder, video cutter/merger via `ffmpeg.wasm`.
+
+10. **Audio & Voice (`audio` — planned Phase 3):**  
+    Voice recorder, audio format converter, waveform cutter, volume normalizer.
+
+11. **URL & Cloud (`url-cloud` — planned Phase 5):**  
+    Burn-after-read secret sharer, pastebin, link protector.
+
+---
+
+## 7. Quality Assurance & Verification Commands
+
+Before concluding any feature, tool addition, or refactoring task, execute the verification suite:
 
 ```bash
-# existing
-npm run dev
-npm run typecheck
-npm run test:schema
-npm run test:pdf
-npm run test:import
-npm run test:docx
-npm run test:resumes
-npm run check          # runs everything above
+# Typecheck
+node node_modules/typescript/bin/tsc --noEmit
 
-# add during Phase 0
-npm run test:registry  # every tool has unique slug, valid category/phase, SEO fields, existing component
-npm run test:tools     # unit tests for tools/**/logic.test.ts
-npm run test:privacy   # scans tools/** for fetch/XMLHttpRequest/sendBeacon (client tools must have none)
-npm run build          # must succeed with all routes generated
+# Tool Logic Unit Tests
+npx tsx scripts/test-tools.ts
+
+# Registry & Schema Integrity Check
+npx tsx scripts/test-registry.ts
+
+# Privacy & Zero-Leak Network Scanner
+npx tsx scripts/test-privacy.ts
+
+# Resume Templates Verification
+npx tsx scripts/test-pdf-templates.tsx
+npx tsx scripts/test-docx-templates.ts
+npx tsx scripts/test-multi-resume-store.ts
+npx tsx scripts/test-import-parser.ts
+
+# Full Master Verification Suite
+npm run check
+
+# Production Build & Static Route Prerender
+npm run build
 ```
-
-Update `check` to include `test:registry`, `test:tools` and `test:privacy`.
-
-**Enforce privacy in the browser too:** on `/tools/*` set a Content-Security-Policy header with `connect-src 'self'` (relax only for server-runtime tools), so an accidental upload fails loudly.
-
-## 8. Phase plan and full tool inventory (175 tools)
-
-Time estimates assume 2-3 developers. Total is roughly 9-12 months because the resume builder is already built.
-
-| Phase | Focus | Tools | Time |
-| :--- | :--- | :--- | :--- |
-| 0 | Platform, registry, tool shell, SEO base, brand switch | Foundation | 3-4 weeks |
-| 1 | Developer, utilities, calculators, codes (+ resume-adjacent tools) | 70 | 6-8 weeks |
-| 2 | PDF, image, privacy | 41 | 8-10 weeks |
-| 3 | Media, document builders, design makers | 48 | 10-12 weeks |
-| 4 | AI and heavy processing | 8 | 8-10 weeks |
-| 5 | Accounts, backend, sharing | 5 | 6-8 weeks |
-| Deferred | Not planned | 3 | n/a |
-
-### Phase 0: Platform (tasks)
-- [ ] Brand switch to Cleartrix (Part B)
-- [ ] `lib/registry` (types, categories, tools) and generated routes
-- [ ] Tool shell components (layout, upload box, progress, result, errors, related tools)
-- [ ] Worker runner, storage helpers, size-limit guard
-- [ ] Navbar with Tools menu and global search; category hubs
-- [ ] SEO: metadata per tool, schema markup, sitemap, robots
-- [ ] Test scripts `test:registry`, `test:tools`, `test:privacy`; CI pipeline
-- [ ] Pilot: ship 5 tools (JSON formatter, QR generator, word counter, mortgage calculator, Base64)
-
-### Phase 1 (70 tools)
-- **Developer, Data & Code (17):** CSV to JSON / JSON to CSV; JSON to XML / XML to JSON; YAML to JSON / JSON to YAML; Excel to JSON/CSV; SQL Dump to CSV; HTML/CSS/JS Beautifier & Formatter; HTML/CSS/JS Minifier; SQL Formatter; Text & Code Diff Comparator; JSON Schema Validator; Regex Tester & Debugger; Base64 Encoder/Decoder; URL Encoder/Decoder; HTML Entity Encoder/Decoder; Unicode Normalizer; Cryptographic Hash Generator (MD5, SHA-1, SHA-256, SHA-512); HMAC Generator
-- **Everyday Utilities (10):** Case Converter; Duplicate Line Remover; Word & Character Counter; Lorem Ipsum Generator; Strong Password/Passphrase Generator; Checksum Verifier; ZIP/TAR/GZ Archive Extractor; Multi-File Archive Packer; Unit Converter; Timezone & Epoch Timestamp Converter
-- **Codes & Barcodes (4):** Barcode Generator (UPC-A, EAN-13, Code 128, Code 39, ITF); Barcode Scanner/Reader; Custom QR Code Generator; QR Code Scanner/Decoder
-- **Calculators, finance (15):** Mortgage & Home Loan; Auto Loan & Lease; Compound Interest & Savings; Retirement/401(k); SIP & Mutual Funds; Debt Payoff (Snowball/Avalanche); Inflation & Purchasing Power; ROI; Income Tax & Bracket; Sales Tax/VAT/GST; Profit Margin & Markup; Break-Even Analysis; Freelance Hourly Rate; Discount & Percentage Off; Payroll & Net Paycheck
-- **Calculators, math (7):** Scientific; Graphing; Percentage; Fraction & Ratio Simplifier; Statistics & Probability; Matrix & Linear Algebra; Geometry (Area & Volume)
-- **Calculators, health (7):** BMI; BMR & TDEE; Calorie & Macro Split; Body Fat Percentage; Target Heart Rate; Daily Water Intake; Pregnancy Due Date & Ovulation
-- **Calculators, date/time/tech (10):** Date Difference; Date Add/Subtract; Age; Time Card/Work Hours; World Clock & Timezone Offset; IP Subnet & CIDR; Bandwidth & Download Time; Binary/Hex/Octal Converter; Chmod Permissions; Aspect Ratio & Resolution
-- **Resume-adjacent bonus pages (reuse existing engines, not counted in 175):** public ATS Resume Checker, Resume PDF/DOCX import viewer
-
-Notes: tax/payroll/VAT/GST calculators need country config, start with 1-2 countries and add a disclaimer. Health calculators need a "not medical advice" notice.
-
-### Phase 2 (41 tools)
-- **PDF tools (13):** PDF Merger; PDF Splitter; PDF Compressor; PDF Page Organizer/Reorder; PDF Page Rotator; PDF Page Numberer/Bates Stamper; PDF Encryptor; PDF Decryptor; PDF Flattener; PDF Annotation Tool; Form Field Extractor; Fillable PDF Form Builder; Digital PDF Signer (visual signature first)
-- **Converters, basic fidelity (5):** DOCX to PDF; PDF to Word (DOCX); Excel to PDF; PowerPoint to PDF; Markdown to PDF/HTML (Office conversions get a server upgrade in Phase 4)
-- **Creators/editors (6):** Direct DOCX Creator/Editor; Direct TXT Creator; Direct Markdown Note Maker; Direct RTF Creator; Direct HTML Document Creator; Markdown Live Editor
-- **Image tools (11):** Image Format Converter (PNG/WebP/JPG/HEIC/SVG/TIFF/RAW); Aspect Ratio Cropper; Canvas Resizer; Image Rotator & Flipper; Batch Image Compressor/Optimizer; Color Balancer; Photo Retouching & Filter Tool; Image Watermarker; Multi-Size Favicon/App Icon Generator; SVG Minifier/Optimizer; EXIF Metadata Viewer & Stripper
-- **Security & privacy (5):** Protected File Locker/Encryptor (AES-256); Protected File Opener/Decryptor; Steganography Tool; File Metadata Stripper & Privacy Sanitizer; PDF Redaction Tool
-- **Local utility (1):** Image to Base64 Data URI Converter
-
-Notes: PDF redaction must remove underlying text, not just draw a box (verify with text extraction). RAW/HEIC decoding is heavy, ship common formats first.
-
-### Phase 3 (48 tools)
-- **Document extras (4):** OCR Tool (browser-based); Camera-to-PDF Deskewing Scanner; LaTeX Equation/Paper Editor; eBook Converter & Editor
-- **Image extra (1):** Bitmap-to-Vector Tracer
-- **Screen capture & video (13):** Full-Desktop Screen Recorder; Window & Application Recorder; Picture-in-Picture Webcam & Screen Overlay Recorder; Browser-Based Tab Recorder; Video Format Transcoder (MOV/MKV/AVI/MP4/WebM); Stream-Copy Video Cutter/Trimmer; Video Joiner/Merger; Video Cropper & Canvas Resizer; Codec/Bitrate Video Compressor; Video Speed Controller; Audio-from-Video Ripper (MP4 to MP3); Subtitle & Caption Synchronizer/Editor; Video-to-GIF/WebP Maker
-- **Audio & voice (9):** Audio Format Converter (WAV/MP3/M4A/FLAC/AAC/OGG); Waveform Audio Trimmer & Cutter; Ringtone Maker; Audio Joiner with Crossfade; In-Browser Voice Recorder; Pitch Shifter; Audio Reverser; Dynamic Volume Booster/Normalizer; ID3 Audio Tag & Metadata Editor
-- **Business documents (9):** ATS-Friendly Resume/CV Builder (already built, register it here); Cover Letter Maker; Professional Invoice & Receipt Generator; Estimate/Quote Builder; Business Card Generator; Proposal & Agreement Builder; Letterhead & Memo Builder; Certificate & Diploma Generator; Printable Label & Sticker Maker
-- **Social, marketing & design (12):** Social Media Feed Post Maker (1:1, 4:5); Story & Reels Canvas Maker (9:16); Video Thumbnail Maker (16:9); Channel & Profile Banner Designer; Ad Creative & Carousel Maker; Poster & Event Flyer Maker; Brochure & Pamphlet Builder; Restaurant Menu Maker; Device Mockup Generator; Meme Caption Generator; Typography Quote Maker; Chart & Graph Visualizer
-
-Notes: build one shared canvas editor (Konva or Fabric.js) and one template engine. `ffmpeg.wasm` is about 30 MB: load on demand and cap size on mobile. Screen recorders use `getDisplayMedia`.
-
-### Phase 4 (8 tools)
-AI Background Remover; AI Image Upscaler/Super-Resolution; Object/Watermark Eraser; Image Colorizer; Video Stabilizer; AI Vocal Remover & Stem Splitter; Background Noise Reducer; Speech-to-Text Transcriber. Also: server-side upgrade of Office-to-PDF and PDF-to-Word, and OCR at scale. Try in-browser models (ONNX/WebGPU) first. Server files are auto-deleted within minutes.
-
-### Phase 5 (5 tools)
-Image to URL/Secure Asset Host; Secure URL Shortener & Link Protector; Temporary Pastebin/Text Sharer; Secret Key/Password Sender (Burn-After-Read); Self-Destructing File Share. Also: optional accounts, Stripe billing, moderation, abuse reporting, rate limits, malware/URL scanning. Burn-after-read: encrypt in the browser and keep the key in the URL fragment.
-
-### Deferred / skipped (3)
-- **Layer-Based Raster Pixel Editor:** a full product on its own. Revisit after Phase 3.
-- **Vector Graphics/Path Editor (SVG):** also a full product. Minifier and tracer cover common needs.
-- **Secure File Shredder:** a browser cannot securely overwrite disk sectors. Skip, or replace with an educational guide page.
-
-**Coverage check:** 70 + 41 + 48 + 8 + 5 + 3 deferred = 175. Category totals: Document & PDF 28, Image 18, Security 8, URL/Cloud 4, Codes 4, Video 14, Audio 12, Builders 21, Developer 17, Utilities 10, Calculators 39.
 
 ---
 
-# PART B: TRANSITION (Cleartrix Resume Builder to Cleartrix)
+## 8. AI Assistant Starter Prompt
 
-## 9. Transition principles
-1. **Nothing breaks for existing users.** Drafts in `localStorage` must survive the rename.
-2. **Do it on a branch,** with a backup tag, and merge only when `npm run check` and the manual checklist pass.
-3. **One source of truth for the brand** (`lib/brand.ts`), so the name is never hard-coded again.
-4. **Rename first, add tools second.** Do not mix the two in one PR.
+When starting a new session on this codebase, provide this prompt:
 
-## 10. Step-by-step transition
+> You are working on **Cleartrix**, a privacy-first web platform with 168+ in-browser tools built on Next.js 15 App Router, TypeScript, and Tailwind CSS.
+> Read `PROJECT.md` completely before taking action.
+> Follow all non-negotiable invariants:
+> 1. Zero server file uploads for client tools (100% in-browser processing).
+> 2. Zero paywalls, zero watermarks, zero forced registrations.
+> 3. Strict 4-file pattern for tools (`logic.ts`, `logic.test.ts`, `index.tsx`, plus registrations in `tools.ts`, `ToolView.tsx`, `test-tools.ts`).
+> 4. Use standard Tailwind color tokens (never use non-standard tokens like `slate-850`).
+> 5. Keep all existing features, the Header Mega Menu, and the Resume Builder green.
+> Today's task: **[Describe your task here]**.
 
-### Step 0: Safety (PowerShell, in the project folder)
-```powershell
-git status                      # commit or stash everything first
-git tag pre-cleartrix-backup
-git checkout -b feat/cleartrix-transition
-```
-**Tip:** your repo is under `OneDrive\Desktop`. OneDrive sync can lock files and slow `node_modules`. Move the project to a plain folder such as `C:\dev\cleartrix` before you continue.
+---
 
-### Step 1: Audit every old name
-```powershell
-Get-ChildItem -Recurse -File -Include *.ts,*.tsx,*.json,*.md,*.svg,*.css,*.mjs |
-  Where-Object { $_.FullName -notmatch 'node_modules|\\.next\\' } |
-  Select-String -Pattern 'Cleartrix Resume Builder|Cleartrix|cleartrix|cleartrix|cleartrix'
-```
-Save the output as your rename checklist. Expect hits in `package.json`, `layout.tsx`, `sitemap.ts`, `robots.ts`, `privacy/page.tsx`, `terms/page.tsx`, `brand/`, `BrandLogo.tsx`, `lib/store/` (storage keys), README and any docs.
+## 9. Future Feature Roadmap & Innovation Plan
 
-### Step 2: Create the brand config
-```ts
-// lib/brand.ts
-export const BRAND = {
-  name: 'Cleartrix',
-  tagline: 'Free tools that stay on your device.',
-  description: 'Free online tools for PDFs, images, documents, resumes, calculators and more. Everything runs in your browser and your files never leave your device.',
-  domain: 'https://cleartrix.com',
-  storagePrefix: 'ct_',
-  resumeProduct: { name: 'Cleartrix Resume Builder', legacyName: 'Cleartrix Resume Builder' },
-} as const;
-```
-Replace hard-coded names in metadata, navbar, footer, privacy, terms, landing copy and the OG tags with `BRAND` values.
+The following strategic initiatives and planned enhancements are curated for upcoming development iterations. When implementing any of these features, adhere strictly to Cleartrix invariants: **100% client-side privacy, zero server uploads, zero paywalls, zero watermarks**.
 
-### Step 3: Storage key migration (non-destructive)
-Real users have drafts under old keys, so **copy, never move**, and keep old keys for at least two releases.
+### Category 1: Navigation, Personalization & UX
+1. **User Favorites & Quick Access Bar:**
+   - Allow users to "star" frequently used tools (e.g. Resume Builder, Invoice Generator, Image Compressor).
+   - Persist favorites in `localStorage` under `ct_favorites`.
+   - Render a sleek horizontal quick-access ribbon directly below the hero header or inside the Mega Menu.
+2. **"Recently Used" History Drawer:**
+   - Track the last 5 tools accessed on the client device.
+   - Quick one-click re-entry with zero tracking or telemetry.
+3. **Interactive Command Palette HUD (Cmd+K / Ctrl+K):**
+   - Quick tool launcher with category badges, fuzzy search, and keyboard navigation.
+   - Direct shortcut actions (e.g., "Create Invoice", "Convert PDF to JPG", "ATS Resume Check").
 
-```ts
-// lib/store/migrate-brand.ts
-const NEW_PREFIX = 'ct_';
-const FLAG = 'ct_brand_migrated_v1';
-```
-- Call it once at app start, before the stores hydrate.
-- **Before coding:** list the real key names in `lib/store/` (the multi-resume index keys are not in the docs I have) and confirm the prefix rule covers them.
-- Reads use the new key first, then fall back to the old key. The existing legacy single-draft migration must keep working.
-- Copying doubles usage briefly. Check the quota guard first (5 MB limit).
-- Extend `test:resumes`: old keys present -> new keys created, old keys kept, no data loss, running twice changes nothing.
+### Category 2: Tool Workflows & Smart Automation
+1. **One-Click Tool Chaining (Pipelines):**
+   - Seamlessly pipe output from one tool into another without manual re-uploading.
+   - *Example flow:* PDF Merge &rarr; PDF Compress &rarr; File Encrypt.
+   - *Example flow:* SVG to PNG &rarr; Image Resizer &rarr; WebP Converter.
+2. **Batch Drag-and-Drop Processing:**
+   - Multi-file dropzones for audio, image, and document tools.
+   - Client-side parallel Web Worker processing with a single "Download All as ZIP" via `jszip`.
+3. **Shareable Tool URL State & Presets:**
+   - Encode tool input configurations into URL hash fragments (e.g. `#data=...` or query params).
+   - Allows instant bookmarking and sharing of tool presets without server databases.
 
-### Step 4: Rename code and package
-- `package.json`: `"name": "cleartrix"`.
-- The component file `BrandLogo.tsx` provides clean umbrella and product logos. Design a new Cleartrix logo/favicon for the umbrella brand.
-- Update `app/icon.svg`, `public/brand/`, and the `/brand` guidelines page.
-- Close editors and rename the folder if needed, then reinstall (`npm install`).
-- Update the Prisma database name and env values only if you have a live database; the schema itself needs no change.
+### Category 3: High-Traffic In-Browser Tools
+1. **Screen & Window Recorder (`screen-recorder`):**
+   - In-browser screen capture via native `navigator.mediaDevices.getDisplayMedia`.
+   - Options for microphone voiceover, webcam picture-in-picture, and system audio.
+   - Instant export to WebM / MP4 via MediaRecorder API.
+2. **Voice Recorder & Audio Studio (`voice-recorder`, `audio-cutter`):**
+   - In-browser microphone recording with real-time HTML5 Canvas visualizer/waveform.
+   - Trimming, silence removal, and volume normalization.
+   - Zero-server Web Worker MP3/WAV encoder.
+3. **Privacy Metadata Stripper / Exif Cleaner (`metadata-stripper`):**
+   - Instant removal of GPS coordinates, device serials, camera models, and timestamps from images before sharing.
 
-### Step 5: SEO and metadata
-- New titles, descriptions, Open Graph and Twitter tags from `BRAND`.
-- `sitemap.ts` includes `/tools`, category pages and all live tool pages once Phase 0 lands.
-- `robots.ts` points to the new sitemap URL.
-- Privacy page: state clearly what runs locally, what never leaves the device, and (later) which Phase 4-5 tools upload data.
+### Category 4: Resume Builder Superpowers
+1. **Real-Time ATS Score & Keyword Audit Meter:**
+   - Real-time scoring algorithm analyzing action verbs, section completeness, word count, and formatting compliance.
+   - Target job description paste area to highlight missing keywords and skill gaps.
+2. **Matching Cover Letter Generator:**
+   - Automatically inherits the contact info, color scheme, and typography from the user's active resume.
+   - Produces a matching professional single-page PDF cover letter.
+3. **Industry Standard JSON Resume Import/Export:**
+   - Full support for the standard `jsonresume.org` schema for seamless profile portability.
 
-### Step 6: Domain and redirects (only if the old site is live)
-- **Warning:** `localStorage` belongs to a domain (origin). If users move to a new domain, their saved resumes do **not** follow automatically.
-- Before switching domains, ship **Export all resumes (JSON)** and **Import backup** in the dashboard, and show a banner on the old domain: "We are now Cleartrix. Export your resumes and import them on the new site."
-- Keep the old domain running the app for about 90 days. Use 301 redirects only for marketing pages (`/`, `/privacy`, `/terms`); redirect `/editor` and `/dashboard` only after the banner period.
-- Use Google Search Console's change-of-address tool once redirects are in place.
-- If the old site is not live yet, skip all of this and launch directly under the Cleartrix domain.
+### Category 5: Performance, SEO & Offline PWA
+1. **Progressive Web App (PWA) Offline Mode:**
+   - Service worker caching for 100% offline capability (launch tools on airplanes or remote locations without internet).
+   - Installable desktop and mobile app experience.
+2. **Dynamic JSON-LD Schema Markup:**
+   - SoftwareApplication and HowTo structured data on every tool route for Google Rich Results.
+3. **Internationalization (i18n):**
+   - Multi-language support (Spanish, French, German, Hindi, Japanese) with lightweight client-side translation dictionaries.
 
-### Step 7: Trademark and domain check (owner action)
-- Search IP India and WIPO (and USPTO if targeting the US) for "Cleartrix" in software/online-services classes.
-- Search Google and major social handles for collisions.
-- Buy the domain and handles, then set `BRAND.domain`.
-- If the name is blocked, the rename is one config file plus assets, which is why Step 2 comes first.
-
-### Step 8: Verify before merging
-```powershell
-npm run check
-npm run build
-Get-ChildItem -Recurse -File -Include *.ts,*.tsx,*.json,*.md,*.svg,*.css |
-  Where-Object { $_.FullName -notmatch 'node_modules|\\.next\\|migrate-brand' } |
-  Select-String -Pattern 'Cleartrix Resume Builder|cleartrix|cleartrix|cleartrix'   # expect no results
-```
-Manual checks:
-- [ ] Old-key drafts appear in the dashboard after migration; new drafts save under `mk_`
-- [ ] Undo/redo, PDF export, DOCX export, import and ATS audit still work
-- [ ] Landing, navbar, footer, metadata and favicon show Cleartrix everywhere
-- [ ] `/privacy` and `/terms` mention Cleartrix
-- [ ] Mobile layout and 4K layout still fine
-
-## 11. Transition checklist (summary)
-- [ ] Backup tag and branch created
-- [ ] Project moved out of OneDrive
-- [ ] Audit list saved
-- [ ] `lib/brand.ts` created and used everywhere
-- [ ] Storage migration written and tested
-- [ ] Logo, favicon and brand page updated
-- [ ] Metadata, sitemap, robots, privacy and terms updated
-- [ ] Package and folder renamed
-- [ ] Trademark and domain checked, `BRAND.domain` set
-- [ ] Export/import backup shipped (if old site is live)
-- [ ] Redirect plan executed after the banner period
-- [ ] `npm run check` and `npm run build` green; zero old-name references
-- [ ] Merge, tag `v1.0.0-cleartrix`, deploy
-
-## 12. Open decisions (owner to answer)
-| Decision | Default in this file | Needed by |
-| :--- | :--- | :--- |
-| Domain name and TLD | not set (`BRAND.domain` placeholder) | Step 7 |
-| Resume product name | "Cleartrix Resume Builder" (old name kept only as legacy) | Step 2 |
-| Is the old site already live with real users? | assumed unknown | Step 6 |
-| First countries for tax/payroll calculators | 1-2 (suggest India and US) | Phase 1 |
-| Ads provider and Pro pricing | light ads from Phase 1, Pro from Phase 2-4 | Phase 2 |
-
-## 13. Starter prompt for each AI coding session
-
-Paste this at the start of a session:
-
-> You are working on Cleartrix, a privacy-first 175-tool web platform built on the existing Cleartrix Resume Builder codebase (Next.js App Router, TypeScript, Tailwind, Zustand, Zod). Read `PROJECT.md` first and follow its invariants (no upload for client tools, lazy-load heavy libraries, registry-driven pages, `mk_` storage prefix, definition of done). Today's task: **[describe one task, for example "implement Phase 0 registry types and generated tool pages" or "add the Word & Character Counter tool"]**. Make small changes, add tests, run `npm run check`, and summarize what you changed and what remains.

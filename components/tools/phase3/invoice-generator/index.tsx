@@ -117,14 +117,134 @@ export default function InvoiceGeneratorTool() {
     }
   };
 
+  const [isPrinting, setIsPrinting] = useState(false);
+
   const handlePrint = () => {
-    window.print();
+    setIsPrinting(true);
+    const printEl = document.getElementById("printable-invoice");
+    if (!printEl) {
+      setIsPrinting(false);
+      window.print();
+      return;
+    }
+
+    // Clone all existing stylesheet links and style tags from current document
+    const styleTags = Array.from(document.querySelectorAll("link[rel='stylesheet'], style"))
+      .map((tag) => tag.outerHTML)
+      .join("\n");
+
+    const iframe = document.createElement("iframe");
+    iframe.style.position = "fixed";
+    iframe.style.right = "0";
+    iframe.style.bottom = "0";
+    iframe.style.width = "0";
+    iframe.style.height = "0";
+    iframe.style.border = "0";
+    document.body.appendChild(iframe);
+
+    const doc = iframe.contentWindow?.document;
+    if (!doc) {
+      setIsPrinting(false);
+      window.print();
+      return;
+    }
+
+    doc.open();
+    doc.write(`
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Invoice_${data.invoiceNumber || "document"}</title>
+          ${styleTags}
+          <style>
+            @page {
+              size: A4 portrait;
+              margin: 12mm 15mm 15mm 15mm;
+            }
+            html, body {
+              background: #ffffff !important;
+              color: #0f172a !important;
+              margin: 0 !important;
+              padding: 0 !important;
+              -webkit-print-color-adjust: exact !important;
+              print-color-adjust: exact !important;
+            }
+            #printable-invoice {
+              width: 100% !important;
+              max-width: 100% !important;
+              min-height: auto !important;
+              padding: 0 !important;
+              margin: 0 !important;
+              box-shadow: none !important;
+              border: none !important;
+              background: #ffffff !important;
+            }
+          </style>
+        </head>
+        <body class="bg-white text-slate-900">
+          <div id="printable-invoice">
+            ${printEl.innerHTML}
+          </div>
+        </body>
+      </html>
+    `);
+    doc.close();
+
+    setTimeout(() => {
+      try {
+        iframe.contentWindow?.focus();
+        iframe.contentWindow?.print();
+      } catch (err) {
+        console.error("Print error:", err);
+      } finally {
+        setTimeout(() => {
+          if (iframe.parentNode) {
+            iframe.parentNode.removeChild(iframe);
+          }
+          setIsPrinting(false);
+        }, 1500);
+      }
+    }, 350);
   };
 
   return (
     <div className="w-full max-w-6xl mx-auto space-y-6">
+      {/* Global Print Stylesheet: Ensures even native Ctrl+P prints ONLY the invoice document */}
+      <style jsx global>{`
+        @media print {
+          body {
+            background: #ffffff !important;
+            color: #000000 !important;
+          }
+          header, footer, nav, aside, [role="region"], #mobile-navigation-drawer, aside {
+            display: none !important;
+          }
+          body * {
+            visibility: hidden;
+          }
+          #printable-invoice, #printable-invoice * {
+            visibility: visible;
+          }
+          #printable-invoice {
+            position: absolute !important;
+            left: 0 !important;
+            top: 0 !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-height: auto !important;
+            margin: 0 !important;
+            padding: 10mm 12mm !important;
+            box-shadow: none !important;
+            border: none !important;
+            background: white !important;
+          }
+        }
+      `}</style>
+
       {/* Privacy Banner */}
-      <div className="flex items-center justify-between px-4 py-2.5 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 rounded-lg text-xs text-emerald-800 dark:text-emerald-300">
+      <div className="flex items-center justify-between px-4 py-2.5 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 rounded-lg text-xs text-emerald-800 dark:text-emerald-300 print:hidden">
         <div className="flex items-center gap-2">
           <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
           <span>100% Client-Side Invoice Builder — Draft saved locally in your browser memory.</span>
@@ -141,15 +261,16 @@ export default function InvoiceGeneratorTool() {
           <Button
             size="sm"
             onClick={handlePrint}
-            className="h-7 text-xs gap-1 bg-emerald-600 hover:bg-emerald-700 text-white"
+            disabled={isPrinting}
+            className="h-7 text-xs gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-xs"
           >
-            <Printer className="w-3 h-3" /> Print / Save PDF
+            <Download className="w-3.5 h-3.5" /> {isPrinting ? "Preparing PDF..." : "Download / Print PDF"}
           </Button>
         </div>
       </div>
 
       {/* Mode Navigation */}
-      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 print:hidden">
         <div className="flex gap-2">
           <button
             type="button"
@@ -198,8 +319,8 @@ export default function InvoiceGeneratorTool() {
         </div>
       </div>
 
-      {activeTab === "edit" ? (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {/* Editor Workspace */}
+      <div className={activeTab === "edit" ? "grid grid-cols-1 lg:grid-cols-3 gap-6 print:hidden" : "hidden print:hidden"}>
           {/* Main Form: 2 cols */}
           <div className="lg:col-span-2 space-y-6">
             {/* Header info */}
@@ -569,13 +690,13 @@ export default function InvoiceGeneratorTool() {
             </div>
           </div>
         </div>
-      ) : (
-        /* Printable Vector Preview */
-        <div className="bg-slate-100 dark:bg-slate-950 p-6 rounded-2xl flex justify-center overflow-x-auto">
-          <div
-            id="printable-invoice"
-            className="w-[794px] min-h-[1123px] bg-white text-slate-900 p-12 rounded-lg shadow-xl space-y-8 print:shadow-none print:p-0 print:m-0"
-          >
+
+      {/* Printable Vector Preview (Always mounted in DOM for iframe and print engine) */}
+      <div className={activeTab === "preview" ? "bg-slate-100 dark:bg-slate-950 p-6 rounded-2xl flex justify-center overflow-x-auto print:bg-white print:p-0" : "hidden print:block"}>
+        <div
+          id="printable-invoice"
+          className="w-[794px] min-h-[1123px] bg-white text-slate-900 p-12 rounded-lg shadow-xl space-y-8 print:shadow-none print:p-0 print:m-0 print:w-full print:max-w-none"
+        >
             {/* Header */}
             <div className="flex justify-between items-start border-b border-slate-200 pb-8">
               <div>
@@ -702,7 +823,6 @@ export default function InvoiceGeneratorTool() {
             )}
           </div>
         </div>
-      )}
-    </div>
+      </div>
   );
 }

@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { BrandLogo } from "@/components/BrandLogo";
 import {
@@ -15,22 +16,85 @@ import {
   CheckCircle2,
   Rocket,
   Wrench,
+  ChevronDown,
+  ChevronRight,
+  Search,
 } from "lucide-react";
-import { TOOLS } from "@/lib/registry/tools";
+import { TOOLS, getAllTools, getToolUrl } from "@/lib/registry/tools";
+import { CATEGORY_LIST, getCategoryById } from "@/lib/registry/categories";
+import { getToolIcon, CATEGORY_ICON_MAP } from "@/lib/tool-icons";
 
 import { CommandPalette } from "@/components/tools/CommandPalette";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { KbdShortcut } from "@/components/ui/KbdShortcut";
-import { Search } from "lucide-react";
+import { NavbarMegaMenu } from "@/components/NavbarMegaMenu";
 
 const ANNOUNCEMENT_STORAGE_KEY = "ct_announcement_dismissed_v1";
 
 export const Navbar: React.FC = () => {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isBannerDismissed, setIsBannerDismissed] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+  const [isMobileToolsExpanded, setIsMobileToolsExpanded] = useState(false);
+  const [mobileSelectedCategory, setMobileSelectedCategory] = useState<string>("document-pdf");
+  const [mobileSearchQuery, setMobileSearchQuery] = useState<string>("");
+
   const menuRef = useRef<HTMLDivElement>(null);
+  const megaMenuContainerRef = useRef<HTMLDivElement>(null);
+  const megaMenuButtonRef = useRef<HTMLButtonElement>(null);
+
+  const allTools = useMemo(() => getAllTools(), []);
+
+  const filteredMobileTools = useMemo(() => {
+    const q = mobileSearchQuery.toLowerCase().trim();
+    if (!q) return [];
+    return allTools.filter(
+      (t) =>
+        t.name.toLowerCase().includes(q) ||
+        t.slug.toLowerCase().includes(q) ||
+        t.seo.description.toLowerCase().includes(q) ||
+        t.category.toLowerCase().includes(q)
+    );
+  }, [allTools, mobileSearchQuery]);
+
+  const activeCategoryTools = useMemo(() => {
+    return allTools.filter((t) => t.category === mobileSelectedCategory);
+  }, [allTools, mobileSelectedCategory]);
+
+  // Close menus on route change
+  useEffect(() => {
+    setIsMegaMenuOpen(false);
+    setIsOpen(false);
+  }, [pathname]);
+
+  // Click outside to close desktop Mega Menu
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        megaMenuContainerRef.current &&
+        !megaMenuContainerRef.current.contains(e.target as Node) &&
+        megaMenuButtonRef.current &&
+        !megaMenuButtonRef.current.contains(e.target as Node)
+      ) {
+        setIsMegaMenuOpen(false);
+      }
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsMegaMenuOpen(false);
+      }
+    };
+    if (isMegaMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isMegaMenuOpen]);
 
   // Keyboard shortcut listener for Cmd+K / Ctrl+K
   useEffect(() => {
@@ -127,9 +191,9 @@ export const Navbar: React.FC = () => {
         </Link>
 
         {/* Trust Pill (Desktop only) */}
-        <span className="hidden xl:inline-flex items-center gap-1.5 rounded-full bg-blue-50/80 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-900/60 px-3 py-1 font-body text-xs font-semibold text-blue-700 dark:text-blue-300 shrink-0 shadow-2xs">
+        <span className="hidden xl:inline-flex items-center gap-1.5 rounded-full bg-blue-50/80 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-900/60 px-2.5 py-0.5 font-body text-xs font-semibold text-blue-700 dark:text-blue-300 shrink-0 shadow-2xs">
           <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-          <span>Open & private · zero paywalls</span>
+          <span>100% Private</span>
         </span>
       </div>
 
@@ -138,18 +202,43 @@ export const Navbar: React.FC = () => {
         aria-label="Main Navigation"
         className="hidden lg:flex items-center gap-5 xl:gap-8 font-body text-xs lg:text-sm font-semibold text-slate-700 dark:text-slate-200 shrink-0"
       >
-        <Link
-          href="/tools"
-          className="inline-flex items-center gap-1.5 hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group font-semibold text-slate-700 dark:text-slate-200"
+        {/* Tools Mega Menu Interactive Trigger */}
+        <div
+          className="relative py-2"
+          onMouseEnter={() => setIsMegaMenuOpen(true)}
         >
-          <span>Tools</span>
-          <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/80 border border-blue-100 dark:border-blue-900/80 px-2 py-0.5 rounded-full">
-            {TOOLS.length}
-          </span>
-          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full" />
-        </Link>
+          <button
+            ref={megaMenuButtonRef}
+            type="button"
+            onClick={() => setIsMegaMenuOpen((prev) => !prev)}
+            aria-expanded={isMegaMenuOpen}
+            aria-haspopup="true"
+            className={`inline-flex items-center gap-1.5 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group font-semibold ${
+              isMegaMenuOpen
+                ? "text-blue-600 dark:text-blue-400"
+                : "text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400"
+            }`}
+          >
+            <span>Tools</span>
+            <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/80 border border-blue-100 dark:border-blue-900/80 px-2 py-0.5 rounded-full">
+              {TOOLS.length}
+            </span>
+            <ChevronDown
+              className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                isMegaMenuOpen ? "rotate-180 text-blue-600 dark:text-blue-400" : "text-slate-400"
+              }`}
+            />
+            <span
+              className={`absolute bottom-0 left-0 h-0.5 bg-blue-600 transition-all duration-300 ${
+                isMegaMenuOpen ? "w-full" : "w-0 group-hover:w-full"
+              }`}
+            />
+          </button>
+        </div>
+
         <Link
           href="/blog"
+          onMouseEnter={() => setIsMegaMenuOpen(false)}
           className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group font-semibold text-slate-700 dark:text-slate-200"
         >
           Blog
@@ -157,6 +246,7 @@ export const Navbar: React.FC = () => {
         </Link>
         <Link
           href="/#templates"
+          onMouseEnter={() => setIsMegaMenuOpen(false)}
           className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group"
         >
           Templates
@@ -164,6 +254,7 @@ export const Navbar: React.FC = () => {
         </Link>
         <Link
           href="/#comparison"
+          onMouseEnter={() => setIsMegaMenuOpen(false)}
           className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group hidden lg:inline-block"
         >
           Comparison
@@ -171,6 +262,7 @@ export const Navbar: React.FC = () => {
         </Link>
         <Link
           href="/#features"
+          onMouseEnter={() => setIsMegaMenuOpen(false)}
           className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group"
         >
           Features
@@ -178,6 +270,7 @@ export const Navbar: React.FC = () => {
         </Link>
         <Link
           href="/dashboard"
+          onMouseEnter={() => setIsMegaMenuOpen(false)}
           className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group"
         >
           My Resumes
@@ -185,6 +278,7 @@ export const Navbar: React.FC = () => {
         </Link>
         <Link
           href="/#faq"
+          onMouseEnter={() => setIsMegaMenuOpen(false)}
           className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors whitespace-nowrap py-1 focus:outline-none focus-visible:text-blue-600 relative group"
         >
           FAQ
@@ -197,11 +291,11 @@ export const Navbar: React.FC = () => {
         <button
           type="button"
           onClick={() => setIsSearchOpen(true)}
-          className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold transition-all"
+          title="Search tools & templates (Ctrl+K)"
+          aria-label="Search tools & templates"
+          className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shrink-0"
         >
-          <Search className="h-3.5 w-3.5 text-slate-500 dark:text-slate-400" />
-          <span>Search</span>
-          <KbdShortcut shortcut="K" className="hidden md:inline-flex text-[10px]" />
+          <Search className="h-4 w-4" />
         </button>
 
         {/* Header Theme Toggle (Dark/Light Switch) */}
@@ -249,19 +343,169 @@ export const Navbar: React.FC = () => {
       }`}
     >
       <nav className="flex flex-col space-y-1">
-        <Link
-          href="/tools"
-          onClick={handleLinkClick}
-          className="flex items-center justify-between p-2.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-slate-800 transition-colors"
-        >
-          <span className="flex items-center gap-2.5">
-            <Wrench className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-            <span>Tools & Utilities</span>
-          </span>
-          <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 border border-slate-200/70 dark:border-slate-700 px-2 py-0.5 rounded-full">
-            {TOOLS.length} tools
-          </span>
-        </Link>
+        {/* Mobile Tools & Utilities Expandable Section with Highlighted Animation */}
+        <div className="rounded-xl border border-slate-200 dark:border-slate-700/90 bg-slate-50/90 dark:bg-slate-800/90 overflow-hidden transition-all shadow-xs">
+          <button
+            type="button"
+            onClick={() => setIsMobileToolsExpanded((prev) => !prev)}
+            aria-expanded={isMobileToolsExpanded}
+            className="w-full flex items-center justify-between p-2.5 rounded-lg text-xs font-semibold text-slate-800 dark:text-slate-100 hover:text-blue-600 dark:hover:text-cyan-300 transition-colors"
+          >
+            <span className="flex items-center gap-2.5">
+              <div className="p-1.5 rounded-lg bg-blue-100 dark:bg-blue-900/60 text-blue-600 dark:text-blue-400">
+                <Wrench className="h-4 w-4" />
+              </div>
+              <span className="font-bold text-slate-900 dark:text-white">Tools & Utilities</span>
+            </span>
+            <div className="flex items-center gap-1.5">
+              <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800 px-2 py-0.5 rounded-full">
+                {TOOLS.length}
+              </span>
+              <ChevronDown
+                className={`h-4 w-4 text-slate-400 dark:text-slate-300 transition-transform duration-200 ${
+                  isMobileToolsExpanded ? "rotate-180 text-blue-600 dark:text-blue-400" : ""
+                }`}
+              />
+            </div>
+          </button>
+
+          {isMobileToolsExpanded && (
+            <div className="p-3 pt-0 space-y-2.5 border-t border-slate-200 dark:border-slate-700/80">
+              {/* Mobile Search Bar */}
+              <div className="relative pt-2">
+                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 dark:text-slate-400" />
+                <input
+                  type="text"
+                  value={mobileSearchQuery}
+                  onChange={(e) => setMobileSearchQuery(e.target.value)}
+                  placeholder="Search 168+ tools..."
+                  className="w-full pl-8 pr-8 py-1.5 text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:focus:ring-cyan-400"
+                />
+                {mobileSearchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setMobileSearchQuery("")}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                )}
+              </div>
+
+              {/* If search query entered, show matching tools */}
+              {mobileSearchQuery ? (
+                <div className="space-y-1 max-h-56 overflow-y-auto pr-1">
+                  {filteredMobileTools.length === 0 ? (
+                    <div className="py-4 text-center text-xs text-slate-500 dark:text-slate-400">
+                      No tools match &ldquo;{mobileSearchQuery}&rdquo;
+                    </div>
+                  ) : (
+                    filteredMobileTools.map((tool) => {
+                      const Icon = getToolIcon(tool);
+                      const url = getToolUrl(tool);
+                      return (
+                        <Link
+                          key={tool.slug}
+                          href={url}
+                          onClick={handleLinkClick}
+                          className="flex items-center gap-2.5 p-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-700 text-xs hover:border-blue-400 dark:hover:border-cyan-400 transition-colors shadow-2xs"
+                        >
+                          <Icon className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400 shrink-0" />
+                          <div className="min-w-0 flex-1">
+                            <div className="font-semibold text-slate-900 dark:text-white truncate">
+                              {tool.name}
+                            </div>
+                            <div className="text-[10px] text-slate-500 dark:text-slate-400 truncate">
+                              {tool.category}
+                            </div>
+                          </div>
+                          <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                        </Link>
+                      );
+                    })
+                  )}
+                </div>
+              ) : (
+                /* Category Pills & Selected Tools */
+                <div className="space-y-2.5">
+                  {/* Category Pills (horizontal scroll) */}
+                  <div className="flex items-center gap-1.5 overflow-x-auto pb-1.5 scrollbar-thin">
+                    {CATEGORY_LIST.map((cat) => {
+                      const isCatActive = mobileSelectedCategory === cat.id;
+                      const catCount = allTools.filter((t) => t.category === cat.id).length;
+                      return (
+                        <button
+                          key={cat.id}
+                          type="button"
+                          onClick={() => setMobileSelectedCategory(cat.id)}
+                          className={`px-2.5 py-1 rounded-full text-[11px] font-semibold whitespace-nowrap transition-colors shrink-0 flex items-center gap-1.5 ${
+                            isCatActive
+                              ? "bg-blue-600 text-white shadow-xs font-bold"
+                              : "bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700"
+                          }`}
+                        >
+                          <span>{cat.name}</span>
+                          <span
+                            className={`text-[9px] px-1 py-0.2 rounded-full font-mono ${
+                              isCatActive
+                                ? "bg-white/25 text-white"
+                                : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400"
+                            }`}
+                          >
+                            {catCount}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Tools under active category */}
+                  <div className="space-y-1 max-h-52 overflow-y-auto pr-1">
+                    {activeCategoryTools.map((tool) => {
+                      const Icon = getToolIcon(tool);
+                      const url = getToolUrl(tool);
+                      return (
+                        <Link
+                          key={tool.slug}
+                          href={url}
+                          onClick={handleLinkClick}
+                          className="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-700 text-xs hover:border-blue-400 dark:hover:border-cyan-400 transition-colors shadow-2xs"
+                        >
+                          <div className="flex items-center gap-2 min-w-0">
+                            <Icon className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400 shrink-0" />
+                            <span className="font-semibold text-slate-900 dark:text-white truncate">
+                              {tool.name}
+                            </span>
+                          </div>
+                          <ChevronRight className="w-3 h-3 text-slate-400 shrink-0" />
+                        </Link>
+                      );
+                    })}
+                  </div>
+
+                  {/* Hub Link & Browse All */}
+                  <div className="pt-1.5 flex items-center justify-between text-xs border-t border-slate-200 dark:border-slate-700/80">
+                    <Link
+                      href={`/tools/${mobileSelectedCategory}`}
+                      onClick={handleLinkClick}
+                      className="font-bold text-blue-600 dark:text-cyan-400 hover:underline flex items-center gap-1"
+                    >
+                      <span>Category Hub</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </Link>
+                    <Link
+                      href="/tools"
+                      onClick={handleLinkClick}
+                      className="font-bold text-slate-700 dark:text-slate-300 hover:underline"
+                    >
+                      All {allTools.length} Tools →
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
 
         <Link
           href="/#templates"
@@ -455,8 +699,29 @@ export const Navbar: React.FC = () => {
         <div className="max-w-container mx-auto px-4 sm:px-6">
           {renderNavContent()}
         </div>
+
+        {/* Desktop Mega Menu Dropdown */}
+        {isMegaMenuOpen && (
+          <div
+            ref={megaMenuContainerRef}
+            onMouseLeave={() => setIsMegaMenuOpen(false)}
+            className="hidden lg:block absolute top-full left-0 right-0 z-50 shadow-2xl"
+          >
+            <NavbarMegaMenu onClose={() => setIsMegaMenuOpen(false)} />
+          </div>
+        )}
+
         {renderMobileDrawer()}
       </header>
+
+      {/* Desktop Mega Menu Backdrop Overlay */}
+      {isMegaMenuOpen && (
+        <div
+          onClick={() => setIsMegaMenuOpen(false)}
+          className="hidden lg:block fixed inset-0 bg-slate-900/20 backdrop-blur-2xs z-40 animate-fade-in"
+          aria-hidden="true"
+        />
+      )}
 
       {/* 3. Backdrop overlay when mobile menu is open (z-40 so it stays BEHIND the z-50 sticky header & drawer) */}
       {isOpen && (
