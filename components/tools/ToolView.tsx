@@ -543,6 +543,10 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     ssr: false,
     loading: () => <ToolLoadingState name="Webcam & Screen Overlay Recorder" />,
   }),
+  "voice-recorder": dynamic(() => import("@/components/tools/audio/voice-recorder"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Voice & Audio Recorder" />,
+  }),
   "social-post-maker": dynamic(() => import("@/components/tools/phase3/social-post-maker"), {
     ssr: false,
     loading: () => <ToolLoadingState name="Social Media Post Maker" />,

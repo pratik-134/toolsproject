@@ -136,10 +136,10 @@ export function encodeAudioBufferToWav(audioBuffer: AudioBuffer): ArrayBuffer {
   let offset = 44;
   for (let i = 0; i < length; i++) {
     for (let ch = 0; ch < numChannels; ch++) {
-      // Clamp float between -1.0 and 1.0
-      let sample = channels[ch][i];
+      const channel = channels[ch];
+      const raw = channel ? channel[i] : 0;
+      let sample = typeof raw === "number" ? raw : 0;
       sample = Math.max(-1, Math.min(1, sample));
-      // Convert to 16-bit signed integer (-32768 to 32767)
       const intSample = sample < 0 ? sample * 0x8000 : sample * 0x7fff;
       view.setInt16(offset, intSample, true);
       offset += 2;

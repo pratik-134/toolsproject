@@ -3984,6 +3984,27 @@ export const TOOLS: ToolDefinition[] = [
     },
     related: ["mp4-to-mp3", "flac-to-mp3", "m4a-to-mp3", "ogg-to-mp3"]
   },
+  {
+    slug: "voice-recorder",
+    name: "Voice & Audio Recorder",
+    category: "audio",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Free Voice Recorder Online — Record Audio in Browser",
+      description: "Record voice notes, podcasts, and microphone audio directly in your browser. Live waveform visualizer, audio trimmer, and instant WAV or WebM download with zero cloud uploads.",
+      h1: "Free In-Browser Voice & Podcast Recorder",
+      intro: "Capture studio-quality microphone voice recordings, interviews, podcasts, and audio notes directly in your web browser. Features a real-time waveform visualizer, built-in silence trimmer, and 100% private client-side WAV and WebM export.",
+      faq: [
+        { q: "Is my voice recording uploaded to any cloud server?", a: "No. ClearTrix processes and encodes your microphone stream 100% inside your device memory using the native Web Audio API." },
+        { q: "What audio formats can I export?", a: "You can download uncompressed lossless 16-bit PCM WAV files or compressed WebM audio files." },
+        { q: "Can I trim or edit the audio after recording?", a: "Yes. Use the built-in audio trimmer to adjust start and end points and remove pauses before saving." },
+        { q: "Can I convert my voice recording to MP3?", a: "Yes. One click transfers your recorded WAV directly into our in-browser WAV to MP3 converter." }
+      ]
+    },
+    related: ["wav-to-mp3", "desktop-screen-recorder", "mp4-to-mp3", "m4a-to-mp3"]
+  },
 
   /* =========================================================================
      WAVE 2 CONVERTER TOOLS (13 High-Volume Gaps)

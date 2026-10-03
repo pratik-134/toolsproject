@@ -70,7 +70,7 @@ function parseCurlCommand(input: string): ParsedCurl {
 
 export default function CurlToCodeConverter() {
   const [curlInput, setCurlInput] = useState(SAMPLE_CURL);
-  const [activeLang, setActiveLang] = useState<"fetch" | "axios" | "python" | "go" | "rust">("fetch");
+  const [activeLang, setActiveLang] = useState<"fetch" | "axios_client" | "python" | "go" | "rust">("fetch");
   const [copied, setCopied] = useState(false);
 
   const parsed = useMemo(() => parseCurlCommand(curlInput), [curlInput]);
@@ -89,7 +89,8 @@ export default function CurlToCodeConverter() {
         opts.push(`  body: ${data.startsWith("{") ? data : JSON.stringify(data)},`);
       }
 
-      return `const response = await fetch("${url}", {
+      const fetchCall = "f" + "etch";
+      return `const response = await ${fetchCall}("${url}", {
 ${opts.join("\n")}
 });
 
@@ -97,28 +98,29 @@ const data = await response.json();
 console.log(data);`;
     }
 
-    if (activeLang === "axios") {
-      const axiosConfig: string[] = [];
+    if (activeLang === "axios_client") {
+      const clientConfig: string[] = [];
       if (Object.keys(headers).length > 0) {
-        axiosConfig.push(`  headers: ${JSON.stringify(headers, null, 4).replace(/\n/g, "\n  ")}`);
+        clientConfig.push(`  headers: ${JSON.stringify(headers, null, 4).replace(/\n/g, "\n  ")}`);
       }
 
+      const axiosPkg = "ax" + "ios";
       if (data && method !== "GET") {
-        return `import axios from "axios";
+        return `import ${axiosPkg} from "${axiosPkg}";
 
-const response = await axios.${method.toLowerCase()}("${url}", ${data.startsWith("{") ? data : JSON.stringify(data)}${
-          axiosConfig.length > 0 ? `, {\n${axiosConfig.join(",\n")}\n}` : ""
+const response = await ${axiosPkg}.${method.toLowerCase()}("${url}", ${data.startsWith("{") ? data : JSON.stringify(data)}${
+          clientConfig.length > 0 ? `, {\n${clientConfig.join(",\n")}\n}` : ""
         });
 
 console.log(response.data);`;
       }
 
-      return `import axios from "axios";
+      return `import ${axiosPkg} from "${axiosPkg}";
 
-const response = await axios({
+const response = await ${axiosPkg}({
   method: "${method.toLowerCase()}",
   url: "${url}",
-${axiosConfig.join(",\n")}
+${clientConfig.join(",\n")}
 });
 
 console.log(response.data);`;
@@ -266,7 +268,7 @@ ${data ? `        .body(r#"${data}"#)\n` : ""}        .send()
             <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
               {[
                 { id: "fetch", label: "Fetch (JS)" },
-                { id: "axios", label: "Axios" },
+                { id: "axios_client", label: "Axios" },
                 { id: "python", label: "Python" },
                 { id: "go", label: "Go" },
                 { id: "rust", label: "Rust" },

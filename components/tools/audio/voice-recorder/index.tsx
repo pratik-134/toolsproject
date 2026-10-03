@@ -108,7 +108,8 @@ export default function VoiceRecorderTool() {
       let x = 0;
 
       for (let i = 0; i < bufferLength; i++) {
-        const barHeight = (dataArray[i] / 255) * height * 0.9;
+        const val = dataArray[i] ?? 0;
+        const barHeight = (val / 255) * height * 0.9;
 
         // Gradient from blue to indigo
         const gradient = ctx.createLinearGradient(0, height, 0, 0);
@@ -149,7 +150,7 @@ export default function VoiceRecorderTool() {
       let min = 1.0;
       let max = -1.0;
       for (let j = 0; j < step; j++) {
-        const datum = data[i * step + j];
+        const datum = data[i * step + j] ?? 0;
         if (datum < min) min = datum;
         if (datum > max) max = datum;
       }

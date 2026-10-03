@@ -119,6 +119,7 @@ import { runTests as runProposalBuilderTests } from "../components/tools/phase3/
 import { runTests as runDesktopScreenRecorderTests } from "../components/tools/phase3/desktop-screen-recorder/logic.test";
 import { runTests as runWebTabRecorderTests } from "../components/tools/phase3/web-tab-recorder/logic.test";
 import { runTests as runWebcamOverlayRecorderTests } from "../components/tools/phase3/webcam-overlay-recorder/logic.test";
+import { runTests as runVoiceRecorderTests } from "../components/tools/audio/voice-recorder/logic.test";
 import { runTests as runSocialPostMakerTests } from "../components/tools/phase3/social-post-maker/logic.test";
 import { runTests as runStoryReelsMakerTests } from "../components/tools/phase3/story-reels-maker/logic.test";
 import { runTests as runChartGraphVisualizerTests } from "../components/tools/phase3/chart-graph-visualizer/logic.test";
@@ -600,6 +601,10 @@ async function main() {
   console.log("Testing [webcam-overlay-recorder] logic...");
   runWebcamOverlayRecorderTests();
   console.log("✅ [webcam-overlay-recorder] unit tests passed!");
+
+  console.log("Testing [voice-recorder] logic...");
+  runVoiceRecorderTests();
+  console.log("✅ [voice-recorder] unit tests passed!");
 
   console.log("Testing [social-post-maker] logic...");
   runSocialPostMakerTests();
