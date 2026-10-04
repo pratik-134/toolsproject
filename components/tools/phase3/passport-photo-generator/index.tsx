@@ -34,8 +34,7 @@ import {
   FileText,
   Calendar,
   User,
-  Layers,
-  Sparkles,
+  Info,
 } from "lucide-react";
 
 export default function PassportPhotoGeneratorTool() {
@@ -458,9 +457,9 @@ export default function PassportPhotoGeneratorTool() {
 
   return (
     <div className="w-full max-w-6xl mx-auto space-y-6 pb-16">
-      {/* Consistent Privacy Ribbon & Actions Bar (Matches ClearTrix Tool Suite) */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-2xl shadow-xs">
-        <div className="flex items-center gap-2.5 min-w-0">
+      {/* Privacy Ribbon & Quick Action Bar */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 rounded-2xl shadow-xs">
+        <div className="flex items-center gap-3 min-w-0">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-800 text-blue-600 dark:text-blue-400 shrink-0">
             <Camera className="h-5 w-5" />
           </div>
@@ -480,7 +479,7 @@ export default function PassportPhotoGeneratorTool() {
         </div>
 
         {/* Quick export actions in header */}
-        <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto flex-wrap">
+        <div className="flex items-center gap-2 shrink-0 flex-wrap">
           <Button
             variant="outline"
             size="sm"
@@ -534,13 +533,15 @@ export default function PassportPhotoGeneratorTool() {
         <div className="lg:col-span-7 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-4 sm:p-5 shadow-xs space-y-4">
           {/* Top Bar above Canvas */}
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-            <div className="flex items-center gap-2">
-              <span className="text-xl">{selectedPreset.flag}</span>
-              <div>
-                <span className="font-headings text-sm font-bold text-slate-900 dark:text-white block">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="flex h-7 px-2 items-center justify-center rounded-md bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-xs font-mono font-bold text-blue-700 dark:text-blue-300 shrink-0">
+                {selectedPreset.code}
+              </span>
+              <div className="min-w-0">
+                <span className="font-headings text-sm font-bold text-slate-900 dark:text-white block truncate">
                   {selectedPreset.country} ({selectedPreset.widthMm} x {selectedPreset.heightMm} mm)
                 </span>
-                <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+                <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono block">
                   {selectedPreset.targetWidthPx} x {selectedPreset.targetHeightPx} px @ 300 DPI
                 </span>
               </div>
@@ -551,7 +552,7 @@ export default function PassportPhotoGeneratorTool() {
               variant="ghost"
               size="sm"
               onClick={() => setShowBiometricGuide(!showBiometricGuide)}
-              className={`gap-1.5 text-xs h-8 rounded-lg ${
+              className={`gap-1.5 text-xs h-8 rounded-lg shrink-0 ${
                 showBiometricGuide
                   ? "bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 font-bold"
                   : "text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800"
@@ -627,9 +628,10 @@ export default function PassportPhotoGeneratorTool() {
                   }}
                 />
 
-                <span className="text-[11px] text-slate-400 dark:text-slate-500 mt-2.5 font-medium">
-                  💡 Drag on the photo to center face inside the biometric guide.
-                </span>
+                <div className="flex items-center gap-1.5 text-[11px] text-slate-500 dark:text-slate-400 mt-2.5 font-medium">
+                  <Info className="h-3.5 w-3.5 text-blue-500 dark:text-blue-400 shrink-0" />
+                  <span>Drag directly on photo to center face within the biometric guide.</span>
+                </div>
               </div>
             )}
           </div>
@@ -703,8 +705,8 @@ export default function PassportPhotoGeneratorTool() {
             </div>
 
             {/* Rotation & Flip Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-              <div>
+            <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center pt-1">
+              <div className="sm:col-span-7">
                 <div className="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                   <span>Rotation (Straighten)</span>
                   <span className="font-mono text-slate-500">{transform.rotation}°</span>
@@ -720,12 +722,12 @@ export default function PassportPhotoGeneratorTool() {
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-2 sm:pt-0">
+              <div className="sm:col-span-5 flex items-center justify-start sm:justify-end gap-1.5 pt-1 sm:pt-4">
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => setTransform((p) => ({ ...p, rotation: (p.rotation - 90) % 360 }))}
-                  className="text-xs h-8 rounded-lg gap-1 border-slate-200 dark:border-slate-800"
+                  className="text-xs h-8 px-2.5 rounded-lg gap-1 border-slate-200 dark:border-slate-800"
                   title="Rotate 90 degrees Left"
                 >
                   <RotateCcw className="h-3 w-3" />
@@ -735,7 +737,7 @@ export default function PassportPhotoGeneratorTool() {
                   variant="outline"
                   size="sm"
                   onClick={() => setTransform((p) => ({ ...p, rotation: (p.rotation + 90) % 360 }))}
-                  className="text-xs h-8 rounded-lg gap-1 border-slate-200 dark:border-slate-800"
+                  className="text-xs h-8 px-2.5 rounded-lg gap-1 border-slate-200 dark:border-slate-800"
                   title="Rotate 90 degrees Right"
                 >
                   <RotateCw className="h-3 w-3" />
@@ -745,8 +747,8 @@ export default function PassportPhotoGeneratorTool() {
                   variant="outline"
                   size="sm"
                   onClick={() => setTransform((p) => ({ ...p, flipH: !p.flipH }))}
-                  className={`text-xs h-8 rounded-lg gap-1 border-slate-200 dark:border-slate-800 ${
-                    transform.flipH ? "bg-blue-50 text-blue-600 font-bold" : ""
+                  className={`text-xs h-8 px-2.5 rounded-lg gap-1 border-slate-200 dark:border-slate-800 ${
+                    transform.flipH ? "bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 font-bold border-blue-300" : ""
                   }`}
                   title="Mirror Photo Horizontally"
                 >
@@ -769,7 +771,7 @@ export default function PassportPhotoGeneratorTool() {
               </span>
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-52 overflow-y-auto pr-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-56 overflow-y-auto pr-1">
               {PASSPORT_PRESETS.map((preset) => {
                 const isSelected = selectedPreset.id === preset.id;
                 return (
@@ -783,7 +785,9 @@ export default function PassportPhotoGeneratorTool() {
                         : "border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/60"
                     }`}
                   >
-                    <span className="text-xl shrink-0 mt-0.5">{preset.flag}</span>
+                    <span className="flex h-6 w-8 items-center justify-center rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[10px] font-mono font-bold text-slate-700 dark:text-slate-200 shrink-0 mt-0.5">
+                      {preset.code}
+                    </span>
                     <div className="min-w-0 flex-1">
                       <span className="font-bold text-xs text-slate-900 dark:text-white truncate block">
                         {preset.country}
@@ -813,13 +817,20 @@ export default function PassportPhotoGeneratorTool() {
           {/* Card 2: Photo Name & Date Overlay (Government Exam & Admit Card Standard) */}
           <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-4 sm:p-5 shadow-xs space-y-3.5">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-1.5">
-                <User className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                <span className="font-headings text-sm font-bold text-slate-900 dark:text-white">
-                  Name & Date on Photo
-                </span>
+              <div className="flex items-center gap-2">
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400">
+                  <User className="h-4 w-4" />
+                </div>
+                <div>
+                  <span className="font-headings text-sm font-bold text-slate-900 dark:text-white block">
+                    Name & Date on Photo
+                  </span>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 block">
+                    Bottom white strip for exams & admit cards
+                  </span>
+                </div>
               </div>
-              <label className="relative inline-flex items-center cursor-pointer">
+              <label className="relative inline-flex items-center cursor-pointer shrink-0">
                 <input
                   type="checkbox"
                   checked={nameOverlay.enabled}
@@ -832,17 +843,15 @@ export default function PassportPhotoGeneratorTool() {
               </label>
             </div>
 
-            <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
-              Required for government exams (SSC CGL/CHSL, NEET, UPSC, Railway, Police) and official application admit cards.
-            </p>
-
-            {nameOverlay.enabled && (
-              <div className="space-y-3 pt-1 border-t border-slate-100 dark:border-slate-800">
+            {nameOverlay.enabled ? (
+              <div className="space-y-3 pt-2 border-t border-slate-100 dark:border-slate-800">
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1 flex items-center justify-between">
-                    <span>Applicant Full Name</span>
-                    <span className="text-[10px] text-slate-400 font-normal">UPPERCASE</span>
-                  </label>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                      Applicant Full Name
+                    </label>
+                    <span className="text-[10px] text-slate-400 font-mono">UPPERCASE</span>
+                  </div>
                   <input
                     type="text"
                     value={nameOverlay.name}
@@ -850,7 +859,7 @@ export default function PassportPhotoGeneratorTool() {
                       setNameOverlay((prev) => ({ ...prev, name: e.target.value.toUpperCase() }))
                     }
                     placeholder="e.g. ANIL SHARMA"
-                    className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full h-9 px-3 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                   />
                 </div>
 
@@ -863,7 +872,7 @@ export default function PassportPhotoGeneratorTool() {
                     <button
                       type="button"
                       onClick={handleSetTodayDate}
-                      className="text-[11px] text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                      className="text-[11px] text-blue-600 dark:text-blue-400 hover:underline font-semibold"
                     >
                       Set Today
                     </button>
@@ -875,9 +884,14 @@ export default function PassportPhotoGeneratorTool() {
                       setNameOverlay((prev) => ({ ...prev, date: e.target.value }))
                     }
                     placeholder="e.g. DOP: 15/10/2026"
-                    className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+                    className="w-full h-9 px-3 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                   />
                 </div>
+              </div>
+            ) : (
+              <div className="flex items-start gap-2 bg-slate-50 dark:bg-slate-950/40 p-2.5 rounded-xl border border-slate-200/60 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400">
+                <Info className="h-3.5 w-3.5 text-slate-400 shrink-0 mt-0.5" />
+                <span>Toggle on if your admit card or exam notice (SSC, NEET, UPSC, Police) requires candidate name & date of photo.</span>
               </div>
             )}
           </div>
@@ -910,7 +924,7 @@ export default function PassportPhotoGeneratorTool() {
                         setSelectedPaper(paper);
                         setRequestedPhotoCount(0); // reset to fill
                       }}
-                      className={`p-2 rounded-xl border text-left transition-all ${
+                      className={`p-2.5 rounded-xl border text-left transition-all ${
                         isSelected
                           ? "border-blue-500 bg-blue-50/70 dark:bg-blue-950/60 shadow-xs ring-1 ring-blue-500/20"
                           : "border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/60"

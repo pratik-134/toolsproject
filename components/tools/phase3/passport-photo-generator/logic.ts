@@ -6,7 +6,8 @@
 export interface PassportPreset {
   id: string;
   country: string;
-  flag: string;
+  code: string;
+  flag?: string;
   document: string;
   widthMm: number;
   heightMm: number;
@@ -25,7 +26,8 @@ export const PASSPORT_PRESETS: PassportPreset[] = [
   {
     id: "us-passport",
     country: "United States",
-    flag: "🇺🇸",
+    code: "US",
+    flag: "US",
     document: "Passport, Visa & Green Card",
     widthMm: 51,
     heightMm: 51,
@@ -42,7 +44,8 @@ export const PASSPORT_PRESETS: PassportPreset[] = [
   {
     id: "in-passport",
     country: "India",
-    flag: "🇮🇳",
+    code: "IN",
+    flag: "IN",
     document: "Standard Passport",
     widthMm: 35,
     heightMm: 45,
@@ -59,7 +62,8 @@ export const PASSPORT_PRESETS: PassportPreset[] = [
   {
     id: "in-visa",
     country: "India",
-    flag: "🇮🇳",
+    code: "IN",
+    flag: "IN",
     document: "Visa / OCI Card",
     widthMm: 51,
     heightMm: 51,
@@ -76,7 +80,8 @@ export const PASSPORT_PRESETS: PassportPreset[] = [
   {
     id: "in-pan",
     country: "India",
-    flag: "🇮🇳",
+    code: "IN",
+    flag: "IN",
     document: "PAN Card / Stamp Size",
     widthMm: 25,
     heightMm: 35,
@@ -93,7 +98,8 @@ export const PASSPORT_PRESETS: PassportPreset[] = [
   {
     id: "uk-passport",
     country: "United Kingdom",
-    flag: "🇬🇧",
+    code: "GB",
+    flag: "GB",
     document: "Standard Passport & Visa",
     widthMm: 35,
     heightMm: 45,
@@ -110,7 +116,8 @@ export const PASSPORT_PRESETS: PassportPreset[] = [
   {
     id: "eu-schengen",
     country: "Schengen / EU",
-    flag: "🇪🇺",
+    code: "EU",
+    flag: "EU",
     document: "Schengen Visa & EU Passport",
     widthMm: 35,
     heightMm: 45,
@@ -127,7 +134,8 @@ export const PASSPORT_PRESETS: PassportPreset[] = [
   {
     id: "ca-passport",
     country: "Canada",
-    flag: "🇨🇦",
+    code: "CA",
+    flag: "CA",
     document: "Canadian Passport & PR Card",
     widthMm: 50,
     heightMm: 70,
@@ -144,7 +152,8 @@ export const PASSPORT_PRESETS: PassportPreset[] = [
   {
     id: "au-passport",
     country: "Australia",
-    flag: "🇦🇺",
+    code: "AU",
+    flag: "AU",
     document: "Passport & Identity",
     widthMm: 35,
     heightMm: 45,
@@ -161,7 +170,8 @@ export const PASSPORT_PRESETS: PassportPreset[] = [
   {
     id: "cn-passport",
     country: "China",
-    flag: "🇨🇳",
+    code: "CN",
+    flag: "CN",
     document: "Passport & Entry Visa",
     widthMm: 33,
     heightMm: 48,
@@ -178,7 +188,8 @@ export const PASSPORT_PRESETS: PassportPreset[] = [
   {
     id: "jp-passport",
     country: "Japan",
-    flag: "🇯🇵",
+    code: "JP",
+    flag: "JP",
     document: "Passport & Residence Card",
     widthMm: 35,
     heightMm: 45,
@@ -195,7 +206,8 @@ export const PASSPORT_PRESETS: PassportPreset[] = [
   {
     id: "ae-visa",
     country: "UAE / Dubai",
-    flag: "🇦🇪",
+    code: "AE",
+    flag: "AE",
     document: "Tourist & Resident Visa",
     widthMm: 40,
     heightMm: 50,
@@ -212,7 +224,8 @@ export const PASSPORT_PRESETS: PassportPreset[] = [
   {
     id: "sg-passport",
     country: "Singapore",
-    flag: "🇸🇬",
+    code: "SG",
+    flag: "SG",
     document: "Passport & Identity Card",
     widthMm: 35,
     heightMm: 45,
