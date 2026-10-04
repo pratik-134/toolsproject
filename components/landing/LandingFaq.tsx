@@ -15,31 +15,31 @@ export const LandingFaq: React.FC = () => {
   return (
     <div className="space-y-10">
       {/* Tab Switcher */}
-      <div className="flex justify-center">
-        <div className="inline-flex p-1 bg-slate-100/80 dark:bg-slate-800/80 rounded-xl border-0 shadow-2xs font-body">
+      <div className="flex justify-center px-2">
+        <div className="inline-flex p-1 bg-slate-100/80 dark:bg-slate-800/80 rounded-xl border-0 shadow-2xs font-body max-w-full overflow-x-auto">
           <button
             type="button"
             onClick={() => setActiveTab("resume")}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
               activeTab === "resume"
                 ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xs border-0"
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
             }`}
           >
-            <FileText className={`h-4 w-4 ${activeTab === "resume" ? "text-blue-600 dark:text-blue-400" : "text-slate-400 dark:text-slate-500"}`} />
+            <FileText className={`h-4 w-4 shrink-0 ${activeTab === "resume" ? "text-blue-600 dark:text-blue-400" : "text-slate-400 dark:text-slate-500"}`} />
             <span>Resume Builder ({RESUME_FAQS.length})</span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab("tools")}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
               activeTab === "tools"
                 ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-xs border-0"
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
             }`}
           >
-            <Wrench className={`h-4 w-4 ${activeTab === "tools" ? "text-emerald-600 dark:text-emerald-400" : "text-slate-400 dark:text-slate-500"}`} />
+            <Wrench className={`h-4 w-4 shrink-0 ${activeTab === "tools" ? "text-emerald-600 dark:text-emerald-400" : "text-slate-400 dark:text-slate-500"}`} />
             <span>In-Browser Tools ({TOOLS_FAQS.length})</span>
           </button>
         </div>
