@@ -173,7 +173,9 @@ export const BrandNewHeroBanner: React.FC = () => {
                   }`}
                 >
                   <FileText className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
-                  <span className="truncate">ATS Resume</span>
+                  <span className="truncate">
+                    <span className="hidden sm:inline">ATS </span>Resume
+                  </span>
                 </button>
                 <button
                   type="button"
@@ -185,7 +187,9 @@ export const BrandNewHeroBanner: React.FC = () => {
                   }`}
                 >
                   <Zap className="h-3.5 w-3.5 text-amber-500 shrink-0" />
-                  <span className="truncate">PDF Suite</span>
+                  <span className="truncate">
+                    PDF<span className="hidden sm:inline"> Suite</span>
+                  </span>
                 </button>
                 <button
                   type="button"
@@ -197,7 +201,9 @@ export const BrandNewHeroBanner: React.FC = () => {
                   }`}
                 >
                   <Wrench className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                  <span className="truncate">111+ Tools</span>
+                  <span className="truncate">
+                    <span className="hidden sm:inline">{toolCount}+ </span>Tools
+                  </span>
                 </button>
               </div>
             </div>
@@ -332,7 +338,7 @@ export const BrandNewHeroBanner: React.FC = () => {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <h2 className="font-headings text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">
-                      111+ In-Browser Privacy Utilities
+                      {toolCount}+ In-Browser Privacy Utilities
                     </h2>
                     <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                       Images, Security, Developer Formatters, Calculators, and QR Code Generators.

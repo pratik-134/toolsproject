@@ -96,7 +96,7 @@ export const AnimatedBannerBackground: React.FC<AnimatedBannerBackgroundProps> =
           className="w-full h-full object-cover"
           viewBox="0 0 1440 680"
           fill="none"
-          preserveAspectRatio="none"
+          preserveAspectRatio="xMidYMid slice"
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
@@ -122,32 +122,7 @@ export const AnimatedBannerBackground: React.FC<AnimatedBannerBackgroundProps> =
               <stop offset="70%" stopColor="#93C5FD" stopOpacity="0.16" />
               <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.0" />
             </linearGradient>
-
-            {/* Subtle luminous ribbon gradient fill */}
-            <linearGradient id="silk-ribbon-fill-1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#2563EB" stopOpacity="0.02" />
-              <stop offset="50%" stopColor="#3B82F6" stopOpacity="0.04" />
-              <stop offset="100%" stopColor="#EFF6FF" stopOpacity="0.0" />
-            </linearGradient>
-
-            <linearGradient id="silk-ribbon-fill-2" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.025" />
-              <stop offset="60%" stopColor="#2563EB" stopOpacity="0.03" />
-              <stop offset="100%" stopColor="#F8FAFC" stopOpacity="0.0" />
-            </linearGradient>
           </defs>
-
-          {/* Fluid Ribbon Plane 1: Background Atmospheric Layer */}
-          <path
-            d="M -100 240 C 240 110, 520 380, 890 200 C 1160 70, 1380 260, 1540 180 L 1540 460 C 1360 410, 1140 290, 890 350 C 580 430, 260 280, -100 370 Z"
-            fill="url(#silk-ribbon-fill-1)"
-          />
-
-          {/* Fluid Ribbon Plane 2: Foreground Luminous Layer */}
-          <path
-            d="M -100 360 C 280 200, 600 480, 960 280 C 1220 130, 1420 360, 1540 280 L 1540 560 C 1380 500, 1180 380, 920 440 C 600 520, 280 390, -100 480 Z"
-            fill="url(#silk-ribbon-fill-2)"
-          />
 
           {/* Primary Silk Contour 1 */}
           <path
