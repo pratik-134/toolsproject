@@ -303,19 +303,6 @@ export const Navbar: React.FC = () => {
           <Search className="h-4 w-4" />
         </button>
 
-        {/* Keyboard Shortcuts Trigger Button */}
-        <button
-          type="button"
-          onClick={() => {
-            window.dispatchEvent(new KeyboardEvent("keydown", { key: "?" }));
-          }}
-          title="Keyboard shortcuts (?)"
-          aria-label="Keyboard shortcuts"
-          className="hidden md:flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all shrink-0 font-mono text-xs font-bold"
-        >
-          ?
-        </button>
-
         {/* Offline Mode Indicator */}
         {!isOnline && (
           <span
