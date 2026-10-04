@@ -95,14 +95,14 @@ export default function ArchivePackerTool() {
     }
   }, [files, compressionLevel]);
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const uploadedFiles = e.target.files;
+  const processIncomingFiles = async (uploadedFiles: FileList | File[]) => {
     if (!uploadedFiles || uploadedFiles.length === 0) return;
 
+    const fileList = Array.from(uploadedFiles);
     const newItems: FileItem[] = [];
 
-    for (let i = 0; i < uploadedFiles.length; i++) {
-      const file = uploadedFiles[i];
+    for (let i = 0; i < fileList.length; i++) {
+      const file = fileList[i];
       if (!file) continue;
 
       if (file.size > 25 * 1024 * 1024) {
@@ -120,7 +120,15 @@ export default function ArchivePackerTool() {
     }
 
     setFiles((prev) => [...prev, ...newItems]);
-    e.target.value = "";
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      await processIncomingFiles(e.target.files);
+    }
   };
 
   const handleCreateNewFile = (e: React.FormEvent) => {
@@ -223,6 +231,31 @@ export default function ArchivePackerTool() {
             <span className="text-xs text-slate-500 font-mono">
               Total: {formatBytes(files.reduce((acc, f) => acc + f.size, 0))}
             </span>
+          </div>
+
+          {/* Multi-File Dropzone */}
+          <div
+            onDragOver={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+            onDrop={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (e.dataTransfer.files?.length) {
+                processIncomingFiles(e.dataTransfer.files);
+              }
+            }}
+            onClick={() => fileInputRef.current?.click()}
+            className="border-2 border-dashed border-slate-300 hover:border-emerald-500 rounded-xl p-4 text-center cursor-pointer transition bg-slate-50/60 hover:bg-emerald-50/20"
+          >
+            <div className="flex items-center justify-center gap-2 text-slate-700 text-xs font-semibold">
+              <Upload className="w-4 h-4 text-emerald-600" />
+              <span>Drag & drop multiple files here or click to browse</span>
+            </div>
+            <p className="text-[11px] text-slate-400 mt-1">
+              Supports any file types. Select or drop multiple files simultaneously.
+            </p>
           </div>
 
           {/* New File Inline Form */}

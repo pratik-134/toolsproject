@@ -17,10 +17,7 @@ export default function ChecksumVerifierTool() {
   const [isComputing, setIsComputing] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
+  const processFile = async (file: File) => {
     // 50 MB in-browser limit
     if (file.size > 50 * 1024 * 1024) {
       alert("File exceeds 50 MB client-side memory safety limit.");
@@ -40,6 +37,13 @@ export default function ChecksumVerifierTool() {
     } finally {
       setIsComputing(false);
     }
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    await processFile(file);
+    e.target.value = "";
   };
 
   const handleComputeText = async () => {
@@ -157,7 +161,19 @@ export default function ChecksumVerifierTool() {
           </label>
 
           {sourceType === "file" ? (
-            <div className="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-8 text-center hover:border-teal-500 transition-colors">
+            <div
+              onDragOver={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}
+              onDrop={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const dropped = e.dataTransfer.files?.[0];
+                if (dropped) processFile(dropped);
+              }}
+              className="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-8 text-center hover:border-teal-500 transition-colors"
+            >
               <input
                 type="file"
                 id="file-upload"

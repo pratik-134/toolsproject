@@ -32,14 +32,14 @@ export default function PdfMergerTool() {
   const [copied, setCopied] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = e.target.files;
+  const processSelectedFiles = async (selectedFiles: FileList | File[]) => {
     if (!selectedFiles || selectedFiles.length === 0) return;
     setError(null);
 
+    const fileList = Array.from(selectedFiles);
     const newEntries: PdfFileInfo[] = [];
-    for (let i = 0; i < selectedFiles.length; i++) {
-      const file = selectedFiles[i];
+    for (let i = 0; i < fileList.length; i++) {
+      const file = fileList[i];
       if (!file) continue;
       if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
         continue;
@@ -66,6 +66,12 @@ export default function PdfMergerTool() {
     }
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
+    }
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      await processSelectedFiles(e.target.files);
     }
   };
 
@@ -198,6 +204,17 @@ export default function PdfMergerTool() {
 
       {/* Upload Zone */}
       <div
+        onDragOver={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+        onDrop={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (e.dataTransfer.files?.length) {
+            processSelectedFiles(e.dataTransfer.files);
+          }
+        }}
         onClick={() => fileInputRef.current?.click()}
         className="border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-400 bg-slate-50/50 dark:bg-slate-900/50 rounded-2xl p-8 text-center cursor-pointer transition-all hover:bg-indigo-50/20 dark:hover:bg-indigo-950/20"
       >

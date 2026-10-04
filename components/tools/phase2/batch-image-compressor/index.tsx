@@ -293,7 +293,10 @@ export default function BatchImageCompressorTool() {
           type="file"
           accept="image/*"
           multiple
-          onChange={(e) => handleFiles(e.target.files)}
+          onChange={(e) => {
+            handleFiles(e.target.files);
+            e.target.value = "";
+          }}
           className="hidden"
         />
         <div className="mx-auto h-14 w-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-3">

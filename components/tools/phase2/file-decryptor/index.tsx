@@ -140,6 +140,7 @@ export default function FileDecryptorTool() {
               onChange={(e) => {
                 const f = e.target.files?.[0];
                 if (f) handleFileSelect(f);
+                e.target.value = "";
               }}
               className="hidden"
             />

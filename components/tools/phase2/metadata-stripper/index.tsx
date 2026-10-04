@@ -123,7 +123,19 @@ export default function MetadataStripperTool() {
             </div>
 
             {/* Drag & Drop or Upload area */}
-            <div className="flex flex-col items-center justify-center p-6 bg-muted/20 border border-dashed border-border rounded-xl space-y-3">
+            <div
+              onDragOver={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}
+              onDrop={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const dropped = e.dataTransfer.files?.[0];
+                if (dropped) handleFileUpload(dropped);
+              }}
+              className="flex flex-col items-center justify-center p-6 bg-muted/20 border border-dashed border-border rounded-xl space-y-3"
+            >
               <input
                 ref={fileInputRef}
                 type="file"
@@ -132,6 +144,7 @@ export default function MetadataStripperTool() {
                 onChange={(e) => {
                   const uploaded = e.target.files?.[0];
                   if (uploaded) handleFileUpload(uploaded);
+                  e.target.value = "";
                 }}
               />
               <Button

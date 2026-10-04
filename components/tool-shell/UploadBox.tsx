@@ -156,6 +156,7 @@ export const UploadBox: React.FC<UploadBoxProps> = ({
             if (e.target.files?.length) {
               handleFiles(e.target.files);
             }
+            e.target.value = "";
           }}
           className="hidden"
         />

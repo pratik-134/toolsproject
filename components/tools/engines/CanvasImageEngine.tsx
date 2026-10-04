@@ -23,7 +23,7 @@ export function CanvasImageEngine({ preset }: CanvasImageEngineProps) {
   const [scale, setScale] = useState<number>(preset.defaultOptions.scale || 2);
 
   const handleFilesSelected = (selectedFiles: File[]) => {
-    setFiles(selectedFiles);
+    setFiles((prev) => [...prev, ...selectedFiles]);
     setDownloadUrl(null);
     setErrorMessage(null);
   };
@@ -47,26 +47,24 @@ export function CanvasImageEngine({ preset }: CanvasImageEngineProps) {
         setDownloadUrl(url);
         setDownloadFilename(`${baseName}${preset.downloadFilenameExtension}`);
       } else {
-        // Multi-file batch processing using Canvas
-        const convertedBlobs: { name: string; blob: Blob }[] = [];
+        // Multi-file batch processing using Canvas and JSZip
+        const JSZip = (await import("jszip")).default;
+        const zip = new JSZip();
+
         for (let i = 0; i < files.length; i++) {
           const file = files[i];
           if (!file) continue;
           const blob = await convertSingleImage(file, preset.outputFormat, quality, bgColor, scale);
           const baseName = file.name.substring(0, file.name.lastIndexOf(".")) || file.name;
-          convertedBlobs.push({
-            name: `${baseName}${preset.downloadFilenameExtension}`,
-            blob,
-          });
-          setProgressPercent(((i + 1) / files.length) * 100);
+          zip.file(`${baseName}${preset.downloadFilenameExtension}`, blob);
+          setProgressPercent(Math.round(((i + 1) / files.length) * 85));
         }
 
-        const firstItem = convertedBlobs[0];
-        if (firstItem) {
-          const url = URL.createObjectURL(firstItem.blob);
-          setDownloadUrl(url);
-          setDownloadFilename(firstItem.name);
-        }
+        const zipBlob = await zip.generateAsync({ type: "blob" });
+        setProgressPercent(100);
+        const url = URL.createObjectURL(zipBlob);
+        setDownloadUrl(url);
+        setDownloadFilename(`${preset.slug}-converted-batch.zip`);
       }
     } catch (err: any) {
       console.error("[CanvasImageEngine Error]:", err);

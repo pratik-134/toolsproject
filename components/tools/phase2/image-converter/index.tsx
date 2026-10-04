@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import JSZip from "jszip";
 import { Button } from "@/components/ui/button";
 import {
   formatBytes,
@@ -24,10 +25,86 @@ import {
   ShieldCheck,
   FileCheck,
   Sparkles,
+  X,
+  Plus,
+  Archive,
 } from "lucide-react";
 
+async function convertFileToBlob(
+  file: File,
+  targetFormat: SupportedImageFormat,
+  quality: number,
+  scale: number,
+  bgColor: string
+): Promise<{ blob: Blob; dimensions: { width: number; height: number }; filename: string }> {
+  const url = URL.createObjectURL(file);
+  try {
+    const img = new Image();
+    await new Promise<void>((resolve, reject) => {
+      img.onload = () => resolve();
+      img.onerror = () => reject(new Error(`Failed to load "${file.name}" into canvas`));
+      img.src = url;
+    });
+
+    const scaled = calculateScaledDimensions(
+      img.naturalWidth || 800,
+      img.naturalHeight || 600,
+      scale / 100
+    );
+
+    const canvas = document.createElement("canvas");
+    canvas.width = scaled.width;
+    canvas.height = scaled.height;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) throw new Error("Could not initialize 2D canvas context");
+
+    const targetDetail = FORMAT_DETAILS[targetFormat];
+    if (!targetDetail.hasAlpha || targetFormat === "jpeg" || targetFormat === "bmp") {
+      ctx.fillStyle = bgColor;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+    ctx.drawImage(img, 0, 0, scaled.width, scaled.height);
+
+    let resultBlob: Blob;
+    if (targetFormat === "bmp") {
+      const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const bmpBytes = createBmpBinary(canvas.width, canvas.height, imgData.data);
+      resultBlob = new Blob([bmpBytes.buffer as ArrayBuffer], { type: "image/bmp" });
+    } else if (targetFormat === "ico") {
+      const pngBlob = await new Promise<Blob>((resolve, reject) => {
+        canvas.toBlob((b) => (b ? resolve(b) : reject(new Error("PNG encoding failed"))), "image/png");
+      });
+      const pngArrayBuffer = await pngBlob.arrayBuffer();
+      const icoBytes = createIcoBinary(new Uint8Array(pngArrayBuffer), canvas.width, canvas.height);
+      resultBlob = new Blob([icoBytes.buffer as ArrayBuffer], { type: "image/x-icon" });
+    } else if (targetFormat === "svg") {
+      const pngDataUri = canvas.toDataURL("image/png");
+      const svgString = createSvgWrapper(pngDataUri, canvas.width, canvas.height);
+      resultBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+    } else {
+      const mime = targetDetail.mime;
+      const q = quality / 100;
+      resultBlob = await new Promise<Blob>((resolve, reject) => {
+        canvas.toBlob(
+          (b) => (b ? resolve(b) : reject(new Error(`Failed to convert to ${targetFormat}`))),
+          mime,
+          q
+        );
+      });
+    }
+
+    const filename = getFilenameWithExtension(file.name, targetDetail.ext);
+    return { blob: resultBlob, dimensions: scaled, filename };
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
 export default function ImageConverterTool() {
-  const [sourceFile, setSourceFile] = useState<File | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [sourceDimensions, setSourceDimensions] = useState<{ width: number; height: number } | null>(null);
 
@@ -37,12 +114,16 @@ export default function ImageConverterTool() {
   const [bgColor, setBgColor] = useState<string>("#ffffff");
 
   const [isConverting, setIsConverting] = useState<boolean>(false);
+  const [progressPercent, setProgressPercent] = useState<number | null>(null);
   const [convertedBlob, setConvertedBlob] = useState<Blob | null>(null);
   const [convertedUrl, setConvertedUrl] = useState<string | null>(null);
   const [convertedDimensions, setConvertedDimensions] = useState<{ width: number; height: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const sourceFile = files[0] || null;
+  const isBatch = files.length > 1;
 
   // Clean up object URLs on unmount or file change
   useEffect(() => {
@@ -52,131 +133,134 @@ export default function ImageConverterTool() {
     };
   }, [previewUrl, convertedUrl]);
 
+  const loadFiles = (incoming: File[]) => {
+    setError(null);
+    const validFiles: File[] = [];
+
+    for (const f of incoming) {
+      const validation = validateImageFile(f);
+      if (validation.valid) {
+        validFiles.push(f);
+      } else {
+        setError(`"${f.name}": ${validation.error || "Invalid file"}`);
+      }
+    }
+
+    if (validFiles.length === 0) return;
+
+    if (convertedUrl) URL.revokeObjectURL(convertedUrl);
+    setConvertedBlob(null);
+    setConvertedUrl(null);
+    setConvertedDimensions(null);
+
+    setFiles((prev) => {
+      const next = [...prev, ...validFiles];
+      if (next[0] && (!previewUrl || prev.length === 0)) {
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
+        const url = URL.createObjectURL(next[0]);
+        setPreviewUrl(url);
+        const img = new Image();
+        img.onload = () => {
+          setSourceDimensions({ width: img.naturalWidth, height: img.naturalHeight });
+        };
+        img.src = url;
+      }
+      return next;
+    });
+  };
+
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    loadFile(file);
+    if (e.target.files && e.target.files.length > 0) {
+      loadFiles(Array.from(e.target.files));
+    }
+    e.target.value = "";
   };
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
-    const file = e.dataTransfer.files?.[0];
-    if (!file) return;
-    loadFile(file);
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      loadFiles(Array.from(e.dataTransfer.files));
+    }
   };
 
-  const loadFile = (file: File) => {
-    setError(null);
-    const validation = validateImageFile(file);
-    if (!validation.valid) {
-      setError(validation.error || "Invalid file");
-      return;
-    }
-
-    if (previewUrl) URL.revokeObjectURL(previewUrl);
+  const removeFile = (index: number) => {
+    setFiles((prev) => {
+      const next = prev.filter((_, i) => i !== index);
+      if (index === 0 && next[0]) {
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
+        const url = URL.createObjectURL(next[0]);
+        setPreviewUrl(url);
+        const img = new Image();
+        img.onload = () => {
+          setSourceDimensions({ width: img.naturalWidth, height: img.naturalHeight });
+        };
+        img.src = url;
+      } else if (next.length === 0) {
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
+        setPreviewUrl(null);
+        setSourceDimensions(null);
+      }
+      return next;
+    });
     if (convertedUrl) URL.revokeObjectURL(convertedUrl);
     setConvertedBlob(null);
     setConvertedUrl(null);
-
-    const url = URL.createObjectURL(file);
-    setPreviewUrl(url);
-    setSourceFile(file);
-
-    // Read dimensions
-    const img = new Image();
-    img.onload = () => {
-      setSourceDimensions({ width: img.naturalWidth, height: img.naturalHeight });
-    };
-    img.onerror = () => {
-      setError("Unable to render image preview in browser.");
-    };
-    img.src = url;
+    setConvertedDimensions(null);
   };
 
   const handleConvert = async () => {
-    if (!sourceFile || !previewUrl || !sourceDimensions) return;
+    if (files.length === 0) return;
     setIsConverting(true);
+    setProgressPercent(0);
     setError(null);
 
     try {
-      const img = new Image();
-      await new Promise<void>((resolve, reject) => {
-        img.onload = () => resolve();
-        img.onerror = () => reject(new Error("Failed to load source image into canvas"));
-        img.src = previewUrl;
-      });
-
-      const scaled = calculateScaledDimensions(
-        sourceDimensions.width,
-        sourceDimensions.height,
-        scale / 100
-      );
-
-      const canvas = document.createElement("canvas");
-      canvas.width = scaled.width;
-      canvas.height = scaled.height;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) throw new Error("Could not initialize 2D canvas context");
-
-      // Handle non-alpha background fill
-      const targetDetail = FORMAT_DETAILS[targetFormat];
-      if (!targetDetail.hasAlpha || targetFormat === "jpeg" || targetFormat === "bmp") {
-        ctx.fillStyle = bgColor;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      }
-
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = "high";
-      ctx.drawImage(img, 0, 0, scaled.width, scaled.height);
-
-      let resultBlob: Blob;
-
-      if (targetFormat === "bmp") {
-        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const bmpBytes = createBmpBinary(canvas.width, canvas.height, imgData.data);
-        resultBlob = new Blob([bmpBytes.buffer as ArrayBuffer], { type: "image/bmp" });
-      } else if (targetFormat === "ico") {
-        // ICO requires PNG internal payload
-        const pngBlob = await new Promise<Blob>((resolve, reject) => {
-          canvas.toBlob((b) => (b ? resolve(b) : reject(new Error("PNG encoding failed"))), "image/png");
-        });
-        const pngArrayBuffer = await pngBlob.arrayBuffer();
-        const icoBytes = createIcoBinary(new Uint8Array(pngArrayBuffer), canvas.width, canvas.height);
-        resultBlob = new Blob([icoBytes.buffer as ArrayBuffer], { type: "image/x-icon" });
-      } else if (targetFormat === "svg") {
-        const pngDataUri = canvas.toDataURL("image/png");
-        const svgString = createSvgWrapper(pngDataUri, canvas.width, canvas.height);
-        resultBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+      if (files.length === 1 && files[0]) {
+        const result = await convertFileToBlob(files[0], targetFormat, quality, scale, bgColor);
+        if (convertedUrl) URL.revokeObjectURL(convertedUrl);
+        const outputUrl = URL.createObjectURL(result.blob);
+        setConvertedBlob(result.blob);
+        setConvertedUrl(outputUrl);
+        setConvertedDimensions(result.dimensions);
       } else {
-        const mime = targetDetail.mime;
-        const q = quality / 100;
-        resultBlob = await new Promise<Blob>((resolve, reject) => {
-          canvas.toBlob(
-            (b) => (b ? resolve(b) : reject(new Error(`Failed to convert to ${targetFormat}`))),
-            mime,
-            q
-          );
-        });
-      }
+        // Multi-file batch
+        const zip = new JSZip();
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          if (!file) continue;
+          const result = await convertFileToBlob(file, targetFormat, quality, scale, bgColor);
+          zip.file(result.filename, result.blob);
+          setProgressPercent(Math.round(((i + 1) / files.length) * 85));
+        }
 
-      if (convertedUrl) URL.revokeObjectURL(convertedUrl);
-      const outputUrl = URL.createObjectURL(resultBlob);
-      setConvertedBlob(resultBlob);
-      setConvertedUrl(outputUrl);
-      setConvertedDimensions(scaled);
+        const zipBlob = await zip.generateAsync({ type: "blob" });
+        setProgressPercent(100);
+        if (convertedUrl) URL.revokeObjectURL(convertedUrl);
+        const outputUrl = URL.createObjectURL(zipBlob);
+        setConvertedBlob(zipBlob);
+        setConvertedUrl(outputUrl);
+        setConvertedDimensions({ width: 0, height: 0 });
+      }
     } catch (err: any) {
+      console.error("[ImageConverter Error]:", err);
       setError(err?.message || "An unexpected error occurred during image conversion.");
     } finally {
       setIsConverting(false);
+      setProgressPercent(null);
     }
   };
 
   const handleDownload = () => {
-    if (!convertedBlob || !convertedUrl || !sourceFile) return;
-    const filename = getFilenameWithExtension(
-      sourceFile.name,
-      FORMAT_DETAILS[targetFormat].ext
-    );
+    if (!convertedBlob || !convertedUrl) return;
+    let filename: string;
+    if (files.length === 1 && files[0]) {
+      filename = getFilenameWithExtension(
+        files[0].name,
+        FORMAT_DETAILS[targetFormat].ext
+      );
+    } else {
+      filename = `converted-images-${targetFormat}.zip`;
+    }
     const a = document.createElement("a");
     a.href = convertedUrl;
     a.download = filename;
@@ -188,12 +272,13 @@ export default function ImageConverterTool() {
   const handleReset = () => {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
     if (convertedUrl) URL.revokeObjectURL(convertedUrl);
-    setSourceFile(null);
+    setFiles([]);
     setPreviewUrl(null);
     setSourceDimensions(null);
     setConvertedBlob(null);
     setConvertedUrl(null);
     setConvertedDimensions(null);
+    setProgressPercent(null);
     setError(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
@@ -231,7 +316,7 @@ export default function ImageConverterTool() {
       )}
 
       {/* Upload Box */}
-      {!sourceFile ? (
+      {files.length === 0 ? (
         <div
           onDragOver={(e) => e.preventDefault()}
           onDrop={handleDrop}
@@ -242,6 +327,7 @@ export default function ImageConverterTool() {
             ref={fileInputRef}
             type="file"
             accept="image/*,.heic,.avif,.bmp,.svg,.ico"
+            multiple
             onChange={handleFileSelect}
             className="hidden"
           />
@@ -249,60 +335,145 @@ export default function ImageConverterTool() {
             <Upload className="h-8 w-8" />
           </div>
           <h3 className="font-headings text-lg font-bold text-slate-900 mb-1">
-            Choose an image or drag & drop here
+            Choose images or drag & drop here
           </h3>
           <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mb-4">
-            Supports PNG, JPEG, WebP, SVG, BMP, ICO, AVIF, and GIF up to 50MB.
+            Supports multiple PNG, JPEG, WebP, SVG, BMP, ICO, AVIF, and GIF up to 50MB each.
           </p>
           <Button
             type="button"
             className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-5 py-2 text-xs font-bold"
           >
-            Select Image
+            Select Images
           </Button>
         </div>
       ) : (
         <div className="space-y-6">
-          {/* Active File & Source Details */}
-          <div className="p-5 rounded-2xl border border-slate-200 bg-white shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div className="flex items-center gap-4 min-w-0">
-              {previewUrl && (
-                <div className="relative h-16 w-16 rounded-lg border border-slate-200 overflow-hidden bg-slate-100 shrink-0 flex items-center justify-center">
-                  <img
-                    src={previewUrl}
-                    alt="Preview"
-                    className="max-h-full max-w-full object-contain"
-                  />
+          {/* Active File / Batch Details */}
+          {!isBatch && sourceFile ? (
+            <div className="p-5 rounded-2xl border border-slate-200 bg-white shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+              <div className="flex items-center gap-4 min-w-0">
+                {previewUrl && (
+                  <div className="relative h-16 w-16 rounded-lg border border-slate-200 overflow-hidden bg-slate-100 shrink-0 flex items-center justify-center">
+                    <img
+                      src={previewUrl}
+                      alt="Preview"
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  </div>
+                )}
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <h4 className="font-headings text-sm sm:text-base font-bold text-slate-900 truncate">
+                      {sourceFile.name}
+                    </h4>
+                    <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200 shrink-0">
+                      {sourceFile.name.split(".").pop()}
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {formatBytes(sourceFile.size)}
+                    {sourceDimensions && (
+                      <> • {sourceDimensions.width} × {sourceDimensions.height} px</>
+                    )}
+                  </p>
                 </div>
-              )}
-              <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <h4 className="font-headings text-sm sm:text-base font-bold text-slate-900 truncate">
-                    {sourceFile.name}
-                  </h4>
-                  <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200 shrink-0">
-                    {sourceFile.name.split(".").pop()}
-                  </span>
-                </div>
-                <p className="text-xs text-slate-500 mt-0.5">
-                  {formatBytes(sourceFile.size)}
-                  {sourceDimensions && (
-                    <> • {sourceDimensions.width} × {sourceDimensions.height} px</>
-                  )}
-                </p>
+              </div>
+
+              <div className="flex items-center gap-2 shrink-0">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*,.heic,.avif,.bmp,.svg,.ico"
+                  multiple
+                  onChange={handleFileSelect}
+                  className="hidden"
+                />
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="text-xs text-blue-600 hover:text-blue-700"
+                >
+                  <Plus className="h-3.5 w-3.5 mr-1" />
+                  Add More
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleReset}
+                  className="text-xs text-slate-600 hover:text-slate-900"
+                >
+                  <RefreshCw className="h-3.5 w-3.5 mr-1.5" />
+                  Reset
+                </Button>
               </div>
             </div>
+          ) : (
+            <div className="p-5 rounded-2xl border border-slate-200 bg-white shadow-xs space-y-3">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                <div className="flex items-center gap-2">
+                  <Archive className="h-5 w-5 text-blue-600" />
+                  <h4 className="font-headings text-sm sm:text-base font-bold text-slate-900">
+                    Batch Queue: {files.length} Images ({formatBytes(files.reduce((acc, f) => acc + f.size, 0))})
+                  </h4>
+                </div>
+                <div className="flex items-center gap-2">
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*,.heic,.avif,.bmp,.svg,.ico"
+                    multiple
+                    onChange={handleFileSelect}
+                    className="hidden"
+                  />
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="text-xs gap-1.5 text-blue-600"
+                  >
+                    <Plus className="h-3.5 w-3.5" />
+                    Add More Images
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleReset}
+                    className="text-xs text-rose-600 hover:text-rose-700 hover:bg-rose-50"
+                  >
+                    Clear All
+                  </Button>
+                </div>
+              </div>
 
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleReset}
-              className="text-xs text-slate-600 hover:text-slate-900"
-            >
-              <RefreshCw className="h-3.5 w-3.5 mr-1.5" />
-              Choose Another
-            </Button>
-          </div>
+              {/* List of files in queue */}
+              <div className="max-h-48 overflow-y-auto space-y-2 pr-1">
+                {files.map((file, idx) => (
+                  <div
+                    key={`${file.name}-${idx}`}
+                    className="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-slate-50/70 text-xs text-slate-800"
+                  >
+                    <div className="flex items-center gap-2.5 truncate">
+                      <ImageIcon className="h-4 w-4 text-blue-600 shrink-0" />
+                      <span className="font-semibold truncate">{file.name}</span>
+                      <span className="text-[11px] text-slate-500 font-mono">
+                        ({formatBytes(file.size)})
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => removeFile(idx)}
+                      className="p-1 rounded-lg hover:bg-slate-200 text-slate-400 hover:text-slate-700 transition"
+                      title="Remove file"
+                    >
+                      <X className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Conversion Settings Panel */}
           <div className="p-6 rounded-2xl border border-slate-200 bg-white shadow-xs space-y-6">
@@ -454,12 +625,16 @@ export default function ImageConverterTool() {
                 {isConverting ? (
                   <>
                     <RefreshCw className="h-4 w-4 animate-spin" />
-                    Converting Image In Memory...
+                    {isBatch
+                      ? `Converting Batch (${progressPercent || 0}%)...`
+                      : "Converting Image In Memory..."}
                   </>
                 ) : (
                   <>
                     <Sparkles className="h-4 w-4" />
-                    Convert to {targetFormat.toUpperCase()}
+                    {isBatch
+                      ? `Convert All ${files.length} Images to ${targetFormat.toUpperCase()}`
+                      : `Convert to ${targetFormat.toUpperCase()}`}
                   </>
                 )}
               </Button>
@@ -467,13 +642,13 @@ export default function ImageConverterTool() {
           </div>
 
           {/* Converted Result Card */}
-          {convertedBlob && convertedUrl && convertedDimensions && (
+          {convertedBlob && convertedUrl && (
             <div className="p-6 rounded-2xl border-2 border-blue-500/40 bg-white shadow-md space-y-6 animate-in fade-in-50 duration-300">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div className="flex items-center gap-2">
                   <FileCheck className="h-5 w-5 text-emerald-600" />
                   <h3 className="font-headings text-sm sm:text-base font-bold text-slate-900">
-                    Conversion Complete!
+                    {isBatch ? `Batch Conversion Complete (${files.length} Images)!` : "Conversion Complete!"}
                   </h3>
                 </div>
                 <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
@@ -481,47 +656,67 @@ export default function ImageConverterTool() {
                 </span>
               </div>
 
-              {/* Comparison Stats */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-                  <span className="text-[11px] font-medium text-slate-500 block">Original Size</span>
-                  <strong className="text-xs sm:text-sm font-bold text-slate-800">
-                    {formatBytes(sourceFile.size)}
-                  </strong>
-                </div>
-                <div className="p-3 rounded-xl bg-blue-50/70 border border-blue-200">
-                  <span className="text-[11px] font-medium text-blue-700 block">Converted Size</span>
-                  <strong className="text-xs sm:text-sm font-bold text-blue-900">
-                    {formatBytes(convertedBlob.size)}
-                  </strong>
-                </div>
-                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-                  <span className="text-[11px] font-medium text-slate-500 block">Dimensions</span>
-                  <strong className="text-xs sm:text-sm font-bold text-slate-800">
-                    {convertedDimensions.width} × {convertedDimensions.height}
-                  </strong>
-                </div>
-                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-                  <span className="text-[11px] font-medium text-slate-500 block">Size Diff</span>
-                  <strong
-                    className={`text-xs sm:text-sm font-bold ${
-                      convertedBlob.size <= sourceFile.size ? "text-emerald-600" : "text-amber-600"
-                    }`}
-                  >
-                    {convertedBlob.size <= sourceFile.size ? "▼ " : "▲ "}
-                    {Math.abs(Math.round(((convertedBlob.size - sourceFile.size) / sourceFile.size) * 100))}%
-                  </strong>
-                </div>
-              </div>
+              {!isBatch && sourceFile && convertedDimensions && (
+                <>
+                  {/* Single Image Comparison Stats */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                      <span className="text-[11px] font-medium text-slate-500 block">Original Size</span>
+                      <strong className="text-xs sm:text-sm font-bold text-slate-800">
+                        {formatBytes(sourceFile.size)}
+                      </strong>
+                    </div>
+                    <div className="p-3 rounded-xl bg-blue-50/70 border border-blue-200">
+                      <span className="text-[11px] font-medium text-blue-700 block">Converted Size</span>
+                      <strong className="text-xs sm:text-sm font-bold text-blue-900">
+                        {formatBytes(convertedBlob.size)}
+                      </strong>
+                    </div>
+                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                      <span className="text-[11px] font-medium text-slate-500 block">Dimensions</span>
+                      <strong className="text-xs sm:text-sm font-bold text-slate-800">
+                        {convertedDimensions.width} × {convertedDimensions.height}
+                      </strong>
+                    </div>
+                    <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                      <span className="text-[11px] font-medium text-slate-500 block">Size Diff</span>
+                      <strong
+                        className={`text-xs sm:text-sm font-bold ${
+                          convertedBlob.size <= sourceFile.size ? "text-emerald-600" : "text-amber-600"
+                        }`}
+                      >
+                        {convertedBlob.size <= sourceFile.size ? "▼ " : "▲ "}
+                        {Math.abs(Math.round(((convertedBlob.size - sourceFile.size) / sourceFile.size) * 100))}%
+                      </strong>
+                    </div>
+                  </div>
 
-              {/* Preview Box */}
-              <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4 flex items-center justify-center max-h-72 overflow-hidden">
-                <img
-                  src={convertedUrl}
-                  alt="Converted"
-                  className="max-h-64 max-w-full object-contain rounded-lg shadow-2xs"
-                />
-              </div>
+                  {/* Preview Box */}
+                  <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4 flex items-center justify-center max-h-72 overflow-hidden">
+                    <img
+                      src={convertedUrl}
+                      alt="Converted"
+                      className="max-h-64 max-w-full object-contain rounded-lg shadow-2xs"
+                    />
+                  </div>
+                </>
+              )}
+
+              {isBatch && (
+                <div className="p-4 rounded-xl bg-blue-50/70 border border-blue-200 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <Archive className="h-8 w-8 text-blue-600" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900 text-sm">
+                        All {files.length} images converted to {targetFormat.toUpperCase()}
+                      </h4>
+                      <p className="text-xs text-slate-600">
+                        Total Package Archive Size: {formatBytes(convertedBlob.size)}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row items-center gap-3">
@@ -530,14 +725,16 @@ export default function ImageConverterTool() {
                   className="w-full sm:flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 text-sm"
                 >
                   <Download className="h-4 w-4" />
-                  Download Converted Image ({FORMAT_DETAILS[targetFormat].ext.toUpperCase()})
+                  {isBatch
+                    ? `Download All (${files.length} Images) as ZIP`
+                    : `Download Converted Image (${FORMAT_DETAILS[targetFormat].ext.toUpperCase()})`}
                 </Button>
                 <Button
                   variant="outline"
                   onClick={handleReset}
                   className="w-full sm:w-auto text-xs text-slate-600 hover:text-slate-900 py-2.5"
                 >
-                  Convert Another Image
+                  Convert More Images
                 </Button>
               </div>
             </div>

@@ -385,6 +385,7 @@ export default function CameraToPdfScannerTool() {
                   type="file"
                   ref={uploadInputRef}
                   accept="image/*"
+                  multiple
                   onChange={handleFileUpload}
                   className="hidden"
                 />

@@ -319,7 +319,7 @@ export function DataTransformEngine({ preset }: DataTransformEngineProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleFilesSelected = (selectedFiles: File[]) => {
-    setFiles(selectedFiles);
+    setFiles((prev) => [...prev, ...selectedFiles]);
     setDownloadUrl(null);
     setErrorMessage(null);
   };
@@ -328,51 +328,77 @@ export function DataTransformEngine({ preset }: DataTransformEngineProps) {
     setFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const handleProcess = async () => {
-    let sourceText = textInput;
-    let baseFilename = "converted";
-
-    if (files.length > 0 && files[0]) {
-      const file = files[0];
-      sourceText = await file.text();
-      baseFilename = file.name.substring(0, file.name.lastIndexOf(".")) || file.name;
+  const transformContent = async (sourceText: string, slug: string): Promise<Blob> => {
+    if (slug === "markdown-to-html") {
+      const html = markdownToHtml(sourceText);
+      return new Blob([html], { type: "text/html;charset=utf-8" });
+    } else if (slug === "html-to-markdown") {
+      const md = htmlToMarkdown(sourceText);
+      return new Blob([md], { type: "text/markdown;charset=utf-8" });
+    } else if (slug === "csv-to-excel") {
+      return await csvToXlsxBlob(sourceText);
+    } else if (slug === "xml-to-csv") {
+      const csv = xmlToCsv(sourceText);
+      return new Blob([csv], { type: "text/csv;charset=utf-8" });
+    } else if (slug === "tsv-to-csv") {
+      const csv = tsvToCsv(sourceText);
+      return new Blob([csv], { type: "text/csv;charset=utf-8" });
+    } else {
+      throw new Error(`Unsupported data transform slug: ${slug}`);
     }
+  };
 
-    if (!sourceText.trim()) {
+  const handleProcess = async () => {
+    if (files.length === 0 && !textInput.trim()) {
       setErrorMessage("Please upload a file or enter text to convert.");
       return;
     }
 
     setIsProcessing(true);
-    setProgressPercent(20);
+    setProgressPercent(10);
     setErrorMessage(null);
 
     try {
-      let outputBlob: Blob;
       const targetExt = preset.downloadFilenameExtension;
 
-      if (preset.slug === "markdown-to-html") {
-        const html = markdownToHtml(sourceText);
-        outputBlob = new Blob([html], { type: "text/html;charset=utf-8" });
-      } else if (preset.slug === "html-to-markdown") {
-        const md = htmlToMarkdown(sourceText);
-        outputBlob = new Blob([md], { type: "text/markdown;charset=utf-8" });
-      } else if (preset.slug === "csv-to-excel") {
-        outputBlob = await csvToXlsxBlob(sourceText);
-      } else if (preset.slug === "xml-to-csv") {
-        const csv = xmlToCsv(sourceText);
-        outputBlob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-      } else if (preset.slug === "tsv-to-csv") {
-        const csv = tsvToCsv(sourceText);
-        outputBlob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-      } else {
-        throw new Error(`Unsupported data transform slug: ${preset.slug}`);
-      }
+      if (files.length <= 1) {
+        let sourceText = textInput;
+        let baseFilename = "converted";
 
-      setProgressPercent(100);
-      const url = URL.createObjectURL(outputBlob);
-      setDownloadUrl(url);
-      setDownloadFilename(`${baseFilename}${targetExt}`);
+        if (files[0]) {
+          sourceText = await files[0].text();
+          baseFilename = files[0].name.substring(0, files[0].name.lastIndexOf(".")) || files[0].name;
+        }
+
+        if (!sourceText.trim()) {
+          setErrorMessage("Input data is empty.");
+          return;
+        }
+
+        const outputBlob = await transformContent(sourceText, preset.slug);
+        setProgressPercent(100);
+        const url = URL.createObjectURL(outputBlob);
+        setDownloadUrl(url);
+        setDownloadFilename(`${baseFilename}${targetExt}`);
+      } else {
+        // Multi-file batch
+        const zip = new JSZip();
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          if (!file) continue;
+          const text = await file.text();
+          const baseName = file.name.substring(0, file.name.lastIndexOf(".")) || file.name;
+          const blob = await transformContent(text, preset.slug);
+          zip.file(`${baseName}${targetExt}`, blob);
+          setProgressPercent(Math.round(((i + 1) / files.length) * 85));
+        }
+
+        const zipBlob = await zip.generateAsync({ type: "blob" });
+        setProgressPercent(100);
+        const url = URL.createObjectURL(zipBlob);
+        setDownloadUrl(url);
+        setDownloadFilename(`${preset.slug}-batch.zip`);
+      }
     } catch (err: unknown) {
       console.error("[DataTransformEngine Error]:", err);
       const msg = err instanceof Error ? err.message : "Failed to transform data.";

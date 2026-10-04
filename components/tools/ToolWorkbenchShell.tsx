@@ -137,6 +137,7 @@ export const ToolWorkbenchShell: React.FC<ToolWorkbenchShellProps> = ({
     if (e.target.files && e.target.files.length > 0) {
       validateAndAddFiles(e.target.files);
     }
+    e.target.value = "";
   };
 
   const triggerBrowse = () => {
