@@ -21,6 +21,13 @@ import {
   signPdf,
   MINIMAL_PNG_BYTES,
 } from "./logic";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { PDFDocument } from "pdf-lib";
 
 export default function PdfDigitalSignerTool() {
@@ -492,15 +499,19 @@ export default function PdfDigitalSignerTool() {
               <label className="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">
                 Placement
               </label>
-              <select
+              <Select
                 value={placement}
-                onChange={(e) => setPlacement(e.target.value as any)}
-                className="w-full px-2.5 py-1.5 text-xs bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg"
+                onValueChange={(v) => setPlacement(v as any)}
               >
-                <option value="bottom-left">Bottom Left</option>
-                <option value="bottom-center">Bottom Center</option>
-                <option value="bottom-right">Bottom Right</option>
-              </select>
+                <SelectTrigger className="w-full h-8 text-xs bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-700">
+                  <SelectValue placeholder="Placement" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="bottom-left">Bottom Left</SelectItem>
+                  <SelectItem value="bottom-center">Bottom Center</SelectItem>
+                  <SelectItem value="bottom-right">Bottom Right</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 

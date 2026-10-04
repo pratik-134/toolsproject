@@ -3,6 +3,13 @@
 import React, { useState, useId } from "react";
 import { Copy, Check, Download, RefreshCw, FileCode, Sparkles } from "lucide-react";
 import { minifyCode, MinifyLanguage } from "./logic";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const SAMPLES: Record<MinifyLanguage, string> = {
   html: `<!DOCTYPE html>
@@ -125,17 +132,20 @@ export default function CodeMinifier() {
           <label htmlFor={languageSelectId} className="text-sm font-semibold text-slate-700 dark:text-slate-300">
             Language:
           </label>
-          <select
-            id={languageSelectId}
+          <Select
             value={language}
-            onChange={(e) => handleLanguageChange(e.target.value as MinifyLanguage)}
-            className="px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            onValueChange={(val) => handleLanguageChange(val as MinifyLanguage)}
           >
-            <option value="html">HTML</option>
-            <option value="css">CSS</option>
-            <option value="js">JavaScript</option>
-            <option value="json">JSON</option>
-          </select>
+            <SelectTrigger id={languageSelectId} className="h-8 w-32 text-sm bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700">
+              <SelectValue placeholder="Language" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="html">HTML</SelectItem>
+              <SelectItem value="css">CSS</SelectItem>
+              <SelectItem value="js">JavaScript</SelectItem>
+              <SelectItem value="json">JSON</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600 dark:text-slate-400">

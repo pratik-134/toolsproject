@@ -3,6 +3,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   calculateSavings,
   calculateDownscale,
   aggregateBatchStats,
@@ -385,17 +392,21 @@ export default function BatchImageCompressorTool() {
               {/* Max Resolution Constraint */}
               <div className="space-y-2">
                 <label className="text-xs font-bold text-slate-700 block">Max Resolution Limit</label>
-                <select
-                  value={maxDimension}
-                  onChange={(e) => setMaxDimension(Number(e.target.value))}
-                  className="w-full px-3 py-1.5 text-xs font-bold border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                <Select
+                  value={String(maxDimension)}
+                  onValueChange={(val) => setMaxDimension(Number(val))}
                 >
-                  <option value={0}>Original Resolution (No Limit)</option>
-                  <option value={1920}>Full HD (Max 1920px)</option>
-                  <option value={1280}>HD 720p (Max 1280px)</option>
-                  <option value={2560}>2K QHD (Max 2560px)</option>
-                  <option value={1080}>Square (Max 1080px)</option>
-                </select>
+                  <SelectTrigger className="w-full text-xs font-bold border-slate-300 bg-white">
+                    <SelectValue placeholder="Max Resolution Limit" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="0">Original Resolution (No Limit)</SelectItem>
+                    <SelectItem value="1920">Full HD (Max 1920px)</SelectItem>
+                    <SelectItem value="1280">HD 720p (Max 1280px)</SelectItem>
+                    <SelectItem value="2560">2K QHD (Max 2560px)</SelectItem>
+                    <SelectItem value="1080">Square (Max 1080px)</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 

@@ -20,6 +20,13 @@ import {
   Trash2,
   Settings2,
 } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const SAMPLE_PRESETS: { name: string; sql: string }[] = [
   {
@@ -217,49 +224,61 @@ export default function SqlDumpToCsvTool() {
               {/* Table Selection Dropdown */}
               <div>
                 <label className="text-slate-600 font-semibold block mb-1">Target Table</label>
-                <select
-                  value={targetTable || result.activeTable}
-                  onChange={(e) => setTargetTable(e.target.value)}
+                <Select
+                  value={targetTable || result.activeTable || (result.tableNames[0] ?? "")}
+                  onValueChange={setTargetTable}
                   disabled={result.tableNames.length <= 1}
-                  className="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-slate-900 bg-white focus:ring-2 focus:ring-blue-500 disabled:bg-slate-100"
                 >
-                  {result.tableNames.map((t) => (
-                    <option key={t} value={t}>
-                      {t} ({result.tables[t]?.rows.length || 0} rows)
-                    </option>
-                  ))}
-                  {result.tableNames.length === 0 && <option value="">(No tables found)</option>}
-                </select>
+                  <SelectTrigger className="w-full h-8 text-xs bg-white border-slate-300">
+                    <SelectValue placeholder="Select Table" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {result.tableNames.map((t) => (
+                      <SelectItem key={t} value={t}>
+                        {t} ({result.tables[t]?.rows.length || 0} rows)
+                      </SelectItem>
+                    ))}
+                    {result.tableNames.length === 0 && <SelectItem value="none">(No tables found)</SelectItem>}
+                  </SelectContent>
+                </Select>
               </div>
 
               {/* Delimiter */}
               <div>
                 <label className="text-slate-600 font-semibold block mb-1">Delimiter</label>
-                <select
+                <Select
                   value={delimiter}
-                  onChange={(e) => setDelimiter(e.target.value as DelimiterType)}
-                  className="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-slate-900 bg-white focus:ring-2 focus:ring-blue-500"
+                  onValueChange={(val) => setDelimiter(val as DelimiterType)}
                 >
-                  <option value=",">Comma (,)</option>
-                  <option value="&#9;">Tab (\t)</option>
-                  <option value=";">Semicolon (;)</option>
-                  <option value="|">Pipe (|)</option>
-                </select>
+                  <SelectTrigger className="w-full h-8 text-xs bg-white border-slate-300">
+                    <SelectValue placeholder="Delimiter" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value=",">Comma (,)</SelectItem>
+                    <SelectItem value={"\t"}>Tab (\t)</SelectItem>
+                    <SelectItem value=";">Semicolon (;)</SelectItem>
+                    <SelectItem value="|">Pipe (|)</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               {/* NULL Representation */}
               <div>
                 <label className="text-slate-600 font-semibold block mb-1">NULL Value As</label>
-                <select
-                  value={nullValue}
-                  onChange={(e) => setNullValue(e.target.value as NullRepresentation)}
-                  className="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-slate-900 bg-white focus:ring-2 focus:ring-blue-500"
+                <Select
+                  value={nullValue === "" ? "EMPTY_STRING" : nullValue}
+                  onValueChange={(val) => setNullValue(val === "EMPTY_STRING" ? "" : (val as NullRepresentation))}
                 >
-                  <option value="">Empty String (&quot;&quot;)</option>
-                  <option value="NULL">NULL</option>
-                  <option value="\N">\N (MySQL)</option>
-                  <option value="null">null</option>
-                </select>
+                  <SelectTrigger className="w-full h-8 text-xs bg-white border-slate-300">
+                    <SelectValue placeholder="NULL Value" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="EMPTY_STRING">Empty String ("")</SelectItem>
+                    <SelectItem value="NULL">NULL</SelectItem>
+                    <SelectItem value="\N">\N (MySQL)</SelectItem>
+                    <SelectItem value="null">null</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 

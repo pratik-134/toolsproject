@@ -5,6 +5,13 @@ import { generatePassword, generatePassphrase, PasswordOptions, PassphraseOption
 import { Copy, Check, RefreshCw, ShieldCheck, Key, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SendToPipelineButton } from "@/components/pipeline/SendToPipelineButton";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function PasswordGeneratorTool() {
   const [mode, setMode] = useState<"password" | "passphrase">("password");
@@ -271,16 +278,17 @@ export default function PasswordGeneratorTool() {
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Word Separator
                 </label>
-                <select
-                  value={separator}
-                  onChange={(e) => setSeparator(e.target.value)}
-                  className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-300 focus:outline-none font-semibold text-slate-800 bg-white"
-                >
-                  <option value="-">Hyphen (-)</option>
-                  <option value=".">Period (.)</option>
-                  <option value="_">Underscore (_)</option>
-                  <option value=" ">Space ( )</option>
-                </select>
+                <Select value={separator} onValueChange={setSeparator}>
+                  <SelectTrigger className="w-full h-8 px-2.5 py-1 text-xs font-semibold text-slate-800 bg-white border-slate-300">
+                    <SelectValue placeholder="Separator" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="-">Hyphen (-)</SelectItem>
+                    <SelectItem value=".">Period (.)</SelectItem>
+                    <SelectItem value="_">Underscore (_)</SelectItem>
+                    <SelectItem value=" ">Space ( )</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="flex items-center">

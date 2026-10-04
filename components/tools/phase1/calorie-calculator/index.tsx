@@ -3,6 +3,13 @@
 import React, { useState, useMemo } from "react";
 import { Flame, Activity, Target, PieChart, ShieldAlert, HeartPulse } from "lucide-react";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   calculateCalories,
   Gender,
   ActivityLevel,
@@ -207,17 +214,21 @@ export default function CalorieCalculatorTool() {
             <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
               Activity Level
             </label>
-            <select
+            <Select
               value={activity}
-              onChange={(e) => setActivity(e.target.value as ActivityLevel)}
-              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 text-sm outline-none focus:ring-2 focus:ring-teal-500"
+              onValueChange={(val) => setActivity(val as ActivityLevel)}
             >
-              <option value="sedentary">Sedentary (desk job, minimal exercise)</option>
-              <option value="light">Lightly Active (light exercise 1-3 days/week)</option>
-              <option value="moderate">Moderately Active (exercise 3-5 days/week)</option>
-              <option value="active">Very Active (hard exercise 6-7 days/week)</option>
-              <option value="extreme">Extra Active (physical job or athlete 2x/day)</option>
-            </select>
+              <SelectTrigger className="w-full text-sm bg-slate-50 dark:bg-slate-950 border-slate-300 dark:border-slate-700">
+                <SelectValue placeholder="Activity Level" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="sedentary">Sedentary (desk job, minimal exercise)</SelectItem>
+                <SelectItem value="light">Lightly Active (light exercise 1-3 days/week)</SelectItem>
+                <SelectItem value="moderate">Moderately Active (exercise 3-5 days/week)</SelectItem>
+                <SelectItem value="active">Very Active (hard exercise 6-7 days/week)</SelectItem>
+                <SelectItem value="extreme">Extra Active (physical job or athlete 2x/day)</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Calorie Goal & Macro Split */}
@@ -226,34 +237,42 @@ export default function CalorieCalculatorTool() {
               <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                 Primary Weight Goal
               </label>
-              <select
+              <Select
                 value={goal}
-                onChange={(e) => setGoal(e.target.value as CalorieGoal)}
-                className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 text-sm outline-none focus:ring-2 focus:ring-teal-500"
+                onValueChange={(val) => setGoal(val as CalorieGoal)}
               >
-                <option value="maintain">Maintain Weight (TDEE)</option>
-                <option value="mild-loss">Mild Weight Loss (-0.5 lb / wk)</option>
-                <option value="loss">Standard Weight Loss (-1 lb / wk)</option>
-                <option value="extreme-loss">Rapid Weight Loss (-2 lb / wk)</option>
-                <option value="mild-gain">Mild Weight Gain (+0.5 lb / wk)</option>
-                <option value="gain">Weight / Muscle Gain (+1 lb / wk)</option>
-              </select>
+                <SelectTrigger className="w-full text-sm bg-slate-50 dark:bg-slate-950 border-slate-300 dark:border-slate-700">
+                  <SelectValue placeholder="Goal" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="maintain">Maintain Weight (TDEE)</SelectItem>
+                  <SelectItem value="mild-loss">Mild Weight Loss (-0.5 lb / wk)</SelectItem>
+                  <SelectItem value="loss">Standard Weight Loss (-1 lb / wk)</SelectItem>
+                  <SelectItem value="extreme-loss">Rapid Weight Loss (-2 lb / wk)</SelectItem>
+                  <SelectItem value="mild-gain">Mild Weight Gain (+0.5 lb / wk)</SelectItem>
+                  <SelectItem value="gain">Weight / Muscle Gain (+1 lb / wk)</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                 Macronutrient Ratio
               </label>
-              <select
+              <Select
                 value={macroSplit}
-                onChange={(e) => setMacroSplit(e.target.value as MacroSplitType)}
-                className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 text-sm outline-none focus:ring-2 focus:ring-teal-500"
+                onValueChange={(val) => setMacroSplit(val as MacroSplitType)}
               >
-                <option value="balanced">Balanced (40% C / 30% P / 30% F)</option>
-                <option value="high-protein">High Protein (35% C / 40% P / 25% F)</option>
-                <option value="low-carb">Low Carb (20% C / 45% P / 35% F)</option>
-                <option value="keto">Keto (5% C / 25% P / 70% F)</option>
-              </select>
+                <SelectTrigger className="w-full text-sm bg-slate-50 dark:bg-slate-950 border-slate-300 dark:border-slate-700">
+                  <SelectValue placeholder="Macro Split" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="balanced">Balanced (40% C / 30% P / 30% F)</SelectItem>
+                  <SelectItem value="high-protein">High Protein (35% C / 40% P / 25% F)</SelectItem>
+                  <SelectItem value="low-carb">Low Carb (20% C / 45% P / 35% F)</SelectItem>
+                  <SelectItem value="keto">Keto (5% C / 25% P / 70% F)</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>

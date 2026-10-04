@@ -4,6 +4,13 @@ import React, { useState, useMemo } from "react";
 import { generateQrSvg } from "./logic";
 import { Download, QrCode, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function QrGeneratorTool() {
   const [text, setText] = useState<string>("https://cleartrix.com");
@@ -104,16 +111,20 @@ export default function QrGeneratorTool() {
               <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Export Size
               </label>
-              <select
-                value={size}
-                onChange={(e) => setSize(Number(e.target.value))}
-                className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-300 focus:outline-none font-semibold text-slate-800 bg-white"
+              <Select
+                value={String(size)}
+                onValueChange={(val) => setSize(Number(val))}
               >
-                <option value={192}>192 x 192 px</option>
-                <option value={256}>256 x 256 px</option>
-                <option value={512}>512 x 512 px</option>
-                <option value={1024}>1024 x 1024 px</option>
-              </select>
+                <SelectTrigger className="w-full h-8 text-xs font-semibold text-slate-800 bg-white border-slate-300">
+                  <SelectValue placeholder="Export Size" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="192">192 x 192 px</SelectItem>
+                  <SelectItem value="256">256 x 256 px</SelectItem>
+                  <SelectItem value="512">512 x 512 px</SelectItem>
+                  <SelectItem value="1024">1024 x 1024 px</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>

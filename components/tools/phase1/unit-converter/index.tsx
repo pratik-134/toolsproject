@@ -8,6 +8,13 @@ import {
   convertUnit,
   getAllConversionsForCategory,
 } from "./logic";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const CATEGORY_ICONS: Record<UnitCategory, React.ElementType> = {
   length: Ruler,
@@ -96,17 +103,18 @@ export default function UnitConverterTool() {
                 onChange={(e) => setVal(parseFloat(e.target.value) || 0)}
                 className="w-1/2 rounded-lg border border-border bg-background px-3 py-2 font-mono text-base font-bold focus:outline-none focus:ring-1 focus:ring-primary"
               />
-              <select
-                value={fromUnit}
-                onChange={(e) => setFromUnit(e.target.value)}
-                className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-primary"
-              >
-                {unitKeys.map((k) => (
-                  <option key={k} value={k}>
-                    {currentCat.units[k]?.name} ({currentCat.units[k]?.symbol})
-                  </option>
-                ))}
-              </select>
+              <Select value={fromUnit} onValueChange={setFromUnit}>
+                <SelectTrigger className="flex-1 h-10 rounded-lg border border-border bg-background text-xs font-semibold">
+                  <SelectValue placeholder="From Unit" />
+                </SelectTrigger>
+                <SelectContent className="max-h-56">
+                  {unitKeys.map((k) => (
+                    <SelectItem key={k} value={k}>
+                      {currentCat.units[k]?.name} ({currentCat.units[k]?.symbol})
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
@@ -134,17 +142,18 @@ export default function UnitConverterTool() {
                 value={convertedValue}
                 className="w-1/2 rounded-lg border border-border bg-muted/40 px-3 py-2 font-mono text-base font-bold focus:outline-none text-foreground select-all"
               />
-              <select
-                value={toUnit}
-                onChange={(e) => setToUnit(e.target.value)}
-                className="flex-1 rounded-lg border border-border bg-background px-3 py-2 text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-primary"
-              >
-                {unitKeys.map((k) => (
-                  <option key={k} value={k}>
-                    {currentCat.units[k]?.name} ({currentCat.units[k]?.symbol})
-                  </option>
-                ))}
-              </select>
+              <Select value={toUnit} onValueChange={setToUnit}>
+                <SelectTrigger className="flex-1 h-10 rounded-lg border border-border bg-background text-xs font-semibold">
+                  <SelectValue placeholder="To Unit" />
+                </SelectTrigger>
+                <SelectContent className="max-h-56">
+                  {unitKeys.map((k) => (
+                    <SelectItem key={k} value={k}>
+                      {currentCat.units[k]?.name} ({currentCat.units[k]?.symbol})
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>

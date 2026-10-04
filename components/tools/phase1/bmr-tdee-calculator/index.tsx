@@ -3,6 +3,13 @@
 import React, { useState, useId } from "react";
 import { Activity, Flame, Heart, AlertCircle, Sparkles } from "lucide-react";
 import { calculateBmr, Gender, ActivityLevel, BmrFormula } from "./logic";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function BmrTdeeCalculator() {
   const ageInputId = useId();
@@ -198,33 +205,39 @@ export default function BmrTdeeCalculator() {
           <label htmlFor={activityLevelSelectId} className="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">
             Activity Level
           </label>
-          <select
-            id={activityLevelSelectId}
+          <Select
             value={activityLevel}
-            onChange={(e) => setActivityLevel(e.target.value as ActivityLevel)}
-            className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-xs font-medium focus:ring-2 focus:ring-blue-500"
+            onValueChange={(val) => setActivityLevel(val as ActivityLevel)}
           >
-            <option value="sedentary">Sedentary (desk job, little exercise)</option>
-            <option value="light">Lightly Active (1-3 days/week)</option>
-            <option value="moderate">Moderately Active (3-5 days/week)</option>
-            <option value="heavy">Very Active (6-7 days/week)</option>
-            <option value="extreme">Extra Active (labor job or 2x/day)</option>
-          </select>
+            <SelectTrigger id={activityLevelSelectId} className="w-full text-xs font-medium bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700">
+              <SelectValue placeholder="Activity Level" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="sedentary">Sedentary (desk job, little exercise)</SelectItem>
+              <SelectItem value="light">Lightly Active (1-3 days/week)</SelectItem>
+              <SelectItem value="moderate">Moderately Active (3-5 days/week)</SelectItem>
+              <SelectItem value="heavy">Very Active (6-7 days/week)</SelectItem>
+              <SelectItem value="extreme">Extra Active (labor job or 2x/day)</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
       {/* Formula toggle */}
       <div className="flex items-center justify-end gap-2 text-xs text-slate-500">
         <label htmlFor={formulaSelectId}>Formula:</label>
-        <select
-          id={formulaSelectId}
+        <Select
           value={formula}
-          onChange={(e) => setFormula(e.target.value as BmrFormula)}
-          className="px-2 py-1 rounded border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+          onValueChange={(val) => setFormula(val as BmrFormula)}
         >
-          <option value="mifflin">Mifflin-St Jeor (Recommended)</option>
-          <option value="harris">Revised Harris-Benedict</option>
-        </select>
+          <SelectTrigger id={formulaSelectId} className="h-7 w-52 text-xs bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700">
+            <SelectValue placeholder="Formula" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="mifflin">Mifflin-St Jeor (Recommended)</SelectItem>
+            <SelectItem value="harris">Revised Harris-Benedict</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       {errorMsg && (

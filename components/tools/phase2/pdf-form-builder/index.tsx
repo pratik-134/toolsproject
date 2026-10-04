@@ -21,6 +21,13 @@ import {
   addFormFieldsToPdf,
   NewFieldDef,
 } from "./logic";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { PDFDocument } from "pdf-lib";
 
 export default function PdfFormBuilderTool() {
@@ -345,21 +352,25 @@ export default function PdfFormBuilderTool() {
                     <label className="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">
                       Target Page #
                     </label>
-                    <select
-                      value={field.pageIndex}
-                      onChange={(e) =>
+                    <Select
+                      value={String(field.pageIndex)}
+                      onValueChange={(val) =>
                         updateField(field.id, {
-                          pageIndex: parseInt(e.target.value, 10),
+                          pageIndex: parseInt(val, 10),
                         })
                       }
-                      className="w-full px-2.5 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
                     >
-                      {Array.from({ length: Math.max(pageCount, 1) }, (_, i) => (
-                        <option key={i} value={i}>
-                          Page {i + 1}
-                        </option>
-                      ))}
-                    </select>
+                      <SelectTrigger className="w-full h-8 text-xs bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700">
+                        <SelectValue placeholder="Page" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Array.from({ length: Math.max(pageCount, 1) }, (_, i) => (
+                          <SelectItem key={i} value={String(i)}>
+                            Page {i + 1}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div>

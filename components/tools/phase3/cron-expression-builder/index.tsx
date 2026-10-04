@@ -150,9 +150,19 @@ export default function CronExpressionBuilder() {
       {/* Main Interactive Expression Box */}
       <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xs space-y-5">
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-2">
-            Cron Expression (5 Parts)
-          </label>
+          <div className="flex items-center justify-between mb-2">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
+              Cron Expression (5 Parts)
+            </label>
+            <button
+              type="button"
+              onClick={() => setCronExpression("0 8 * * 1-5")}
+              className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 hover:bg-blue-200 transition-colors"
+            >
+              <Sparkles className="w-3 h-3" />
+              Try Sample
+            </button>
+          </div>
           <div className="relative flex items-center">
             <input
               type="text"

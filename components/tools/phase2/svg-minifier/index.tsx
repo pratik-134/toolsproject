@@ -3,6 +3,13 @@
 import React, { useState, useMemo, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   minifySvg,
   validateSvg,
   formatBytes,
@@ -211,17 +218,21 @@ export default function SvgMinifierTool() {
               </h4>
               <div className="flex items-center gap-2 text-xs">
                 <span className="text-muted-foreground">Precision:</span>
-                <select
-                  value={options.precision}
-                  onChange={(e) =>
-                    setOptions({ ...options, precision: parseInt(e.target.value, 10) })
+                <Select
+                  value={String(options.precision)}
+                  onValueChange={(val) =>
+                    setOptions({ ...options, precision: parseInt(val, 10) })
                   }
-                  className="bg-muted px-2 py-0.5 rounded border border-border text-foreground font-mono text-xs"
                 >
-                  <option value={1}>1 decimal (Aggressive)</option>
-                  <option value={2}>2 decimals (Balanced)</option>
-                  <option value={3}>3 decimals (High-Res)</option>
-                </select>
+                  <SelectTrigger className="h-6 w-44 text-xs font-mono bg-muted border-border">
+                    <SelectValue placeholder="Precision" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="1">1 decimal (Aggressive)</SelectItem>
+                    <SelectItem value="2">2 decimals (Balanced)</SelectItem>
+                    <SelectItem value="3">3 decimals (High-Res)</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 

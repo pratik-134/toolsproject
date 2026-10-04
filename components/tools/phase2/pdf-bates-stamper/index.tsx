@@ -21,6 +21,13 @@ import {
   StampColor,
 } from "./logic";
 import { PDFDocument } from "pdf-lib";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function PdfBatesStamperTool() {
   const [fileBuffer, setFileBuffer] = useState<Uint8Array | null>(null);
@@ -293,50 +300,62 @@ export default function PdfBatesStamperTool() {
               <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
                 Position
               </label>
-              <select
+              <Select
                 value={position}
-                onChange={(e) => setPosition(e.target.value as StampPosition)}
-                className="w-full px-3 py-2 text-sm bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                onValueChange={(val) => setPosition(val as StampPosition)}
               >
-                <option value="bottom-right">Bottom Right (Standard)</option>
-                <option value="bottom-center">Bottom Center</option>
-                <option value="bottom-left">Bottom Left</option>
-                <option value="top-right">Top Right (Header)</option>
-                <option value="top-center">Top Center</option>
-                <option value="top-left">Top Left</option>
-              </select>
+                <SelectTrigger className="w-full text-sm bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-700">
+                  <SelectValue placeholder="Position" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="bottom-right">Bottom Right (Standard)</SelectItem>
+                  <SelectItem value="bottom-center">Bottom Center</SelectItem>
+                  <SelectItem value="bottom-left">Bottom Left</SelectItem>
+                  <SelectItem value="top-right">Top Right (Header)</SelectItem>
+                  <SelectItem value="top-center">Top Center</SelectItem>
+                  <SelectItem value="top-left">Top Left</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             <div>
               <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
                 Color
               </label>
-              <select
+              <Select
                 value={color}
-                onChange={(e) => setColor(e.target.value as StampColor)}
-                className="w-full px-3 py-2 text-sm bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                onValueChange={(val) => setColor(val as StampColor)}
               >
-                <option value="red">Red (Litigation Notice)</option>
-                <option value="black">Black (Formal)</option>
-                <option value="blue">Blue (Corporate)</option>
-                <option value="gray">Gray (Subtle)</option>
-              </select>
+                <SelectTrigger className="w-full text-sm bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-700">
+                  <SelectValue placeholder="Color" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="red">Red (Litigation Notice)</SelectItem>
+                  <SelectItem value="black">Black (Formal)</SelectItem>
+                  <SelectItem value="blue">Blue (Corporate)</SelectItem>
+                  <SelectItem value="gray">Gray (Subtle)</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             <div>
               <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
                 Font Size
               </label>
-              <select
-                value={fontSize}
-                onChange={(e) => setFontSize(parseInt(e.target.value, 10))}
-                className="w-full px-3 py-2 text-sm bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              <Select
+                value={String(fontSize)}
+                onValueChange={(val) => setFontSize(parseInt(val, 10))}
               >
-                <option value={8}>8 pt (Small)</option>
-                <option value={10}>10 pt (Recommended)</option>
-                <option value={12}>12 pt (Prominent)</option>
-                <option value={14}>14 pt (Large)</option>
-              </select>
+                <SelectTrigger className="w-full text-sm bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-700">
+                  <SelectValue placeholder="Font Size" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="8">8 pt (Small)</SelectItem>
+                  <SelectItem value="10">10 pt (Recommended)</SelectItem>
+                  <SelectItem value="12">12 pt (Prominent)</SelectItem>
+                  <SelectItem value="14">14 pt (Large)</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 

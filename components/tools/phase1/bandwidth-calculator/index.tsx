@@ -9,6 +9,13 @@ import {
   TransferTimeResult,
 } from "./logic";
 import { Copy, Check, RotateCcw, Wifi, DownloadCloud, Activity, HardDrive } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const SPEED_PRESETS = [
   { name: "3G Mobile", speed: 3, unit: "Mbps" as SpeedUnit },
@@ -128,16 +135,20 @@ export default function BandwidthCalculatorTool() {
                 onChange={(e) => setFileSize(Math.max(0, Number(e.target.value)))}
                 className="flex-1 px-3 py-2 text-sm font-bold rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
               />
-              <select
+              <Select
                 value={fileUnit}
-                onChange={(e) => setFileUnit(e.target.value as FileSizeUnit)}
-                className="w-24 px-2 py-2 text-xs font-bold rounded-lg border border-slate-300 text-slate-900 bg-white"
+                onValueChange={(val) => setFileUnit(val as FileSizeUnit)}
               >
-                <option value="MB">MB</option>
-                <option value="GB">GB</option>
-                <option value="TB">TB</option>
-                <option value="KB">KB</option>
-              </select>
+                <SelectTrigger className="w-24 h-9.5 text-xs font-bold bg-white border-slate-300">
+                  <SelectValue placeholder="Unit" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="MB">MB</SelectItem>
+                  <SelectItem value="GB">GB</SelectItem>
+                  <SelectItem value="TB">TB</SelectItem>
+                  <SelectItem value="KB">KB</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
@@ -155,16 +166,20 @@ export default function BandwidthCalculatorTool() {
                 onChange={(e) => setSpeed(Math.max(0, Number(e.target.value)))}
                 className="flex-1 px-3 py-2 text-sm font-bold rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
               />
-              <select
+              <Select
                 value={speedUnit}
-                onChange={(e) => setSpeedUnit(e.target.value as SpeedUnit)}
-                className="w-24 px-2 py-2 text-xs font-bold rounded-lg border border-slate-300 text-slate-900 bg-white"
+                onValueChange={(val) => setSpeedUnit(val as SpeedUnit)}
               >
-                <option value="Mbps">Mbps</option>
-                <option value="Gbps">Gbps</option>
-                <option value="MB/s">MB/s</option>
-                <option value="Kbps">Kbps</option>
-              </select>
+                <SelectTrigger className="w-24 h-9.5 text-xs font-bold bg-white border-slate-300">
+                  <SelectValue placeholder="Unit" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Mbps">Mbps</SelectItem>
+                  <SelectItem value="Gbps">Gbps</SelectItem>
+                  <SelectItem value="MB/s">MB/s</SelectItem>
+                  <SelectItem value="Kbps">Kbps</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 

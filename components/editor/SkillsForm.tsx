@@ -7,6 +7,13 @@ import { SectionWrapper } from "./SectionWrapper";
 import { AiAssistantModal } from "./AiAssistantModal";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Plus, Trash2, ArrowUp, ArrowDown, Sparkles } from "lucide-react";
 
 interface SkillsFormProps {
@@ -137,22 +144,26 @@ export const SkillsForm: React.FC<SkillsFormProps> = ({ sectionId }) => {
                   />
 
                   <div className="flex items-center justify-between sm:justify-end gap-1.5 w-full sm:w-auto shrink-0">
-                    <select
+                    <Select
                       disabled={isLocked}
                       value={skill.level}
-                      onChange={(e) =>
+                      onValueChange={(v) =>
                         updateSectionItem(sectionId, skill.id, {
-                          level: e.target.value as any,
+                          level: v as any,
                         })
                       }
-                      className="rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-2 py-1 sm:py-0.5 text-xs font-medium text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-1 focus:ring-blue-500/20 flex-1 sm:flex-initial"
                     >
-                      <option value="none">No label</option>
-                      <option value="beginner">Beginner</option>
-                      <option value="intermediate">Intermediate</option>
-                      <option value="advanced">Advanced</option>
-                      <option value="expert">Expert</option>
-                    </select>
+                      <SelectTrigger className="h-8 sm:h-7 w-[120px] rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-2 py-1 text-xs font-medium text-slate-700 dark:text-slate-300">
+                        <SelectValue placeholder="Level" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="none">No label</SelectItem>
+                        <SelectItem value="beginner">Beginner</SelectItem>
+                        <SelectItem value="intermediate">Intermediate</SelectItem>
+                        <SelectItem value="advanced">Advanced</SelectItem>
+                        <SelectItem value="expert">Expert</SelectItem>
+                      </SelectContent>
+                    </Select>
 
                     <div className="flex items-center gap-0.5 shrink-0">
                       <Button

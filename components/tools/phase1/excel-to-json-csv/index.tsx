@@ -24,6 +24,13 @@ import {
   Layers,
   ShieldCheck,
 } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const SAMPLE_SHEETS: { name: string; sheet: ExcelSheet }[] = [
   {
@@ -325,15 +332,16 @@ export default function ExcelToJsonCsvTool() {
             )}
 
             {activeTab === "csv" && (
-              <select
-                value={csvDelimiter}
-                onChange={(e) => setCsvDelimiter(e.target.value)}
-                className="px-2 py-1 text-xs rounded-lg border border-slate-300 bg-white text-slate-800"
-              >
-                <option value=",">Comma (,)</option>
-                <option value="&#9;">Tab (\t)</option>
-                <option value=";">Semicolon (;)</option>
-              </select>
+              <Select value={csvDelimiter} onValueChange={setCsvDelimiter}>
+                <SelectTrigger className="h-7 w-28 text-xs bg-white border-slate-300 text-slate-800">
+                  <SelectValue placeholder="Delimiter" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value=",">Comma (,)</SelectItem>
+                  <SelectItem value={"\t"}>Tab (\t)</SelectItem>
+                  <SelectItem value=";">Semicolon (;)</SelectItem>
+                </SelectContent>
+              </Select>
             )}
 
             {activeTab !== "table" && (

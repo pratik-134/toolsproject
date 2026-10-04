@@ -5,6 +5,13 @@ import { formatJson, JsonFormatOptions } from "./logic";
 import { Copy, Check, Download, Trash2, FileJson, Sparkles, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SendToPipelineButton } from "@/components/pipeline/SendToPipelineButton";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const SAMPLE_JSON = `{
   "platform": "Cleartrix",
@@ -68,20 +75,23 @@ export default function JsonFormatterTool() {
       <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-50 border border-slate-200/80 rounded-xl p-3">
         <div className="flex items-center gap-2">
           <label className="text-xs font-semibold text-slate-700">Indent:</label>
-          <select
+          <Select
             value={String(indent)}
-            onChange={(e) => {
-              const v = e.target.value;
-              if (v === "minify" || v === "tab") setIndent(v);
-              else setIndent(Number(v));
+            onValueChange={(val) => {
+              if (val === "minify" || val === "tab") setIndent(val);
+              else setIndent(Number(val));
             }}
-            className="text-xs rounded-lg border border-slate-300 bg-white px-2.5 py-1.5 font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="2">2 Spaces</option>
-            <option value="4">4 Spaces</option>
-            <option value="tab">Tab</option>
-            <option value="minify">Minify (Compact)</option>
-          </select>
+            <SelectTrigger className="h-8 w-36 text-xs bg-white border-slate-300">
+              <SelectValue placeholder="Indent" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="2">2 Spaces</SelectItem>
+              <SelectItem value="4">4 Spaces</SelectItem>
+              <SelectItem value="tab">Tab</SelectItem>
+              <SelectItem value="minify">Minify (Compact)</SelectItem>
+            </SelectContent>
+          </Select>
 
           <label className="inline-flex items-center gap-1.5 ml-3 cursor-pointer text-xs font-medium text-slate-700 select-none">
             <input

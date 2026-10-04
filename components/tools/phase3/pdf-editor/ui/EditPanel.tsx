@@ -46,6 +46,13 @@ import {
 } from "lucide-react";
 import { usePdfEditorStore } from "../store";
 import { EditorMode, EditorTool, FormFieldDef } from "../types";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface EditPanelProps {
   onOpenSignatureModal: (tab: "draw" | "type" | "upload" | "initials") => void;
@@ -959,15 +966,19 @@ export const EditPanel: React.FC<EditPanelProps> = ({
 
               {pageNumbering?.enabled && (
                 <div className="p-3 rounded-xl border border-border bg-muted/20 space-y-2">
-                  <select
+                  <Select
                     value={pageNumbering.format}
-                    onChange={(e) => setPageNumbering({ ...pageNumbering, format: e.target.value as any })}
-                    className="w-full px-2.5 py-1.5 rounded-lg border border-border bg-background text-xs"
+                    onValueChange={(val) => setPageNumbering({ ...pageNumbering, format: val as any })}
                   >
-                    <option value="page-of-total">Page 1 of {pages.length}</option>
-                    <option value="simple">1 of {pages.length}</option>
-                    <option value="page">Page 1</option>
-                  </select>
+                    <SelectTrigger className="w-full h-8 text-xs bg-background border-border">
+                      <SelectValue placeholder="Format" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="page-of-total">Page 1 of {pages.length}</SelectItem>
+                      <SelectItem value="simple">1 of {pages.length}</SelectItem>
+                      <SelectItem value="page">Page 1</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               )}
             </div>

@@ -3,6 +3,13 @@
 import React, { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   extractTextBlocksFromPdf,
   createDocxFromBlocks,
   ExtractedPdfBlock,
@@ -218,30 +225,35 @@ export default function PdfToDocxTool() {
             {/* Typography Selection */}
             <div className="space-y-1.5">
               <label className="text-xs font-medium text-muted-foreground">Word Typography Family</label>
-              <select
-                value={fontFamily}
-                onChange={(e) => setFontFamily(e.target.value)}
-                className="w-full px-3 py-2 text-xs bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary"
-              >
-                <option value="Calibri">Calibri (Standard Office)</option>
-                <option value="Arial">Arial (Clean Modern)</option>
-                <option value="Times New Roman">Times New Roman (Academic)</option>
-                <option value="Georgia">Georgia (Editorial Serif)</option>
-              </select>
+              <Select value={fontFamily} onValueChange={setFontFamily}>
+                <SelectTrigger className="w-full text-xs bg-background border-border">
+                  <SelectValue placeholder="Font Family" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Calibri">Calibri (Standard Office)</SelectItem>
+                  <SelectItem value="Arial">Arial (Clean Modern)</SelectItem>
+                  <SelectItem value="Times New Roman">Times New Roman (Academic)</SelectItem>
+                  <SelectItem value="Georgia">Georgia (Editorial Serif)</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Font Sizing */}
             <div className="space-y-1.5">
               <label className="text-xs font-medium text-muted-foreground">Body Text Size</label>
-              <select
-                value={fontSize}
-                onChange={(e) => setFontSize(Number(e.target.value))}
-                className="w-full px-3 py-2 text-xs bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary"
+              <Select
+                value={String(fontSize)}
+                onValueChange={(val) => setFontSize(Number(val))}
               >
-                <option value={20}>10 pt (Compact)</option>
-                <option value={22}>11 pt (Standard Word)</option>
-                <option value={24}>12 pt (Large)</option>
-              </select>
+                <SelectTrigger className="w-full text-xs bg-background border-border">
+                  <SelectValue placeholder="Font Size" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="20">10 pt (Compact)</SelectItem>
+                  <SelectItem value="22">11 pt (Standard Word)</SelectItem>
+                  <SelectItem value="24">12 pt (Large)</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Compatibility Features */}

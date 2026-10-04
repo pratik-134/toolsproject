@@ -2,6 +2,13 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { PDFDocument } from "pdf-lib";
 import {
   applyPdfRedactions,
@@ -227,20 +234,20 @@ export default function PdfRedactionTool() {
                   <span className="text-[11px] text-muted-foreground mr-1 flex items-center gap-1">
                     <Sparkles className="w-3 h-3 text-primary" /> Presets:
                   </span>
-                  <select
-                    onChange={(e) => handleApplyPreset(e.target.value)}
-                    className="text-xs bg-background border rounded px-2 py-1 text-foreground"
-                    defaultValue=""
+                  <Select
+                    onValueChange={(val) => handleApplyPreset(val)}
                   >
-                    <option value="" disabled>
-                      Select Preset Area...
-                    </option>
-                    {Object.entries(REDACTION_PRESETS).map(([key, p]) => (
-                      <option key={key} value={key}>
-                        {p.name}
-                      </option>
-                    ))}
-                  </select>
+                    <SelectTrigger className="h-7 w-[160px] text-xs bg-background">
+                      <SelectValue placeholder="Preset Area..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Object.entries(REDACTION_PRESETS).map(([key, p]) => (
+                        <SelectItem key={key} value={key}>
+                          {p.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
 
@@ -250,17 +257,21 @@ export default function PdfRedactionTool() {
                   <label className="text-[11px] font-medium text-muted-foreground block mb-1">
                     Target Page
                   </label>
-                  <select
-                    value={selectedPage}
-                    onChange={(e) => setSelectedPage(Number(e.target.value))}
-                    className="w-full text-xs bg-background border rounded px-2 py-1.5 font-mono"
+                  <Select
+                    value={String(selectedPage)}
+                    onValueChange={(v) => setSelectedPage(Number(v))}
                   >
-                    {Array.from({ length: pageCount }, (_, i) => (
-                      <option key={i + 1} value={i + 1}>
-                        Page {i + 1}
-                      </option>
-                    ))}
-                  </select>
+                    <SelectTrigger className="w-full h-8 text-xs bg-background font-mono">
+                      <SelectValue placeholder="Page" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Array.from({ length: pageCount }, (_, i) => (
+                        <SelectItem key={i + 1} value={String(i + 1)}>
+                          Page {i + 1}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
                 <div>
                   <label className="text-[11px] font-medium text-muted-foreground block mb-1">

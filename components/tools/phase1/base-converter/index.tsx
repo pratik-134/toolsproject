@@ -3,6 +3,13 @@
 import React, { useState, useMemo } from "react";
 import { Binary, Copy, Check, Hash, Sparkles, AlertCircle } from "lucide-react";
 import { convertNumberBase, BaseConversionResult } from "./logic";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const PRESETS = [
   { label: "255 (0xFF)", val: "255", base: 10 },
@@ -201,17 +208,21 @@ export default function BaseConverterTool() {
                   <span className="text-purple-600 dark:text-purple-400 font-semibold uppercase tracking-wider">
                     Custom Base:
                   </span>
-                  <select
-                    value={customTargetBase}
-                    onChange={(e) => setCustomTargetBase(Number(e.target.value))}
-                    className="px-1.5 py-0.5 rounded border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-xs"
+                  <Select
+                    value={String(customTargetBase)}
+                    onValueChange={(val) => setCustomTargetBase(Number(val))}
                   >
-                    {[3, 4, 5, 6, 7, 9, 11, 12, 20, 32, 36].map((b) => (
-                      <option key={b} value={b}>
-                        Base {b}
-                      </option>
-                    ))}
-                  </select>
+                    <SelectTrigger className="h-6 w-24 px-2 py-0 text-xs bg-slate-50 dark:bg-slate-950 border-slate-300 dark:border-slate-700">
+                      <SelectValue placeholder="Base" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[3, 4, 5, 6, 7, 9, 11, 12, 20, 32, 36].map((b) => (
+                        <SelectItem key={b} value={String(b)}>
+                          Base {b}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
                 <button
                   type="button"

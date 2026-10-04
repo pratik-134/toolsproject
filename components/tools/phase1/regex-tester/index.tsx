@@ -139,13 +139,27 @@ export default function RegexTesterTool() {
             <label className="text-sm font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
               <List className="w-4 h-4 text-teal-600" /> Test String
             </label>
-            <button
-              type="button"
-              onClick={() => setTestString("")}
-              className="text-xs text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
-            >
-              Clear
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setPattern("([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})");
+                  setFlags("g");
+                  setTestString("Support inquiries: support@cleartrix.com, billing issues: billing@domain.org, general info: hello@sample.io.");
+                }}
+                className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 hover:bg-teal-100 transition-colors"
+              >
+                <Sparkles className="w-3 h-3" />
+                Try Sample
+              </button>
+              <button
+                type="button"
+                onClick={() => setTestString("")}
+                className="text-xs text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
+              >
+                Clear
+              </button>
+            </div>
           </div>
           <textarea
             value={testString}

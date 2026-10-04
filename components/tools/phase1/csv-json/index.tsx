@@ -4,6 +4,14 @@ import React, { useState, useMemo } from "react";
 import { csvToJson, jsonToCsv } from "./logic";
 import { Copy, Check, Download, ArrowRightLeft, Sparkles, Trash2, FileSpreadsheet, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SendToPipelineButton } from "@/components/pipeline/SendToPipelineButton";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const SAMPLE_CSV = `id,name,role,department,salary,remote
 101,Alice Walker,Staff Architect,Platform,165000,true
@@ -121,16 +129,17 @@ export default function CsvJsonConverterTool() {
 
           <div className="flex items-center gap-1.5 ml-2">
             <label className="text-xs font-semibold text-slate-600">Delimiter:</label>
-            <select
-              value={delimiter}
-              onChange={(e) => setDelimiter(e.target.value)}
-              className="text-xs rounded-lg border border-slate-300 bg-white px-2 py-1 font-semibold text-slate-800 focus:outline-none"
-            >
-              <option value=",">Comma (,)</option>
-              <option value=";">Semicolon (;)</option>
-              <option value="&#9;">Tab (\t)</option>
-              <option value="|">Pipe (|)</option>
-            </select>
+            <Select value={delimiter} onValueChange={setDelimiter}>
+              <SelectTrigger className="h-7 w-28 text-xs font-semibold bg-white border-slate-300">
+                <SelectValue placeholder="Delimiter" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value=",">Comma (,)</SelectItem>
+                <SelectItem value=";">Semicolon (;)</SelectItem>
+                <SelectItem value={"\t"}>Tab (\t)</SelectItem>
+                <SelectItem value="|">Pipe (|)</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           <label className="inline-flex items-center gap-1.5 ml-3 cursor-pointer text-xs font-medium text-slate-700 select-none">
@@ -239,6 +248,16 @@ export default function CsvJsonConverterTool() {
                   </>
                 )}
               </Button>
+              {result.success && result.output && (
+                <SendToPipelineButton
+                  sourceSlug="csv-json"
+                  sourceToolName="CSV to JSON Converter"
+                  dataType="text"
+                  textData={result.output}
+                  fileName={direction === "csv-to-json" ? "data.json" : "data.csv"}
+                  title="Export from CSV to JSON"
+                />
+              )}
               <Button
                 size="sm"
                 variant="outline"

@@ -2,6 +2,13 @@
 
 import React, { useState, useMemo } from "react";
 import { Car, DollarSign, Calendar, Percent, ShieldAlert, Sparkles } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { calculateAutoLoan, AutoLoanResult } from "./logic";
 
 const LOAN_TERMS = [
@@ -151,17 +158,21 @@ export default function AutoLoanCalculatorTool() {
               <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                 Loan Term
               </label>
-              <select
-                value={loanTerm}
-                onChange={(e) => setLoanTerm(parseInt(e.target.value) || 60)}
-                className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 text-sm outline-none focus:ring-2 focus:ring-teal-500"
+              <Select
+                value={String(loanTerm)}
+                onValueChange={(val) => setLoanTerm(parseInt(val, 10) || 60)}
               >
-                {LOAN_TERMS.map((t) => (
-                  <option key={t.months} value={t.months}>
-                    {t.label}
-                  </option>
-                ))}
-              </select>
+                <SelectTrigger className="w-full text-sm bg-slate-50 dark:bg-slate-950 border-slate-300 dark:border-slate-700">
+                  <SelectValue placeholder="Loan Term" />
+                </SelectTrigger>
+                <SelectContent>
+                  {LOAN_TERMS.map((t) => (
+                    <SelectItem key={t.months} value={String(t.months)}>
+                      {t.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
 

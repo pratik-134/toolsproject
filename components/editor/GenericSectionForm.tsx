@@ -7,6 +7,13 @@ import { ItemToolbar } from "./ItemToolbar";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Plus, GripVertical } from "lucide-react";
 
 interface GenericSectionFormProps {
@@ -157,20 +164,24 @@ export const GenericSectionForm: React.FC<GenericSectionFormProps> = ({
                         }
                         placeholder="Language (e.g. Spanish, German, Japanese)"
                       />
-                      <select
+                      <Select
                         disabled={isLocked}
                         value={item.fluency || "Fluent"}
-                        onChange={(e) =>
-                          updateSectionItem(sectionId, item.id, { fluency: e.target.value })
+                        onValueChange={(v) =>
+                          updateSectionItem(sectionId, item.id, { fluency: v })
                         }
-                        className="rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-xs font-medium text-slate-800 dark:text-slate-100 shadow-xs focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                       >
-                        <option value="Native">Native</option>
-                        <option value="Fluent">Fluent</option>
-                        <option value="Professional">Professional Working</option>
-                        <option value="Intermediate">Intermediate</option>
-                        <option value="Elementary">Elementary</option>
-                      </select>
+                        <SelectTrigger className="w-full h-9 rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-xs font-medium text-slate-800 dark:text-slate-100 shadow-xs">
+                          <SelectValue placeholder="Fluency" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Native">Native</SelectItem>
+                          <SelectItem value="Fluent">Fluent</SelectItem>
+                          <SelectItem value="Professional">Professional Working</SelectItem>
+                          <SelectItem value="Intermediate">Intermediate</SelectItem>
+                          <SelectItem value="Elementary">Elementary</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
                   )}
 

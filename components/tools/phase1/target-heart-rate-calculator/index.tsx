@@ -18,6 +18,13 @@ import {
   Gauge,
   ShieldAlert,
 } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface Preset {
   name: string;
@@ -212,27 +219,35 @@ export default function TargetHeartRateCalculatorTool() {
           <div className="grid grid-cols-2 gap-3 pt-2">
             <div>
               <label className="text-xs font-semibold text-slate-700 block mb-1">Gender</label>
-              <select
+              <Select
                 value={gender}
-                onChange={(e) => setGender(e.target.value as Gender)}
-                className="w-full px-3 py-2 text-xs font-semibold rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 text-slate-900 bg-white"
+                onValueChange={(val) => setGender(val as Gender)}
               >
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
+                <SelectTrigger className="w-full text-xs font-semibold text-slate-900 bg-white border-slate-300">
+                  <SelectValue placeholder="Gender" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="male">Male</SelectItem>
+                  <SelectItem value="female">Female</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div>
               <label className="text-xs font-semibold text-slate-700 block mb-1">Formula Model</label>
-              <select
+              <Select
                 value={formula}
-                onChange={(e) => setFormula(e.target.value as MhrFormula)}
-                className="w-full px-3 py-2 text-xs font-semibold rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 text-slate-900 bg-white"
+                onValueChange={(val) => setFormula(val as MhrFormula)}
               >
-                <option value="karvonen">Karvonen (HRR + RHR)</option>
-                <option value="tanaka">Tanaka (208 - 0.7*Age)</option>
-                <option value="fox">Fox (220 - Age)</option>
-                <option value="gulati">Gulati (Female validated)</option>
-              </select>
+                <SelectTrigger className="w-full text-xs font-semibold text-slate-900 bg-white border-slate-300">
+                  <SelectValue placeholder="Formula" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="karvonen">Karvonen (HRR + RHR)</SelectItem>
+                  <SelectItem value="tanaka">Tanaka (208 - 0.7*Age)</SelectItem>
+                  <SelectItem value="fox">Fox (220 - Age)</SelectItem>
+                  <SelectItem value="gulati">Gulati (Female validated)</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>

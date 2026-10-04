@@ -3,6 +3,13 @@
 import React, { useState, useId } from "react";
 import { Network, Copy, Check, Server, Globe, Cpu } from "lucide-react";
 import { calculateSubnet } from "./logic";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const COMMON_CIDRS = [
   { cidr: 8, label: "/8 (Class A / 16.7M Hosts)" },
@@ -61,18 +68,21 @@ export default function IpSubnetCalculator() {
               <label htmlFor={cidrPrefixSelectId} className="text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wider">
                 Subnet Mask / Prefix (/{cidr})
               </label>
-              <select
-                id={cidrPrefixSelectId}
-                value={cidr}
-                onChange={(e) => setCidr(Number(e.target.value))}
-                className="px-2 py-0.5 text-xs font-mono rounded border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100"
+              <Select
+                value={String(cidr)}
+                onValueChange={(val) => setCidr(Number(val))}
               >
-                {Array.from({ length: 33 }, (_, i) => (
-                  <option key={i} value={i}>
-                    /{i} ({Math.pow(2, 32 - i).toLocaleString()} addresses)
-                  </option>
-                ))}
-              </select>
+                <SelectTrigger id={cidrPrefixSelectId} className="h-6 w-36 px-2 py-0 text-xs font-mono bg-slate-50 dark:bg-slate-800 border-slate-300 dark:border-slate-700">
+                  <SelectValue placeholder="Prefix" />
+                </SelectTrigger>
+                <SelectContent className="max-h-56">
+                  {Array.from({ length: 33 }, (_, i) => (
+                    <SelectItem key={i} value={String(i)}>
+                      /{i} ({Math.pow(2, 32 - i).toLocaleString()} hosts)
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
             <input
               id={cidrRangeSliderId}

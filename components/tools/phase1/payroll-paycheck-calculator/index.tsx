@@ -22,6 +22,13 @@ import {
   TrendingDown,
   Building,
 } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface Preset {
   name: string;
@@ -279,27 +286,35 @@ export default function PayrollPaycheckCalculatorTool() {
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="text-xs font-semibold text-slate-700 block mb-1">Pay Frequency</label>
-              <select
+              <Select
                 value={payFrequency}
-                onChange={(e) => setPayFrequency(e.target.value as PayFrequency)}
-                className="w-full px-3 py-2 text-xs font-semibold rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 text-slate-900 bg-white"
+                onValueChange={(val) => setPayFrequency(val as PayFrequency)}
               >
-                <option value="weekly">Weekly (52x/yr)</option>
-                <option value="bi-weekly">Bi-Weekly (26x/yr)</option>
-                <option value="semi-monthly">Semi-Monthly (24x/yr)</option>
-                <option value="monthly">Monthly (12x/yr)</option>
-              </select>
+                <SelectTrigger className="w-full text-xs font-semibold text-slate-900 bg-white border-slate-300">
+                  <SelectValue placeholder="Frequency" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="weekly">Weekly (52x/yr)</SelectItem>
+                  <SelectItem value="bi-weekly">Bi-Weekly (26x/yr)</SelectItem>
+                  <SelectItem value="semi-monthly">Semi-Monthly (24x/yr)</SelectItem>
+                  <SelectItem value="monthly">Monthly (12x/yr)</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div>
               <label className="text-xs font-semibold text-slate-700 block mb-1">Tax Filing Status</label>
-              <select
+              <Select
                 value={filingStatus}
-                onChange={(e) => setFilingStatus(e.target.value as FilingStatus)}
-                className="w-full px-3 py-2 text-xs font-semibold rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 text-slate-900 bg-white"
+                onValueChange={(val) => setFilingStatus(val as FilingStatus)}
               >
-                <option value="single">Single</option>
-                <option value="married">Married (Joint)</option>
-              </select>
+                <SelectTrigger className="w-full text-xs font-semibold text-slate-900 bg-white border-slate-300">
+                  <SelectValue placeholder="Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="single">Single</SelectItem>
+                  <SelectItem value="married">Married (Joint)</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 

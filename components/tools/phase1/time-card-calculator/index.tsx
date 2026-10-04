@@ -3,6 +3,13 @@
 import React, { useState, useMemo } from "react";
 import { calculateTimeCard, TimeCardEntry, TimeCardConfig, TimeCardResult } from "./logic";
 import { Copy, Check, Download, RotateCcw, Clock, DollarSign, Calendar, AlertCircle } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const INITIAL_DAYS: TimeCardEntry[] = [
   { day: "Monday", enabled: true, startTime: "09:00", endTime: "17:30", breakMinutes: 30 },
@@ -329,15 +336,19 @@ export default function TimeCardCalculatorTool() {
               <label className="block text-[11px] font-semibold text-slate-600 mb-1">
                 Overtime Multiplier Rate
               </label>
-              <select
-                value={overtimeMultiplier}
-                onChange={(e) => setOvertimeMultiplier(Number(e.target.value))}
-                className="w-full px-2.5 py-1.5 text-xs font-semibold rounded-lg border border-slate-300 text-slate-900"
+              <Select
+                value={String(overtimeMultiplier)}
+                onValueChange={(val) => setOvertimeMultiplier(Number(val))}
               >
-                <option value={1.5}>1.5x (Time and a half)</option>
-                <option value={2.0}>2.0x (Double time)</option>
-                <option value={1.0}>1.0x (Straight time)</option>
-              </select>
+                <SelectTrigger className="w-full text-xs font-semibold text-slate-900 bg-white border-slate-300">
+                  <SelectValue placeholder="Multiplier" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="1.5">1.5x (Time and a half)</SelectItem>
+                  <SelectItem value="2.0">2.0x (Double time)</SelectItem>
+                  <SelectItem value="1.0">1.0x (Straight time)</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 

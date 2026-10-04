@@ -3,6 +3,13 @@
 import React, { useState, useMemo } from "react";
 import { Copy, Check, Download, Trash2, ArrowUpDown, Filter, Sparkles } from "lucide-react";
 import { deduplicateLines, SortOrder } from "./logic";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function DuplicateLineRemoverTool() {
   const [inputText, setInputText] = useState<string>(
@@ -84,19 +91,22 @@ export default function DuplicateLineRemoverTool() {
           <div className="flex items-center gap-2">
             <ArrowUpDown className="w-3.5 h-3.5 text-muted-foreground" />
             <label htmlFor="sort-order" className="text-xs text-muted-foreground font-medium">Sort:</label>
-            <select
-              id="sort-order"
+            <Select
               value={sortOrder}
-              onChange={(e) => setSortOrder(e.target.value as SortOrder)}
-              className="text-xs rounded-lg border border-border bg-background px-2.5 py-1.5 font-medium text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+              onValueChange={(val) => setSortOrder(val as SortOrder)}
             >
-              <option value="none">Original Order (Keep order)</option>
-              <option value="asc">A &rarr; Z (Alphabetical)</option>
-              <option value="desc">Z &rarr; A (Reverse Alphabetical)</option>
-              <option value="length-asc">Shortest First</option>
-              <option value="length-desc">Longest First</option>
-              <option value="reverse">Invert Order</option>
-            </select>
+              <SelectTrigger id="sort-order" className="h-8 w-44 text-xs font-medium bg-background border-border">
+                <SelectValue placeholder="Sort Order" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="none">Original Order (Keep order)</SelectItem>
+                <SelectItem value="asc">A → Z (Alphabetical)</SelectItem>
+                <SelectItem value="desc">Z → A (Reverse Alphabetical)</SelectItem>
+                <SelectItem value="length-asc">Shortest First</SelectItem>
+                <SelectItem value="length-desc">Longest First</SelectItem>
+                <SelectItem value="reverse">Invert Order</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
 

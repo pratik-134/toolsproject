@@ -18,6 +18,13 @@ import {
 } from "lucide-react";
 import { usePdfEditorStore } from "../store";
 import { exportComments } from "../logic";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface PropertiesSidebarProps {
   onExportComments: (format: "txt" | "json") => void;
@@ -254,20 +261,24 @@ export const PropertiesSidebar: React.FC<PropertiesSidebarProps> = ({
                   <>
                     <div>
                       <label className="text-muted-foreground block mb-1">Font Family</label>
-                      <select
+                      <Select
                         value={selectedElement.fontFamily || "Helvetica"}
-                        onChange={(e) =>
+                        onValueChange={(val) =>
                           updateElement(selectedElement.id, {
-                            fontFamily: e.target.value as any,
+                            fontFamily: val as any,
                           })
                         }
-                        className="w-full p-1.5 rounded border border-border bg-background"
                       >
-                        <option value="Helvetica">Helvetica (Standard Sans)</option>
-                        <option value="Helvetica-Bold">Helvetica Bold</option>
-                        <option value="Times-Roman">Times New Roman (Serif)</option>
-                        <option value="Courier">Courier (Monospace)</option>
-                      </select>
+                        <SelectTrigger className="w-full h-8 text-xs bg-background border-border">
+                          <SelectValue placeholder="Font family" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Helvetica">Helvetica (Standard Sans)</SelectItem>
+                          <SelectItem value="Helvetica-Bold">Helvetica Bold</SelectItem>
+                          <SelectItem value="Times-Roman">Times New Roman (Serif)</SelectItem>
+                          <SelectItem value="Courier">Courier (Monospace)</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     <div>
@@ -644,33 +655,41 @@ export const PropertiesSidebar: React.FC<PropertiesSidebarProps> = ({
                 <div className="space-y-2.5 pt-2">
                   <div>
                     <label className="text-muted-foreground block mb-1">Format</label>
-                    <select
+                    <Select
                       value={pageNumbering.format}
-                      onChange={(e) =>
-                        setPageNumbering({ ...pageNumbering, format: e.target.value as any })
+                      onValueChange={(val) =>
+                        setPageNumbering({ ...pageNumbering, format: val as any })
                       }
-                      className="w-full p-1.5 rounded border border-border bg-background"
                     >
-                      <option value="page-of-total">Page 1 of 5</option>
-                      <option value="page">Page 1</option>
-                      <option value="simple">1</option>
-                    </select>
+                      <SelectTrigger className="w-full h-8 text-xs bg-background border-border">
+                        <SelectValue placeholder="Format" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="page-of-total">Page 1 of 5</SelectItem>
+                        <SelectItem value="page">Page 1</SelectItem>
+                        <SelectItem value="simple">1</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div>
                     <label className="text-muted-foreground block mb-1">Position</label>
-                    <select
+                    <Select
                       value={pageNumbering.position}
-                      onChange={(e) =>
-                        setPageNumbering({ ...pageNumbering, position: e.target.value as any })
+                      onValueChange={(val) =>
+                        setPageNumbering({ ...pageNumbering, position: val as any })
                       }
-                      className="w-full p-1.5 rounded border border-border bg-background"
                     >
-                      <option value="bottom-center">Bottom Center</option>
-                      <option value="bottom-right">Bottom Right</option>
-                      <option value="bottom-left">Bottom Left</option>
-                      <option value="top-right">Top Right</option>
-                      <option value="top-center">Top Center</option>
-                    </select>
+                      <SelectTrigger className="w-full h-8 text-xs bg-background border-border">
+                        <SelectValue placeholder="Position" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="bottom-center">Bottom Center</SelectItem>
+                        <SelectItem value="bottom-right">Bottom Right</SelectItem>
+                        <SelectItem value="bottom-left">Bottom Left</SelectItem>
+                        <SelectItem value="top-right">Top Right</SelectItem>
+                        <SelectItem value="top-center">Top Center</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               )}

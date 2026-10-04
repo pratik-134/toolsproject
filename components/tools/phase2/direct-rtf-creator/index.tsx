@@ -3,6 +3,13 @@
 import React, { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   generateRtfDocument,
   RTF_TEMPLATES,
   RtfDocumentOptions,
@@ -144,30 +151,38 @@ export default function DirectRtfCreatorTool() {
             {/* Typography Toolbar */}
             <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-border">
               <div className="flex items-center gap-2 text-xs">
-                <select
+                <Select
                   value={fontFamily}
-                  onChange={(e) =>
-                    setFontFamily(e.target.value as "Arial" | "Calibri" | "Times New Roman")
+                  onValueChange={(v) =>
+                    setFontFamily(v as "Arial" | "Calibri" | "Times New Roman")
                   }
-                  className="bg-muted px-2 py-1 rounded border border-border text-foreground text-xs"
                 >
-                  <option value="Calibri">Calibri</option>
-                  <option value="Arial">Arial</option>
-                  <option value="Times New Roman">Times New Roman</option>
-                </select>
+                  <SelectTrigger className="h-7 w-[120px] text-xs bg-muted border-border">
+                    <SelectValue placeholder="Font" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Calibri">Calibri</SelectItem>
+                    <SelectItem value="Arial">Arial</SelectItem>
+                    <SelectItem value="Times New Roman">Times New Roman</SelectItem>
+                  </SelectContent>
+                </Select>
 
-                <select
-                  value={fontSizePt}
-                  onChange={(e) => setFontSizePt(parseInt(e.target.value, 10))}
-                  className="bg-muted px-2 py-1 rounded border border-border text-foreground text-xs"
+                <Select
+                  value={String(fontSizePt)}
+                  onValueChange={(v) => setFontSizePt(parseInt(v, 10))}
                 >
-                  <option value={10}>10 pt</option>
-                  <option value={11}>11 pt</option>
-                  <option value={12}>12 pt (Standard)</option>
-                  <option value={14}>14 pt</option>
-                  <option value={16}>16 pt</option>
-                  <option value={18}>18 pt</option>
-                </select>
+                  <SelectTrigger className="h-7 w-[120px] text-xs bg-muted border-border">
+                    <SelectValue placeholder="Font Size" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="10">10 pt</SelectItem>
+                    <SelectItem value="11">11 pt</SelectItem>
+                    <SelectItem value="12">12 pt (Standard)</SelectItem>
+                    <SelectItem value="14">14 pt</SelectItem>
+                    <SelectItem value="16">16 pt</SelectItem>
+                    <SelectItem value="18">18 pt</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               {/* Quick Snippets */}
