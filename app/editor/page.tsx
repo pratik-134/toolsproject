@@ -241,11 +241,11 @@ export default function EditorPage() {
 
         {/* Right Live Preview Canvas */}
         <div
-          className={`w-full lg:w-[52%] xl:w-[55%] h-full overflow-y-auto bg-slate-100 dark:bg-slate-900 ${
+          className={`w-full lg:w-[52%] xl:w-[55%] h-full overflow-hidden bg-slate-100 dark:bg-slate-900 ${
             mobileTab === "edit" ? "hidden lg:block" : "block"
           }`}
         >
-          <LivePreview />
+          <LivePreview mobileTab={mobileTab} />
         </div>
       </div>
     </div>

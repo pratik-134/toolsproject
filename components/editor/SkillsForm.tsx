@@ -125,7 +125,7 @@ export const SkillsForm: React.FC<SkillsFormProps> = ({ sectionId }) => {
               return (
                 <div
                   key={skill.id}
-                  className="flex items-center justify-between gap-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50/40 dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800 hover:border-blue-200 dark:hover:border-blue-800 px-3 py-1.5 shadow-xs transition-colors"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50/40 dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800 hover:border-blue-200 dark:hover:border-blue-800 px-3 py-2 sm:py-1.5 shadow-xs transition-colors"
                 >
                   <Input
                     disabled={isLocked}
@@ -133,58 +133,60 @@ export const SkillsForm: React.FC<SkillsFormProps> = ({ sectionId }) => {
                     onChange={(e) =>
                       updateSectionItem(sectionId, skill.id, { name: e.target.value })
                     }
-                    className="h-7 text-xs font-medium text-slate-900 dark:text-white border-transparent hover:border-slate-200 dark:hover:border-slate-700 focus:border-blue-500 bg-transparent flex-1"
+                    className="h-8 sm:h-7 text-xs font-medium text-slate-900 dark:text-white border-transparent hover:border-slate-200 dark:hover:border-slate-700 focus:border-blue-500 bg-transparent w-full sm:flex-1 min-w-0"
                   />
 
-                  <select
-                    disabled={isLocked}
-                    value={skill.level}
-                    onChange={(e) =>
-                      updateSectionItem(sectionId, skill.id, {
-                        level: e.target.value as any,
-                      })
-                    }
-                    className="rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-2 py-0.5 text-xs font-medium text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-1 focus:ring-blue-500/20 shrink-0"
-                  >
-                    <option value="none">No label</option>
-                    <option value="beginner">Beginner</option>
-                    <option value="intermediate">Intermediate</option>
-                    <option value="advanced">Advanced</option>
-                    <option value="expert">Expert</option>
-                  </select>
-
-                  <div className="flex items-center gap-0.5 shrink-0">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      disabled={!canSkillMoveUp || isLocked}
-                      onClick={() => moveSectionItem(sectionId, skill.id, "up")}
-                      className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 rounded-md transition-colors"
-                      title="Move Skill Up"
+                  <div className="flex items-center justify-between sm:justify-end gap-1.5 w-full sm:w-auto shrink-0">
+                    <select
+                      disabled={isLocked}
+                      value={skill.level}
+                      onChange={(e) =>
+                        updateSectionItem(sectionId, skill.id, {
+                          level: e.target.value as any,
+                        })
+                      }
+                      className="rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-2 py-1 sm:py-0.5 text-xs font-medium text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-1 focus:ring-blue-500/20 flex-1 sm:flex-initial"
                     >
-                      <ArrowUp className="h-3 w-3" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      disabled={!canSkillMoveDown || isLocked}
-                      onClick={() => moveSectionItem(sectionId, skill.id, "down")}
-                      className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 rounded-md transition-colors"
-                      title="Move Skill Down"
-                    >
-                      <ArrowDown className="h-3 w-3" />
-                    </Button>
+                      <option value="none">No label</option>
+                      <option value="beginner">Beginner</option>
+                      <option value="intermediate">Intermediate</option>
+                      <option value="advanced">Advanced</option>
+                      <option value="expert">Expert</option>
+                    </select>
 
-                    {!isLocked && (
+                    <div className="flex items-center gap-0.5 shrink-0">
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() => removeSectionItem(sectionId, skill.id)}
-                        className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/50 rounded-md transition-colors"
+                        disabled={!canSkillMoveUp || isLocked}
+                        onClick={() => moveSectionItem(sectionId, skill.id, "up")}
+                        className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 rounded-md transition-colors"
+                        title="Move Skill Up"
                       >
-                        <Trash2 className="h-3 w-3" />
+                        <ArrowUp className="h-3 w-3" />
                       </Button>
-                    )}
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        disabled={!canSkillMoveDown || isLocked}
+                        onClick={() => moveSectionItem(sectionId, skill.id, "down")}
+                        className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 rounded-md transition-colors"
+                        title="Move Skill Down"
+                      >
+                        <ArrowDown className="h-3 w-3" />
+                      </Button>
+
+                      {!isLocked && (
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => removeSectionItem(sectionId, skill.id)}
+                          className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/50 rounded-md transition-colors"
+                        >
+                          <Trash2 className="h-3 w-3" />
+                        </Button>
+                      )}
+                    </div>
                   </div>
                 </div>
               );

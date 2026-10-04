@@ -438,23 +438,8 @@ export default function PdfEditor() {
   // WELCOME / DROPZONE SCREEN
   if (!pdfBytes || pages.length === 0) {
     return (
-      <div className="min-h-[calc(100vh-140px)] flex flex-col items-center justify-center p-6 bg-gradient-to-b from-background to-muted/20">
+      <div className="py-6 px-4 sm:p-10 flex flex-col items-center justify-center bg-gradient-to-b from-background to-muted/20">
         <div className="max-w-2xl w-full text-center space-y-6">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold">
-            <ShieldCheck className="w-4 h-4" />
-            <span>100% Client-Side In-Memory PDF Workspace</span>
-          </div>
-
-          <div className="space-y-2">
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-              Professional PDF Editor
-            </h1>
-            <p className="text-sm sm:text-base text-muted-foreground max-w-lg mx-auto">
-              Organize, annotate, sign, redact, and stamp PDF documents entirely in your web browser. Zero server uploads, zero data leaks.
-            </p>
-          </div>
-
           {/* Drag & Drop Card */}
           <div
             onDragOver={(e) => e.preventDefault()}

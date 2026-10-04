@@ -87,7 +87,7 @@ export const GenericSectionForm: React.FC<GenericSectionFormProps> = ({
                   <span className="rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-[10px] font-mono px-2 py-0.5">
                     #{idx + 1}
                   </span>
-                  <span className="text-sm font-semibold text-slate-900 dark:text-white truncate">
+                  <span className="text-sm font-semibold text-slate-900 dark:text-white truncate flex-1 min-w-0">
                     {item.title || item.name || item.language || item.organization || "Entry"}
                   </span>
                 </div>

@@ -265,14 +265,14 @@ export default function ChartGraphVisualizerTool() {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto space-y-6">
+    <div className="w-full max-w-6xl mx-auto space-y-6 pb-20 lg:pb-0">
       {/* Privacy Notice */}
-      <div className="flex items-center justify-between px-4 py-2.5 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 rounded-lg text-xs text-emerald-800 dark:text-emerald-300">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-4 py-3 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 rounded-xl text-xs text-emerald-800 dark:text-emerald-300">
+        <div className="flex items-center gap-2 min-w-0">
           <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-          <span>Chart & Graph Visualizer — Pure HTML Canvas. Paste CSV or enter metrics securely in browser memory.</span>
+          <span className="leading-relaxed">Chart & Graph Visualizer — Pure HTML Canvas. Paste CSV or enter metrics securely in browser memory.</span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
           <Button
             size="sm"
             variant="outline"

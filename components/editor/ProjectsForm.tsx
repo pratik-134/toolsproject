@@ -92,7 +92,7 @@ export const ProjectsForm: React.FC<ProjectsFormProps> = ({ sectionId }) => {
                     <div className="cursor-grab text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 shrink-0">
                       <GripVertical className="h-3.5 w-3.5" />
                     </div>
-                    <div className="min-w-0">
+                    <div className="min-w-0 flex-1">
                       <h4 className="text-sm font-semibold text-slate-900 dark:text-white truncate">
                         {item.title || "Untitled Project"}
                       </h4>

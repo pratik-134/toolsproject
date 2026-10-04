@@ -24,7 +24,11 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export const LivePreview: React.FC = () => {
+export interface LivePreviewProps {
+  mobileTab?: "edit" | "preview";
+}
+
+export const LivePreview: React.FC<LivePreviewProps> = ({ mobileTab }) => {
   const {
     resumeData,
     zoomLevel,
@@ -55,17 +59,22 @@ export const LivePreview: React.FC = () => {
     const handleAutoFit = () => {
       if (typeof window === "undefined") return;
       if (window.innerWidth < 1024) {
-        const padding = window.innerWidth < 640 ? 24 : 48;
-        const availableWidth = window.innerWidth - padding;
-        const targetZoom = Math.max(30, Math.min(100, Math.round((availableWidth / A4_WIDTH_PX) * 100)));
+        const padding = window.innerWidth < 640 ? 20 : 48;
+        const availableWidth = Math.max(260, window.innerWidth - padding);
+        const targetZoom = Math.max(25, Math.min(100, Math.round((availableWidth / A4_WIDTH_PX) * 100)));
         setZoomLevel(targetZoom);
       }
     };
 
     handleAutoFit();
+    // Re-check after tab animation frame settles
+    const raf = requestAnimationFrame(handleAutoFit);
     window.addEventListener("resize", handleAutoFit);
-    return () => window.removeEventListener("resize", handleAutoFit);
-  }, [setZoomLevel]);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", handleAutoFit);
+    };
+  }, [setZoomLevel, mobileTab]);
 
   const handleFitToScreen = () => {
     if (typeof window === "undefined") return;
@@ -103,7 +112,7 @@ export const LivePreview: React.FC = () => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-start min-h-full py-4 sm:py-8 px-2 sm:px-6 overflow-auto bg-slate-100/70 dark:bg-slate-900/70 pb-24">
+    <div className="relative flex flex-col items-center justify-start min-h-full py-4 sm:py-8 px-2 sm:px-6 overflow-y-auto overflow-x-hidden w-full bg-slate-100/70 dark:bg-slate-900/70 pb-24">
       {/* Floating Canvas Dock */}
       <div className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border border-slate-200 dark:border-slate-700 shadow-xl no-print select-none transition-all max-w-[calc(100vw-24px)] overflow-x-auto no-scrollbar">
         {/* Zoom Out */}
@@ -193,7 +202,7 @@ export const LivePreview: React.FC = () => {
       >
         {/* DOM Live Preview Column */}
         <div
-          className="flex flex-col items-center transition-all duration-200"
+          className="flex flex-col items-center shrink-0 transition-all duration-200 shadow-[0_12px_40px_rgba(0,0,0,0.08),0_2px_6px_rgba(0,0,0,0.03)] ring-1 ring-slate-900/5 rounded-xs overflow-hidden"
           style={{
             width: `${Math.round(A4_WIDTH_PX * scale)}px`,
             height: `${Math.round(canvasHeight * scale)}px`,
@@ -212,7 +221,7 @@ export const LivePreview: React.FC = () => {
             <div
               ref={canvasRef}
               onClick={handleCanvasClick}
-              className="relative bg-white text-slate-900 shadow-[0_12px_40px_rgba(0,0,0,0.08),0_2px_6px_rgba(0,0,0,0.03)] ring-1 ring-slate-900/5 rounded-xs select-text print:shadow-none print:m-0"
+              className="relative bg-white text-slate-900 select-text print:shadow-none print:m-0"
               style={{
                 width: `${A4_WIDTH_PX}px`,
                 minHeight: `${A4_HEIGHT_PX}px`,

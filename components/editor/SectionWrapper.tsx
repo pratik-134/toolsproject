@@ -26,8 +26,16 @@ import {
   Heart,
   Users,
   FileText,
+  MoreHorizontal,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
 
 interface SectionWrapperProps {
   id: string;
@@ -193,55 +201,117 @@ export const SectionWrapper: React.FC<SectionWrapperProps> = ({
         </div>
 
         {/* Section Action Toolbar */}
-        <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
-          {/* Move Up */}
+        <div className="flex items-center gap-0.5 sm:gap-1 shrink-0" onClick={(e) => e.stopPropagation()}>
+          {/* Mobile Actions Dropdown (sm:hidden) */}
+          <div className="sm:hidden flex items-center">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors"
+                  title="More section actions"
+                >
+                  <MoreHorizontal className="h-3.5 w-3.5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-44">
+                {onMoveUp && (
+                  <DropdownMenuItem
+                    disabled={!canMoveUp || locked}
+                    onClick={onMoveUp}
+                    className="gap-2 text-xs"
+                  >
+                    <ArrowUp className="h-3.5 w-3.5" />
+                    <span>Move Section Up</span>
+                  </DropdownMenuItem>
+                )}
+                {onMoveDown && (
+                  <DropdownMenuItem
+                    disabled={!canMoveDown || locked}
+                    onClick={onMoveDown}
+                    className="gap-2 text-xs"
+                  >
+                    <ArrowDown className="h-3.5 w-3.5" />
+                    <span>Move Section Down</span>
+                  </DropdownMenuItem>
+                )}
+                {onDuplicate && (
+                  <DropdownMenuItem onClick={onDuplicate} className="gap-2 text-xs">
+                    <Copy className="h-3.5 w-3.5" />
+                    <span>Duplicate Section</span>
+                  </DropdownMenuItem>
+                )}
+                {onToggleLock && (
+                  <DropdownMenuItem onClick={onToggleLock} className="gap-2 text-xs">
+                    {locked ? <Unlock className="h-3.5 w-3.5" /> : <Lock className="h-3.5 w-3.5" />}
+                    <span>{locked ? "Unlock Section" : "Lock Section"}</span>
+                  </DropdownMenuItem>
+                )}
+                {onRemove && !locked && (
+                  <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={onRemove}
+                      className="gap-2 text-xs text-red-600 dark:text-red-400 focus:text-red-600 dark:focus:text-red-400"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                      <span>Delete Section</span>
+                    </DropdownMenuItem>
+                  </>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          {/* Move Up (Desktop) */}
           {onMoveUp && (
             <Button
               variant="ghost"
               size="icon"
               disabled={!canMoveUp || locked}
               onClick={onMoveUp}
-              className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 rounded-md transition-colors"
+              className="hidden sm:inline-flex h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 rounded-md transition-colors"
               title="Move Section Up"
             >
               <ArrowUp className="h-3.5 w-3.5" />
             </Button>
           )}
 
-          {/* Move Down */}
+          {/* Move Down (Desktop) */}
           {onMoveDown && (
             <Button
               variant="ghost"
               size="icon"
               disabled={!canMoveDown || locked}
               onClick={onMoveDown}
-              className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 rounded-md transition-colors"
+              className="hidden sm:inline-flex h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-20 rounded-md transition-colors"
               title="Move Section Down"
             >
               <ArrowDown className="h-3.5 w-3.5" />
             </Button>
           )}
 
-          {/* Duplicate Section */}
+          {/* Duplicate Section (Desktop) */}
           {onDuplicate && (
             <Button
               variant="ghost"
               size="icon"
               onClick={onDuplicate}
-              className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors"
+              className="hidden sm:inline-flex h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md transition-colors"
               title="Duplicate Section"
             >
               <Copy className="h-3.5 w-3.5" />
             </Button>
           )}
 
-          {/* Lock / Unlock */}
+          {/* Lock / Unlock (Desktop) */}
           {onToggleLock && (
             <Button
               variant="ghost"
               size="icon"
               onClick={onToggleLock}
-              className={`h-7 w-7 rounded-md transition-colors ${
+              className={`hidden sm:inline-flex h-7 w-7 rounded-md transition-colors ${
                 locked
                   ? "text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 bg-amber-100/60 dark:bg-amber-950/60"
                   : "text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
@@ -252,7 +322,7 @@ export const SectionWrapper: React.FC<SectionWrapperProps> = ({
             </Button>
           )}
 
-          {/* Visibility Toggle */}
+          {/* Visibility Toggle (Visible on both mobile & desktop) */}
           <Button
             variant="ghost"
             size="icon"
@@ -263,20 +333,20 @@ export const SectionWrapper: React.FC<SectionWrapperProps> = ({
             {visible ? <Eye className="h-3.5 w-3.5" /> : <EyeOff className="h-3.5 w-3.5 text-amber-500" />}
           </Button>
 
-          {/* Delete Section */}
+          {/* Delete Section (Desktop) */}
           {onRemove && !locked && (
             <Button
               variant="ghost"
               size="icon"
               onClick={onRemove}
-              className="h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/50 rounded-md transition-colors"
+              className="hidden sm:inline-flex h-7 w-7 text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/50 rounded-md transition-colors"
               title="Delete Section"
             >
               <Trash2 className="h-3.5 w-3.5" />
             </Button>
           )}
 
-          {/* Expand / Collapse */}
+          {/* Expand / Collapse (Visible on both mobile & desktop) */}
           <Button
             variant="ghost"
             size="icon"
