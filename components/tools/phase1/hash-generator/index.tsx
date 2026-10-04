@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { generateHashes, HashResults } from "./logic";
 import { Copy, Check, Hash, Sparkles, Trash2, KeyRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useSessionHistory } from "@/lib/hooks/use-session-history";
+import { SessionHistoryDrawer } from "@/components/tools/shared/SessionHistoryDrawer";
 
 export default function HashGeneratorTool() {
   const [input, setInput] = useState<string>("Cleartrix Privacy First");
@@ -15,6 +17,7 @@ export default function HashGeneratorTool() {
     sha512: "",
   });
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
+  const { items: historyItems, addItem: addHistoryItem, clearHistory } = useSessionHistory("hash-generator");
 
   useEffect(() => {
     let isCancelled = false;
@@ -32,6 +35,7 @@ export default function HashGeneratorTool() {
     if (!val) return;
     await navigator.clipboard.writeText(val);
     setCopiedKey(key);
+    addHistoryItem(val, key.toUpperCase());
     setTimeout(() => setCopiedKey(null), 2000);
   };
 
@@ -137,6 +141,13 @@ export default function HashGeneratorTool() {
           })}
         </div>
       </div>
+
+      {/* Session History Drawer */}
+      <SessionHistoryDrawer
+        items={historyItems}
+        onClear={clearHistory}
+        title="Recent Hashes (This Session)"
+      />
     </div>
   );
 }

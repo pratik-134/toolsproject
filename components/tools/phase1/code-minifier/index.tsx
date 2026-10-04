@@ -10,6 +10,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useToolDraft } from "@/lib/hooks/use-tool-draft";
+import { useToolKeyboardShortcuts } from "@/lib/hooks/use-keyboard-shortcut";
+import { DraftRestoredBanner } from "@/components/tool-shell/DraftRestoredBanner";
+import { DiffInspector } from "@/components/tools/shared/DiffInspector";
 
 const SAMPLES: Record<MinifyLanguage, string> = {
   html: `<!DOCTYPE html>
@@ -64,13 +68,38 @@ function authenticateUser(username, token) {
 }`,
 };
 
+interface MinifierDraft {
+  language: MinifyLanguage;
+  input: string;
+}
+
 export default function CodeMinifier() {
   const languageSelectId = useId();
   const removeCommentsId = useId();
   const collapseWhitespaceId = useId();
   const removeConsoleId = useId();
-  const [language, setLanguage] = useState<MinifyLanguage>("html");
-  const [input, setInput] = useState(SAMPLES.html);
+
+  const {
+    value: draftState,
+    setValue: setDraftState,
+    isDraftRestored,
+    formattedSavedAt,
+    clearDraft,
+    dismissRestoredBanner,
+  } = useToolDraft<MinifierDraft>({
+    toolSlug: "code-minifier",
+    initialValue: {
+      language: "html",
+      input: SAMPLES.html,
+    },
+  });
+
+  const language = draftState.language;
+  const input = draftState.input;
+
+  const setLanguage = (lang: MinifyLanguage) => setDraftState((prev) => ({ ...prev, language: lang }));
+  const setInput = (code: string) => setDraftState((prev) => ({ ...prev, input: code }));
+
   const [removeComments, setRemoveComments] = useState(true);
   const [collapseWhitespace, setCollapseWhitespace] = useState(true);
   const [removeConsole, setRemoveConsole] = useState(false);
@@ -78,8 +107,10 @@ export default function CodeMinifier() {
   const [error, setError] = useState<string | null>(null);
 
   const handleLanguageChange = (newLang: MinifyLanguage) => {
-    setLanguage(newLang);
-    setInput(SAMPLES[newLang]);
+    setDraftState({
+      language: newLang,
+      input: SAMPLES[newLang],
+    });
     setError(null);
   };
 
@@ -94,12 +125,18 @@ export default function CodeMinifier() {
     // handled gracefully
   }
 
+  const [activeView, setActiveView] = useState<"code" | "diff">("code");
+
   const handleCopy = () => {
     if (!result?.code) return;
     navigator.clipboard.writeText(result.code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  useToolKeyboardShortcuts({
+    onCopy: handleCopy,
+  });
 
   const handleDownload = () => {
     if (!result?.code) return;
@@ -126,6 +163,13 @@ export default function CodeMinifier() {
 
   return (
     <div className="space-y-6">
+      <DraftRestoredBanner
+        isRestored={isDraftRestored}
+        savedAtFormatted={formattedSavedAt}
+        onReset={() => clearDraft(true)}
+        onDismiss={dismissRestoredBanner}
+      />
+
       {/* Control Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
         <div className="flex items-center gap-3">
@@ -223,8 +267,46 @@ export default function CodeMinifier() {
         </div>
       )}
 
-      {/* Editors Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      {/* View Switcher: Code Editors vs Visual Diff Inspector */}
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+          <button
+            type="button"
+            onClick={() => setActiveView("code")}
+            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
+              activeView === "code"
+                ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-2xs"
+                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
+            }`}
+          >
+            Code Editors
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveView("diff")}
+            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors flex items-center gap-1.5 ${
+              activeView === "diff"
+                ? "bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-2xs"
+                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
+            }`}
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Visual Diff & Savings</span>
+          </button>
+        </div>
+      </div>
+
+      {activeView === "diff" ? (
+        <DiffInspector
+          originalText={input}
+          modifiedText={result?.code || ""}
+          originalLabel={`Source ${language.toUpperCase()}`}
+          modifiedLabel={`Minified ${language.toUpperCase()}`}
+          title="Minification Token & Byte Savings Diff"
+        />
+      ) : (
+        /* Editors Grid */
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Input Pane */}
         <div className="flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-sm">
           <div className="flex items-center justify-between px-4 py-2.5 bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800">
@@ -283,6 +365,7 @@ export default function CodeMinifier() {
           />
         </div>
       </div>
+      )}
     </div>
   );
 }

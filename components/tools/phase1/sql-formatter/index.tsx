@@ -3,6 +3,10 @@
 import React, { useState, useMemo } from "react";
 import { Database, Copy, Check, Sparkles, Download, ArrowRightLeft, FileCode } from "lucide-react";
 import { formatSql, minifySql } from "./logic";
+import { useToolDraft } from "@/lib/hooks/use-tool-draft";
+import { useToolKeyboardShortcuts } from "@/lib/hooks/use-keyboard-shortcut";
+import { DraftRestoredBanner } from "@/components/tool-shell/DraftRestoredBanner";
+import { DiffInspector } from "@/components/tools/shared/DiffInspector";
 
 const SAMPLES = [
   {
@@ -20,7 +24,17 @@ const SAMPLES = [
 ];
 
 export default function SqlFormatterTool() {
-  const [inputSql, setInputSql] = useState<string>(SAMPLES[0]!.sql);
+  const {
+    value: inputSql,
+    setValue: setInputSql,
+    isDraftRestored,
+    formattedSavedAt,
+    clearDraft,
+    dismissRestoredBanner,
+  } = useToolDraft<string>({
+    toolSlug: "sql-formatter",
+    initialValue: SAMPLES[0]!.sql,
+  });
   const [mode, setMode] = useState<"beautify" | "minify">("beautify");
   const [indentSize, setIndentSize] = useState<2 | 4 | "tab">(2);
   const [uppercase, setUppercase] = useState<boolean>(true);
@@ -35,6 +49,8 @@ export default function SqlFormatterTool() {
     }
   }, [inputSql, mode, indentSize, uppercase]);
 
+  const [activeView, setActiveView] = useState<"code" | "diff">("code");
+
   const handleCopy = () => {
     if (outputSql) {
       navigator.clipboard.writeText(outputSql);
@@ -42,6 +58,10 @@ export default function SqlFormatterTool() {
       setTimeout(() => setCopied(false), 2000);
     }
   };
+
+  useToolKeyboardShortcuts({
+    onCopy: handleCopy,
+  });
 
   const handleDownload = () => {
     if (!outputSql) return;
@@ -56,6 +76,13 @@ export default function SqlFormatterTool() {
 
   return (
     <div className="space-y-6">
+      <DraftRestoredBanner
+        isRestored={isDraftRestored}
+        savedAtFormatted={formattedSavedAt}
+        onReset={() => clearDraft(true)}
+        onDismiss={dismissRestoredBanner}
+      />
+
       {/* Controls Bar */}
       <div className="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -155,72 +182,111 @@ export default function SqlFormatterTool() {
         )}
       </div>
 
-      {/* Editor Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Left: Input */}
-        <div className="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm space-y-3">
-          <div className="flex items-center justify-between">
-            <label className="text-sm font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-              <Database className="w-4 h-4 text-teal-600" />
-              Raw SQL Query
-            </label>
-            <span className="text-xs text-slate-400 font-mono">
-              {inputSql.length} characters
-            </span>
-          </div>
-          <textarea
-            value={inputSql}
-            onChange={(e) => setInputSql(e.target.value)}
-            rows={14}
-            placeholder="Paste your raw or unformatted SQL query here..."
-            className="w-full p-3 font-mono text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 outline-none focus:ring-2 focus:ring-teal-500 resize-y"
-            spellCheck={false}
-          />
-        </div>
-
-        {/* Right: Output */}
-        <div className="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm space-y-3 flex flex-col">
-          <div className="flex items-center justify-between">
-            <label className="text-sm font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-teal-600" />
-              {mode === "beautify" ? "Beautified SQL" : "Minified SQL"}
-            </label>
-            <span className="text-xs text-slate-400 font-mono">
-              {outputSql.length} characters
-            </span>
-          </div>
-
-          <textarea
-            value={outputSql}
-            readOnly
-            rows={14}
-            placeholder="Formatted SQL output will appear here..."
-            className="w-full flex-1 p-3 font-mono text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 outline-none resize-y"
-            spellCheck={false}
-          />
-
-          <div className="flex items-center justify-end gap-2 pt-2">
-            <button
-              type="button"
-              onClick={handleDownload}
-              disabled={!outputSql}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 transition-colors"
-            >
-              <Download className="w-3.5 h-3.5" />
-              Download .sql
-            </button>
-            <button
-              type="button"
-              onClick={handleCopy}
-              disabled={!outputSql}
-              className="flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-lg bg-teal-600 text-white hover:bg-teal-700 disabled:opacity-40 transition-colors shadow-xs"
-            >
-              {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-              {copied ? "Copied" : "Copy SQL"}
-            </button>
-          </div>
+      {/* View Switcher: Editor Grid vs Visual Diff */}
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+          <button
+            type="button"
+            onClick={() => setActiveView("code")}
+            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
+              activeView === "code"
+                ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 shadow-2xs"
+                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
+            }`}
+          >
+            SQL Editor
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveView("diff")}
+            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors flex items-center gap-1.5 ${
+              activeView === "diff"
+                ? "bg-white dark:bg-slate-900 text-teal-600 dark:text-teal-400 shadow-2xs"
+                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
+            }`}
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Visual Diff & Transformation</span>
+          </button>
         </div>
       </div>
+
+      {activeView === "diff" ? (
+        <DiffInspector
+          originalText={inputSql}
+          modifiedText={outputSql}
+          originalLabel="Raw SQL"
+          modifiedLabel={mode === "beautify" ? "Beautified SQL" : "Minified SQL"}
+          title="SQL Formatting & Syntax Diff"
+        />
+      ) : (
+        /* Editor Grid */
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Left: Input */}
+          <div className="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm space-y-3">
+            <div className="flex items-center justify-between">
+              <label className="text-sm font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                <Database className="w-4 h-4 text-teal-600" />
+                Raw SQL Query
+              </label>
+              <span className="text-xs text-slate-400 font-mono">
+                {inputSql.length} characters
+              </span>
+            </div>
+            <textarea
+              value={inputSql}
+              onChange={(e) => setInputSql(e.target.value)}
+              rows={14}
+              placeholder="Paste your raw or unformatted SQL query here..."
+              className="w-full p-3 font-mono text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 outline-none focus:ring-2 focus:ring-teal-500 resize-y"
+              spellCheck={false}
+            />
+          </div>
+
+          {/* Right: Output */}
+          <div className="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm space-y-3 flex flex-col">
+            <div className="flex items-center justify-between">
+              <label className="text-sm font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-teal-600" />
+                {mode === "beautify" ? "Beautified SQL" : "Minified SQL"}
+              </label>
+              <span className="text-xs text-slate-400 font-mono">
+                {outputSql.length} characters
+              </span>
+            </div>
+
+            <textarea
+              value={outputSql}
+              readOnly
+              rows={14}
+              placeholder="Formatted SQL output will appear here..."
+              className="w-full flex-1 p-3 font-mono text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 outline-none resize-y"
+              spellCheck={false}
+            />
+
+            <div className="flex items-center justify-end gap-2 pt-2">
+              <button
+                type="button"
+                onClick={handleDownload}
+                disabled={!outputSql}
+                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 transition-colors"
+              >
+                <Download className="w-3.5 h-3.5" />
+                Download .sql
+              </button>
+              <button
+                type="button"
+                onClick={handleCopy}
+                disabled={!outputSql}
+                className="flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold rounded-lg bg-teal-600 text-white hover:bg-teal-700 disabled:opacity-40 transition-colors shadow-xs"
+              >
+                {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                {copied ? "Copied" : "Copy SQL"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

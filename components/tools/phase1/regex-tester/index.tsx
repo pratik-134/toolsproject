@@ -3,6 +3,8 @@
 import React, { useState, useMemo } from "react";
 import { Copy, Check, AlertCircle, Sparkles, RefreshCw, List, Replace } from "lucide-react";
 import { testRegex, RegexOptions } from "./logic";
+import { useToolDraft } from "@/lib/hooks/use-tool-draft";
+import { DraftRestoredBanner } from "@/components/tool-shell/DraftRestoredBanner";
 
 const PRESETS = [
   { name: "Email Address", pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}", flags: "g" },
@@ -20,13 +22,44 @@ const AVAILABLE_FLAGS = [
   { flag: "u", label: "Unicode", desc: "Treat pattern as full unicode" },
 ];
 
+interface RegexDraft {
+  pattern: string;
+  flags: string;
+  testString: string;
+  replacePattern: string;
+}
+
+const DEFAULT_REGEX_DRAFT: RegexDraft = {
+  pattern: "([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})",
+  flags: "g",
+  testString:
+    "Welcome to Cleartrix! You can contact our support team at support@cleartrix.com or sales team at team@cleartrix.com anytime.",
+  replacePattern: "[REDACTED_EMAIL]",
+};
+
 export default function RegexTesterTool() {
-  const [pattern, setPattern] = useState<string>("([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})");
-  const [flags, setFlags] = useState<string>("g");
-  const [testString, setTestString] = useState<string>(
-    "Welcome to Cleartrix! You can contact our support team at support@cleartrix.com or sales team at team@cleartrix.com anytime."
-  );
-  const [replacePattern, setReplacePattern] = useState<string>("[REDACTED_EMAIL]");
+  const {
+    value: draftState,
+    setValue: setDraftState,
+    isDraftRestored,
+    formattedSavedAt,
+    clearDraft,
+    dismissRestoredBanner,
+  } = useToolDraft<RegexDraft>({
+    toolSlug: "regex-tester",
+    initialValue: DEFAULT_REGEX_DRAFT,
+  });
+
+  const pattern = draftState.pattern;
+  const flags = draftState.flags;
+  const testString = draftState.testString;
+  const replacePattern = draftState.replacePattern;
+
+  const setPattern = (p: string) => setDraftState((prev) => ({ ...prev, pattern: p }));
+  const setFlags = (f: string) => setDraftState((prev) => ({ ...prev, flags: f }));
+  const setTestString = (t: string) => setDraftState((prev) => ({ ...prev, testString: t }));
+  const setReplacePattern = (rp: string) => setDraftState((prev) => ({ ...prev, replacePattern: rp }));
+
   const [showReplace, setShowReplace] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
 
@@ -60,6 +93,13 @@ export default function RegexTesterTool() {
 
   return (
     <div className="space-y-6">
+      <DraftRestoredBanner
+        isRestored={isDraftRestored}
+        savedAtFormatted={formattedSavedAt}
+        onReset={() => clearDraft(true)}
+        onDismiss={dismissRestoredBanner}
+      />
+
       {/* Pattern & Flags Bar */}
       <div className="p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm space-y-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">

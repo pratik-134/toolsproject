@@ -5,6 +5,9 @@ import { generatePassword, generatePassphrase, PasswordOptions, PassphraseOption
 import { Copy, Check, RefreshCw, ShieldCheck, Key, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SendToPipelineButton } from "@/components/pipeline/SendToPipelineButton";
+import { useSessionHistory } from "@/lib/hooks/use-session-history";
+import { useToolKeyboardShortcuts } from "@/lib/hooks/use-keyboard-shortcut";
+import { SessionHistoryDrawer } from "@/components/tools/shared/SessionHistoryDrawer";
 import {
   Select,
   SelectContent,
@@ -33,8 +36,13 @@ export default function PasswordGeneratorTool() {
   const [currentValue, setCurrentValue] = useState<string>("");
   const [entropyBits, setEntropyBits] = useState<number>(0);
   const [copied, setCopied] = useState<boolean>(false);
+  const { items: historyItems, addItem: addHistoryItem, clearHistory } = useSessionHistory("password-generator");
 
   const regenerate = () => {
+    if (currentValue) {
+      addHistoryItem(currentValue, mode === "password" ? `${length} chars` : `${wordsCount} words`);
+    }
+
     if (mode === "password") {
       const res = generatePassword({
         length,
@@ -78,8 +86,14 @@ export default function PasswordGeneratorTool() {
     if (!currentValue) return;
     await navigator.clipboard.writeText(currentValue);
     setCopied(true);
+    addHistoryItem(currentValue, mode === "password" ? `${length} chars` : `${wordsCount} words`);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  useToolKeyboardShortcuts({
+    onCopy: handleCopy,
+    onExecute: regenerate,
+  });
 
   let strengthLabel = "Weak";
   let strengthColor = "text-red-500 bg-red-50 border-red-200";
@@ -326,6 +340,14 @@ export default function PasswordGeneratorTool() {
           Generated using the browser&apos;s standard Cryptographically Secure Pseudo-Random Number Generator (CSPRNG, <code className="bg-blue-100/60 px-1 py-0.5 rounded font-mono">crypto.getRandomValues</code>). Your password is never logged or transmitted over any network.
         </p>
       </div>
+
+      {/* Session History Drawer */}
+      <SessionHistoryDrawer
+        items={historyItems}
+        onClear={clearHistory}
+        onRestore={(val) => setCurrentValue(val)}
+        title="Recent Passwords (This Session)"
+      />
     </div>
   );
 }

@@ -15,6 +15,8 @@ import {
   validateHtmlMarkup,
   HTML_TEMPLATES,
 } from "./logic";
+import { useToolDraft } from "@/lib/hooks/use-tool-draft";
+import { DraftRestoredBanner } from "@/components/tool-shell/DraftRestoredBanner";
 import {
   FileCode,
   Download,
@@ -34,13 +36,44 @@ import {
   Minimize2,
 } from "lucide-react";
 
+interface HtmlEditorDraft {
+  html: string;
+  css: string;
+  js: string;
+  title: string;
+}
+
 export default function DirectHtmlEditorTool() {
   const defaultTmpl = HTML_TEMPLATES.landing;
   const [selectedTemplate, setSelectedTemplate] = useState<string>("landing");
-  const [html, setHtml] = useState<string>(defaultTmpl?.html || "");
-  const [css, setCss] = useState<string>(defaultTmpl?.css || "");
-  const [js, setJs] = useState<string>(defaultTmpl?.js || "");
-  const [title, setTitle] = useState<string>(defaultTmpl?.title || "Product Landing Card");
+
+  const {
+    value: draftState,
+    setValue: setDraftState,
+    isDraftRestored,
+    formattedSavedAt,
+    clearDraft,
+    dismissRestoredBanner,
+  } = useToolDraft<HtmlEditorDraft>({
+    toolSlug: "direct-html-editor",
+    initialValue: {
+      html: defaultTmpl?.html || "",
+      css: defaultTmpl?.css || "",
+      js: defaultTmpl?.js || "",
+      title: defaultTmpl?.title || "Product Landing Card",
+    },
+  });
+
+  const html = draftState.html;
+  const css = draftState.css;
+  const js = draftState.js;
+  const title = draftState.title;
+
+  const setHtml = (val: string) => setDraftState((prev) => ({ ...prev, html: val }));
+  const setCss = (val: string) => setDraftState((prev) => ({ ...prev, css: val }));
+  const setJs = (val: string) => setDraftState((prev) => ({ ...prev, js: val }));
+  const setTitle = (val: string) => setDraftState((prev) => ({ ...prev, title: val }));
+
   const [activeCodeTab, setActiveCodeTab] = useState<"html" | "css" | "js">("html");
   const [copied, setCopied] = useState<boolean>(false);
   const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
@@ -52,10 +85,12 @@ export default function DirectHtmlEditorTool() {
     setSelectedTemplate(key);
     const tmpl = HTML_TEMPLATES[key];
     if (tmpl) {
-      setHtml(tmpl.html);
-      setCss(tmpl.css);
-      setJs(tmpl.js);
-      setTitle(tmpl.title);
+      setDraftState({
+        html: tmpl.html,
+        css: tmpl.css,
+        js: tmpl.js,
+        title: tmpl.title,
+      });
     }
   };
 
@@ -112,6 +147,13 @@ export default function DirectHtmlEditorTool() {
 
   return (
     <div className={`space-y-6 ${isFullScreen ? "fixed inset-0 z-50 bg-background p-6 overflow-auto" : ""}`}>
+      <DraftRestoredBanner
+        isRestored={isDraftRestored}
+        savedAtFormatted={formattedSavedAt}
+        onReset={() => clearDraft(true)}
+        onDismiss={dismissRestoredBanner}
+      />
+
       {/* Privacy Guarantee Header */}
       <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-300">
         <div className="flex items-center gap-3">

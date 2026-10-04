@@ -2,10 +2,20 @@
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { getAllTools, getToolUrl } from "@/lib/registry/tools";
+import { getAllTools, getToolUrl, getToolBySlug } from "@/lib/registry/tools";
 import { getCategoryById } from "@/lib/registry/categories";
 import { CATEGORY_COLORS } from "@/lib/design-tokens";
-import { Search, Command, X, ArrowRight, CornerDownLeft } from "lucide-react";
+import { detectInputType, DetectedAction } from "@/lib/detect-input-type";
+import { setPipelineHandoff } from "@/lib/pipeline/handoff";
+import {
+  Search,
+  Command,
+  X,
+  ArrowRight,
+  CornerDownLeft,
+  Sparkles,
+  Zap,
+} from "lucide-react";
 
 export interface CommandPaletteProps {
   isOpen: boolean;
@@ -21,6 +31,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
 
   const tools = useMemo(() => getAllTools(), []);
 
+  // 1. Smart Input Auto-Detection
+  const detected = useMemo(() => detectInputType(query), [query]);
+
+  // 2. Regular Filtered Tools
   const results = useMemo(() => {
     const q = query.toLowerCase().trim();
     if (!q) return tools.slice(0, 12); // Show top 12 when search is empty
@@ -35,10 +49,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     });
   }, [tools, query]);
 
-  // Reset selected index when results change
+  const smartCount = detected ? detected.suggestedTools.length : 0;
+  const totalCount = smartCount + results.length;
+
+  // Reset selected index when query or results change
   useEffect(() => {
     setSelectedIndex(0);
-  }, [results]);
+  }, [query, results]);
 
   // Focus input on open
   useEffect(() => {
@@ -51,6 +68,28 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     }
   }, [isOpen]);
 
+  // Execute smart action handoff
+  const handleSelectSmartAction = (action: DetectedAction) => {
+    const targetTool = getToolBySlug(action.toolSlug);
+    if (!targetTool) return;
+
+    try {
+      setPipelineHandoff({
+        sourceSlug: "omnibar",
+        sourceToolName: "Quick Input",
+        targetSlug: action.toolSlug,
+        dataType: "text",
+        textData: query.trim(),
+        title: `Pasted ${detected?.label || "Content"}`,
+      });
+    } catch {
+      // Ignore if quota exceeded
+    }
+
+    onClose();
+    router.push(getToolUrl(targetTool));
+  };
+
   // Handle keyboard navigation inside search dialog
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Escape") {
@@ -58,16 +97,24 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       onClose();
     } else if (e.key === "ArrowDown") {
       e.preventDefault();
-      setSelectedIndex((prev) => (prev < results.length - 1 ? prev + 1 : 0));
+      setSelectedIndex((prev) => (prev < totalCount - 1 ? prev + 1 : 0));
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : results.length - 1));
-    } else if (e.key === "Enter" && results.length > 0) {
+      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : totalCount - 1));
+    } else if (e.key === "Enter" && totalCount > 0) {
       e.preventDefault();
-      const targetTool = results[selectedIndex];
-      if (targetTool) {
-        onClose();
-        router.push(getToolUrl(targetTool));
+      if (detected && selectedIndex < smartCount) {
+        const smartAction = detected.suggestedTools[selectedIndex];
+        if (smartAction) {
+          handleSelectSmartAction(smartAction);
+        }
+      } else {
+        const toolIndex = selectedIndex - smartCount;
+        const targetTool = results[toolIndex];
+        if (targetTool) {
+          onClose();
+          router.push(getToolUrl(targetTool));
+        }
       }
     }
   };
@@ -96,7 +143,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder={`Search ${tools.length}+ free tools (e.g. PDF merge, WebP, AES, JSON)...`}
+            placeholder={`Search ${tools.length}+ tools, or paste JSON, JWT, SQL, Color, Cron, Timestamp...`}
             className="w-full bg-transparent pl-3 pr-10 text-sm sm:text-base font-medium text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none"
           />
           <button
@@ -108,13 +155,102 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
           </button>
         </div>
 
-        {/* Results List */}
-        <div className="max-h-[60vh] overflow-y-auto p-2 divide-y divide-slate-100 dark:divide-slate-800">
+        {/* Results Body */}
+        <div className="max-h-[60vh] overflow-y-auto p-2 space-y-2">
+          {/* 🌟 SMART INPUT AUTO-DETECTION HERO CARD */}
+          {detected && (
+            <div className="p-3 bg-gradient-to-r from-blue-50/90 via-indigo-50/60 to-purple-50/50 dark:from-blue-950/40 dark:via-indigo-950/30 dark:to-purple-950/20 border border-blue-200/80 dark:border-blue-800/80 rounded-xl space-y-2">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <div className="p-1 rounded-md bg-blue-600 text-white shrink-0 shadow-xs">
+                    <Zap className="h-3.5 w-3.5" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold text-slate-900 dark:text-slate-100">
+                        Detected: {detected.label}
+                      </span>
+                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 border border-blue-200/80 dark:border-blue-800/80">
+                        {detected.badge}
+                      </span>
+                    </div>
+                    {detected.previewValue && (
+                      <p className="text-[11px] text-slate-600 dark:text-slate-400 font-mono truncate mt-0.5">
+                        {detected.previewValue}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {detected.colorSwatch && (
+                  <div
+                    className="h-6 w-6 rounded-md border border-slate-300 dark:border-slate-600 shrink-0 shadow-xs"
+                    style={{ backgroundColor: detected.colorSwatch }}
+                    title={detected.colorSwatch}
+                  />
+                )}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="space-y-1.5 pt-1">
+                {detected.suggestedTools.map((action, sIdx) => {
+                  const isSelected = selectedIndex === sIdx;
+
+                  return (
+                    <div
+                      key={action.toolSlug}
+                      onClick={() => handleSelectSmartAction(action)}
+                      onMouseEnter={() => setSelectedIndex(sIdx)}
+                      className={`flex items-center justify-between p-2.5 rounded-lg cursor-pointer transition-all ${
+                        isSelected
+                          ? "bg-white dark:bg-slate-800 border border-blue-400 dark:border-blue-600 shadow-xs"
+                          : "bg-white/70 dark:bg-slate-800/60 hover:bg-white dark:hover:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 min-w-0 truncate">
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <Sparkles className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
+                          <span className="text-xs font-bold text-slate-900 dark:text-slate-100">
+                            {action.actionTitle}
+                          </span>
+                        </div>
+                        <span className="text-[11px] text-slate-500 dark:text-slate-400 truncate hidden sm:inline">
+                          • {action.description}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-2 shrink-0">
+                        <span className="text-[10px] font-medium text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 rounded px-1.5 py-0.5">
+                          Pre-fill Data
+                        </span>
+                        {isSelected && (
+                          <span className="text-[10px] font-mono text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/60 px-1.5 py-0.5 rounded flex items-center gap-1 font-semibold">
+                            Enter <CornerDownLeft className="h-2.5 w-2.5" />
+                          </span>
+                        )}
+                        <ArrowRight className={`h-3.5 w-3.5 ${isSelected ? "text-blue-600 dark:text-blue-400" : "text-slate-400"}`} />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Section Heading if smart suggestions are present */}
+          {detected && results.length > 0 && (
+            <div className="px-2 pt-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+              Other Matching Tools
+            </div>
+          )}
+
+          {/* Regular Results List */}
           {results.length > 0 ? (
             results.map((tool, idx) => {
               const categoryDef = getCategoryById(tool.category);
               const colorToken = CATEGORY_COLORS[categoryDef?.colorKey || "security"];
-              const isSelected = idx === selectedIndex;
+              const itemIndex = smartCount + idx;
+              const isSelected = itemIndex === selectedIndex;
 
               return (
                 <div
@@ -123,9 +259,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                     onClose();
                     router.push(getToolUrl(tool));
                   }}
-                  onMouseEnter={() => setSelectedIndex(idx)}
+                  onMouseEnter={() => setSelectedIndex(itemIndex)}
                   className={`flex items-center justify-between p-3 rounded-xl cursor-pointer transition-colors ${
-                    isSelected ? "bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800" : "hover:bg-slate-50 dark:hover:bg-slate-800/60"
+                    isSelected
+                      ? "bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800"
+                      : "hover:bg-slate-50 dark:hover:bg-slate-800/60"
                   }`}
                 >
                   <div className="flex items-center gap-3 truncate">
@@ -140,8 +278,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                       {categoryDef?.shortName || tool.category}
                     </span>
                     <div className="truncate">
-                      <p className="text-sm font-bold text-slate-900 dark:text-slate-100 truncate">{tool.name}</p>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 truncate">{tool.seo.description}</p>
+                      <p className="text-sm font-bold text-slate-900 dark:text-slate-100 truncate">
+                        {tool.name}
+                      </p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
+                        {tool.seo.description}
+                      </p>
                     </div>
                   </div>
 
@@ -156,11 +298,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                 </div>
               );
             })
-          ) : (
+          ) : !detected ? (
             <div className="p-8 text-center text-slate-500 dark:text-slate-400 text-sm">
-              No matching tools found for "{query}".
+              No matching tools found for &quot;{query}&quot;.
             </div>
-          )}
+          ) : null}
         </div>
 
         {/* Footer shortcuts helper */}

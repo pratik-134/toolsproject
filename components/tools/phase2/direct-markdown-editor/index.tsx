@@ -2,6 +2,8 @@
 
 import React, { useState, useMemo, useRef } from "react";
 import { Button } from "@/components/ui/button";
+import { useToolDraft } from "@/lib/hooks/use-tool-draft";
+import { DraftRestoredBanner } from "@/components/tool-shell/DraftRestoredBanner";
 import {
   computeTaskProgress,
   generateMarkdownTable,
@@ -73,7 +75,17 @@ interface DocumentEngine {
 *Drafted securely in Cleartrix Privacy Suite.*`;
 
 export default function DirectMarkdownEditorTool() {
-  const [markdown, setMarkdown] = useState<string>(SAMPLE_MARKDOWN);
+  const {
+    value: markdown,
+    setValue: setMarkdown,
+    isDraftRestored,
+    formattedSavedAt,
+    clearDraft,
+    dismissRestoredBanner,
+  } = useToolDraft<string>({
+    toolSlug: "direct-markdown-editor",
+    initialValue: SAMPLE_MARKDOWN,
+  });
   const [filename, setFilename] = useState<string>("document.md");
   const [activeTab, setActiveTab] = useState<"split" | "edit" | "preview">("split");
   const [copiedMd, setCopiedMd] = useState<boolean>(false);
@@ -217,6 +229,13 @@ ${renderedHtml}
 
   return (
     <div className={`space-y-6 ${isFullScreen ? "fixed inset-0 z-50 bg-background p-6 overflow-auto" : ""}`}>
+      <DraftRestoredBanner
+        isRestored={isDraftRestored}
+        savedAtFormatted={formattedSavedAt}
+        onReset={() => clearDraft(true)}
+        onDismiss={dismissRestoredBanner}
+      />
+
       {/* Privacy Guarantee Header */}
       <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-300">
         <div className="flex items-center gap-3">

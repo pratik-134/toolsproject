@@ -15,11 +15,14 @@ import {
   Wrench,
   Sparkles,
   Cloud,
+  Zap,
 } from "lucide-react";
-import { getLiveTools } from "@/lib/registry/tools";
+import { getLiveTools, getToolBySlug, getToolUrl } from "@/lib/registry/tools";
 import { ToolDefinition, CategoryId } from "@/lib/registry/types";
 import { getCategoryTheme } from "@/lib/category-theme";
 import { KbdShortcut } from "@/components/ui/KbdShortcut";
+import { detectInputType, DetectedAction } from "@/lib/detect-input-type";
+import { setPipelineHandoff } from "@/lib/pipeline/handoff";
 
 const CATEGORY_ICON_MAP: Record<CategoryId, React.ElementType> = {
   "document-pdf": FileText,
@@ -150,6 +153,10 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
     };
   }, []);
 
+  const detected = useMemo(() => detectInputType(query), [query]);
+  const smartCount = detected ? detected.suggestedTools.length : 0;
+  const totalCount = smartCount + results.length;
+
   const handleSelectTool = (tool: ToolDefinition) => {
     setIsOpen(false);
     setQuery("");
@@ -160,23 +167,52 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
     }
   };
 
+  const handleSelectSmartAction = (action: DetectedAction) => {
+    const targetTool = getToolBySlug(action.toolSlug);
+    if (!targetTool) return;
+
+    try {
+      setPipelineHandoff({
+        sourceSlug: "omnibar",
+        sourceToolName: "Quick Input",
+        targetSlug: action.toolSlug,
+        dataType: "text",
+        textData: query.trim(),
+        title: `Pasted ${detected?.label || "Content"}`,
+      });
+    } catch {
+      // Ignore if storage full
+    }
+
+    setIsOpen(false);
+    setQuery("");
+    router.push(getToolUrl(targetTool));
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      if (!isOpen && results.length > 0) {
+      if (!isOpen && totalCount > 0) {
         setIsOpen(true);
         setSelectedIndex(0);
         return;
       }
-      setSelectedIndex((prev) => (prev < results.length - 1 ? prev + 1 : 0));
+      setSelectedIndex((prev) => (prev < totalCount - 1 ? prev + 1 : 0));
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : results.length - 1));
+      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : totalCount - 1));
     } else if (e.key === "Enter") {
       e.preventDefault();
+      if (detected && selectedIndex >= 0 && selectedIndex < smartCount) {
+        const smartAction = detected.suggestedTools[selectedIndex];
+        if (smartAction) {
+          handleSelectSmartAction(smartAction);
+          return;
+        }
+      }
       if (results.length > 0) {
-        const targetTool =
-          selectedIndex >= 0 && selectedIndex < results.length ? results[selectedIndex] : results[0];
+        const toolIdx = selectedIndex >= smartCount ? selectedIndex - smartCount : 0;
+        const targetTool = results[toolIdx] || results[0];
         if (targetTool) {
           handleSelectTool(targetTool);
           return;
@@ -266,12 +302,92 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
         <div
           id="tool-search-results-listbox"
           role="listbox"
-          className="absolute left-0 right-0 top-full mt-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-2xl overflow-hidden z-50 animate-fade-in font-body max-h-[75vh] sm:max-h-[440px] overflow-y-auto overscroll-contain"
+          className="absolute left-0 right-0 top-full mt-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-2xl overflow-hidden z-50 animate-fade-in font-body max-h-[75vh] sm:max-h-[460px] overflow-y-auto overscroll-contain"
         >
+          {/* 🌟 SMART INPUT AUTO-DETECTION HERO CARD */}
+          {detected && (
+            <div className="p-3 bg-gradient-to-r from-blue-50/90 via-indigo-50/60 to-purple-50/50 dark:from-blue-950/40 dark:via-indigo-950/30 dark:to-purple-950/20 border-b border-blue-200/80 dark:border-blue-800/80 space-y-2">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <div className="p-1 rounded-md bg-blue-600 text-white shrink-0 shadow-xs">
+                    <Zap className="h-3.5 w-3.5" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold text-slate-900 dark:text-slate-100">
+                        Detected: {detected.label}
+                      </span>
+                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300 border border-blue-200/80 dark:border-blue-800/80">
+                        {detected.badge}
+                      </span>
+                    </div>
+                    {detected.previewValue && (
+                      <p className="text-[11px] text-slate-600 dark:text-slate-400 font-mono truncate mt-0.5">
+                        {detected.previewValue}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {detected.colorSwatch && (
+                  <div
+                    className="h-6 w-6 rounded-md border border-slate-300 dark:border-slate-600 shrink-0 shadow-xs"
+                    style={{ backgroundColor: detected.colorSwatch }}
+                    title={detected.colorSwatch}
+                  />
+                )}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="space-y-1.5 pt-1">
+                {detected.suggestedTools.map((action, sIdx) => {
+                  const isSelected = selectedIndex === sIdx;
+
+                  return (
+                    <button
+                      key={action.toolSlug}
+                      type="button"
+                      onPointerDown={(e) => {
+                        e.preventDefault();
+                        handleSelectSmartAction(action);
+                      }}
+                      onClick={() => handleSelectSmartAction(action)}
+                      onMouseEnter={() => setSelectedIndex(sIdx)}
+                      className={`w-full flex items-center justify-between p-2.5 rounded-lg cursor-pointer transition-all text-left ${
+                        isSelected
+                          ? "bg-white dark:bg-slate-800 border border-blue-400 dark:border-blue-600 shadow-xs"
+                          : "bg-white/80 dark:bg-slate-800/60 hover:bg-white dark:hover:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 min-w-0 truncate">
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <Sparkles className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
+                          <span className="text-xs font-bold text-slate-900 dark:text-slate-100">
+                            {action.actionTitle}
+                          </span>
+                        </div>
+                        <span className="text-[11px] text-slate-500 dark:text-slate-400 truncate hidden sm:inline">
+                          • {action.description}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-2 shrink-0">
+                        <span className="text-[10px] font-medium text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 rounded px-1.5 py-0.5">
+                          Pre-fill Data
+                        </span>
+                        <ArrowRight className={`h-3.5 w-3.5 ${isSelected ? "text-blue-600 dark:text-blue-400" : "text-slate-400"}`} />
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           {results.length > 0 ? (
             <div className="py-1 divide-y divide-slate-100 dark:divide-slate-800">
               <div className="px-3.5 sm:px-4 py-2 bg-slate-50/80 dark:bg-slate-800/80 text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center justify-between">
-                <span>Matching Tools ({results.length})</span>
+                <span>{detected ? "Other Matching Tools" : "Matching Tools"} ({results.length})</span>
                 <span className="text-[10px] text-slate-400 font-normal hidden xs:inline">
                   Press Enter to open #1
                 </span>
@@ -279,7 +395,8 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
               {results.map((tool, idx) => {
                 const IconComponent = CATEGORY_ICON_MAP[tool.category] || Wrench;
                 const theme = getCategoryTheme(tool.category);
-                const isSelected = selectedIndex === idx;
+                const itemIndex = smartCount + idx;
+                const isSelected = selectedIndex === itemIndex;
                 return (
                   <button
                     key={tool.slug}
@@ -289,7 +406,7 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
                       handleSelectTool(tool);
                     }}
                     onClick={() => handleSelectTool(tool)}
-                    onMouseEnter={() => setSelectedIndex(idx)}
+                    onMouseEnter={() => setSelectedIndex(itemIndex)}
                     className={`w-full flex items-center justify-between px-3.5 sm:px-4 py-2.5 sm:py-3 text-left text-xs sm:text-sm transition-colors ${
                       isSelected ? "bg-blue-50/70 dark:bg-blue-950/60 text-blue-900 dark:text-blue-200" : "text-slate-700 dark:text-slate-200 hover:bg-slate-50/80 dark:hover:bg-slate-800/60"
                     }`}
@@ -328,7 +445,7 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
                 See all results for &quot;{query}&quot; →
               </Link>
             </div>
-          ) : (
+          ) : !detected ? (
             <div className="p-5 text-center space-y-2">
               <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                 No direct tool match for &quot;<span className="font-semibold text-slate-700 dark:text-slate-200">{query}</span>&quot;
@@ -342,7 +459,7 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
                 <span>Search all 111 tools directory</span>
               </Link>
             </div>
-          )}
+          ) : null}
         </div>
       )}
     </div>
