@@ -238,6 +238,8 @@ export interface PrintPaperFormat {
   dpi: number;
   targetWidthPx: number;
   targetHeightPx: number;
+  pdfWidthPt: number;
+  pdfHeightPt: number;
 }
 
 export const PRINT_PAPERS: PrintPaperFormat[] = [
@@ -251,6 +253,8 @@ export const PRINT_PAPERS: PrintPaperFormat[] = [
     dpi: 300,
     targetWidthPx: 0,
     targetHeightPx: 0,
+    pdfWidthPt: 0,
+    pdfHeightPt: 0,
   },
   {
     id: "4x6",
@@ -262,6 +266,8 @@ export const PRINT_PAPERS: PrintPaperFormat[] = [
     dpi: 300,
     targetWidthPx: 1800,
     targetHeightPx: 1200,
+    pdfWidthPt: 432,
+    pdfHeightPt: 288,
   },
   {
     id: "5x7",
@@ -273,6 +279,8 @@ export const PRINT_PAPERS: PrintPaperFormat[] = [
     dpi: 300,
     targetWidthPx: 2100,
     targetHeightPx: 1500,
+    pdfWidthPt: 504,
+    pdfHeightPt: 360,
   },
   {
     id: "a4",
@@ -284,8 +292,99 @@ export const PRINT_PAPERS: PrintPaperFormat[] = [
     dpi: 300,
     targetWidthPx: 2480,
     targetHeightPx: 3508,
+    pdfWidthPt: 595.28,
+    pdfHeightPt: 841.89,
+  },
+  {
+    id: "letter",
+    name: "US Letter (8.5 x 11 in)",
+    widthInches: 8.5,
+    heightInches: 11.0,
+    widthMm: 215.9,
+    heightMm: 279.4,
+    dpi: 300,
+    targetWidthPx: 2550,
+    targetHeightPx: 3300,
+    pdfWidthPt: 612,
+    pdfHeightPt: 792,
   },
 ];
+
+export interface NameOverlayConfig {
+  enabled: boolean;
+  name: string;
+  date: string;
+}
+
+export const DEFAULT_NAME_OVERLAY: NameOverlayConfig = {
+  enabled: false,
+  name: "",
+  date: "",
+};
+
+/**
+ * Draws official government admit card / exam / visa Name & Date strip at bottom of photo.
+ */
+export function drawNameOverlay(
+  ctx: CanvasRenderingContext2D,
+  width: number,
+  height: number,
+  config: NameOverlayConfig
+) {
+  if (!config.enabled) return;
+  const trimmedName = (config.name || "").trim().toUpperCase();
+  const trimmedDate = (config.date || "").trim();
+  if (!trimmedName && !trimmedDate) return;
+
+  ctx.save();
+
+  // White bottom strip (~16% of height, minimum 28px)
+  const stripHeight = Math.max(28, Math.round(height * 0.16));
+  const stripY = height - stripHeight;
+
+  // Solid white background
+  ctx.fillStyle = "#FFFFFF";
+  ctx.fillRect(0, stripY, width, stripHeight);
+
+  // Top border line for crisp separation
+  ctx.strokeStyle = "rgba(0, 0, 0, 0.25)";
+  ctx.lineWidth = Math.max(1, Math.round(height / 300));
+  ctx.beginPath();
+  ctx.moveTo(0, stripY);
+  ctx.lineTo(width, stripY);
+  ctx.stroke();
+
+  // Text styling
+  ctx.fillStyle = "#000000";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+
+  const centerX = width / 2;
+
+  if (trimmedName && trimmedDate) {
+    // Two lines: Name on top, Date below
+    const nameFontSize = Math.max(10, Math.round(stripHeight * 0.36));
+    const dateFontSize = Math.max(8, Math.round(stripHeight * 0.28));
+
+    ctx.font = `bold ${nameFontSize}px Arial, sans-serif`;
+    ctx.fillText(trimmedName, centerX, stripY + stripHeight * 0.33);
+
+    ctx.font = `600 ${dateFontSize}px Arial, sans-serif`;
+    ctx.fillText(trimmedDate, centerX, stripY + stripHeight * 0.74);
+  } else if (trimmedName) {
+    // Single line: Name only
+    const nameFontSize = Math.max(11, Math.round(stripHeight * 0.48));
+    ctx.font = `bold ${nameFontSize}px Arial, sans-serif`;
+    ctx.fillText(trimmedName, centerX, stripY + stripHeight / 2);
+  } else if (trimmedDate) {
+    // Single line: Date only
+    const dateFontSize = Math.max(11, Math.round(stripHeight * 0.48));
+    ctx.font = `bold ${dateFontSize}px Arial, sans-serif`;
+    ctx.fillText(trimmedDate, centerX, stripY + stripHeight / 2);
+  }
+
+  ctx.restore();
+}
 
 export interface PhotoTransform {
   zoom: number; // 0.5 to 3.0 (default 1.0)
@@ -317,7 +416,9 @@ export const DEFAULT_TRANSFORM: PhotoTransform = {
 export interface SheetLayout {
   cols: number;
   rows: number;
-  totalPhotos: number;
+  totalCapacity: number;
+  photosToRender: number;
+  totalPhotos: number; // alias for photosToRender
   cellWidthPx: number;
   cellHeightPx: number;
   offsetX: number;
@@ -327,12 +428,15 @@ export interface SheetLayout {
 
 export function computePrintSheetLayout(
   paper: PrintPaperFormat,
-  preset: PassportPreset
+  preset: PassportPreset,
+  requestedCount?: number
 ): SheetLayout {
   if (paper.id === "single") {
     return {
       cols: 1,
       rows: 1,
+      totalCapacity: 1,
+      photosToRender: 1,
       totalPhotos: 1,
       cellWidthPx: preset.targetWidthPx,
       cellHeightPx: preset.targetHeightPx,
@@ -350,6 +454,7 @@ export function computePrintSheetLayout(
   // Maximum columns and rows that can fit
   const cols = Math.max(1, Math.floor(paperW / photoW));
   const rows = Math.max(1, Math.floor(paperH / photoH));
+  const totalCapacity = cols * rows;
 
   // Determine gap between photos if there is available space
   const remainingW = paperW - cols * photoW;
@@ -365,10 +470,16 @@ export function computePrintSheetLayout(
   const offsetX = Math.max(0, Math.round((paperW - totalGridW) / 2));
   const offsetY = Math.max(0, Math.round((paperH - totalGridH) / 2));
 
+  const photosToRender = requestedCount
+    ? Math.min(Math.max(1, requestedCount), totalCapacity)
+    : totalCapacity;
+
   return {
     cols,
     rows,
-    totalPhotos: cols * rows,
+    totalCapacity,
+    photosToRender,
+    totalPhotos: photosToRender,
     cellWidthPx: photoW,
     cellHeightPx: photoH,
     offsetX,

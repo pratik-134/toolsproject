@@ -5,6 +5,7 @@ import {
   computePrintSheetLayout,
   mmToPixels,
   inchesToPixels,
+  drawNameOverlay,
 } from "./logic";
 
 export function runTests(): boolean {
@@ -56,7 +57,46 @@ export function runTests(): boolean {
   assert(singleSheet.totalPhotos === 1, "Single format must output exactly 1 photo");
   assert(singleSheet.cellWidthPx === 600, "Single format cell width matches preset");
 
-  // 4. Default Transform sanity
+  // 4. US Letter Paper & Requested Photo Count Calculation
+  const paperLetter = PRINT_PAPERS.find((p) => p.id === "letter")!;
+  assert(Boolean(paperLetter), "US Letter paper preset must exist");
+  assert(paperLetter.pdfWidthPt === 612 && paperLetter.pdfHeightPt === 792, "US Letter 612x792 pt");
+
+  const letterFullSheet = computePrintSheetLayout(paperLetter, inPreset!);
+  assert(letterFullSheet.totalCapacity >= 15, `Letter paper should hold >= 15 photos (got ${letterFullSheet.totalCapacity})`);
+  assert(letterFullSheet.photosToRender === letterFullSheet.totalCapacity, "Full sheet renders totalCapacity");
+
+  const letter4Photos = computePrintSheetLayout(paperLetter, inPreset!, 4);
+  assert(letter4Photos.photosToRender === 4, `Requested 4 photos must return photosToRender=4 (got ${letter4Photos.photosToRender})`);
+  assert(letter4Photos.totalCapacity === letterFullSheet.totalCapacity, "Total capacity remains constant");
+
+  // 5. Name and Date Overlay Functionality
+  const mockCtx = {
+    save: () => {},
+    restore: () => {},
+    fillRect: () => {},
+    strokeRect: () => {},
+    beginPath: () => {},
+    moveTo: () => {},
+    lineTo: () => {},
+    stroke: () => {},
+    fillText: () => {},
+    fillStyle: "",
+    strokeStyle: "",
+    lineWidth: 1,
+    font: "",
+    textAlign: "center",
+    textBaseline: "middle",
+  } as unknown as CanvasRenderingContext2D;
+
+  // Should not throw under any scenario
+  drawNameOverlay(mockCtx, 413, 531, { enabled: false, name: "JOHN DOE", date: "15/10/2026" });
+  drawNameOverlay(mockCtx, 413, 531, { enabled: true, name: "JOHN DOE", date: "15/10/2026" });
+  drawNameOverlay(mockCtx, 413, 531, { enabled: true, name: "JOHN DOE", date: "" });
+  drawNameOverlay(mockCtx, 413, 531, { enabled: true, name: "", date: "15/10/2026" });
+  drawNameOverlay(mockCtx, 413, 531, { enabled: true, name: "", date: "" });
+
+  // 6. Default Transform sanity
   assert(DEFAULT_TRANSFORM.zoom === 1.0, "Default zoom is 1.0");
   assert(DEFAULT_TRANSFORM.rotation === 0, "Default rotation is 0");
   assert(DEFAULT_TRANSFORM.flipH === false, "Default flip is false");
