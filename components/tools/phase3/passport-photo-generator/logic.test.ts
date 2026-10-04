@@ -96,7 +96,13 @@ export function runTests(): boolean {
   drawNameOverlay(mockCtx, 413, 531, { enabled: true, name: "", date: "15/10/2026" });
   drawNameOverlay(mockCtx, 413, 531, { enabled: true, name: "", date: "" });
 
-  // 6. Default Transform sanity
+  // 6. Custom Spacing Calculation
+  const zeroSpacingSheet = computePrintSheetLayout(paper4x6, inPreset!, undefined, 0);
+  assert(zeroSpacingSheet.gapPx === 0, "Zero spacing sets gapPx to 0");
+  const customSpacingSheet = computePrintSheetLayout(paper4x6, inPreset!, undefined, 2);
+  assert(customSpacingSheet.gapPx === 24, `2mm spacing at 300DPI sets gapPx to 24 (got ${customSpacingSheet.gapPx})`);
+
+  // 7. Default Transform sanity
   assert(DEFAULT_TRANSFORM.zoom === 1.0, "Default zoom is 1.0");
   assert(DEFAULT_TRANSFORM.rotation === 0, "Default rotation is 0");
   assert(DEFAULT_TRANSFORM.flipH === false, "Default flip is false");

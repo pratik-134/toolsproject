@@ -42,37 +42,10 @@ export default function ImageWatermarkerTool() {
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // Generate scenic canvas sample image
+  // Load original sample architecture photograph
   const loadSampleDocument = useCallback(() => {
-    const canvas = document.createElement("canvas");
-    canvas.width = 800;
-    canvas.height = 550;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    // Document background
-    ctx.fillStyle = "#f8fafc";
-    ctx.fillRect(0, 0, 800, 550);
-
-    // Decorative document layout
-    ctx.fillStyle = "#e2e8f0";
-    ctx.fillRect(50, 40, 300, 30);
-    ctx.fillRect(50, 90, 700, 15);
-    ctx.fillRect(50, 120, 680, 15);
-    ctx.fillRect(50, 150, 640, 15);
-    ctx.fillRect(50, 180, 700, 15);
-
-    // Document card boxes
-    ctx.fillStyle = "#cbd5e1";
-    ctx.fillRect(50, 230, 330, 180);
-    ctx.fillRect(420, 230, 330, 180);
-
-    // Document footer
-    ctx.fillStyle = "#94a3b8";
-    ctx.fillRect(50, 470, 200, 20);
-
-    setImageSrc(canvas.toDataURL("image/png"));
-    setImageName("financial-statement");
+    setImageSrc("/images/samples/architecture-sample.jpg");
+    setImageName("modern-architecture-commercial");
     setOptions({ ...DEFAULT_WATERMARK_OPTIONS });
   }, []);
 

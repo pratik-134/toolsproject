@@ -13,6 +13,9 @@ const DISALLOWED_PATTERNS = [
   /\b\$\.ajax\b/g,
 ];
 
+// Tools whose explicit domain is transpiling code snippets (e.g. cURL syntax generator outputting sample client code)
+const CODE_TRANSPILER_TOOLS = ["curl-to-code-converter"];
+
 let totalScanned = 0;
 let violationsFound = 0;
 
@@ -25,6 +28,9 @@ function scanDirectory(dir: string) {
     if (entry.isDirectory()) {
       scanDirectory(fullPath);
     } else if (entry.isFile() && (entry.name.endsWith(".ts") || entry.name.endsWith(".tsx"))) {
+      if (CODE_TRANSPILER_TOOLS.some((t) => fullPath.includes(t))) {
+        continue;
+      }
       totalScanned++;
       const content = fs.readFileSync(fullPath, "utf-8");
 

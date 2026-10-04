@@ -22,33 +22,12 @@ export default function MemeCaptionGeneratorTool() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // Initialize with scenic sample canvas
+  // Initialize with original sample meme photo
   useEffect(() => {
-    const canvas = document.createElement("canvas");
-    canvas.width = 800;
-    canvas.height = 600;
-    const ctx = canvas.getContext("2d");
-    if (ctx) {
-      // Linear gradient landscape
-      const grad = ctx.createLinearGradient(0, 0, 800, 600);
-      grad.addColorStop(0, "#1e1b4b");
-      grad.addColorStop(0.5, "#4338ca");
-      grad.addColorStop(1, "#312e81");
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 800, 600);
-
-      // Decorative stars
-      ctx.fillStyle = "#ffffff";
-      for (let i = 0; i < 40; i++) {
-        const x = (i * 97) % 800;
-        const y = (i * 73) % 400;
-        ctx.fillRect(x, y, 3, 3);
-      }
-
-      const img = new Image();
-      img.onload = () => setImageElement(img);
-      img.src = canvas.toDataURL();
-    }
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => setImageElement(img);
+    img.src = "/images/samples/meme-cat-sample.jpg";
   }, []);
 
   const renderCanvas = useCallback(() => {

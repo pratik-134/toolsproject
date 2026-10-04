@@ -3,6 +3,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   PrintOptions,
   TEMPLATES,
   validateHtmlString,
@@ -131,17 +138,18 @@ export default function HtmlToPdfTool() {
             <label className="text-xs font-semibold text-muted-foreground flex items-center gap-1.5 mb-1.5">
               <Sparkles className="w-3.5 h-3.5 text-primary" /> Preset Templates
             </label>
-            <select
-              value={selectedTemplate}
-              onChange={(e) => handleTemplateChange(e.target.value)}
-              className="w-full text-sm bg-background border rounded-lg px-3 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
-            >
-              {Object.entries(TEMPLATES).map(([key, t]) => (
-                <option key={key} value={key}>
-                  {t.name}
-                </option>
-              ))}
-            </select>
+            <Select value={selectedTemplate} onValueChange={handleTemplateChange}>
+              <SelectTrigger className="w-full h-10 text-xs bg-background border rounded-lg px-3 py-2 text-foreground">
+                <SelectValue placeholder="Select Template" />
+              </SelectTrigger>
+              <SelectContent>
+                {Object.entries(TEMPLATES).map(([key, t]) => (
+                  <SelectItem key={key} value={key}>
+                    {t.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Page Size */}

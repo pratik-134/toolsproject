@@ -162,7 +162,7 @@ export default function StoryReelsMakerTool() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-4 py-3 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 rounded-xl text-xs text-emerald-800 dark:text-emerald-300">
         <div className="flex items-center gap-2 min-w-0">
           <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-          <span className="leading-relaxed">Story & Reels Canvas Maker — 100% In-Browser 9:16 Canvas. Files never leave your device.</span>
+          <span className="leading-relaxed">Story & Reels Canvas Maker — 100% In-Browser 9:16 Visual Studio.</span>
         </div>
         <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
           <Button

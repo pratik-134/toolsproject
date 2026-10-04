@@ -1,6 +1,13 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { DollarSign, PieChart, ShieldCheck, ArrowRight, Percent, Building, Wallet, Calendar } from "lucide-react";
 
 // 2026 IRS Federal Tax Brackets for Single Filers
@@ -145,17 +152,18 @@ export default function SalaryTaxCalculator() {
             <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
               State Residence
             </label>
-            <select
-              value={statePreset}
-              onChange={(e) => setStatePreset(e.target.value)}
-              className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl text-xs sm:text-sm font-medium text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500"
-            >
-              {Object.entries(STATE_TAX_PRESETS).map(([key, item]) => (
-                <option key={key} value={key}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
+            <Select value={statePreset} onValueChange={setStatePreset}>
+              <SelectTrigger className="w-full h-10 px-3 py-2 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl text-xs sm:text-sm font-medium text-slate-900 dark:text-slate-100">
+                <SelectValue placeholder="Select State Residence" />
+              </SelectTrigger>
+              <SelectContent>
+                {Object.entries(STATE_TAX_PRESETS).map(([key, item]) => (
+                  <SelectItem key={key} value={key}>
+                    {item.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           {/* 401(k) Pre-Tax */}

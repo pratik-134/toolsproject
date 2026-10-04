@@ -3,6 +3,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   InvoiceData,
   InvoiceItem,
   DEFAULT_INVOICE,
@@ -297,25 +304,28 @@ export default function InvoiceGeneratorTool() {
         </div>
 
         <div className="flex items-center gap-2">
-          <label className="text-xs text-slate-500 font-medium">Currency:</label>
-          <select
+          <label className="text-xs text-slate-500 font-medium whitespace-nowrap">Currency:</label>
+          <Select
             value={data.currency}
-            onChange={(e) => {
-              const cur = e.target.value;
+            onValueChange={(cur) => {
               setData((prev) => ({
                 ...prev,
                 currency: cur,
                 currencySymbol: CURRENCY_SYMBOLS[cur] || "$",
               }));
             }}
-            className="text-xs px-2.5 py-1 rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900"
           >
-            {Object.keys(CURRENCY_SYMBOLS).map((c) => (
-              <option key={c} value={c}>
-                {c} ({CURRENCY_SYMBOLS[c]})
-              </option>
-            ))}
-          </select>
+            <SelectTrigger className="h-8 px-2.5 text-xs rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 w-32">
+              <SelectValue placeholder="Currency" />
+            </SelectTrigger>
+            <SelectContent>
+              {Object.keys(CURRENCY_SYMBOLS).map((c) => (
+                <SelectItem key={c} value={c}>
+                  {c} ({CURRENCY_SYMBOLS[c]})
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
 

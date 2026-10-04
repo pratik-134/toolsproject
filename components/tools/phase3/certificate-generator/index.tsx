@@ -3,6 +3,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   CertificateData,
   DEFAULT_CERTIFICATE,
   CERTIFICATE_TEMPLATES,
@@ -117,23 +124,27 @@ export default function CertificateGeneratorTool() {
 
         {/* Template selector */}
         <div className="flex items-center gap-2">
-          <label className="text-xs text-slate-500 font-medium">Style:</label>
-          <select
+          <label className="text-xs text-slate-500 font-medium whitespace-nowrap">Style:</label>
+          <Select
             value={data.template}
-            onChange={(e) =>
+            onValueChange={(val) =>
               setData((prev) => ({
                 ...prev,
-                template: e.target.value as CertificateData["template"],
+                template: val as CertificateData["template"],
               }))
             }
-            className="text-xs px-2.5 py-1 rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-medium"
           >
-            {CERTIFICATE_TEMPLATES.map((tmpl) => (
-              <option key={tmpl.id} value={tmpl.id}>
-                {tmpl.name}
-              </option>
-            ))}
-          </select>
+            <SelectTrigger className="h-8 px-2.5 text-xs rounded-lg border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 w-36 font-medium">
+              <SelectValue placeholder="Style" />
+            </SelectTrigger>
+            <SelectContent>
+              {CERTIFICATE_TEMPLATES.map((tmpl) => (
+                <SelectItem key={tmpl.id} value={tmpl.id}>
+                  {tmpl.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
 

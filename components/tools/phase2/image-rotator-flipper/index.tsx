@@ -40,39 +40,10 @@ export default function ImageRotatorFlipperTool() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const imageElementRef = useRef<HTMLImageElement | null>(null);
 
-  // Load sample demo image
+  // Load original sample lighthouse image
   const loadSampleImage = useCallback(() => {
-    const canvas = document.createElement("canvas");
-    canvas.width = 600;
-    canvas.height = 400;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    // Background gradient
-    const grad = ctx.createLinearGradient(0, 0, 600, 400);
-    grad.addColorStop(0, "#0284c7");
-    grad.addColorStop(1, "#6366f1");
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 600, 400);
-
-    // Decorative shapes
-    ctx.fillStyle = "rgba(255, 255, 255, 0.15)";
-    ctx.beginPath();
-    ctx.arc(450, 100, 150, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Text & arrow to see orientation clearly
-    ctx.fillStyle = "#ffffff";
-    ctx.font = "bold 32px sans-serif";
-    ctx.fillText("CLEARTRIX ROTATE & FLIP", 50, 180);
-
-    ctx.font = "20px sans-serif";
-    ctx.fillStyle = "#e0e7ff";
-    ctx.fillText("Top-Left Anchor — Arrow Points Right ->", 50, 230);
-
-    setImageSrc(canvas.toDataURL("image/png"));
-    setImageName("sample-orientation.png");
-    setOrigSize({ width: 600, height: 400 });
+    setImageSrc("/images/samples/lighthouse-sample.jpg");
+    setImageName("coastal-lighthouse.jpg");
     setTransform({ rotation: 0, flipH: false, flipV: false });
   }, []);
 

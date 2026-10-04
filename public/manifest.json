@@ -1,11 +1,15 @@
 {
   "name": "ClearTrix — 100% In-Browser Privacy Tools & ATS Resume Builder",
   "short_name": "ClearTrix",
-  "description": "168+ free, private in-browser document, developer, media, and calculator tools with zero server file uploads.",
+  "description": "169+ free, private in-browser document, developer, media, and calculator tools with zero server file uploads.",
   "start_url": "/",
   "scope": "/",
+  "id": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "orientation": "any",
+  "lang": "en-US",
+  "dir": "ltr",
   "categories": ["utilities", "productivity", "business", "developer"],
   "background_color": "#0F172A",
   "theme_color": "#2563EB",
@@ -33,7 +37,7 @@
     {
       "name": "All Tools Hub",
       "short_name": "Tools",
-      "description": "Browse 168+ free client-side privacy tools.",
+      "description": "Browse 169+ free client-side privacy tools.",
       "url": "/tools",
       "icons": [{ "src": "/icon.png", "sizes": "512x512" }]
     },
@@ -42,6 +46,13 @@
       "short_name": "PDF Editor",
       "description": "Edit, merge, compress, sign, and convert PDFs in browser.",
       "url": "/tools/document-pdf/pdf-editor",
+      "icons": [{ "src": "/icon.png", "sizes": "512x512" }]
+    },
+    {
+      "name": "My Resumes Dashboard",
+      "short_name": "Dashboard",
+      "description": "Access saved local resumes and backups.",
+      "url": "/dashboard",
       "icons": [{ "src": "/icon.png", "sizes": "512x512" }]
     }
   ]

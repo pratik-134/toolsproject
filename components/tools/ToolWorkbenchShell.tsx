@@ -7,7 +7,6 @@ import {
   AlertCircle,
   Download,
   RotateCcw,
-  ShieldCheck,
   Loader2,
   FileText,
   X,
@@ -146,17 +145,6 @@ export const ToolWorkbenchShell: React.FC<ToolWorkbenchShellProps> = ({
 
   return (
     <div className="w-full space-y-6 font-body">
-      {/* Privacy Guarantee Pill */}
-      <div className="flex items-center justify-between gap-2 rounded-lg border border-blue-200 dark:border-blue-900/60 bg-blue-50/80 dark:bg-blue-950/40 px-3.5 py-2 text-xs text-blue-900 dark:text-blue-200 shadow-2xs">
-        <div className="flex items-center gap-2 font-semibold">
-          <ShieldCheck className="h-4 w-4 shrink-0 text-blue-600 dark:text-blue-400" />
-          <span>Files never leave your browser • 100% Client-Side Privacy Guaranteed</span>
-        </div>
-        <span className="hidden sm:inline-block text-[11px] font-mono text-blue-700 dark:text-blue-300 bg-white/80 dark:bg-slate-900/80 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-900/60">
-          Zero Uploads
-        </span>
-      </div>
-
       {title && (
         <div className="space-y-1">
           <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">{title}</h2>

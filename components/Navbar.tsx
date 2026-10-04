@@ -19,6 +19,8 @@ import {
   ChevronDown,
   ChevronRight,
   Search,
+  WifiOff,
+  Download,
 } from "lucide-react";
 import { TOOLS, getAllTools, getToolUrl } from "@/lib/registry/tools";
 import { CATEGORY_LIST, getCategoryById } from "@/lib/registry/categories";
@@ -27,6 +29,7 @@ import { getToolIcon, CATEGORY_ICON_MAP } from "@/lib/tool-icons";
 import { CommandPalette } from "@/components/tools/CommandPalette";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { NavbarMegaMenu } from "@/components/NavbarMegaMenu";
+import { usePwa } from "@/components/pwa/PwaProvider";
 
 const ANNOUNCEMENT_STORAGE_KEY = "ct_announcement_dismissed_v1";
 
@@ -40,6 +43,7 @@ export const Navbar: React.FC = () => {
   const [isMobileToolsExpanded, setIsMobileToolsExpanded] = useState(false);
   const [mobileSelectedCategory, setMobileSelectedCategory] = useState<string>("document-pdf");
   const [mobileSearchQuery, setMobileSearchQuery] = useState<string>("");
+  const { isOnline, isInstallable, isInstalled, installApp } = usePwa();
 
   const menuRef = useRef<HTMLDivElement>(null);
   const megaMenuContainerRef = useRef<HTMLDivElement>(null);
@@ -298,6 +302,31 @@ export const Navbar: React.FC = () => {
           <Search className="h-4 w-4" />
         </button>
 
+        {/* Offline Mode Indicator */}
+        {!isOnline && (
+          <span
+            title="Offline mode active: In-browser tools continue running."
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl text-xs font-semibold bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 shrink-0"
+          >
+            <WifiOff className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">Offline</span>
+          </span>
+        )}
+
+        {/* PWA Install Button */}
+        {isInstallable && !isInstalled && (
+          <button
+            type="button"
+            onClick={installApp}
+            title="Install Cleartrix app for offline use"
+            aria-label="Install Cleartrix app"
+            className="hidden md:inline-flex items-center gap-1.5 h-9 px-3 rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/70 dark:bg-blue-950/60 hover:bg-blue-100 dark:hover:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-semibold transition-all shrink-0"
+          >
+            <Download className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
+            <span>Install App</span>
+          </button>
+        )}
+
         {/* Header Theme Toggle (Dark/Light Switch) */}
         <ThemeToggle />
 
@@ -378,7 +407,7 @@ export const Navbar: React.FC = () => {
                   type="text"
                   value={mobileSearchQuery}
                   onChange={(e) => setMobileSearchQuery(e.target.value)}
-                  placeholder="Search 168+ tools..."
+                  placeholder="Search 169+ tools..."
                   className="w-full pl-8 pr-8 py-1.5 text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:focus:ring-cyan-400"
                 />
                 {mobileSearchQuery && (

@@ -5,6 +5,7 @@ import { BRAND, getFooterCopyright } from "@/lib/brand";
 import { Lock, ShieldCheck, ArrowRight, Sparkles } from "lucide-react";
 import { CATEGORY_COLORS } from "@/lib/design-tokens";
 import { getAllTools } from "@/lib/registry/tools";
+import { InstallButton } from "@/components/pwa/InstallButton";
 
 export const Footer: React.FC = () => {
   const toolCount = getAllTools().length;
@@ -241,6 +242,7 @@ export const Footer: React.FC = () => {
             {getFooterCopyright(toolCount)}
           </p>
           <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-6 gap-y-2">
+            <InstallButton />
             <Link href="/tools" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-semibold text-blue-600 dark:text-blue-400">
               All {toolCount} Tools
             </Link>

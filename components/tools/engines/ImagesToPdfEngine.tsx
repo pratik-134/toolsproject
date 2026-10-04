@@ -5,6 +5,13 @@ import { ToolWorkbenchShell } from "@/components/tools/ToolWorkbenchShell";
 import { ConverterPreset } from "@/lib/registry/converter-presets";
 import { PDFDocument, PageSizes } from "pdf-lib";
 import { Sliders, ArrowUp, ArrowDown } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export interface ImagesToPdfEngineProps {
   preset: ConverterPreset;
@@ -219,41 +226,47 @@ export function ImagesToPdfEngine({ preset }: ImagesToPdfEngineProps) {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
                   <label className="font-semibold text-slate-700 block mb-1">Page Size</label>
-                  <select
-                    value={pageSize}
-                    onChange={(e) => setPageSize(e.target.value as any)}
-                    className="w-full p-2 rounded-lg border border-slate-300 bg-white font-medium"
-                  >
-                    <option value="a4">A4 Standard</option>
-                    <option value="letter">US Letter</option>
-                    <option value="fit">Fit to Image Size</option>
-                  </select>
+                  <Select value={pageSize} onValueChange={(val) => setPageSize(val as any)}>
+                    <SelectTrigger className="w-full h-9 rounded-lg border border-slate-300 bg-white font-medium text-xs">
+                      <SelectValue placeholder="Page Size" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="a4">A4 Standard</SelectItem>
+                      <SelectItem value="letter">US Letter</SelectItem>
+                      <SelectItem value="fit">Fit to Image Size</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div>
                   <label className="font-semibold text-slate-700 block mb-1">Orientation</label>
-                  <select
+                  <Select
                     value={orientation}
-                    onChange={(e) => setOrientation(e.target.value as any)}
+                    onValueChange={(val) => setOrientation(val as any)}
                     disabled={pageSize === "fit"}
-                    className="w-full p-2 rounded-lg border border-slate-300 bg-white font-medium disabled:opacity-50"
                   >
-                    <option value="portrait">Portrait (Vertical)</option>
-                    <option value="landscape">Landscape (Horizontal)</option>
-                  </select>
+                    <SelectTrigger className="w-full h-9 rounded-lg border border-slate-300 bg-white font-medium text-xs disabled:opacity-50">
+                      <SelectValue placeholder="Orientation" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="portrait">Portrait (Vertical)</SelectItem>
+                      <SelectItem value="landscape">Landscape (Horizontal)</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div>
                   <label className="font-semibold text-slate-700 block mb-1">Page Margin</label>
-                  <select
-                    value={margin}
-                    onChange={(e) => setMargin(parseInt(e.target.value))}
-                    className="w-full p-2 rounded-lg border border-slate-300 bg-white font-medium"
-                  >
-                    <option value={0}>No Margin (Full Bleed)</option>
-                    <option value={10}>Small Margin (10pt)</option>
-                    <option value={25}>Medium Margin (25pt)</option>
-                  </select>
+                  <Select value={String(margin)} onValueChange={(val) => setMargin(parseInt(val, 10))}>
+                    <SelectTrigger className="w-full h-9 rounded-lg border border-slate-300 bg-white font-medium text-xs">
+                      <SelectValue placeholder="Page Margin" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="0">No Margin (Full Bleed)</SelectItem>
+                      <SelectItem value="10">Small Margin (10pt)</SelectItem>
+                      <SelectItem value="25">Medium Margin (25pt)</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
             </div>

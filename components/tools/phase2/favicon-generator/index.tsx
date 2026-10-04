@@ -37,35 +37,9 @@ export default function FaviconGeneratorTool() {
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // Load sample geometric icon
+  // Load original sample geometric emblem icon
   const loadSampleIcon = useCallback(() => {
-    const canvas = document.createElement("canvas");
-    canvas.width = 512;
-    canvas.height = 512;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    // Draw modern gradient icon
-    const grad = ctx.createLinearGradient(0, 0, 512, 512);
-    grad.addColorStop(0, "#4f46e5");
-    grad.addColorStop(1, "#06b6d4");
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.roundRect(32, 32, 448, 448, 96);
-    ctx.fill();
-
-    // Draw emblem
-    ctx.fillStyle = "#ffffff";
-    ctx.beginPath();
-    ctx.arc(256, 256, 120, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.fillStyle = "#4f46e5";
-    ctx.beginPath();
-    ctx.arc(256, 256, 70, 0, Math.PI * 2);
-    ctx.fill();
-
-    setImageSrc(canvas.toDataURL("image/png"));
+    setImageSrc("/images/samples/app-icon-sample.jpg");
   }, []);
 
   // Initialize with sample icon on first mount

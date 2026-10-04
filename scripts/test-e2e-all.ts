@@ -38,7 +38,7 @@ async function runE2eTestSuite() {
   // ==========================================================================
   console.log("▶ STAGE 1: Testing Route Integrity & Metadata Generation...");
   const allTools = getAllTools();
-  assert(allTools.length === 168, `Expected 168 tools, found ${allTools.length}`);
+  assert(allTools.length === 169, `Expected 169 tools, found ${allTools.length}`);
 
   let metadataCount = 0;
   for (const tool of allTools) {
@@ -69,7 +69,7 @@ async function runE2eTestSuite() {
 
     metadataCount++;
   }
-  console.log(`✅ Stage 1.1: All ${metadataCount}/168 tool routes, SEO metadata, and FAQs verified!`);
+  console.log(`✅ Stage 1.1: All ${metadataCount}/169 tool routes, SEO metadata, and FAQs verified!`);
 
   // Verify all category hubs
   const categoryList = Object.values(CATEGORIES);

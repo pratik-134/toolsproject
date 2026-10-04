@@ -442,7 +442,8 @@ export interface SheetLayout {
 export function computePrintSheetLayout(
   paper: PrintPaperFormat,
   preset: PassportPreset,
-  requestedCount?: number
+  requestedCount?: number,
+  customSpacingMm?: number
 ): SheetLayout {
   if (paper.id === "single") {
     return {
@@ -464,20 +465,34 @@ export function computePrintSheetLayout(
   const photoW = preset.targetWidthPx;
   const photoH = preset.targetHeightPx;
 
-  // Maximum columns and rows that can fit
-  const cols = Math.max(1, Math.floor(paperW / photoW));
-  const rows = Math.max(1, Math.floor(paperH / photoH));
+  let cols: number;
+  let rows: number;
+  let gapPx: number;
+
+  if (customSpacingMm !== undefined && customSpacingMm >= 0) {
+    const desiredGapPx = Math.round((customSpacingMm / 25.4) * 300);
+    gapPx = desiredGapPx;
+    if (gapPx === 0) {
+      cols = Math.max(1, Math.floor(paperW / photoW));
+      rows = Math.max(1, Math.floor(paperH / photoH));
+    } else {
+      cols = Math.max(1, Math.floor((paperW + gapPx) / (photoW + gapPx)));
+      rows = Math.max(1, Math.floor((paperH + gapPx) / (photoH + gapPx)));
+    }
+  } else {
+    // Default auto spacing (maximizes grid capacity while maintaining equal margins)
+    cols = Math.max(1, Math.floor(paperW / photoW));
+    rows = Math.max(1, Math.floor(paperH / photoH));
+    const remainingW = paperW - cols * photoW;
+    const remainingH = paperH - rows * photoH;
+    gapPx = Math.min(
+      cols > 1 ? Math.floor(remainingW / (cols - 1)) : 0,
+      rows > 1 ? Math.floor(remainingH / (rows - 1)) : 0,
+      16
+    );
+  }
+
   const totalCapacity = cols * rows;
-
-  // Determine gap between photos if there is available space
-  const remainingW = paperW - cols * photoW;
-  const remainingH = paperH - rows * photoH;
-  const gapPx = Math.min(
-    cols > 1 ? Math.floor(remainingW / (cols - 1)) : 0,
-    rows > 1 ? Math.floor(remainingH / (rows - 1)) : 0,
-    16
-  );
-
   const totalGridW = cols * photoW + (cols - 1) * Math.max(0, gapPx);
   const totalGridH = rows * photoH + (rows - 1) * Math.max(0, gapPx);
   const offsetX = Math.max(0, Math.round((paperW - totalGridW) / 2));

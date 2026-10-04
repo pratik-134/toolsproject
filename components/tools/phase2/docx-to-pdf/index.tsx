@@ -3,6 +3,13 @@
 import React, { useState, useMemo, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   extractStructuredBlocks,
   parseDocxBuffer,
   convertBlocksToPdf,
@@ -239,28 +246,30 @@ export default function DocxToPdfTool() {
             {/* Typography Sizing */}
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
-                <label className="text-xs font-medium text-muted-foreground">Body Font Size</label>
-                <select
-                  value={fontSize}
-                  onChange={(e) => setFontSize(Number(e.target.value))}
-                  className="w-full px-3 py-2 text-xs bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary"
-                >
-                  <option value={10}>10 pt (Compact)</option>
-                  <option value={11}>11 pt (Standard Office)</option>
-                  <option value={12}>12 pt (Large / Executive)</option>
-                </select>
+                <label className="text-xs font-medium text-muted-foreground whitespace-nowrap">Body Font Size</label>
+                <Select value={String(fontSize)} onValueChange={(val) => setFontSize(Number(val))}>
+                  <SelectTrigger className="w-full h-9 px-3 py-2 text-xs bg-background border border-border rounded-lg">
+                    <SelectValue placeholder="Font Size" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="10">10 pt (Compact)</SelectItem>
+                    <SelectItem value="11">11 pt (Standard Office)</SelectItem>
+                    <SelectItem value="12">12 pt (Large / Executive)</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <div className="space-y-1.5">
-                <label className="text-xs font-medium text-muted-foreground">Line Spacing</label>
-                <select
-                  value={lineHeight}
-                  onChange={(e) => setLineHeight(Number(e.target.value))}
-                  className="w-full px-3 py-2 text-xs bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary"
-                >
-                  <option value={1.2}>1.2× (Tight)</option>
-                  <option value={1.4}>1.4× (Balanced)</option>
-                  <option value={1.6}>1.6× (Spacious)</option>
-                </select>
+                <label className="text-xs font-medium text-muted-foreground whitespace-nowrap">Line Spacing</label>
+                <Select value={String(lineHeight)} onValueChange={(val) => setLineHeight(Number(val))}>
+                  <SelectTrigger className="w-full h-9 px-3 py-2 text-xs bg-background border border-border rounded-lg">
+                    <SelectValue placeholder="Line Spacing" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="1.2">1.2× (Tight)</SelectItem>
+                    <SelectItem value="1.4">1.4× (Balanced)</SelectItem>
+                    <SelectItem value="1.6">1.6× (Spacious)</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 

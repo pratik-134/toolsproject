@@ -3,6 +3,13 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   MarkdownPdfOptions,
   compileMarkdownToPdf,
 } from "./logic";
@@ -230,28 +237,30 @@ export default function MarkdownToPdfTool() {
             {/* Page Size & Margins */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700">Page Size</label>
-                <select
-                  value={pageSize}
-                  onChange={(e) => setPageSize(e.target.value as MarkdownPdfOptions["pageSize"])}
-                  className="w-full px-3 py-1.5 text-xs font-semibold border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="a4">Standard A4</option>
-                  <option value="letter">US Letter</option>
-                </select>
+                <label className="text-xs font-bold text-slate-700 whitespace-nowrap">Page Size</label>
+                <Select value={pageSize} onValueChange={(val) => setPageSize(val as MarkdownPdfOptions["pageSize"])}>
+                  <SelectTrigger className="w-full h-9 px-3 py-1.5 text-xs font-semibold border border-slate-300 rounded-lg bg-white">
+                    <SelectValue placeholder="Page Size" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="a4">Standard A4</SelectItem>
+                    <SelectItem value="letter">US Letter</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700">Margins</label>
-                <select
-                  value={margin}
-                  onChange={(e) => setMargin(e.target.value as MarkdownPdfOptions["margin"])}
-                  className="w-full px-3 py-1.5 text-xs font-semibold border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="normal">Normal (0.75 in)</option>
-                  <option value="narrow">Narrow (0.5 in)</option>
-                  <option value="wide">Wide (1.0 in)</option>
-                </select>
+                <label className="text-xs font-bold text-slate-700 whitespace-nowrap">Margins</label>
+                <Select value={margin} onValueChange={(val) => setMargin(val as MarkdownPdfOptions["margin"])}>
+                  <SelectTrigger className="w-full h-9 px-3 py-1.5 text-xs font-semibold border border-slate-300 rounded-lg bg-white">
+                    <SelectValue placeholder="Margins" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="normal">Normal (0.75 in)</SelectItem>
+                    <SelectItem value="narrow">Narrow (0.5 in)</SelectItem>
+                    <SelectItem value="wide">Wide (1.0 in)</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 

@@ -11,6 +11,7 @@ import { Footer } from "@/components/Footer";
 import { ToolsDirectoryClient } from "@/components/tools/ToolsDirectoryClient";
 import { ToolsShelf } from "@/components/tools/ToolsShelf";
 import { ArrowRight, Sparkles, Wrench } from "lucide-react";
+import { InstallButton } from "@/components/pwa/InstallButton";
 import { constructToolMetadata } from "@/lib/seo/metadata";
 import { generateToolsHubJsonLd } from "@/lib/seo/jsonld";
 
@@ -44,9 +45,12 @@ export default function ToolsHubPage() {
         {/* Hub Header */}
         <section className="bg-gradient-to-b from-blue-50/50 via-slate-50/40 to-[#F8FAFC] dark:from-slate-900/60 dark:via-slate-950/70 dark:to-slate-950 py-12 sm:py-16 border-b border-slate-200/60 dark:border-slate-800/60">
           <div className="max-w-container mx-auto px-4 sm:px-6 text-center space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 px-4 py-1.5 text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 shadow-sm">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>{allTools.length} Tools · 100% In-Browser · Zero Uploads</span>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 px-4 py-1.5 text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 shadow-sm">
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>{allTools.length} Tools · 100% In-Browser · Offline Capable</span>
+              </div>
+              <InstallButton />
             </div>
 
             <h1 className="font-headings text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">

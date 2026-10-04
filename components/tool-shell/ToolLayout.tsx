@@ -14,7 +14,6 @@ import { RelatedToolsDrawer } from "@/components/tools/RelatedToolsDrawer";
 import { BRAND } from "@/lib/brand";
 import { useToolsPreferenceStore } from "@/lib/store/use-tools-preference-store";
 import {
-  ShieldCheck,
   ChevronRight,
   HelpCircle,
   ChevronDown,
@@ -23,6 +22,7 @@ import {
   Layers,
   Star,
   Sparkles,
+  ShieldCheck,
   FileText,
   Image as ImageIcon,
   Lock,
@@ -122,8 +122,8 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
             </nav>
 
             {/* Title row */}
-            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-              <div className="flex items-center gap-3">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex items-center gap-3 min-w-0">
                 {/* Category accent bar */}
                 <div
                   className="hidden sm:block w-1 self-stretch rounded-full shrink-0"
@@ -133,47 +133,45 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
                 <h1 className="text-[22px] xs:text-[26px] sm:text-[34px] leading-[1.2] font-bold text-[#0F172A] dark:text-slate-100 tracking-[-0.02em]">
                   {tool.seo.h1 || tool.name}
                 </h1>
-                <button
-                  type="button"
-                  onClick={() => {
-                    toggleFavorite(tool.slug);
-                    setIsFav(!isFav);
-                  }}
-                  className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-400 hover:text-amber-400 shrink-0"
-                  title={isFav ? "Remove from Pinned Favorites" : "Pin to Favorites"}
-                >
-                  <Star className={`w-5 h-5 ${isFav ? "fill-amber-400 text-amber-400" : ""}`} />
-                </button>
               </div>
 
-              {/* Privacy badge & Trust line */}
-              <div
-                className="inline-flex items-center gap-1.5 rounded-[6px]
-                  border border-[#BFDBFE] dark:border-blue-900/60 bg-[#EFF6FF] dark:bg-blue-950/40 text-[#1D4ED8] dark:text-blue-300 px-2.5 py-1 text-[11px] font-semibold tracking-[0.05em] uppercase shrink-0
-                  self-start sm:self-auto max-w-full"
+              {/* Save tool icon on top right corner of banner */}
+              <button
+                type="button"
+                onClick={() => {
+                  toggleFavorite(tool.slug);
+                  setIsFav(!isFav);
+                }}
+                className="p-1.5 rounded-lg text-slate-400 hover:text-amber-400 hover:bg-slate-100/80 dark:hover:bg-slate-800/60 transition-colors shrink-0"
+                title={isFav ? "Remove from Pinned Favorites" : "Save to Favorites"}
+                aria-label={isFav ? "Remove from Pinned Favorites" : "Save to Favorites"}
               >
-                <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-[#1D4ED8] dark:text-blue-300" strokeWidth={1.75} aria-hidden="true" />
-                <span className="hidden xs:inline">Files never leave your browser • 100% Client-Side</span>
-                <span className="xs:hidden">100% Client-Side • In-Browser</span>
-              </div>
+                <Star className={`w-6 h-6 transition-colors ${isFav ? "fill-amber-400 text-amber-400" : ""}`} />
+              </button>
             </div>
 
             {/* Category chip + intro */}
             <div className="space-y-2">
-              {category && (
-                <span
-                  className="inline-flex items-center gap-1.5 rounded-[6px]
-                    px-2.5 py-0.5 text-[11px] font-semibold tracking-[0.05em] uppercase border bg-[var(--cat-tint)] dark:bg-slate-800 border-[var(--cat-border)] dark:border-slate-700 text-[var(--cat-primary)] dark:text-slate-200"
-                  style={{
-                    "--cat-tint": theme.tint,
-                    "--cat-border": theme.border,
-                    "--cat-primary": theme.primary,
-                  } as React.CSSProperties}
-                >
-                  <CategoryIcon className="h-3 w-3" strokeWidth={1.75} aria-hidden="true" />
-                  {category.shortName}
+              <div className="flex flex-wrap items-center gap-2">
+                {category && (
+                  <span
+                    className="inline-flex items-center gap-1.5 rounded-[6px]
+                      px-2.5 py-0.5 text-[11px] font-semibold tracking-[0.05em] uppercase border bg-[var(--cat-tint)] dark:bg-slate-800 border-[var(--cat-border)] dark:border-slate-700 text-[var(--cat-primary)] dark:text-slate-200"
+                    style={{
+                      "--cat-tint": theme.tint,
+                      "--cat-border": theme.border,
+                      "--cat-primary": theme.primary,
+                    } as React.CSSProperties}
+                  >
+                    <CategoryIcon className="h-3 w-3" strokeWidth={1.75} aria-hidden="true" />
+                    {category.shortName}
+                  </span>
+                )}
+                <span className="inline-flex items-center gap-1.5 rounded-[6px] px-2.5 py-0.5 text-[11px] font-semibold tracking-[0.05em] uppercase border bg-emerald-50/80 dark:bg-emerald-950/40 border-emerald-200/80 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-300">
+                  <ShieldCheck className="h-3 w-3 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
+                  <span>Offline Ready · Zero Uploads</span>
                 </span>
-              )}
+              </div>
               <p className="text-[15px] leading-[1.5] text-[#475569] dark:text-slate-300 max-w-3xl">
                 {tool.seo.intro}
               </p>

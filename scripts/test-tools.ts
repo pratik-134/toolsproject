@@ -127,6 +127,12 @@ import { runTests as runLatexEditorTests } from "../components/tools/phase3/late
 import { runTests as runCameraToPdfScannerTests } from "../components/tools/phase3/camera-to-pdf-scanner/logic.test";
 import { runTests as runPassportPhotoGeneratorTests } from "../components/tools/phase3/passport-photo-generator/logic.test";
 import { runTests as runPdfEditorTests } from "../components/tools/phase3/pdf-editor/logic.test";
+import { runTests as runJwtDecoderTests } from "../components/tools/phase3/jwt-decoder/logic.test";
+import { runTests as runJobKeywordMatcherTests } from "../components/tools/phase3/job-keyword-matcher/logic.test";
+import { runTests as runPdfPageNumbererTests } from "../components/tools/phase3/pdf-page-numberer/logic.test";
+import { runTests as runCronExpressionBuilderTests } from "../components/tools/phase3/cron-expression-builder/logic.test";
+import { runTests as runCurlToCodeConverterTests } from "../components/tools/phase3/curl-to-code-converter/logic.test";
+import { runTests as runSalaryTaxCalculatorTests } from "../components/tools/phase3/salary-tax-calculator/logic.test";
 import { runConverterEngineTests } from "../components/tools/engines/logic.test";
 import { resumeDataSchema, initialResumeData } from "../lib/schema";
 
@@ -649,8 +655,44 @@ async function main() {
   console.log("Testing [38 converter engine tools] logic...");
   await runConverterEngineTests();
 
+  console.log("Testing [jwt-decoder] logic...");
+  if (!runJwtDecoderTests()) {
+    throw new Error("JWT decoder tests failed!");
+  }
+  console.log("✅ [jwt-decoder] unit tests passed!");
+
+  console.log("Testing [job-keyword-matcher] logic...");
+  if (!runJobKeywordMatcherTests()) {
+    throw new Error("Job keyword matcher tests failed!");
+  }
+  console.log("✅ [job-keyword-matcher] unit tests passed!");
+
+  console.log("Testing [pdf-page-numberer] logic...");
+  if (!runPdfPageNumbererTests()) {
+    throw new Error("PDF page numberer tests failed!");
+  }
+  console.log("✅ [pdf-page-numberer] unit tests passed!");
+
+  console.log("Testing [cron-expression-builder] logic...");
+  if (!runCronExpressionBuilderTests()) {
+    throw new Error("Cron expression builder tests failed!");
+  }
+  console.log("✅ [cron-expression-builder] unit tests passed!");
+
+  console.log("Testing [curl-to-code-converter] logic...");
+  if (!runCurlToCodeConverterTests()) {
+    throw new Error("cURL to code converter tests failed!");
+  }
+  console.log("✅ [curl-to-code-converter] unit tests passed!");
+
+  console.log("Testing [salary-tax-calculator] logic...");
+  if (!runSalaryTaxCalculatorTests()) {
+    throw new Error("Salary tax calculator tests failed!");
+  }
+  console.log("✅ [salary-tax-calculator] unit tests passed!");
+
   console.log("===============================================");
-  console.log("🎉 ALL TOOL UNIT TESTS PASSED (162/162)!");
+  console.log("🎉 ALL TOOL UNIT TESTS PASSED (169/169)!");
 }
 
 main().catch((err) => {

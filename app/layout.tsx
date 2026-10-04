@@ -129,6 +129,7 @@ const jsonLd = {
 };
 
 import { ThemeProvider } from "@/components/theme-provider";
+import { PwaProvider } from "@/components/pwa/PwaProvider";
 
 export default function RootLayout({
   children,
@@ -159,7 +160,9 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-background text-foreground font-body antialiased selection:bg-blue-500/20 selection:text-slate-900 dark:selection:text-slate-100 transition-colors duration-200">
         <ThemeProvider>
-          <ToastProvider>{children}</ToastProvider>
+          <PwaProvider>
+            <ToastProvider>{children}</ToastProvider>
+          </PwaProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -33,50 +33,10 @@ export default function PhotoFilterStudioTool() {
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // Generate scenic canvas sample image
+  // Load original sample landscape photo
   const loadSamplePhoto = useCallback(() => {
-    const canvas = document.createElement("canvas");
-    canvas.width = 700;
-    canvas.height = 450;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    // Sky gradient
-    const sky = ctx.createLinearGradient(0, 0, 0, 300);
-    sky.addColorStop(0, "#0284c7");
-    sky.addColorStop(0.6, "#f59e0b");
-    sky.addColorStop(1, "#ef4444");
-    ctx.fillStyle = sky;
-    ctx.fillRect(0, 0, 700, 450);
-
-    // Glowing sun
-    ctx.fillStyle = "#fef08a";
-    ctx.beginPath();
-    ctx.arc(350, 220, 60, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Mountain silhouettes
-    ctx.fillStyle = "#1e293b";
-    ctx.beginPath();
-    ctx.moveTo(0, 450);
-    ctx.lineTo(150, 260);
-    ctx.lineTo(280, 360);
-    ctx.lineTo(440, 240);
-    ctx.lineTo(580, 340);
-    ctx.lineTo(700, 280);
-    ctx.lineTo(700, 450);
-    ctx.closePath();
-    ctx.fill();
-
-    // Foreground lake
-    const lake = ctx.createLinearGradient(0, 350, 0, 450);
-    lake.addColorStop(0, "#0f172a");
-    lake.addColorStop(1, "#020617");
-    ctx.fillStyle = lake;
-    ctx.fillRect(0, 350, 700, 100);
-
-    setImageSrc(canvas.toDataURL("image/png"));
-    setImageName("sunset-mountains");
+    setImageSrc("/images/samples/landscape-sample.jpg");
+    setImageName("alpine-lake-sunset");
     setAdjustments({ ...DEFAULT_FILTER_ADJUSTMENTS });
     setActivePreset("original");
   }, []);
