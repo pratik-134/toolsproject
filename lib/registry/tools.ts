@@ -4771,6 +4771,27 @@ export const TOOLS: ToolDefinition[] = [
     related: ["image-to-text", "pdf-merger", "batch-image-compressor", "jpg-to-pdf"]
   },
   {
+    slug: "passport-photo-generator",
+    name: "Passport Photo Generator & Biometric Studio",
+    category: "image",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Free Passport Photo Generator — 300 DPI Biometric Crop & Print Sheet",
+      description: "Create compliant biometric passport and visa photos online. Official requirements for US (2x2\"), UK, India (35x45mm), Schengen, Canada & 4x6\" printable photo sheets.",
+      h1: "Free Passport Photo Generator & Biometric Crop Studio",
+      intro: "Create official biometric passport, visa, and ID photos directly in your web browser. Includes ICAO-compliant head guides, official country dimensions, and 4x6\" multi-photo print sheets.",
+      faq: [
+        { q: "What countries and visa types are supported?", a: "Supports United States (2x2 inches / 51x51mm), India (35x45mm Passport, 51x51mm OCI/Visa, PAN card), UK, Schengen / EU, Canada (50x70mm), Australia, China, Japan, UAE, Singapore, and custom sizes." },
+        { q: "Can I print the photos at a local pharmacy or print shop?", a: "Yes. ClearTrix automatically compiles your passport photos into a standard 4x6 inch (10x15cm) multi-photo print sheet with crop marks, ready to print for pennies at CVS, Walgreens, Walmart, or Boots." },
+        { q: "Are my personal facial photos sent to external servers or AI?", a: "Never. All biometric framing, canvas cropping, and export generation execute 100% locally inside your browser memory. Your personal photos never touch any server." },
+        { q: "Does the output meet official 300 DPI resolution standards?", a: "Yes. Both individual passport photo downloads and printable photo sheets are exported at exact 300 DPI print-ready resolution." }
+      ]
+    },
+    related: ["canvas-resizer", "aspect-ratio-cropper", "photo-filter-studio", "batch-image-compressor"]
+  },
+  {
     slug: "jwt-decoder",
     name: "JSON Web Token (JWT) Decoder",
     category: "developer",

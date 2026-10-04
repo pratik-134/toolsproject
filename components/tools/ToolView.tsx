@@ -567,6 +567,10 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     ssr: false,
     loading: () => <ToolLoadingState name="Camera to PDF Scanner" />,
   }),
+  "passport-photo-generator": dynamic(() => import("@/components/tools/phase3/passport-photo-generator"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Passport Photo Generator & Biometric Studio" />,
+  }),
   "jwt-decoder": dynamic(() => import("@/components/tools/phase3/jwt-decoder"), {
     ssr: false,
     loading: () => <ToolLoadingState name="JSON Web Token (JWT) Decoder" />,

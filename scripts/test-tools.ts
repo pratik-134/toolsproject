@@ -125,6 +125,7 @@ import { runTests as runChartGraphVisualizerTests } from "../components/tools/ph
 import { runTests as runMemeCaptionGeneratorTests } from "../components/tools/phase3/meme-caption-generator/logic.test";
 import { runTests as runLatexEditorTests } from "../components/tools/phase3/latex-editor/logic.test";
 import { runTests as runCameraToPdfScannerTests } from "../components/tools/phase3/camera-to-pdf-scanner/logic.test";
+import { runTests as runPassportPhotoGeneratorTests } from "../components/tools/phase3/passport-photo-generator/logic.test";
 import { runTests as runPdfEditorTests } from "../components/tools/phase3/pdf-editor/logic.test";
 import { runConverterEngineTests } from "../components/tools/engines/logic.test";
 import { resumeDataSchema, initialResumeData } from "../lib/schema";
@@ -624,6 +625,12 @@ async function main() {
   console.log("Testing [camera-to-pdf-scanner] logic...");
   runCameraToPdfScannerTests();
   console.log("✅ [camera-to-pdf-scanner] unit tests passed!");
+
+  console.log("Testing [passport-photo-generator] logic...");
+  if (!runPassportPhotoGeneratorTests()) {
+    throw new Error("Passport photo generator tests failed!");
+  }
+  console.log("✅ [passport-photo-generator] unit tests passed!");
 
   // Flagship Tool: Resume Builder
   console.log("Testing [resume-builder] logic...");
