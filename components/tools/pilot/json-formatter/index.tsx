@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import { formatJson, JsonFormatOptions } from "./logic";
 import { Copy, Check, Download, Trash2, FileJson, Sparkles, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SendToPipelineButton } from "@/components/pipeline/SendToPipelineButton";
 
 const SAMPLE_JSON = `{
   "platform": "Cleartrix",
@@ -25,6 +26,19 @@ export default function JsonFormatterTool() {
   const [indent, setIndent] = useState<JsonFormatOptions["indent"]>(2);
   const [sortKeys, setSortKeys] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
+
+  React.useEffect(() => {
+    const handlePipelineData = (e: Event) => {
+      const customEvent = e as CustomEvent<any>;
+      if (customEvent.detail && customEvent.detail.textData) {
+        setInput(customEvent.detail.textData);
+      }
+    };
+    window.addEventListener("pipeline-apply-data", handlePipelineData);
+    return () => {
+      window.removeEventListener("pipeline-apply-data", handlePipelineData);
+    };
+  }, []);
 
   const result = useMemo(() => {
     return formatJson(input, { indent, sortKeys });
@@ -169,6 +183,15 @@ export default function JsonFormatterTool() {
                 <Download className="h-3 w-3" />
                 <span>Save</span>
               </Button>
+              {result.success && result.output && (
+                <SendToPipelineButton
+                  sourceSlug="json-formatter"
+                  sourceToolName="JSON Formatter"
+                  dataType="text"
+                  textData={result.output}
+                  title="Formatted JSON"
+                />
+              )}
             </div>
           </div>
 

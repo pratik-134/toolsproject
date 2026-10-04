@@ -1,7 +1,7 @@
 # Cleartrix: Master Project Architecture, Invariants & AI Developer Guide
 
 > **Product:** Cleartrix (`https://cleartrix.com`)  
-> **Umbrella Platform:** Privacy-first, in-browser suite of 169+ tools across 11 categories  
+> **Umbrella Platform:** Privacy-first, in-browser suite of 172+ tools across all 11 categories  
 > **Flagship Product:** Cleartrix Resume Builder (`/editor`, `/dashboard`) with 20 Vector PDF & Word DOCX templates  
 > **Primary Stack:** Next.js 15.5 (App Router, React 18, TypeScript 5.7, Tailwind CSS 3.4), Zustand 4.5, Zod 3.23, Radix UI primitives (`@radix-ui/react-select`), Lucide Icons  
 > **AI / Media Boost:** In-browser WebAssembly (Pyodide, Web Workers, Canvas, Web Audio, Web Crypto) + Optional Server Microservice (Python FastAPI for heavyweight Phase 4 models)  
@@ -12,7 +12,7 @@
 
 ## 1. Core Mission & Non-Negotiable Invariants
 
-Cleartrix is one unified, lightning-fast web platform hosting 169+ everyday tools for PDFs, documents, images, developer utilities, calculators, codes, and media. The defining differentiator is **absolute privacy: user files and data are processed directly inside the client browser and never uploaded to any remote server.**
+Cleartrix is one unified, lightning-fast web platform hosting 172+ everyday tools for PDFs, documents, images, developer utilities, calculators, codes, media, and zero-knowledge cloud sharing. The defining differentiator is **absolute privacy: user files and data are processed directly inside the client browser and never uploaded to any remote server.**
 
 ### The 8 Non-Negotiable Invariants (Never Break These):
 
@@ -118,7 +118,7 @@ cleartrix/
 │   ├── brand/                              # Official ClearTrix identity assets (logos, icons)
 │   └── images/samples/                     # Original copyright-free bundled sample photos and assets
 ├── scripts/                                # Verification & Quality Assurance Suite
-│   ├── test-tools.ts                       # Unit test runner executing all 162 tool logic.test.ts suites
+│   ├── test-tools.ts                       # Unit test runner executing all 172 tool logic.test.ts suites
 │   ├── test-registry.ts                    # Schema validator (unique slugs, categories, SEO, FAQs)
 │   ├── test-privacy.ts                     # AST/regex scanner ensuring zero network leaks in client tools
 │   ├── test-docx-templates.ts              # Validates 20 Word template packages
@@ -349,7 +349,7 @@ cmd /c npm run build
 
 ## 9. Progressive Web App (PWA) & Offline Execution Architecture
 
-Cleartrix functions as a fully offline Progressive Web App, enabling all 169+ client-side tools to run without an active internet connection:
+Cleartrix functions as a fully offline Progressive Web App, enabling all 172+ client-side tools to run without an active internet connection:
 
 1. **Service Worker (`public/sw.js`):**
    - **Cache Strategy:** Network-first with cache fallback for navigation HTML requests; Cache-first for static scripts, fonts, stylesheets, and images.
@@ -363,4 +363,26 @@ Cleartrix functions as a fully offline Progressive Web App, enabling all 169+ cl
 
 3. **Install Button (`components/pwa/InstallButton.tsx`):**
    - Integrated into the global footer and available across key workspaces, allowing users to install Cleartrix as a native desktop or mobile application.
+
+---
+
+## 10. Client-Side Multi-Tool Pipeline & Data Hand-Off Architecture
+
+Cleartrix enables zero-upload, 100% in-browser data transfer between compatible tools:
+
+1. **Pipeline Engine (`lib/pipeline/handoff.ts`):**
+   - High-affinity tool workflow matrix (`PIPELINE_WORKFLOW_MAP`) defining intelligent downstream targets (e.g. `curl-to-code-converter` -> `client-pastebin` / `burn-after-read-secret`; `json-formatter` -> `json-yaml-converter` / `json-to-typescript`).
+   - Browser storage session buffer (`ct_pipeline_active_handoff`) with 15-minute TTL invalidation.
+   - Zero-network privacy: data stays strictly in local browser memory without intermediate server uploads.
+
+2. **Sender Component (`components/pipeline/SendToPipelineButton.tsx`):**
+   - Renders a clean "Send to Next Tool" dropdown across output toolbars.
+   - Packages text or file data, saves the handoff payload, and navigates seamlessly to the destination tool.
+
+3. **Receiver Component (`components/pipeline/PipelineReceiverBanner.tsx`):**
+   - Mounted globally within `ToolLayout.tsx` above all 172 tool workspaces.
+   - Detects incoming handoffs targeting the active tool slug.
+   - Displays incoming data preview with one-click "Apply Input", "Copy Data", and "Dismiss" controls.
+   - Dispatches a `pipeline-apply-data` window event for tools that support direct programmatic state population.
+
 

@@ -39,7 +39,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Protected links, burn-after-read secret sharing, and temporary client-side encrypted text vaults.",
     iconName: "Cloud",
-    expectedToolCount: 0,
+    expectedToolCount: 3,
     colorKey: "codes",
   },
   codes: {

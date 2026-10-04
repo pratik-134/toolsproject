@@ -595,6 +595,18 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     ssr: false,
     loading: () => <ToolLoadingState name="2026 Salary & Tax Calculator" />,
   }),
+  "burn-after-read-secret": dynamic(() => import("@/components/tools/phase3/burn-after-read-secret"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Burn-After-Read Secret Sharer" />,
+  }),
+  "client-pastebin": dynamic(() => import("@/components/tools/phase3/client-pastebin"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Encrypted Client Pastebin" />,
+  }),
+  "link-protector": dynamic(() => import("@/components/tools/phase3/link-protector"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Password-Protected Link Redirector" />,
+  }),
 };
 
 function ToolLoadingState({ name }: { name: string }) {

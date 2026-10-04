@@ -11,6 +11,7 @@ import { CategoryId } from "@/lib/registry/types";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { RelatedToolsDrawer } from "@/components/tools/RelatedToolsDrawer";
+import { PipelineReceiverBanner } from "@/components/pipeline/PipelineReceiverBanner";
 import { BRAND } from "@/lib/brand";
 import { useToolsPreferenceStore } from "@/lib/store/use-tools-preference-store";
 import {
@@ -190,6 +191,11 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
               )}
             </div>
           </div>
+        </div>
+
+        {/* ── Pipeline Handoff Receiver Banner ── */}
+        <div className="pt-6 px-4 sm:px-6">
+          <PipelineReceiverBanner currentToolSlug={tool.slug} />
         </div>
 
         {/* ── Studio Workspace for Flagship Editors (Resume Builder style) ── */}

@@ -4911,6 +4911,66 @@ export const TOOLS: ToolDefinition[] = [
       ]
     },
     related: ["compound-interest-calculator", "percentage-calculator", "discount-calculator", "roi-calculator"]
+  },
+  {
+    slug: "burn-after-read-secret",
+    name: "Burn-After-Read Secret Sharer",
+    category: "url-cloud",
+    phase: 5,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Burn-After-Read Secret Sharer — Zero-Knowledge Encrypted Vault",
+      description: "Share self-destructing passwords, API keys, and sensitive secrets with AES-256-GCM browser encryption. Key in URL hash, never sent to server.",
+      h1: "Free Burn-After-Read Secret Sharer",
+      intro: "Protect confidential credentials, passwords, and tokens with client-side AES-256 encryption. Links auto-destruct on view or after your configured expiration.",
+      faq: [
+        { q: "Is my secret text or password transmitted to your server?", a: "Never. Your data is encrypted locally with AES-256-GCM. The decryption key exists solely in the URL hash fragment (#data=...), which web browsers never send across HTTP requests." },
+        { q: "What happens when a secret is burned?", a: "Once the recipient reveals the secret, the URL fragment and local memory are purged, preventing replay or retrieval." },
+        { q: "Can I add a custom passphrase for extra security?", a: "Yes. You can require an additional passphrase using PBKDF2 SHA-256 key derivation with 100,000 iterations." }
+      ]
+    },
+    related: ["client-pastebin", "link-protector", "password-generator", "hash-generator"]
+  },
+  {
+    slug: "client-pastebin",
+    name: "Encrypted Client Pastebin",
+    category: "url-cloud",
+    phase: 5,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Encrypted Client Pastebin — Zero-Knowledge Code & Text Vault",
+      description: "Store and share encrypted code snippets, configs, and private notes with client-side AES-256-GCM. 100% private in-browser pastebin.",
+      h1: "Free Encrypted Client-Side Pastebin",
+      intro: "Share code, configurations, and private markdown with zero server storage. Decryption keys live exclusively in your browser URL fragment.",
+      faq: [
+        { q: "Does ClearTrix store my code or paste content on a database?", a: "No. The entire paste payload is encrypted in your browser using AES-256-GCM and stored within the URL hash fragment (#paste=...). We have zero servers or databases storing your pastes." },
+        { q: "Which programming languages and syntaxes are supported?", a: "Supported syntaxes include Plain Text, JavaScript, TypeScript, Python, JSON, HTML, CSS, Markdown, SQL, Bash, and YAML." },
+        { q: "Can I password-protect my paste?", a: "Yes. You can optionally enforce a custom passphrase. PBKDF2 key derivation with 100,000 rounds ensures high resistance against brute-force attacks." }
+      ]
+    },
+    related: ["burn-after-read-secret", "link-protector", "code-minifier", "json-formatter"]
+  },
+  {
+    slug: "link-protector",
+    name: "Password-Protected Link Redirector",
+    category: "url-cloud",
+    phase: 5,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Password-Protected Link Redirector — Zero-Knowledge Safe Links",
+      description: "Protect sensitive target URLs and links with AES-256 passphrase encryption. Anti-phishing domain preview with zero server redirection tracking.",
+      h1: "Free Password-Protected Link Redirector",
+      intro: "Hide private URLs, internal dashboards, and confidential documents behind an encrypted client-side lock screen with optional hints and expirations.",
+      faq: [
+        { q: "How does the Link Protector prevent intermediate link tracking?", a: "Standard link shorteners log destination URLs and clicks on central servers. ClearTrix encrypts the destination URL entirely in your browser using AES-256-GCM so no server ever knows where the link points." },
+        { q: "How does anti-phishing protection work?", a: "Upon decrypting, ClearTrix displays the verified destination hostname and full link to the user before they click, preventing stealth redirects or phishing traps." },
+        { q: "Can I set an expiration timer on protected links?", a: "Yes. You can configure expiration periods from 1 hour to 30 days, after which the client will decline to unlock the link." }
+      ]
+    },
+    related: ["burn-after-read-secret", "client-pastebin", "url-encoder", "password-generator"]
   }
 ];
 

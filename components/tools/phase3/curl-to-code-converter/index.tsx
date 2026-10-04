@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import { Copy, Check, Terminal, Code2, Sparkles, RefreshCw } from "lucide-react";
+import { SendToPipelineButton } from "@/components/pipeline/SendToPipelineButton";
 
 interface ParsedCurl {
   url: string;
@@ -286,14 +287,24 @@ ${data ? `        .body(r#"${data}"#)\n` : ""}        .send()
               ))}
             </div>
 
-            <button
-              type="button"
-              onClick={handleCopy}
-              className="inline-flex items-center gap-1 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-xs transition-colors shadow-xs"
-            >
-              {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-              <span>{copied ? "Copied" : "Copy Code"}</span>
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handleCopy}
+                className="inline-flex items-center gap-1 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-xs transition-colors shadow-xs"
+              >
+                {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                <span>{copied ? "Copied" : "Copy Code"}</span>
+              </button>
+
+              <SendToPipelineButton
+                sourceSlug="curl-to-code-converter"
+                sourceToolName="cURL to Code Converter"
+                dataType="text"
+                textData={generatedCode}
+                title={`Generated ${activeLang.toUpperCase()} Code`}
+              />
+            </div>
           </div>
 
           {/* Generated Code Window */}

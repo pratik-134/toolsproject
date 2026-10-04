@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { generatePassword, generatePassphrase, PasswordOptions, PassphraseOptions } from "./logic";
 import { Copy, Check, RefreshCw, ShieldCheck, Key, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SendToPipelineButton } from "@/components/pipeline/SendToPipelineButton";
 
 export default function PasswordGeneratorTool() {
   const [mode, setMode] = useState<"password" | "passphrase">("password");
@@ -136,6 +137,13 @@ export default function PasswordGeneratorTool() {
                 </>
               )}
             </Button>
+            <SendToPipelineButton
+              sourceSlug="password-generator"
+              sourceToolName="Password Generator"
+              dataType="text"
+              textData={currentValue}
+              title="Generated Secret Password"
+            />
           </div>
         </div>
       </div>

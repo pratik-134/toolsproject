@@ -3,6 +3,13 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   OverlayPosition,
   BubbleSize,
   BubbleShape,
@@ -362,16 +369,20 @@ export default function WebcamOverlayRecorderTool() {
             <label className="text-xs font-medium text-slate-600 dark:text-slate-400 flex items-center gap-1">
               <Move className="w-3.5 h-3.5" /> Corner:
             </label>
-            <select
+            <Select
               value={position}
-              onChange={(e) => setPosition(e.target.value as OverlayPosition)}
-              className="text-xs px-2.5 py-1 rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+              onValueChange={(val) => setPosition(val as OverlayPosition)}
             >
-              <option value="bottom-right">Bottom-Right</option>
-              <option value="bottom-left">Bottom-Left</option>
-              <option value="top-right">Top-Right</option>
-              <option value="top-left">Top-Left</option>
-            </select>
+              <SelectTrigger className="h-8 px-2.5 py-1 text-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 w-36">
+                <SelectValue placeholder="Corner" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="bottom-right">Bottom-Right</SelectItem>
+                <SelectItem value="bottom-left">Bottom-Left</SelectItem>
+                <SelectItem value="top-right">Top-Right</SelectItem>
+                <SelectItem value="top-left">Top-Left</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           <div className="flex items-center gap-3">

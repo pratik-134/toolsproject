@@ -133,6 +133,10 @@ import { runTests as runPdfPageNumbererTests } from "../components/tools/phase3/
 import { runTests as runCronExpressionBuilderTests } from "../components/tools/phase3/cron-expression-builder/logic.test";
 import { runTests as runCurlToCodeConverterTests } from "../components/tools/phase3/curl-to-code-converter/logic.test";
 import { runTests as runSalaryTaxCalculatorTests } from "../components/tools/phase3/salary-tax-calculator/logic.test";
+import { runTests as runBurnAfterReadSecretTests } from "../components/tools/phase3/burn-after-read-secret/logic.test";
+import { runTests as runClientPastebinTests } from "../components/tools/phase3/client-pastebin/logic.test";
+import { runTests as runLinkProtectorTests } from "../components/tools/phase3/link-protector/logic.test";
+import { runTests as runPipelineHandoffTests } from "../lib/pipeline/handoff.test";
 import { runConverterEngineTests } from "../components/tools/engines/logic.test";
 import { resumeDataSchema, initialResumeData } from "../lib/schema";
 
@@ -691,8 +695,32 @@ async function main() {
   }
   console.log("✅ [salary-tax-calculator] unit tests passed!");
 
+  console.log("Testing [burn-after-read-secret] logic...");
+  if (!(await runBurnAfterReadSecretTests())) {
+    throw new Error("Burn-after-read secret tests failed!");
+  }
+  console.log("✅ [burn-after-read-secret] unit tests passed!");
+
+  console.log("Testing [client-pastebin] logic...");
+  if (!(await runClientPastebinTests())) {
+    throw new Error("Client pastebin tests failed!");
+  }
+  console.log("✅ [client-pastebin] unit tests passed!");
+
+  console.log("Testing [link-protector] logic...");
+  if (!(await runLinkProtectorTests())) {
+    throw new Error("Link protector tests failed!");
+  }
+  console.log("✅ [link-protector] unit tests passed!");
+
+  console.log("Testing [cross-tool-pipeline-handoff] logic...");
+  if (!runPipelineHandoffTests()) {
+    throw new Error("Cross-tool pipeline handoff tests failed!");
+  }
+  console.log("✅ [cross-tool-pipeline-handoff] unit tests passed!");
+
   console.log("===============================================");
-  console.log("🎉 ALL TOOL UNIT TESTS PASSED (169/169)!");
+  console.log("🎉 ALL TOOL UNIT TESTS PASSED (172/172)!");
 }
 
 main().catch((err) => {
