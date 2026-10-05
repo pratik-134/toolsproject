@@ -33,14 +33,16 @@ export const PIPELINE_WORKFLOW_MAP: Record<string, string[]> = {
   "direct-html-editor": ["html-to-pdf", "markdown-to-html", "client-pastebin"],
 
   // Developer & Data workflows
-  "json-formatter": ["json-yaml-converter", "json-to-typescript", "json-schema-validator", "client-pastebin"],
+  "json-formatter": ["json-yaml-converter", "json-to-typescript", "json-schema-validator", "json-graph-visualizer", "code-snapshot-studio", "client-pastebin"],
   "csv-json-converter": ["csv-to-excel", "excel-to-json-csv", "client-pastebin"],
   "tsv-to-csv": ["csv-to-excel", "excel-to-json-csv", "duplicate-line-remover"],
-  "curl-to-code-converter": ["client-pastebin", "burn-after-read-secret"],
+  "curl-to-code-converter": ["code-snapshot-studio", "client-pastebin", "burn-after-read-secret"],
   "jwt-decoder": ["json-formatter", "client-pastebin", "burn-after-read-secret"],
-  "sql-formatter": ["client-pastebin", "burn-after-read-secret", "text-diff"],
+  "sql-formatter": ["code-snapshot-studio", "client-pastebin", "burn-after-read-secret", "text-diff"],
   "sql-dump-to-csv": ["csv-to-excel", "duplicate-line-remover"],
-  "code-minifier": ["client-pastebin", "burn-after-read-secret"],
+  "code-minifier": ["code-snapshot-studio", "client-pastebin", "burn-after-read-secret"],
+  "code-snapshot-studio": ["client-pastebin", "burn-after-read-secret"],
+  "json-graph-visualizer": ["json-formatter", "code-snapshot-studio", "client-pastebin"],
 
   // Image workflows
   "aspect-ratio-cropper": ["canvas-resizer", "batch-image-compressor", "photo-filter-studio", "image-watermarker"],
@@ -49,6 +51,7 @@ export const PIPELINE_WORKFLOW_MAP: Record<string, string[]> = {
   "social-post-maker": ["batch-image-compressor", "image-converter"],
   "meme-caption-generator": ["batch-image-compressor", "image-converter"],
   "passport-photo-generator": ["batch-image-compressor", "image-converter"],
+  "svg-pattern-generator": ["svg-minifier", "svg-to-png", "batch-image-compressor"],
 
   // Media workflows
   "desktop-screen-recorder": ["webm-to-mp4", "mp4-to-mp3"],

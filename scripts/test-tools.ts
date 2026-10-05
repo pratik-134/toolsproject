@@ -136,6 +136,9 @@ import { runTests as runSalaryTaxCalculatorTests } from "../components/tools/pha
 import { runTests as runBurnAfterReadSecretTests } from "../components/tools/phase3/burn-after-read-secret/logic.test";
 import { runTests as runClientPastebinTests } from "../components/tools/phase3/client-pastebin/logic.test";
 import { runTests as runLinkProtectorTests } from "../components/tools/phase3/link-protector/logic.test";
+import { runTests as runCodeSnapshotStudioTests } from "../components/tools/phase3/code-snapshot-studio/logic.test";
+import { runTests as runSvgPatternGeneratorTests } from "../components/tools/phase3/svg-pattern-generator/logic.test";
+import { runTests as runJsonGraphVisualizerTests } from "../components/tools/phase3/json-graph-visualizer/logic.test";
 import { runTests as runPipelineHandoffTests } from "../lib/pipeline/handoff.test";
 import { runConverterEngineTests } from "../components/tools/engines/logic.test";
 import { resumeDataSchema, initialResumeData } from "../lib/schema";
@@ -713,6 +716,24 @@ async function main() {
   }
   console.log("✅ [link-protector] unit tests passed!");
 
+  console.log("Testing [code-snapshot-studio] logic...");
+  if (!runCodeSnapshotStudioTests()) {
+    throw new Error("Code snapshot studio tests failed!");
+  }
+  console.log("✅ [code-snapshot-studio] unit tests passed!");
+
+  console.log("Testing [svg-pattern-generator] logic...");
+  if (!runSvgPatternGeneratorTests()) {
+    throw new Error("SVG pattern generator tests failed!");
+  }
+  console.log("✅ [svg-pattern-generator] unit tests passed!");
+
+  console.log("Testing [json-graph-visualizer] logic...");
+  if (!runJsonGraphVisualizerTests()) {
+    throw new Error("JSON graph visualizer tests failed!");
+  }
+  console.log("✅ [json-graph-visualizer] unit tests passed!");
+
   console.log("Testing [cross-tool-pipeline-handoff] logic...");
   if (!runPipelineHandoffTests()) {
     throw new Error("Cross-tool pipeline handoff tests failed!");
@@ -720,7 +741,7 @@ async function main() {
   console.log("✅ [cross-tool-pipeline-handoff] unit tests passed!");
 
   console.log("===============================================");
-  console.log("🎉 ALL TOOL UNIT TESTS PASSED (172/172)!");
+  console.log("🎉 ALL TOOL UNIT TESTS PASSED (175/175)!");
 }
 
 main().catch((err) => {

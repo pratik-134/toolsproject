@@ -4971,6 +4971,105 @@ export const TOOLS: ToolDefinition[] = [
       ]
     },
     related: ["burn-after-read-secret", "client-pastebin", "url-encoder", "password-generator"]
+  },
+
+  /* =========================================================================
+     PHASE 3 DEVELOPER TOOL: High-Res Code Snapshot Studio
+     ========================================================================= */
+  {
+    slug: "code-snapshot-studio",
+    name: "High-Res Code Snapshot Studio",
+    category: "developer",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "High-Res Code Snapshot Studio — Beautiful Code Screenshots Online",
+      description: "Turn source code into presentation-ready, high-resolution code snapshots with custom themes, macOS window frames, line numbers, and retina PNG/SVG export.",
+      h1: "Free High-Res Code Snapshot Studio",
+      intro: "Create stunning, high-resolution screenshots of your source code for documentation, presentations, and social media. 100% in-browser rendering with zero server uploads or watermarks.",
+      faq: [
+        {
+          q: "Is ClearTrix Code Snapshot Studio completely free with no watermarks?",
+          a: "Yes. Every theme, canvas gradient, window style, and high-DPI retina export is 100% free with zero watermarks."
+        },
+        {
+          q: "Can I copy the code snapshot directly to my clipboard?",
+          a: "Yes. Click 'Copy Image' to copy retina-resolution PNG graphics directly into your clipboard for instant pasting into Slack, Twitter, LinkedIn, Discord, or Notion."
+        },
+        {
+          q: "Does my confidential source code ever get uploaded to a server?",
+          a: "Never. ClearTrix tokenizes and renders code snapshots 100% in-browser using local Web APIs. Zero network requests carry your code."
+        }
+      ]
+    },
+    related: ["code-minifier", "json-formatter", "sql-formatter", "html-beautifier"]
+  },
+
+  /* =========================================================================
+     PHASE 3 IMAGE TOOL: Vector SVG Wave & Pattern Studio
+     ========================================================================= */
+  {
+    slug: "svg-pattern-generator",
+    name: "Vector SVG Wave & Pattern Studio",
+    category: "image",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Vector SVG Wave & Pattern Studio — Free Parametric Waves & Blobs",
+      description: "Generate customizable SVG wave dividers, organic blobs, layered mountain peaks, and dot matrix patterns with instant SVG and CSS code export.",
+      h1: "Free Vector SVG Wave & Pattern Studio",
+      intro: "Design and export beautiful vector SVG wave dividers, layered curves, and organic blob shapes for landing pages and graphic design. 100% in-browser generation with zero server uploads.",
+      faq: [
+        {
+          q: "Is ClearTrix SVG Wave & Pattern Studio free for commercial use?",
+          a: "Yes. All generated SVG vector graphics and CSS snippets are 100% free with zero watermarks or attribution requirements for commercial websites and apps."
+        },
+        {
+          q: "Can I copy the SVG or CSS directly into my code?",
+          a: "Yes. Click 'Copy SVG' to grab the raw XML markup, or click 'Copy CSS' for a ready-to-paste background-image data URI."
+        },
+        {
+          q: "Can I customize wave curves, complexity, and layers?",
+          a: "Yes. Fine-tune curve variance, point count, stacked layer opacities, canvas dimensions, and gradient color themes in real time."
+        }
+      ]
+    },
+    related: ["svg-minifier", "svg-to-png", "aspect-ratio-cropper", "canvas-resizer"]
+  },
+
+  /* =========================================================================
+     PHASE 3 DEVELOPER TOOL: Interactive JSON Graph & Tree Visualizer
+     ========================================================================= */
+  {
+    slug: "json-graph-visualizer",
+    name: "Interactive JSON Graph & Tree Visualizer",
+    category: "developer",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Interactive JSON Graph & Tree Visualizer — Free 2D Schema Explorer",
+      description: "Explore complex JSON and YAML data as an interactive 2D node tree with live search, path breadcrumbs, collapsible branches, and SVG graph export.",
+      h1: "Free Interactive JSON Graph & Tree Visualizer",
+      intro: "Transform raw, nested JSON payloads into an interactive 2D node graph and tree diagram. Search nodes, copy JSONPath syntax, and export vector diagrams with 100% in-browser privacy.",
+      faq: [
+        {
+          q: "Is ClearTrix JSON Graph Visualizer free for large payloads?",
+          a: "Yes. Visualizing, filtering, searching, and exporting tree graphs for large datasets is 100% free with no limits or subscriptions."
+        },
+        {
+          q: "Can I copy JSONPath expressions for any node?",
+          a: "Yes. Click any node in the graph to inspect its full JSONPath hierarchy (e.g. $.modules[0].name) and copy it with 1 click."
+        },
+        {
+          q: "Does my JSON data leave my device?",
+          a: "No. All parsing and graph rendering happens directly inside your browser memory with zero network uploads."
+        }
+      ]
+    },
+    related: ["json-formatter", "json-yaml-converter", "json-schema-validator", "code-snapshot-studio"]
   }
 ];
 

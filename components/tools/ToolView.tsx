@@ -607,6 +607,18 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     ssr: false,
     loading: () => <ToolLoadingState name="Password-Protected Link Redirector" />,
   }),
+  "code-snapshot-studio": dynamic(() => import("@/components/tools/phase3/code-snapshot-studio"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="High-Res Code Snapshot Studio" />,
+  }),
+  "svg-pattern-generator": dynamic(() => import("@/components/tools/phase3/svg-pattern-generator"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Vector SVG Wave & Pattern Studio" />,
+  }),
+  "json-graph-visualizer": dynamic(() => import("@/components/tools/phase3/json-graph-visualizer"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Interactive JSON Graph & Tree Visualizer" />,
+  }),
 };
 
 function ToolLoadingState({ name }: { name: string }) {

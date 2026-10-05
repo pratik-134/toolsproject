@@ -93,6 +93,7 @@ export function getToolIcon(tool: ToolDefinition): LucideIcon {
   if (slug.includes("diff") || slug.includes("compare")) return GitCompare;
   if (slug.includes("regex")) return Regex;
   if (slug.includes("jwt") || slug.includes("token")) return KeyRound;
+  if (slug.includes("snapshot") || slug.includes("carbon")) return FileCode;
   if (slug.includes("cron")) return Clock;
   if (slug.includes("curl")) return Terminal;
 
@@ -117,7 +118,7 @@ export function getToolIcon(tool: ToolDefinition): LucideIcon {
   if (slug.includes("resize") || slug.includes("canvas")) return Maximize2;
   if (slug.includes("compress") || slug.includes("minifier")) return Minimize2;
   if (slug.includes("filter") || slug.includes("retouch")) return Palette;
-  if (slug.includes("watermark")) return Sparkles;
+  if (slug.includes("watermark") || slug.includes("pattern") || slug.includes("wave")) return Sparkles;
 
   // PDF & Documents
   if (slug.includes("ats") || slug.includes("keyword")) return FileCheck;
