@@ -619,6 +619,30 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     ssr: false,
     loading: () => <ToolLoadingState name="Interactive JSON Graph & Tree Visualizer" />,
   }),
+  "color-palette-generator": dynamic(() => import("@/components/tools/phase3/color-palette-generator"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Harmonic Color Palette Studio" />,
+  }),
+  "css-mesh-gradient-generator": dynamic(() => import("@/components/tools/phase3/css-mesh-gradient-generator"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="CSS Mesh Gradient Studio" />,
+  }),
+  "image-background-remover": dynamic(() => import("@/components/tools/phase3/image-background-remover"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Smart Image Background Remover" />,
+  }),
+  "visual-diff-studio": dynamic(() => import("@/components/tools/phase3/visual-diff-studio"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Multi-Format Visual Diff Studio" />,
+  }),
+  "regex-visualizer": dynamic(() => import("@/components/tools/phase3/regex-visualizer"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Interactive RegEx Visualizer" />,
+  }),
+  "pdf-watermark-stamper": dynamic(() => import("@/components/tools/phase3/pdf-watermark-stamper"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="PDF Watermark & Page Stamp Studio" />,
+  }),
 };
 
 function ToolLoadingState({ name }: { name: string }) {

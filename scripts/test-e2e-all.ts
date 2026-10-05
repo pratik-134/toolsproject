@@ -38,7 +38,7 @@ async function runE2eTestSuite() {
   // ==========================================================================
   console.log("▶ STAGE 1: Testing Route Integrity & Metadata Generation...");
   const allTools = getAllTools();
-  assert(allTools.length === 175, `Expected 175 tools, found ${allTools.length}`);
+  assert(allTools.length === 181, `Expected 181 tools, found ${allTools.length}`);
 
   let metadataCount = 0;
   for (const tool of allTools) {

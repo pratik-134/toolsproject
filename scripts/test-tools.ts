@@ -139,6 +139,12 @@ import { runTests as runLinkProtectorTests } from "../components/tools/phase3/li
 import { runTests as runCodeSnapshotStudioTests } from "../components/tools/phase3/code-snapshot-studio/logic.test";
 import { runTests as runSvgPatternGeneratorTests } from "../components/tools/phase3/svg-pattern-generator/logic.test";
 import { runTests as runJsonGraphVisualizerTests } from "../components/tools/phase3/json-graph-visualizer/logic.test";
+import { runColorPaletteTests } from "../components/tools/phase3/color-palette-generator/logic.test";
+import { runMeshGradientTests } from "../components/tools/phase3/css-mesh-gradient-generator/logic.test";
+import { runBackgroundRemoverTests } from "../components/tools/phase3/image-background-remover/logic.test";
+import { runVisualDiffTests } from "../components/tools/phase3/visual-diff-studio/logic.test";
+import { runRegexVisualizerTests } from "../components/tools/phase3/regex-visualizer/logic.test";
+import { runPdfWatermarkTests } from "../components/tools/phase3/pdf-watermark-stamper/logic.test";
 import { runTests as runPipelineHandoffTests } from "../lib/pipeline/handoff.test";
 import { runConverterEngineTests } from "../components/tools/engines/logic.test";
 import { resumeDataSchema, initialResumeData } from "../lib/schema";
@@ -734,6 +740,30 @@ async function main() {
   }
   console.log("✅ [json-graph-visualizer] unit tests passed!");
 
+  if (!runColorPaletteTests()) {
+    throw new Error("Color palette generator tests failed!");
+  }
+
+  if (!runMeshGradientTests()) {
+    throw new Error("CSS mesh gradient generator tests failed!");
+  }
+
+  if (!runBackgroundRemoverTests()) {
+    throw new Error("Smart background remover tests failed!");
+  }
+
+  if (!runVisualDiffTests()) {
+    throw new Error("Visual diff studio tests failed!");
+  }
+
+  if (!runRegexVisualizerTests()) {
+    throw new Error("Regex visualizer tests failed!");
+  }
+
+  if (!(await runPdfWatermarkTests())) {
+    throw new Error("PDF watermark stamper tests failed!");
+  }
+
   console.log("Testing [cross-tool-pipeline-handoff] logic...");
   if (!runPipelineHandoffTests()) {
     throw new Error("Cross-tool pipeline handoff tests failed!");
@@ -741,7 +771,7 @@ async function main() {
   console.log("✅ [cross-tool-pipeline-handoff] unit tests passed!");
 
   console.log("===============================================");
-  console.log("🎉 ALL TOOL UNIT TESTS PASSED (175/175)!");
+  console.log("🎉 ALL TOOL UNIT TESTS PASSED (181/181)!");
 }
 
 main().catch((err) => {

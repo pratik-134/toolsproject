@@ -5070,6 +5070,212 @@ export const TOOLS: ToolDefinition[] = [
       ]
     },
     related: ["json-formatter", "json-yaml-converter", "json-schema-validator", "code-snapshot-studio"]
+  },
+
+  /* =========================================================================
+     PHASE 3 DEVELOPER TOOL: Harmonic Color Palette Studio & WCAG Contrast Checker
+     ========================================================================= */
+  {
+    slug: "color-palette-generator",
+    name: "Harmonic Color Palette Studio & Contrast Checker",
+    category: "developer",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Harmonic Color Palette Studio & WCAG Contrast Checker — Free Coolors Alternative",
+      description: "Generate harmonic color schemes with complementary, analogous, and triadic modes. Inspect live WCAG 2.1 AA/AAA contrast ratios and simulate color blindness with zero cloud uploads.",
+      h1: "Free Harmonic Color Palette Studio & WCAG Contrast Checker",
+      intro: "Create beautiful, accessible color palettes with one click or spacebar. Lock favorite colors, test real-time W3C WCAG 2.1 contrast ratios, simulate vision deficiencies, and export CSS variables, Tailwind configurations, or JSON in 100% browser privacy.",
+      faq: [
+        {
+          q: "How does the harmonic palette generator work?",
+          a: "It applies classic color harmony formulas across the 360-degree HSL color wheel, calculating exact angular relationships including Complementary, Analogous, Triadic, Monochromatic, and Tetradic harmonies."
+        },
+        {
+          q: "What WCAG accessibility standards does ClearTrix check?",
+          a: "It computes exact W3C relative luminance and contrast ratios (from 1:1 to 21:1) against pure white and obsidian dark backgrounds, scoring compliance for WCAG 2.1 Level AA and AAA Normal/Large text."
+        },
+        {
+          q: "Can I simulate color blindness?",
+          a: "Yes. ClearTrix applies Brettel-Viénot mathematical transformation matrices to simulate Protanopia (red-blind), Deuteranopia (green-blind), Tritanopia (blue-blind), and Achromatopsia (monochromacy) in real time."
+        },
+        {
+          q: "What developer formats can I export?",
+          a: "Export with 1 click to CSS Custom Properties (:root variables), Tailwind CSS configuration snippet, HEX list, RGB tuples, HSL values, or structured JSON."
+        }
+      ]
+    },
+    related: ["color-converter", "code-snapshot-studio", "svg-pattern-generator", "code-minifier"]
+  },
+
+  /* =========================================================================
+     PHASE 3 IMAGE TOOL: CSS Mesh Gradient Studio & Generator
+     ========================================================================= */
+  {
+    slug: "css-mesh-gradient-generator",
+    name: "CSS Mesh Gradient Studio & Generator",
+    category: "image",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "CSS Mesh Gradient Studio & Generator — Free Meshgradient Alternative",
+      description: "Create stunning, organic multi-point CSS mesh gradients with draggable color pins, live softness blur, curated presets, and 1-click CSS, Tailwind, or SVG wallpaper export.",
+      h1: "Free CSS Mesh Gradient Studio & Generator",
+      intro: "Design organic multi-point mesh gradients directly in your browser. Drag color pins, adjust spread radius and Gaussian blur, try curated aesthetic themes, and copy production-ready CSS or high-resolution vector SVG wallpapers with 100% in-browser privacy.",
+      faq: [
+        {
+          q: "How does the in-browser CSS mesh gradient generator work?",
+          a: "It computes multi-layered radial gradients positioned at exact percentages across your canvas, blending them into a smooth, organic mesh with zero server processing."
+        },
+        {
+          q: "Can I use the generated mesh gradient in Tailwind CSS or React?",
+          a: "Yes. ClearTrix generates pure CSS background properties, arbitrary Tailwind utility classes, and standalone vector SVG markup for direct pasting into your codebase."
+        },
+        {
+          q: "Can I download the mesh gradient as a high-resolution wallpaper?",
+          a: "Yes. Click 'Download SVG' to save a scalable 1920x1080 vector graphic with native Gaussian blur filters suitable for responsive desktop or mobile backgrounds."
+        },
+        {
+          q: "Are there any usage limits or watermarks?",
+          a: "None. All mesh presets, color customizations, and SVG downloads are 100% free with zero watermarks or cloud uploads."
+        }
+      ]
+    },
+    related: ["svg-pattern-generator", "color-palette-generator", "canvas-resizer", "svg-minifier"]
+  },
+
+  /* =========================================================================
+     PHASE 3 IMAGE TOOL: Client-Side Smart Background Remover
+     ========================================================================= */
+  {
+    slug: "image-background-remover",
+    name: "Smart Image Background Remover",
+    category: "image",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Free Image Background Remover — 100% Client-Side Remove.bg Alternative",
+      description: "Remove image backgrounds automatically in your browser with zero server uploads. Fine-tune color tolerance, edge feathering, and export transparent PNGs.",
+      h1: "Free Client-Side Smart Image Background Remover",
+      intro: "Erase photo backgrounds instantly in device RAM. Adjust edge feathering, replace cutouts with custom colors or gradients, and export transparent PNGs with 100% privacy.",
+      faq: [
+        {
+          q: "Are my photos uploaded to external servers?",
+          a: "Never. ClearTrix processes every pixel directly inside your browser memory using local canvas segmentation algorithms."
+        },
+        {
+          q: "Can I replace the background with a solid color or gradient?",
+          a: "Yes. Choose transparent cutout, solid background fill, or modern linear gradients."
+        },
+        {
+          q: "What image formats are supported for background removal?",
+          a: "ClearTrix supports PNG, JPEG, WebP, SVG, and GIF photos with instant client-side rendering."
+        }
+      ]
+    },
+    related: ["aspect-ratio-cropper", "canvas-resizer", "batch-image-compressor", "image-watermarker"]
+  },
+
+  /* =========================================================================
+     PHASE 3 DEVELOPER TOOL: Multi-Format Visual Diff Studio
+     ========================================================================= */
+  {
+    slug: "visual-diff-studio",
+    name: "Multi-Format Visual Diff Studio",
+    category: "developer",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Visual Diff Studio — Free Side-by-Side Diffchecker Alternative",
+      description: "Compare code and text with side-by-side split view, character-level micro-diff highlights, whitespace/case toggles, and unified patch export.",
+      h1: "Free Multi-Format Visual Diff Studio",
+      intro: "Compare differences between two codebases or documents with dual-pane synchronized scrolling, word-level highlights, and one-click unified patch export.",
+      faq: [
+        {
+          q: "How does the micro-diff highlighting work?",
+          a: "It performs token-level diff analysis within modified lines, highlighting specific word and character insertions and deletions."
+        },
+        {
+          q: "Can I export Git patches?",
+          a: "Yes. Click 'Copy Unified Patch' or 'Download .patch' to export standard unified diff patches."
+        },
+        {
+          q: "Can I ignore whitespace differences or letter case?",
+          a: "Yes. Toggle 'Ignore Whitespace' and 'Ignore Case' checkboxes to filter out trivial formatting variances."
+        }
+      ]
+    },
+    related: ["text-diff", "code-snapshot-studio", "json-graph-visualizer", "code-minifier"]
+  },
+
+  /* =========================================================================
+     PHASE 3 DEVELOPER TOOL: Interactive RegEx Visualizer & Rail Diagram
+     ========================================================================= */
+  {
+    slug: "regex-visualizer",
+    name: "Interactive RegEx Visualizer & Rail Diagram",
+    category: "developer",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Interactive RegEx Visualizer & Rail Diagram — Free RegExr Alternative",
+      description: "Visualize regular expressions as interactive railroad flow diagrams. Inspect tokens, capture groups, and test regex matches in real time.",
+      h1: "Free Interactive RegEx Visualizer & Rail Diagram",
+      intro: "Break down complex regular expressions into clean railroad node diagrams with human-readable token explanations and real-time live string matching.",
+      faq: [
+        {
+          q: "What does the railroad diagram show?",
+          a: "It maps each regular expression component into structured semantic flow nodes (anchors, capture groups, quantifiers, character classes)."
+        },
+        {
+          q: "Can I test regex flags?",
+          a: "Yes. Configure global (g), case-insensitive (i), multiline (m), and other flags with instant match highlighting."
+        },
+        {
+          q: "Is any regex or test data sent over the internet?",
+          a: "No. The RegExp evaluation and railroad parser run 100% inside your browser's JavaScript engine."
+        }
+      ]
+    },
+    related: ["regex-tester", "code-snapshot-studio", "curl-to-code-converter", "code-minifier"]
+  },
+
+  /* =========================================================================
+     PHASE 3 DOCUMENT TOOL: PDF Watermark & Page Stamp Studio
+     ========================================================================= */
+  {
+    slug: "pdf-watermark-stamper",
+    name: "PDF Watermark & Page Stamp Studio",
+    category: "document-pdf",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "PDF Watermark & Page Stamp Studio — Free In-Browser PDF Stamper",
+      description: "Stamp multi-page PDF documents with custom text watermarks, diagonal rotation, opacity control, and page range filtering in browser memory.",
+      h1: "Free In-Browser PDF Watermark & Page Stamp Studio",
+      intro: "Protect documents with diagonal or horizontal watermarks. Control opacity, font size, angle, and target specific pages with 100% in-browser privacy.",
+      faq: [
+        {
+          q: "Does my PDF leave my device?",
+          a: "No. All PDF loading, vector text stamping, and downloading execute 100% locally in your browser memory."
+        },
+        {
+          q: "Can I watermark only the first page or odd/even pages?",
+          a: "Yes. Filter page ranges to All Pages, First Page Only, Odd Pages, or Even Pages."
+        },
+        {
+          q: "Can I adjust watermark rotation angle and opacity?",
+          a: "Yes. Customize angle from -90 to +90 degrees and transparency from 5% subtle to 100% opaque."
+        }
+      ]
+    },
+    related: ["pdf-editor", "pdf-merger", "pdf-page-numberer", "pdf-compressor"]
   }
 ];
 

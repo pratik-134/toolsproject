@@ -118,7 +118,7 @@ export function getToolIcon(tool: ToolDefinition): LucideIcon {
   if (slug.includes("resize") || slug.includes("canvas")) return Maximize2;
   if (slug.includes("compress") || slug.includes("minifier")) return Minimize2;
   if (slug.includes("filter") || slug.includes("retouch")) return Palette;
-  if (slug.includes("watermark") || slug.includes("pattern") || slug.includes("wave")) return Sparkles;
+  if (slug.includes("watermark") || slug.includes("pattern") || slug.includes("wave") || slug.includes("mesh") || slug.includes("gradient")) return Sparkles;
 
   // PDF & Documents
   if (slug.includes("ats") || slug.includes("keyword")) return FileCheck;

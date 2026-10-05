@@ -237,6 +237,12 @@ Every tool in Cleartrix is built using this strict, modular 4-file pattern. Doma
 - **High-Res Code Snapshot Studio (`code-snapshot-studio`):** In-browser Carbon/Ray-grade code screenshot studio supporting 10 languages, 7 themes (Dracula, Monokai, One Dark, Nord, Synthwave, GitHub Dark/Light), macOS/Windows window frames, line numbers, 1-click clipboard image copy, and 1x/2x/3x retina PNG & SVG export.
 - **Vector SVG Wave & Pattern Studio (`svg-pattern-generator`):** In-browser parametric SVG generator for wave dividers, layered curves, organic blobs, mesh gradients, and dot matrices with 1-click SVG and CSS data URI exports.
 - **Interactive JSON/YAML Graph & Tree Visualizer (`json-graph-visualizer`):** In-browser 2D node-tree diagram explorer for complex JSON/YAML schemas with live search filtering, JSONPath copy, and SVG graph export.
+- **Harmonic Color Palette Studio & WCAG Contrast Checker (`color-palette-generator`):** In-browser Coolors/Adobe-grade color palette generator with Complementary, Analogous, Triadic, Monochromatic, Split-Complementary, and Tetradic harmonies, individual color locking, live W3C WCAG 2.1 AA/AAA contrast ratio compliance, Brettel-Viénot color blindness vision simulation (Protanopia, Deuteranopia, Tritanopia, Achromatopsia), and 1-click export to CSS variables, Tailwind configs, and JSON.
+- **CSS Mesh Gradient Studio & Generator (`css-mesh-gradient-generator`):** In-browser Meshgradient/CSS Hero-grade multi-point radial mesh studio with draggable color coordinates, spread radius and blur sliders, aesthetic presets (Aurora, Sunset, Cyberpunk, Spring), and 1-click copy for pure CSS, Tailwind arbitrary classes, and scalable vector SVG wallpaper export.
+- **Smart Image Background Remover (`image-background-remover`):** In-browser Remove.bg/PhotoRoom alternative performing local canvas pixel distance segmentation, edge feathering, and cutouts with transparent, solid, or gradient backgrounds.
+- **Multi-Format Visual Diff Studio (`visual-diff-studio`):** In-browser Diffchecker Pro alternative featuring dual-pane split view, unified patch export, synchronized scrolling, and token-level micro-diff word highlights.
+- **Interactive RegEx Visualizer & Rail Diagram (`regex-visualizer`):** In-browser RegExr railroad diagram visualizer with semantic AST tokens, capture group explanations, and live regex match testing.
+- **PDF Watermark & Page Stamp Studio (`pdf-watermark-stamper`):** In-browser multi-page PDF stamper with vector text watermarks, opacity sliders, diagonal rotation angles, and page range filtering.
 
 ### 6. 38 Converter Engine Tools
 - **Canvas Image Converters:** WebP to PNG, WebP to JPG, PNG to JPG, JPG to PNG, SVG to PNG, BMP to JPG, BMP to PNG, GIF to PNG, Image to ICO, HEIC to JPG.
@@ -246,21 +252,21 @@ Every tool in Cleartrix is built using this strict, modular 4-file pattern. Doma
 
 ---
 
-## 6. The 11 Platform Categories & 169 Shipped Tools
+## 6. The 11 Platform Categories & 181 Shipped Tools
 
-The platform contains 169 registered and fully typed tools across 11 official categories:
+The platform contains 181 registered and fully typed tools across 11 official categories:
 
-### 1. Document & PDF (`document-pdf` — 36 tools)
-`pdf-editor`, `ats-resume-checker`, `resume-import-viewer`, `pdf-merger`, `pdf-splitter`, `pdf-page-rotator`, `pdf-page-organizer`, `pdf-compressor`, `pdf-bates-stamper`, `pdf-flattener`, `pdf-form-extractor`, `pdf-form-builder`, `pdf-digital-signer`, `markdown-to-pdf`, `html-to-pdf`, `direct-txt-editor`, `direct-markdown-editor`, `direct-html-editor`, `pdf-redaction-tool`, `direct-rtf-creator`, `direct-docx-editor`, `pdf-annotator`, `excel-to-pdf`, `docx-to-pdf`, `pdf-to-docx`, `pdf-encryptor`, `pdf-decryptor`, `powerpoint-to-pdf`, `jpg-to-pdf`, `pdf-to-jpg`, `pdf-to-png`, `pdf-to-text`, `latex-editor`, `camera-to-pdf-scanner`, `job-keyword-matcher`, `pdf-page-numberer`.
+### 1. Document & PDF (`document-pdf` — 37 tools)
+`pdf-editor`, `ats-resume-checker`, `resume-import-viewer`, `pdf-merger`, `pdf-splitter`, `pdf-page-rotator`, `pdf-page-organizer`, `pdf-compressor`, `pdf-bates-stamper`, `pdf-flattener`, `pdf-form-extractor`, `pdf-form-builder`, `pdf-digital-signer`, `markdown-to-pdf`, `html-to-pdf`, `direct-txt-editor`, `direct-markdown-editor`, `direct-html-editor`, `pdf-redaction-tool`, `direct-rtf-creator`, `direct-docx-editor`, `pdf-annotator`, `excel-to-pdf`, `docx-to-pdf`, `pdf-to-docx`, `pdf-encryptor`, `pdf-decryptor`, `powerpoint-to-pdf`, `jpg-to-pdf`, `pdf-to-jpg`, `pdf-to-png`, `pdf-to-text`, `latex-editor`, `camera-to-pdf-scanner`, `job-keyword-matcher`, `pdf-page-numberer`, `pdf-watermark-stamper`.
 
-### 2. Developer, Data & Code (`developer` — 32 tools)
-`json-formatter`, `base64-converter`, `csv-json-converter`, `hash-generator`, `url-encoder`, `html-beautifier`, `text-diff`, `regex-tester`, `html-entity-encoder`, `json-xml-converter`, `base-converter`, `unicode-normalizer`, `sql-formatter`, `hmac-generator`, `json-yaml-converter`, `json-schema-validator`, `code-minifier`, `chmod-calculator`, `sql-dump-to-csv`, `excel-to-json-csv`, `markdown-to-html`, `html-to-markdown`, `csv-to-excel`, `json-to-typescript`, `xml-to-csv`, `text-to-binary`, `tsv-to-csv`, `jwt-decoder`, `cron-expression-builder`, `curl-to-code-converter`, `code-snapshot-studio`, `json-graph-visualizer`.
+### 2. Developer, Data & Code (`developer` — 35 tools)
+`json-formatter`, `base64-converter`, `csv-json-converter`, `hash-generator`, `url-encoder`, `html-beautifier`, `text-diff`, `regex-tester`, `html-entity-encoder`, `json-xml-converter`, `base-converter`, `unicode-normalizer`, `sql-formatter`, `hmac-generator`, `json-yaml-converter`, `json-schema-validator`, `code-minifier`, `chmod-calculator`, `sql-dump-to-csv`, `excel-to-json-csv`, `markdown-to-html`, `html-to-markdown`, `csv-to-excel`, `json-to-typescript`, `xml-to-csv`, `text-to-binary`, `tsv-to-csv`, `jwt-decoder`, `cron-expression-builder`, `curl-to-code-converter`, `code-snapshot-studio`, `json-graph-visualizer`, `color-palette-generator`, `visual-diff-studio`, `regex-visualizer`.
 
 ### 3. Calculators (`calculators` — 34 tools)
 `mortgage-calculator`, `compound-interest-calculator`, `percentage-calculator`, `bmi-calculator`, `date-calculator`, `age-calculator`, `discount-calculator`, `sales-tax-calculator`, `freelance-rate-calculator`, `calorie-calculator`, `water-intake-calculator`, `auto-loan-calculator`, `scientific-calculator`, `aspect-ratio-calculator`, `bmr-tdee-calculator`, `inflation-calculator`, `ip-subnet-calculator`, `statistics-calculator`, `fraction-simplifier`, `geometry-calculator`, `time-card-calculator`, `world-clock-converter`, `bandwidth-calculator`, `sip-calculator`, `retirement-401k-calculator`, `debt-payoff-calculator`, `roi-calculator`, `profit-margin-calculator`, `break-even-calculator`, `payroll-paycheck-calculator`, `body-fat-calculator`, `target-heart-rate-calculator`, `pregnancy-due-date-calculator`, `salary-tax-calculator`.
 
-### 4. Image Tools (`image` — 28 tools)
-`image-converter`, `aspect-ratio-cropper`, `canvas-resizer`, `batch-image-compressor`, `exif-stripper`, `image-base64-converter`, `svg-minifier`, `favicon-generator`, `image-rotator-flipper`, `photo-filter-studio`, `image-watermarker`, `webp-to-png`, `webp-to-jpg`, `png-to-jpg`, `jpg-to-png`, `svg-to-png`, `image-to-ico`, `heic-to-jpg`, `image-to-text`, `bmp-to-jpg`, `bmp-to-png`, `gif-to-png`, `social-post-maker`, `story-reels-maker`, `chart-graph-visualizer`, `meme-caption-generator`, `passport-photo-generator`, `svg-pattern-generator`.
+### 4. Image Tools (`image` — 30 tools)
+`image-converter`, `aspect-ratio-cropper`, `canvas-resizer`, `batch-image-compressor`, `exif-stripper`, `image-base64-converter`, `svg-minifier`, `favicon-generator`, `image-rotator-flipper`, `photo-filter-studio`, `image-watermarker`, `webp-to-png`, `webp-to-jpg`, `png-to-jpg`, `jpg-to-png`, `svg-to-png`, `image-to-ico`, `heic-to-jpg`, `image-to-text`, `bmp-to-jpg`, `bmp-to-png`, `gif-to-png`, `social-post-maker`, `story-reels-maker`, `chart-graph-visualizer`, `meme-caption-generator`, `passport-photo-generator`, `svg-pattern-generator`, `css-mesh-gradient-generator`, `image-background-remover`.
 
 ### 5. Everyday Utilities (`utilities` — 13 tools)
 `word-counter`, `password-generator`, `case-converter`, `lorem-generator`, `duplicate-line-remover`, `unit-converter`, `epoch-converter`, `checksum-verifier`, `archive-extractor`, `archive-packer`, `color-converter`, `roman-numeral-converter`, `number-to-words`.

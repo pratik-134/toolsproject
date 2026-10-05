@@ -43,6 +43,9 @@ export const PIPELINE_WORKFLOW_MAP: Record<string, string[]> = {
   "code-minifier": ["code-snapshot-studio", "client-pastebin", "burn-after-read-secret"],
   "code-snapshot-studio": ["client-pastebin", "burn-after-read-secret"],
   "json-graph-visualizer": ["json-formatter", "code-snapshot-studio", "client-pastebin"],
+  "color-palette-generator": ["code-snapshot-studio", "svg-pattern-generator", "client-pastebin"],
+  "visual-diff-studio": ["code-snapshot-studio", "client-pastebin", "burn-after-read-secret"],
+  "regex-visualizer": ["code-snapshot-studio", "client-pastebin", "curl-to-code-converter"],
 
   // Image workflows
   "aspect-ratio-cropper": ["canvas-resizer", "batch-image-compressor", "photo-filter-studio", "image-watermarker"],
@@ -52,6 +55,11 @@ export const PIPELINE_WORKFLOW_MAP: Record<string, string[]> = {
   "meme-caption-generator": ["batch-image-compressor", "image-converter"],
   "passport-photo-generator": ["batch-image-compressor", "image-converter"],
   "svg-pattern-generator": ["svg-minifier", "svg-to-png", "batch-image-compressor"],
+  "css-mesh-gradient-generator": ["color-palette-generator", "svg-pattern-generator", "batch-image-compressor"],
+  "image-background-remover": ["canvas-resizer", "batch-image-compressor", "image-converter"],
+
+  // Document workflows
+  "pdf-watermark-stamper": ["pdf-editor", "pdf-compressor", "pdf-merger"],
 
   // Media workflows
   "desktop-screen-recorder": ["webm-to-mp4", "mp4-to-mp3"],
