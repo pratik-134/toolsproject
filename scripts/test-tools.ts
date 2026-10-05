@@ -145,6 +145,10 @@ import { runBackgroundRemoverTests } from "../components/tools/phase3/image-back
 import { runVisualDiffTests } from "../components/tools/phase3/visual-diff-studio/logic.test";
 import { runRegexVisualizerTests } from "../components/tools/phase3/regex-visualizer/logic.test";
 import { runPdfWatermarkTests } from "../components/tools/phase3/pdf-watermark-stamper/logic.test";
+import { runAudioWaveformTests } from "../components/tools/phase3/audio-waveform-visualizer/logic.test";
+import { runBoxShadowTests } from "../components/tools/phase3/box-shadow-generator/logic.test";
+import { runPdfToSvgTests } from "../components/tools/phase3/pdf-to-svg/logic.test";
+import { runAudioPitchTempoTests } from "../components/tools/phase3/audio-pitch-tempo-shifter/logic.test";
 import { runTests as runPipelineHandoffTests } from "../lib/pipeline/handoff.test";
 import { runConverterEngineTests } from "../components/tools/engines/logic.test";
 import { resumeDataSchema, initialResumeData } from "../lib/schema";
@@ -764,6 +768,30 @@ async function main() {
     throw new Error("PDF watermark stamper tests failed!");
   }
 
+  console.log("Testing [audio-waveform-visualizer] logic...");
+  if (!runAudioWaveformTests()) {
+    throw new Error("Audio waveform visualizer tests failed!");
+  }
+  console.log("✅ [audio-waveform-visualizer] unit tests passed!");
+
+  console.log("Testing [box-shadow-generator] logic...");
+  if (!runBoxShadowTests()) {
+    throw new Error("Box shadow generator tests failed!");
+  }
+  console.log("✅ [box-shadow-generator] unit tests passed!");
+
+  console.log("Testing [pdf-to-svg] logic...");
+  if (!(await runPdfToSvgTests())) {
+    throw new Error("PDF to SVG converter tests failed!");
+  }
+  console.log("✅ [pdf-to-svg] unit tests passed!");
+
+  console.log("Testing [audio-pitch-tempo-shifter] logic...");
+  if (!runAudioPitchTempoTests()) {
+    throw new Error("Audio pitch & tempo shifter tests failed!");
+  }
+  console.log("✅ [audio-pitch-tempo-shifter] unit tests passed!");
+
   console.log("Testing [cross-tool-pipeline-handoff] logic...");
   if (!runPipelineHandoffTests()) {
     throw new Error("Cross-tool pipeline handoff tests failed!");
@@ -771,7 +799,7 @@ async function main() {
   console.log("✅ [cross-tool-pipeline-handoff] unit tests passed!");
 
   console.log("===============================================");
-  console.log("🎉 ALL TOOL UNIT TESTS PASSED (181/181)!");
+  console.log("🎉 ALL TOOL UNIT TESTS PASSED (185/185)!");
 }
 
 main().catch((err) => {

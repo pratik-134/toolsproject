@@ -5276,6 +5276,139 @@ export const TOOLS: ToolDefinition[] = [
       ]
     },
     related: ["pdf-editor", "pdf-merger", "pdf-page-numberer", "pdf-compressor"]
+  },
+
+  /* =========================================================================
+     PHASE 3 AUDIO TOOL: Audio Waveform Visualizer & Audiogram Generator
+     ========================================================================= */
+  {
+    slug: "audio-waveform-visualizer",
+    name: "Audio Waveform Visualizer",
+    category: "audio",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Audio Waveform Visualizer & Video Generator — Free Client-Side Audiogram",
+      description: "Generate high-resolution audio waveform visualizations and audiogram videos directly in your browser. Multiple themes, bar/line/circle styles, zero server uploads.",
+      h1: "Free Client-Side Audio Waveform Visualizer & Audiogram Generator",
+      intro: "Transform voice notes, podcasts, and sound clips into stunning visual waveforms or MP4/WebM video animations. 100% private in-browser rendering with zero server uploads.",
+      faq: [
+        {
+          q: "Is any audio uploaded to external servers?",
+          a: "No. Cleartrix analyzes audio frequencies and renders canvas waveform frames 100% client-side inside your browser."
+        },
+        {
+          q: "Can I export waveform animations as video?",
+          a: "Yes. You can record and export the live waveform as a WebM video or download instant high-resolution PNG snapshots."
+        },
+        {
+          q: "What audio formats are supported?",
+          a: "MP3, WAV, OGG, AAC, and FLAC files are all natively supported via the browser Web Audio API."
+        }
+      ]
+    },
+    related: ["audio-pitch-tempo-shifter", "wav-to-mp3", "mp4-to-mp3", "flac-to-mp3"]
+  },
+
+  /* =========================================================================
+     PHASE 3 DEVELOPER TOOL: CSS Box Shadow & Neumorphism Generator
+     ========================================================================= */
+  {
+    slug: "box-shadow-generator",
+    name: "CSS Box Shadow Generator",
+    category: "developer",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "CSS Box Shadow Generator — Multi-Layer & Neumorphism Studio",
+      description: "Craft multi-layer CSS box shadows, neumorphic soft UI effects, and smooth elevation scales with instant Tailwind CSS and standard CSS code generation.",
+      h1: "Free In-Browser CSS Box Shadow & Neumorphism Generator",
+      intro: "Design realistic multi-layer depth, inset glows, and neumorphic soft UI shadows with real-time preview. One-click copy for vanilla CSS and Tailwind CSS classes.",
+      faq: [
+        {
+          q: "Can I stack multiple layered shadows?",
+          a: "Yes. You can add, edit, reorder, and toggle multiple box shadow layers to achieve ultra-smooth photorealistic elevation."
+        },
+        {
+          q: "Does it support Tailwind CSS syntax?",
+          a: "Yes. Instantly copy arbitrary Tailwind shadow utilities (e.g., shadow-[...]) ready for modern Next.js and Tailwind projects."
+        },
+        {
+          q: "What is Neumorphism mode?",
+          a: "Neumorphism generates dual opposing light and dark shadows that create extruded or inset soft tactile surfaces against a matching background."
+        }
+      ]
+    },
+    related: ["css-mesh-gradient-generator", "color-palette-generator", "code-snapshot-studio", "code-minifier"]
+  },
+
+  /* =========================================================================
+     PHASE 3 DOCUMENT TOOL: PDF to SVG Vector Converter
+     ========================================================================= */
+  {
+    slug: "pdf-to-svg",
+    name: "PDF to SVG Vector Converter",
+    category: "document-pdf",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    heavyDeps: ["pdfjs"],
+    seo: {
+      title: "PDF to SVG Converter — 100% Client-Side Vector Conversion",
+      description: "Convert multi-page PDF documents into scalable vector graphics (SVG) in your browser. Crisp vector typography, path fidelity, zero uploads.",
+      h1: "Free In-Browser PDF to SVG Vector Converter",
+      intro: "Extract PDF pages as crisp, resolution-independent SVG vector graphics directly in your browser. All vector paths, text shapes, and colors are converted locally without uploading files to remote servers.",
+      faq: [
+        {
+          q: "Are vector paths and text preserved in the SVG output?",
+          a: "Yes. The conversion renders exact PDF vector coordinate paths and glyph definitions into standard SVG elements."
+        },
+        {
+          q: "Are my PDF documents uploaded to external servers?",
+          a: "No. Processing executes 100% client-side using PDF.js inside your browser memory. Confidential documents never leave your computer."
+        },
+        {
+          q: "Can I convert specific pages or batch download them?",
+          a: "Yes. You can inspect individual converted pages, download any page as an individual SVG, or download a combined ZIP archive."
+        }
+      ]
+    },
+    related: ["pdf-editor", "pdf-to-png", "pdf-to-jpg", "svg-to-png"]
+  },
+
+  /* =========================================================================
+     PHASE 3 AUDIO TOOL: Audio Pitch & Tempo Shifter
+     ========================================================================= */
+  {
+    slug: "audio-pitch-tempo-shifter",
+    name: "Audio Pitch & Tempo Shifter",
+    category: "audio",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Audio Pitch & Tempo Shifter — Free Client-Side Transcribe Tool",
+      description: "Adjust audio playback pitch (semitones/cents) and tempo/speed independently in real time without quality loss. 100% private client-side processing.",
+      h1: "Free Client-Side Audio Pitch & Tempo Shifter",
+      intro: "Transpose songs, practice musical instruments, or transcribe speech by changing pitch and playback speed independently in real time. Runs 100% in your browser using the Web Audio API.",
+      faq: [
+        {
+          q: "Can I change speed without changing musical pitch?",
+          a: "Yes. Independent speed and pitch scaling allows slowing down fast passages for transcription while maintaining original key."
+        },
+        {
+          q: "Can I transpose audio into a different musical key?",
+          a: "Yes. Shift pitch by musical semitones (-12 to +12) or fine-tune in musical cents."
+        },
+        {
+          q: "Does my audio file get uploaded to the cloud?",
+          a: "No. Cleartrix decodes, modulates, and loops audio entirely in local browser RAM using the Web Audio API."
+        }
+      ]
+    },
+    related: ["audio-waveform-visualizer", "wav-to-mp3", "mp4-to-mp3", "flac-to-mp3"]
   }
 ];
 

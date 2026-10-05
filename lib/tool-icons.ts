@@ -90,6 +90,7 @@ export function getToolIcon(tool: ToolDefinition): LucideIcon {
   if (slug.includes("hash") || slug.includes("hmac")) return Hash;
   if (slug.includes("url-encoder") || slug.includes("url")) return LinkIcon;
   if (slug.includes("html") || slug.includes("css") || slug.includes("beautifier")) return Code;
+  if (slug.includes("shadow")) return Layers;
   if (slug.includes("diff") || slug.includes("compare")) return GitCompare;
   if (slug.includes("regex")) return Regex;
   if (slug.includes("jwt") || slug.includes("token")) return KeyRound;
@@ -139,7 +140,8 @@ export function getToolIcon(tool: ToolDefinition): LucideIcon {
   if (slug.includes("recorder") || slug.includes("screen")) return Film;
   if (slug.includes("trim") || slug.includes("cut")) return Scissors;
   if (slug.includes("booster") || slug.includes("volume")) return Volume2;
-  if (slug.includes("audio") || slug.includes("voice") || slug.includes("pitch")) return Music;
+  if (slug.includes("waveform")) return Activity;
+  if (slug.includes("audio") || slug.includes("voice") || slug.includes("pitch") || slug.includes("tempo")) return Music;
 
   // Fallback to Category Icon
   return CATEGORY_ICON_MAP[tool.category] || FileText;

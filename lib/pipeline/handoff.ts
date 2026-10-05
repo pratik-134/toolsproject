@@ -60,11 +60,17 @@ export const PIPELINE_WORKFLOW_MAP: Record<string, string[]> = {
 
   // Document workflows
   "pdf-watermark-stamper": ["pdf-editor", "pdf-compressor", "pdf-merger"],
+  "pdf-to-svg": ["svg-to-png", "svg-pattern-generator", "pdf-editor"],
+
+  // Developer workflows
+  "box-shadow-generator": ["css-mesh-gradient-generator", "code-snapshot-studio", "client-pastebin"],
 
   // Media workflows
   "desktop-screen-recorder": ["webm-to-mp4", "mp4-to-mp3"],
   "web-tab-recorder": ["webm-to-mp4", "mp4-to-mp3"],
   "webcam-overlay-recorder": ["webm-to-mp4", "mp4-to-mp3"],
+  "audio-waveform-visualizer": ["audio-pitch-tempo-shifter", "desktop-screen-recorder", "mp4-to-mp3"],
+  "audio-pitch-tempo-shifter": ["audio-waveform-visualizer", "wav-to-mp3", "mp4-to-mp3"],
 
   // Cloud & Security workflows
   "client-pastebin": ["burn-after-read-secret", "link-protector", "word-counter"],

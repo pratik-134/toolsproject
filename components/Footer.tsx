@@ -19,11 +19,11 @@ export const Footer: React.FC = () => {
       {/* Subtle Top Gradient Divider Line */}
       <div className="h-px w-full bg-gradient-to-r from-transparent via-blue-500/30 dark:via-cyan-400/30 to-transparent" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-10">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-12 pb-10">
         {/* Top Status & Feature Bar */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-10 mb-10 border-b border-slate-200/70 dark:border-slate-800/70">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-8 sm:pb-10 mb-8 sm:mb-10 border-b border-slate-200/70 dark:border-slate-800/70">
           <div className="flex items-center gap-3">
-            <span className="relative flex h-2.5 w-2.5">
+            <span className="relative flex h-2.5 w-2.5 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
             </span>
@@ -47,10 +47,10 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Main Columns Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 lg:gap-10">
+        {/* Main Columns Grid - Optimized for Mobile Screens */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 sm:gap-6 lg:gap-10">
           {/* Brand Info Column */}
-          <div className="col-span-2 md:col-span-4 lg:col-span-2 space-y-4">
+          <div className="col-span-1 sm:col-span-2 md:col-span-4 lg:col-span-2 space-y-4">
             <Link href="/" className="inline-block transition-transform hover:opacity-90">
               <CleartrixLogo size={28} isLight={false} />
             </Link>
@@ -150,8 +150,8 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/tools/developer/css-inliner" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  CSS Inliner
+                <Link href="/tools/developer/code-snapshot-studio" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  Code Snapshot Studio
                 </Link>
               </li>
             </ul>
@@ -169,6 +169,11 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/tools/image/image-background-remover" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  Background Remover
+                </Link>
+              </li>
+              <li>
                 <Link href="/tools/image/favicon-generator" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                   Favicon Generator
                 </Link>
@@ -179,18 +184,13 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/tools/image/svg-minifier" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  SVG XML Minifier
+                <Link href="/tools/image/css-mesh-gradient-generator" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  Mesh Gradient Studio
                 </Link>
               </li>
               <li>
                 <Link href="/tools/codes/qr-generator" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                   Custom QR Generator
-                </Link>
-              </li>
-              <li>
-                <Link href="/tools/codes/barcode-generator" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  Barcode Studio
                 </Link>
               </li>
             </ul>
@@ -240,15 +240,15 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Bar (No git icon per user instruction) */}
-        <div className="mt-12 pt-6 border-t border-slate-200/70 dark:border-slate-800/70 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
-          <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-center sm:text-left">
+        {/* Bottom Bar (Clean mobile stack + no git icon per user instructions) */}
+        <div className="mt-10 sm:mt-12 pt-6 border-t border-slate-200/70 dark:border-slate-800/70 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400 text-center md:text-left">
+          <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2">
             <span>© {new Date().getFullYear()} {BRAND.name}.</span>
             <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
             <span>All web tools execute 100% in-browser with zero server tracking.</span>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
             <Link href="/privacy" className="hover:text-slate-900 dark:hover:text-slate-200 transition-colors">
               Privacy
             </Link>
@@ -261,7 +261,7 @@ export const Footer: React.FC = () => {
             <Link href="/blog" className="hover:text-slate-900 dark:hover:text-slate-200 transition-colors">
               Blog
             </Link>
-            <div className="flex items-center gap-1.5 text-[11px] text-slate-400 dark:text-slate-500 pl-2 border-l border-slate-200 dark:border-slate-800">
+            <div className="flex items-center gap-1.5 text-[11px] text-slate-400 dark:text-slate-500 pl-2 sm:pl-3 border-l border-slate-200 dark:border-slate-800">
               <Lock className="w-3 h-3 text-emerald-500" />
               <span>Isolated Memory</span>
             </div>

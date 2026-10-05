@@ -243,6 +243,10 @@ Every tool in Cleartrix is built using this strict, modular 4-file pattern. Doma
 - **Multi-Format Visual Diff Studio (`visual-diff-studio`):** In-browser Diffchecker Pro alternative featuring dual-pane split view, unified patch export, synchronized scrolling, and token-level micro-diff word highlights.
 - **Interactive RegEx Visualizer & Rail Diagram (`regex-visualizer`):** In-browser RegExr railroad diagram visualizer with semantic AST tokens, capture group explanations, and live regex match testing.
 - **PDF Watermark & Page Stamp Studio (`pdf-watermark-stamper`):** In-browser multi-page PDF stamper with vector text watermarks, opacity sliders, diagonal rotation angles, and page range filtering.
+- **Audio Waveform Visualizer & Video Generator (`audio-waveform-visualizer`):** In-browser Headliner/Audiogram alternative for audio frequency analysis, live waveform rendering (bars, waves, round frequency rings), gradient themes, high-res PNG snapshot capture, and client-side WebM/canvas video recording.
+- **CSS Box Shadow & Neumorphism Generator (`box-shadow-generator`):** In-browser CSSMatic alternative supporting multi-layer shadow stacking, inset/outset glows, full Neumorphic soft UI dual-shadow modeling, smooth elevation presets, and instant vanilla CSS & Tailwind arbitrary class export.
+- **PDF to SVG Vector Converter (`pdf-to-svg`):** In-browser vector conversion using PDF.js vector coordinate extraction, generating standalone resolution-independent SVG files per page with batch ZIP archive download.
+- **Audio Pitch & Tempo Shifter (`audio-pitch-tempo-shifter`):** In-browser Transcribe! alternative with independent Web Audio API pitch shifting (-12 to +12 semitones, fine-tuned cents), variable speed rate playback (0.25x to 2.5x), looping, and instant client-side WAV export.
 
 ### 6. 38 Converter Engine Tools
 - **Canvas Image Converters:** WebP to PNG, WebP to JPG, PNG to JPG, JPG to PNG, SVG to PNG, BMP to JPG, BMP to PNG, GIF to PNG, Image to ICO, HEIC to JPG.
@@ -252,15 +256,15 @@ Every tool in Cleartrix is built using this strict, modular 4-file pattern. Doma
 
 ---
 
-## 6. The 11 Platform Categories & 181 Shipped Tools
+## 6. The 11 Platform Categories & 185 Shipped Tools
 
-The platform contains 181 registered and fully typed tools across 11 official categories:
+The platform contains 185 registered and fully typed tools across 11 official categories:
 
-### 1. Document & PDF (`document-pdf` — 37 tools)
-`pdf-editor`, `ats-resume-checker`, `resume-import-viewer`, `pdf-merger`, `pdf-splitter`, `pdf-page-rotator`, `pdf-page-organizer`, `pdf-compressor`, `pdf-bates-stamper`, `pdf-flattener`, `pdf-form-extractor`, `pdf-form-builder`, `pdf-digital-signer`, `markdown-to-pdf`, `html-to-pdf`, `direct-txt-editor`, `direct-markdown-editor`, `direct-html-editor`, `pdf-redaction-tool`, `direct-rtf-creator`, `direct-docx-editor`, `pdf-annotator`, `excel-to-pdf`, `docx-to-pdf`, `pdf-to-docx`, `pdf-encryptor`, `pdf-decryptor`, `powerpoint-to-pdf`, `jpg-to-pdf`, `pdf-to-jpg`, `pdf-to-png`, `pdf-to-text`, `latex-editor`, `camera-to-pdf-scanner`, `job-keyword-matcher`, `pdf-page-numberer`, `pdf-watermark-stamper`.
+### 1. Document & PDF (`document-pdf` — 38 tools)
+`pdf-editor`, `ats-resume-checker`, `resume-import-viewer`, `pdf-merger`, `pdf-splitter`, `pdf-page-rotator`, `pdf-page-organizer`, `pdf-compressor`, `pdf-bates-stamper`, `pdf-flattener`, `pdf-form-extractor`, `pdf-form-builder`, `pdf-digital-signer`, `markdown-to-pdf`, `html-to-pdf`, `direct-txt-editor`, `direct-markdown-editor`, `direct-html-editor`, `pdf-redaction-tool`, `direct-rtf-creator`, `direct-docx-editor`, `pdf-annotator`, `excel-to-pdf`, `docx-to-pdf`, `pdf-to-docx`, `pdf-encryptor`, `pdf-decryptor`, `powerpoint-to-pdf`, `jpg-to-pdf`, `pdf-to-jpg`, `pdf-to-png`, `pdf-to-text`, `latex-editor`, `camera-to-pdf-scanner`, `job-keyword-matcher`, `pdf-page-numberer`, `pdf-watermark-stamper`, `pdf-to-svg`.
 
-### 2. Developer, Data & Code (`developer` — 35 tools)
-`json-formatter`, `base64-converter`, `csv-json-converter`, `hash-generator`, `url-encoder`, `html-beautifier`, `text-diff`, `regex-tester`, `html-entity-encoder`, `json-xml-converter`, `base-converter`, `unicode-normalizer`, `sql-formatter`, `hmac-generator`, `json-yaml-converter`, `json-schema-validator`, `code-minifier`, `chmod-calculator`, `sql-dump-to-csv`, `excel-to-json-csv`, `markdown-to-html`, `html-to-markdown`, `csv-to-excel`, `json-to-typescript`, `xml-to-csv`, `text-to-binary`, `tsv-to-csv`, `jwt-decoder`, `cron-expression-builder`, `curl-to-code-converter`, `code-snapshot-studio`, `json-graph-visualizer`, `color-palette-generator`, `visual-diff-studio`, `regex-visualizer`.
+### 2. Developer, Data & Code (`developer` — 36 tools)
+`json-formatter`, `base64-converter`, `csv-json-converter`, `hash-generator`, `url-encoder`, `html-beautifier`, `text-diff`, `regex-tester`, `html-entity-encoder`, `json-xml-converter`, `base-converter`, `unicode-normalizer`, `sql-formatter`, `hmac-generator`, `json-yaml-converter`, `json-schema-validator`, `code-minifier`, `chmod-calculator`, `sql-dump-to-csv`, `excel-to-json-csv`, `markdown-to-html`, `html-to-markdown`, `csv-to-excel`, `json-to-typescript`, `xml-to-csv`, `text-to-binary`, `tsv-to-csv`, `jwt-decoder`, `cron-expression-builder`, `curl-to-code-converter`, `code-snapshot-studio`, `json-graph-visualizer`, `color-palette-generator`, `visual-diff-studio`, `regex-visualizer`, `box-shadow-generator`.
 
 ### 3. Calculators (`calculators` — 34 tools)
 `mortgage-calculator`, `compound-interest-calculator`, `percentage-calculator`, `bmi-calculator`, `date-calculator`, `age-calculator`, `discount-calculator`, `sales-tax-calculator`, `freelance-rate-calculator`, `calorie-calculator`, `water-intake-calculator`, `auto-loan-calculator`, `scientific-calculator`, `aspect-ratio-calculator`, `bmr-tdee-calculator`, `inflation-calculator`, `ip-subnet-calculator`, `statistics-calculator`, `fraction-simplifier`, `geometry-calculator`, `time-card-calculator`, `world-clock-converter`, `bandwidth-calculator`, `sip-calculator`, `retirement-401k-calculator`, `debt-payoff-calculator`, `roi-calculator`, `profit-margin-calculator`, `break-even-calculator`, `payroll-paycheck-calculator`, `body-fat-calculator`, `target-heart-rate-calculator`, `pregnancy-due-date-calculator`, `salary-tax-calculator`.
@@ -274,8 +278,8 @@ The platform contains 181 registered and fully typed tools across 11 official ca
 ### 6. Video & Screen Capture (`video` — 10 tools)
 `desktop-screen-recorder`, `web-tab-recorder`, `webcam-overlay-recorder`, `mp4-to-mp3`, `mov-to-mp4`, `webm-to-mp4`, `gif-to-mp4`, `mkv-to-mp4`, `avi-to-mp4`, `flv-to-mp4`.
 
-### 7. Audio & Voice (`audio` — 6 tools)
-`wav-to-mp3`, `m4a-to-mp3`, `flac-to-mp3`, `ogg-to-mp3`, `aac-to-mp3`, `wma-to-mp3`.
+### 7. Audio & Voice (`audio` — 8 tools)
+`wav-to-mp3`, `m4a-to-mp3`, `flac-to-mp3`, `ogg-to-mp3`, `aac-to-mp3`, `wma-to-mp3`, `audio-waveform-visualizer`, `audio-pitch-tempo-shifter`.
 
 ### 8. Builders & Generators (`builders` — 5 tools)
 `resume-builder`, `invoice-receipt-generator`, `estimate-quote-builder`, `certificate-diploma-generator`, `proposal-builder`.

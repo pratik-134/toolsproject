@@ -643,6 +643,22 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     ssr: false,
     loading: () => <ToolLoadingState name="PDF Watermark & Page Stamp Studio" />,
   }),
+  "audio-waveform-visualizer": dynamic(() => import("@/components/tools/phase3/audio-waveform-visualizer"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Audio Waveform Visualizer" />,
+  }),
+  "box-shadow-generator": dynamic(() => import("@/components/tools/phase3/box-shadow-generator"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="CSS Box Shadow Generator" />,
+  }),
+  "pdf-to-svg": dynamic(() => import("@/components/tools/phase3/pdf-to-svg"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="PDF to SVG Vector Converter" />,
+  }),
+  "audio-pitch-tempo-shifter": dynamic(() => import("@/components/tools/phase3/audio-pitch-tempo-shifter"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Audio Pitch & Tempo Shifter" />,
+  }),
 };
 
 function ToolLoadingState({ name }: { name: string }) {
