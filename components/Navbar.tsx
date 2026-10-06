@@ -328,10 +328,11 @@ export const Navbar: React.FC = () => {
           </button>
         )}
 
-        {/* Header Theme Toggle (Dark/Light Switch) */}
-        <ThemeToggle />
+        {/* Header Theme Toggle (Dark/Light Switch) - Desktop only (hidden on mobile) */}
+        <ThemeToggle className="hidden lg:inline-flex" />
 
-        <Link href="/editor" onClick={handleLinkClick}>
+        {/* Header Builder Button - Desktop only (hidden on mobile) */}
+        <Link href="/editor" onClick={handleLinkClick} className="hidden lg:inline-flex">
           <Button
             size="sm"
             className="gap-1.5 font-extrabold bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white shadow-md hover:shadow-lg rounded-xl h-9 sm:h-10.5 px-3.5 sm:px-5 text-xs sm:text-sm whitespace-nowrap transition-all shrink-0"
@@ -372,6 +373,23 @@ export const Navbar: React.FC = () => {
           : "max-h-0 opacity-0 pointer-events-none p-0 border-transparent"
       }`}
     >
+      {/* Mobile Drawer Top Actions: Builder CTA & Theme Switcher (visible without scrolling) */}
+      <div className="space-y-2 pb-1">
+        <Link href="/editor" onClick={handleLinkClick} className="block w-full">
+          <Button
+            size="lg"
+            className="w-full gap-2 font-bold bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-xl h-10 text-xs shadow-xs"
+          >
+            <Sparkles className="h-3.5 w-3.5 text-white/95" />
+            <span>Open Resume Builder</span>
+            <ArrowRight className="h-3.5 w-3.5 ml-auto text-white/90" />
+          </Button>
+        </Link>
+
+        {/* Mobile Theme Toggle (High-contrast, intuitive segmented switch) */}
+        <ThemeToggle variant="segmented" />
+      </div>
+
       <nav className="flex flex-col space-y-1">
         {/* Mobile Tools & Utilities Expandable Section with Highlighted Animation */}
         <div className="rounded-xl border border-slate-200 dark:border-slate-700/90 bg-slate-50/90 dark:bg-slate-800/90 overflow-hidden transition-all shadow-xs">
@@ -631,10 +649,7 @@ export const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Drawer Theme Toggle */}
-      <div className="pt-1">
-        <ThemeToggle showLabel className="w-full justify-between py-2 px-3.5 bg-slate-50 dark:bg-slate-800/80 border-slate-200 dark:border-slate-700" />
-      </div>
+
 
       <div className="pt-1">
         <Link href="/editor" onClick={handleLinkClick} className="block w-full">

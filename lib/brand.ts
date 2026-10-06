@@ -15,6 +15,7 @@ export const BRAND = {
   name: "Qwertygen",
   shortName: "Qwertygen",
   brandPrefix: "Qwerty",
+  stemPrefix: "werty",
   brandSuffix: "gen",
   legalName: "Qwertygen Technologies Inc.",
   tagline: "Tools for a Smarter You",

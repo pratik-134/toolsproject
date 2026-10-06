@@ -1,6 +1,6 @@
 Add-Type -AssemblyName System.Drawing
 
-Write-Host "=== QWERTYGEN BRAND ASSET COMPILATION ENGINE ===" -ForegroundColor Cyan
+Write-Host "=== QWERTYGEN BRAND ASSET COMPILATION ENGINE (V2.1 - TIGHT LOCKUP & TRANSPARENT FAVICON) ===" -ForegroundColor Cyan
 
 # 1. PATH DEFINITIONS
 $publicDir = "$PSScriptRoot\..\public"
@@ -12,7 +12,7 @@ if (-not (Test-Path $brandDir)) {
 }
 
 # 2. VECTOR OUTLINE GENERATOR FOR SVG WORDMARK
-# Converts "Qwertygen" into SVG path outlines using .NET GraphicsPath
+# Converts "[Q]wertygen" into SVG path outlines using .NET GraphicsPath (No double Q, tight spacing)
 function Export-Outlined-Logo-Svg([string]$theme, [string]$outPath) {
     $bmp = New-Object System.Drawing.Bitmap(360, 64)
     $g = [System.Drawing.Graphics]::FromImage($bmp)
@@ -31,15 +31,15 @@ function Export-Outlined-Logo-Svg([string]$theme, [string]$outPath) {
     $ff = New-Object System.Drawing.FontFamily($fontName)
     $fontStyle = [int][System.Drawing.FontStyle]::Bold
 
-    # Generate path for "Qwerty"
-    $pathQwerty = New-Object System.Drawing.Drawing2D.GraphicsPath
-    $ptQwerty = New-Object System.Drawing.PointF(72, 12)
+    # Generate path for "werty" (starts immediately at x=60 right next to the Q mark)
+    $pathWerty = New-Object System.Drawing.Drawing2D.GraphicsPath
+    $ptWerty = New-Object System.Drawing.PointF(60, 12)
     $fmt = New-Object System.Drawing.StringFormat
-    $pathQwerty.AddString("Qwerty", $ff, $fontStyle, 34, $ptQwerty, $fmt)
+    $pathWerty.AddString("werty", $ff, $fontStyle, 34, $ptWerty, $fmt)
 
-    # Measure width of "Qwerty" to position "gen" with tight tracking (-2px)
-    $boundsQ = $pathQwerty.GetBounds()
-    $genX = $boundsQ.Right - 1.5
+    # Measure width of "werty" to position "gen" with tight tracking (-1.5px)
+    $boundsW = $pathWerty.GetBounds()
+    $genX = $boundsW.Right - 1.5
 
     # Generate path for "gen"
     $pathGen = New-Object System.Drawing.Drawing2D.GraphicsPath
@@ -85,12 +85,12 @@ function Export-Outlined-Logo-Svg([string]$theme, [string]$outPath) {
         return $sb.ToString().Trim()
     }
 
-    $dQwerty = PathToSvgData $pathQwerty
+    $dWerty = PathToSvgData $pathWerty
     $dGen = PathToSvgData $pathGen
-    $qwertyFill = if ($theme -eq "dark") { "#FFFFFF" } else { "#0F172A" }
+    $wertyFill = if ($theme -eq "dark") { "#FFFFFF" } else { "#0F172A" }
 
     $svgContent = @"
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" fill="none" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" fill="none" width="100%" height="100%">
   <defs>
     <linearGradient id="qRibbonGradOut" x1="12" y1="12" x2="52" y2="52" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#2563EB" />
@@ -103,8 +103,8 @@ function Export-Outlined-Logo-Svg([string]$theme, [string]$outPath) {
     </linearGradient>
   </defs>
 
-  <!-- Continuous Ribbon Q Logomark (ViewBox 64x64 mapped to x=4, y=4) -->
-  <g transform="translate(4, 0)">
+  <!-- Continuous Ribbon Q Logomark (ViewBox 6 6 52 52 mapped tightly to x=2) -->
+  <g transform="translate(0, 0)">
     <path
       d="M 32 10 C 19.85 10 10 19.85 10 32 C 10 44.15 19.85 54 32 54 C 38.2 54 43.8 51.4 47.8 47.3 L 34 33.5 C 32.5 32 32.5 29.5 34 28 C 35.5 26.5 38 26.5 39.5 28 L 54 42.5"
       stroke="url(#qRibbonGradOut)"
@@ -120,8 +120,8 @@ function Export-Outlined-Logo-Svg([string]$theme, [string]$outPath) {
     />
   </g>
 
-  <!-- Outlined Typography: "Qwerty" -->
-  <path d="$dQwerty" fill="$qwertyFill" />
+  <!-- Outlined Typography: "werty" (Single Q, Zero Double Q) -->
+  <path d="$dWerty" fill="$wertyFill" />
 
   <!-- Outlined Typography: "gen" (Gradient Filled) -->
   <path d="$dGen" fill="url(#qGenTextGrad)" />
@@ -135,7 +135,7 @@ function Export-Outlined-Logo-Svg([string]$theme, [string]$outPath) {
 }
 
 # 3. HIGH-RESOLUTION BITMAP RENDERER (System.Drawing)
-function Draw-Ribbon-Q([System.Drawing.Graphics]$g, [float]$size, [float]$offsetX = 0, [float]$offsetY = 0, [bool]$monochrome = $false, [string]$monoColor = "#FFFFFF") {
+function Draw-Ribbon-Q([System.Drawing.Graphics]$g, [float]$size, [float]$offsetX = 0, [float]$offsetY = 0, [bool]$monochrome = $false, [string]$monoColor = "#FFFFFF", [float]$customStroke = 0) {
     $scale = $size / 64.0
 
     $pt1 = New-Object System.Drawing.PointF([float](12 * $scale + $offsetX), [float](12 * $scale + $offsetY))
@@ -144,7 +144,7 @@ function Draw-Ribbon-Q([System.Drawing.Graphics]$g, [float]$size, [float]$offset
     $c2 = [System.Drawing.ColorTranslator]::FromHtml('#06D6A0')
 
     $ribbonBrush = New-Object System.Drawing.Drawing2D.LinearGradientBrush($pt1, $pt2, $c1, $c2)
-    $strokeWidth = [float](6.5 * $scale)
+    $strokeWidth = if ($customStroke -gt 0) { $customStroke } else { [float](6.5 * $scale) }
 
     $penRibbon = if ($monochrome) {
         New-Object System.Drawing.Pen([System.Drawing.ColorTranslator]::FromHtml($monoColor), $strokeWidth)
@@ -165,7 +165,6 @@ function Draw-Ribbon-Q([System.Drawing.Graphics]$g, [float]$size, [float]$offset
 
     # Primary ribbon path
     $pMain = New-Object System.Drawing.Drawing2D.GraphicsPath
-    # Loop from top (32, 10) around through left (10, 32) to bottom (32, 54)
     $pMain.AddBezier(
         [float](32 * $scale + $offsetX), [float](10 * $scale + $offsetY),
         [float](19.85 * $scale + $offsetX), [float](10 * $scale + $offsetY),
@@ -178,7 +177,6 @@ function Draw-Ribbon-Q([System.Drawing.Graphics]$g, [float]$size, [float]$offset
         [float](19.85 * $scale + $offsetX), [float](54 * $scale + $offsetY),
         [float](32 * $scale + $offsetX), [float](54 * $scale + $offsetY)
     )
-    # Bottom curve tuck into internal diagonal fold
     $pMain.AddBezier(
         [float](32 * $scale + $offsetX), [float](54 * $scale + $offsetY),
         [float](38.2 * $scale + $offsetX), [float](54 * $scale + $offsetY),
@@ -228,7 +226,7 @@ function Draw-Ribbon-Q([System.Drawing.Graphics]$g, [float]$size, [float]$offset
     $ribbonBrush.Dispose()
 }
 
-# RENDER APP ICON BITMAP (With Squircle Container)
+# RENDER APP ICON BITMAP (With Optional Squircle or 100% Transparent)
 function Render-App-Icon([int]$size, [string]$outPath, [bool]$transparent = $false) {
     $bmp = New-Object System.Drawing.Bitmap($size, $size)
     $g = [System.Drawing.Graphics]::FromImage($bmp)
@@ -256,15 +254,20 @@ function Render-App-Icon([int]$size, [string]$outPath, [bool]$transparent = $fal
         $g.DrawPath($borderPen, $path)
         $borderPen.Dispose()
         $bgBrush.Dispose()
+
+        $markSize = $size * 0.72
+        $offset = ($size - $markSize) / 2.0
+        Draw-Ribbon-Q $g $markSize $offset $offset
+    } else {
+        # Transparent background: mark occupies 86% of canvas for maximum tab visibility
+        $markSize = $size * 0.86
+        $offset = ($size - $markSize) / 2.0
+        $customStroke = [float]([Math]::Max(2.0, 7.5 * ($markSize / 64.0)))
+        Draw-Ribbon-Q $g $markSize $offset $offset $false "#FFFFFF" $customStroke
     }
 
-    # Inner mark dimensions: 70% of canvas centered
-    $markSize = $size * 0.72
-    $offset = ($size - $markSize) / 2.0
-    Draw-Ribbon-Q $g $markSize $offset $offset
-
     $bmp.Save($outPath, [System.Drawing.Imaging.ImageFormat]::Png)
-    Write-Host "  -> Rendered PNG: $outPath ($size x $size)" -ForegroundColor Green
+    Write-Host "  -> Rendered PNG: $outPath ($size x $size, Transparent=$transparent)" -ForegroundColor Green
 
     $g.Dispose()
     $bmp.Dispose()
@@ -272,14 +275,18 @@ function Render-App-Icon([int]$size, [string]$outPath, [bool]$transparent = $fal
 
 # 4. RENDER ALL SIZES
 Write-Host "Generating Multi-Resolution PNGs..." -ForegroundColor Yellow
-Render-App-Icon 512 "$publicDir\icon.png"
-Render-App-Icon 512 "$publicDir\favicon.png"
-Render-App-Icon 512 "$brandDir\logo-icon.png"
-Render-App-Icon 512 "$brandDir\logo-icon-512.png"
-Render-App-Icon 192 "$brandDir\logo-icon-192.png"
-Render-App-Icon 32  "$brandDir\logo-icon-32.png"
-Render-App-Icon 180 "$publicDir\apple-icon.png"
-Render-App-Icon 180 "$publicDir\apple-touch-icon.png"
+# App icons (dark squircle for PWA and Apple touch icon)
+Render-App-Icon 512 "$publicDir\icon.png" $false
+Render-App-Icon 512 "$brandDir\logo-icon.png" $false
+Render-App-Icon 512 "$brandDir\logo-icon-512.png" $false
+Render-App-Icon 192 "$brandDir\logo-icon-192.png" $false
+Render-App-Icon 180 "$publicDir\apple-icon.png" $false
+Render-App-Icon 180 "$publicDir\apple-touch-icon.png" $false
+
+# 100% TRANSPARENT FAVICON PNGs & ICONS (As explicitly requested by user)
+Write-Host "Generating 100% Transparent Favicons..." -ForegroundColor Yellow
+Render-App-Icon 512 "$publicDir\favicon.png" $true
+Render-App-Icon 32  "$brandDir\logo-icon-32.png" $true
 
 # White background variant
 $bmpW = New-Object System.Drawing.Bitmap(512, 512)
@@ -291,7 +298,7 @@ $bmpW.Save("$brandDir\logo-icon-white-bg.png", [System.Drawing.Imaging.ImageForm
 $gW.Dispose(); $bmpW.Dispose()
 Write-Host "  -> Rendered logo-icon-white-bg.png" -ForegroundColor Green
 
-# 5. RENDER HORIZONTAL LOGO BANNERS
+# 5. RENDER HORIZONTAL LOGO BANNERS (No double Q, tight spacing)
 function Render-Horizontal-Logo([string]$outPath, [bool]$isDark = $true) {
     $bmp = New-Object System.Drawing.Bitmap(640, 160)
     $g = [System.Drawing.Graphics]::FromImage($bmp)
@@ -304,10 +311,10 @@ function Render-Horizontal-Logo([string]$outPath, [bool]$isDark = $true) {
         $g.Clear([System.Drawing.Color]::White)
     }
 
-    # Draw mark at 110px
-    Draw-Ribbon-Q $g 110 32 25
+    # Draw mark at 105px
+    Draw-Ribbon-Q $g 105 28 27
 
-    # Draw typography
+    # Draw typography: "werty" + "gen" (tightly positioned right next to [Q] mark)
     $fontName = "Segoe UI"
     $candidateFonts = @("Plus Jakarta Sans", "Sora", "Segoe UI Semibold", "Segoe UI", "Arial")
     $installed = (New-Object System.Drawing.Text.InstalledFontCollection).Families | ForEach-Object { $_.Name }
@@ -315,31 +322,32 @@ function Render-Horizontal-Logo([string]$outPath, [bool]$isDark = $true) {
         if ($installed -contains $cand) { $fontName = $cand; break }
     }
     $ff = New-Object System.Drawing.FontFamily($fontName)
-    $font = New-Object System.Drawing.Font($ff, [float]48, [System.Drawing.FontStyle]::Bold, [System.Drawing.GraphicsUnit]::Pixel)
+    $font = New-Object System.Drawing.Font($ff, [float]52, [System.Drawing.FontStyle]::Bold, [System.Drawing.GraphicsUnit]::Pixel)
 
     $textColor = if ($isDark) { [System.Drawing.Color]::White } else { [System.Drawing.ColorTranslator]::FromHtml('#0F172A') }
-    $textBrushQ = New-Object System.Drawing.SolidBrush($textColor)
+    $textBrushW = New-Object System.Drawing.SolidBrush($textColor)
 
-    $pt1 = New-Object System.Drawing.PointF(350, 50)
+    $pt1 = New-Object System.Drawing.PointF(320, 50)
     $pt2 = New-Object System.Drawing.PointF(520, 50)
     $c1 = [System.Drawing.ColorTranslator]::FromHtml('#0EA5E9')
     $c2 = [System.Drawing.ColorTranslator]::FromHtml('#06D6A0')
     $textBrushGen = New-Object System.Drawing.Drawing2D.LinearGradientBrush($pt1, $pt2, $c1, $c2)
 
-    $g.DrawString("Qwerty", $font, $textBrushQ, [float]165, [float]42)
-    $qSize = $g.MeasureString("Qwerty", $font)
-    $g.DrawString("gen", $font, $textBrushGen, [float](165 + $qSize.Width - 12), [float]42)
+    # Wordmark begins at x=136 immediately adjacent to the ribbon tail
+    $g.DrawString("werty", $font, $textBrushW, [float]136, [float]38)
+    $wSize = $g.MeasureString("werty", $font)
+    $g.DrawString("gen", $font, $textBrushGen, [float](136 + $wSize.Width - 14), [float]38)
 
     # Subtitle
     $subFont = New-Object System.Drawing.Font($ff, [float]13, [System.Drawing.FontStyle]::Bold, [System.Drawing.GraphicsUnit]::Pixel)
     $subColor = if ($isDark) { [System.Drawing.ColorTranslator]::FromHtml('#94A3B8') } else { [System.Drawing.ColorTranslator]::FromHtml('#64748B') }
     $subBrush = New-Object System.Drawing.SolidBrush($subColor)
-    $g.DrawString("TOOLS FOR A SMARTER YOU", $subFont, $subBrush, [float]168, [float]96)
+    $g.DrawString("TOOLS FOR A SMARTER YOU", $subFont, $subBrush, [float]140, [float]96)
 
     $bmp.Save($outPath, [System.Drawing.Imaging.ImageFormat]::Png)
     Write-Host "  -> Rendered horizontal banner: $outPath" -ForegroundColor Green
 
-    $font.Dispose(); $subFont.Dispose(); $textBrushQ.Dispose(); $textBrushGen.Dispose(); $subBrush.Dispose()
+    $font.Dispose(); $subFont.Dispose(); $textBrushW.Dispose(); $textBrushGen.Dispose(); $subBrush.Dispose()
     $g.Dispose(); $bmp.Dispose()
 }
 
@@ -355,7 +363,7 @@ function Render-OG-Card([string]$outPath) {
     $g.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::AntiAlias
     $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
 
-    # Dark high-tech background
+    # Dark background
     $pt1 = New-Object System.Drawing.PointF(0, 0)
     $pt2 = New-Object System.Drawing.PointF(1200, 630)
     $bgBrush = New-Object System.Drawing.Drawing2D.LinearGradientBrush($pt1, $pt2, [System.Drawing.ColorTranslator]::FromHtml('#0B132B'), [System.Drawing.ColorTranslator]::FromHtml('#0F172A'))
@@ -372,7 +380,7 @@ function Render-OG-Card([string]$outPath) {
     # Continuous Ribbon Q mark at 220px
     Draw-Ribbon-Q $g 220 100 190
 
-    # Typography
+    # Typography: "werty" + "gen" seamlessly paired with [Q] mark
     $fontName = "Segoe UI"
     $candidateFonts = @("Plus Jakarta Sans", "Sora", "Segoe UI Semibold", "Segoe UI", "Arial")
     $installed = (New-Object System.Drawing.Text.InstalledFontCollection).Families | ForEach-Object { $_.Name }
@@ -380,39 +388,38 @@ function Render-OG-Card([string]$outPath) {
         if ($installed -contains $cand) { $fontName = $cand; break }
     }
     $ff = New-Object System.Drawing.FontFamily($fontName)
-    $fontTitle = New-Object System.Drawing.Font($ff, [float]82, [System.Drawing.FontStyle]::Bold, [System.Drawing.GraphicsUnit]::Pixel)
+    $fontTitle = New-Object System.Drawing.Font($ff, [float]88, [System.Drawing.FontStyle]::Bold, [System.Drawing.GraphicsUnit]::Pixel)
     $fontTagline = New-Object System.Drawing.Font($ff, [float]34, [System.Drawing.FontStyle]::Bold, [System.Drawing.GraphicsUnit]::Pixel)
     $fontBadge = New-Object System.Drawing.Font($ff, [float]20, [System.Drawing.FontStyle]::Bold, [System.Drawing.GraphicsUnit]::Pixel)
 
     $brushWhite = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::White)
-    $brushGray = New-Object System.Drawing.SolidBrush([System.Drawing.ColorTranslator]::FromHtml('#94A3B8'))
 
-    $gGradPt1 = New-Object System.Drawing.PointF(670, 200)
-    $gGradPt2 = New-Object System.Drawing.PointF(900, 200)
+    $gGradPt1 = New-Object System.Drawing.PointF(630, 200)
+    $gGradPt2 = New-Object System.Drawing.PointF(860, 200)
     $genBrush = New-Object System.Drawing.Drawing2D.LinearGradientBrush($gGradPt1, $gGradPt2, [System.Drawing.ColorTranslator]::FromHtml('#0EA5E9'), [System.Drawing.ColorTranslator]::FromHtml('#06D6A0'))
 
-    $g.DrawString("Qwerty", $fontTitle, $brushWhite, [float]360, [float]180)
-    $qSize = $g.MeasureString("Qwerty", $fontTitle)
-    $g.DrawString("gen", $fontTitle, $genBrush, [float](360 + $qSize.Width - 18), [float]180)
+    $g.DrawString("werty", $fontTitle, $brushWhite, [float]325, [float]180)
+    $wSize = $g.MeasureString("werty", $fontTitle)
+    $g.DrawString("gen", $fontTitle, $genBrush, [float](325 + $wSize.Width - 20), [float]180)
 
     # Tagline
-    $g.DrawString("Tools for a Smarter You", $fontTagline, $brushWhite, [float]364, [float]285)
+    $g.DrawString("Tools for a Smarter You", $fontTagline, $brushWhite, [float]328, [float]285)
 
     # Privacy guarantee badge pill
-    $badgeRect = New-Object System.Drawing.RectangleF(364, 355, 520, 52)
+    $badgeRect = New-Object System.Drawing.RectangleF(328, 355, 520, 52)
     $badgeBrush = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(40, 6, 214, 160))
     $badgePen = New-Object System.Drawing.Pen([System.Drawing.ColorTranslator]::FromHtml('#06D6A0'), 2)
     $g.FillRectangle($badgeBrush, $badgeRect)
     $g.DrawRectangle($badgePen, $badgeRect.X, $badgeRect.Y, $badgeRect.Width, $badgeRect.Height)
 
     $tealBrush = New-Object System.Drawing.SolidBrush([System.Drawing.ColorTranslator]::FromHtml('#06D6A0'))
-    $g.DrawString("100% IN-BROWSER · ZERO SERVER UPLOADS", $fontBadge, $tealBrush, [float]388, [float]368)
+    $g.DrawString("100% IN-BROWSER · ZERO SERVER UPLOADS", $fontBadge, $tealBrush, [float]352, [float]368)
 
     $bmp.Save($outPath, [System.Drawing.Imaging.ImageFormat]::Png)
     Write-Host "  -> Rendered OG social card: $outPath (1200 x 630)" -ForegroundColor Green
 
     $fontTitle.Dispose(); $fontTagline.Dispose(); $fontBadge.Dispose()
-    $brushWhite.Dispose(); $brushGray.Dispose(); $genBrush.Dispose()
+    $brushWhite.Dispose(); $genBrush.Dispose()
     $badgeBrush.Dispose(); $badgePen.Dispose(); $tealBrush.Dispose()
     $g.Dispose(); $bmp.Dispose()
 }
@@ -420,9 +427,8 @@ function Render-OG-Card([string]$outPath) {
 Render-OG-Card "$publicDir\og-image.png"
 Render-OG-Card "$publicDir\og-default.png"
 
-# 7. GENERATE MULTI-RESOLUTION FAVICON.ICO (16, 32, 48)
+# 7. GENERATE 100% TRANSPARENT MULTI-RESOLUTION FAVICON.ICO (16, 32, 48)
 function Generate-Ico-File([string]$outPath) {
-    # Generate 16, 32, 48 PNG frames
     $sizes = @(16, 32, 48)
     $pngBytesList = @()
 
@@ -432,8 +438,13 @@ function Generate-Ico-File([string]$outPath) {
         $g.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::AntiAlias
         $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
 
-        # In favicon, render thick ribbon
-        Draw-Ribbon-Q $g ([float]$s) 0 0
+        # Pure transparent background, bold thick ribbon mark scaled to fill frame (88%)
+        $markSize = [float]($s * 0.88)
+        $offset = [float](($s - $markSize) / 2.0)
+        $customStroke = [float]([Math]::Max(2.0, 7.8 * ($markSize / 64.0)))
+
+        Draw-Ribbon-Q $g $markSize $offset $offset $false "#FFFFFF" $customStroke
+
         $ms = New-Object System.IO.MemoryStream
         $bmp.Save($ms, [System.Drawing.Imaging.ImageFormat]::Png)
         $pngBytesList += ,$ms.ToArray()
@@ -470,15 +481,15 @@ function Generate-Ico-File([string]$outPath) {
 
     [System.IO.File]::WriteAllBytes($outPath, $icoMs.ToArray())
     $bw.Dispose(); $icoMs.Dispose()
-    Write-Host "  -> Generated Multi-Resolution ICO (16/32/48): $outPath" -ForegroundColor Green
+    Write-Host "  -> Generated 100% Transparent Multi-Resolution ICO (16/32/48): $outPath" -ForegroundColor Green
 }
 
 Generate-Ico-File "$publicDir\favicon.ico"
 Generate-Ico-File "$appDir\favicon.ico"
 
-# 8. EXPORT OUTLINED SVG LOGOS
+# 8. EXPORT OUTLINED SVG LOGOS (No double Q, tight spacing)
 Export-Outlined-Logo-Svg "light" "$brandDir\logo-light.svg"
 Export-Outlined-Logo-Svg "dark" "$brandDir\logo-dark.svg"
 Export-Outlined-Logo-Svg "dark" "$brandDir\logo-horizontal.svg"
 
-Write-Host "`nAll brand assets successfully generated and synchronized!" -ForegroundColor Cyan
+Write-Host "`nAll brand assets successfully recompiled with transparent favicon & zero double Q!" -ForegroundColor Cyan
