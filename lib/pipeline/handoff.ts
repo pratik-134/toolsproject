@@ -72,6 +72,9 @@ export const PIPELINE_WORKFLOW_MAP: Record<string, string[]> = {
   "audio-waveform-visualizer": ["audio-pitch-tempo-shifter", "desktop-screen-recorder", "mp4-to-mp3"],
   "audio-pitch-tempo-shifter": ["audio-waveform-visualizer", "wav-to-mp3", "mp4-to-mp3"],
 
+  // Everyday Utility workflows
+  "language-translator": ["word-counter", "client-pastebin", "burn-after-read-secret", "text-diff"],
+
   // Cloud & Security workflows
   "client-pastebin": ["burn-after-read-secret", "link-protector", "word-counter"],
   "password-generator": ["burn-after-read-secret", "link-protector", "client-pastebin"],

@@ -659,6 +659,10 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     ssr: false,
     loading: () => <ToolLoadingState name="Audio Pitch & Tempo Shifter" />,
   }),
+  "language-translator": dynamic(() => import("@/components/tools/phase3/language-translator"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="Offline Language & Text Translator" />,
+  }),
 };
 
 function ToolLoadingState({ name }: { name: string }) {

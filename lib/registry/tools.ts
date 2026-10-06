@@ -5409,6 +5409,39 @@ export const TOOLS: ToolDefinition[] = [
       ]
     },
     related: ["audio-waveform-visualizer", "wav-to-mp3", "mp4-to-mp3", "flac-to-mp3"]
+  },
+
+  /* =========================================================================
+     PHASE 3 UTILITY TOOL: In-Browser Offline Language & Text Translator
+     ========================================================================= */
+  {
+    slug: "language-translator",
+    name: "Offline Language & Text Translator",
+    category: "utilities",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "Offline Language & Text Translator — 100% Client-Side Privacy",
+      description: "Translate words, common phrases, and documents across 12+ major languages in real time. 100% private in-browser translation with zero cloud uploads.",
+      h1: "Free In-Browser Language & Text Translator",
+      intro: "Translate between English, Spanish, French, German, Italian, Portuguese, Dutch, Russian, Chinese, Japanese, Hindi, and Arabic directly in your browser. Audio pronunciation and heuristic language detection with zero network tracking.",
+      faq: [
+        {
+          q: "Is any of my text sent to external servers or cloud APIs?",
+          a: "No. All text parsing, translation matching, and speech synthesis execute 100% locally in your browser memory. No data ever leaves your device."
+        },
+        {
+          q: "Can I hear native pronunciation of the translated text?",
+          a: "Yes. The translator integrates with the browser native Web Speech API to provide audio speech pronunciation with zero network requests."
+        },
+        {
+          q: "How does the auto-detect feature identify the source language?",
+          a: "ClearTrix uses an in-memory heuristic analyzer that examines unicode script ranges (e.g. Cyrillic, Devanagari, CJK, Arabic), language-specific diacritics, and stopword distributions."
+        }
+      ]
+    },
+    related: ["word-counter", "case-converter", "lorem-generator", "client-pastebin"]
   }
 ];
 

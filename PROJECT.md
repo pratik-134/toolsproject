@@ -247,6 +247,7 @@ Every tool in Cleartrix is built using this strict, modular 4-file pattern. Doma
 - **CSS Box Shadow & Neumorphism Generator (`box-shadow-generator`):** In-browser CSSMatic alternative supporting multi-layer shadow stacking, inset/outset glows, full Neumorphic soft UI dual-shadow modeling, smooth elevation presets, and instant vanilla CSS & Tailwind arbitrary class export.
 - **PDF to SVG Vector Converter (`pdf-to-svg`):** In-browser vector conversion using PDF.js vector coordinate extraction, generating standalone resolution-independent SVG files per page with batch ZIP archive download.
 - **Audio Pitch & Tempo Shifter (`audio-pitch-tempo-shifter`):** In-browser Transcribe! alternative with independent Web Audio API pitch shifting (-12 to +12 semitones, fine-tuned cents), variable speed rate playback (0.25x to 2.5x), looping, and instant client-side WAV export.
+- **Offline Language & Text Translator (`language-translator`):** In-browser Google Translate / DeepL alternative supporting 12+ major languages, heuristic script/diacritic/stopword language auto-detection, case & punctuation preservation, native Web Speech API audio pronunciation, and zero-network client privacy.
 
 ### 6. 38 Converter Engine Tools
 - **Canvas Image Converters:** WebP to PNG, WebP to JPG, PNG to JPG, JPG to PNG, SVG to PNG, BMP to JPG, BMP to PNG, GIF to PNG, Image to ICO, HEIC to JPG.
@@ -256,9 +257,9 @@ Every tool in Cleartrix is built using this strict, modular 4-file pattern. Doma
 
 ---
 
-## 6. The 11 Platform Categories & 185 Shipped Tools
+## 6. The 11 Platform Categories & 186 Shipped Tools
 
-The platform contains 185 registered and fully typed tools across 11 official categories:
+The platform contains 186 registered and fully typed tools across 11 official categories:
 
 ### 1. Document & PDF (`document-pdf` — 38 tools)
 `pdf-editor`, `ats-resume-checker`, `resume-import-viewer`, `pdf-merger`, `pdf-splitter`, `pdf-page-rotator`, `pdf-page-organizer`, `pdf-compressor`, `pdf-bates-stamper`, `pdf-flattener`, `pdf-form-extractor`, `pdf-form-builder`, `pdf-digital-signer`, `markdown-to-pdf`, `html-to-pdf`, `direct-txt-editor`, `direct-markdown-editor`, `direct-html-editor`, `pdf-redaction-tool`, `direct-rtf-creator`, `direct-docx-editor`, `pdf-annotator`, `excel-to-pdf`, `docx-to-pdf`, `pdf-to-docx`, `pdf-encryptor`, `pdf-decryptor`, `powerpoint-to-pdf`, `jpg-to-pdf`, `pdf-to-jpg`, `pdf-to-png`, `pdf-to-text`, `latex-editor`, `camera-to-pdf-scanner`, `job-keyword-matcher`, `pdf-page-numberer`, `pdf-watermark-stamper`, `pdf-to-svg`.
@@ -272,8 +273,8 @@ The platform contains 185 registered and fully typed tools across 11 official ca
 ### 4. Image Tools (`image` — 30 tools)
 `image-converter`, `aspect-ratio-cropper`, `canvas-resizer`, `batch-image-compressor`, `exif-stripper`, `image-base64-converter`, `svg-minifier`, `favicon-generator`, `image-rotator-flipper`, `photo-filter-studio`, `image-watermarker`, `webp-to-png`, `webp-to-jpg`, `png-to-jpg`, `jpg-to-png`, `svg-to-png`, `image-to-ico`, `heic-to-jpg`, `image-to-text`, `bmp-to-jpg`, `bmp-to-png`, `gif-to-png`, `social-post-maker`, `story-reels-maker`, `chart-graph-visualizer`, `meme-caption-generator`, `passport-photo-generator`, `svg-pattern-generator`, `css-mesh-gradient-generator`, `image-background-remover`.
 
-### 5. Everyday Utilities (`utilities` — 13 tools)
-`word-counter`, `password-generator`, `case-converter`, `lorem-generator`, `duplicate-line-remover`, `unit-converter`, `epoch-converter`, `checksum-verifier`, `archive-extractor`, `archive-packer`, `color-converter`, `roman-numeral-converter`, `number-to-words`.
+### 5. Everyday Utilities (`utilities` — 14 tools)
+`word-counter`, `password-generator`, `case-converter`, `lorem-generator`, `duplicate-line-remover`, `unit-converter`, `epoch-converter`, `checksum-verifier`, `archive-extractor`, `archive-packer`, `color-converter`, `roman-numeral-converter`, `number-to-words`, `language-translator`.
 
 ### 6. Video & Screen Capture (`video` — 10 tools)
 `desktop-screen-recorder`, `web-tab-recorder`, `webcam-overlay-recorder`, `mp4-to-mp3`, `mov-to-mp4`, `webm-to-mp4`, `gif-to-mp4`, `mkv-to-mp4`, `avi-to-mp4`, `flv-to-mp4`.

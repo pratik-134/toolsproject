@@ -100,6 +100,7 @@ export function getToolIcon(tool: ToolDefinition): LucideIcon {
 
   // Everyday Utilities
   if (slug.includes("word-counter") || slug.includes("character")) return Type;
+  if (slug.includes("translat") || slug.includes("language")) return Globe;
   if (slug.includes("password")) return KeyRound;
   if (slug.includes("case")) return FileType;
   if (slug.includes("archive") || slug.includes("zip") || slug.includes("tar")) return Archive;
