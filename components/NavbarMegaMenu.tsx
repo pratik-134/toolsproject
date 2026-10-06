@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import Link from "next/link";
 import { CATEGORY_LIST, getCategoryById } from "@/lib/registry/categories";
-import { getAllTools, getToolUrl } from "@/lib/registry/tools";
+import { getAllTools, getToolUrl, TOOLS_COUNT_LABEL, TOOLS_COUNT_DISPLAY } from "@/lib/registry/tools";
 import { getToolIcon, CATEGORY_ICON_MAP } from "@/lib/tool-icons";
 import { ToolDefinition } from "@/lib/registry/types";
 import {
@@ -60,7 +60,7 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search across all 168+ privacy tools..."
+              placeholder={`Search across all ${TOOLS_COUNT_LABEL}...`}
               className="w-full pl-9 pr-9 py-2 text-xs sm:text-sm bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 dark:focus:border-blue-500 transition-all shadow-inner"
             />
             {searchQuery && (
@@ -233,7 +233,7 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
           <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
             <Sparkles className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
             <span>
-              All 168+ tools run locally in WebAssembly & JavaScript. Zero cloud storage.
+              All {TOOLS_COUNT_LABEL} run locally in WebAssembly & JavaScript. Zero cloud storage.
             </span>
           </div>
           <Link
@@ -241,7 +241,7 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
             onClick={onClose}
             className="inline-flex items-center gap-1.5 font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline shrink-0"
           >
-            <span>Browse Full Tools Directory ({allTools.length} Tools)</span>
+            <span>Browse Full Tools Directory ({TOOLS_COUNT_LABEL})</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>

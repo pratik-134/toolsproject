@@ -14,6 +14,7 @@ import {
   Zap,
 } from "lucide-react";
 import Link from "next/link";
+import { TOOLS_COUNT_LABEL } from "@/lib/registry/tools";
 
 export const HeroMockupPreview: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"resume" | "tools">("resume");
@@ -90,7 +91,7 @@ export const HeroMockupPreview: React.FC = () => {
               }`}
             >
               <Wrench className="h-3.5 w-3.5 text-blue-600" />
-              <span>111+ Tools</span>
+              <span>{TOOLS_COUNT_LABEL}</span>
             </button>
           </div>
 
@@ -239,7 +240,7 @@ export const HeroMockupPreview: React.FC = () => {
               <p className="text-[11px] text-slate-500 mt-0.5">100% In-Browser Engine • No File Uploads to Server</p>
               <Link href="/tools">
                 <button type="button" className="mt-2.5 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-bold shadow-sm hover:bg-blue-700 transition-all">
-                  <span>Explore All 111+ Tools</span>
+                  <span>Explore All {TOOLS_COUNT_LABEL}</span>
                   <ArrowRight className="h-3 w-3" />
                 </button>
               </Link>

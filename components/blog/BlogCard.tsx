@@ -30,6 +30,16 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, isFeatured = false }) 
               post.coverGradient || "from-blue-600 to-indigo-600"
             } p-8 lg:p-12 flex flex-col justify-between text-white relative overflow-hidden`}
           >
+            {/* Cover Image Background */}
+            {post.coverImage && (
+              <img
+                src={post.coverImage}
+                alt={post.coverImageAlt || post.title}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-25 mix-blend-overlay pointer-events-none"
+              />
+            )}
+
             {/* Subtle decorative circles */}
             <div className="absolute -top-12 -right-12 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none" />
             <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-black/10 rounded-full blur-2xl pointer-events-none" />
@@ -116,10 +126,18 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, isFeatured = false }) 
     >
       {/* Visual Header / Cover Banner */}
       <div
-        className={`h-36 sm:h-40 bg-gradient-to-br ${
+        className={`h-40 sm:h-44 bg-gradient-to-br ${
           post.coverGradient || "from-slate-700 to-slate-900"
-        } p-6 flex flex-col justify-between relative overflow-hidden text-white`}
+        } p-5 flex flex-col justify-between relative overflow-hidden text-white`}
       >
+        {post.coverImage && (
+          <img
+            src={post.coverImage}
+            alt={post.coverImageAlt || post.title}
+            loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-30 mix-blend-overlay pointer-events-none"
+          />
+        )}
         <div className="relative z-10 flex items-center justify-between">
           <span className="text-[11px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-white border border-white/20">
             {post.category}

@@ -26,10 +26,9 @@ import {
 } from "lucide-react";
 import { AnimatedBannerBackground } from "./AnimatedBannerBackground";
 import { HeroHeadlineTicker } from "./HeroHeadlineTicker";
-import { getAllTools } from "@/lib/registry/tools";
+import { getAllTools, TOOLS_COUNT_LABEL, TOOLS_COUNT_DISPLAY } from "@/lib/registry/tools";
 
 export const BrandNewHeroBanner: React.FC = () => {
-  const toolCount = getAllTools().length;
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"resume" | "pdf" | "tools">("resume");
   const [hasExistingResumes, setHasExistingResumes] = useState(false);
@@ -67,7 +66,7 @@ export const BrandNewHeroBanner: React.FC = () => {
             </span>
             <span className="text-slate-300 dark:text-slate-700 shrink-0 hidden xs:inline">•</span>
             <span className="text-slate-700 dark:text-slate-300 truncate hidden xs:inline">
-              Free ATS Resume Engine & {toolCount} Client-Side Tools
+              Free ATS Resume Engine & {TOOLS_COUNT_DISPLAY} Client-Side Tools
             </span>
           </div>
 
@@ -76,14 +75,14 @@ export const BrandNewHeroBanner: React.FC = () => {
 
           {/* 3. Subtitle Description */}
           <p className="font-body text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto font-normal">
-            Create ATS-optimized resumes with 20 professional templates, or run {toolCount} client-side privacy tools for PDFs, images, code, and security. Zero server uploads, zero watermarks, and zero paywalls—ever.
+            Create ATS-optimized resumes with 20 professional templates, or run {TOOLS_COUNT_DISPLAY} client-side privacy tools for PDFs, images, code, and security. Zero server uploads, zero watermarks, and zero paywalls—ever.
           </p>
 
           {/* 4. Commanding Search Bar */}
           <div className="max-w-xl mx-auto text-left relative z-30 pt-1">
             <ToolSearchBar
               size="large"
-              placeholder={`Search ${toolCount} tools & ATS templates... (e.g. PDF merge, resume, compress)`}
+              placeholder={`Search ${TOOLS_COUNT_LABEL} & ATS templates... (e.g. PDF merge, resume, compress)`}
             />
           </div>
 
@@ -117,7 +116,7 @@ export const BrandNewHeroBanner: React.FC = () => {
                 size="lg"
                 className="w-full sm:w-auto justify-center gap-2 text-sm sm:text-base px-5 py-3.5 rounded-xl min-h-[52px] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100/80 dark:hover:bg-slate-850 font-bold transition-all duration-200 active:scale-[0.98]"
               >
-                <span>Browse {toolCount} Tools</span>
+                <span>Browse {TOOLS_COUNT_LABEL}</span>
               </Button>
             </a>
           </div>
@@ -202,7 +201,7 @@ export const BrandNewHeroBanner: React.FC = () => {
                 >
                   <Wrench className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                   <span className="truncate">
-                    <span className="hidden sm:inline">{toolCount}+ </span>Tools
+                    <span className="hidden sm:inline">{TOOLS_COUNT_DISPLAY} </span>Tools
                   </span>
                 </button>
               </div>
@@ -300,7 +299,7 @@ export const BrandNewHeroBanner: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <Link href="/tools/document-pdf/pdf-merge" className="group">
+                  <Link href="/tools/document-pdf/pdf-merger" className="group">
                     <div className="bg-white dark:bg-slate-900 rounded-xl p-3.5 border border-slate-200 dark:border-slate-800 shadow-2xs group-hover:border-blue-300 dark:group-hover:border-blue-500/40 group-hover:shadow-md transition-all">
                       <div className="h-8 w-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-800 flex items-center justify-center mb-2">
                         <Layers className="h-4 w-4" />
@@ -320,7 +319,7 @@ export const BrandNewHeroBanner: React.FC = () => {
                     </div>
                   </Link>
 
-                  <Link href="/tools/document-pdf/pdf-split" className="group">
+                  <Link href="/tools/document-pdf/pdf-splitter" className="group">
                     <div className="bg-white dark:bg-slate-900 rounded-xl p-3.5 border border-slate-200 dark:border-slate-800 shadow-2xs group-hover:border-blue-300 dark:group-hover:border-blue-500/40 group-hover:shadow-md transition-all">
                       <div className="h-8 w-8 rounded-lg bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 border border-purple-100 dark:border-purple-800 flex items-center justify-center mb-2">
                         <FileText className="h-4 w-4" />
@@ -338,7 +337,7 @@ export const BrandNewHeroBanner: React.FC = () => {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <h2 className="font-headings text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">
-                      {toolCount}+ In-Browser Privacy Utilities
+                      {TOOLS_COUNT_DISPLAY} In-Browser Privacy Utilities
                     </h2>
                     <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                       Images, Security, Developer Formatters, Calculators, and QR Code Generators.

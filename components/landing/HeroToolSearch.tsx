@@ -3,14 +3,15 @@
 import React from "react";
 import Link from "next/link";
 import { ToolSearchBar } from "@/components/tools/ToolSearchBar";
+import { TOOLS_COUNT_LABEL } from "@/lib/registry/tools";
 import { FileText, Layers, Image as ImageIcon, Code2, Lock } from "lucide-react";
 
 const POPULAR_SEARCHES = [
   { label: "Resume Builder", href: "/editor", icon: FileText },
-  { label: "Merge PDF", href: "/tools/document-pdf/pdf-merge", icon: Layers },
-  { label: "Compress Image", href: "/tools/image/image-compressor", icon: ImageIcon },
+  { label: "Merge PDF", href: "/tools/document-pdf/pdf-merger", icon: Layers },
+  { label: "Compress Image", href: "/tools/image/batch-image-compressor", icon: ImageIcon },
   { label: "JSON Formatter", href: "/tools/developer/json-formatter", icon: Code2 },
-  { label: "Password Gen", href: "/tools/security/password-generator", icon: Lock },
+  { label: "Password Gen", href: "/tools/utilities/password-generator", icon: Lock },
 ];
 
 export const HeroToolSearch: React.FC = () => {
@@ -19,7 +20,7 @@ export const HeroToolSearch: React.FC = () => {
       <div className="relative">
         <ToolSearchBar
           size="large"
-          placeholder="Search 111+ tools & templates... (e.g. PDF merge, resume, compress)"
+          placeholder={`Search ${TOOLS_COUNT_LABEL} & templates... (e.g. PDF merge, resume, compress)`}
         />
       </div>
 

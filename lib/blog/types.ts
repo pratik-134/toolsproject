@@ -15,6 +15,12 @@ export interface TableOfContentsItem {
   level: number;
 }
 
+export interface BlogImageCredit {
+  photographer: string;
+  url: string;
+  platform: string;
+}
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -24,6 +30,8 @@ export interface BlogPost {
   readingTime: string;
   author: BlogAuthor;
   coverImage?: string;
+  coverImageAlt?: string;
+  coverImageCredit?: BlogImageCredit;
   coverGradient?: string;
   tags: string[];
   featured?: boolean;

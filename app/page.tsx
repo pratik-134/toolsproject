@@ -74,7 +74,7 @@ export default function HomePage() {
         <BrandNewHeroBanner />
 
         {/* ========================================================================= */}
-        {/* 2. In-Browser Tools Mega-Section (111+ Client-Side Tools)                 */}
+        {/* 2. In-Browser Tools Mega-Section                                         */}
         {/* ========================================================================= */}
         <ToolsMegaSection />
 

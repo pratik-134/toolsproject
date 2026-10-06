@@ -96,13 +96,147 @@
   * {
     @apply border-border;
   }
+  html, body, button, input, select, textarea {
+    font-family: var(--font-manrope), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
   body {
     @apply bg-background text-foreground font-body antialiased;
     font-size: 16px;
-    line-height: 1.5;
-    font-weight: 600;
+    line-height: 1.6;
+    font-weight: 500;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
+
+  /* Universal Responsive Typography Scale */
+  h1, .h1 {
+    font-size: 2rem; /* 32px mobile */
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+  @media (min-width: 640px) {
+    h1, .h1 {
+      font-size: 2.5rem; /* 40px tablet */
+    }
+  }
+  @media (min-width: 1024px) {
+    h1, .h1 {
+      font-size: 3.5rem; /* 56px desktop */
+    }
+  }
+
+  h2, .h2 {
+    font-size: 1.5rem; /* 24px mobile */
+    line-height: 1.25;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  @media (min-width: 640px) {
+    h2, .h2 {
+      font-size: 1.875rem; /* 30px tablet */
+    }
+  }
+  @media (min-width: 1024px) {
+    h2, .h2 {
+      font-size: 2.25rem; /* 36px desktop */
+    }
+  }
+
+  h3, .h3 {
+    font-size: 1.125rem; /* 18px mobile */
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  @media (min-width: 640px) {
+    h3, .h3 {
+      font-size: 1.25rem; /* 20px tablet */
+    }
+  }
+  @media (min-width: 1024px) {
+    h3, .h3 {
+      font-size: 1.5rem; /* 24px desktop */
+    }
+  }
+}
+
+/* Range Slider Cross-Browser Standardization */
+input[type="range"],
+.range-input {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 9999px;
+  outline: none;
+  cursor: pointer;
+  background-color: #E2E8F0;
+  transition: background-color 0.15s ease;
+}
+
+.dark input[type="range"],
+.dark .range-input {
+  background-color: #334155;
+}
+
+/* WebKit (Chrome, Safari, Edge, iOS) */
+input[type="range"]::-webkit-slider-thumb,
+.range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #3B82F6;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover,
+.range-input::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+  background: #2563EB;
+}
+
+input[type="range"]::-webkit-slider-thumb:active,
+.range-input::-webkit-slider-thumb:active {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.3);
+}
+
+/* Mozilla Firefox */
+input[type="range"]::-moz-range-thumb,
+.range-input::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #3B82F6;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+input[type="range"]::-moz-range-thumb:hover,
+.range-input::-moz-range-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+  background: #2563EB;
+}
+
+input[type="range"]::-moz-range-thumb:active,
+.range-input::-moz-range-thumb:active {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.3);
+}
+
+input[type="range"]::-moz-range-track,
+.range-input::-moz-range-track {
+  height: 6px;
+  border-radius: 9999px;
+  background-color: transparent;
 }
 
 /* Qwertygen Brand Custom Utilities */

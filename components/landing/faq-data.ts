@@ -55,7 +55,7 @@ export const TOOLS_FAQS: FaqItem[] = [
   },
   {
     num: "02",
-    q: "Are the 111+ tools really free forever?",
+    q: "Are the tools really free forever with no limits?",
     a: "Yes. There are no trial periods, monthly subscriptions, credit card prompts, or daily usage caps. Every tool across all 5 categories is permanently accessible and 100% free to use without restrictions.",
   },
   {

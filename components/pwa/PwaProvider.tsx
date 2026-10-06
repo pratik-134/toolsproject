@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
 import { WifiOff, Wifi, Download, X } from "lucide-react";
+import { TOOLS_COUNT_DISPLAY } from "@/lib/registry/tools";
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -205,7 +206,7 @@ export function PwaProvider({ children }: { children: React.ReactNode }) {
                   Install Qwertygen App
                 </div>
                 <div className="text-xs text-slate-500 dark:text-slate-400">
-                  Run 169+ private tools offline with standalone window mode.
+                  Run {TOOLS_COUNT_DISPLAY} private tools offline with standalone window mode.
                 </div>
               </div>
             </div>

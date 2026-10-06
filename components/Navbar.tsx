@@ -22,7 +22,7 @@ import {
   WifiOff,
   Download,
 } from "lucide-react";
-import { TOOLS, getAllTools, getToolUrl } from "@/lib/registry/tools";
+import { TOOLS, getAllTools, getToolUrl, TOOLS_COUNT_DISPLAY, TOOLS_COUNT_LABEL } from "@/lib/registry/tools";
 import { CATEGORY_LIST, getCategoryById } from "@/lib/registry/categories";
 import { getToolIcon, CATEGORY_ICON_MAP } from "@/lib/tool-icons";
 
@@ -32,13 +32,10 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { NavbarMegaMenu } from "@/components/NavbarMegaMenu";
 import { usePwa } from "@/components/pwa/PwaProvider";
 
-const ANNOUNCEMENT_STORAGE_KEY = "qg_announcement_dismissed_v1";
-
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isBannerDismissed, setIsBannerDismissed] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [isMobileToolsExpanded, setIsMobileToolsExpanded] = useState(false);
@@ -113,26 +110,6 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener("keydown", handleGlobalKeyDown);
   }, []);
 
-  // Check if announcement was previously dismissed
-  useEffect(() => {
-    try {
-      const dismissed = localStorage.getItem(ANNOUNCEMENT_STORAGE_KEY);
-      if (dismissed === "true") {
-        setIsBannerDismissed(true);
-      }
-    } catch {
-      // Ignore localStorage access restrictions
-    }
-  }, []);
-
-  const handleDismissBanner = () => {
-    setIsBannerDismissed(true);
-    try {
-      localStorage.setItem(ANNOUNCEMENT_STORAGE_KEY, "true");
-    } catch {
-      // Ignore
-    }
-  };
 
   // Detect scroll to trigger elevated navbar styling
   useEffect(() => {
@@ -226,7 +203,7 @@ export const Navbar: React.FC = () => {
           >
             <span>Tools</span>
             <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/80 border border-blue-100 dark:border-blue-900/80 px-2 py-0.5 rounded-full">
-              {TOOLS.length}
+              {TOOLS_COUNT_DISPLAY}
             </span>
             <ChevronDown
               className={`w-3.5 h-3.5 transition-transform duration-200 ${
@@ -426,7 +403,7 @@ export const Navbar: React.FC = () => {
                   type="text"
                   value={mobileSearchQuery}
                   onChange={(e) => setMobileSearchQuery(e.target.value)}
-                  placeholder="Search 169+ tools..."
+                  placeholder={`Search ${TOOLS_COUNT_DISPLAY} tools...`}
                   className="w-full pl-8 pr-8 py-1.5 text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:focus:ring-cyan-400"
                 />
                 {mobileSearchQuery && (
@@ -667,71 +644,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      {/* 1. Platform Announcement Banner — Clean, responsive, zero mobile wrapping */}
-      {!isBannerDismissed && (
-        <aside
-          aria-label="Platform Announcement"
-          className="w-full bg-slate-900 text-white text-xs relative z-30 transition-all border-b border-slate-800"
-        >
-          <div className="max-w-container mx-auto flex items-center justify-between px-3 sm:px-6 py-1.5 sm:py-2 gap-2">
-            {/* Mobile compact single-line view (< 640px) */}
-            <div className="flex sm:hidden items-center justify-between w-full min-w-0 gap-2">
-              <div className="flex items-center gap-1.5 min-w-0 truncate">
-                <Rocket className="h-3 w-3 text-cyan-400 shrink-0" strokeWidth={2} aria-hidden="true" />
-                <span className="text-[11px] font-medium text-slate-200 truncate">
-                  <span className="font-mono font-bold text-white">{TOOLS.length}+</span> Free Privacy Tools
-                </span>
-              </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <Link
-                  href="/tools"
-                  className="text-[11px] font-semibold text-cyan-300 hover:text-cyan-200 underline underline-offset-2 transition-colors whitespace-nowrap"
-                >
-                  Explore →
-                </Link>
-                <button
-                  type="button"
-                  onClick={handleDismissBanner}
-                  aria-label="Dismiss banner"
-                  className="p-0.5 text-slate-400 hover:text-white transition-colors"
-                >
-                  <X className="h-3.5 w-3.5" />
-                </button>
-              </div>
-            </div>
-
-            {/* Tablet & Desktop full view (>= 640px) */}
-            <div className="hidden sm:flex flex-1 items-center justify-center gap-2.5 text-center text-xs">
-              <span className="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30 text-[10px] tracking-wider uppercase font-bold shrink-0">
-                100% Free & Private
-              </span>
-              <span className="inline-flex items-center gap-1.5 font-medium text-slate-200">
-                <Rocket className="h-3.5 w-3.5 text-cyan-400 shrink-0" strokeWidth={1.75} aria-hidden="true" />
-                <span>
-                  <span className="font-mono font-bold text-white">{TOOLS.length}+</span> In-Browser Privacy Tools Available
-                </span>
-              </span>
-              <span className="text-slate-400 text-xs hidden lg:inline">• 100% Free, Zero Uploads & Zero Server Storage</span>
-              <Link
-                href="/tools"
-                className="shrink-0 inline-flex items-center gap-1 font-semibold text-cyan-300 hover:text-cyan-200 underline underline-offset-2 transition-colors ml-1"
-              >
-                <span>Explore Tools</span>
-                <ArrowRight className="h-3 w-3" />
-              </Link>
-            </div>
-            <button
-              type="button"
-              onClick={handleDismissBanner}
-              aria-label="Dismiss announcement banner"
-              title="Dismiss banner"
-              className="hidden sm:flex shrink-0 p-1 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 transition-colors focus:outline-none"
-            >
-              <X className="h-3.5 w-3.5" />
-            </button>
-          </div>
-        </aside>
-      )}
+      
 
       {/* 2. Full-Width Sticky Navbar */}
       <header

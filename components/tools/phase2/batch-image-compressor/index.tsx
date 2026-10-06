@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { RangeInput } from "@/components/ui/RangeInput";
 import {
   Select,
   SelectContent,
@@ -113,6 +114,9 @@ export default function BatchImageCompressorTool() {
     setItems([]);
     setOverallProgress(null);
     setError(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   // Compress a single image
@@ -199,18 +203,27 @@ export default function BatchImageCompressorTool() {
   };
 
   const downloadSingle = (item: BatchItem) => {
-    if (!item.compressedUrl) return;
+    if (!item.compressedBlob && !item.compressedUrl) return;
     const lastDot = item.file.name.lastIndexOf(".");
     const base = lastDot !== -1 ? item.file.name.substring(0, lastDot) : item.file.name;
-    const ext = targetFormat === "jpeg" ? "jpg" : targetFormat === "webp" ? "webp" : "jpg";
+    const ext = targetFormat === "jpeg" ? "jpg" : targetFormat === "webp" ? "webp" : (item.file.type === "image/png" ? "png" : "jpg");
     const filename = `${base}_optimized.${ext}`;
 
+    const blob = item.compressedBlob;
+    const downloadUrl = blob ? URL.createObjectURL(blob) : item.compressedUrl!;
+
     const a = document.createElement("a");
-    a.href = item.compressedUrl;
+    a.href = downloadUrl;
     a.download = filename;
+    a.style.display = "none";
+    a.rel = "noopener";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+
+    if (blob) {
+      setTimeout(() => URL.revokeObjectURL(downloadUrl), 3000);
+    }
   };
 
   // Download all as ZIP
@@ -348,24 +361,17 @@ export default function BatchImageCompressorTool() {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {/* Quality Slider */}
-              <div className="space-y-2">
-                <div className="flex justify-between text-xs font-bold text-slate-700">
-                  <span>Compression Quality:</span>
-                  <span className="text-blue-700">{quality}%</span>
-                </div>
-                <input
-                  type="range"
-                  min="10"
-                  max="100"
+              <div className="space-y-1">
+                <RangeInput
+                  label="Compression Quality"
                   value={quality}
-                  onChange={(e) => setQuality(Number(e.target.value))}
-                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                  min={10}
+                  max={100}
+                  unit="%"
+                  minLabel="Small File (10%)"
+                  maxLabel="Max (100%)"
+                  onChange={(val) => setQuality(val)}
                 />
-                <div className="flex justify-between text-[10px] text-slate-400">
-                  <span>Small File (20%)</span>
-                  <span>Balanced (80%)</span>
-                  <span>Max (100%)</span>
-                </div>
               </div>
 
               {/* Target Format */}

@@ -21,6 +21,7 @@ import {
   Sparkles,
   Layers,
   Image as ImageIcon,
+  X,
 } from "lucide-react";
 
 export default function ImageRotatorFlipperTool() {
@@ -67,6 +68,16 @@ export default function ImageRotatorFlipperTool() {
       }
     };
     reader.readAsDataURL(file);
+  };
+
+  const handleClearImage = () => {
+    setImageSrc(null);
+    setImageName("");
+    setPreviewUrl(null);
+    setTransform({ rotation: 0, flipH: false, flipV: false });
+    setOrigSize({ width: 0, height: 0 });
+    setResultDimensions({ width: 0, height: 0 });
+    if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   // Re-render canvas transformation
@@ -361,20 +372,33 @@ export default function ImageRotatorFlipperTool() {
           {/* Interactive Preview Canvas */}
           <div className="p-4 bg-card border border-border rounded-xl min-h-[380px] flex flex-col justify-between items-center space-y-4">
             <div className="w-full flex items-center justify-between pb-2 border-b border-border">
-              <span className="text-xs font-semibold text-foreground flex items-center gap-1.5">
-                <ImageIcon className="w-3.5 h-3.5 text-primary" />
-                Live Preview
+              <span className="text-xs font-semibold text-foreground flex items-center gap-1.5 truncate">
+                <ImageIcon className="w-3.5 h-3.5 text-primary shrink-0" />
+                <span className="truncate">{imageName ? `${imageName}` : "Live Preview"}</span>
               </span>
-              <Button
-                variant="default"
-                size="sm"
-                onClick={handleDownload}
-                disabled={!previewUrl}
-                className="h-7 text-xs gap-1.5 bg-primary text-primary-foreground hover:bg-primary/90"
-              >
-                <Download className="w-3.5 h-3.5" />
-                Download Transformed
-              </Button>
+              <div className="flex items-center gap-2 shrink-0">
+                {imageSrc && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleClearImage}
+                    className="h-7 text-xs text-rose-600 hover:text-rose-700 hover:bg-rose-50 border-rose-200"
+                  >
+                    <X className="w-3 h-3 mr-1" />
+                    Clear Image
+                  </Button>
+                )}
+                <Button
+                  variant="default"
+                  size="sm"
+                  onClick={handleDownload}
+                  disabled={!previewUrl}
+                  className="h-7 text-xs gap-1.5 bg-primary text-primary-foreground hover:bg-primary/90"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  Download
+                </Button>
+              </div>
             </div>
 
             <div className="flex-1 flex items-center justify-center p-4 max-h-[350px] w-full overflow-hidden">
@@ -386,7 +410,19 @@ export default function ImageRotatorFlipperTool() {
                   className="max-h-[320px] max-w-full object-contain rounded-lg shadow-sm border border-border bg-muted/20"
                 />
               ) : (
-                <p className="text-xs text-muted-foreground">Rendering preview...</p>
+                <div className="flex flex-col items-center justify-center text-center p-8 border-2 border-dashed border-border rounded-xl w-full">
+                  <ImageIcon className="w-10 h-10 text-muted-foreground/40 mb-2" />
+                  <p className="text-xs font-semibold text-foreground mb-1">No image loaded</p>
+                  <p className="text-[11px] text-muted-foreground mb-3">Upload your own photo or load the demo image</p>
+                  <div className="flex items-center gap-2">
+                    <Button size="sm" onClick={() => fileInputRef.current?.click()} className="text-xs">
+                      <Upload className="w-3.5 h-3.5 mr-1" /> Upload
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={loadSampleImage} className="text-xs">
+                      <Sparkles className="w-3.5 h-3.5 mr-1" /> Demo Photo
+                    </Button>
+                  </div>
+                </div>
               )}
             </div>
 

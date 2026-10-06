@@ -7,6 +7,7 @@ import {
   QwertygenLogo,
 } from "@/components/BrandLogo";
 import { BRAND } from "@/lib/brand";
+import { TOOLS_COUNT_LABEL } from "@/lib/registry/tools";
 
 /**
  * Official Qwertygen Brand Guidelines & Logo Asset Presentation Page
@@ -101,7 +102,7 @@ export const BrandLogoPresentation: React.FC = () => {
                   <ShieldCheck className="w-4 h-4 text-[#06D6A0]" /> 100% Client-Side Privacy
                 </div>
                 <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
-                  <Layers className="w-4 h-4 text-[#3B82F6]" /> 111+ In-Browser Tools
+                  <Layers className="w-4 h-4 text-[#3B82F6]" /> {TOOLS_COUNT_LABEL} In-Browser
                 </div>
               </div>
             </div>

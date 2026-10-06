@@ -3,10 +3,9 @@ import Link from "next/link";
 import { QwertygenLogo } from "@/components/BrandLogo";
 import { BRAND } from "@/lib/brand";
 import { ShieldCheck, Cpu, Lock, Sparkles } from "lucide-react";
-import { getAllTools } from "@/lib/registry/tools";
+import { getAllTools, TOOLS_COUNT_LABEL } from "@/lib/registry/tools";
 
 export const Footer: React.FC = () => {
-  const toolCount = getAllTools().length;
 
   return (
     <footer className="relative bg-slate-50/80 dark:bg-[#070B14] border-t border-slate-200/80 dark:border-slate-800/80 text-slate-600 dark:text-slate-400 overflow-hidden">
@@ -42,7 +41,7 @@ export const Footer: React.FC = () => {
               <span>WASM & Web Workers</span>
             </span>
             <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200/70 dark:border-blue-800/60 font-medium">
-              <span>{toolCount} Free Tools</span>
+              <span>{TOOLS_COUNT_LABEL}</span>
             </span>
           </div>
         </div>
@@ -213,7 +212,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link href="/tools" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  Directory ({toolCount} Tools)
+                  Directory ({TOOLS_COUNT_LABEL})
                 </Link>
               </li>
               <li>

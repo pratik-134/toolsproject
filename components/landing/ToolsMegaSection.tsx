@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { ToolSearchBar } from "@/components/tools/ToolSearchBar";
 import { CATEGORY_COLORS } from "@/lib/design-tokens";
-import { getAllTools, getToolsByCategory } from "@/lib/registry/tools";
+import { getAllTools, getToolsByCategory, TOOLS_COUNT_LABEL, TOOLS_COUNT_DISPLAY } from "@/lib/registry/tools";
 
 export const ToolsMegaSection: React.FC = () => {
   const allTools = getAllTools();
@@ -80,11 +80,11 @@ export const ToolsMegaSection: React.FC = () => {
         <div className="inline-flex items-center gap-2 rounded-full bg-slate-100/90 dark:bg-slate-900/90 border border-slate-300/80 dark:border-slate-800 px-4 py-1.5 font-body text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 shadow-2xs mb-4">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
           <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
-          <span>Privacy Utility Suite · {totalCount} Tools Running in Browser</span>
+          <span>Privacy Utility Suite · {TOOLS_COUNT_LABEL} Running in Browser</span>
         </div>
 
         <h2 className="font-headings text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          One platform. <span className="font-mono text-blue-600 dark:text-blue-400">{totalCount}</span> free tools.
+          One platform. <span className="font-mono text-blue-600 dark:text-blue-400">{TOOLS_COUNT_DISPLAY}</span> free tools.
         </h2>
 
         <p className="font-body text-slate-700 dark:text-slate-200 text-sm sm:text-base max-w-2xl mx-auto mt-3.5 leading-relaxed font-medium">
@@ -94,7 +94,7 @@ export const ToolsMegaSection: React.FC = () => {
         <div className="max-w-xl mx-auto mt-8 mb-10 sm:mb-12 relative z-30">
           <ToolSearchBar
             size="large"
-            placeholder={`Search ${totalCount} tools... (e.g. PDF merge, image compress, BMI calculator)`}
+            placeholder={`Search ${TOOLS_COUNT_LABEL}... (e.g. PDF merge, image compress, BMI calculator)`}
           />
         </div>
 

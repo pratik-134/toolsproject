@@ -206,6 +206,37 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {/* Main Content Column */}
             <article className="lg:col-span-8">
               <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-10 shadow-2xs">
+                {/* Featured Cover Image with License Attribution */}
+                {post.coverImage && (
+                  <div className="mb-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100 dark:bg-slate-850 shadow-2xs">
+                    <img
+                      src={post.coverImage}
+                      alt={post.coverImageAlt || post.title}
+                      loading="lazy"
+                      className="w-full h-64 sm:h-80 md:h-96 object-cover object-center"
+                    />
+                    {post.coverImageCredit && (
+                      <div className="px-4 py-2 bg-slate-50 dark:bg-slate-900 border-t border-slate-200/80 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400 flex flex-wrap items-center justify-between gap-2">
+                        <span>
+                          Photo by{" "}
+                          <a
+                            href={post.coverImageCredit.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 dark:text-blue-400 font-semibold hover:underline"
+                          >
+                            {post.coverImageCredit.photographer}
+                          </a>{" "}
+                          on {post.coverImageCredit.platform}
+                        </span>
+                        <span className="text-slate-400 text-[10px]">
+                          Free to use under {post.coverImageCredit.platform} License
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 {/* Embedded HTML Body */}
                 <div
                   className="blog-prose"

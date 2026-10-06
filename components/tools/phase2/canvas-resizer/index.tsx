@@ -22,6 +22,7 @@ import {
   Sparkles,
   Sliders,
   Palette,
+  X,
 } from "lucide-react";
 
 export default function CanvasResizerTool() {
@@ -303,20 +304,34 @@ export default function CanvasResizerTool() {
                 </p>
               </div>
             </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => {
-                setSourceFile(null);
-                setPreviewUrl(null);
-                setResizedUrl(null);
-                if (fileInputRef.current) fileInputRef.current.value = "";
-              }}
-              className="text-xs text-slate-600"
-            >
-              <RefreshCw className="h-3 w-3 mr-1" />
-              Change Image
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => fileInputRef.current?.click()}
+                className="text-xs text-blue-600 hover:text-blue-700"
+              >
+                <RefreshCw className="h-3 w-3 mr-1" />
+                Change Image
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setSourceFile(null);
+                  if (previewUrl) URL.revokeObjectURL(previewUrl);
+                  if (resizedUrl) URL.revokeObjectURL(resizedUrl);
+                  setPreviewUrl(null);
+                  setResizedUrl(null);
+                  setResizedBlob(null);
+                  if (fileInputRef.current) fileInputRef.current.value = "";
+                }}
+                className="text-xs text-rose-600 hover:text-rose-700 hover:bg-rose-50 border-rose-200"
+              >
+                <X className="h-3.5 w-3.5 mr-1" />
+                Remove
+              </Button>
+            </div>
           </div>
 
           {/* Dimension Controls Card */}

@@ -5,6 +5,7 @@ import { BRAND } from "@/lib/brand";
 import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { ShieldCheck, Lock, ArrowRight, EyeOff } from "lucide-react";
+import { TOOLS_COUNT_DISPLAY } from "@/lib/registry/tools";
 
 import { constructToolMetadata } from "@/lib/seo/metadata";
 
@@ -54,7 +55,7 @@ export default function PrivacyPage() {
                 <span>Our Privacy Promise</span>
               </div>
               <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
-                {BRAND.name} was intentionally engineered so that we <strong className="text-slate-900 dark:text-white">cannot</strong> see, store, or sell your documents, text, or files. When you create, edit, calculate, or convert files across our 111+ live tools and {BRAND.resumeProduct.name}, all computation happens locally inside your browser sandbox. No user content is ever transmitted to or stored on our servers.
+                {BRAND.name} was intentionally engineered so that we <strong className="text-slate-900 dark:text-white">cannot</strong> see, store, or sell your documents, text, or files. When you create, edit, calculate, or convert files across our {TOOLS_COUNT_DISPLAY} live tools and {BRAND.resumeProduct.name}, all computation happens locally inside your browser sandbox. No user content is ever transmitted to or stored on our servers.
               </p>
             </div>
 

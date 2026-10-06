@@ -14,6 +14,8 @@ import {
   ShieldCheck,
   Upload,
   Type,
+  Sparkles,
+  X,
 } from "lucide-react";
 
 export default function MemeCaptionGeneratorTool() {
@@ -32,15 +34,24 @@ export default function MemeCaptionGeneratorTool() {
 
   const renderCanvas = useCallback(() => {
     const canvas = canvasRef.current;
-    if (!canvas || !imageElement) return;
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    canvas.width = imageElement.width || 800;
-    canvas.height = imageElement.height || 600;
+    canvas.width = imageElement?.width || 800;
+    canvas.height = imageElement?.height || 600;
 
-    // 1. Draw base photo
-    ctx.drawImage(imageElement, 0, 0, canvas.width, canvas.height);
+    // 1. Draw base photo or empty placeholder
+    if (imageElement) {
+      ctx.drawImage(imageElement, 0, 0, canvas.width, canvas.height);
+    } else {
+      ctx.fillStyle = "#0f172a";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#64748b";
+      ctx.font = "bold 20px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("Upload an image to create your meme", canvas.width / 2, canvas.height / 2);
+    }
 
     // 2. Configure font styles
     ctx.font = `bold ${options.fontSize}px ${options.fontFamily}`;
@@ -99,6 +110,18 @@ export default function MemeCaptionGeneratorTool() {
     img.src = URL.createObjectURL(file);
   };
 
+  const handleClearImage = () => {
+    setImageElement(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const handleLoadSample = () => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => setImageElement(img);
+    img.src = "/images/samples/meme-cat-sample.jpg";
+  };
+
   const handleDownload = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -148,11 +171,22 @@ export default function MemeCaptionGeneratorTool() {
 
         {/* Right: Controls */}
         <div className="lg:col-span-4 space-y-5">
-          {/* Upload */}
+          {/* Upload & Clear */}
           <div className="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl space-y-3 shadow-sm">
-            <h4 className="text-xs font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
-              <Upload className="w-3.5 h-3.5 text-emerald-600" /> Meme Base Image
-            </h4>
+            <div className="flex items-center justify-between">
+              <h4 className="text-xs font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                <Upload className="w-3.5 h-3.5 text-emerald-600" /> Meme Base Image
+              </h4>
+              {imageElement && (
+                <button
+                  type="button"
+                  onClick={handleClearImage}
+                  className="text-[11px] text-rose-600 hover:text-rose-700 font-medium flex items-center gap-1"
+                >
+                  <X className="w-3 h-3" /> Remove Image
+                </button>
+              )}
+            </div>
             <input
               type="file"
               ref={fileInputRef}
@@ -160,15 +194,28 @@ export default function MemeCaptionGeneratorTool() {
               onChange={handleImageUpload}
               className="hidden"
             />
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => fileInputRef.current?.click()}
-              className="w-full text-xs gap-1.5"
-            >
-              <Upload className="w-3.5 h-3.5" /> Upload Custom Photo
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => fileInputRef.current?.click()}
+                className="w-full text-xs gap-1.5"
+              >
+                <Upload className="w-3.5 h-3.5" /> Upload Photo
+              </Button>
+              {!imageElement && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={handleLoadSample}
+                  className="text-xs shrink-0 text-slate-600 dark:text-slate-300"
+                >
+                  <Sparkles className="w-3 h-3 mr-1" /> Demo Photo
+                </Button>
+              )}
+            </div>
           </div>
 
           {/* Captions */}

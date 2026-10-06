@@ -24,10 +24,12 @@ const buttonVariants = cva(
           "text-[#3B82F6] dark:text-blue-400 underline-offset-4 hover:underline hover:text-[#2563EB] dark:hover:text-blue-300 font-semibold",
       },
       size: {
-        default: "h-10 px-5 py-2.5",
-        sm: "h-8 rounded-lg px-3 text-xs",
-        lg: "px-7 py-3.5 rounded-lg min-h-[48px] text-base font-bold",
-        icon: "h-8 w-8 rounded-lg",
+        default: "h-11 min-h-[44px] rounded-xl px-5 py-2.5 text-sm font-semibold",
+        sm: "h-9 min-h-[36px] rounded-lg px-3.5 text-xs font-semibold",
+        md: "h-11 min-h-[44px] rounded-xl px-5 py-2.5 text-sm font-semibold",
+        lg: "h-[52px] min-h-[52px] rounded-xl px-7 py-3 text-base font-bold",
+        icon: "h-11 w-11 min-h-[44px] min-w-[44px] rounded-xl",
+        "icon-sm": "h-9 w-9 min-h-[36px] min-w-[36px] rounded-lg",
       },
     },
     defaultVariants: {

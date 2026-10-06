@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import JSZip from "jszip";
 import { Button } from "@/components/ui/button";
+import { RangeInput } from "@/components/ui/RangeInput";
 import {
   formatBytes,
   getFilenameWithExtension,
@@ -402,10 +403,10 @@ export default function ImageConverterTool() {
                   variant="outline"
                   size="sm"
                   onClick={handleReset}
-                  className="text-xs text-slate-600 hover:text-slate-900"
+                  className="text-xs text-rose-600 hover:text-rose-700 hover:bg-rose-50 border-rose-200"
                 >
-                  <RefreshCw className="h-3.5 w-3.5 mr-1.5" />
-                  Reset
+                  <X className="h-3.5 w-3.5 mr-1.5" />
+                  Remove
                 </Button>
               </div>
             </div>
@@ -525,61 +526,36 @@ export default function ImageConverterTool() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
               {/* Quality Slider (Visible for lossy formats JPEG and WebP) */}
               {FORMAT_DETAILS[targetFormat].lossy && (
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <label className="text-xs font-bold text-slate-700">
-                      Encoding Quality
-                    </label>
-                    <span className="text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200">
-                      {quality}%
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min="10"
-                    max="100"
-                    value={quality}
-                    onChange={(e) => setQuality(Number(e.target.value))}
-                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
-                  />
-                  <div className="flex justify-between text-[10px] text-slate-500 font-medium">
-                    <span>Smaller Size (10%)</span>
-                    <span>Standard (85%)</span>
-                    <span>Max Quality (100%)</span>
-                  </div>
-                </div>
+                <RangeInput
+                  label="Encoding Quality"
+                  value={quality}
+                  onChange={setQuality}
+                  min={10}
+                  max={100}
+                  valueDisplay={`${quality}%`}
+                  minLabel="Smaller Size (10%)"
+                  midLabel="Standard (85%)"
+                  maxLabel="Max Quality (100%)"
+                />
               )}
 
               {/* Scaling Slider */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <label className="text-xs font-bold text-slate-700">
-                    Output Scale & Resolution
-                  </label>
-                  <span className="text-xs font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
-                    {scale}% {sourceDimensions && (
-                      <span className="text-slate-500 font-normal">
-                        ({Math.round((sourceDimensions.width * scale) / 100)} ×{" "}
-                        {Math.round((sourceDimensions.height * scale) / 100)} px)
-                      </span>
-                    )}
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min="25"
-                  max="200"
-                  step="5"
-                  value={scale}
-                  onChange={(e) => setScale(Number(e.target.value))}
-                  className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
-                />
-                <div className="flex justify-between text-[10px] text-slate-500 font-medium">
-                  <span>Quarter (25%)</span>
-                  <span>Original (100%)</span>
-                  <span>Double (200%)</span>
-                </div>
-              </div>
+              <RangeInput
+                label="Output Scale & Resolution"
+                value={scale}
+                onChange={setScale}
+                min={25}
+                max={200}
+                step={5}
+                valueDisplay={
+                  sourceDimensions
+                    ? `${scale}% (${Math.round((sourceDimensions.width * scale) / 100)} × ${Math.round((sourceDimensions.height * scale) / 100)} px)`
+                    : `${scale}%`
+                }
+                minLabel="Quarter (25%)"
+                midLabel="Original (100%)"
+                maxLabel="Double (200%)"
+              />
             </div>
 
             {/* Background Color Picker for Opaque Formats */}

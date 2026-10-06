@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { getAllPosts, getAllCategories } from "@/lib/blog/posts";
 import { BlogListClient } from "@/components/blog/BlogListClient";
 import { ShieldCheck, Sparkles, ArrowRight, Layers } from "lucide-react";
+import { TOOLS_COUNT_LABEL } from "@/lib/registry/tools";
 
 import { constructToolMetadata } from "@/lib/seo/metadata";
 
@@ -89,7 +90,7 @@ export default function BlogPage() {
                   className="px-6 py-3 rounded-xl bg-white text-blue-700 font-bold text-sm shadow-md hover:bg-blue-50 transition-colors inline-flex items-center gap-2"
                 >
                   <Layers className="w-4 h-4" />
-                  <span>Browse All 162 Free Tools</span>
+                  <span>Browse All {TOOLS_COUNT_LABEL}</span>
                 </Link>
                 <Link
                   href="/editor"

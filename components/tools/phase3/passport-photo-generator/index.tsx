@@ -47,6 +47,8 @@ import {
   Scissors,
   Square,
   Maximize2,
+  X,
+  Sparkles,
 } from "lucide-react";
 
 export default function PassportPhotoGeneratorTool() {
@@ -103,13 +105,23 @@ export default function PassportPhotoGeneratorTool() {
   const renderSinglePhotoToCanvas = useCallback(
     (targetCanvas: HTMLCanvasElement, withGuide: boolean = false) => {
       const ctx = targetCanvas.getContext("2d");
-      if (!ctx || !imageElement) return;
+      if (!ctx) return;
 
       const targetW = selectedPreset.targetWidthPx;
       const targetH = selectedPreset.targetHeightPx;
 
       targetCanvas.width = targetW;
       targetCanvas.height = targetH;
+
+      if (!imageElement) {
+        ctx.fillStyle = transform.bgColor || "#ffffff";
+        ctx.fillRect(0, 0, targetW, targetH);
+        ctx.fillStyle = "#94a3b8";
+        ctx.font = "600 24px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("Upload or take a photo", targetW / 2, targetH / 2);
+        return;
+      }
 
       // 1. Fill Background
       ctx.fillStyle = transform.bgColor;
@@ -644,6 +656,36 @@ export default function PassportPhotoGeneratorTool() {
             <Camera className="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
             <span className="whitespace-nowrap">Live Camera</span>
           </Button>
+
+          {imageElement ? (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                setImageElement(null);
+                if (fileInputRef.current) fileInputRef.current.value = "";
+              }}
+              className="h-10 px-3.5 rounded-xl text-xs font-semibold gap-1.5 text-rose-600 hover:text-rose-700 hover:bg-rose-50 dark:hover:bg-rose-950/30 border-rose-200 dark:border-rose-800 whitespace-nowrap shrink-0"
+            >
+              <X className="h-3.5 w-3.5 shrink-0" />
+              <span className="whitespace-nowrap">Remove Photo</span>
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                const img = new Image();
+                img.crossOrigin = "anonymous";
+                img.onload = () => setImageElement(img);
+                img.src = "/images/samples/passport-sample.jpg";
+              }}
+              className="h-10 px-3.5 rounded-xl text-xs font-semibold gap-1.5 text-slate-600 hover:text-slate-900 border-slate-200 dark:border-slate-700 whitespace-nowrap shrink-0"
+            >
+              <Sparkles className="h-3.5 w-3.5 text-amber-500 shrink-0" />
+              <span className="whitespace-nowrap">Demo Photo</span>
+            </Button>
+          )}
 
           <Button
             variant="ghost"

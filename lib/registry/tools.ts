@@ -5488,3 +5488,7 @@ export function getToolUrl(tool: { slug: string; category?: string } | string): 
     : `/tools/${tool.slug}`;
 }
 
+export const TOOLS_COUNT = TOOLS.length;
+export const TOOLS_COUNT_DISPLAY = `${TOOLS_COUNT}+`;
+export const TOOLS_COUNT_LABEL = `${TOOLS_COUNT}+ Tools`;
+

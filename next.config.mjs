@@ -109,6 +109,31 @@ const nextConfig = {
         destination: '/tools/document-pdf/direct-markdown-editor',
         permanent: true,
       },
+      {
+        source: '/tools/document-pdf/pdf-merge',
+        destination: '/tools/document-pdf/pdf-merger',
+        permanent: true,
+      },
+      {
+        source: '/tools/document-pdf/pdf-split',
+        destination: '/tools/document-pdf/pdf-splitter',
+        permanent: true,
+      },
+      {
+        source: '/tools/image/image-compressor',
+        destination: '/tools/image/batch-image-compressor',
+        permanent: true,
+      },
+      {
+        source: '/tools/security/password-generator',
+        destination: '/tools/utilities/password-generator',
+        permanent: true,
+      },
+      {
+        source: '/tools/developer/csv-json',
+        destination: '/tools/developer/csv-json-converter',
+        permanent: true,
+      },
     ];
   },
   webpack: (config) => {

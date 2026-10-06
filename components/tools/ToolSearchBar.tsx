@@ -17,7 +17,7 @@ import {
   Cloud,
   Zap,
 } from "lucide-react";
-import { getLiveTools, getToolBySlug, getToolUrl } from "@/lib/registry/tools";
+import { getLiveTools, getToolBySlug, getToolUrl, TOOLS_COUNT_LABEL } from "@/lib/registry/tools";
 import { ToolDefinition, CategoryId } from "@/lib/registry/types";
 import { getCategoryTheme } from "@/lib/category-theme";
 import { KbdShortcut } from "@/components/ui/KbdShortcut";
@@ -59,10 +59,11 @@ export interface ToolSearchBarProps {
 }
 
 export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
-  placeholder = "Search 111+ tools... (e.g. PDF merge, BMI calculator, hash generator)",
+  placeholder,
   size = "default",
   className = "",
 }) => {
+  const resolvedPlaceholder = placeholder || `Search ${TOOLS_COUNT_LABEL}... (e.g. PDF merge, BMI calculator, hash generator)`;
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -256,7 +257,7 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
             if (query.trim().length > 0) setIsOpen(true);
           }}
           onKeyDown={handleKeyDown}
-          placeholder={placeholder}
+          placeholder={resolvedPlaceholder}
           className={`w-full bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-all font-body ${
             isLarge
               ? "pl-12 sm:pl-14 pr-16 py-3.5 sm:py-4 rounded-2xl border-2 border-slate-200/90 dark:border-slate-800 shadow-xs hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-sm text-sm sm:text-base focus:border-blue-600 dark:focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/10"
