@@ -49,9 +49,9 @@ export const metadata: Metadata = {
     siteName: BRAND.name,
     images: [
       {
-        url: "/icon.png",
-        width: 512,
-        height: 512,
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
         alt: `${BRAND.name} — ${BRAND.tagline}`,
       },
     ],
@@ -62,18 +62,22 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${BRAND.name} — ${BRAND.tagline}`,
     description: BRAND.description,
-    images: ["/icon.png"],
+    images: ["/og-image.png"],
     creator: BRAND.twitterHandle,
   },
   icons: {
     icon: [
-      { url: "/icon.svg?v=2", type: "image/svg+xml" },
-      { url: "/icon.png?v=2", type: "image/png" },
-      { url: "/favicon.png?v=2", type: "image/png" },
-      { url: "/favicon.ico?v=2" },
+      { url: "/favicon.svg?v=3", type: "image/svg+xml" },
+      { url: "/icon.svg?v=3", type: "image/svg+xml" },
+      { url: "/icon.png?v=3", type: "image/png" },
+      { url: "/favicon.png?v=3", type: "image/png" },
+      { url: "/favicon.ico?v=3" },
     ],
-    shortcut: "/icon.svg?v=2",
-    apple: "/apple-icon.png?v=2",
+    shortcut: "/favicon.svg?v=3",
+    apple: [
+      { url: "/apple-icon.png?v=3", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.png?v=3", sizes: "180x180", type: "image/png" },
+    ],
   },
   manifest: "/manifest.json",
   robots: {

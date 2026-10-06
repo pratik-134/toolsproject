@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" width="100%" height="100%">
+  <defs>
+    <linearGradient id="qRibbonBrand" x1="12" y1="12" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2563EB" />
+      <stop offset="55%" stop-color="#0EA5E9" />
+      <stop offset="100%" stop-color="#06D6A0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Continuous Ribbon Q: Primary Loop with Internal Geometric Fold & Terminal Kick -->
+  <path
+    d="M 32 10 C 19.85 10 10 19.85 10 32 C 10 44.15 19.85 54 32 54 C 38.2 54 43.8 51.4 47.8 47.3 L 34 33.5 C 32.5 32 32.5 29.5 34 28 C 35.5 26.5 38 26.5 39.5 28 L 54 42.5"
+    stroke="url(#qRibbonBrand)"
+    stroke-width="6.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Continuous Ribbon Q: Upper Closure Facet -->
+  <path
+    d="M 32 10 C 44.15 10 54 19.85 54 32 C 54 35.8 53 39.4 51.3 42.5"
+    stroke="#2563EB"
+    stroke-width="6.5"
+    stroke-linecap="round"
+  />
+</svg>

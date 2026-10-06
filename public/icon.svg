@@ -1,60 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
   <defs>
-    <!-- Background Gradient -->
+    <!-- Background Frame Gradient -->
     <linearGradient id="qBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#0B132B" />
       <stop offset="100%" stop-color="#0F172A" />
     </linearGradient>
 
-    <!-- Outer Brand Ring Gradient: Blue -> Sky -> Emerald -->
-    <linearGradient id="qRingGrad" x1="10%" y1="10%" x2="90%" y2="90%">
+    <!-- Master Continuous Ribbon Gradient (Blue -> Sky -> Teal) -->
+    <linearGradient id="qRibbonGrad" x1="96" y1="80" x2="416" y2="416" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#2563EB" />
-      <stop offset="35%" stop-color="#3B82F6" />
-      <stop offset="70%" stop-color="#0EA5E9" />
+      <stop offset="55%" stop-color="#0EA5E9" />
       <stop offset="100%" stop-color="#06D6A0" />
     </linearGradient>
-
-    <!-- Power Spark & Tail Gradient -->
-    <linearGradient id="qTailGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0EA5E9" />
-      <stop offset="100%" stop-color="#06D6A0" />
-    </linearGradient>
-
-    <!-- Inner Core Glow -->
-    <radialGradient id="qCoreGlow" cx="48%" cy="46%" r="50%">
-      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.32" />
-      <stop offset="65%" stop-color="#0EA5E9" stop-opacity="0.08" />
-      <stop offset="100%" stop-color="#0EA5E9" stop-opacity="0" />
-    </radialGradient>
   </defs>
 
   <!-- Squircle Canvas Frame -->
   <rect width="512" height="512" rx="116" fill="url(#qBgGrad)" />
   <rect width="504" height="504" x="4" y="4" rx="112" fill="none" stroke="#1E293B" stroke-width="4" opacity="0.6" />
 
-  <!-- Ambient Radiant Core Glow -->
-  <circle cx="240" cy="236" r="150" fill="url(#qCoreGlow)" />
-
-  <!-- The "Q" Monogram Ring Body -->
-  <circle
-    cx="240"
-    cy="236"
-    r="126"
-    fill="none"
-    stroke="url(#qRingGrad)"
-    stroke-width="52"
-    stroke-linecap="round"
-  />
-
-  <!-- High-Energy Generator Diagonal Tail for "Q" -->
+  <!-- Continuous Ribbon Q: Primary Loop with Internal Geometric Fold & Terminal Kick -->
+  <!-- Scaled 8x from 64x64 grid (stroke-width 52px = 6.5 * 8) -->
   <path
-    d="M 292 288 L 396 392"
-    stroke="url(#qTailGrad)"
+    d="M 256 80 C 158.8 80 80 158.8 80 256 C 80 353.2 158.8 432 256 432 C 305.6 432 350.4 411.2 382.4 378.4 L 272 268 C 260 256 260 236 272 224 C 284 212 304 212 316 224 L 432 340"
+    fill="none"
+    stroke="url(#qRibbonGrad)"
+    stroke-width="52"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Continuous Ribbon Q: Upper Closure Facet -->
+  <path
+    d="M 256 80 C 353.2 80 432 158.8 432 256 C 432 286.4 424 315.2 410.4 340"
+    fill="none"
+    stroke="#2563EB"
     stroke-width="52"
     stroke-linecap="round"
   />
-
-  <!-- Generator Power Node (Center Core Dynamic Accent) -->
-  <circle cx="240" cy="236" r="28" fill="#0EA5E9" opacity="0.9" />
-  <circle cx="240" cy="236" r="14" fill="#E0F2FE" />
 </svg>

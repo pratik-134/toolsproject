@@ -55,10 +55,14 @@ export const BRAND = {
 
   /** Platform Colors & Design Tokens */
   colors: {
-    primary: "#3B82F6",     // Primary Blue (#3B82F6)
+    primary: "#2563EB",     // Royal Blue (#2563EB)
+    blue: "#3B82F6",        // Vibrant Blue (#3B82F6)
+    sky: "#0EA5E9",         // Sky Cyan (#0EA5E9)
     accentTeal: "#06D6A0",  // Accent Teal (#06D6A0)
-    primaryDark: "#0F172A", // Dark Navy (#0F172A)
-    gray: "#94A3B8",        // Gray (#94A3B8)
+    primaryDark: "#0F172A", // Slate Dark (#0F172A)
+    darkNavy: "#0B132B",    // Midnight Base (#0B132B)
+    lightSpark: "#E0F2FE",  // Light Spark (#E0F2FE)
+    gray: "#94A3B8",        // Muted Slate (#94A3B8)
     canvas: "#F8FAFC",      // Light Canvas (#F8FAFC)
   },
 
