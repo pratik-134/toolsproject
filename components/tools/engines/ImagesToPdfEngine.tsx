@@ -138,7 +138,7 @@ export function ImagesToPdfEngine({ preset }: ImagesToPdfEngineProps) {
       const firstFile = files[0];
       const firstBase = firstFile ? firstFile.name.substring(0, firstFile.name.lastIndexOf(".")) : "converted";
       setDownloadUrl(url);
-      setDownloadFilename(`${firstBase}-cleartrix.pdf`);
+      setDownloadFilename(`${firstBase}-qwertygen.pdf`);
     } catch (err: any) {
       console.error("[ImagesToPdfEngine Error]:", err);
       setErrorMessage(err.message || "Failed to generate PDF from images.");

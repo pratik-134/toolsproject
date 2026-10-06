@@ -1,7 +1,7 @@
 /**
  * CSS Mesh Gradient Studio & Generator — Pure Domain Logic
  * 100% In-Browser Parametric Mesh Gradient Calculations & CSS/SVG Generators
- * Zero External Network Calls, Zero Server Uploads (Cleartrix Invariant #1)
+ * Zero External Network Calls, Zero Server Uploads (Qwertygen Invariant #1)
  */
 
 export interface MeshPoint {

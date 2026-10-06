@@ -1,5 +1,5 @@
 /**
- * Cleartrix Client-Side Pipeline Handoff Engine
+ * Qwertygen Client-Side Pipeline Handoff Engine
  * Enables zero-upload, 100% in-browser data transfer between any tools in the suite.
  */
 

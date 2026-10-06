@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 
 export default function QrGeneratorTool() {
-  const [text, setText] = useState<string>("https://cleartrix.com");
+  const [text, setText] = useState<string>("https://qwertygen.com");
   const [fgColor, setFgColor] = useState<string>("#0B1229");
   const [bgColor, setBgColor] = useState<string>("#FFFFFF");
   const [size, setSize] = useState<number>(256);
@@ -34,7 +34,7 @@ export default function QrGeneratorTool() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "cleartrix-qrcode.svg";
+    a.download = "qwertygen-qrcode.svg";
     a.click();
     URL.revokeObjectURL(url);
   };

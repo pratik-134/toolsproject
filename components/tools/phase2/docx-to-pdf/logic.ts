@@ -275,9 +275,9 @@ export async function convertBlocksToPdf(
   return await pdfDoc.save();
 }
 
-export const SAMPLE_DOCX_MARKDOWN = `# Executive Project Summary: Cleartrix Enterprise Suite
+export const SAMPLE_DOCX_MARKDOWN = `# Executive Project Summary: Qwertygen Enterprise Suite
 ## Overview & Objectives
-Cleartrix provides 100% in-browser, privacy-preserving tools designed for professionals and teams. All computations, media transformations, and document conversions execute exclusively within device memory.
+Qwertygen provides 100% in-browser, privacy-preserving tools designed for professionals and teams. All computations, media transformations, and document conversions execute exclusively within device memory.
 
 ## Key Architecture Principles
 • Zero Server Data Transmission: Sensitive files, PDFs, and spreadsheets never leave browser RAM.

@@ -2,9 +2,9 @@ import { minifyCode } from "./logic";
 
 export function runTests(): boolean {
   // Test JSON
-  const jsonInput = '{\n  "name": "Cleartrix",\n  "active": true,\n  "count": 42\n}';
+  const jsonInput = '{\n  "name": "Qwertygen",\n  "active": true,\n  "count": 42\n}';
   const jsonResult = minifyCode(jsonInput, "json");
-  if (jsonResult.code !== '{"name":"Cleartrix","active":true,"count":42}') {
+  if (jsonResult.code !== '{"name":"Qwertygen","active":true,"count":42}') {
     throw new Error(`JSON minification failed: ${jsonResult.code}`);
   }
   if (jsonResult.bytesSaved <= 0 || jsonResult.savingsPercent <= 0) {

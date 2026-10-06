@@ -20,7 +20,7 @@ const SAMPLES: Record<MinifyLanguage, string> = {
 <!-- Navigation Bar -->
 <header class="navbar">
   <div class="container">
-    <a href="/" class="brand-logo"> Cleartrix </a>
+    <a href="/" class="brand-logo"> Qwertygen </a>
     <ul class="nav-links">
       <li> <a href="/tools"> Tools </a> </li>
       <li> <a href="/about"> About </a> </li>

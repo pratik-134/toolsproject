@@ -30,14 +30,14 @@ import {
 
 const ACCENT_COLORS = [
   { name: "Executive Navy", hex: "1E3A8A" },
-  { name: "Cleartrix Blue", hex: "2563EB" },
+  { name: "Qwertygen Blue", hex: "2563EB" },
   { name: "Emerald Slate", hex: "065F46" },
   { name: "Modern Crimson", hex: "991B1B" },
   { name: "Neutral Graphite", hex: "1F2937" },
 ];
 
 export default function DocxToPdfTool() {
-  const [docTitle, setDocTitle] = useState<string>("Cleartrix Executive Summary");
+  const [docTitle, setDocTitle] = useState<string>("Qwertygen Executive Summary");
   const [textInput, setTextInput] = useState<string>(SAMPLE_DOCX_MARKDOWN);
   const [pageSize, setPageSize] = useState<"letter" | "a4">("letter");
   const [fontSize, setFontSize] = useState<number>(11);
@@ -159,7 +159,7 @@ export default function DocxToPdfTool() {
                   className="text-xs h-7 gap-1 text-muted-foreground hover:text-foreground"
                   onClick={() => {
                     setTextInput(SAMPLE_DOCX_MARKDOWN);
-                    setDocTitle("Cleartrix Executive Summary");
+                    setDocTitle("Qwertygen Executive Summary");
                     setStatusMessage("");
                   }}
                 >

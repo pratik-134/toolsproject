@@ -175,7 +175,7 @@ export const ToolWorkbenchShell: React.FC<ToolWorkbenchShellProps> = ({
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <a
               href={downloadUrl}
-              download={downloadFilename || "cleartrix-processed"}
+              download={downloadFilename || "qwertygen-processed"}
               onClick={onDownload}
               className="w-full sm:w-auto px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
             >

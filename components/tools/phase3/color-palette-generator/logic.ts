@@ -1,7 +1,7 @@
 /**
  * Harmonic Color Palette Studio & WCAG Contrast Checker — Pure Domain Logic
  * 100% In-Browser Color Harmonies, WCAG 2.1 Contrast & Accessibility Auditing
- * Zero External Network Calls, Zero Server Uploads (Cleartrix Invariant #1)
+ * Zero External Network Calls, Zero Server Uploads (Qwertygen Invariant #1)
  */
 
 export type HarmonyMode =

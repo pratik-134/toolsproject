@@ -11,8 +11,8 @@ import {
 export function runVisualDiffTests(): boolean {
   console.log("Testing [visual-diff-studio] logic...");
 
-  const orig = `const name = "Cleartrix";\nconst version = 1;\nconsole.log(name);`;
-  const mod = `const name = "Cleartrix Pro";\nconst version = 2;\nconsole.log(name);\nconsole.log("done");`;
+  const orig = `const name = "Qwertygen";\nconst version = 1;\nconsole.log(name);`;
+  const mod = `const name = "Qwertygen Pro";\nconst version = 2;\nconsole.log(name);\nconsole.log("done");`;
 
   const diff = computeVisualDiff(orig, mod);
 

@@ -39,7 +39,7 @@ export async function generateMetadata({
 
   if (!post) return {};
 
-  const baseUrl = BRAND.domain ? `https://${BRAND.domain}` : "https://cleartrix.com";
+  const baseUrl = BRAND.domain ? `https://${BRAND.domain}` : "https://qwertygen.com";
   const postUrl = `${baseUrl}/blog/${post.slug}`;
 
   return {
@@ -86,7 +86,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     year: "numeric",
   });
 
-  const baseUrl = BRAND.domain ? `https://${BRAND.domain}` : "https://cleartrix.com";
+  const baseUrl = BRAND.domain ? `https://${BRAND.domain}` : "https://qwertygen.com";
   const articleUrl = `${baseUrl}/blog/${post.slug}`;
 
   // JSON-LD Structured Data
@@ -222,7 +222,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                       Written by {post.author.name}
                     </h3>
                     <p className="text-xs text-slate-500 dark:text-slate-400">
-                      {post.author.role} at ClearTrix. Passionate about client-side document processing, data privacy invariants, and high-performance browser tooling.
+                      {post.author.role} at Qwertygen. Passionate about client-side document processing, data privacy invariants, and high-performance browser tooling.
                     </p>
                   </div>
                 </div>
@@ -253,7 +253,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     ))}
                   </nav>
 
-                  {/* Contextual ClearTrix Tool Card */}
+                  {/* Contextual Qwertygen Tool Card */}
                   {relatedTools.length > 0 && (
                     <div className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 space-y-3">
                       <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 dark:text-slate-100">

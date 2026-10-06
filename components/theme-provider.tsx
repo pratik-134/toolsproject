@@ -10,7 +10,8 @@ export interface ThemeContextType {
   toggleTheme: () => void;
 }
 
-const THEME_STORAGE_KEY = "ct_theme";
+const THEME_STORAGE_KEY = "qg_theme";
+const LEGACY_THEME_KEY = "ct_theme";
 
 const ThemeContext = createContext<ThemeContextType>({
   theme: "light",
@@ -25,7 +26,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   useEffect(() => {
     setMounted(true);
     try {
-      const stored = localStorage.getItem(THEME_STORAGE_KEY);
+      const stored = localStorage.getItem(THEME_STORAGE_KEY) || localStorage.getItem(LEGACY_THEME_KEY);
       // Strictly default to light for first-time users as required
       if (stored === "dark") {
         setThemeState("dark");

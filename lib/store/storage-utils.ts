@@ -1,9 +1,9 @@
 import { migrateBrandKeys } from "./migrate-brand";
 
-export const INDEX_STORAGE_KEY = "ct_resumes_index";
-export const RESUME_STORAGE_PREFIX = "ct_resume_";
-export const LEGACY_STORAGE_KEY = "ct_resume_draft";
-export const LEGACY_BACKUP_KEY = "ct_resume_draft_backup";
+export const INDEX_STORAGE_KEY = "qg_resumes_index";
+export const RESUME_STORAGE_PREFIX = "qg_resume_";
+export const LEGACY_STORAGE_KEY = "qg_resume_draft";
+export const LEGACY_BACKUP_KEY = "qg_resume_draft_backup";
 
 function decodeLegacy(b64: string): string {
   if (typeof atob !== "undefined") {
@@ -18,6 +18,7 @@ export const LEGACY_RESUME_PREFIX = decodeLegacy("cmVzdW1lYnVpbGRlcmxhYl9yZXN1bW
 export const OLD_LEGACY_DRAFT_KEY = decodeLegacy("cmVzdW1lYnVpbGRlcmxhYl9yZXN1bWVfZHJhZnQ=");
 
 const FALLBACK_PREFIXES = [
+  decodeLegacy("Y3Rf"), // ct_ (legacy prefix)
   decodeLegacy("cmVzdW1lYnVpbGRlcmxhYl8="),
   decodeLegacy("Y3VyaXZf"),
   decodeLegacy("Y3Vydml2Xw=="),
@@ -25,8 +26,8 @@ const FALLBACK_PREFIXES = [
   decodeLegacy("bWtf"),
 ];
 
-export const BRAND_MIGRATION_FLAG = "ct_brand_migrated_v1";
-export const THEME_MIGRATION_FLAG = "ct_theme_v2_migrated";
+export const BRAND_MIGRATION_FLAG = "qg_brand_migrated_v1";
+export const THEME_MIGRATION_FLAG = "qg_theme_v2_migrated";
 
 // Standard browser local storage quota is typically 5MB
 export const ESTIMATED_LOCAL_STORAGE_QUOTA_BYTES = 5 * 1024 * 1024;
@@ -96,9 +97,9 @@ export function safeLocalStorageGet(key: string): string | null {
     const val = localStorage.getItem(key);
     if (val !== null) return val;
 
-    // Fallback reads: if looking for ct_ prefix, check older prefixes
-    if (key.startsWith("ct_")) {
-      const suffix = key.slice("ct_".length);
+    // Fallback reads: if looking for qg_ prefix, check older prefixes
+    if (key.startsWith("qg_")) {
+      const suffix = key.slice("qg_".length);
       for (const prefix of FALLBACK_PREFIXES) {
         const fallbackVal = localStorage.getItem(`${prefix}${suffix}`);
         if (fallbackVal !== null) return fallbackVal;
@@ -144,8 +145,8 @@ export function safeLocalStorageRemove(key: string): boolean {
   try {
     localStorage.removeItem(key);
     // Also remove legacy keys to prevent deleted entries from resurrecting on fallback
-    if (key.startsWith("ct_")) {
-      const suffix = key.slice("ct_".length);
+    if (key.startsWith("qg_")) {
+      const suffix = key.slice("qg_".length);
       for (const prefix of FALLBACK_PREFIXES) {
         localStorage.removeItem(`${prefix}${suffix}`);
       }

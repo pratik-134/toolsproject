@@ -33,7 +33,7 @@ const DEFAULT_REGEX_DRAFT: RegexDraft = {
   pattern: "([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})",
   flags: "g",
   testString:
-    "Welcome to Cleartrix! You can contact our support team at support@cleartrix.com or sales team at team@cleartrix.com anytime.",
+    "Welcome to Qwertygen! You can contact our support team at support@qwertygen.com or sales team at team@qwertygen.com anytime.",
   replacePattern: "[REDACTED_EMAIL]",
 };
 
@@ -185,7 +185,7 @@ export default function RegexTesterTool() {
                 onClick={() => {
                   setPattern("([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})");
                   setFlags("g");
-                  setTestString("Support inquiries: support@cleartrix.com, billing issues: billing@domain.org, general info: hello@sample.io.");
+                  setTestString("Support inquiries: support@qwertygen.com, billing issues: billing@domain.org, general info: hello@sample.io.");
                 }}
                 className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 hover:bg-teal-100 transition-colors"
               >

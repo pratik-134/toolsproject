@@ -26,13 +26,13 @@ export function inspectEncryptedContainer(containerBytes: Uint8Array): {
   error?: string;
 } {
   if (containerBytes.length < MAGIC_BYTES.length + SALT_LENGTH + IV_LENGTH + 4) {
-    return { valid: false, error: "File is too small to be a valid Cleartrix encrypted container." };
+    return { valid: false, error: "File is too small to be a valid Qwertygen encrypted container." };
   }
 
   // Check magic bytes
   for (let i = 0; i < MAGIC_BYTES.length; i++) {
     if (containerBytes[i] !== MAGIC_BYTES[i]) {
-      return { valid: false, error: "Unrecognized file signature. Not a Cleartrix .enc file." };
+      return { valid: false, error: "Unrecognized file signature. Not a Qwertygen .enc file." };
     }
   }
 
@@ -67,7 +67,7 @@ export function inspectEncryptedContainer(containerBytes: Uint8Array): {
 }
 
 /**
- * Decrypt a Cleartrix encrypted container with password
+ * Decrypt a Qwertygen encrypted container with password
  */
 export async function decryptFileBuffer(
   containerBytes: Uint8Array,

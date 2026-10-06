@@ -103,7 +103,7 @@ export default function MemeCaptionGeneratorTool() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const link = document.createElement("a");
-    link.download = `cleartrix-meme-${Date.now()}.png`;
+    link.download = `qwertygen-meme-${Date.now()}.png`;
     link.href = canvas.toDataURL("image/png");
     link.click();
   };

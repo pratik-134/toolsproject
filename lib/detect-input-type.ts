@@ -1,5 +1,5 @@
 /**
- * Cleartrix Smart Input Auto-Detection Engine
+ * Qwertygen Smart Input Auto-Detection Engine
  * Zero-upload, 100% in-browser content sniffing for the Command Palette & Omnibar.
  */
 

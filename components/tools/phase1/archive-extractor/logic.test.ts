@@ -4,8 +4,8 @@ import { extractArchive, detectFormat, formatFileSize, readTextContent } from ".
 export function runTests(): boolean {
   // Test 1: Create synthetic ZIP with multiple nested files
   const syntheticZip = zipSync({
-    "README.md": strToU8("# Sample Archive Project\nCreated with Cleartrix!"),
-    "src/index.ts": strToU8("console.log('Hello Cleartrix');"),
+    "README.md": strToU8("# Sample Archive Project\nCreated with Qwertygen!"),
+    "src/index.ts": strToU8("console.log('Hello Qwertygen');"),
     "data/config.json": strToU8(JSON.stringify({ version: "1.0.0", active: true })),
   });
 
@@ -36,7 +36,7 @@ export function runTests(): boolean {
     throw new Error("README.md should be flagged as text");
   }
   const text = readTextContent(readme);
-  if (!text.includes("Created with Cleartrix!")) {
+  if (!text.includes("Created with Qwertygen!")) {
     throw new Error(`Unexpected text content: ${text}`);
   }
 

@@ -32,7 +32,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { NavbarMegaMenu } from "@/components/NavbarMegaMenu";
 import { usePwa } from "@/components/pwa/PwaProvider";
 
-const ANNOUNCEMENT_STORAGE_KEY = "ct_announcement_dismissed_v1";
+const ANNOUNCEMENT_STORAGE_KEY = "qg_announcement_dismissed_v1";
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
@@ -192,7 +192,7 @@ export const Navbar: React.FC = () => {
           onClick={handleLinkClick}
           className="flex items-center gap-2 sm:gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-xl py-1"
         >
-          <BrandLogo product="cleartrix" size={34} isLight={false} />
+          <BrandLogo product="qwertygen" size={34} isLight={false} />
         </Link>
 
         {/* Trust Pill (Desktop only) */}
@@ -319,8 +319,8 @@ export const Navbar: React.FC = () => {
           <button
             type="button"
             onClick={installApp}
-            title="Install Cleartrix app for offline use"
-            aria-label="Install Cleartrix app"
+            title="Install Qwertygen app for offline use"
+            aria-label="Install Qwertygen app"
             className="hidden md:inline-flex items-center gap-1.5 h-9 px-3 rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/70 dark:bg-blue-950/60 hover:bg-blue-100 dark:hover:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-semibold transition-all shrink-0"
           >
             <Download className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
@@ -572,7 +572,7 @@ export const Navbar: React.FC = () => {
         >
           <span className="flex items-center gap-2.5">
             <CheckCircle2 className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-            <span>Why Cleartrix? (Comparison)</span>
+            <span>Why Qwertygen? (Comparison)</span>
           </span>
           <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 border border-slate-200/70 dark:border-slate-700 px-2 py-0.5 rounded-full">
             Zero paywall

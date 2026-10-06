@@ -41,7 +41,7 @@ import {
 
 const SAMPLE_MARKDOWN = `# Modern Privacy-First Architecture
 
-Welcome to the **Cleartrix Direct Markdown Editor** — a high-speed, zero-upload workspace for drafting technical documentation, roadmaps, and release notes.
+Welcome to the **Qwertygen Direct Markdown Editor** — a high-speed, zero-upload workspace for drafting technical documentation, roadmaps, and release notes.
 
 ## Architectural Pillars
 - **Zero-Cloud Compute**: Everything executes locally inside your browser sandbox.
@@ -57,7 +57,7 @@ Welcome to the **Cleartrix Direct Markdown Editor** — a high-speed, zero-uploa
 > "True digital privacy begins when data never leaves the client in the first place."
 
 ### Performance Benchmarks
-| Benchmark Item | Cloud Server | Cleartrix In-Browser | Advantage |
+| Benchmark Item | Cloud Server | Qwertygen In-Browser | Advantage |
 | --- | --- | --- | --- |
 | Parsing Latency | 340ms | 2ms | 170x Faster |
 | Network Egress | 4.2 MB | 0 KB | 100% Free |
@@ -72,7 +72,7 @@ interface DocumentEngine {
 \`\`\`
 
 ---
-*Drafted securely in Cleartrix Privacy Suite.*`;
+*Drafted securely in Qwertygen Privacy Suite.*`;
 
 export default function DirectMarkdownEditorTool() {
   const {

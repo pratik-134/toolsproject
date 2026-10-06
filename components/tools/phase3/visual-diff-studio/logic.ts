@@ -1,7 +1,7 @@
 /**
  * Multi-Format Visual Diff Studio — Pure Domain Logic
  * Synchronized side-by-side & unified diff calculation with character-level micro-diffs
- * 100% In-Browser Deterministic Diff Algorithm (Cleartrix Invariant #1)
+ * 100% In-Browser Deterministic Diff Algorithm (Qwertygen Invariant #1)
  */
 
 export interface DiffLine {

@@ -37,7 +37,7 @@ export const DOCX_TEMPLATES: Record<string, { title: string; subtitle: string; b
     subtitle: "High-Performance, Local-First Architecture Specification",
     blocks: [
       { id: "1", type: "heading1", content: "1. Executive Summary" },
-      { id: "2", type: "paragraph", content: "This document outlines the engineering architecture for Cleartrix, a privacy-first web utility suite executing entirely within browser memory to eliminate server-side storage risks." },
+      { id: "2", type: "paragraph", content: "This document outlines the engineering architecture for Qwertygen, a privacy-first web utility suite executing entirely within browser memory to eliminate server-side storage risks." },
       { id: "3", type: "heading1", content: "2. Key Objectives" },
       { id: "4", type: "bullet", content: "Zero server uploads for Phase 1-3 document and media processing." },
       { id: "5", type: "bullet", content: "High-fidelity export parity across Vector PDF, DOCX, and RTF formats." },
@@ -234,7 +234,7 @@ export async function buildDocxDocument(config: DocxDocumentConfig): Promise<Uin
   }
 
   const doc = new Document({
-    creator: config.author || "Cleartrix Direct DOCX Creator",
+    creator: config.author || "Qwertygen Direct DOCX Creator",
     title: config.title || "Document",
     sections: [
       {

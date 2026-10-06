@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const forbiddenTerms = [
+  'cleartrix',
   'mindkit',
   'resumebuilderlab',
   'curviv',
@@ -14,7 +15,7 @@ const results = [];
 function search(dir) {
   const files = fs.readdirSync(dir);
   for (const file of files) {
-    if (file === 'scan-branding.js' || file === 'rebrand-to-cleartrix.js') continue;
+    if (file === 'scan-branding.js') continue;
     const fullPath = path.join(dir, file);
     const stat = fs.statSync(fullPath);
     if (stat.isDirectory()) {
@@ -47,7 +48,7 @@ targetDirs.forEach(d => {
 // Also scan root directory files
 const rootFiles = fs.readdirSync(path.join(__dirname, '..'));
 for (const file of rootFiles) {
-  if (['scan-branding.js', 'rebrand-to-cleartrix.js', 'package-lock.json'].includes(file)) continue;
+  if (['scan-branding.js', 'package-lock.json'].includes(file)) continue;
   const fullPath = path.join(__dirname, '..', file);
   if (fs.statSync(fullPath).isFile() && /\.(ts|tsx|js|json|md|html|css|yml|env.*)$/.test(file)) {
     const content = fs.readFileSync(fullPath, 'utf8');
@@ -69,12 +70,12 @@ for (const file of rootFiles) {
 }
 
 if (results.length > 0) {
-  console.error(`🚨 Found ${results.length} legacy branding occurrences:`);
+  console.log(`Found ${results.length} legacy branding occurrences:`);
   results.forEach(r => {
-    console.error(`${r.file}:${r.line} [${r.term}] -> ${r.snippet}`);
+    console.log(`${r.file}:${r.line} [${r.term}] -> ${r.snippet}`);
   });
   process.exit(1);
 } else {
-  console.log('✅ ZERO legacy branding found across app/, components/, lib/, scripts/! All rebranded to Cleartrix.');
+  console.log('✅ ZERO legacy branding found across app/, components/, lib/, scripts/! All rebranded to Qwertygen.');
   process.exit(0);
 }

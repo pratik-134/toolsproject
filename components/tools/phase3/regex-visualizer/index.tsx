@@ -21,7 +21,7 @@ export default function RegexVisualizerTool() {
   const [pattern, setPattern] = useState<string>("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
   const [flags, setFlags] = useState<string>("gi");
   const [testString, setTestString] = useState<string>(
-    "Contact us at hello@cleartrix.com or support@example.org for assistance."
+    "Contact us at hello@qwertygen.com or support@example.org for assistance."
   );
   const [copiedRegex, setCopiedRegex] = useState<boolean>(false);
 

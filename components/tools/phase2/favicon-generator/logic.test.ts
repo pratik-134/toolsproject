@@ -17,14 +17,14 @@ export function runTests(): boolean {
 
   // Test 2: Web Manifest JSON generation
   const manifestRaw = generateWebManifest({
-    name: "Cleartrix App",
-    shortName: "Cleartrix",
+    name: "Qwertygen App",
+    shortName: "Qwertygen",
     themeColor: "#6366f1",
     backgroundColor: "#ffffff",
   });
 
   const parsed = JSON.parse(manifestRaw);
-  if (parsed.name !== "Cleartrix App" || parsed.short_name !== "Cleartrix") {
+  if (parsed.name !== "Qwertygen App" || parsed.short_name !== "Qwertygen") {
     throw new Error("Web manifest properties mismatch");
   }
   if (parsed.theme_color !== "#6366f1") {

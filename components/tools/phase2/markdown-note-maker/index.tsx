@@ -29,7 +29,7 @@ const STORAGE_KEY = "ct_markdown_notes_v1";
 
 export default function MarkdownNoteMakerTool() {
   const [notes, setNotes] = useState<MarkdownNote[]>(DEFAULT_SAMPLE_NOTES);
-  const [activeNoteId, setActiveNoteId] = useState<string>("cleartrix-arch");
+  const [activeNoteId, setActiveNoteId] = useState<string>("qwertygen-arch");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedTag, setSelectedTag] = useState<string | undefined>(undefined);
   const [copiedMd, setCopiedMd] = useState<boolean>(false);
@@ -43,7 +43,7 @@ export default function MarkdownNoteMakerTool() {
         const parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
           setNotes(parsed);
-          setActiveNoteId(parsed[0]?.id || "cleartrix-arch");
+          setActiveNoteId(parsed[0]?.id || "qwertygen-arch");
         }
       }
     } catch {

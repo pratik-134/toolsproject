@@ -46,7 +46,7 @@ export const DeleteResumeModal: React.FC<DeleteResumeModalProps> = ({
             <strong className="text-slate-900 dark:text-slate-100">&ldquo;{resumeTitle}&rdquo;</strong>?
           </p>
           <p className="text-red-700 dark:text-red-300 font-medium">
-            Because Cleartrix runs 100% client-side in your browser, deleted resumes cannot be restored from a server backup.
+            Because Qwertygen runs 100% client-side in your browser, deleted resumes cannot be restored from a server backup.
           </p>
         </div>
 

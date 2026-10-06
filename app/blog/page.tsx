@@ -16,7 +16,7 @@ export const metadata: Metadata = constructToolMetadata({
     "Comprehensive guides, technical deep dives, and tutorials on ATS resume optimization, true vector PDF redaction, client-side data privacy, and developer tools.",
   slug: "/blog",
   keywords: [
-    "ClearTrix engineering blog",
+    "Qwertygen engineering blog",
     "ATS resume guides",
     "PDF redaction tutorials",
     "client-side privacy technical guides",
@@ -51,7 +51,7 @@ export default function BlogPage() {
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white font-headings tracking-tight leading-tight">
-                ClearTrix Insights & Guides
+                Qwertygen Insights & Guides
               </h1>
 
               <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-body">

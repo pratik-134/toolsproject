@@ -100,7 +100,7 @@ export async function createDemoPdf(): Promise<{ bytes: Uint8Array; fileName: st
     color: rgb(0.08, 0.18, 0.36),
   });
 
-  page1.drawText("CLEARTRIX DIGITAL CONTRACT", {
+  page1.drawText("QWERTYGEN DIGITAL CONTRACT", {
     x: 40,
     y: height - 48,
     size: 20,
@@ -128,7 +128,7 @@ export async function createDemoPdf(): Promise<{ bytes: Uint8Array; fileName: st
 
   cursorY -= 20;
   const paragraph1 = [
-    "This Master Services Agreement ('Agreement') is entered into by and between Cleartrix Global,",
+    "This Master Services Agreement ('Agreement') is entered into by and between Qwertygen Global,",
     "and the counterparty client organization ('Client'). The purpose of this agreement is to establish",
     "the operational terms, zero-telemetry client-side privacy commitments, vector document rendering",
     "standards, and cryptographic verification guarantees under Tier-1 professional specifications.",
@@ -193,7 +193,7 @@ export async function createDemoPdf(): Promise<{ bytes: Uint8Array; fileName: st
   });
 
   // Footer
-  page1.drawText("Page 1 of 3 - Cleartrix Enterprise Spec", {
+  page1.drawText("Page 1 of 3 - Qwertygen Enterprise Spec", {
     x: 40,
     y: 30,
     size: 9,
@@ -251,7 +251,7 @@ export async function createDemoPdf(): Promise<{ bytes: Uint8Array; fileName: st
     page2.drawText(row.ver, { x: 470, y: rowY + 7, size: 9, font: fontBold, color: rgb(0.15, 0.55, 0.25) });
   });
 
-  page2.drawText("Page 2 of 3 - Cleartrix Enterprise Spec", {
+  page2.drawText("Page 2 of 3 - Qwertygen Enterprise Spec", {
     x: 40,
     y: 30,
     size: 9,
@@ -299,7 +299,7 @@ export async function createDemoPdf(): Promise<{ bytes: Uint8Array; fileName: st
     borderWidth: 1,
     color: rgb(0.99, 0.99, 1),
   });
-  page3.drawText("PROVIDER: CLEARTRIX INC.", { x: col1X + 12, y: sigBoxY + 118, size: 10, font: fontBold, color: rgb(0.1, 0.2, 0.4) });
+  page3.drawText("PROVIDER: QWERTYGEN INC.", { x: col1X + 12, y: sigBoxY + 118, size: 10, font: fontBold, color: rgb(0.1, 0.2, 0.4) });
   page3.drawLine({ start: { x: col1X + 12, y: sigBoxY + 50 }, end: { x: col1X + 208, y: sigBoxY + 50 }, thickness: 1, color: rgb(0.5, 0.55, 0.6) });
   page3.drawText("Authorized Signatory", { x: col1X + 12, y: sigBoxY + 36, size: 8, font: fontHelvetica, color: rgb(0.5, 0.55, 0.6) });
   page3.drawText("Date: October 1, 2026", { x: col1X + 12, y: sigBoxY + 18, size: 8, font: fontHelvetica, color: rgb(0.5, 0.55, 0.6) });
@@ -319,7 +319,7 @@ export async function createDemoPdf(): Promise<{ bytes: Uint8Array; fileName: st
   page3.drawLine({ start: { x: col2X + 12, y: sigBoxY + 50 }, end: { x: col2X + 208, y: sigBoxY + 50 }, thickness: 1, color: rgb(0.3, 0.5, 0.8) });
   page3.drawText("Signature / Initials / Date", { x: col2X + 12, y: sigBoxY + 36, size: 8, font: fontHelvetica, color: rgb(0.4, 0.5, 0.6) });
 
-  page3.drawText("Page 3 of 3 - Cleartrix Enterprise Spec", {
+  page3.drawText("Page 3 of 3 - Qwertygen Enterprise Spec", {
     x: 40,
     y: 30,
     size: 9,
@@ -328,7 +328,7 @@ export async function createDemoPdf(): Promise<{ bytes: Uint8Array; fileName: st
   });
 
   const bytes = await pdfDoc.save();
-  return { bytes, fileName: "cleartrix-demo-contract.pdf" };
+  return { bytes, fileName: "qwertygen-demo-contract.pdf" };
 }
 
 /**

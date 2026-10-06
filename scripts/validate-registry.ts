@@ -2,7 +2,7 @@ import { TOOLS } from "../lib/registry/tools";
 import { CATEGORIES } from "../lib/registry/categories";
 import { CONVERTER_PRESETS } from "../lib/registry/converter-presets";
 
-console.log("=== ClearTrix Strict Registry Validator ===\n");
+console.log("=== Qwertygen Strict Registry Validator ===\n");
 
 let errorsCount = 0;
 

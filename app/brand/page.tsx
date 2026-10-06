@@ -7,11 +7,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = constructToolMetadata({
   title: "Brand Guidelines & Logo System",
   description:
-    "Official brand assets, vector logo marks, color tokens, and typography guidelines for Cleartrix.",
+    "Official brand assets, vector logo marks, color tokens, and typography guidelines for Qwertygen.",
   slug: "/brand",
   keywords: [
-    "Cleartrix brand assets",
-    "Cleartrix logos",
+    "Qwertygen brand assets",
+    "Qwertygen logos",
     "vector brand kit",
     "color tokens",
   ],

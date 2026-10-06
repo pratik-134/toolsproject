@@ -450,8 +450,8 @@ export function scanQRCode(imageData: ImageDataLike): QRScanResult {
 
   return {
     found: true,
-    text: "https://cleartrix.com",
-    parsed: parseQRPayload("https://cleartrix.com"),
+    text: "https://qwertygen.com",
+    parsed: parseQRPayload("https://qwertygen.com"),
     version,
     ecLevel: "M",
     confidence: 0.98,

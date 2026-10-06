@@ -21,11 +21,11 @@ export async function createSampleCompressPdf(): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
   const font = await doc.embedFont(StandardFonts.Helvetica);
 
-  doc.setTitle("Cleartrix Uncompressed Document Example with Heavy Metadata");
-  doc.setAuthor("Cleartrix Enterprise Authoring Suite - Department of Digital Systems");
+  doc.setTitle("Qwertygen Uncompressed Document Example with Heavy Metadata");
+  doc.setAuthor("Qwertygen Enterprise Authoring Suite - Department of Digital Systems");
   doc.setSubject("Client-Side In-Browser PDF Compression Benchmarks and Analysis");
   doc.setKeywords([
-    "cleartrix",
+    "qwertygen",
     "pdf",
     "compression",
     "privacy",
@@ -34,8 +34,8 @@ export async function createSampleCompressPdf(): Promise<Uint8Array> {
     "stream",
     "objects",
   ]);
-  doc.setProducer("Cleartrix Engine v1.0.0");
-  doc.setCreator("Cleartrix Test Document Generator");
+  doc.setProducer("Qwertygen Engine v1.0.0");
+  doc.setCreator("Qwertygen Test Document Generator");
 
   for (let i = 1; i <= 3; i++) {
     const page = doc.addPage([595.28, 841.89]);

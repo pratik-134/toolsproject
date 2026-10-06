@@ -46,7 +46,7 @@ export function PwaProvider({ children }: { children: React.ReactNode }) {
               if (installingWorker) {
                 installingWorker.onstatechange = () => {
                   if (installingWorker.state === "installed" && navigator.serviceWorker.controller) {
-                    console.log("New Cleartrix version available. Ready to update.");
+                    console.log("New Qwertygen version available. Ready to update.");
                   }
                 };
               }
@@ -192,7 +192,7 @@ export function PwaProvider({ children }: { children: React.ReactNode }) {
       {/* Subtle PWA Install Banner */}
       {showInstallBanner && deferredPrompt && !isInstalled && (
         <aside
-          aria-label="Install Cleartrix Application"
+          aria-label="Install Qwertygen Application"
           className="fixed bottom-4 left-4 z-50 max-w-sm w-[calc(100vw-2rem)] sm:w-auto p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl space-y-3 animate-in fade-in slide-in-from-bottom-3"
         >
           <div className="flex items-start justify-between gap-3">
@@ -202,7 +202,7 @@ export function PwaProvider({ children }: { children: React.ReactNode }) {
               </div>
               <div>
                 <div className="text-sm font-bold text-slate-900 dark:text-slate-100">
-                  Install Cleartrix App
+                  Install Qwertygen App
                 </div>
                 <div className="text-xs text-slate-500 dark:text-slate-400">
                   Run 169+ private tools offline with standalone window mode.

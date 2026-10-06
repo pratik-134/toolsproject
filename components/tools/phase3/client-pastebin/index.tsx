@@ -53,7 +53,7 @@ async function computeSHA256(message: string): Promise<string> {
 }
 
 // Example usage:
-// computeSHA256("Cleartrix privacy standard").then(console.log);
+// computeSHA256("Qwertygen privacy standard").then(console.log);
 export { computeSHA256 };`;
 
 export default function ClientPastebinTool() {

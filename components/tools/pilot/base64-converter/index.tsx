@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Base64ConverterTool() {
   const [mode, setMode] = useState<"encode" | "decode">("encode");
-  const [input, setInput] = useState<string>("Cleartrix: 100% Client-Side Privacy Platform");
+  const [input, setInput] = useState<string>("Qwertygen: 100% Client-Side Privacy Platform");
   const [copied, setCopied] = useState<boolean>(false);
 
   const result = mode === "encode" ? encodeBase64(input) : decodeBase64(input);

@@ -257,7 +257,7 @@ export default function FaviconGeneratorTool() {
                     value={appName}
                     onChange={(e) => setAppName(e.target.value)}
                     className="w-full px-2.5 py-1.5 bg-muted/40 border border-border rounded-lg text-foreground font-medium text-xs focus:ring-1 focus:ring-primary focus:outline-none"
-                    placeholder="e.g. Cleartrix Platform"
+                    placeholder="e.g. Qwertygen Platform"
                   />
                 </div>
 
@@ -268,7 +268,7 @@ export default function FaviconGeneratorTool() {
                     value={shortName}
                     onChange={(e) => setShortName(e.target.value)}
                     className="w-full px-2.5 py-1.5 bg-muted/40 border border-border rounded-lg text-foreground font-medium text-xs focus:ring-1 focus:ring-primary focus:outline-none"
-                    placeholder="e.g. Cleartrix"
+                    placeholder="e.g. Qwertygen"
                   />
                 </div>
 

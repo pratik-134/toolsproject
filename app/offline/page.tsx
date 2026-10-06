@@ -6,7 +6,7 @@ import { BRAND } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "Offline Mode",
-  description: "Cleartrix works offline. All client-side tools run in-memory inside your browser with zero network required.",
+  description: "Qwertygen works offline. All client-side tools run in-memory inside your browser with zero network required.",
 };
 
 export default function OfflinePage() {

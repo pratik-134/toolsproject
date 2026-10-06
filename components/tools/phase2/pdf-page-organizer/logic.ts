@@ -30,7 +30,7 @@ export async function createSampleOrganizerPdf(
     });
 
     page.drawText(
-      `Drag, move, duplicate, or delete this page using Cleartrix's client-side organizer.`,
+      `Drag, move, duplicate, or delete this page using Qwertygen's client-side organizer.`,
       {
         x: 50,
         y: height - 140,

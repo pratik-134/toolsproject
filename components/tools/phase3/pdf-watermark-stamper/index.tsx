@@ -28,7 +28,7 @@ export default function PdfWatermarkStamperTool() {
   const loadDemoPdf = async () => {
     const doc = await PDFDocument.create();
     const page = doc.addPage([595, 842]);
-    page.drawText("ClearTrix PDF Watermark Studio Demo Document", { x: 50, y: 750, size: 16 });
+    page.drawText("Qwertygen PDF Watermark Studio Demo Document", { x: 50, y: 750, size: 16 });
     page.drawText("This is a sample page to test watermark opacity and diagonal angles.", { x: 50, y: 700, size: 12 });
     const bytes = await doc.save();
     setPdfBytes(bytes);

@@ -98,7 +98,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
   };
 
   const toolUrl = getToolUrl(tool);
-  const baseUrl = BRAND.domain ? `https://${BRAND.domain}` : "https://cleartrix.com";
+  const baseUrl = BRAND.domain ? `https://${BRAND.domain}` : "https://qwertygen.com";
   const isStudioWorkspace = tool.slug === "pdf-editor";
 
   if (isZenMode) {

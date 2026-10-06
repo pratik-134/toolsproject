@@ -1,8 +1,8 @@
 import { computeStringHash, compareChecksums } from "./logic";
 
 export async function runTests(): Promise<boolean> {
-  // Test 1: SHA-256 of "Cleartrix"
-  const sha256 = await computeStringHash("Cleartrix", "SHA-256");
+  // Test 1: SHA-256 of "Qwertygen"
+  const sha256 = await computeStringHash("Qwertygen", "SHA-256");
   if (!sha256 || sha256.length !== 64) {
     throw new Error(`Test 1 SHA-256 length failed: ${sha256}`);
   }
@@ -20,7 +20,7 @@ export async function runTests(): Promise<boolean> {
   }
 
   // Test 4: SHA-512 length check
-  const sha512 = await computeStringHash("Cleartrix", "SHA-512");
+  const sha512 = await computeStringHash("Qwertygen", "SHA-512");
   if (sha512.length !== 128) {
     throw new Error(`Test 4 SHA-512 length failed: ${sha512.length}`);
   }

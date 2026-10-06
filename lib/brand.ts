@@ -1,43 +1,43 @@
 /**
- * ClearTrix Brand Identity Configuration — Single Source of Truth
+ * Qwertygen Brand Identity Configuration — Single Source of Truth
  * 
  * ALL product names, taglines, domain references, trust guarantees, 
  * metadata titles/descriptions, legal copyright text, and brand colors 
  * are defined here.
  * 
  * Rebranding Principle:
- * If the brand name or identity changes in the future (e.g. from "ClearTrix" to any new brand),
+ * If the brand name or identity changes in the future,
  * updating the properties in THIS SINGLE FILE will automatically update the entire application.
  */
 
 export const BRAND = {
   /** Core Brand Identity */
-  name: "ClearTrix",
-  shortName: "ClearTrix",
-  brandPrefix: "Clear",
-  brandSuffix: "Trix",
-  legalName: "ClearTrix Technologies Inc.",
+  name: "Qwertygen",
+  shortName: "Qwertygen",
+  brandPrefix: "Qwerty",
+  brandSuffix: "gen",
+  legalName: "Qwertygen Technologies Inc.",
   tagline: "Tools for a Smarter You",
   shortTagline: "Open & private · zero paywalls",
   description:
     "Free online privacy-first tools for PDFs, images, documents, resumes, calculators and developer tools. 100% in-browser execution with zero server uploads.",
 
   /** Domain & URLs */
-  domain: "https://cleartrix.com",
-  domainName: "cleartrix.com",
-  supportEmail: "support@cleartrix.com",
-  twitterHandle: "@cleartrix",
+  domain: "https://qwertygen.com",
+  domainName: "qwertygen.com",
+  supportEmail: "support@qwertygen.com",
+  twitterHandle: "@qwertygen",
 
   /** Local Storage & State Prefixes */
-  storagePrefix: "ct_",
-  announcementStorageKey: "ct_announcement_dismissed_v1",
-  brandMigratedFlag: "ct_brand_migrated_v1",
+  storagePrefix: "qg_",
+  announcementStorageKey: "qg_announcement_dismissed_v1",
+  brandMigratedFlag: "qg_brand_migrated_v1",
 
   /** Flagship Product: Resume Builder */
   resumeProduct: {
-    name: "ClearTrix Resume Builder",
+    name: "Qwertygen Resume Builder",
     shortName: "Resume Builder",
-    legacyName: "ClearTrix Resume Builder",
+    legacyName: "Qwertygen Resume Builder",
     description:
       "Build executive-grade, ATS-optimized resumes with 20+ professional templates. 100% free with vector PDF and native Word export.",
   },
@@ -65,8 +65,8 @@ export const BRAND = {
   /** Social Links */
   social: {
     github: "https://github.com/pratik-134/toolsproject",
-    twitter: "https://twitter.com/cleartrix",
-    linkedin: "https://linkedin.com/company/cleartrix",
+    twitter: "https://twitter.com/qwertygen",
+    linkedin: "https://linkedin.com/company/qwertygen",
   },
 } as const;
 

@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/select";
 
 const SAMPLE_JSON = `{
-  "platform": "Cleartrix",
+  "platform": "Qwertygen",
   "privacy": "100% Client-Side",
   "toolsCount": 175,
   "features": [
@@ -27,7 +27,7 @@ const SAMPLE_JSON = `{
     "Completely free forever"
   ],
   "author": {
-    "name": "Cleartrix Engineering",
+    "name": "Qwertygen Engineering",
     "verified": true
   }
 }`;

@@ -154,7 +154,7 @@ export default function ColorPaletteGeneratorTool() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.setAttribute("download", `cleartrix-palette-${harmonyMode}.${exportFormat === "json" ? "json" : "txt"}`);
+    link.setAttribute("download", `qwertygen-palette-${harmonyMode}.${exportFormat === "json" ? "json" : "txt"}`);
     link.click();
     URL.revokeObjectURL(url);
   };

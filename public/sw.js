@@ -1,6 +1,6 @@
-// Cleartrix Privacy-First Service Worker
+// Qwertygen Privacy-First Service Worker
 // Version: 1.0.0
-const CACHE_NAME = "cleartrix-v1";
+const CACHE_NAME = "qwertygen-v1";
 
 const PRECACHE_URLS = [
   "/",

@@ -189,7 +189,7 @@ export function injectPrintStyles(html: string, options: PrintOptions): string {
       : "20mm";
 
   const printStyleTag = `
-  <style id="cleartrix-print-styles">
+  <style id="qwertygen-print-styles">
     @page {
       size: ${options.pageSize};
       margin: ${marginCss};

@@ -15,7 +15,7 @@ export function runTests(): boolean {
   }
 
   // Test 3: Query parser
-  const testUrl = "https://example.com/search?q=cleartrix+tools&category=developer&filter=free";
+  const testUrl = "https://example.com/search?q=qwertygen+tools&category=developer&filter=free";
   const parsed = parseUrlQuery(testUrl);
   if (parsed.baseUrl !== "https://example.com/search") {
     throw new Error(`Base URL parsing failed: ${parsed.baseUrl}`);
@@ -23,13 +23,13 @@ export function runTests(): boolean {
   if (parsed.params.length !== 3) {
     throw new Error(`Params count failed: ${parsed.params.length}`);
   }
-  if (parsed.params[0]?.key !== "q" || parsed.params[0]?.value !== "cleartrix tools") {
+  if (parsed.params[0]?.key !== "q" || parsed.params[0]?.value !== "qwertygen tools") {
     throw new Error(`Param decode failed: ${JSON.stringify(parsed.params[0])}`);
   }
 
   // Test 4: Build URL
   const reconstructed = buildUrlWithParams(parsed.baseUrl, parsed.params);
-  if (!reconstructed.includes("q=cleartrix%20tools") || !reconstructed.includes("category=developer")) {
+  if (!reconstructed.includes("q=qwertygen%20tools") || !reconstructed.includes("category=developer")) {
     throw new Error(`Reconstruction failed: ${reconstructed}`);
   }
 

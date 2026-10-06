@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { CleartrixLogo } from "@/components/BrandLogo";
+import { QwertygenLogo } from "@/components/BrandLogo";
 import { BRAND } from "@/lib/brand";
 import { ShieldCheck, Cpu, Lock, Sparkles } from "lucide-react";
 import { getAllTools } from "@/lib/registry/tools";
@@ -52,7 +52,7 @@ export const Footer: React.FC = () => {
           {/* Brand Info Column */}
           <div className="col-span-1 sm:col-span-2 md:col-span-4 lg:col-span-2 space-y-4">
             <Link href="/" className="inline-block transition-transform hover:opacity-90">
-              <CleartrixLogo size={28} isLight={false} />
+              <QwertygenLogo size={28} isLight={false} />
             </Link>
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-sm">
               The high-performance, private in-browser utility suite. Convert, format, manipulate, and secure documents, code, and media without uploading data to external servers.

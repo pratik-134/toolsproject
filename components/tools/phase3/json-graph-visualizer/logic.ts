@@ -1,7 +1,7 @@
 /**
  * Interactive JSON/YAML Graph & Tree Visualizer — Pure Domain Logic
  * 100% In-Browser Hierarchical Parsing, Tree Traversal & SVG Graph Generation
- * Zero Server Uploads (Cleartrix Invariant #1)
+ * Zero Server Uploads (Qwertygen Invariant #1)
  */
 
 export type JsonValueType =
@@ -32,7 +32,7 @@ export interface TreeStats {
 }
 
 export const SAMPLE_JSON = `{
-  "platform": "ClearTrix Studio",
+  "platform": "Qwertygen Studio",
   "version": 2.4,
   "isPrivate": true,
   "encryption": {

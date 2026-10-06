@@ -33,7 +33,7 @@ const PRESETS: Preset[] = [
     files: [
       {
         path: "index.html",
-        content: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Cleartrix Starter</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <h1>Cleartrix Web Starter</h1>\n  <script src=\"app.js\"></script>\n</body>\n</html>",
+        content: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Qwertygen Starter</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <h1>Qwertygen Web Starter</h1>\n  <script src=\"app.js\"></script>\n</body>\n</html>",
       },
       {
         path: "styles.css",
@@ -45,11 +45,11 @@ const PRESETS: Preset[] = [
       },
       {
         path: "package.json",
-        content: JSON.stringify({ name: "cleartrix-starter", version: "1.0.0", private: true }, null, 2),
+        content: JSON.stringify({ name: "qwertygen-starter", version: "1.0.0", private: true }, null, 2),
       },
       {
         path: "README.md",
-        content: "# Cleartrix Web Starter\nPackaged with 100% in-browser privacy.",
+        content: "# Qwertygen Web Starter\nPackaged with 100% in-browser privacy.",
       },
     ],
   },
@@ -78,7 +78,7 @@ export default function ArchivePackerTool() {
     return preset.files.map((f) => createFileItem(f.path, f.content));
   });
 
-  const [archiveName, setArchiveName] = useState<string>("cleartrix-archive.zip");
+  const [archiveName, setArchiveName] = useState<string>("qwertygen-archive.zip");
   const [compressionLevel, setCompressionLevel] = useState<CompressionLevel>(6);
   const [newFilePath, setNewFilePath] = useState<string>("");
   const [newFileContent, setNewFileContent] = useState<string>("");

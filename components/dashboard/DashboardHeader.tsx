@@ -43,7 +43,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
     <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-slate-800 px-3 sm:px-8 select-none shadow-md">
       {/* Left: Brand & Dashboard Title */}
       <div className="flex items-center gap-3">
-        <Link href="/" className="group" title="Cleartrix Resume Builder Home">
+        <Link href="/" className="group" title="Qwertygen Resume Builder Home">
           <BrandLogo product="resume-builder" size={32} subtitle="My Resumes" />
         </Link>
         <Link
@@ -65,7 +65,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
               ? "bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-900 animate-pulse"
               : "bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700"
           }`}
-          title="Cleartrix stores all your resume data exclusively in your browser memory and local storage. Zero data leaves your machine."
+          title="Qwertygen stores all your resume data exclusively in your browser memory and local storage. Zero data leaves your machine."
         >
           <HardDrive className="h-3.5 w-3.5 text-slate-500 dark:text-slate-400" />
           <span>Storage: {storageUsage.formattedUsed} used</span>

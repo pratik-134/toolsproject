@@ -7,8 +7,8 @@ export interface FaqItem {
 export const RESUME_FAQS: FaqItem[] = [
   {
     num: "01",
-    q: "Is Cleartrix Resume Builder truly 100% free with no hidden paywalls or watermarks?",
-    a: "Yes, unconditionally. Unlike services that lure you in only to demand a credit card at the final download step, Cleartrix is completely free. All 20 templates, all styling tools, and every vector PDF export are 100% unrestricted.",
+    q: "Is Qwertygen Resume Builder truly 100% free with no hidden paywalls or watermarks?",
+    a: "Yes, unconditionally. Unlike services that lure you in only to demand a credit card at the final download step, Qwertygen is completely free. All 20 templates, all styling tools, and every vector PDF export are 100% unrestricted.",
   },
   {
     num: "02",
@@ -22,13 +22,13 @@ export const RESUME_FAQS: FaqItem[] = [
   },
   {
     num: "04",
-    q: "How does Cleartrix protect my personal privacy and resume details?",
-    a: "Cleartrix runs on a strict client-side sandbox architecture. Your resume data, contact info, and work history remain in your browser's private local storage—never transmitted to external servers, logged in databases, or sold to third parties.",
+    q: "How does Qwertygen protect my personal privacy and resume details?",
+    a: "Qwertygen runs on a strict client-side sandbox architecture. Your resume data, contact info, and work history remain in your browser's private local storage—never transmitted to external servers, logged in databases, or sold to third parties.",
   },
   {
     num: "05",
     q: "Can I download my resume as a high-resolution vector PDF?",
-    a: "Yes. Cleartrix utilizes an in-browser vector PDF compilation engine that produces crystal-clear, print-ready documents with selectable text and embedded fonts on standard A4 dimensions. You can also print directly from your browser.",
+    a: "Yes. Qwertygen utilizes an in-browser vector PDF compilation engine that produces crystal-clear, print-ready documents with selectable text and embedded fonts on standard A4 dimensions. You can also print directly from your browser.",
   },
   {
     num: "06",
@@ -37,8 +37,8 @@ export const RESUME_FAQS: FaqItem[] = [
   },
   {
     num: "07",
-    q: "How does Cleartrix compare to other resume builders?",
-    a: "Traditional graphic builders often produce complex layers that choke ATS parsers, while subscription builders demand credit cards at download. Cleartrix provides clean, parser-verified semantic code structure, pin-sharp vector PDF exports, and complete feature access with zero paywalls.",
+    q: "How does Qwertygen compare to other resume builders?",
+    a: "Traditional graphic builders often produce complex layers that choke ATS parsers, while subscription builders demand credit cards at download. Qwertygen provides clean, parser-verified semantic code structure, pin-sharp vector PDF exports, and complete feature access with zero paywalls.",
   },
   {
     num: "08",
@@ -50,7 +50,7 @@ export const RESUME_FAQS: FaqItem[] = [
 export const TOOLS_FAQS: FaqItem[] = [
   {
     num: "01",
-    q: "How can Cleartrix tools run with zero server uploads?",
+    q: "How can Qwertygen tools run with zero server uploads?",
     a: "Every tool executes directly inside your browser sandbox via WebAssembly, Web Workers, Canvas, and client-side JavaScript. When you process files or calculate data, computation happens in device memory—never transmitting a single byte across the internet.",
   },
   {
@@ -76,7 +76,7 @@ export const TOOLS_FAQS: FaqItem[] = [
   {
     num: "06",
     q: "How do you make money if everything is free?",
-    a: "Cleartrix is built with an ultra-lean architecture: because all computation happens on the client side, our server hosting costs are negligible compared to traditional cloud platforms. We sustain operations through non-intrusive affiliate partnerships, developer sponsorships, and future optional enterprise team features—never by gating basic consumer tools or selling user data.",
+    a: "Qwertygen is built with an ultra-lean architecture: because all computation happens on the client side, our server hosting costs are negligible compared to traditional cloud platforms. We sustain operations through non-intrusive affiliate partnerships, developer sponsorships, and future optional enterprise team features—never by gating basic consumer tools or selling user data.",
   },
   {
     num: "07",

@@ -75,7 +75,7 @@ export default function VisualDiffStudioTool() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "cleartrix-changes.patch";
+    link.download = "qwertygen-changes.patch";
     link.click();
     URL.revokeObjectURL(url);
   };

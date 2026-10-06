@@ -38,16 +38,16 @@ export function runTests(): boolean {
   assert(parsedVCard.vcard?.organization === "Baker Street Health", "vCard org mismatch");
 
   // 3. Test URL Payload Parsing
-  const urlRaw = "https://cleartrix.com/tools/developer/json-formatter";
+  const urlRaw = "https://qwertygen.com/tools/developer/json-formatter";
   const parsedUrl = parseQRPayload(urlRaw);
   assert(parsedUrl.type === "url", "Expected type 'url'");
   assert(parsedUrl.url === urlRaw, "URL string mismatch");
 
   // 4. Test Email Payload Parsing
-  const emailRaw = "mailto:team@cleartrix.com?subject=Inquiry&body=Hello%20Team";
+  const emailRaw = "mailto:team@qwertygen.com?subject=Inquiry&body=Hello%20Team";
   const parsedEmail = parseQRPayload(emailRaw);
   assert(parsedEmail.type === "email", "Expected type 'email'");
-  assert(parsedEmail.email?.address === "team@cleartrix.com", "Email address mismatch");
+  assert(parsedEmail.email?.address === "team@qwertygen.com", "Email address mismatch");
   assert(parsedEmail.email?.subject === "Inquiry", "Email subject mismatch");
 
   // 5. Test Phone and SMS
@@ -63,7 +63,7 @@ export function runTests(): boolean {
   assert(parsedSms.sms?.message === "Need assistance", "SMS message mismatch");
 
   // 6. Test Plain Text
-  const textRaw = "Cleartrix is a 100% private, client-side toolkit.";
+  const textRaw = "Qwertygen is a 100% private, client-side toolkit.";
   const parsedText = parseQRPayload(textRaw);
   assert(parsedText.type === "text", "Expected type 'text'");
   assert(parsedText.raw === textRaw, "Text raw mismatch");

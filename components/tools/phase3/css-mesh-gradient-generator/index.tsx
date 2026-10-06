@@ -143,7 +143,7 @@ export default function CssMeshGradientStudioTool() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.setAttribute("download", "cleartrix-mesh-gradient.svg");
+    link.setAttribute("download", "qwertygen-mesh-gradient.svg");
     link.click();
     URL.revokeObjectURL(url);
   };

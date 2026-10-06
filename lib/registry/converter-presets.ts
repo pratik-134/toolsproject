@@ -1,5 +1,5 @@
 /**
- * ClearTrix Converter Preset Registry
+ * Qwertygen Converter Preset Registry
  * Maps converter tool slugs to typed engine presets.
  */
 

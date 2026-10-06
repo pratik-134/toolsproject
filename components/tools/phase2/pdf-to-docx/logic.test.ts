@@ -9,7 +9,7 @@ import {
 export async function runTests(): Promise<boolean> {
   // Test 1: createDocxFromBlocks produces valid DOCX (OpenXML ZIP signature PK)
   const docxBytes = await createDocxFromBlocks(SAMPLE_PDF_PARAGRAPHS, {
-    title: "Cleartrix Spec",
+    title: "Qwertygen Spec",
     fontFamily: "Calibri",
   });
 

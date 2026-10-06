@@ -1,7 +1,7 @@
 /**
  * Vector SVG Wave & Pattern Studio — Pure Domain Logic
  * 100% In-Browser Parametric SVG Mathematics (Zero Network Uploads)
- * Compliant with Cleartrix Invariant #1
+ * Compliant with Qwertygen Invariant #1
  */
 
 export type PatternType =

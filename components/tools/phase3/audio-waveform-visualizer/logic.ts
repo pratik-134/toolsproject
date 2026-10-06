@@ -1,7 +1,7 @@
 /**
  * Audio Waveform & Speech Visualizer — Pure Domain Logic
  * 100% In-Browser Audio Peak Normalization & SVG Waveform Generation
- * Zero External Network Calls, Zero Server Uploads (Cleartrix Invariant #1)
+ * Zero External Network Calls, Zero Server Uploads (Qwertygen Invariant #1)
  */
 
 export type WaveformStyle = "bars" | "wave" | "circular" | "glow";

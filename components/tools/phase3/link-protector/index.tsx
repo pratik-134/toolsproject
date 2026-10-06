@@ -230,8 +230,8 @@ export default function LinkProtectorTool() {
                   <button
                     type="button"
                     onClick={() => {
-                      setUrl("https://github.com/cleartrix/security-manifesto");
-                      setPassphrase("CleartrixShield2026!");
+                      setUrl("https://github.com/qwertygen/security-manifesto");
+                      setPassphrase("QwertygenShield2026!");
                       setHint("Platform security password (check README)");
                       setNote("Strictly confidential link for verified engineering team members only.");
                     }}

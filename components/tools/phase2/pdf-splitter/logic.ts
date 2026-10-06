@@ -64,7 +64,7 @@ export async function createSampleSplitPdf(pageCount: number = 5): Promise<Uint8
     });
 
     page.drawText(
-      "Cleartrix PDF Splitter — 100% private, client-side extraction.",
+      "Qwertygen PDF Splitter — 100% private, client-side extraction.",
       {
         x: 50,
         y: 60,

@@ -1,25 +1,25 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: cleartrix-postgres
+    container_name: qwertygen-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: cleartrix_user
-      POSTGRES_PASSWORD: cleartrix_password
-      POSTGRES_DB: cleartrix_db
+      POSTGRES_USER: qwertygen_user
+      POSTGRES_PASSWORD: qwertygen_password
+      POSTGRES_DB: qwertygen_db
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U cleartrix_user -d cleartrix_db"]
+      test: ["CMD-SHELL", "pg_isready -U qwertygen_user -d qwertygen_db"]
       interval: 5s
       timeout: 5s
       retries: 5
 
   redis:
     image: redis:7-alpine
-    container_name: cleartrix-redis
+    container_name: qwertygen-redis
     restart: unless-stopped
     ports:
       - "6379:6379"
@@ -33,6 +33,6 @@ services:
 
 volumes:
   postgres_data:
-    name: cleartrix_postgres_data
+    name: qwertygen_postgres_data
   redis_data:
-    name: cleartrix_redis_data
+    name: qwertygen_redis_data

@@ -31,7 +31,7 @@ const SAMPLES = [
       {
         id: 101,
         username: "alex_coder",
-        email: "alex@cleartrix.com",
+        email: "alex@qwertygen.com",
         age: 26,
         role: "member",
         skills: ["TypeScript", "Next.js", "Tailwind"],

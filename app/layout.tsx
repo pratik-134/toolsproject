@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
   description: BRAND.description,
   keywords: [
-    "cleartrix",
+    "qwertygen",
     "free online tools",
     "privacy-first tools",
     "client-side pdf tools",
@@ -67,11 +67,13 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/icon.png", type: "image/png" },
-      { url: "/favicon.png", type: "image/png" },
+      { url: "/icon.svg?v=2", type: "image/svg+xml" },
+      { url: "/icon.png?v=2", type: "image/png" },
+      { url: "/favicon.png?v=2", type: "image/png" },
+      { url: "/favicon.ico?v=2" },
     ],
-    shortcut: "/icon.png",
-    apple: "/apple-icon.png",
+    shortcut: "/icon.svg?v=2",
+    apple: "/apple-icon.png?v=2",
   },
   manifest: "/manifest.json",
   robots: {
@@ -143,7 +145,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `(function() {
               try {
-                var t = localStorage.getItem('ct_theme');
+                var t = localStorage.getItem('qg_theme') || localStorage.getItem('ct_theme');
                 if (t === 'dark') {
                   document.documentElement.classList.add('dark');
                 } else {

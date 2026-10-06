@@ -18,7 +18,7 @@ export const RTF_TEMPLATES: Record<string, { title: string; body: string }> = {
     body: `PROJECT DEVELOPMENT PROPOSAL
 
 1. EXECUTIVE SUMMARY
-Cleartrix provides modern, high-speed, client-side web utility solutions designed for privacy and enterprise productivity. All operations execute strictly within local device memory.
+Qwertygen provides modern, high-speed, client-side web utility solutions designed for privacy and enterprise productivity. All operations execute strictly within local device memory.
 
 2. OBJECTIVES & DELIVERABLES
 • Deliver 100+ production-ready in-browser tools.
@@ -106,11 +106,11 @@ export function generateRtfDocument(options: RtfDocumentOptions): string {
     "{\\rtf1\\ansi\\ansicpg1252\\deff0\\nouicompat\\deflang1033",
     "{\\fonttbl{\\f0\\fnil\\fcharset0 Arial;}{\\f1\\fnil\\fcharset0 Calibri;}{\\f2\\fnil\\fcharset0 Times New Roman;}}",
     "{\\colortbl ;\\red0\\green0\\blue0;\\red79\\green70\\blue229;\\red15\\green23\\blue42;}",
-    "{\\*\\generator Cleartrix Direct RTF Creator 1.0;}",
+    "{\\*\\generator Qwertygen Direct RTF Creator 1.0;}",
   ].join("\n");
 
   const titleBlock = options.title
-    ? `{\\info{\\title ${escapeRtfText(options.title)}}{\\author ${escapeRtfText(options.author || "Cleartrix User")}}}\n`
+    ? `{\\info{\\title ${escapeRtfText(options.title)}}{\\author ${escapeRtfText(options.author || "Qwertygen User")}}}\n`
     : "";
 
   const escapedBody = escapeRtfText(options.body);

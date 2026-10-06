@@ -49,7 +49,7 @@ export const DEFAULT_POST_CONFIG: PostConfig = {
   aspectRatio: "1:1",
   headline: "Design Systems That Scale In 2026",
   subtitle: "Build consistent, client-side web tools with zero server overhead and maximum privacy.",
-  authorHandle: "@cleartrix",
+  authorHandle: "@qwertygen",
   categoryBadge: "TECH INSIGHTS",
   backgroundType: "gradient",
   solidColor: "#0f172a",

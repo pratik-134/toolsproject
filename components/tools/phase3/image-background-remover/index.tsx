@@ -143,7 +143,7 @@ export default function ImageBackgroundRemoverTool() {
     if (!canvas) return;
     const a = document.createElement("a");
     a.href = canvas.toDataURL("image/png");
-    a.download = "cleartrix-removed-background.png";
+    a.download = "qwertygen-removed-background.png";
     a.click();
   };
 

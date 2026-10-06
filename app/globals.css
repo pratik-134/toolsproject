@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* Brand Color Palette (Official ClearTrix Guidelines) */
+    /* Brand Color Palette (Official Qwertygen Guidelines) */
     --brand-primary: #3B82F6;     /* Primary Blue */
     --brand-accent-teal: #06D6A0; /* Accent Teal */
     --brand-dark-navy: #0F172A;   /* Dark Navy */
@@ -105,7 +105,7 @@
   }
 }
 
-/* ClearTrix Brand Custom Utilities */
+/* Qwertygen Brand Custom Utilities */
 .text-wordmark-grad {
   background: linear-gradient(90deg, #0EA5E9 0%, #06D6A0 100%);
   -webkit-background-clip: text;

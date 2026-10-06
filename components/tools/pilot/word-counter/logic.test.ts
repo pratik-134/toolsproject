@@ -6,7 +6,7 @@ export function runTests(): boolean {
   if (empty.words !== 0 || empty.characters !== 0) throw new Error("Empty text analysis failed");
 
   // Test 2: Standard sentence
-  const text = "Cleartrix is a privacy-first web platform. It runs completely on your device.\n\nEnjoy 175 free tools.";
+  const text = "Qwertygen is a privacy-first web platform. It runs completely on your device.\n\nEnjoy 175 free tools.";
   const stats = analyzeText(text);
 
   if (stats.words !== 16) throw new Error(`Expected 16 words, got ${stats.words}`);

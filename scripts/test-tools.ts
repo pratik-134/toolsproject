@@ -155,7 +155,7 @@ import { runConverterEngineTests } from "../components/tools/engines/logic.test"
 import { resumeDataSchema, initialResumeData } from "../lib/schema";
 
 async function main() {
-  console.log("=== CLEARTRIX TOOL LOGIC UNIT TESTS ===");
+  console.log("=== QWERTYGEN TOOL LOGIC UNIT TESTS ===");
 
   console.log("Testing [json-formatter] logic...");
   testJson();

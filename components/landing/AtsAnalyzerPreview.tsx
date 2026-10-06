@@ -221,7 +221,7 @@ export const AtsAnalyzerPreview: React.FC = () => {
         </p>
 
         <p className="font-body text-body text-slate-600 dark:text-slate-400 leading-relaxed">
-          Cleartrix constructs every template with strict semantic hierarchy.
+          Qwertygen constructs every template with strict semantic hierarchy.
           Your credentials arrive at the recruiter's inbox crystal-clear, structured,
           and completely intact.
         </p>

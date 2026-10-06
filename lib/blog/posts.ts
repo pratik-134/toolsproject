@@ -100,7 +100,7 @@ export const BLOG_POSTS: BlogPost[] = [
 </ul>
 
 <div class="callout callout-info">
-  <strong>Build ATS-Optimized Resumes for Free:</strong> Try the <a href="/editor" class="text-blue-600 font-semibold underline">ClearTrix Free ATS Resume Builder</a>. All 20 executive templates run 100% locally in your browser with zero paywalls, live ATS scoring, and pixel-perfect vector PDF and Word DOCX export.
+  <strong>Build ATS-Optimized Resumes for Free:</strong> Try the <a href="/editor" class="text-blue-600 font-semibold underline">Qwertygen Free ATS Resume Builder</a>. All 20 executive templates run 100% locally in your browser with zero paywalls, live ATS scoring, and pixel-perfect vector PDF and Word DOCX export.
 </div>
 `,
   },
@@ -122,7 +122,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { id: "anatomy-of-pdf-leak", title: "2. The Anatomy of a High-Profile PDF Leak", level: 2 },
       { id: "true-vector-redaction", title: "3. How True Vector Redaction Works", level: 2 },
       { id: "metadata-stripping", title: "4. Don't Forget Metadata & Hidden Streams", level: 2 },
-      { id: "step-by-step", title: "5. How to Permanently Redact in ClearTrix", level: 2 },
+      { id: "step-by-step", title: "5. How to Permanently Redact in Qwertygen", level: 2 },
     ],
     contentHtml: `
 <p class="lead">Every year, major law firms, government departments, and multinational corporations accidentally publish unredacted classified intelligence, sensitive customer PII, and financial trade secrets. The culprit is almost always the same: confusing visual obscuration with cryptographic byte redaction.</p>
@@ -166,13 +166,13 @@ export const BLOG_POSTS: BlogPost[] = [
   <li>Print spooler and scanner serial numbers.</li>
 </ul>
 
-<h2 id="step-by-step">5. How to Permanently Redact in ClearTrix</h2>
-<p>ClearTrix performs true destructive vector redaction 100% inside your browser sandbox:</p>
+<h2 id="step-by-step">5. How to Permanently Redact in Qwertygen</h2>
+<p>Qwertygen performs true destructive vector redaction 100% inside your browser sandbox:</p>
 <ol>
-  <li>Open the <a href="/tools/document-pdf/pdf-redaction-tool" class="text-blue-600 font-semibold underline">ClearTrix PDF Redaction Tool</a> or the full <a href="/tools/document-pdf/pdf-editor" class="text-blue-600 font-semibold underline">PDF Editor Studio</a>.</li>
+  <li>Open the <a href="/tools/document-pdf/pdf-redaction-tool" class="text-blue-600 font-semibold underline">Qwertygen PDF Redaction Tool</a> or the full <a href="/tools/document-pdf/pdf-editor" class="text-blue-600 font-semibold underline">PDF Editor Studio</a>.</li>
   <li>Select the <strong>Redact</strong> tool from the toolbar.</li>
   <li>Draw a bounding box across the sensitive text or figures.</li>
-  <li>Click <strong>Apply Permanent Redactions</strong>. ClearTrix destroys the intersecting bytes in memory and bakes clean vector shapes.</li>
+  <li>Click <strong>Apply Permanent Redactions</strong>. Qwertygen destroys the intersecting bytes in memory and bakes clean vector shapes.</li>
   <li>Export your clean document with zero server transmission.</li>
 </ol>
 `,
@@ -217,11 +217,11 @@ export const BLOG_POSTS: BlogPost[] = [
 </ul>
 
 <div class="callout callout-tip">
-  <strong>The ClearTrix Philosophy:</strong> Every single tool on ClearTrix is architected as an offline-capable, isolated client sandbox. Your files never touch external servers or cloud endpoints.
+  <strong>The Qwertygen Philosophy:</strong> Every single tool on Qwertygen is architected as an offline-capable, isolated client sandbox. Your files never touch external servers or cloud endpoints.
 </div>
 
 <h2 id="security-auditing">3. Verifying Zero Network Requests</h2>
-<p>You do not need to take our word for it. You can independently verify the privacy of ClearTrix tools in real-time:</p>
+<p>You do not need to take our word for it. You can independently verify the privacy of Qwertygen tools in real-time:</p>
 <ol>
   <li>Open Developer Tools in your browser (<kbd>F12</kbd> or <kbd>Ctrl+Shift+I</kbd>).</li>
   <li>Navigate to the <strong>Network</strong> tab.</li>
@@ -231,7 +231,7 @@ export const BLOG_POSTS: BlogPost[] = [
 </ol>
 
 <h2 id="enterprise-benefits">4. Compliance & Enterprise Benefits</h2>
-<p>By eliminating server uploads, ClearTrix tools automatically satisfy the strictest regulatory frameworks:</p>
+<p>By eliminating server uploads, Qwertygen tools automatically satisfy the strictest regulatory frameworks:</p>
 <ul>
   <li><strong>GDPR & CCPA Compliance:</strong> Since no personal data is transferred or stored on our servers, there is zero risk of international data transfer violations.</li>
   <li><strong>HIPAA & FERPA Safety:</strong> Healthcare practitioners and educators can sanitize files without violating privacy statutes.</li>
@@ -289,7 +289,7 @@ export const BLOG_POSTS: BlogPost[] = [
 </ol>
 
 <div class="callout callout-info">
-  <strong>Try It in ClearTrix:</strong> Use our <a href="/tools/document-pdf/pdf-editor" class="text-blue-600 font-semibold underline">Interactive PDF Editor Studio</a> to visually rearrange, rotate, merge, and split pages in real time with immediate vector export.
+  <strong>Try It in Qwertygen:</strong> Use our <a href="/tools/document-pdf/pdf-editor" class="text-blue-600 font-semibold underline">Interactive PDF Editor Studio</a> to visually rearrange, rotate, merge, and split pages in real time with immediate vector export.
 </div>
 `,
   },
@@ -356,7 +356,7 @@ export const BLOG_POSTS: BlogPost[] = [
 </ol>
 
 <div class="callout callout-tip">
-  <strong>Format Confidential JSON Safely:</strong> Use the <a href="/tools/developer/json-formatter" class="text-blue-600 font-semibold underline">ClearTrix Client-Side JSON Formatter</a> or generate types with <a href="/tools/developer/json-to-typescript" class="text-blue-600 font-semibold underline">JSON to TypeScript Converter</a>.
+  <strong>Format Confidential JSON Safely:</strong> Use the <a href="/tools/developer/json-formatter" class="text-blue-600 font-semibold underline">Qwertygen Client-Side JSON Formatter</a> or generate types with <a href="/tools/developer/json-to-typescript" class="text-blue-600 font-semibold underline">JSON to TypeScript Converter</a>.
 </div>
 `,
   },

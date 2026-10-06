@@ -1,8 +1,8 @@
 /**
- * Cleartrix Design Tokens — Single Source of Truth
+ * Qwertygen Design Tokens — Single Source of Truth
  *
  * Establishes typed constants for base neutrals and 10 category accents
- * per the deliberate Cleartrix soft-tech editorial design system.
+ * per the deliberate Qwertygen soft-tech editorial design system.
  */
 
 /* =========================================================================

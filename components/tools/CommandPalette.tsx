@@ -125,7 +125,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Search all ClearTrix tools"
+      aria-label="Search all Qwertygen tools"
       className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-start justify-center p-4 sm:p-6 pt-16 sm:pt-24 animate-fade-in font-body"
       onClick={onClose}
     >
@@ -339,7 +339,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
 
           <div className="flex items-center gap-1 font-semibold text-slate-700 dark:text-slate-300 shrink-0">
             <Command className="h-3 w-3 text-blue-600 dark:text-blue-400" />
-            <span>ClearTrix Index ({tools.length})</span>
+            <span>Qwertygen Index ({tools.length})</span>
           </div>
         </div>
       </div>

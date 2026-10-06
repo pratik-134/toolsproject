@@ -1,7 +1,7 @@
 /**
  * In-Browser Audio Pitch & Tempo Shifter — Pure Domain Logic
  * 100% In-Browser Audio Resampling & Playback Rate Calculations
- * Zero External Network Calls, Zero Server Uploads (Cleartrix Invariant #1)
+ * Zero External Network Calls, Zero Server Uploads (Qwertygen Invariant #1)
  */
 
 export interface PitchTempoSettings {

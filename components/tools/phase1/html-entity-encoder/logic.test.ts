@@ -25,12 +25,12 @@ export function runTests(): boolean {
   }
 
   // Test 4: Hex encoding of unicode symbols
-  const enc4 = encodeHtmlEntities("Cleartrix © 2026", { format: "hex", scope: "non-ascii" });
+  const enc4 = encodeHtmlEntities("Qwertygen © 2026", { format: "hex", scope: "non-ascii" });
   if (!enc4.includes("&#xA9;")) {
     throw new Error(`Test 4 hex encode failed: ${enc4}`);
   }
   const dec4 = decodeHtmlEntities(enc4);
-  if (dec4 !== "Cleartrix © 2026") {
+  if (dec4 !== "Qwertygen © 2026") {
     throw new Error(`Test 4 decode failed: ${dec4}`);
   }
 

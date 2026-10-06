@@ -14,7 +14,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({ title, url }) => {
   const getShareUrl = () => {
     if (url) return url;
     if (typeof window !== "undefined") return window.location.href;
-    return "https://cleartrix.com/blog";
+    return "https://qwertygen.com/blog";
   };
 
   const handleCopy = async () => {
@@ -28,7 +28,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({ title, url }) => {
   };
 
   const shareOnTwitter = () => {
-    const text = encodeURIComponent(`${title} via @ClearTrix`);
+    const text = encodeURIComponent(`${title} via @Qwertygen`);
     const shareUrl = encodeURIComponent(getShareUrl());
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${shareUrl}`, "_blank", "noopener,noreferrer");
   };

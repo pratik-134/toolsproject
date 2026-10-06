@@ -12,7 +12,7 @@ export interface ConstructMetadataOptions {
 }
 
 export function getBaseUrl(): string {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL || BRAND.domain || "https://cleartrix.com";
+  const raw = process.env.NEXT_PUBLIC_SITE_URL || BRAND.domain || "https://qwertygen.com";
   return raw.startsWith("http") ? raw : `https://${raw}`;
 }
 

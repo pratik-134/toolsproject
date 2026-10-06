@@ -3,14 +3,14 @@
 import React, { useState } from "react";
 import { Check, Copy, Sparkles, Layers, ShieldCheck, Box } from "lucide-react";
 import {
-  CleartrixIcon,
-  CleartrixLogo,
+  QwertygenIcon,
+  QwertygenLogo,
 } from "@/components/BrandLogo";
 import { BRAND } from "@/lib/brand";
 
 /**
- * Official ClearTrix Brand Guidelines & Logo Asset Presentation Page
- * Aligned 100% with the official ClearTrix Brand Asset specifications.
+ * Official Qwertygen Brand Guidelines & Logo Asset Presentation Page
+ * Aligned 100% with the official Qwertygen Brand Asset specifications.
  */
 export const BrandLogoPresentation: React.FC = () => {
   const [copiedHex, setCopiedHex] = useState<string | null>(null);
@@ -27,19 +27,19 @@ export const BrandLogoPresentation: React.FC = () => {
     {
       name: "Primary Blue",
       hex: "#3B82F6",
-      desc: "Core brand accent, 'Tr' wordmark, key buttons & active states",
+      desc: "Core brand accent, 'Qwerty' styling, key buttons & active states",
       textColor: "text-white",
     },
     {
       name: "Accent Teal",
       hex: "#06D6A0",
-      desc: "Monogram stem, 'ix' wordmark, positive highlight indicators",
+      desc: "Monogram accent, 'gen' gradient wordmark, positive highlight indicators",
       textColor: "text-slate-900",
     },
     {
       name: "Dark Navy",
       hex: "#0F172A",
-      desc: "'Clear' wordmark text, dark mode canvas, high contrast headers",
+      desc: "'Qwerty' wordmark text, dark mode canvas, high contrast headers",
       textColor: "text-white",
     },
     {
@@ -63,10 +63,10 @@ export const BrandLogoPresentation: React.FC = () => {
         {/* Header Title */}
         <div className="text-center space-y-3">
           <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-900 px-3.5 py-1 text-xs font-semibold text-blue-700 dark:text-blue-300">
-            <Sparkles className="h-3.5 w-3.5 text-[#3B82F6]" /> Official ClearTrix Brand Guidelines
+            <Sparkles className="h-3.5 w-3.5 text-[#3B82F6]" /> Official Qwertygen Brand Guidelines
           </div>
           <h1 className="font-headings text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] dark:text-white tracking-tight">
-            Clear<span className="text-[#3B82F6]">Tr</span><span className="text-[#06D6A0]">ix</span> Assets & Tokens
+            Qwerty<span className="bg-gradient-to-r from-[#0EA5E9] to-[#06D6A0] bg-clip-text text-transparent">gen</span> Assets & Tokens
           </h1>
           <p className="font-body text-base sm:text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto font-medium">
             {BRAND.tagline}
@@ -80,21 +80,21 @@ export const BrandLogoPresentation: React.FC = () => {
               Brand Monogram Geometry
             </span>
             <h2 className="font-headings text-2xl font-bold text-[#0F172A] dark:text-white mt-1">
-              ClearTrix Interlocking C+T Mark
+              Qwertygen Brand Mark
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="bg-[#F8FAFC] dark:bg-slate-950 rounded-xl p-8 flex items-center justify-center border border-slate-200 dark:border-slate-800">
-              <CleartrixIcon size={120} />
+              <QwertygenIcon size={120} />
             </div>
 
             <div className="space-y-4 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
               <p>
-                The <strong>ClearTrix Monogram</strong> combines the curved Primary Blue (<strong>#3B82F6</strong>) outer 'C' arc with the inner Accent Teal (<strong>#06D6A0</strong>) 'T' stem.
+                The <strong>Qwertygen Monogram</strong> combines crisp typography with modern accent styling.
               </p>
               <p>
-                The interlocked structure represents privacy-first client-side web tools executing seamlessly on local user devices with zero cloud uploads.
+                The structure represents privacy-first client-side web tools executing seamlessly on local user devices with zero cloud uploads.
               </p>
               <div className="flex items-center gap-4 pt-2">
                 <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
@@ -122,25 +122,25 @@ export const BrandLogoPresentation: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Horizontal */}
             <div className="p-6 bg-[#F8FAFC] dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center gap-4 min-h-[160px]">
-              <CleartrixLogo size={36} variant="horizontal" />
+              <QwertygenLogo size={36} variant="horizontal" />
               <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">Horizontal Logo</span>
             </div>
 
             {/* Stacked */}
             <div className="p-6 bg-[#F8FAFC] dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center gap-4 min-h-[160px]">
-              <CleartrixLogo size={36} variant="stacked" />
+              <QwertygenLogo size={36} variant="stacked" />
               <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">Stacked Logo</span>
             </div>
 
             {/* Dark Version */}
             <div className="p-6 bg-[#0F172A] dark:bg-slate-900 rounded-xl border border-slate-800 flex flex-col items-center justify-center gap-4 min-h-[160px]">
-              <CleartrixLogo size={36} variant="horizontal" isLight />
+              <QwertygenLogo size={36} variant="horizontal" isLight />
               <span className="text-xs text-slate-400 font-mono">Dark Version</span>
             </div>
 
             {/* App Icon / Favicon */}
             <div className="p-6 bg-[#F8FAFC] dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center gap-4 min-h-[160px]">
-              <CleartrixIcon size={56} hasContainer />
+              <QwertygenIcon size={56} hasContainer />
               <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">App Icon / Favicon</span>
             </div>
           </div>

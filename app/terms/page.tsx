@@ -14,7 +14,7 @@ export const metadata: Metadata = constructToolMetadata({
     `Review the Terms of Service for ${BRAND.name}. Learn about our 100% free web utilities, user content ownership, client-side architecture, and privacy-first commitments.`,
   slug: "/terms",
   keywords: [
-    "Cleartrix terms of service",
+    "Qwertygen terms of service",
     "free web tools terms",
     "content ownership",
     "client-side privacy terms",

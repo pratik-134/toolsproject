@@ -14,7 +14,7 @@ import {
 
 export default function BarcodeGeneratorTool() {
   const [format, setFormat] = useState<BarcodeFormat>("CODE128");
-  const [inputText, setInputText] = useState<string>("CLEARTRIX-2026");
+  const [inputText, setInputText] = useState<string>("QWERTYGEN-2026");
   const [barWidth, setBarWidth] = useState<number>(2);
   const [barHeight, setBarHeight] = useState<number>(90);
   const [showText, setShowText] = useState<boolean>(true);
@@ -92,7 +92,7 @@ export default function BarcodeGeneratorTool() {
     } else if (fmt === "UPCA") {
       setInputText("012345678905");
     } else {
-      setInputText("CLEARTRIX-2026");
+      setInputText("QWERTYGEN-2026");
     }
   };
 

@@ -8,7 +8,7 @@ import { useSessionHistory } from "@/lib/hooks/use-session-history";
 import { SessionHistoryDrawer } from "@/components/tools/shared/SessionHistoryDrawer";
 
 export default function HashGeneratorTool() {
-  const [input, setInput] = useState<string>("Cleartrix Privacy First");
+  const [input, setInput] = useState<string>("Qwertygen Privacy First");
   const [hashes, setHashes] = useState<HashResults>({
     md5: "",
     sha1: "",

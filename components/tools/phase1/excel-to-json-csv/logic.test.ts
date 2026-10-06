@@ -55,7 +55,7 @@ export function runTests(): boolean {
   <sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="3" uniqueCount="3">
     <si><t>Product</t></si>
     <si><t>Revenue</t></si>
-    <si><t>Cleartrix Pro</t></si>
+    <si><t>Qwertygen Pro</t></si>
   </sst>`;
 
   const sheet1Xml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -90,7 +90,7 @@ export function runTests(): boolean {
   if (s0.columns[0] !== "Product" || s0.columns[1] !== "Revenue") {
     throw new Error(`Expected columns ['Product', 'Revenue'], got ${JSON.stringify(s0.columns)}`);
   }
-  if (s0.rows.length !== 1 || s0.rows[0]![0] !== "Cleartrix Pro" || s0.rows[0]![1] !== 99.95) {
+  if (s0.rows.length !== 1 || s0.rows[0]![0] !== "Qwertygen Pro" || s0.rows[0]![1] !== 99.95) {
     throw new Error(`Unexpected row data: ${JSON.stringify(s0.rows)}`);
   }
 

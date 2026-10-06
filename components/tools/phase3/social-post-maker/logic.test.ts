@@ -24,7 +24,7 @@ export function runTests(): boolean {
     measureText: (text: string) => ({ width: text.length * 10 }),
   } as unknown as CanvasRenderingContext2D;
 
-  const lines = wrapTextLines(mockCtx, "Hello World from ClearTrix Post Maker", 120);
+  const lines = wrapTextLines(mockCtx, "Hello World from Qwertygen Post Maker", 120);
   if (!Array.isArray(lines) || lines.length === 0) {
     throw new Error("wrapTextLines should return non-empty array of strings");
   }

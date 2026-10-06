@@ -3,7 +3,7 @@ import { CATEGORIES, getCategoryColor } from "../lib/registry/categories";
 import { CATEGORY_COLORS } from "../lib/design-tokens";
 import { getCategoryTheme } from "../lib/category-theme";
 
-console.log("=== CLEARTRIX PLATFORM REGISTRY & DESIGN SYSTEM VERIFICATION ===");
+console.log("=== QWERTYGEN PLATFORM REGISTRY & DESIGN SYSTEM VERIFICATION ===");
 
 // 1. Verify Category Design Token Mappings
 console.log("Verifying category color mappings...");

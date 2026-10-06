@@ -1,5 +1,5 @@
 /**
- * Comprehensive Unit Tests for ClearTrix Converter Engines (38 Tools)
+ * Comprehensive Unit Tests for Qwertygen Converter Engines (38 Tools)
  */
 
 import { hexToRgb, rgbToHex, rgbToHsl, rgbToCmyk } from "./ColorConverterEngine";
@@ -17,7 +17,7 @@ import { CONVERTER_PRESETS, ConverterPreset } from "@/lib/registry/converter-pre
 import { PDFDocument } from "pdf-lib";
 
 export async function runConverterEngineTests(): Promise<boolean> {
-  console.log("=== Testing ClearTrix Converter Engine Pure Logic (38 Tools) ===");
+  console.log("=== Testing Qwertygen Converter Engine Pure Logic (38 Tools) ===");
 
   // --------------------------------------------------------------------------
   // 1. Color Converter Logic (color-converter)
@@ -160,7 +160,7 @@ export async function runConverterEngineTests(): Promise<boolean> {
   console.log("-> Testing JSON to TypeScript logic...");
   const sampleJson = JSON.stringify({
     id: 101,
-    name: "ClearTrix",
+    name: "Qwertygen",
     isActive: true,
     tags: ["security", "privacy"],
     nested: {
@@ -184,9 +184,9 @@ export async function runConverterEngineTests(): Promise<boolean> {
   // 6. Text Transform: Text to Binary & Binary to Text (text-to-binary)
   // --------------------------------------------------------------------------
   console.log("-> Testing Text to Binary and Binary to Text logic...");
-  const testString = "ClearTrix 2026";
+  const testString = "Qwertygen 2026";
   const binaryRepresentation = textToBinary(testString);
-  if (!binaryRepresentation.startsWith("01000011") || binaryRepresentation.split(" ").length !== testString.length) {
+  if (!binaryRepresentation.startsWith("01010001") || binaryRepresentation.split(" ").length !== testString.length) {
     throw new Error(`textToBinary failed: got ${binaryRepresentation}`);
   }
   const recoveredText = binaryToText(binaryRepresentation);
@@ -258,7 +258,7 @@ export async function runConverterEngineTests(): Promise<boolean> {
   // 9. Markdown to HTML (markdown-to-html) & HTML to Markdown (html-to-markdown)
   // --------------------------------------------------------------------------
   console.log("-> Testing Markdown to HTML & HTML to Markdown logic...");
-  const sampleMarkdown = "# Title\n\nThis is **bold** and *italic* and `code`.\n\n> Quote text\n\n[Link](https://cleartrix.com)";
+  const sampleMarkdown = "# Title\n\nThis is **bold** and *italic* and `code`.\n\n> Quote text\n\n[Link](https://qwertygen.com)";
   const htmlOutput = markdownToHtml(sampleMarkdown);
   if (
     !htmlOutput.includes("<h1>Title</h1>") ||
@@ -266,7 +266,7 @@ export async function runConverterEngineTests(): Promise<boolean> {
     !htmlOutput.includes("<em>italic</em>") ||
     !htmlOutput.includes("<code>code</code>") ||
     !htmlOutput.includes("<blockquote>Quote text</blockquote>") ||
-    !htmlOutput.includes('<a href="https://cleartrix.com"')
+    !htmlOutput.includes('<a href="https://qwertygen.com"')
   ) {
     throw new Error(`markdownToHtml failed: got\n${htmlOutput}`);
   }
@@ -326,7 +326,7 @@ export async function runConverterEngineTests(): Promise<boolean> {
   // Test PDF generation via pdf-lib for jpg-to-pdf
   const pdfDoc = await PDFDocument.create();
   const page = pdfDoc.addPage([595.28, 841.89]); // A4
-  page.drawText("ClearTrix Document Converter Test", { x: 50, y: 800 });
+  page.drawText("Qwertygen Document Converter Test", { x: 50, y: 800 });
   const pdfBytes = await pdfDoc.save();
   if (!pdfBytes || pdfBytes.length === 0) {
     throw new Error("PDFDocument generation failed for converter engine");

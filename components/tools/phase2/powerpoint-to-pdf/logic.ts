@@ -179,7 +179,7 @@ export async function convertSlidesToPdf(
 ): Promise<Uint8Array> {
   const themeKey = options.theme ?? "modern-dark";
   const theme = THEME_MAP[themeKey];
-  const deckTitle = options.deckTitle ?? "Cleartrix Presentation";
+  const deckTitle = options.deckTitle ?? "Qwertygen Presentation";
   const includeSlideNumbers = options.includeSlideNumbers ?? true;
 
   // 16:9 Widescreen dimensions: 960 x 540 points
@@ -315,7 +315,7 @@ export async function convertSlidesToPdf(
   return await pdfDoc.save();
 }
 
-export const SAMPLE_PRESENTATION_MARKDOWN = `# Cleartrix Platform Overview
+export const SAMPLE_PRESENTATION_MARKDOWN = `# Qwertygen Platform Overview
 ## 100% In-Browser Privacy Architecture
 • Zero network requests: Documents, PDFs, and spreadsheets process strictly in client RAM.
 • WebAssembly & Web Workers: Native performance without external servers.

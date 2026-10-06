@@ -49,7 +49,7 @@ export const useToolsPreferenceStore = create<ToolsPreferenceState>()(
       },
     }),
     {
-      name: "cleartrix_tools_preferences",
+      name: "qwertygen_tools_preferences",
     }
   )
 );

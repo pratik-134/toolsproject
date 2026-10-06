@@ -1,7 +1,7 @@
 /**
  * Client-Side Smart Background Remover — Pure Domain Logic
  * 100% In-Browser Pixel Segmentation, Alpha Masking & Background Replacement
- * Zero External Network Calls, Zero Server Uploads (Cleartrix Invariant #1)
+ * Zero External Network Calls, Zero Server Uploads (Qwertygen Invariant #1)
  */
 
 export interface SegmentationOptions {

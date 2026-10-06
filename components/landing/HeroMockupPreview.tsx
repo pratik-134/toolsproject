@@ -97,7 +97,7 @@ export const HeroMockupPreview: React.FC = () => {
           {/* URL Pill */}
           <div className="hidden sm:flex items-center gap-1.5 rounded-md bg-white px-2.5 py-0.5 text-[11px] font-mono font-medium text-slate-600 border border-slate-200/80 shadow-2xs">
             <span className="text-slate-400">https://</span>
-            <span className="text-slate-800 font-semibold">cleartrix.com/{activeTab}</span>
+            <span className="text-slate-800 font-semibold">qwertygen.com/{activeTab}</span>
           </div>
         </div>
 

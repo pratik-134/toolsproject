@@ -130,7 +130,7 @@ export default function UrlEncoderTool() {
               <button
                 type="button"
                 onClick={() =>
-                  setInputText("https://cleartrix.com/search?q=resume builder & fast tools#section-1")
+                  setInputText("https://qwertygen.com/search?q=resume builder & fast tools#section-1")
                 }
                 className="text-xs text-primary hover:underline font-medium"
               >

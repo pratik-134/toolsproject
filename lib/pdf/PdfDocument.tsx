@@ -13,12 +13,12 @@ export const PdfDocument: React.FC<PdfDocumentProps> = ({ data }) => {
 
   return (
     <Document
-      title={`${personalInfo?.fullName || "Resume"} - Cleartrix Resume Builder`}
-      author={personalInfo?.fullName || "Cleartrix User"}
-      subject="Professional Resume created with Cleartrix Resume Builder"
-      keywords="Resume, CV, Cleartrix, Career"
-      creator="Cleartrix (cleartrix.com)"
-      producer="Cleartrix Client-Side PDF Engine"
+      title={`${personalInfo?.fullName || "Resume"} - Qwertygen Resume Builder`}
+      author={personalInfo?.fullName || "Qwertygen User"}
+      subject="Professional Resume created with Qwertygen Resume Builder"
+      keywords="Resume, CV, Qwertygen, Career"
+      creator="Qwertygen (qwertygen.com)"
+      producer="Qwertygen Client-Side PDF Engine"
     >
       <TemplateComponent data={data} />
     </Document>

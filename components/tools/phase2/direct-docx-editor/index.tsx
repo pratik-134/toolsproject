@@ -35,7 +35,7 @@ const THEME_COLORS: { name: string; hex: string }[] = [
 export default function DirectDocxEditorTool() {
   const [title, setTitle] = useState<string>("Enterprise Architecture Proposal");
   const [subtitle, setSubtitle] = useState<string>("Client-Side Utility Platform Specification");
-  const [author, setAuthor] = useState<string>("Cleartrix Author");
+  const [author, setAuthor] = useState<string>("Qwertygen Author");
   const [accentColor, setAccentColor] = useState<string>("2563EB");
   const [blocks, setBlocks] = useState<DocxBlock[]>(
     DOCX_TEMPLATES["Project Proposal"]?.blocks ?? []

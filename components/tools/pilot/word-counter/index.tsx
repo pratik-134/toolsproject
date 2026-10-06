@@ -5,7 +5,7 @@ import { analyzeText } from "./logic";
 import { Copy, Check, Trash2, Clock, AlignLeft, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const SAMPLE_TEXT = `Cleartrix is a privacy-first collection of free, high-performance web tools.
+const SAMPLE_TEXT = `Qwertygen is a privacy-first collection of free, high-performance web tools.
 Every calculation, file conversion, and document compilation executes entirely on your device inside standard browser memory.
 
 No files are ever uploaded to cloud servers. No accounts or registrations are mandatory.

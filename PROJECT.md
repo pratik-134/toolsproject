@@ -1,8 +1,8 @@
-# Cleartrix: Master Project Architecture, Invariants & AI Developer Guide
+# Qwertygen: Master Project Architecture, Invariants & AI Developer Guide
 
-> **Product:** Cleartrix (`https://cleartrix.com`)  
+> **Product:** Qwertygen (`https://qwertygen.com`)  
 > **Umbrella Platform:** Privacy-first, in-browser suite of 172+ tools across all 11 categories  
-> **Flagship Product:** Cleartrix Resume Builder (`/editor`, `/dashboard`) with 20 Vector PDF & Word DOCX templates  
+> **Flagship Product:** Qwertygen Resume Builder (`/editor`, `/dashboard`) with 20 Vector PDF & Word DOCX templates  
 > **Primary Stack:** Next.js 15.5 (App Router, React 18, TypeScript 5.7, Tailwind CSS 3.4), Zustand 4.5, Zod 3.23, Radix UI primitives (`@radix-ui/react-select`), Lucide Icons  
 > **AI / Media Boost:** In-browser WebAssembly (Pyodide, Web Workers, Canvas, Web Audio, Web Crypto) + Optional Server Microservice (Python FastAPI for heavyweight Phase 4 models)  
 > **Brand & Storage Configuration:** `lib/brand.ts` (`BRAND` object), `ct_` localStorage prefix with non-destructive fallback migration  
@@ -12,7 +12,7 @@
 
 ## 1. Core Mission & Non-Negotiable Invariants
 
-Cleartrix is one unified, lightning-fast web platform hosting 172+ everyday tools for PDFs, documents, images, developer utilities, calculators, codes, media, and zero-knowledge cloud sharing. The defining differentiator is **absolute privacy: user files and data are processed directly inside the client browser and never uploaded to any remote server.**
+Qwertygen is one unified, lightning-fast web platform hosting 172+ everyday tools for PDFs, documents, images, developer utilities, calculators, codes, media, and zero-knowledge cloud sharing. The defining differentiator is **absolute privacy: user files and data are processed directly inside the client browser and never uploaded to any remote server.**
 
 ### The 8 Non-Negotiable Invariants (Never Break These):
 
@@ -57,10 +57,10 @@ Cleartrix is one unified, lightning-fast web platform hosting 172+ everyday tool
 ## 2. Codebase Directory Structure
 
 ```
-cleartrix/
+qwertygen/
 ├── app/                                    # Next.js 15 App Router
 │   ├── layout.tsx                          # Root layout with Brand metadata, ThemeProvider, Toast, Header & Footer
-│   ├── page.tsx                            # Cleartrix homepage (hero, trust pill, tools showcase, templates)
+│   ├── page.tsx                            # Qwertygen homepage (hero, trust pill, tools showcase, templates)
 │   ├── brand/page.tsx                      # Brand guidelines, assets & palette
 │   ├── dashboard/page.tsx                  # Multi-resume manager with local drafts
 │   ├── editor/page.tsx                     # Flagship ATS Resume Builder editor workspace
@@ -115,7 +115,7 @@ cleartrix/
 │   ├── docx/                               # 20 native Word templates (docx OOXML package generator)
 │   └── import/                             # In-browser PDF & Word resume parser
 ├── public/
-│   ├── brand/                              # Official ClearTrix identity assets (logos, icons)
+│   ├── brand/                              # Official Qwertygen identity assets (logos, icons)
 │   └── images/samples/                     # Original copyright-free bundled sample photos and assets
 ├── scripts/                                # Verification & Quality Assurance Suite
 │   ├── test-tools.ts                       # Unit test runner executing all 172 tool logic.test.ts suites
@@ -133,7 +133,7 @@ cleartrix/
 
 ## 3. The 4-File Modular Tool Pattern
 
-Every tool in Cleartrix is built using this strict, modular 4-file pattern. Domain logic is strictly separated from React components:
+Every tool in Qwertygen is built using this strict, modular 4-file pattern. Domain logic is strictly separated from React components:
 
 ### 1. `components/tools/<phase>/<slug>/logic.ts`
 - **Rule:** Contains **only pure TypeScript functions and interfaces**.
@@ -186,7 +186,7 @@ Every tool in Cleartrix is built using this strict, modular 4-file pattern. Doma
 - **STRICT PROHIBITION:** Never invent custom color classes like `slate-850` or `slate-750` that do not exist in Tailwind defaults.
 
 ### Asset & Sample Image Architecture
-- All sample and demo images are stored locally in [`public/images/samples/`](file:///c:/Users/dell/OneDrive/Desktop/mindkit/public/images/samples):
+- All sample and demo images are stored locally in `public/images/samples/`:
   - `passport-sample.jpg`: High-resolution studio biometric portrait with neutral background.
   - `landscape-sample.jpg`: Vivid alpine lake landscape with high dynamic range for filter testing.
   - `architecture-sample.jpg`: Modern corporate architecture photography for watermark testing.
@@ -363,7 +363,7 @@ cmd /c npm run build
 
 ## 9. Progressive Web App (PWA) & Offline Execution Architecture
 
-Cleartrix functions as a fully offline Progressive Web App, enabling all 172+ client-side tools to run without an active internet connection:
+Qwertygen functions as a fully offline Progressive Web App, enabling all 172+ client-side tools to run without an active internet connection:
 
 1. **Service Worker (`public/sw.js`):**
    - **Cache Strategy:** Network-first with cache fallback for navigation HTML requests; Cache-first for static scripts, fonts, stylesheets, and images.
@@ -376,13 +376,13 @@ Cleartrix functions as a fully offline Progressive Web App, enabling all 172+ cl
    - Captures `beforeinstallprompt` and manages standalone window mode install prompts.
 
 3. **Install Button (`components/pwa/InstallButton.tsx`):**
-   - Integrated into the global footer and available across key workspaces, allowing users to install Cleartrix as a native desktop or mobile application.
+   - Integrated into the global footer and available across key workspaces, allowing users to install Qwertygen as a native desktop or mobile application.
 
 ---
 
 ## 10. Client-Side Multi-Tool Pipeline & Data Hand-Off Architecture
 
-Cleartrix enables zero-upload, 100% in-browser data transfer between compatible tools:
+Qwertygen enables zero-upload, 100% in-browser data transfer between compatible tools:
 
 1. **Pipeline Engine (`lib/pipeline/handoff.ts`):**
    - High-affinity tool workflow matrix (`PIPELINE_WORKFLOW_MAP`) defining intelligent downstream targets (e.g. `curl-to-code-converter` -> `client-pastebin` / `burn-after-read-secret`; `json-formatter` -> `json-yaml-converter` / `json-to-typescript`).

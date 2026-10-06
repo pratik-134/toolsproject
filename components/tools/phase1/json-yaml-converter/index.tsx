@@ -7,7 +7,7 @@ import { jsonToYaml, yamlToJson } from "./logic";
 const SAMPLES = {
   json: JSON.stringify(
     {
-      app: "cleartrix-web",
+      app: "qwertygen-web",
       version: "1.0.0",
       environment: "production",
       services: ["api", "workers", "proxy"],
@@ -20,7 +20,7 @@ const SAMPLES = {
     null,
     2
   ),
-  yaml: `app: cleartrix-web
+  yaml: `app: qwertygen-web
 version: 1.0.0
 environment: production
 services:

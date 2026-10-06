@@ -61,7 +61,7 @@ assert.strictEqual(regex?.suggestedTools[0]?.toolSlug, "regex-tester");
 console.log("✓ Regex Pattern detection passed");
 
 // 8. HTML
-const html = detectInputType('<div class="hero-card"><h1>Welcome to ClearTrix</h1><p>Privacy First</p></div>');
+const html = detectInputType('<div class="hero-card"><h1>Welcome to Qwertygen</h1><p>Privacy First</p></div>');
 assert.strictEqual(html?.type, "html");
 assert.strictEqual(html?.suggestedTools[0]?.toolSlug, "direct-html-editor");
 console.log("✓ HTML Markup detection passed");

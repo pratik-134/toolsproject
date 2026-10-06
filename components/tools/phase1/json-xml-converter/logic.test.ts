@@ -27,11 +27,11 @@ export function runTests(): boolean {
   }
 
   // Test 3: XML to JSON parsing (fallback in Node environment)
-  const sampleXml = `<root><title>Cleartrix</title><version>1.0</version></root>`;
+  const sampleXml = `<root><title>Qwertygen</title><version>1.0</version></root>`;
   const jsonOut = xmlToJson(sampleXml);
   const parsed = JSON.parse(jsonOut);
 
-  if (!parsed.root || parsed.root.title !== "Cleartrix" || parsed.root.version !== 1) {
+  if (!parsed.root || parsed.root.title !== "Qwertygen" || parsed.root.version !== 1) {
     throw new Error(`Test 3 XML to JSON failed: ${jsonOut}`);
   }
 

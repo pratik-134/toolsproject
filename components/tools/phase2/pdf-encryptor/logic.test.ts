@@ -21,7 +21,7 @@ export async function runTests(): Promise<boolean> {
   // Test 2: Generate sample PDF bytes
   const doc = await PDFDocument.create();
   const page = doc.addPage([400, 300]);
-  page.drawText("Confidential Cleartrix Financials", { x: 50, y: 250 });
+  page.drawText("Confidential Qwertygen Financials", { x: 50, y: 250 });
   const samplePdfBytes = await doc.save();
 
   // Test 3: Encrypt PDF buffer

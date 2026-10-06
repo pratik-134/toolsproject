@@ -2,7 +2,7 @@ import { ToolDefinition, ToolMetadata, CategoryId } from "./types";
 
 export const TOOLS: ToolDefinition[] = [
   /* =========================================================================
-     FLAGSHIP PRODUCT: Cleartrix Resume Builder
+     FLAGSHIP PRODUCT: Qwertygen Resume Builder
      ========================================================================= */
   {
     slug: "resume-builder",
@@ -20,7 +20,7 @@ export const TOOLS: ToolDefinition[] = [
         "Craft ATS-friendly, professional resumes directly in your browser. All templates, styling tools, vector PDF downloads, and Word exports are 100% free with no account or paywall.",
       faq: [
         {
-          q: "Is Cleartrix Resume Builder completely free with no watermarks?",
+          q: "Is Qwertygen Resume Builder completely free with no watermarks?",
           a: "Yes. Every template, color accent, font pairing, and vector PDF download is 100% free forever with no watermarks or paywalls.",
         },
         {
@@ -55,7 +55,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         {
           q: "Is it safe to format JSON containing confidential API keys or credentials?",
-          a: "Yes. Cleartrix executes 100% inside your browser memory. No network request carries your JSON data.",
+          a: "Yes. Qwertygen executes 100% inside your browser memory. No network request carries your JSON data.",
         },
         {
           q: "Can this tool fix or identify JSON syntax errors?",
@@ -163,7 +163,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Does this calculator save my financial inputs to external servers?",
-          a: "No. All numbers are calculated client-side in your browser. Cleartrix stores zero personal or financial data.",
+          a: "No. All numbers are calculated client-side in your browser. Qwertygen stores zero personal or financial data.",
         },
         {
           q: "Can I adjust property taxes and homeowners insurance?",
@@ -193,7 +193,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         {
           q: "Do generated QR codes ever expire?",
-          a: "Never. Cleartrix generates static, direct QR codes encoding your exact URL or text with zero intermediary tracking redirects.",
+          a: "Never. Qwertygen generates static, direct QR codes encoding your exact URL or text with zero intermediary tracking redirects.",
         },
         {
           q: "Can I customize QR colors?",
@@ -235,7 +235,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Are my sensitive business spreadsheets uploaded anywhere?",
-          a: "No. All conversion is computed locally in your browser memory. Cleartrix operates under connect-src 'self' zero-upload privacy.",
+          a: "No. All conversion is computed locally in your browser memory. Qwertygen operates under connect-src 'self' zero-upload privacy.",
         },
       ],
     },
@@ -295,7 +295,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         {
           q: "How are passwords generated securely in the browser?",
-          a: "Cleartrix utilizes crypto.getRandomValues, the browser's hardware-seeded Cryptographically Secure Pseudo-Random Number Generator (CSPRNG).",
+          a: "Qwertygen utilizes crypto.getRandomValues, the browser's hardware-seeded Cryptographically Secure Pseudo-Random Number Generator (CSPRNG).",
         },
         {
           q: "Are generated passwords saved, sent, or logged anywhere?",
@@ -373,7 +373,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Are my personal financial inputs kept private?",
-          a: "Yes. All calculations execute client-side in your browser. Cleartrix stores zero financial or personal data.",
+          a: "Yes. All calculations execute client-side in your browser. Qwertygen stores zero financial or personal data.",
         },
       ],
     },
@@ -2293,7 +2293,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Are my camera video frames or uploaded photos uploaded to a server?",
-          a: "Never. Camera frames and image files are processed strictly inside your device's memory using client-side canvas algorithms. Cleartrix enforces zero-upload privacy.",
+          a: "Never. Camera frames and image files are processed strictly inside your device's memory using client-side canvas algorithms. Qwertygen enforces zero-upload privacy.",
         },
         {
           q: "Can I use my mobile phone camera to scan barcodes?",
@@ -2327,7 +2327,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Does this scanner track or redirect my destination links?",
-          a: "No. Unlike mobile scanner apps that route links through tracking proxies, Cleartrix decodes the raw URL directly in your browser without redirection.",
+          a: "No. Unlike mobile scanner apps that route links through tracking proxies, Qwertygen decodes the raw URL directly in your browser without redirection.",
         },
         {
           q: "Can I scan a QR code from a screenshot or saved photo?",
@@ -2358,7 +2358,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         {
           q: "Is my PDF uploaded to any server or cloud storage?",
-          a: "Never. ClearTrix processes every page, vector annotation, AcroForm field, and OCR recognition pass 100% locally in your web browser memory. No files or metrics are ever sent over the network.",
+          a: "Never. Qwertygen processes every page, vector annotation, AcroForm field, and OCR recognition pass 100% locally in your web browser memory. No files or metrics are ever sent over the network.",
         },
         {
           q: "What interactive form and redaction tools are included?",
@@ -2434,7 +2434,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "Resume PDF & DOCX Import Inspector",
-      description: "Inspect, validate, and convert PDF & DOCX resume files into structured JSON schemas. View parsed timelines, competencies, and export to Cleartrix's.",
+      description: "Inspect, validate, and convert PDF & DOCX resume files into structured JSON schemas. View parsed timelines, competencies, and export to Qwertygen's.",
       h1: "Free Resume PDF & DOCX Import Inspector",
       intro:
         "Inspect extracted resume data with client-side transparency. View parsed personal details, work timelines, education records, and download standard JSON schemas.",
@@ -2444,8 +2444,8 @@ export const TOOLS: ToolDefinition[] = [
           a: "It extracts personal contact info, work experience positions, education history, technical skills, and unassigned text blocks into a clean structured schema.",
         },
         {
-          q: "Can I export the parsed resume into Cleartrix's Resume Builder?",
-          a: "Yes. Click 'Edit in Cleartrix Resume Builder' to load the parsed data directly into the visual resume editor.",
+          q: "Can I export the parsed resume into Qwertygen's Resume Builder?",
+          a: "Yes. Click 'Edit in Qwertygen Resume Builder' to load the parsed data directly into the visual resume editor.",
         },
         {
           q: "Can I download the extracted resume as a JSON file?",
@@ -2604,7 +2604,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Are my confidential files sent to a remote server for compression?",
-          a: "No. Unlike other online PDF compressors that upload your files to remote servers, Cleartrix processes everything in your browser RAM.",
+          a: "No. Unlike other online PDF compressors that upload your files to remote servers, Qwertygen processes everything in your browser RAM.",
         },
         {
           q: "Will compression reduce the visual quality of text?",
@@ -2736,7 +2736,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Does creating forms require an account or subscription?",
-          a: "No. Cleartrix is completely free, unlocked, and runs 100% client-side without paywalls.",
+          a: "No. Qwertygen is completely free, unlocked, and runs 100% client-side without paywalls.",
         },
       ],
     },
@@ -2801,7 +2801,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "What happens to transparency when converting PNG to JPEG?",
-          a: "Because JPEG does not support alpha transparency, Cleartrix allows you to select a background fill color (such as solid white or black) to cleanly replace transparent regions.",
+          a: "Because JPEG does not support alpha transparency, Qwertygen allows you to select a background fill color (such as solid white or black) to cleanly replace transparent regions.",
         },
       ],
     },
@@ -2823,7 +2823,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         {
           q: "Which aspect ratio presets are included?",
-          a: "Cleartrix includes 1:1 (Square / Avatars), 16:9 (YouTube & Banners), 9:16 (Stories / Reels / TikTok), 4:5 (Instagram Feed portrait), 4:3 (Classic display), 3:2 (35mm photography), 2:1 (Twitter/X header), and Freeform.",
+          a: "Qwertygen includes 1:1 (Square / Avatars), 16:9 (YouTube & Banners), 9:16 (Stories / Reels / TikTok), 4:5 (Instagram Feed portrait), 4:3 (Classic display), 3:2 (35mm photography), 2:1 (Twitter/X header), and Freeform.",
         },
         {
           q: "Can I rotate or mirror my image during cropping?",
@@ -2917,7 +2917,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Does stripping metadata reduce image quality?",
-          a: "No. Cleartrix uses lossless binary segment stripping for JPEG and chunk filtering for PNG. The underlying compressed image stream is preserved bit-for-bit with zero re-encoding loss.",
+          a: "No. Qwertygen uses lossless binary segment stripping for JPEG and chunk filtering for PNG. The underlying compressed image stream is preserved bit-for-bit with zero re-encoding loss.",
         },
         {
           q: "Do my photos ever touch external servers?",
@@ -2974,7 +2974,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         {
           q: "How does in-browser HTML to PDF work without a backend?",
-          a: "Cleartrix renders your HTML and custom CSS inside an isolated client sandbox and applies standardized @page print stylesheets, invoking your browser's native high-resolution vector print engine.",
+          a: "Qwertygen renders your HTML and custom CSS inside an isolated client sandbox and applies standardized @page print stylesheets, invoking your browser's native high-resolution vector print engine.",
         },
         {
           q: "Can I customize the page dimensions and margins?",
@@ -3117,7 +3117,7 @@ export const TOOLS: ToolDefinition[] = [
     runtime: "client",
     seo: {
       title: "Free AES-256 File Decryptor — In-Browser Secure File",
-      description: "Unlock and decrypt .enc files encrypted with Cleartrix AES-GCM-256 File Locker. 100% in-browser authentication tag verification, zero server uploads,.",
+      description: "Unlock and decrypt .enc files encrypted with Qwertygen AES-GCM-256 File Locker. 100% in-browser authentication tag verification, zero server uploads,.",
       h1: "Free In-Browser AES-256 File Decryptor & Unlocker",
       intro:
         "Decrypt and authenticate protected files in your browser sandbox. Enter your master password to verify the 128-bit GCM integrity tag and restore the original file instantly.",
@@ -3128,7 +3128,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Does the decrypted file retain its original filename and extension?",
-          a: "Yes. The Cleartrix container securely encapsulates the original file metadata and restores its exact name and mime type upon successful decryption.",
+          a: "Yes. The Qwertygen container securely encapsulates the original file metadata and restores its exact name and mime type upon successful decryption.",
         },
         {
           q: "Is there any file size limit for decryption?",
@@ -3185,7 +3185,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         {
           q: "Is this redaction permanent or can text be highlighted underneath?",
-          a: "Cleartrix bakes opaque vector fill rectangles directly into the PDF content stream with 100% opacity, completely and irreversibly obscuring the underlying content.",
+          a: "Qwertygen bakes opaque vector fill rectangles directly into the PDF content stream with 100% opacity, completely and irreversibly obscuring the underlying content.",
         },
         {
           q: "Can I customize the redaction box appearance and label?",
@@ -3644,8 +3644,8 @@ export const TOOLS: ToolDefinition[] = [
           a: "Yes. Enter your authorized document password to decrypt the file and download a clean PDF that will never prompt for a password again.",
         },
         {
-          q: "Does this tool work for both Cleartrix encrypted PDFs and standard PDFs?",
-          a: "Yes. It automatically detects and unlocks both Cleartrix AES-256 containers and standard password-protected PDF files.",
+          q: "Does this tool work for both Qwertygen encrypted PDFs and standard PDFs?",
+          a: "Yes. It automatically detects and unlocks both Qwertygen AES-256 containers and standard password-protected PDF files.",
         },
         {
           q: "Is it safe to unlock confidential PDFs here?",
@@ -3704,7 +3704,7 @@ export const TOOLS: ToolDefinition[] = [
       intro: "Convert modern WebP images into universally compatible PNG graphics directly on your device. WebP offers excellent web compression, but many design editors and print workflows still require standard PNG files with full transparency support.",
       faq: [
         { q: "Does converting WebP to PNG preserve background transparency?", a: "Yes. PNG fully supports alpha channel transparency, ensuring translucent and cut-out graphics render perfectly." },
-        { q: "Is my image uploaded to any server?", a: "No. ClearTrix converts your files 100% inside your browser memory using HTML5 Canvas APIs." },
+        { q: "Is my image uploaded to any server?", a: "No. Qwertygen converts your files 100% inside your browser memory using HTML5 Canvas APIs." },
         { q: "Can I convert multiple WebP files at once?", a: "Yes. You can drag and drop multiple WebP images to convert them in a single batch operation." },
         { q: "Will the converted PNG image lose visual quality?", a: "No. PNG is a lossless format, meaning no further image degradation occurs during export." }
       ]
@@ -3746,7 +3746,7 @@ export const TOOLS: ToolDefinition[] = [
       intro: "Convert heavy PNG graphics into lightweight JPEG images directly in your browser. PNG files often carry high file sizes due to uncompressed pixel data and transparency masks. Converting to JPEG reduces file size by up to 80%.",
       faq: [
         { q: "How much does converting PNG to JPG shrink file size?", a: "Converting complex photographic PNGs to JPG can reduce file size by 60% to 80% with minimal visual difference." },
-        { q: "Why did my transparent PNG background turn white?", a: "JPG does not support transparency. ClearTrix automatically fills transparent background pixels with a clean white fill." },
+        { q: "Why did my transparent PNG background turn white?", a: "JPG does not support transparency. Qwertygen automatically fills transparent background pixels with a clean white fill." },
         { q: "Can I convert multiple PNGs simultaneously?", a: "Yes. Select multiple PNG files to process the entire batch in browser memory." },
         { q: "Does this tool work offline?", a: "Yes. Once the page is loaded, conversions process 100% locally on your computer." }
       ]
@@ -3768,7 +3768,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         { q: "Does converting JPG to PNG improve photo quality?", a: "No. Converting format cannot restore details lost in initial JPEG compression, but it prevents further loss upon future saves." },
         { q: "Will the converted PNG file be larger in size?", a: "Yes. PNG uses lossless encoding, so PNG files are typically larger than compressed JPEG files." },
-        { q: "Can I convert JPEG images on mobile devices?", a: "Yes. ClearTrix works smoothly on smartphone browsers with responsive touch controls." },
+        { q: "Can I convert JPEG images on mobile devices?", a: "Yes. Qwertygen works smoothly on smartphone browsers with responsive touch controls." },
         { q: "Is my image uploaded to external servers?", a: "No. All rendering occurs locally inside your web browser sandbox." }
       ]
     },
@@ -3810,7 +3810,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         { q: "What sizes should be included in a website favicon.ico?", a: "A standard web favicon should include 16x16, 32x32, and 48x48 resolutions for browser tabs and taskbars." },
         { q: "Can I convert transparent PNGs to ICO?", a: "Yes. Alpha transparency is preserved across all generated icon sizes." },
-        { q: "Does this tool create a valid Windows .ICO binary?", a: "Yes. ClearTrix constructs proper ICO file headers and directory structures in browser memory." },
+        { q: "Does this tool create a valid Windows .ICO binary?", a: "Yes. Qwertygen constructs proper ICO file headers and directory structures in browser memory." },
         { q: "Are my brand logos uploaded to external servers?", a: "No. Binary construction executes 100% in your browser sandbox." }
       ]
     },
@@ -3893,7 +3893,7 @@ export const TOOLS: ToolDefinition[] = [
       intro: "Render PDF pages into sharp, lossless PNG images directly in your web browser. PNG rendering is ideal for technical diagrams, architectural drawings, and text-heavy PDF pages where crisp edges and lossless clarity are critical.",
       faq: [
         { q: "Why choose PNG over JPG for PDF page rendering?", a: "PNG is a lossless format, making text, fine lines, and vector diagrams look sharper without compression blur." },
-        { q: "Can I convert large PDF documents?", a: "Yes. ClearTrix renders pages iteratively in browser memory to keep performance smooth." },
+        { q: "Can I convert large PDF documents?", a: "Yes. Qwertygen renders pages iteratively in browser memory to keep performance smooth." },
         { q: "Will the output images have white backgrounds?", a: "Yes. PDF pages are rendered with a standard white canvas background for maximum readability." },
         { q: "Is my document stored on external servers?", a: "No. All processing happens 100% inside your browser sandbox." }
       ]
@@ -3977,7 +3977,7 @@ export const TOOLS: ToolDefinition[] = [
       intro: "Convert uncompressed WAV audio files into compact, high-fidelity MP3 files directly in your web browser. WAV files offer pristine audio quality, but their massive file sizes make them impractical for storage or sharing.",
       faq: [
         { q: "How much does converting WAV to MP3 reduce file size?", a: "Converting WAV to 192kbps MP3 typically reduces file size by 80% to 90% with minimal perceived audio difference." },
-        { q: "Will the audio quality sound good?", a: "Yes. ClearTrix uses 192kbps MP3 encoding for crisp, clear audio reproduction." },
+        { q: "Will the audio quality sound good?", a: "Yes. Qwertygen uses 192kbps MP3 encoding for crisp, clear audio reproduction." },
         { q: "Is my audio recording uploaded to external servers?", a: "No. Audio encoding takes place 100% inside your browser memory." },
         { q: "Can I convert large WAV audio recordings?", a: "Yes. The browser engine processes long voice recordings and music tracks smoothly." }
       ]
@@ -4002,7 +4002,7 @@ export const TOOLS: ToolDefinition[] = [
       intro: "Convert WebM videos captured from webcams or screen recordings into universally compatible MP4 videos directly in your browser.",
       faq: [
         { q: "Why convert WebM to MP4?", a: "MP4 offers 100% video playback support across all desktop OS, mobile devices, and video editing suites." },
-        { q: "Is my screen recording uploaded to any cloud server?", a: "No. ClearTrix processes your WebM video entirely within local browser memory." },
+        { q: "Is my screen recording uploaded to any cloud server?", a: "No. Qwertygen processes your WebM video entirely within local browser memory." },
         { q: "Does WebM to MP4 preserve video quality?", a: "Yes. In-browser stream remuxing preserves original video resolution and frame rate." },
         { q: "Can I convert webcam recordings?", a: "Yes. WebM recordings from webcams or browser tab recorders convert seamlessly." }
       ]
@@ -4025,7 +4025,7 @@ export const TOOLS: ToolDefinition[] = [
         { q: "Are iPhone Voice Memos supported?", a: "Yes. iPhone Voice Memos recorded in M4A format convert quickly to MP3." },
         { q: "Is my private voice recording sent to any server?", a: "No. Conversion processing happens 100% inside local browser memory." },
         { q: "What audio bitrate is generated?", a: "Output MP3 files are encoded at crisp 192kbps stereo audio bitrates." },
-        { q: "Can I convert M4A files on mobile browsers?", a: "Yes. ClearTrix works directly in mobile Safari and Chrome browsers." }
+        { q: "Can I convert M4A files on mobile browsers?", a: "Yes. Qwertygen works directly in mobile Safari and Chrome browsers." }
       ]
     },
     related: ["flac-to-mp3", "wav-to-mp3", "mp4-to-mp3"]
@@ -4043,7 +4043,7 @@ export const TOOLS: ToolDefinition[] = [
       h1: "Free FLAC to MP3 Converter",
       intro: "Convert lossless FLAC audio files into high-bitrate 320kbps MP3 files directly inside your web browser. While FLAC provides uncompromised studio audio quality, its large file sizes can strain mobile storage.",
       faq: [
-        { q: "What bitrate is used for FLAC to MP3 conversion?", a: "ClearTrix encodes FLAC files at 320kbps, the highest possible MP3 quality preset." },
+        { q: "What bitrate is used for FLAC to MP3 conversion?", a: "Qwertygen encodes FLAC files at 320kbps, the highest possible MP3 quality preset." },
         { q: "How much space will I save?", a: "Converting FLAC to 320kbps MP3 reduces file size by approximately 60% to 75%." },
         { q: "Are my music files uploaded to a server?", a: "No. Processing is 100% local inside browser memory." },
         { q: "Does it support high-res 24-bit FLAC audio?", a: "Yes. High-resolution 24-bit FLAC streams are decoded and encoded cleanly." }
@@ -4169,7 +4169,7 @@ export const TOOLS: ToolDefinition[] = [
       h1: "Free XML to CSV Converter",
       intro: "Convert complex XML documents and data feeds into flat CSV spreadsheet tables directly in your web browser.",
       faq: [
-        { q: "How does it handle repeating XML nodes?", a: "ClearTrix identifies repeating record tags under the root element and extracts their properties into table rows." },
+        { q: "How does it handle repeating XML nodes?", a: "Qwertygen identifies repeating record tags under the root element and extracts their properties into table rows." },
         { q: "Is my enterprise XML data kept confidential?", a: "Yes. XML DOM parsing runs 100% inside local browser memory without network uploads." },
         { q: "What if some XML records have missing fields?", a: "Missing fields are safely rendered as empty CSV cells to keep columns aligned." },
         { q: "Can I open the resulting CSV in Microsoft Excel or Google Sheets?", a: "Yes. Output CSV files are fully compatible with Excel, Sheets, and database tools." }
@@ -4253,7 +4253,7 @@ export const TOOLS: ToolDefinition[] = [
       h1: "Free Number to Words Converter",
       intro: "Convert numeric digits into full written English words instantly in your web browser. Converting numbers to words is essential when writing financial checks.",
       faq: [
-        { q: "What range of numbers can be converted?", a: "ClearTrix converts integers from negative trillions up to positive trillions." },
+        { q: "What range of numbers can be converted?", a: "Qwertygen converts integers from negative trillions up to positive trillions." },
         { q: "Are commas allowed in input numbers?", a: "Yes. Numbers formatted with or without commas (e.g., 1,000,000 or 1000000) parse correctly." },
         { q: "Is my financial number data uploaded to a server?", a: "No. Number conversion operates 100% inside local browser memory." },
         { q: "Does it support negative numbers?", a: "Yes. Negative integers are prefixed with 'negative'." }
@@ -4386,7 +4386,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         { q: "Will converting AAC to MP3 preserve clear audio?", a: "Yes. High-quality 192kbps MP3 encoding preserves audio clarity." },
         { q: "Is my audio file uploaded to a remote server?", a: "No. All audio encoding happens 100% inside local browser memory." },
-        { q: "Does this tool work on mobile devices?", a: "Yes. ClearTrix runs in mobile Safari and Chrome browsers." },
+        { q: "Does this tool work on mobile devices?", a: "Yes. Qwertygen runs in mobile Safari and Chrome browsers." },
         { q: "Can I convert M4A AAC files?", a: "Yes. Use our M4A to MP3 tool for Apple M4A container files." }
       ]
     },
@@ -4721,7 +4721,7 @@ export const TOOLS: ToolDefinition[] = [
       intro: "Add iconic top and bottom Impact captions to photos with authentic black text outlines, customizable font sizes, and zero watermarks.",
       faq: [
         { q: "Can I upload my own custom photo or screenshot?", a: "Yes. Upload any JPG, PNG, or WebP image to apply meme captions immediately." },
-        { q: "Does Cleartrix add a watermark to created memes?", a: "No. All memes generated are completely clean with zero watermarks or branding." },
+        { q: "Does Qwertygen add a watermark to created memes?", a: "No. All memes generated are completely clean with zero watermarks or branding." },
         { q: "Can I adjust the black outline stroke thickness?", a: "Yes. Sliders allow full control over stroke width, text fill color, and font scale." },
         { q: "Are uploaded images stored on any server?", a: "No. Images are rendered purely inside your local browser HTML Canvas." }
       ]
@@ -4744,7 +4744,7 @@ export const TOOLS: ToolDefinition[] = [
         { q: "What math symbols are supported?", a: "Fractions, square roots, integrals, summations, matrices, limits, and all standard Greek letters." },
         { q: "Can I export equations as scalable vector SVG images?", a: "Yes. Export formulas directly as high-resolution SVG or print/save as vector PDF." },
         { q: "Does the editor check for bracket errors?", a: "Yes. Built-in syntax validation flags unclosed or mismatched brackets in real-time." },
-        { q: "Does this require a server-side LaTeX compiler?", a: "No. Cleartrix renders equations using client-side semantic MathML and vector SVG in-browser." }
+        { q: "Does this require a server-side LaTeX compiler?", a: "No. Qwertygen renders equations using client-side semantic MathML and vector SVG in-browser." }
       ]
     },
     related: ["markdown-to-pdf", "pdf-merger", "scientific-calculator", "direct-html-editor"]
@@ -4784,7 +4784,7 @@ export const TOOLS: ToolDefinition[] = [
       intro: "Create official biometric passport, visa, and ID photos directly in your web browser. Includes ICAO-compliant head guides, official country dimensions, and 4x6\" multi-photo print sheets.",
       faq: [
         { q: "What countries and visa types are supported?", a: "Supports United States (2x2 inches / 51x51mm), India (35x45mm Passport, 51x51mm OCI/Visa, PAN card), UK, Schengen / EU, Canada (50x70mm), Australia, China, Japan, UAE, Singapore, and custom sizes." },
-        { q: "Can I print the photos at a local pharmacy or print shop?", a: "Yes. ClearTrix automatically compiles your passport photos into a standard 4x6 inch (10x15cm) multi-photo print sheet with crop marks, ready to print for pennies at CVS, Walgreens, Walmart, or Boots." },
+        { q: "Can I print the photos at a local pharmacy or print shop?", a: "Yes. Qwertygen automatically compiles your passport photos into a standard 4x6 inch (10x15cm) multi-photo print sheet with crop marks, ready to print for pennies at CVS, Walgreens, Walmart, or Boots." },
         { q: "Are my personal facial photos sent to external servers or AI?", a: "Never. All biometric framing, canvas cropping, and export generation execute 100% locally inside your browser memory. Your personal photos never touch any server." },
         { q: "Does the output meet official 300 DPI resolution standards?", a: "Yes. Both individual passport photo downloads and printable photo sheets are exported at exact 300 DPI print-ready resolution." }
       ]
@@ -4804,7 +4804,7 @@ export const TOOLS: ToolDefinition[] = [
       h1: "Free Client-Side JSON Web Token (JWT) Decoder",
       intro: "Inspect and decode JWT tokens instantly in your browser. Verify token claims, expiration timestamps, and algorithms with 100% in-browser privacy.",
       faq: [
-        { q: "Is it safe to paste confidential production JWT tokens into this decoder?", a: "Yes. Unlike online decoders that log requests, ClearTrix decodes tokens 100% locally in your browser memory using Base64URL decoding. No tokens are logged or sent to any server." },
+        { q: "Is it safe to paste confidential production JWT tokens into this decoder?", a: "Yes. Unlike online decoders that log requests, Qwertygen decodes tokens 100% locally in your browser memory using Base64URL decoding. No tokens are logged or sent to any server." },
         { q: "Can this tool verify token cryptographic signatures?", a: "This decoder checks token formatting, expiry, and decodes the claims header and payload. Cryptographic signature verification against private keys is kept offline to protect secret keys." },
         { q: "Does it convert timestamps into readable dates?", a: "Yes, standard Unix epoch claims including exp (expiration), iat (issued at), and nbf (not before) are automatically translated into human-readable local dates and live countdowns." }
       ]
@@ -4825,7 +4825,7 @@ export const TOOLS: ToolDefinition[] = [
       intro: "Scan and compare your resume against target job requirements. Instantly discover keyword matches, missing qualifications, and strong action verbs to beat Applicant Tracking Systems.",
       faq: [
         { q: "How does the ATS keyword matcher calculate the match percentage?", a: "It extracts key terms, required skills, and core action verbs from the job description, then scans your resume text to compute match frequency, keyword density, and missing gaps." },
-        { q: "Can I directly load my resume from the ClearTrix Resume Builder?", a: "Yes! Click the 'Load Active Resume' button to automatically import your active draft from the ClearTrix builder with one click." },
+        { q: "Can I directly load my resume from the Qwertygen Resume Builder?", a: "Yes! Click the 'Load Active Resume' button to automatically import your active draft from the Qwertygen builder with one click." },
         { q: "Is my resume or the job posting uploaded to a cloud server?", a: "No. All text processing and keyword extraction algorithms execute strictly inside your local browser tab." }
       ]
     },
@@ -4866,7 +4866,7 @@ export const TOOLS: ToolDefinition[] = [
       intro: "Construct and debug crontab expressions visually in your browser. Translate cryptic cron syntax into plain English and copy pre-formatted triggers for GitHub Actions and Linux.",
       faq: [
         { q: "What do the 5 parts of a standard cron expression represent?", a: "They represent: Minute (0-59), Hour (0-23), Day of Month (1-31), Month (1-12), and Day of Week (0-6 starting Sunday)." },
-        { q: "Can I copy triggers for GitHub Actions or Linux crontab?", a: "Yes. ClearTrix automatically generates syntax for GitHub Actions workflows, Linux crontab entries, and Kubernetes CronJobs." },
+        { q: "Can I copy triggers for GitHub Actions or Linux crontab?", a: "Yes. Qwertygen automatically generates syntax for GitHub Actions workflows, Linux crontab entries, and Kubernetes CronJobs." },
         { q: "Does this schedule generator run in my browser?", a: "Yes. All parsing, forward run projections, and explanations are computed 100% locally in your browser memory." }
       ]
     },
@@ -4885,7 +4885,7 @@ export const TOOLS: ToolDefinition[] = [
       h1: "Free Client-Side cURL to Code Converter",
       intro: "Paste any raw cURL terminal command and convert it into clean, modern code for JavaScript (Fetch & Axios), Python, Go, and Rust with zero server transmission.",
       faq: [
-        { q: "Are secret API keys or bearer tokens sent to a remote server?", a: "No. Unlike other online converters that inspect HTTP requests on backend servers, ClearTrix runs the parser 100% locally in your browser memory." },
+        { q: "Are secret API keys or bearer tokens sent to a remote server?", a: "No. Unlike other online converters that inspect HTTP requests on backend servers, Qwertygen runs the parser 100% locally in your browser memory." },
         { q: "Which programming languages and HTTP libraries are supported?", a: "Supports JavaScript / TypeScript (native Fetch & Axios), Python (requests), Go (net/http), and Rust (reqwest)." },
         { q: "Does it support custom headers, request bodies, and authentication?", a: "Yes, it parses -H headers, -d / --data JSON payloads, and -u basic auth credentials automatically." }
       ]
@@ -4945,7 +4945,7 @@ export const TOOLS: ToolDefinition[] = [
       h1: "Free Encrypted Client-Side Pastebin",
       intro: "Share code, configurations, and private markdown with zero server storage. Decryption keys live exclusively in your browser URL fragment.",
       faq: [
-        { q: "Does ClearTrix store my code or paste content on a database?", a: "No. The entire paste payload is encrypted in your browser using AES-256-GCM and stored within the URL hash fragment (#paste=...). We have zero servers or databases storing your pastes." },
+        { q: "Does Qwertygen store my code or paste content on a database?", a: "No. The entire paste payload is encrypted in your browser using AES-256-GCM and stored within the URL hash fragment (#paste=...). We have zero servers or databases storing your pastes." },
         { q: "Which programming languages and syntaxes are supported?", a: "Supported syntaxes include Plain Text, JavaScript, TypeScript, Python, JSON, HTML, CSS, Markdown, SQL, Bash, and YAML." },
         { q: "Can I password-protect my paste?", a: "Yes. You can optionally enforce a custom passphrase. PBKDF2 key derivation with 100,000 rounds ensures high resistance against brute-force attacks." }
       ]
@@ -4965,8 +4965,8 @@ export const TOOLS: ToolDefinition[] = [
       h1: "Free Password-Protected Link Redirector",
       intro: "Hide private URLs, internal dashboards, and confidential documents behind an encrypted client-side lock screen with optional hints and expirations.",
       faq: [
-        { q: "How does the Link Protector prevent intermediate link tracking?", a: "Standard link shorteners log destination URLs and clicks on central servers. ClearTrix encrypts the destination URL entirely in your browser using AES-256-GCM so no server ever knows where the link points." },
-        { q: "How does anti-phishing protection work?", a: "Upon decrypting, ClearTrix displays the verified destination hostname and full link to the user before they click, preventing stealth redirects or phishing traps." },
+        { q: "How does the Link Protector prevent intermediate link tracking?", a: "Standard link shorteners log destination URLs and clicks on central servers. Qwertygen encrypts the destination URL entirely in your browser using AES-256-GCM so no server ever knows where the link points." },
+        { q: "How does anti-phishing protection work?", a: "Upon decrypting, Qwertygen displays the verified destination hostname and full link to the user before they click, preventing stealth redirects or phishing traps." },
         { q: "Can I set an expiration timer on protected links?", a: "Yes. You can configure expiration periods from 1 hour to 30 days, after which the client will decline to unlock the link." }
       ]
     },
@@ -4990,7 +4990,7 @@ export const TOOLS: ToolDefinition[] = [
       intro: "Create stunning, high-resolution screenshots of your source code for documentation, presentations, and social media. 100% in-browser rendering with zero server uploads or watermarks.",
       faq: [
         {
-          q: "Is ClearTrix Code Snapshot Studio completely free with no watermarks?",
+          q: "Is Qwertygen Code Snapshot Studio completely free with no watermarks?",
           a: "Yes. Every theme, canvas gradient, window style, and high-DPI retina export is 100% free with zero watermarks."
         },
         {
@@ -4999,7 +4999,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Does my confidential source code ever get uploaded to a server?",
-          a: "Never. ClearTrix tokenizes and renders code snapshots 100% in-browser using local Web APIs. Zero network requests carry your code."
+          a: "Never. Qwertygen tokenizes and renders code snapshots 100% in-browser using local Web APIs. Zero network requests carry your code."
         }
       ]
     },
@@ -5023,7 +5023,7 @@ export const TOOLS: ToolDefinition[] = [
       intro: "Design and export beautiful vector SVG wave dividers, layered curves, and organic blob shapes for landing pages and graphic design. 100% in-browser generation with zero server uploads.",
       faq: [
         {
-          q: "Is ClearTrix SVG Wave & Pattern Studio free for commercial use?",
+          q: "Is Qwertygen SVG Wave & Pattern Studio free for commercial use?",
           a: "Yes. All generated SVG vector graphics and CSS snippets are 100% free with zero watermarks or attribution requirements for commercial websites and apps."
         },
         {
@@ -5056,7 +5056,7 @@ export const TOOLS: ToolDefinition[] = [
       intro: "Transform raw, nested JSON payloads into an interactive 2D node graph and tree diagram. Search nodes, copy JSONPath syntax, and export vector diagrams with 100% in-browser privacy.",
       faq: [
         {
-          q: "Is ClearTrix JSON Graph Visualizer free for large payloads?",
+          q: "Is Qwertygen JSON Graph Visualizer free for large payloads?",
           a: "Yes. Visualizing, filtering, searching, and exporting tree graphs for large datasets is 100% free with no limits or subscriptions."
         },
         {
@@ -5093,12 +5093,12 @@ export const TOOLS: ToolDefinition[] = [
           a: "It applies classic color harmony formulas across the 360-degree HSL color wheel, calculating exact angular relationships including Complementary, Analogous, Triadic, Monochromatic, and Tetradic harmonies."
         },
         {
-          q: "What WCAG accessibility standards does ClearTrix check?",
+          q: "What WCAG accessibility standards does Qwertygen check?",
           a: "It computes exact W3C relative luminance and contrast ratios (from 1:1 to 21:1) against pure white and obsidian dark backgrounds, scoring compliance for WCAG 2.1 Level AA and AAA Normal/Large text."
         },
         {
           q: "Can I simulate color blindness?",
-          a: "Yes. ClearTrix applies Brettel-Viénot mathematical transformation matrices to simulate Protanopia (red-blind), Deuteranopia (green-blind), Tritanopia (blue-blind), and Achromatopsia (monochromacy) in real time."
+          a: "Yes. Qwertygen applies Brettel-Viénot mathematical transformation matrices to simulate Protanopia (red-blind), Deuteranopia (green-blind), Tritanopia (blue-blind), and Achromatopsia (monochromacy) in real time."
         },
         {
           q: "What developer formats can I export?",
@@ -5131,7 +5131,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Can I use the generated mesh gradient in Tailwind CSS or React?",
-          a: "Yes. ClearTrix generates pure CSS background properties, arbitrary Tailwind utility classes, and standalone vector SVG markup for direct pasting into your codebase."
+          a: "Yes. Qwertygen generates pure CSS background properties, arbitrary Tailwind utility classes, and standalone vector SVG markup for direct pasting into your codebase."
         },
         {
           q: "Can I download the mesh gradient as a high-resolution wallpaper?",
@@ -5164,7 +5164,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         {
           q: "Are my photos uploaded to external servers?",
-          a: "Never. ClearTrix processes every pixel directly inside your browser memory using local canvas segmentation algorithms."
+          a: "Never. Qwertygen processes every pixel directly inside your browser memory using local canvas segmentation algorithms."
         },
         {
           q: "Can I replace the background with a solid color or gradient?",
@@ -5172,7 +5172,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "What image formats are supported for background removal?",
-          a: "ClearTrix supports PNG, JPEG, WebP, SVG, and GIF photos with instant client-side rendering."
+          a: "Qwertygen supports PNG, JPEG, WebP, SVG, and GIF photos with instant client-side rendering."
         }
       ]
     },
@@ -5296,7 +5296,7 @@ export const TOOLS: ToolDefinition[] = [
       faq: [
         {
           q: "Is any audio uploaded to external servers?",
-          a: "No. Cleartrix analyzes audio frequencies and renders canvas waveform frames 100% client-side inside your browser."
+          a: "No. Qwertygen analyzes audio frequencies and renders canvas waveform frames 100% client-side inside your browser."
         },
         {
           q: "Can I export waveform animations as video?",
@@ -5404,7 +5404,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "Does my audio file get uploaded to the cloud?",
-          a: "No. Cleartrix decodes, modulates, and loops audio entirely in local browser RAM using the Web Audio API."
+          a: "No. Qwertygen decodes, modulates, and loops audio entirely in local browser RAM using the Web Audio API."
         }
       ]
     },
@@ -5437,7 +5437,7 @@ export const TOOLS: ToolDefinition[] = [
         },
         {
           q: "How does the auto-detect feature identify the source language?",
-          a: "ClearTrix uses an in-memory heuristic analyzer that examines unicode script ranges (e.g. Cyrillic, Devanagari, CJK, Arabic), language-specific diacritics, and stopword distributions."
+          a: "Qwertygen uses an in-memory heuristic analyzer that examines unicode script ranges (e.g. Cyrillic, Devanagari, CJK, Arabic), language-specific diacritics, and stopword distributions."
         }
       ]
     },

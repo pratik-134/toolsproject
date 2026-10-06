@@ -52,7 +52,7 @@ function checkLayoutAnomalies(node: any, parent: any, issues: string[]) {
 }
 
 async function verifyAllPdfTemplates() {
-  console.log("=== CLEARTRIX PDF TEMPLATES COMPREHENSIVE VERIFICATION ===");
+  console.log("=== QWERTYGEN PDF TEMPLATES COMPREHENSIVE VERIFICATION ===");
   const templateIds = Object.keys(PDF_TEMPLATES_REGISTRY);
   console.log(`Found ${templateIds.length} registered PDF templates.`);
 

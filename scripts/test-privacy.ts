@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 
-console.log("=== CLEARTRIX PRIVACY ENFORCEMENT SCANNER ===");
+console.log("=== QWERTYGEN PRIVACY ENFORCEMENT SCANNER ===");
 
 const TOOLS_DIR = path.resolve(__dirname, "../components/tools");
 

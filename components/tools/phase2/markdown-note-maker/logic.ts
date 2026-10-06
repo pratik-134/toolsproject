@@ -20,11 +20,11 @@ export interface NoteStats {
 
 export const DEFAULT_SAMPLE_NOTES: MarkdownNote[] = [
   {
-    id: "cleartrix-arch",
-    title: "Cleartrix Architecture & Invariants",
-    content: `# Cleartrix Platform Architecture
+    id: "qwertygen-arch",
+    title: "Qwertygen Architecture & Invariants",
+    content: `# Qwertygen Platform Architecture
 
-Cleartrix is a privacy-first web utility suite executing **100% client-side** in browser memory.
+Qwertygen is a privacy-first web utility suite executing **100% client-side** in browser memory.
 
 ### Key Invariants:
 1. **Zero Server Uploads**: Files never leave user RAM.

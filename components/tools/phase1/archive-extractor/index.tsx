@@ -31,20 +31,20 @@ const SAMPLE_PRESETS: { name: string; files: Record<string, string> }[] = [
   {
     name: "Web Starter Pack (.zip)",
     files: {
-      "index.html": "<!DOCTYPE html>\n<html>\n<head>\n  <title>Cleartrix Starter</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <h1>Welcome to Cleartrix</h1>\n  <p>Zero-upload client-side tools.</p>\n</body>\n</html>",
+      "index.html": "<!DOCTYPE html>\n<html>\n<head>\n  <title>Qwertygen Starter</title>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n  <h1>Welcome to Qwertygen</h1>\n  <p>Zero-upload client-side tools.</p>\n</body>\n</html>",
       "styles.css": "body {\n  font-family: sans-serif;\n  background: #0f172a;\n  color: #f8fafc;\n  padding: 2rem;\n}\nh1 {\n  color: #38bdf8;\n}",
-      "app.js": "console.log('Cleartrix Web Starter initialized successfully!');",
+      "app.js": "console.log('Qwertygen Web Starter initialized successfully!');",
       "README.md": "# Web Starter Pack\nThis is a sample project bundle extracted entirely in browser memory.",
-      "config/app.json": JSON.stringify({ name: "cleartrix-starter", version: "1.0.0", private: true }, null, 2),
+      "config/app.json": JSON.stringify({ name: "qwertygen-starter", version: "1.0.0", private: true }, null, 2),
     },
   },
   {
     name: "Markdown Docs Bundle (.zip)",
     files: {
-      "docs/overview.md": "# System Overview\nCleartrix is designed for privacy-first, client-side utility computing.",
+      "docs/overview.md": "# System Overview\nQwertygen is designed for privacy-first, client-side utility computing.",
       "docs/architecture.md": "# Architecture Invariants\n1. Zero server uploads\n2. 100% in-memory processing\n3. Strict CSP",
       "docs/changelog.md": "# Changelog\n- Added archive extractor\n- Added archive packer\n- Fully verified",
-      "LICENSE": "MIT License\nCopyright (c) 2026 Cleartrix",
+      "LICENSE": "MIT License\nCopyright (c) 2026 Qwertygen",
     },
   },
 ];

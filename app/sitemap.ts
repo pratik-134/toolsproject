@@ -5,7 +5,7 @@ import { getAllTools } from "@/lib/registry/tools";
 import { getAllPosts } from "@/lib/blog/posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const rawDomain = process.env.NEXT_PUBLIC_SITE_URL || BRAND.domain || "https://cleartrix.com";
+  const rawDomain = process.env.NEXT_PUBLIC_SITE_URL || BRAND.domain || "https://qwertygen.com";
   const baseUrl = rawDomain.startsWith("http") ? rawDomain : `https://${rawDomain}`;
   const currentDate = new Date();
 

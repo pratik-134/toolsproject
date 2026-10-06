@@ -1,5 +1,5 @@
 /**
- * ClearTrix Static Blog Type Definitions
+ * Qwertygen Static Blog Type Definitions
  * 100% file-based and static-generation friendly.
  */
 

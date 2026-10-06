@@ -1,5 +1,5 @@
 /**
- * Automated Verification Suite for Cleartrix Resume Builder Multi-Resume Architecture:
+ * Automated Verification Suite for Qwertygen Resume Builder Multi-Resume Architecture:
  * - One-time migration from single-draft to multi-resume index
  * - CRUD operations on index store
  * - Per-resume history isolation (undo/redo stack reset on switch)
@@ -58,7 +58,7 @@ const mockStorage = new MockLocalStorage();
 (global as any).window = { localStorage: mockStorage };
 
 async function runMultiResumeTests() {
-  console.log("=== CLEARTRIX RESUME BUILDER MULTI-RESUME ARCHITECTURE TESTS ===\n");
+  console.log("=== QWERTYGEN RESUME BUILDER MULTI-RESUME ARCHITECTURE TESTS ===\n");
   let passCount = 0;
   let failCount = 0;
 
@@ -264,9 +264,9 @@ async function runMultiResumeTests() {
   }
 
   // -------------------------------------------------------------
-  // TEST 5: Cleartrix Brand Key Migration (ct_ prefix & fallback)
+  // TEST 5: Qwertygen Brand Key Migration (qg_ prefix & fallback)
   // -------------------------------------------------------------
-  process.stdout.write("TEST 5: Testing Cleartrix non-destructive brand key migration (ct_ prefix)... ");
+  process.stdout.write("TEST 5: Testing Qwertygen non-destructive brand key migration (qg_ prefix)... ");
   try {
     mockStorage.clear();
 
@@ -285,19 +285,19 @@ async function runMultiResumeTests() {
     migrateBrandKeys(mockStorage);
 
     // 1. Verify new keys were created with identical content
-    const newIndex = mockStorage.getItem("ct_resumes_index");
+    const newIndex = mockStorage.getItem("qg_resumes_index");
     if (!newIndex || !newIndex.includes("res_old_1")) {
-      throw new Error("ct_resumes_index not created or content incorrect");
+      throw new Error("qg_resumes_index not created or content incorrect");
     }
 
-    const newResume = mockStorage.getItem("ct_resume_res_old_1");
+    const newResume = mockStorage.getItem("qg_resume_res_old_1");
     if (!newResume || !newResume.includes("Legacy 1")) {
-      throw new Error("ct_resume_res_old_1 not created");
+      throw new Error("qg_resume_res_old_1 not created");
     }
 
-    const newCustom = mockStorage.getItem("ct_custom_preset");
+    const newCustom = mockStorage.getItem("qg_custom_preset");
     if (!newCustom || !newCustom.includes("emerald")) {
-      throw new Error("legacy key not migrated to ct_ prefix");
+      throw new Error("legacy key not migrated to qg_ prefix");
     }
 
     // 2. Verify non-destructive invariant: old keys MUST still exist
@@ -315,22 +315,22 @@ async function runMultiResumeTests() {
 
     // 4. Test idempotency: running again changes nothing
     migrateBrandKeys(mockStorage);
-    if (mockStorage.getItem("ct_resumes_index") !== newIndex) {
+    if (mockStorage.getItem("qg_resumes_index") !== newIndex) {
       throw new Error("Migration not idempotent");
     }
 
-    // 5. Test safe fallback read: read an old key using ct_ requested key
+    // 5. Test safe fallback read: read an old key using qg_ requested key
     mockStorage.setItem(legKeyOld, "old_value_data");
-    const fallbackVal = safeLocalStorageGet("ct_only_old");
+    const fallbackVal = safeLocalStorageGet("qg_only_old");
     if (fallbackVal !== "old_value_data") {
       throw new Error(`Expected fallback to find "old_value_data", got "${fallbackVal}"`);
     }
 
-    // 6. Test safe remove: removing ct_ key also cleans up legacy key so it doesn't resurrect
-    mockStorage.setItem("ct_temp_item", "new_val");
+    // 6. Test safe remove: removing qg_ key also cleans up legacy key so it doesn't resurrect
+    mockStorage.setItem("qg_temp_item", "new_val");
     mockStorage.setItem(legKeyTemp, "old_val");
-    safeLocalStorageRemove("ct_temp_item");
-    if (mockStorage.getItem("ct_temp_item") !== null || mockStorage.getItem(legKeyTemp) !== null) {
+    safeLocalStorageRemove("qg_temp_item");
+    if (mockStorage.getItem("qg_temp_item") !== null || mockStorage.getItem(legKeyTemp) !== null) {
       throw new Error("safeLocalStorageRemove did not clean up both new and legacy keys");
     }
 
@@ -344,7 +344,7 @@ async function runMultiResumeTests() {
   // -------------------------------------------------------------
   // TEST 6: Backup Export (JSON) and Import (JSON)
   // -------------------------------------------------------------
-  process.stdout.write("TEST 6: Testing Cleartrix JSON backup export and import... ");
+  process.stdout.write("TEST 6: Testing Qwertygen JSON backup export and import... ");
   try {
     const store = useResumeIndexStore.getState();
     const testResumeId = store.createResume({ title: "Backup Verification Resume" });
@@ -352,7 +352,7 @@ async function runMultiResumeTests() {
     const backupJson = store.exportAllResumesJson();
     const parsed = JSON.parse(backupJson);
 
-    if (parsed.source !== "cleartrix" || !Array.isArray(parsed.resumes)) {
+    if (parsed.source !== "qwertygen" || !Array.isArray(parsed.resumes)) {
       throw new Error("Invalid backup export payload structure");
     }
 

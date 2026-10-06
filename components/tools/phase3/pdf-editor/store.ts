@@ -179,7 +179,7 @@ export const usePdfEditorStore = create<PdfEditorStore>((set, get) => {
       author: "",
       subject: "",
       keywords: "",
-      creator: "ClearTrix Privacy PDF Suite",
+      creator: "Qwertygen Privacy PDF Suite",
       producer: "pdf-lib (In-Browser Client)",
     },
     security: {

@@ -174,7 +174,7 @@ export async function runTests(): Promise<boolean> {
     },
     headerFooter: {
       enabled: true,
-      headerText: "CLEARTRIX PRIVACY AUDIT SPECIFICATION",
+      headerText: "QWERTYGEN PRIVACY AUDIT SPECIFICATION",
       footerText: "CONFIDENTIAL - ZERO TRANSMISSION GUARANTEED",
       fontSize: 8,
       color: "#64748b",
@@ -268,10 +268,10 @@ export async function runTests(): Promise<boolean> {
     formFields,
     metadata: {
       title: "Privacy Agreement 2026",
-      author: "ClearTrix Enterprise",
+      author: "Qwertygen Enterprise",
       subject: "Interactive Contract",
       keywords: "privacy, acroforms, client-side",
-      creator: "ClearTrix Suite",
+      creator: "Qwertygen Suite",
       producer: "pdf-lib",
     },
   });
@@ -341,7 +341,7 @@ export async function runTests(): Promise<boolean> {
       author: "Legal Dept",
       subject: "Security Redaction",
       keywords: "redaction, compliance",
-      creator: "ClearTrix Redaction Suite",
+      creator: "Qwertygen Redaction Suite",
       producer: "pdf-lib",
     },
   });
@@ -440,13 +440,13 @@ export async function runTests(): Promise<boolean> {
 
   const { whiteouts, replacementTexts } = generateFindAndReplaceElements(
     mockMatches,
-    "ClearTrix Enterprise"
+    "Qwertygen Enterprise"
   );
 
   if (whiteouts.length !== 1 || replacementTexts.length !== 1) {
     throw new Error("Find & Replace element generation failed");
   }
-  if (whiteouts[0]?.type !== "whiteout" || replacementTexts[0]?.text !== "ClearTrix Enterprise") {
+  if (whiteouts[0]?.type !== "whiteout" || replacementTexts[0]?.text !== "Qwertygen Enterprise") {
     throw new Error("Find & Replace elements mismatch");
   }
   console.log("✓ Test 11: Find & Replace overlay generator created exact match whiteouts and replacements.");

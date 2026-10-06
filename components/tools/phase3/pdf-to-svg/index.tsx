@@ -22,11 +22,11 @@ export default function PdfToSvgTool() {
   const loadDemoPdf = async () => {
     const doc = await PDFDocument.create();
     const p1 = doc.addPage([595, 842]);
-    p1.drawText("ClearTrix PDF to Vector SVG Demo Page 1", { x: 50, y: 750, size: 18 });
+    p1.drawText("Qwertygen PDF to Vector SVG Demo Page 1", { x: 50, y: 750, size: 18 });
     p1.drawText("Scalable vector graphics generated directly in browser RAM with zero blur.", { x: 50, y: 710, size: 12 });
 
     const p2 = doc.addPage([595, 842]);
-    p2.drawText("ClearTrix PDF to Vector SVG Demo Page 2", { x: 50, y: 750, size: 18 });
+    p2.drawText("Qwertygen PDF to Vector SVG Demo Page 2", { x: 50, y: 750, size: 18 });
 
     const bytes = await doc.save();
     await convertPdf(bytes, "demo.pdf");

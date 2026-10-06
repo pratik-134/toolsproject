@@ -4,9 +4,9 @@ import { packZipArchive, createFileItem, formatBytes } from "./logic";
 export function runTests(): boolean {
   // Test 1: Pack 3 files with directories
   const files = [
-    createFileItem("index.html", "<!DOCTYPE html><html><body><h1>Cleartrix</h1></body></html>"),
+    createFileItem("index.html", "<!DOCTYPE html><html><body><h1>Qwertygen</h1></body></html>"),
     createFileItem("css/style.css", "body { margin: 0; background: #fff; }"),
-    createFileItem("data/metadata.json", JSON.stringify({ name: "cleartrix", version: "1.0.0" })),
+    createFileItem("data/metadata.json", JSON.stringify({ name: "qwertygen", version: "1.0.0" })),
   ];
 
   const result = packZipArchive(files, { level: 6 });
@@ -32,7 +32,7 @@ export function runTests(): boolean {
   }
 
   const htmlData = unzipped["index.html"]!;
-  if (!strFromU8(htmlData).includes("<h1>Cleartrix</h1>")) {
+  if (!strFromU8(htmlData).includes("<h1>Qwertygen</h1>")) {
     throw new Error("HTML content did not roundtrip cleanly");
   }
 

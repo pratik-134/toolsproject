@@ -1,7 +1,7 @@
 /**
  * Interactive CSS Box-Shadow & Glassmorphism Studio — Pure Domain Logic
  * 100% In-Browser Multi-Layer Ambient & Elevation Shadow Generator
- * Zero External Network Calls, Zero Server Uploads (Cleartrix Invariant #1)
+ * Zero External Network Calls, Zero Server Uploads (Qwertygen Invariant #1)
  */
 
 export interface ShadowLayer {

@@ -1,5 +1,5 @@
 /**
- * Comprehensive End-to-End (E2E) & UI Verification Suite for ClearTrix
+ * Comprehensive End-to-End (E2E) & UI Verification Suite for Qwertygen
  * Tests all 162 tools, 11 category hubs, root pages, navigation, search,
  * theme toggling, and interactive user flows.
  */
@@ -30,7 +30,7 @@ function assert(condition: boolean, message: string) {
 
 async function runE2eTestSuite() {
   console.log("==================================================================");
-  console.log("🚀 CLEARTRIX END-TO-END (E2E) & FULL UI VERIFICATION SUITE");
+  console.log("🚀 QWERTYGEN END-TO-END (E2E) & FULL UI VERIFICATION SUITE");
   console.log("==================================================================\n");
 
   // ==========================================================================
@@ -53,7 +53,7 @@ async function runE2eTestSuite() {
 
     assert(!!metadata.title, `Missing metadata title for ${tool.slug}`);
     assert(!!metadata.description, `Missing metadata description for ${tool.slug}`);
-    assert(typeof metadata.title === "string" && metadata.title.includes("ClearTrix"), `Metadata title does not include Brand for ${tool.slug}`);
+    assert(typeof metadata.title === "string" && metadata.title.includes(BRAND.name), `Metadata title does not include Brand for ${tool.slug}`);
     
     // 3. Verify category mapping
     const category = getCategoryById(tool.category);
@@ -207,13 +207,13 @@ async function runE2eTestSuite() {
   // Workflow 4.1: Text & Formatting Workflow (JSON Formatter & Validator)
   // --------------------------------------------------------------------------
   console.log("-> 4.1 User Flow: JSON Formatter & Validator...");
-  const rawDirtyJson = '{"name": "ClearTrix"  , "tags" : ["security" ,"privacy" ] , "version":1.0}';
+  const rawDirtyJson = '{"name": "Qwertygen"  , "tags" : ["security" ,"privacy" ] , "version":1.0}';
   const parsedJson = JSON.parse(rawDirtyJson);
   const prettyJson = JSON.stringify(parsedJson, null, 2);
   const minifiedJson = JSON.stringify(parsedJson);
 
-  assert(prettyJson.includes('  "name": "ClearTrix"'), "Pretty print indentation failed");
-  assert(minifiedJson === '{"name":"ClearTrix","tags":["security","privacy"],"version":1}', "Minification failed");
+  assert(prettyJson.includes('  "name": "Qwertygen"'), "Pretty print indentation failed");
+  assert(minifiedJson === '{"name":"Qwertygen","tags":["security","privacy"],"version":1}', "Minification failed");
   console.log("  ✓ JSON validation, beautification, and minification user flow verified.");
 
   // --------------------------------------------------------------------------

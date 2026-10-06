@@ -307,7 +307,7 @@ export const densitySchema = z.enum(["compact", "comfortable", "spacious"]);
 
 export const themeConfigSchema = z.object({
   templateId: z.string().default("modern"),
-  accentColor: z.string().default("#2563EB"), // Default Cleartrix Brand Blue
+  accentColor: z.string().default("#2563EB"), // Default Qwertygen Brand Blue
   fontPair: fontPairSchema.default("inter-roboto"),
   density: densitySchema.default("comfortable"),
   columns: z.union([z.literal(1), z.literal(2)]).default(1),
@@ -366,7 +366,7 @@ export type ResumeData = z.infer<typeof resumeDataSchema>;
 // 7. Initial / Sample Resume Data Fixture
 // ==========================================
 export const initialResumeData: ResumeData = {
-  id: "cleartrix-sample-01",
+  id: "qwertygen-sample-01",
   title: "Senior Full Stack Engineer Resume",
   personalInfo: {
     fullName: "Alex Rivera",

@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
   const baseUrl = (
     process.env.NEXT_PUBLIC_SITE_URL ||
     BRAND.domain ||
-    "https://cleartrix.com"
+    "https://qwertygen.com"
   ).replace(/^(?!https?:\/\/)/, "https://");
 
   return {

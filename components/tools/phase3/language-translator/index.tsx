@@ -428,7 +428,7 @@ export default function LanguageTranslatorTool() {
           </div>
           <div>
             <h1 className="text-base font-semibold text-foreground">
-              ClearTrix Translate
+              Qwertygen Translate
             </h1>
             <p className="text-xs text-muted-foreground">
               Real-time Google Translate neural engine with on-device speech & pronunciation

@@ -1,10 +1,10 @@
 /**
- * Cleartrix Storage Migration Engine (Non-Destructive)
- * Migrates legacy local storage keys to Cleartrix's unified 'ct_' storage prefix.
+ * Qwertygen Storage Migration Engine (Non-Destructive)
+ * Migrates legacy local storage keys to Qwertygen's unified 'qg_' storage prefix.
  *
  * Guarantees:
  * 1. Copy, Never Move: Old keys are strictly preserved to ensure zero data loss.
- * 2. Idempotent: Flag 'ct_brand_migrated_v1' prevents repeat migrations.
+ * 2. Idempotent: Flag 'qg_brand_migrated_v1' prevents repeat migrations.
  * 3. Graceful fallback on quota errors or storage blocks.
  */
 
@@ -22,10 +22,11 @@ export const OLD_PREFIXES = [
   decodeLegacy("Y3Vydml2Xw=="),
   decodeLegacy("bWluZGtpdF8="),
   decodeLegacy("bWtf"),
+  decodeLegacy("Y3Rf"), // Legacy prefix ct_
 ] as const;
 
-export const NEW_PREFIX = "ct_";
-export const BRAND_MIGRATION_FLAG = "ct_brand_migrated_v1";
+export const NEW_PREFIX = "qg_";
+export const BRAND_MIGRATION_FLAG = "qg_brand_migrated_v1";
 
 export function migrateBrandKeys(storage?: Storage): void {
   const store: Storage | null =
@@ -60,6 +61,6 @@ export function migrateBrandKeys(storage?: Storage): void {
     store.setItem(BRAND_MIGRATION_FLAG, new Date().toISOString());
   } catch (err) {
     // Quota exceeded or storage blocked: fail-safe, existing keys remain untouched
-    console.warn("Notice: Storage migration to 'ct_' completed with warnings:", err);
+    console.warn("Notice: Storage migration to 'qg_' completed with warnings:", err);
   }
 }

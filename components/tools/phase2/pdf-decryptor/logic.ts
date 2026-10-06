@@ -8,14 +8,14 @@ import {
 
 export interface DecryptResult {
   pdfBytes: Uint8Array;
-  method: "cleartrix-aes256" | "standard-pdf";
+  method: "qwertygen-aes256" | "standard-pdf";
   permissions?: PdfSecurityPermissions;
 }
 
 /**
- * Checks whether a byte buffer starts with the Cleartrix MKPDF1 magic header
+ * Checks whether a byte buffer starts with the Qwertygen MKPDF1 magic header
  */
-export function isCleartrixEncryptedPdf(buffer: Uint8Array): boolean {
+export function isQwertygenEncryptedPdf(buffer: Uint8Array): boolean {
   if (buffer.length < 6) return false;
   for (let i = 0; i < 6; i++) {
     if (buffer[i] !== PDF_MAGIC_BYTES[i]) return false;
@@ -24,7 +24,7 @@ export function isCleartrixEncryptedPdf(buffer: Uint8Array): boolean {
 }
 
 /**
- * Decrypts a Cleartrix encrypted PDF or standard password-protected PDF in-browser
+ * Decrypts a Qwertygen encrypted PDF or standard password-protected PDF in-browser
  */
 export async function decryptAndUnlockPdf(
   buffer: Uint8Array,
@@ -34,12 +34,12 @@ export async function decryptAndUnlockPdf(
     throw new Error("Password is required to decrypt the document.");
   }
 
-  // Case 1: Cleartrix MKPDF1 AES-256 Container
-  if (isCleartrixEncryptedPdf(buffer)) {
+  // Case 1: Qwertygen MKPDF1 AES-256 Container
+  if (isQwertygenEncryptedPdf(buffer)) {
     const { pdfBytes, permissions } = await decryptPdfContainer(buffer, password);
     return {
       pdfBytes,
-      method: "cleartrix-aes256",
+      method: "qwertygen-aes256",
       permissions,
     };
   }

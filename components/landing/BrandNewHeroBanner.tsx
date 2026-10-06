@@ -157,7 +157,7 @@ export const BrandNewHeroBanner: React.FC = () => {
                   <div className="h-3 w-3 rounded-full bg-emerald-400/90 shadow-xs" />
                 </div>
                 <span className="font-mono text-xs text-slate-500 dark:text-slate-400 font-semibold ml-2">
-                  ClearTrix Engine Sandbox
+                  Qwertygen Engine Sandbox
                 </span>
               </div>
 

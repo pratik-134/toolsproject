@@ -119,7 +119,7 @@ export const FindReplaceModal: React.FC<FindReplaceModalProps> = ({
                 type="text"
                 value={replaceText}
                 onChange={(e) => setReplaceText(e.target.value)}
-                placeholder="e.g. Cleartrix Global Ltd..."
+                placeholder="e.g. Qwertygen Global Ltd..."
                 className="w-full px-3 py-2 rounded-xl border border-border bg-background text-xs text-foreground focus:outline-hidden focus:ring-2 focus:ring-primary/20"
               />
             </div>

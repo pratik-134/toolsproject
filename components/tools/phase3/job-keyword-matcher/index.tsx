@@ -149,7 +149,7 @@ export default function JobKeywordMatcherTool() {
   const handleCopyReport = async () => {
     if (!analysis) return;
     const report = [
-      `=== CLEARTRIX ATS JOB KEYWORD GAP REPORT ===`,
+      `=== QWERTYGEN ATS JOB KEYWORD GAP REPORT ===`,
       `Overall ATS Keyword Match Score: ${analysis.matchScore}%`,
       `Matched Keywords (${analysis.matchedKeywords.length}): ${analysis.matchedKeywords.join(", ")}`,
       `Missing Target Keywords (${analysis.missingKeywords.length}): ${analysis.missingKeywords.join(", ")}`,
@@ -373,7 +373,7 @@ export default function JobKeywordMatcherTool() {
             Paste both your resume and job description above
           </h4>
           <p className="text-xs text-slate-500 max-w-sm mx-auto">
-            ClearTrix will scan both texts in local browser memory and pinpoint the exact missing skills to boost your ATS match score.
+            Qwertygen will scan both texts in local browser memory and pinpoint the exact missing skills to boost your ATS match score.
           </p>
         </div>
       )}

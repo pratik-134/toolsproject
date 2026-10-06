@@ -1,7 +1,7 @@
 /**
  * Interactive RegEx Visualizer & Rail Diagram — Pure Domain Logic
  * 100% In-Browser AST tokenization, rail diagram nodes & live regex match evaluation
- * Zero External Network Calls, Zero Server Uploads (Cleartrix Invariant #1)
+ * Zero External Network Calls, Zero Server Uploads (Qwertygen Invariant #1)
  */
 
 export interface RegexNode {

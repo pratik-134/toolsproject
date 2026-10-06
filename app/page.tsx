@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { CleartrixLogo } from "@/components/BrandLogo";
+import { QwertygenLogo } from "@/components/BrandLogo";
 import { BrandNewHeroBanner } from "@/components/landing/BrandNewHeroBanner";
 import { ToolsMegaSection } from "@/components/landing/ToolsMegaSection";
 import { LandingTemplatesSection } from "@/components/landing/LandingTemplatesSection";
@@ -150,7 +150,7 @@ export default function HomePage() {
                 <p className="font-body text-subtitle text-slate-300 leading-relaxed max-w-2xl mx-auto">
                   Most resume tools lure you with "free" templates, only to demand credit
                   cards, subscriptions, or slap huge watermarks when you try to download.
-                  Cleartrix Resume Builder is genuinely 100% free.
+                  Qwertygen Resume Builder is genuinely 100% free.
                 </p>
               </div>
             </Reveal>
@@ -163,32 +163,32 @@ export default function HomePage() {
                   {[
                     {
                       feature: "PDF Download",
-                      cleartrix: "Free & Unlimited Vector PDF",
+                      qwertygen: "Free & Unlimited Vector PDF",
                       others: "Paywalled or recurring subscription ($24/mo)",
                     },
                     {
                       feature: "Template Access",
-                      cleartrix: "All 20+ Templates Unlocked",
+                      qwertygen: "All 20+ Templates Unlocked",
                       others: "Most designs locked behind pro paywall",
                     },
                     {
                       feature: "Watermarks",
-                      cleartrix: "Zero watermarks on any export",
+                      qwertygen: "Zero watermarks on any export",
                       others: "Branding watermarks on free tier",
                     },
                     {
                       feature: "Account Required",
-                      cleartrix: "None. Open & build immediately",
+                      qwertygen: "None. Open & build immediately",
                       others: "Mandatory email registration & tracking",
                     },
                     {
                       feature: "Data Privacy",
-                      cleartrix: "Saved privately on your device",
+                      qwertygen: "Saved privately on your device",
                       others: "Resume data stored on external servers",
                     },
                     {
                       feature: "ATS Compliance",
-                      cleartrix: "100% Parser-Tested Single Column & Layouts",
+                      qwertygen: "100% Parser-Tested Single Column & Layouts",
                       others: "Complex multi-column layouts can fail ATS parsers",
                     },
                   ].map((row, idx) => (
@@ -200,8 +200,8 @@ export default function HomePage() {
                         <div className="flex items-start gap-2 bg-blue-500/15 border border-blue-500/30 rounded-lg p-2.5">
                           <Check className="h-4 w-4 text-emerald-400 shrink-0 stroke-[3] mt-0.5" />
                           <div className="text-xs">
-                            <span className="font-bold text-cyan-300 block mb-0.5">Cleartrix</span>
-                            <span className="text-slate-200 font-medium">{row.cleartrix}</span>
+                            <span className="font-bold text-cyan-300 block mb-0.5">Qwertygen</span>
+                            <span className="text-slate-200 font-medium">{row.qwertygen}</span>
                           </div>
                         </div>
                         <div className="flex items-start gap-2 bg-slate-800/60 border border-slate-700/60 rounded-lg p-2.5">
@@ -223,7 +223,7 @@ export default function HomePage() {
                     <div className="grid grid-cols-12 bg-slate-800/90 text-white border-b border-slate-700/80 p-4 font-headings text-xs font-bold uppercase tracking-wider">
                       <div className="col-span-4 text-slate-300">Feature</div>
                       <div className="col-span-4 text-cyan-300 font-extrabold flex items-center gap-2 bg-blue-600/20 -my-4 py-4 px-3 border-x border-blue-500/30">
-                        <span>Cleartrix</span>
+                        <span>Qwertygen</span>
                         <span className="rounded-md bg-emerald-500 text-slate-950 px-2 py-0.5 text-[10px] font-black uppercase">
                           100% Free
                         </span>
@@ -237,32 +237,32 @@ export default function HomePage() {
                     {[
                       {
                         feature: "PDF Download",
-                        cleartrix: "Free & Unlimited Vector PDF",
+                        qwertygen: "Free & Unlimited Vector PDF",
                         others: "Paywalled or recurring subscription ($24/mo)",
                       },
                       {
                         feature: "Template Access",
-                        cleartrix: "All 20+ Templates Unlocked",
+                        qwertygen: "All 20+ Templates Unlocked",
                         others: "Most designs locked behind pro paywall",
                       },
                       {
                         feature: "Watermarks",
-                        cleartrix: "Zero watermarks on any export",
+                        qwertygen: "Zero watermarks on any export",
                         others: "Branding watermarks on free tier",
                       },
                       {
                         feature: "Account Required",
-                        cleartrix: "None. Open & build immediately",
+                        qwertygen: "None. Open & build immediately",
                         others: "Mandatory email registration & tracking",
                       },
                       {
                         feature: "Data Privacy",
-                        cleartrix: "Saved privately on your device",
+                        qwertygen: "Saved privately on your device",
                         others: "Resume data stored on external servers",
                       },
                       {
                         feature: "ATS Compliance",
-                        cleartrix: "100% Parser-Tested Single Column & Layouts",
+                        qwertygen: "100% Parser-Tested Single Column & Layouts",
                         others: "Complex multi-column layouts can fail ATS parsers",
                       },
                     ].map((row, idx) => (
@@ -277,7 +277,7 @@ export default function HomePage() {
                         </div>
                         <div className="col-span-4 font-body font-bold text-white flex items-center gap-2 bg-blue-600/15 -my-4 py-4 px-3 border-x border-blue-500/20">
                           <Check className="h-4 w-4 text-emerald-400 shrink-0 stroke-[3]" />
-                          <span className="text-slate-100">{row.cleartrix}</span>
+                          <span className="text-slate-100">{row.qwertygen}</span>
                         </div>
                         <div className="col-span-4 font-body text-xs text-slate-400 flex items-center gap-2 pl-3">
                           <X className="h-4 w-4 text-red-400 shrink-0 stroke-[2.5]" />
@@ -295,7 +295,7 @@ export default function HomePage() {
                     <strong className="text-red-400">$24.95 / month</strong>
                   </span>
                   <span className="inline-flex items-center gap-1.5 font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-3 py-1 rounded-full text-xs">
-                    Cleartrix: $0.00 forever
+                    Qwertygen: $0.00 forever
                   </span>
                 </div>
               </div>
@@ -306,7 +306,7 @@ export default function HomePage() {
 
 
         {/* ========================================================================= */}
-        {/* 5. Why Cleartrix: Features Bento & AI Bullet Enhancer Live Demo            */}
+        {/* 5. Why Qwertygen: Features Bento & AI Bullet Enhancer Live Demo            */}
         {/* ========================================================================= */}
         <section
           id="features"
@@ -581,7 +581,7 @@ export default function HomePage() {
                   <span>Common questions · Clear, straight answers</span>
                 </span>
                 <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 dark:text-slate-100 [&>span]:text-blue-600 dark:[&>span]:text-blue-400">
-                  Everything you need to know about <span>Cleartrix</span>
+                  Everything you need to know about <span>Qwertygen</span>
                 </h2>
                 <p className="font-body text-body text-slate-600 dark:text-slate-400 leading-relaxed">
                   Clear, transparent answers. No hidden terms, no bait-and-switch billing,
@@ -673,7 +673,7 @@ export default function HomePage() {
         </section>
       </main>
 
-      {/* Global Cleartrix Footer */}
+      {/* Global Qwertygen Footer */}
       <Footer />
 
       {/* Google Structured Data / JSON-LD for SEO */}
@@ -685,7 +685,7 @@ export default function HomePage() {
             "@graph": [
               {
                 "@type": "SoftwareApplication",
-                "name": "Cleartrix Resume Builder",
+                "name": "Qwertygen Resume Builder",
                 "applicationCategory": "BusinessApplication",
                 "operatingSystem": "Web browser",
                 "offers": {

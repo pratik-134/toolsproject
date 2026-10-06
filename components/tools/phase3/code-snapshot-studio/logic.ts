@@ -1,7 +1,7 @@
 /**
  * High-Res Code Snapshot Studio — Pure Domain Logic
  * 100% In-Browser Code Syntax Tokenization & SVG/Canvas Snapshot Rendering
- * Zero External Network Calls, Zero Server Uploads (Cleartrix Invariant #1)
+ * Zero External Network Calls, Zero Server Uploads (Qwertygen Invariant #1)
  */
 
 export type SupportedLanguage =
@@ -346,7 +346,7 @@ async def fetch_user_profile(user_id: str) -> Dict[str, Any]:
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>ClearTrix Studio</title>
+    <title>Qwertygen Studio</title>
   </head>
   <body>
     <div id="app" class="container">
@@ -373,7 +373,7 @@ GROUP BY u.id, u.email
 ORDER BY total_runs DESC
 LIMIT 10;`,
   json: `{
-  "product": "ClearTrix Studio",
+  "product": "Qwertygen Studio",
   "version": "2.4.0",
   "privacy": "100% In-Browser",
   "features": [
@@ -407,7 +407,7 @@ func worker(id int, jobs <-chan int, results chan<- int) {
 # Client-side workspace verification
 set -euo pipefail
 
-echo "Running ClearTrix validation..."
+echo "Running Qwertygen validation..."
 npm run typecheck
 npm run test:tools
 echo "All local suites passed cleanly!"`,

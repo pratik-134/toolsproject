@@ -1,7 +1,7 @@
 import { resumeDataSchema, initialResumeData, Section } from "../lib/schema";
 
 function runVerification() {
-  console.log("=== CLEARTRIX RESUME BUILDER FOUNDATION SCHEMA VERIFICATION ===");
+  console.log("=== QWERTYGEN RESUME BUILDER FOUNDATION SCHEMA VERIFICATION ===");
 
   // 1. Validate default fixture
   console.log("1. Validating initial sample resume data fixture...");
@@ -79,9 +79,9 @@ function runVerification() {
         {
           id: "pj-1",
           type: "projects",
-          title: "Cleartrix Resume Builder",
+          title: "Qwertygen Resume Builder",
           subtitle: "CV Builder",
-          link: "https://cleartrix.com",
+          link: "https://qwertygen.com",
           startDate: "2024",
           endDate: "Present",
           description: "Free builder",
