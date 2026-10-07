@@ -204,31 +204,26 @@ export const AtsAnalyzerPreview: React.FC = () => {
       </div>
 
       {/* Right Column: Value Narrative */}
-      <div className="lg:col-span-5 space-y-5">
-        <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/60 px-3.5 py-1.5 font-body text-eyebrow uppercase tracking-[1.2px] text-blue-800 dark:text-blue-300 font-bold shadow-2xs">
-          <ShieldCheck className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
-          <span>75% of Resumes Get Rejected By Bots</span>
-        </div>
-
-        <h3 className="font-headings text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white leading-tight">
+      <div className="lg:col-span-5 space-y-4">
+        <h3 className="font-headings text-xl sm:text-2xl lg:text-[28px] font-bold text-slate-900 dark:text-white leading-tight">
           Never let a software parser discard your application.
         </h3>
 
-        <p className="font-body text-body text-slate-600 dark:text-slate-400 leading-relaxed">
+        <p className="font-body text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed mt-2 font-normal">
           Fancy graphic resumes created in design tools often hide text inside complex
           floating boxes, tables, and multi-column layers. When ATS parsers attempt to
           read them, sections get jumbled together and the bot automatically rejects you.
         </p>
 
-        <p className="font-body text-body text-slate-600 dark:text-slate-400 leading-relaxed">
+        <p className="font-body text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed mt-2 font-normal">
           Qwertygen constructs every template with strict semantic hierarchy.
           Your credentials arrive at the recruiter's inbox crystal-clear, structured,
           and completely intact.
         </p>
 
         <div className="pt-2">
-          <Link href="/editor">
-            <Button className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-lg px-6 py-3 font-bold gap-2 shadow-xs transition-all">
+          <Link href="/editor" className="w-full sm:w-auto inline-block">
+            <Button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-xl h-10 sm:h-11 px-4 sm:px-6 text-xs sm:text-sm font-bold gap-2 shadow-xs transition-all">
               Build ATS-Safe Resume Free <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>

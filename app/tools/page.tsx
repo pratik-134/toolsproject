@@ -45,22 +45,18 @@ export default function ToolsHubPage() {
         {/* Hub Header */}
         <section className="bg-gradient-to-b from-blue-50/50 via-slate-50/40 to-[#F8FAFC] dark:from-slate-900/60 dark:via-slate-950/70 dark:to-slate-950 py-12 sm:py-16 border-b border-slate-200/60 dark:border-slate-800/60">
           <div className="max-w-container mx-auto px-4 sm:px-6 text-center space-y-4">
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 px-4 py-1.5 text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 shadow-sm">
-                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>{allTools.length} Tools · 100% In-Browser · Offline Capable</span>
-              </div>
-              <InstallButton />
-            </div>
-
             <h1 className="font-headings text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
               All {BRAND.name} Tools
             </h1>
 
-            <p className="font-body text-slate-700 dark:text-slate-200 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-medium">
+            <p className="font-body text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed font-normal">
               Every utility runs inside your browser. Zero file uploads, zero
               watermarks, zero paywalls.
             </p>
+
+            <div className="flex items-center justify-center">
+              <InstallButton />
+            </div>
           </div>
         </section>
 
@@ -71,10 +67,10 @@ export default function ToolsHubPage() {
         <section className="max-w-container mx-auto px-4 sm:px-6 pt-12">
           <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
             <div>
-              <h2 className="font-headings text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+              <h2 className="font-headings text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
                 Browse by Category
               </h2>
-              <p className="text-sm text-slate-700 dark:text-slate-200 font-medium mt-0.5">
+              <p className="text-sm text-slate-600 dark:text-slate-400 font-normal mt-0.5">
                 Specialized suites built for speed and complete data privacy
               </p>
             </div>

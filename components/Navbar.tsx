@@ -350,20 +350,8 @@ export const Navbar: React.FC = () => {
           : "max-h-0 opacity-0 pointer-events-none p-0 border-transparent"
       }`}
     >
-      {/* Mobile Drawer Top Actions: Builder CTA & Theme Switcher (visible without scrolling) */}
-      <div className="space-y-2 pb-1">
-        <Link href="/editor" onClick={handleLinkClick} className="block w-full">
-          <Button
-            size="lg"
-            className="w-full gap-2 font-bold bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-xl h-10 text-xs shadow-xs"
-          >
-            <Sparkles className="h-3.5 w-3.5 text-white/95" />
-            <span>Open Resume Builder</span>
-            <ArrowRight className="h-3.5 w-3.5 ml-auto text-white/90" />
-          </Button>
-        </Link>
-
-        {/* Mobile Theme Toggle (High-contrast, intuitive segmented switch) */}
+      {/* Mobile Drawer Top Actions: Theme Switcher */}
+      <div className="pb-1">
         <ThemeToggle variant="segmented" />
       </div>
 
@@ -631,11 +619,12 @@ export const Navbar: React.FC = () => {
       <div className="pt-1">
         <Link href="/editor" onClick={handleLinkClick} className="block w-full">
           <Button
-            size="lg"
-            className="w-full gap-2 font-bold bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-lg h-10 text-xs shadow-xs"
+            size="default"
+            className="w-full gap-2 font-bold bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-xl h-10 px-4 text-xs sm:text-sm shadow-xs"
           >
             <Sparkles className="h-3.5 w-3.5" />
             <span>Start Building Resume Free</span>
+            <ArrowRight className="h-3.5 w-3.5 ml-auto text-white/90" />
           </Button>
         </Link>
       </div>

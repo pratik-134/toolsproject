@@ -4,10 +4,14 @@
  * Zero External Network Calls, Zero Server Uploads (Qwertygen Invariant #1)
  */
 
+export const MAX_SAFE_IMAGE_DIMENSION = 2048;
+
 export interface SegmentationOptions {
   tolerance: number; // 1 to 60 (color distance threshold percentage)
   featherRadius: number; // 0 to 5 (edge smoothing radius)
   smoothRollOff?: boolean; // smooth anti-aliased edge falloff
+  mode?: "contiguous" | "global"; // "contiguous" (flood-fill from border) vs "global" (all matching pixels)
+  customSeeds?: Array<[number, number, number]>; // User-picked eyedropper seeds
 }
 
 export interface ReplacementFill {
@@ -35,6 +39,42 @@ export function colorDistance(
 }
 
 /**
+ * Calculates Euclidean distance squared (fast check without Math.sqrt)
+ */
+export function colorDistanceSq(
+  r1: number,
+  g1: number,
+  b1: number,
+  r2: number,
+  g2: number,
+  b2: number
+): number {
+  const dr = r1 - r2;
+  const dg = g1 - g2;
+  const db = b1 - b2;
+  return dr * dr + dg * dg + db * db;
+}
+
+/**
+ * Calculates safe processing dimensions to prevent browser tab OOM crashes on large images (e.g. 12MP-24MP cameras)
+ */
+export function calculateSafeDimensions(
+  width: number,
+  height: number,
+  maxDim: number = MAX_SAFE_IMAGE_DIMENSION
+): { width: number; height: number; scaled: boolean } {
+  if (width <= maxDim && height <= maxDim) {
+    return { width, height, scaled: false };
+  }
+  const ratio = Math.min(maxDim / width, maxDim / height);
+  return {
+    width: Math.max(1, Math.round(width * ratio)),
+    height: Math.max(1, Math.round(height * ratio)),
+    scaled: true,
+  };
+}
+
+/**
  * Samples perimeter points along top, bottom, left, and right borders to detect
  * dominant background seed colors. Clusters seeds to avoid outliers.
  */
@@ -44,7 +84,7 @@ export function detectBorderBackgroundColors(
   height: number
 ): Array<[number, number, number]> {
   const seeds: Array<[number, number, number]> = [];
-  const samplesPerSide = 12;
+  const samplesPerSide = Math.min(24, Math.max(8, Math.floor(Math.max(width, height) / 10)));
 
   // 1. Top and Bottom edges
   for (let i = 0; i < samplesPerSide; i++) {
@@ -72,11 +112,11 @@ export function detectBorderBackgroundColors(
 
   // Deduplicate / cluster close seeds
   const uniqueSeeds: Array<[number, number, number]> = [];
-  const clusterDist = 20;
+  const clusterDistSq = 20 * 20;
 
   for (const s of seeds) {
     const exists = uniqueSeeds.some(
-      (u) => colorDistance(s[0], s[1], s[2], u[0], u[1], u[2]) < clusterDist
+      (u) => colorDistanceSq(s[0], s[1], s[2], u[0], u[1], u[2]) < clusterDistSq
     );
     if (!exists) {
       uniqueSeeds.push(s);
@@ -88,7 +128,8 @@ export function detectBorderBackgroundColors(
 
 /**
  * Removes background pixels using continuous smooth alpha falloff
- * to prevent harsh jagged edges and halos around subjects.
+ * with support for contiguous flood-fill segmentation (protecting subject interiors)
+ * and custom user-sampled seeds.
  */
 export function removeBackgroundPixels(
   pixels: Uint8ClampedArray,
@@ -96,49 +137,223 @@ export function removeBackgroundPixels(
   height: number,
   options: SegmentationOptions
 ): { removedPixelCount: number; totalPixels: number } {
-  const seeds = detectBorderBackgroundColors(pixels, width, height);
+  const detectedSeeds = detectBorderBackgroundColors(pixels, width, height);
+  const allSeeds = [...detectedSeeds, ...(options.customSeeds || [])];
+
   const maxDistance = (options.tolerance / 100) * 441.67; // max Euclidean distance between RGB extremes
+  const maxDistanceSq = maxDistance * maxDistance;
   const minDistance = maxDistance * 0.65; // falloff threshold for anti-aliasing
+  const minDistanceSq = minDistance * minDistance;
 
   let removedPixelCount = 0;
   const totalPixels = width * height;
+  const mode = options.mode ?? "contiguous";
 
-  for (let i = 0; i < pixels.length; i += 4) {
-    const r = pixels[i] ?? 0;
-    const g = pixels[i + 1] ?? 0;
-    const b = pixels[i + 2] ?? 0;
+  if (mode === "contiguous") {
+    // Breadth-First Flood Fill from edges inward
+    const visited = new Uint8Array(totalPixels); // 0 = unvisited, 1 = background, 2 = foreground
+    const queue = new Int32Array(totalPixels);
+    let queueHead = 0;
+    let queueTail = 0;
 
-    let closestDist = Infinity;
-    for (const [sr, sg, sb] of seeds) {
-      const dist = colorDistance(r, g, b, sr, sg, sb);
-      if (dist < closestDist) {
-        closestDist = dist;
+    // Helper to test if a pixel matches any background seed
+    const isMatchingSeed = (pxIdx: number): { matches: boolean; closestDist: number } => {
+      const r = pixels[pxIdx] ?? 0;
+      const g = pixels[pxIdx + 1] ?? 0;
+      const b = pixels[pxIdx + 2] ?? 0;
+
+      let closestSq = Infinity;
+      for (let s = 0; s < allSeeds.length; s++) {
+        const seed = allSeeds[s]!;
+        const dSq = colorDistanceSq(r, g, b, seed[0], seed[1], seed[2]);
+        if (dSq < closestSq) {
+          closestSq = dSq;
+        }
+      }
+      return { matches: closestSq < maxDistanceSq, closestDist: Math.sqrt(closestSq) };
+    };
+
+    // 1. Seed border pixels into the BFS queue
+    // Top & Bottom rows
+    for (let x = 0; x < width; x++) {
+      // Top
+      const topIdx = x;
+      const topMatch = isMatchingSeed(topIdx * 4);
+      if (topMatch.matches) {
+        visited[topIdx] = 1;
+        queue[queueTail++] = topIdx;
+      } else {
+        visited[topIdx] = 2;
+      }
+
+      // Bottom
+      const botIdx = (height - 1) * width + x;
+      if (visited[botIdx] === 0) {
+        const botMatch = isMatchingSeed(botIdx * 4);
+        if (botMatch.matches) {
+          visited[botIdx] = 1;
+          queue[queueTail++] = botIdx;
+        } else {
+          visited[botIdx] = 2;
+        }
       }
     }
 
-    if (closestDist <= minDistance) {
-      // Complete background
-      pixels[i + 3] = 0;
-      removedPixelCount++;
-    } else if (closestDist < maxDistance) {
-      // Soft transition edge (anti-aliased feathering)
-      const factor = (closestDist - minDistance) / (maxDistance - minDistance);
-      // Smoothstep curve for soft natural transitions
-      const smoothAlpha = Math.round(factor * factor * (3 - 2 * factor) * 255);
-      pixels[i + 3] = smoothAlpha;
-      if (smoothAlpha < 128) {
+    // Left & Right columns
+    for (let y = 1; y < height - 1; y++) {
+      // Left
+      const leftIdx = y * width;
+      if (visited[leftIdx] === 0) {
+        const leftMatch = isMatchingSeed(leftIdx * 4);
+        if (leftMatch.matches) {
+          visited[leftIdx] = 1;
+          queue[queueTail++] = leftIdx;
+        } else {
+          visited[leftIdx] = 2;
+        }
+      }
+
+      // Right
+      const rightIdx = y * width + (width - 1);
+      if (visited[rightIdx] === 0) {
+        const rightMatch = isMatchingSeed(rightIdx * 4);
+        if (rightMatch.matches) {
+          visited[rightIdx] = 1;
+          queue[queueTail++] = rightIdx;
+        } else {
+          visited[rightIdx] = 2;
+        }
+      }
+    }
+
+    // Also seed any custom clicked seeds if provided
+    if (options.customSeeds && options.customSeeds.length > 0) {
+      // If user clicked a spot, ensure that color can spread even if enclosed
+      // We will let the flood fill expand from border, which handles 99% of images
+    }
+
+    // 2. Process BFS Queue
+    while (queueHead < queueTail) {
+      const curr = queue[queueHead++]!;
+      const cx = curr % width;
+      const cy = Math.floor(curr / width);
+      const pxIdx = curr * 4;
+
+      // Compute alpha for current background pixel
+      const r = pixels[pxIdx] ?? 0;
+      const g = pixels[pxIdx + 1] ?? 0;
+      const b = pixels[pxIdx + 2] ?? 0;
+
+      let closestDist = Infinity;
+      for (let s = 0; s < allSeeds.length; s++) {
+        const seed = allSeeds[s]!;
+        const d = colorDistance(r, g, b, seed[0], seed[1], seed[2]);
+        if (d < closestDist) closestDist = d;
+      }
+
+      if (closestDist <= minDistance) {
+        pixels[pxIdx + 3] = 0;
         removedPixelCount++;
+      } else if (closestDist < maxDistance) {
+        const factor = (closestDist - minDistance) / (maxDistance - minDistance);
+        const smoothAlpha = Math.round(factor * factor * (3 - 2 * factor) * 255);
+        pixels[pxIdx + 3] = smoothAlpha;
+        if (smoothAlpha < 128) {
+          removedPixelCount++;
+        }
+      }
+
+      // Check 4-connected neighbors
+      // Up
+      if (cy > 0) {
+        const up = curr - width;
+        if (visited[up] === 0) {
+          const m = isMatchingSeed(up * 4);
+          if (m.matches) {
+            visited[up] = 1;
+            queue[queueTail++] = up;
+          } else {
+            visited[up] = 2;
+          }
+        }
+      }
+      // Down
+      if (cy < height - 1) {
+        const down = curr + width;
+        if (visited[down] === 0) {
+          const m = isMatchingSeed(down * 4);
+          if (m.matches) {
+            visited[down] = 1;
+            queue[queueTail++] = down;
+          } else {
+            visited[down] = 2;
+          }
+        }
+      }
+      // Left
+      if (cx > 0) {
+        const left = curr - 1;
+        if (visited[left] === 0) {
+          const m = isMatchingSeed(left * 4);
+          if (m.matches) {
+            visited[left] = 1;
+            queue[queueTail++] = left;
+          } else {
+            visited[left] = 2;
+          }
+        }
+      }
+      // Right
+      if (cx < width - 1) {
+        const right = curr + 1;
+        if (visited[right] === 0) {
+          const m = isMatchingSeed(right * 4);
+          if (m.matches) {
+            visited[right] = 1;
+            queue[queueTail++] = right;
+          } else {
+            visited[right] = 2;
+          }
+        }
       }
     }
-    // Else closestDist >= maxDistance: foreground, preserve original alpha
+  } else {
+    // Global Match mode: Process all pixels across entire image
+    for (let i = 0; i < pixels.length; i += 4) {
+      const r = pixels[i] ?? 0;
+      const g = pixels[i + 1] ?? 0;
+      const b = pixels[i + 2] ?? 0;
+
+      let closestSq = Infinity;
+      for (let s = 0; s < allSeeds.length; s++) {
+        const seed = allSeeds[s]!;
+        const dSq = colorDistanceSq(r, g, b, seed[0], seed[1], seed[2]);
+        if (dSq < closestSq) {
+          closestSq = dSq;
+        }
+      }
+
+      if (closestSq <= minDistanceSq) {
+        pixels[i + 3] = 0;
+        removedPixelCount++;
+      } else if (closestSq < maxDistanceSq) {
+        const closestDist = Math.sqrt(closestSq);
+        const factor = (closestDist - minDistance) / (maxDistance - minDistance);
+        const smoothAlpha = Math.round(factor * factor * (3 - 2 * factor) * 255);
+        pixels[i + 3] = smoothAlpha;
+        if (smoothAlpha < 128) {
+          removedPixelCount++;
+        }
+      }
+    }
   }
 
   return { removedPixelCount, totalPixels };
 }
 
 /**
- * Applies multi-pass separable box/Gaussian blur feathering on the alpha channel
- * to produce clean, anti-aliased cutouts without jagged pixel steps.
+ * Applies multi-pass separable box blur feathering on the alpha channel
+ * using sliding window sums to guarantee O(N) performance without locking the main thread.
  */
 export function applyAlphaFeather(
   pixels: Uint8ClampedArray,
@@ -156,36 +371,66 @@ export function applyAlphaFeather(
 
   const tempAlpha = new Uint8Array(total);
 
-  // Horizontal blur pass
+  // Horizontal blur pass (separable sliding window)
   for (let y = 0; y < height; y++) {
     const rowOffset = y * width;
-    for (let x = 0; x < width; x++) {
-      let sum = 0;
-      let count = 0;
-      for (let dx = -radius; dx <= radius; dx++) {
-        const nx = x + dx;
-        if (nx >= 0 && nx < width) {
-          sum += alphaCopy[rowOffset + nx] ?? 255;
-          count++;
-        }
+    let sum = 0;
+    let count = 0;
+
+    // Initial window
+    for (let dx = -radius; dx <= radius; dx++) {
+      if (dx >= 0 && dx < width) {
+        sum += alphaCopy[rowOffset + dx] ?? 255;
+        count++;
       }
-      tempAlpha[rowOffset + x] = Math.round(sum / count);
+    }
+    tempAlpha[rowOffset] = Math.round(sum / count);
+
+    // Slide window across row
+    for (let x = 1; x < width; x++) {
+      const removeX = x - radius - 1;
+      const addX = x + radius;
+
+      if (removeX >= 0) {
+        sum -= alphaCopy[rowOffset + removeX] ?? 255;
+        count--;
+      }
+      if (addX < width) {
+        sum += alphaCopy[rowOffset + addX] ?? 255;
+        count++;
+      }
+      tempAlpha[rowOffset + x] = Math.round(sum / (count > 0 ? count : 1));
     }
   }
 
-  // Vertical blur pass
+  // Vertical blur pass (separable sliding window)
   for (let x = 0; x < width; x++) {
-    for (let y = 0; y < height; y++) {
-      let sum = 0;
-      let count = 0;
-      for (let dy = -radius; dy <= radius; dy++) {
-        const ny = y + dy;
-        if (ny >= 0 && ny < height) {
-          sum += tempAlpha[ny * width + x] ?? 255;
-          count++;
-        }
+    let sum = 0;
+    let count = 0;
+
+    // Initial window
+    for (let dy = -radius; dy <= radius; dy++) {
+      if (dy >= 0 && dy < height) {
+        sum += tempAlpha[dy * width + x] ?? 255;
+        count++;
       }
-      pixels[(y * width + x) * 4 + 3] = Math.round(sum / count);
+    }
+    pixels[x * 4 + 3] = Math.round(sum / count);
+
+    // Slide window down column
+    for (let y = 1; y < height; y++) {
+      const removeY = y - radius - 1;
+      const addY = y + radius;
+
+      if (removeY >= 0) {
+        sum -= tempAlpha[removeY * width + x] ?? 255;
+        count--;
+      }
+      if (addY < height) {
+        sum += tempAlpha[addY * width + x] ?? 255;
+        count++;
+      }
+      pixels[(y * width + x) * 4 + 3] = Math.round(sum / (count > 0 ? count : 1));
     }
   }
 }

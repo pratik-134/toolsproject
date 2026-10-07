@@ -44,17 +44,12 @@ export const AiAssistantShowcase: React.FC = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center text-left">
       {/* Left Column: Context & Value */}
-      <div className="lg:col-span-5 space-y-5">
-        <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/60 px-3.5 py-1.5 font-body text-eyebrow uppercase tracking-[1.2px] text-blue-800 dark:text-blue-300 font-bold shadow-2xs">
-          <Sparkles className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
-          <span>Intelligent Bullet Polishing</span>
-        </div>
-
-        <h3 className="font-headings text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white leading-tight">
+      <div className="lg:col-span-5 space-y-4">
+        <h3 className="font-headings text-xl sm:text-2xl lg:text-[28px] font-bold text-slate-900 dark:text-white leading-tight">
           Turn passive task lists into quantifiable career wins.
         </h3>
 
-        <p className="font-body text-body text-slate-600 dark:text-slate-400 leading-relaxed">
+        <p className="font-body text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed mt-2 font-normal">
           Recruiters scan for strong action verbs and measurable business results.
           Our integrated AI assistant refines your raw draft into authoritative,
           bulletproof statements—without inventing fake credentials or hallucinating data.
@@ -83,8 +78,8 @@ export const AiAssistantShowcase: React.FC = () => {
         </div>
 
         <div className="pt-2">
-          <Link href="/editor">
-            <Button className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-lg px-6 py-3 font-bold gap-2 shadow-xs transition-all">
+          <Link href="/editor" className="w-full sm:w-auto inline-block">
+            <Button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-xl h-10 sm:h-11 px-4 sm:px-6 text-xs sm:text-sm font-bold gap-2 shadow-xs transition-all">
               Try AI Bullet Enhancer Free <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>

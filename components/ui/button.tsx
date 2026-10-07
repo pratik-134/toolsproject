@@ -24,12 +24,12 @@ const buttonVariants = cva(
           "text-[#3B82F6] dark:text-blue-400 underline-offset-4 hover:underline hover:text-[#2563EB] dark:hover:text-blue-300 font-semibold",
       },
       size: {
-        default: "h-11 min-h-[44px] rounded-xl px-5 py-2.5 text-sm font-semibold",
-        sm: "h-9 min-h-[36px] rounded-lg px-3.5 text-xs font-semibold",
-        md: "h-11 min-h-[44px] rounded-xl px-5 py-2.5 text-sm font-semibold",
-        lg: "h-[52px] min-h-[52px] rounded-xl px-7 py-3 text-base font-bold",
-        icon: "h-11 w-11 min-h-[44px] min-w-[44px] rounded-xl",
-        "icon-sm": "h-9 w-9 min-h-[36px] min-w-[36px] rounded-lg",
+        default: "h-10 sm:h-11 min-h-[40px] sm:min-h-[44px] rounded-xl px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold",
+        sm: "h-8.5 sm:h-9 min-h-[34px] sm:min-h-[36px] rounded-lg px-3 sm:px-3.5 text-xs font-semibold",
+        md: "h-10 sm:h-11 min-h-[40px] sm:min-h-[44px] rounded-xl px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold",
+        lg: "h-11 sm:h-12 md:h-[50px] min-h-[44px] sm:min-h-[48px] rounded-xl px-5 sm:px-6 md:px-7 py-2.5 sm:py-3 text-xs sm:text-sm md:text-base font-bold",
+        icon: "h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 min-h-[36px] min-w-[36px] sm:min-h-[40px] sm:min-w-[40px] rounded-xl",
+        "icon-sm": "h-8 w-8 sm:h-8.5 sm:w-8.5 min-h-[32px] min-w-[32px] rounded-lg",
       },
     },
     defaultVariants: {

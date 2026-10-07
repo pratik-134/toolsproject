@@ -94,21 +94,17 @@ export default function HomePage() {
             <Reveal variant="fade-up">
               <div className="flex flex-col md:flex-row md:items-end justify-between mb-section-mb-mob md:mb-12 lg:mb-section-mb gap-6">
                 <div>
-                  <span className="font-body text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100/90 dark:bg-slate-900/90 px-3 py-1 rounded-full inline-flex items-center gap-1.5 mb-2">
-                    <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-                    <span>20 hand-crafted styles · Recruiter-tested & ATS-safe</span>
-                  </span>
-                  <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 dark:text-slate-100">
+                  <h2 className="font-headings text-2xl sm:text-3xl lg:text-[32px] font-bold text-slate-900 dark:text-slate-100 tracking-tight leading-tight">
                     Designed for recruiters, tested against ATS parsers.
                   </h2>
-                  <p className="font-body text-subtitle text-slate-600 dark:text-slate-400 mt-2 max-w-2xl">
+                  <p className="font-body text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-2 max-w-2xl leading-relaxed font-normal">
                     Choose from 20 distinct design styles. Switch templates at any point
                     without losing a single word of your data.
                   </p>
                 </div>
 
-                <Link href="/editor">
-                  <Button className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-lg px-6 py-3 font-bold gap-2 shadow-xs hover:shadow-md shrink-0 transition-all">
+                <Link href="/editor" className="w-full sm:w-auto">
+                  <Button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-xl h-10 sm:h-11 px-4 sm:px-6 text-xs sm:text-sm font-bold gap-2 shadow-xs hover:shadow-md shrink-0 transition-all">
                     Open All in Editor <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
@@ -140,14 +136,10 @@ export default function HomePage() {
           <div className="max-w-container mx-auto px-4 sm:px-6 text-center relative z-10">
             <Reveal variant="fade-up">
               <div className="mb-section-mb-mob md:mb-12 lg:mb-section-mb max-w-3xl mx-auto space-y-3">
-                <span className="font-body text-xs font-semibold text-cyan-300 bg-blue-500/20 border border-blue-500/30 px-3.5 py-1 rounded-full inline-flex items-center gap-1.5 shadow-xs">
-                  <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>The honest truth · Why job seekers leave traditional builders</span>
-                </span>
-                <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-white font-black tracking-tight">
+                <h2 className="font-headings text-2xl sm:text-3xl lg:text-[32px] text-white font-bold tracking-tight leading-tight">
                   Why job seekers are ditching traditional resume builders.
                 </h2>
-                <p className="font-body text-subtitle text-slate-300 leading-relaxed max-w-2xl mx-auto">
+                <p className="font-body text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl mx-auto mt-2 font-normal">
                   Most resume tools lure you with "free" templates, only to demand credit
                   cards, subscriptions, or slap huge watermarks when you try to download.
                   Qwertygen Resume Builder is genuinely 100% free.
@@ -320,15 +312,11 @@ export default function HomePage() {
           <div className="max-w-container mx-auto px-4 sm:px-6 relative z-10 space-y-12">
             {/* Section Header */}
             <Reveal variant="fade-up">
-              <div className="text-center max-w-3xl mx-auto">
-                <span className="font-body text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100/90 dark:bg-slate-900/90 px-3.5 py-1 rounded-full inline-flex items-center gap-1.5 mb-3">
-                  <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-                  <span>Under the hood · Built for applicants, not data brokers</span>
-                </span>
-                <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 dark:text-slate-100">
+              <div className="text-center max-w-3xl mx-auto space-y-2">
+                <h2 className="font-headings text-2xl sm:text-3xl lg:text-[32px] font-bold text-slate-900 dark:text-slate-100 tracking-tight leading-tight">
                   Engineered for real careers. Backed by client-side intelligence.
                 </h2>
-                <p className="font-body text-subtitle text-slate-600 dark:text-slate-400 mt-3">
+                <p className="font-body text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-2 max-w-2xl mx-auto leading-relaxed font-normal">
                   Native vector PDF compilation, client-side data isolation, strict ATS compliance, and instant AI bullet point polishing—completely private on your device.
                 </p>
               </div>
@@ -498,15 +486,11 @@ export default function HomePage() {
 
           <div className="max-w-container mx-auto px-4 sm:px-6 relative z-10 text-center space-y-12">
             <Reveal variant="fade-up">
-              <div className="max-w-3xl mx-auto space-y-4">
-                <span className="font-body text-xs font-medium text-slate-700 dark:text-slate-300 bg-slate-100/90 dark:bg-slate-900/90 px-3.5 py-1 rounded-full inline-flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-                  <span>Privacy by architecture · Zero servers, zero cookies</span>
-                </span>
-                <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 dark:text-slate-100 font-bold">
+              <div className="max-w-3xl mx-auto space-y-2">
+                <h2 className="font-headings text-2xl sm:text-3xl lg:text-[32px] font-bold text-slate-900 dark:text-slate-100 tracking-tight leading-tight">
                   Your career data belongs solely to you.
                 </h2>
-                <p className="font-body text-subtitle text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto">
+                <p className="font-body text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto mt-2 font-normal">
                   A resume contains your home address, personal phone number, employment
                   dates, and career history. We believe that data should never sit in an
                   unnecessary cloud database.
@@ -575,15 +559,11 @@ export default function HomePage() {
           <div className="max-w-container mx-auto px-4 sm:px-6 space-y-12">
             {/* Header */}
             <Reveal variant="fade-up">
-              <div className="text-center space-y-4 max-w-2xl mx-auto">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-100/80 dark:bg-slate-900/90 border border-slate-200/60 dark:border-slate-800 px-3.5 py-1 font-body text-xs font-medium text-slate-600 dark:text-slate-300">
-                  <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-                  <span>Common questions · Clear, straight answers</span>
-                </span>
-                <h2 className="font-headings text-section-mobile md:text-section-tablet lg:text-section text-slate-900 dark:text-slate-100 [&>span]:text-blue-600 dark:[&>span]:text-blue-400">
+              <div className="text-center space-y-2 max-w-2xl mx-auto">
+                <h2 className="font-headings text-2xl sm:text-3xl lg:text-[32px] font-bold text-slate-900 dark:text-slate-100 [&>span]:text-blue-600 dark:[&>span]:text-blue-400 tracking-tight leading-tight">
                   Everything you need to know about <span>Qwertygen</span>
                 </h2>
-                <p className="font-body text-body text-slate-600 dark:text-slate-400 leading-relaxed">
+                <p className="font-body text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto mt-2 font-normal">
                   Clear, transparent answers. No hidden terms, no bait-and-switch billing,
                   and zero marketing gimmicks.
                 </p>
@@ -604,50 +584,43 @@ export default function HomePage() {
 
           <div className="max-w-container mx-auto px-4 sm:px-6 space-y-6 relative z-10">
             <Reveal variant="fade-up">
-              <div className="inline-flex items-center gap-2 rounded-full bg-blue-500/15 border border-blue-500/30 px-4 py-1.5 font-body text-xs font-semibold text-cyan-300 shadow-xs">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Start in seconds · No account or payment needed</span>
-              </div>
-            </Reveal>
-
-            <Reveal variant="fade-up" delay={100}>
-              <h2 className="font-headings text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white [&>span]:text-wordmark-grad tracking-tight max-w-2xl mx-auto">
+              <h2 className="font-headings text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white [&>span]:text-wordmark-grad tracking-tight max-w-2xl mx-auto leading-tight">
                 Ready to create your <span>job-winning</span> resume?
               </h2>
             </Reveal>
 
             <Reveal variant="fade-up" delay={200}>
-              <p className="font-body text-sm sm:text-base text-slate-300 max-w-xl mx-auto font-medium leading-relaxed">
+              <p className="font-body text-sm sm:text-base text-slate-300 max-w-xl mx-auto font-normal leading-relaxed mt-2">
                 No credit card. No paywall. Jump straight into the editor and download
                 your free vector PDF in minutes.
               </p>
             </Reveal>
 
             <Reveal variant="fade-up" delay={300}>
-              <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
-                <Link href="/editor">
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto w-full">
+                <Link href="/editor" className="w-full sm:w-auto">
                   <Button
                     size="lg"
-                    className="bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white px-8 py-3.5 rounded-xl min-h-[48px] text-base font-bold shadow-lg hover:shadow-blue-500/25 transition-all gap-2"
+                    className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white px-5 sm:px-7 rounded-xl font-bold shadow-lg hover:shadow-blue-500/25 transition-all gap-2"
                   >
                     Build Your Resume Free <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
-                <Link href="/tools">
+                <Link href="/tools" className="w-full sm:w-auto">
                   <Button
                     variant="outline"
                     size="lg"
-                    className="bg-slate-800 hover:bg-slate-700 text-white hover:text-white border-slate-700 hover:border-slate-600 px-7 py-3.5 rounded-xl min-h-[48px] text-base font-semibold shadow-xs gap-2 transition-all"
+                    className="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-white hover:text-white border-slate-700 hover:border-slate-600 px-5 sm:px-6 rounded-xl font-semibold shadow-xs gap-2 transition-all"
                   >
                     <Sparkles className="h-4 w-4 text-cyan-300" />
                     <span>Explore {totalTools} Tools</span>
                   </Button>
                 </Link>
-                <a href="#templates">
+                <a href="#templates" className="w-full sm:w-auto">
                   <Button
                     variant="ghost"
                     size="lg"
-                    className="text-slate-300 hover:text-white hover:bg-slate-800/90 px-6 py-3.5 rounded-xl min-h-[48px] text-base font-medium transition-all"
+                    className="w-full sm:w-auto text-slate-300 hover:text-white hover:bg-slate-800/90 px-4 sm:px-5 rounded-xl font-medium transition-all"
                   >
                     <span>Browse 20+ Templates</span>
                   </Button>

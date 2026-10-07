@@ -48,9 +48,9 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
   const isSingleCategoryHub = initialCategory !== "all" && !showCategoryFilter;
 
   return (
-    <div className="w-full space-y-6 font-body">
+    <div className="w-full space-y-4 sm:space-y-6 font-body">
       {(title || subtitle || showSearchBar) && (
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {title && (
             <div className="text-center sm:text-left space-y-1">
               <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
@@ -67,7 +67,7 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
           {showSearchBar && (
             <div className="relative max-w-xl">
               <Search
-                className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500"
+                className="absolute left-3 sm:left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500"
                 aria-hidden="true"
               />
               <input
@@ -75,9 +75,19 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={`Search ${tools.length} utilities by name or keyword...`}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 shadow-sm transition-all"
+                className="w-full pl-9 sm:pl-10 pr-9 sm:pr-10 py-2 sm:py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 shadow-sm transition-all"
                 aria-label="Filter tools by keyword"
               />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1"
+                  aria-label="Clear search"
+                >
+                  <span className="text-xs font-bold leading-none">×</span>
+                </button>
+              )}
             </div>
           )}
         </div>
@@ -86,13 +96,13 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
       {/* Category Pills Filter */}
       {showCategoryFilter && (
         <div
-          className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none no-scrollbar"
+          className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 sm:pb-2 scrollbar-none no-scrollbar pt-0.5"
           aria-label="Category filter"
         >
           <button
             type="button"
             onClick={() => setSelectedCategory("all")}
-            className={`px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-200 border ${
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap transition-all duration-200 border ${
               selectedCategory === "all"
                 ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white shadow-sm"
                 : "bg-white dark:bg-slate-800/80 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-400 dark:hover:border-slate-600"
@@ -111,7 +121,7 @@ export const ToolCardGrid: React.FC<ToolCardGridProps> = ({
                 key={cat.id}
                 type="button"
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-200 flex items-center gap-2 border ${
+                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 sm:gap-2 border ${
                   isSelected
                     ? "text-white shadow-sm border-transparent"
                     : "bg-white dark:bg-slate-800/80 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 hover:border-slate-400 dark:hover:border-slate-600"

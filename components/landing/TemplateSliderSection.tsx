@@ -159,15 +159,11 @@ export const TemplateSliderSection: React.FC = () => {
         {/* Section Header */}
         <Reveal variant="fade-up">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-6">
-            <div className="space-y-2.5 max-w-2xl text-left">
-              <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/90 px-3.5 py-1 font-body text-eyebrow uppercase tracking-[1.2px] text-blue-800 font-bold shadow-2xs">
-                <Sparkles className="h-3.5 w-3.5 text-blue-600" />
-                <span>Auto-Playing Template Showcase</span>
-              </div>
-              <h2 className="font-headings text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+            <div className="space-y-2 max-w-2xl text-left">
+              <h2 className="font-headings text-2xl sm:text-3xl lg:text-[32px] font-bold text-slate-900 tracking-tight leading-tight">
                 Explore 20 Recruiter-Approved Styles
               </h2>
-              <p className="font-body text-sm sm:text-base text-slate-600 leading-relaxed">
+              <p className="font-body text-sm sm:text-base text-slate-600 leading-relaxed mt-2">
                 Handcrafted for modern engineering, executive, and creative careers.
                 Every template is tested against ATS parsers and compiles cleanly to PDF and Word.
               </p>

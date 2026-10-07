@@ -77,21 +77,15 @@ export const ToolsMegaSection: React.FC = () => {
       className="scroll-mt-20 py-16 sm:py-24 bg-gradient-to-b from-white via-slate-50/70 to-white dark:from-slate-950 dark:via-slate-900/60 dark:to-slate-950 relative"
     >
       <div className="max-w-container mx-auto px-4 sm:px-6 text-center relative z-10">
-        <div className="inline-flex items-center gap-2 rounded-full bg-slate-100/90 dark:bg-slate-900/90 border border-slate-300/80 dark:border-slate-800 px-4 py-1.5 font-body text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 shadow-2xs mb-4">
-          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-          <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
-          <span>Privacy Utility Suite · {TOOLS_COUNT_LABEL} Running in Browser</span>
-        </div>
-
-        <h2 className="font-headings text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        <h2 className="font-headings text-2xl sm:text-3xl lg:text-[32px] font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
           One platform. <span className="font-mono text-blue-600 dark:text-blue-400">{TOOLS_COUNT_DISPLAY}</span> free tools.
         </h2>
 
-        <p className="font-body text-slate-700 dark:text-slate-200 text-sm sm:text-base max-w-2xl mx-auto mt-3.5 leading-relaxed font-medium">
+        <p className="font-body text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-2xl mx-auto mt-2.5 leading-relaxed font-normal">
           Runs <span className="font-mono font-bold text-slate-900 dark:text-white">100%</span> inside your browser sandbox. Zero file uploads, zero accounts required, and zero usage limits.
         </p>
 
-        <div className="max-w-xl mx-auto mt-8 mb-10 sm:mb-12 relative z-30">
+        <div className="max-w-xl mx-auto mt-6 sm:mt-8 mb-7 sm:mb-10 relative z-30">
           <ToolSearchBar
             size="large"
             placeholder={`Search ${TOOLS_COUNT_LABEL}... (e.g. PDF merge, image compress, BMI calculator)`}
