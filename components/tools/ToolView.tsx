@@ -683,6 +683,10 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     ssr: false,
     loading: () => <ToolLoadingState name="Smart Image Background Remover" />,
   }),
+  "ai-background-remover": dynamic(() => import("@/components/tools/phase3/ai-background-remover"), {
+    ssr: false,
+    loading: () => <ToolLoadingState name="AI Background Remover" />,
+  }),
   "visual-diff-studio": dynamic(() => import("@/components/tools/phase3/visual-diff-studio"), {
     ssr: false,
     loading: () => <ToolLoadingState name="Multi-Format Visual Diff Studio" />,

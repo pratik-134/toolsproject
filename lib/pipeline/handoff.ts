@@ -57,6 +57,7 @@ export const PIPELINE_WORKFLOW_MAP: Record<string, string[]> = {
   "svg-pattern-generator": ["svg-minifier", "svg-to-png", "batch-image-compressor"],
   "css-mesh-gradient-generator": ["color-palette-generator", "svg-pattern-generator", "batch-image-compressor"],
   "image-background-remover": ["canvas-resizer", "batch-image-compressor", "image-converter"],
+  "ai-background-remover": ["canvas-resizer", "batch-image-compressor", "image-converter"],
 
   // Document workflows
   "pdf-watermark-stamper": ["pdf-editor", "pdf-compressor", "pdf-merger"],

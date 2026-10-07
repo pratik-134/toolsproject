@@ -116,6 +116,7 @@ export function getToolIcon(tool: ToolDefinition): LucideIcon {
   if (slug.includes("encrypt") || slug.includes("lock")) return Shield;
 
   // Image & Optimizers
+  if (slug.includes("background-remover") || slug.includes("bg-remover")) return Scissors;
   if (slug.includes("crop")) return Crop;
   if (slug.includes("resize") || slug.includes("canvas")) return Maximize2;
   if (slug.includes("compress") || slug.includes("minifier")) return Minimize2;

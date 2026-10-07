@@ -5307,36 +5307,77 @@ export const TOOLS: ToolDefinition[] = [
   },
 
   /* =========================================================================
-     PHASE 3 IMAGE TOOL: Client-Side Smart Background Remover
+     PHASE 3 IMAGE TOOL: Client-Side Simple Background Remover
      ========================================================================= */
   {
     slug: "image-background-remover",
-    name: "Smart Image Background Remover",
+    name: "Simple Background Remover (Plain Backgrounds)",
     category: "image",
     phase: 3,
     status: "live",
     runtime: "client",
     seo: {
-      title: "Free Image Background Remover — 100% Client-Side Remove.bg Alternative",
-      description: "Remove image backgrounds automatically in your browser with zero server uploads. Fine-tune color tolerance, edge feathering, and export transparent PNGs.",
-      h1: "Free Client-Side Smart Image Background Remover",
-      intro: "Erase photo backgrounds instantly in device RAM. Adjust edge feathering, replace cutouts with custom colors or gradients, and export transparent PNGs with 100% privacy.",
+      title: "Simple Background Remover — Instant Client-Side Cutout | Qwertygen",
+      description: "Remove solid and uniform image backgrounds instantly in your browser with zero server uploads. Fine-tune color tolerance, edge feathering, and export transparent PNGs with zero model download.",
+      h1: "Free Client-Side Simple Background Remover",
+      intro: "Erase solid or plain photo backgrounds instantly in device RAM with zero model download. Adjust color tolerance, feather edges, and replace cutouts with custom colors or gradients. For complex backgrounds or people photos, use our AI Background Remover.",
       faq: [
         {
           q: "Are my photos uploaded to external servers?",
-          a: "Never. Qwertygen processes every pixel directly inside your browser memory using local canvas segmentation algorithms."
+          a: "Never. Qwertygen processes every pixel directly inside your browser memory using local canvas color-distance flood fill."
+        },
+        {
+          q: "When should I use Simple Background Remover vs AI Background Remover?",
+          a: "Simple Background Remover is instant with zero model download, best suited for solid white, green screen, or uniform studio backdrops. For photos with busy backgrounds, human hair, or complex scenes, use our AI Background Remover."
         },
         {
           q: "Can I replace the background with a solid color or gradient?",
           a: "Yes. Choose transparent cutout, solid background fill, or modern linear gradients."
         },
         {
-          q: "What image formats are supported for background removal?",
+          q: "What image formats are supported?",
           a: "Qwertygen supports PNG, JPEG, WebP, SVG, and GIF photos with instant client-side rendering."
         }
       ]
     },
-    related: ["aspect-ratio-cropper", "canvas-resizer", "batch-image-compressor", "image-watermarker"]
+    related: ["ai-background-remover", "aspect-ratio-cropper", "canvas-resizer", "batch-image-compressor"]
+  },
+
+  /* =========================================================================
+     PHASE 3 IMAGE TOOL: In-Browser AI Background Remover (MODNet)
+     ========================================================================= */
+  {
+    slug: "ai-background-remover",
+    name: "AI Background Remover",
+    category: "image",
+    phase: 3,
+    status: "live",
+    runtime: "client",
+    seo: {
+      title: "AI Background Remover — Free Online, No Upload | Qwertygen",
+      description: "Remove backgrounds from portraits, photos, and products instantly using client-side AI. 100% private, free, unlimited in-browser MODNet segmentation with zero server uploads.",
+      h1: "Free Client-Side AI Background Remover",
+      intro: "Isolate people, objects, and subjects with in-browser deep learning neural network segmentation (MODNet). Runs locally on your GPU/CPU via WebGPU and WebAssembly with 100% privacy and zero server uploads.",
+      faq: [
+        {
+          q: "Does my photo ever leave my device?",
+          a: "No. The AI model executes entirely inside your browser sandbox via WebGPU and WebAssembly. Your photos are never sent to external servers or cloud APIs."
+        },
+        {
+          q: "How large is the AI model download, and does it download every time?",
+          a: "The MODNet neural network is ~45 MB and downloads only on your first use. It is cached in your browser storage so subsequent background removals start instantly."
+        },
+        {
+          q: "When should I use Simple Background Remover instead of AI Background Remover?",
+          a: "If your image has a uniform or solid studio background, our Simple Background Remover (Plain Backgrounds) works instantly with zero model download. For complex, busy, or real-world photo backgrounds, this AI Background Remover delivers superior edge segmentation."
+        },
+        {
+          q: "Can I replace the cutout background with custom colors or gradients?",
+          a: "Yes. You can export transparent PNG cutouts or composite your subject directly onto solid color fills and vibrant linear gradients."
+        }
+      ]
+    },
+    related: ["image-background-remover", "aspect-ratio-cropper", "canvas-resizer", "batch-image-compressor"]
   },
 
   /* =========================================================================

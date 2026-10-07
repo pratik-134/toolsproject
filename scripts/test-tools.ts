@@ -142,6 +142,7 @@ import { runTests as runJsonGraphVisualizerTests } from "../components/tools/pha
 import { runColorPaletteTests } from "../components/tools/phase3/color-palette-generator/logic.test";
 import { runMeshGradientTests } from "../components/tools/phase3/css-mesh-gradient-generator/logic.test";
 import { runBackgroundRemoverTests } from "../components/tools/phase3/image-background-remover/logic.test";
+import { runAiBackgroundRemoverTests } from "../components/tools/phase3/ai-background-remover/logic.test";
 import { runVisualDiffTests } from "../components/tools/phase3/visual-diff-studio/logic.test";
 import { runRegexVisualizerTests } from "../components/tools/phase3/regex-visualizer/logic.test";
 import { runPdfWatermarkTests } from "../components/tools/phase3/pdf-watermark-stamper/logic.test";
@@ -757,6 +758,10 @@ async function main() {
     throw new Error("Smart background remover tests failed!");
   }
 
+  if (!runAiBackgroundRemoverTests()) {
+    throw new Error("AI background remover tests failed!");
+  }
+
   if (!runVisualDiffTests()) {
     throw new Error("Visual diff studio tests failed!");
   }
@@ -806,7 +811,7 @@ async function main() {
   console.log("✅ [cross-tool-pipeline-handoff] unit tests passed!");
 
   console.log("===============================================");
-  console.log("🎉 ALL TOOL UNIT TESTS PASSED (194/194)!");
+  console.log("🎉 ALL TOOL UNIT TESTS PASSED (195/195)!");
 }
 
 main().catch((err) => {

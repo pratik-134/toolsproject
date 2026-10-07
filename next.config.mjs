@@ -23,7 +23,7 @@ const nextConfig = {
       },
     ],
   },
-  serverExternalPackages: ['@prisma/client', 'prisma', 'docx', '@react-pdf/renderer'],
+  serverExternalPackages: ['@prisma/client', 'prisma', 'docx', '@react-pdf/renderer', '@huggingface/transformers'],
   async headers() {
     return [
       {
@@ -141,12 +141,20 @@ const nextConfig = {
       },
     ];
   },
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
     config.resolve.alias = {
       ...config.resolve.alias,
       canvas: emptyModulePath,
       encoding: emptyModulePath,
     };
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        path: false,
+        crypto: false,
+      };
+    }
     return config;
   },
 };
