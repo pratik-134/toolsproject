@@ -77,18 +77,27 @@ self.addEventListener('message', async (e: MessageEvent) => {
 
   if (type === 'process') {
     try {
-      self.postMessage({ type: 'status', status: 'processing' });
+      self.postMessage({ type: 'status', status: 'loading-model' });
 
       const pipe = await PipelineSingleton.getInstance((progressData) => {
         if (progressData && typeof progressData === 'object') {
-          self.postMessage({
-            type: 'download-progress',
-            file: progressData.file || 'model',
-            loaded: progressData.loaded || 0,
-            total: progressData.total || 0,
-            progress: typeof progressData.progress === 'number' ? progressData.progress : 0,
-          });
+          if (progressData.status === 'progress' || typeof progressData.progress === 'number') {
+            self.postMessage({
+              type: 'download-progress',
+              file: progressData.file || 'model',
+              loaded: progressData.loaded || 0,
+              total: progressData.total || 0,
+              progress: Math.min(100, Math.max(0, progressData.progress || 0)),
+            });
+          }
         }
+      });
+
+      // Model is fully loaded in memory! Now signal active background removal
+      self.postMessage({
+        type: 'status',
+        status: 'removing-bg',
+        message: 'AI neural network removing background...',
       });
 
       // Construct RawImage from transferable RGBA Uint8ClampedArray

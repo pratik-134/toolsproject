@@ -83,20 +83,28 @@ export default function AiBackgroundRemoverTool() {
         if (type === "status") {
           if (status === "loading-model") {
             setStatusMessage("Loading AI segmentation model into browser memory...");
-          } else if (status === "processing") {
-            setStatusMessage("AI model removing background...");
+          } else if (status === "removing-bg" || status === "processing") {
+            setStatusMessage("AI neural network removing background...");
             setModelProgress(null);
           } else if (status === "ready") {
             setStatusMessage(null);
           }
         } else if (type === "download-progress") {
-          setModelProgress({
-            file: file || "model",
-            loaded: loaded || 0,
-            total: total || 45 * 1024 * 1024,
-            progress: typeof progress === "number" ? Math.round(progress) : 0,
+          const currentProgress = typeof progress === "number" ? Math.round(progress) : 0;
+          setModelProgress((prev) => {
+            const nextProgress = prev ? Math.max(prev.progress, currentProgress) : currentProgress;
+            return {
+              file: file || "model",
+              loaded: loaded || (prev?.loaded ?? 0),
+              total: total || (prev?.total ?? 45 * 1024 * 1024),
+              progress: Math.min(100, Math.max(0, nextProgress)),
+            };
           });
-          setStatusMessage(`Downloading AI model: ${Math.round(progress || 0)}%`);
+          if (currentProgress >= 100) {
+            setStatusMessage("AI model downloaded. Initializing neural network...");
+          } else {
+            setStatusMessage(`Downloading AI model: ${currentProgress}%`);
+          }
         } else if (type === "done") {
           setIsProcessing(false);
           setStatusMessage(null);
@@ -425,8 +433,18 @@ export default function AiBackgroundRemoverTool() {
                     disabled={isProcessing}
                     className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs shadow-md shadow-blue-600/20 disabled:opacity-50 transition-all"
                   >
-                    <Sparkles className="w-3.5 h-3.5 text-cyan-200" />
-                    <span>{isProcessing ? "Processing..." : "Remove Background with AI"}</span>
+                    {isProcessing ? (
+                      <RefreshCw className="w-3.5 h-3.5 animate-spin text-white" />
+                    ) : (
+                      <Sparkles className="w-3.5 h-3.5 text-cyan-200" />
+                    )}
+                    <span>
+                      {modelProgress
+                        ? `Downloading Model (${modelProgress.progress}%)...`
+                        : isProcessing
+                        ? "Removing Background..."
+                        : "Remove Background with AI"}
+                    </span>
                   </button>
                 )}
               </>
@@ -531,35 +549,51 @@ export default function AiBackgroundRemoverTool() {
 
         {/* Model Download Progress Bar (First Time Only) */}
         {modelProgress && (
-          <div className="p-4 rounded-2xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 space-y-2">
+          <div className="p-4 rounded-2xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 space-y-2.5">
             <div className="flex items-center justify-between text-xs font-bold text-slate-900 dark:text-white">
               <span className="flex items-center gap-2 text-blue-600 dark:text-blue-400">
                 <Cpu className="w-4 h-4 animate-pulse" />
-                <span>Downloading AI Model (~45 MB)</span>
+                <span>
+                  {modelProgress.progress < 100
+                    ? "Downloading AI Model (~45 MB)"
+                    : "Initializing AI Model in Browser Memory..."}
+                </span>
               </span>
               <span>{modelProgress.progress}%</span>
             </div>
 
             <div className="w-full h-2 rounded-full bg-blue-100 dark:bg-blue-900 overflow-hidden">
               <div
-                className="h-full bg-blue-600 rounded-full transition-all duration-200"
-                style={{ width: `${Math.min(100, Math.max(0, modelProgress.progress))}%` }}
+                className="h-full bg-blue-600 rounded-full transition-all duration-300"
+                style={{ width: `${Math.min(100, Math.max(3, modelProgress.progress))}%` }}
               />
             </div>
 
-            <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-normal">
-              <strong>First time only:</strong> downloading AI model (~45 MB) to your browser cache. Subsequent uses will be instant and work offline.
-            </p>
+            <div className="flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-400">
+              <span>
+                <strong>First time only:</strong> cached in browser for fast future use.
+              </span>
+              {modelProgress.loaded > 0 && modelProgress.total > 0 && (
+                <span className="font-mono text-[10px] text-slate-500">
+                  {formatByteSize(modelProgress.loaded)} / {formatByteSize(modelProgress.total)}
+                </span>
+              )}
+            </div>
           </div>
         )}
 
-        {/* Processing Spinner */}
+        {/* Neural Network Removing Background Loader */}
         {isProcessing && !modelProgress && (
-          <div className="flex items-center gap-3 p-4 rounded-2xl bg-blue-50/50 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900 text-xs">
+          <div className="flex items-center gap-3.5 p-4 rounded-2xl bg-blue-50/60 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 text-xs">
             <RefreshCw className="w-4 h-4 text-blue-600 dark:text-blue-400 animate-spin shrink-0" />
-            <span className="font-semibold text-slate-800 dark:text-slate-200">
-              {statusMessage || "Running neural network segmentation..."}
-            </span>
+            <div className="flex-1">
+              <span className="font-bold text-slate-900 dark:text-white block">
+                {statusMessage || "AI neural network removing background..."}
+              </span>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 block mt-0.5">
+                Segmenting portrait and isolating subject with MODNet
+              </span>
+            </div>
           </div>
         )}
 
@@ -701,11 +735,79 @@ export default function AiBackgroundRemoverTool() {
 
           {/* Canvas Preview Area with Checkerboard Background */}
           <div className="relative min-h-[360px] max-h-[640px] flex items-center justify-center rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden bg-[repeating-conic-gradient(#f1f5f9_0%_25%,#ffffff_0%_50%)] dark:bg-[repeating-conic-gradient(#1e293b_0%_25%,#0f172a_0%_50%)] [background-size:20px_20px] p-4">
+            {/* Active AI Processing Overlay inside Preview Area */}
+            {isProcessing && (
+              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-slate-900/60 backdrop-blur-xs p-6 text-center">
+                {modelProgress ? (
+                  /* Model Download Phase */
+                  <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 shadow-2xl max-w-xs sm:max-w-sm w-full space-y-4">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800 flex items-center justify-center mx-auto shadow-xs">
+                      <Cpu className="w-6 h-6 animate-pulse" />
+                    </div>
+                    <div>
+                      <h4 className="font-headings font-bold text-sm text-slate-900 dark:text-white">
+                        Downloading AI Model (~45 MB)
+                      </h4>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                        {modelProgress.progress < 100
+                          ? `Downloading weights: ${modelProgress.progress}%`
+                          : "Initializing neural network in browser memory..."}
+                      </p>
+                    </div>
+                    <div className="w-full h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                      <div
+                        className="h-full bg-blue-600 rounded-full transition-all duration-300"
+                        style={{ width: `${Math.min(100, Math.max(3, modelProgress.progress))}%` }}
+                      />
+                    </div>
+                    <p className="text-[11px] text-slate-400 dark:text-slate-500">
+                      First time only. Cached in browser for future uses.
+                    </p>
+                  </div>
+                ) : (
+                  /* Neural Matting Phase */
+                  <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 shadow-2xl max-w-xs sm:max-w-sm w-full space-y-3.5">
+                    <div className="relative w-12 h-12 mx-auto">
+                      <div className="absolute inset-0 rounded-2xl bg-blue-500/20 animate-ping" />
+                      <div className="relative w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-md">
+                        <Sparkles className="w-6 h-6 animate-pulse" />
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-headings font-bold text-sm text-slate-900 dark:text-white">
+                        Removing Background...
+                      </h4>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                        MODNet neural network is segmenting portrait
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-center gap-1.5 pt-1">
+                      <span className="w-2 h-2 rounded-full bg-blue-600 animate-bounce [animation-delay:-0.3s]" />
+                      <span className="w-2 h-2 rounded-full bg-blue-600 animate-bounce [animation-delay:-0.15s]" />
+                      <span className="w-2 h-2 rounded-full bg-blue-600 animate-bounce" />
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
             {previewTab === "cutout" && (
-              <canvas
-                ref={previewCanvasRef}
-                className="max-h-[580px] max-w-full object-contain rounded-lg shadow-sm"
-              />
+              <>
+                {!hasResult && isProcessing && imageSrc && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={imageSrc}
+                    alt="Source photo preview"
+                    className="max-h-[580px] max-w-full object-contain rounded-lg opacity-40 blur-[1px]"
+                  />
+                )}
+                <canvas
+                  ref={previewCanvasRef}
+                  className={`max-h-[580px] max-w-full object-contain rounded-lg shadow-sm ${
+                    !hasResult ? "hidden" : "block"
+                  }`}
+                />
+              </>
             )}
 
             {previewTab === "original" && (
