@@ -65,7 +65,9 @@ export default function AiBackgroundRemoverTool() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const originalImgRef = useRef<HTMLImageElement | null>(null);
   const rawCutoutCanvasRef = useRef<HTMLCanvasElement | null>(null);
+  const rawInferenceCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const previewCanvasRef = useRef<HTMLCanvasElement | null>(null);
+  const comparisonCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const workerRef = useRef<Worker | null>(null);
 
   // Initialize Web Worker
@@ -107,6 +109,8 @@ export default function AiBackgroundRemoverTool() {
               width,
               height
             );
+
+            rawInferenceCanvasRef.current = inferenceCanvas;
 
             // Apply mask to original full-resolution image if High Quality is enabled
             const finalCutout = applyMaskToOriginalImage(
@@ -155,28 +159,56 @@ export default function AiBackgroundRemoverTool() {
     };
   }, []);
 
-  // Update preview canvas whenever rawCutout, fillMode, or colors change
+  // Draw composited cutout to specified canvas
+  const drawCompositeToCanvas = useCallback(
+    (targetCanvas: HTMLCanvasElement | null) => {
+      if (!targetCanvas || !rawCutoutCanvasRef.current) return;
+      const fill: ReplacementFill = {
+        type: fillMode,
+        solidColor,
+        gradientStart,
+        gradientEnd,
+      };
+
+      const composited = renderCompositeImage(rawCutoutCanvasRef.current, fill);
+      targetCanvas.width = composited.width;
+      targetCanvas.height = composited.height;
+
+      const ctx = targetCanvas.getContext("2d");
+      if (ctx) {
+        ctx.clearRect(0, 0, targetCanvas.width, targetCanvas.height);
+        ctx.drawImage(composited, 0, 0);
+      }
+    },
+    [fillMode, solidColor, gradientStart, gradientEnd]
+  );
+
+  // Update preview canvas whenever rawCutout, fillMode, colors, or previewTab change
   useEffect(() => {
-    if (!hasResult || !rawCutoutCanvasRef.current || !previewCanvasRef.current) return;
+    if (!hasResult || !rawCutoutCanvasRef.current) return;
 
-    const fill: ReplacementFill = {
-      type: fillMode,
-      solidColor,
-      gradientStart,
-      gradientEnd,
-    };
-
-    const composited = renderCompositeImage(rawCutoutCanvasRef.current, fill);
-    const targetCanvas = previewCanvasRef.current;
-    targetCanvas.width = composited.width;
-    targetCanvas.height = composited.height;
-
-    const ctx = targetCanvas.getContext("2d");
-    if (ctx) {
-      ctx.clearRect(0, 0, targetCanvas.width, targetCanvas.height);
-      ctx.drawImage(composited, 0, 0);
+    if (previewTab === "cutout") {
+      drawCompositeToCanvas(previewCanvasRef.current);
+    } else if (previewTab === "comparison") {
+      drawCompositeToCanvas(comparisonCanvasRef.current);
     }
-  }, [hasResult, fillMode, solidColor, gradientStart, gradientEnd]);
+  }, [hasResult, previewTab, drawCompositeToCanvas]);
+
+  // Re-composite if user toggles High Quality without re-running inference
+  useEffect(() => {
+    if (!originalImgRef.current || !rawInferenceCanvasRef.current) return;
+    const finalCutout = applyMaskToOriginalImage(
+      originalImgRef.current,
+      rawInferenceCanvasRef.current,
+      highQuality
+    );
+    rawCutoutCanvasRef.current = finalCutout;
+    if (previewTab === "cutout") {
+      drawCompositeToCanvas(previewCanvasRef.current);
+    } else if (previewTab === "comparison") {
+      drawCompositeToCanvas(comparisonCanvasRef.current);
+    }
+  }, [highQuality, previewTab, drawCompositeToCanvas]);
 
   // Handle image upload
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -193,6 +225,7 @@ export default function AiBackgroundRemoverTool() {
     setErrorMessage(null);
     setHasResult(false);
     rawCutoutCanvasRef.current = null;
+    rawInferenceCanvasRef.current = null;
 
     const baseName = file.name.substring(0, file.name.lastIndexOf(".")) || "portrait";
     setFileName(baseName);
@@ -267,6 +300,7 @@ export default function AiBackgroundRemoverTool() {
     setModelProgress(null);
     setStats(null);
     rawCutoutCanvasRef.current = null;
+    rawInferenceCanvasRef.current = null;
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -274,10 +308,19 @@ export default function AiBackgroundRemoverTool() {
 
   // Download cutouts
   const handleDownload = async (format: "png" | "jpeg") => {
-    if (!previewCanvasRef.current) return;
+    if (!rawCutoutCanvasRef.current) return;
 
     try {
-      const blob = await exportCanvasBlob(previewCanvasRef.current, format, 0.95);
+      const fill: ReplacementFill = {
+        type: fillMode,
+        solidColor,
+        gradientStart,
+        gradientEnd,
+      };
+
+      // Always composite from the full-resolution pristine rawCutoutCanvas
+      const composited = renderCompositeImage(rawCutoutCanvasRef.current, fill);
+      const blob = await exportCanvasBlob(composited, format, 0.95);
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
@@ -625,7 +668,9 @@ export default function AiBackgroundRemoverTool() {
                   className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-xs transition-all"
                 >
                   <Download className="w-3.5 h-3.5" />
-                  <span>Download Transparent PNG</span>
+                  <span>
+                    {fillMode === "transparent" ? "Download Transparent PNG" : "Download PNG"}
+                  </span>
                 </button>
                 <button
                   type="button"
@@ -686,7 +731,7 @@ export default function AiBackgroundRemoverTool() {
                 <div className="space-y-1 text-center">
                   <span className="text-[11px] font-bold text-blue-600 uppercase">AI Cutout</span>
                   <canvas
-                    ref={previewCanvasRef}
+                    ref={comparisonCanvasRef}
                     className="max-h-[460px] mx-auto object-contain rounded-lg shadow-sm"
                   />
                 </div>
