@@ -142,6 +142,66 @@ export function createCanvasFromRgba(
 }
 
 /**
+ * Post-processes the alpha matte from AI inference:
+ * 1. Corrects the Transformers.js double-sigmoid bug if detected (where background was compressed to ~128 and subject to ~186)
+ * 2. Cleans up low-alpha background noise/haze (foliage, shadows, textured backgrounds) below threshold
+ * 3. Solidifies high-confidence subject foreground (> 225) to 255
+ * 4. Smoothly preserves hair strands and anti-aliased edge details in the transition zone
+ */
+export function postProcessAlphaMatte(
+  rgbaData: Uint8ClampedArray,
+  width: number,
+  height: number
+): Uint8ClampedArray {
+  const numPixels = width * height;
+  const result = new Uint8ClampedArray(numPixels * 4);
+
+  // 1. Analyze alpha distribution across the matte
+  let minA = 255;
+  let maxA = 0;
+  for (let i = 0; i < numPixels; i++) {
+    const a = rgbaData[i * 4 + 3] ?? 255;
+    if (a < minA) minA = a;
+    if (a > maxA) maxA = a;
+  }
+
+  // Double-sigmoid bug detector:
+  // sigmoid(0)*255 ≈ 128 (background), sigmoid(1)*255 ≈ 186 (subject)
+  // When this bug happens, minA is around 110-145 and maxA is around 165-210.
+  const isDoubleSigmoid = minA >= 110 && minA <= 145 && maxA <= 210 && maxA >= 165;
+
+  for (let i = 0; i < numPixels; i++) {
+    const idx = i * 4;
+    result[idx] = rgbaData[idx] ?? 0;         // Red
+    result[idx + 1] = rgbaData[idx + 1] ?? 0; // Green
+    result[idx + 2] = rgbaData[idx + 2] ?? 0; // Blue
+
+    let a = rgbaData[idx + 3] ?? 255;
+
+    if (isDoubleSigmoid) {
+      // Invert the redundant second sigmoid: logit(p) = ln(p / (1 - p))
+      const p = Math.max(0.001, Math.min(0.999, a / 255));
+      const logit = Math.log(p / (1 - p)); // maps 0.5 -> 0, 0.731 -> 1
+      a = Math.round(Math.max(0, Math.min(1, logit)) * 255);
+    }
+
+    // Clean up matte edges and eliminate noisy background remnants
+    if (a < 32) {
+      a = 0; // Pure clean transparency for background
+    } else if (a > 225) {
+      a = 255; // Solid opaque subject
+    } else {
+      // Linear transition zone for hair and soft edges
+      a = Math.round(((a - 32) / (225 - 32)) * 255);
+    }
+
+    result[idx + 3] = a;
+  }
+
+  return result;
+}
+
+/**
  * Composes the segmented result.
  * If highQuality is true, the mask is bi-linearly applied to the original full-res image.
  */
@@ -150,11 +210,11 @@ export function applyMaskToOriginalImage(
   inferenceResultCanvas: HTMLCanvasElement,
   highQuality: boolean = true
 ): HTMLCanvasElement {
-  const origW = originalImg.naturalWidth || originalImg.width;
-  const origH = originalImg.naturalHeight || originalImg.height;
+  const origW = originalImg.naturalWidth || originalImg.width || inferenceResultCanvas.width;
+  const origH = originalImg.naturalHeight || originalImg.height || inferenceResultCanvas.height;
 
-  if (!highQuality) {
-    // Return direct inference canvas without upscaling
+  if (!highQuality || (origW === inferenceResultCanvas.width && origH === inferenceResultCanvas.height)) {
+    // Return direct inference canvas if matching or highQuality disabled
     return inferenceResultCanvas;
   }
 

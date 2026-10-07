@@ -4,6 +4,7 @@ import {
   validateImageFile,
   extractAlphaChannel,
   formatByteSize,
+  postProcessAlphaMatte,
   MAX_INFERENCE_DIMENSION,
 } from "./logic";
 
@@ -77,6 +78,25 @@ export function runAiBackgroundRemoverTests() {
   assert.strictEqual(formatByteSize(0), "0 B");
   assert.strictEqual(formatByteSize(1024), "1.0 KB");
   assert.strictEqual(formatByteSize(45 * 1024 * 1024), "45.0 MB");
+
+  // 5. Alpha Matte Post-Processing & Glitch / Double-Sigmoid Correction
+  // Case A: Double-sigmoid corrupted matte where background is ~128 and foreground is ~186
+  const doubleSigmoidRgba = new Uint8ClampedArray([
+    120, 150, 80, 128,  // Background (green hedge with double-sigmoid alpha 128)
+    210, 180, 150, 186, // Foreground subject (skin/kurta with double-sigmoid alpha 186)
+  ]);
+  const correctedMatte = postProcessAlphaMatte(doubleSigmoidRgba, 2, 1);
+  assert.strictEqual(correctedMatte[3], 0, "Corrupted background alpha must be restored to 0 (clean transparent)");
+  assert.strictEqual(correctedMatte[7], 255, "Corrupted foreground alpha must be restored to 255 (solid opaque)");
+
+  // Case B: Normal inference with faint background noise (< 32)
+  const noisyRgba = new Uint8ClampedArray([
+    50, 60, 70, 20,     // Residual foliage background noise (alpha 20)
+    200, 100, 50, 240,  // Clean solid subject (alpha 240)
+  ]);
+  const cleanedNoisyMatte = postProcessAlphaMatte(noisyRgba, 2, 1);
+  assert.strictEqual(cleanedNoisyMatte[3], 0, "Low-alpha background noise must be clamped to 0");
+  assert.strictEqual(cleanedNoisyMatte[7], 255, "High-alpha subject must be solidified to 255");
 
   console.log("✅ [ai-background-remover] unit tests passed!");
   return true;

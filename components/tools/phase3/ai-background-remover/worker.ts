@@ -1,4 +1,5 @@
 import { env, pipeline, RawImage } from '@huggingface/transformers';
+import { postProcessAlphaMatte } from './logic';
 
 // Enforce browser-side caching & disable local filesystem checks
 env.allowLocalModels = false;
@@ -23,10 +24,25 @@ class PipelineSingleton {
         }
       }
 
-      this.instance = await pipeline(this.task as any, this.model, {
-        device,
-        progress_callback,
-      });
+      try {
+        this.instance = await pipeline(this.task as any, this.model, {
+          device,
+          dtype: 'fp32',
+          progress_callback,
+        });
+      } catch (initErr) {
+        // If WebGPU shader compilation or memory allocation failed, fallback to WASM
+        if (device === 'webgpu') {
+          console.warn('WebGPU pipeline initialization failed, falling back to WASM:', initErr);
+          this.instance = await pipeline(this.task as any, this.model, {
+            device: 'wasm',
+            dtype: 'fp32',
+            progress_callback,
+          });
+        } else {
+          throw initErr;
+        }
+      }
     }
     return this.instance;
   }
@@ -78,11 +94,33 @@ self.addEventListener('message', async (e: MessageEvent) => {
       // Construct RawImage from transferable RGBA Uint8ClampedArray
       const rawImage = new RawImage(new Uint8ClampedArray(data), width, height, 4);
 
-      // Execute MODNet background removal
-      const output = await pipe(rawImage);
+      // Execute MODNet background removal with fallback on GPU inference error
+      let output: any;
+      try {
+        output = await pipe(rawImage);
+      } catch (gpuInferErr) {
+        console.warn('WebGPU inference failed, retrying with WASM pipeline:', gpuInferErr);
+        PipelineSingleton.instance = await pipeline(
+          PipelineSingleton.task as any,
+          PipelineSingleton.model,
+          {
+            device: 'wasm',
+            dtype: 'fp32',
+          }
+        );
+        output = await PipelineSingleton.instance(rawImage);
+      }
 
-      // Extract result RGBA buffer containing the alpha matte
-      const outputBuffer = output.data.buffer;
+      // Extract raw RGBA taking byteOffset into account
+      const rawOutputData = new Uint8ClampedArray(
+        output.data.buffer,
+        output.data.byteOffset,
+        output.data.byteLength
+      );
+
+      // Post-process the matte: fixes double-sigmoid bug, cleans low-alpha background noise, and solidifies foreground
+      const cleanedRgba = postProcessAlphaMatte(rawOutputData, output.width, output.height);
+      const outputBuffer = cleanedRgba.buffer;
 
       (self as any).postMessage(
         {

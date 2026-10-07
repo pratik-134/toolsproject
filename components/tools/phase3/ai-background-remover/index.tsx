@@ -690,7 +690,7 @@ export default function AiBackgroundRemoverTool() {
             ref={originalImgRef}
             src={imageSrc}
             alt="Source for AI background removal"
-            className="hidden"
+            className="absolute -left-[9999px] -top-[9999px] opacity-0 pointer-events-none"
             onLoad={() => {
               if (!hasResult && !isProcessing) {
                 // Auto trigger background removal upon image load
