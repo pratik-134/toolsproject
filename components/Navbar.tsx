@@ -680,7 +680,7 @@ export const Navbar: React.FC = () => {
           <div
             ref={megaMenuContainerRef}
             onMouseLeave={() => setIsMegaMenuOpen(false)}
-            className="hidden lg:block absolute top-full left-0 right-0 z-50 shadow-2xl"
+            className="hidden lg:block absolute top-full left-0 right-0 z-50 shadow-2xl bg-white dark:bg-slate-900"
           >
             <NavbarMegaMenu onClose={() => setIsMegaMenuOpen(false)} />
           </div>
@@ -693,7 +693,7 @@ export const Navbar: React.FC = () => {
       {isMegaMenuOpen && (
         <div
           onClick={() => setIsMegaMenuOpen(false)}
-          className="hidden lg:block fixed inset-0 bg-slate-900/20 backdrop-blur-2xs z-40 animate-fade-in"
+          className="hidden lg:block fixed inset-0 bg-slate-950/40 z-40 animate-fade-in"
           aria-hidden="true"
         />
       )}

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { CATEGORY_LIST, getCategoryById } from "@/lib/registry/categories";
 import { getAllTools, getToolUrl, TOOLS_COUNT_LABEL, TOOLS_COUNT_DISPLAY } from "@/lib/registry/tools";
 import { getToolIcon, CATEGORY_ICON_MAP } from "@/lib/tool-icons";
-import { ToolDefinition } from "@/lib/registry/types";
 import {
   Search,
   Sparkles,
@@ -135,14 +134,14 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
     <div
       role="region"
       aria-label="All Tools Mega Menu"
-      className="w-full bg-white/98 dark:bg-slate-900/98 backdrop-blur-xl border-b border-slate-200/90 dark:border-slate-800 shadow-2xl transition-all duration-200 overflow-hidden"
+      className="w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-2xl transition-all duration-150 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5 space-y-4">
-        {/* Top Control Bar: Spacious Command Search & Quick Category Shortcuts */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5 pb-4 border-b border-slate-200/80 dark:border-slate-800">
+        {/* Top Control Bar: Command Search & Quick Category Shortcuts */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5 pb-4 border-b border-slate-200 dark:border-slate-800">
           {/* Search Input Bar */}
           <div className="relative flex-1 max-w-lg">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-slate-400" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 dark:text-slate-400" />
             <input
               ref={searchInputRef}
               type="text"
@@ -151,8 +150,8 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                 setSearchQuery(e.target.value);
                 setSearchFilterCategory("all");
               }}
-              placeholder={`Search across all ${TOOLS_COUNT_LABEL} (e.g. PDF compressor, WebP, JSON)...`}
-              className="w-full pl-10 pr-9 py-2.5 text-xs sm:text-sm bg-slate-100/90 dark:bg-slate-800/90 border border-slate-200/90 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/80 dark:focus:ring-blue-400 transition-all shadow-inner"
+              placeholder={`Search all ${TOOLS_COUNT_LABEL} (e.g. PDF compressor, WebP, JSON)...`}
+              className="w-full pl-10 pr-9 py-2.5 text-xs sm:text-sm bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400 transition-all font-medium"
             />
             {searchQuery && (
               <button
@@ -161,7 +160,7 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                   setSearchQuery("");
                   setSearchFilterCategory("all");
                 }}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-0.5"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white p-0.5"
                 title="Clear search"
                 aria-label="Clear search"
               >
@@ -173,8 +172,8 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
           {/* Quick Shortcuts & Security Trust Badge */}
           <div className="flex items-center flex-wrap gap-2 text-xs">
             {/* Quick jump pills */}
-            <div className="hidden sm:flex items-center gap-1.5 text-slate-500 dark:text-slate-400 font-medium">
-              <span className="text-[11px] uppercase tracking-wider font-bold text-slate-400 dark:text-slate-400 mr-0.5">
+            <div className="hidden sm:flex items-center gap-1.5 text-slate-700 dark:text-slate-300 font-medium">
+              <span className="text-[11px] uppercase tracking-wider font-extrabold text-slate-600 dark:text-slate-300 mr-0.5">
                 Popular:
               </span>
               <button
@@ -183,7 +182,7 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                   setSearchQuery("");
                   setActiveCategoryId("document-pdf");
                 }}
-                className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950/60 hover:text-blue-600 dark:hover:text-blue-400 text-slate-700 dark:text-slate-300 transition-colors font-medium text-xs border border-transparent hover:border-blue-200 dark:hover:border-blue-800/80"
+                className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white text-slate-800 dark:text-slate-200 transition-colors font-semibold text-xs border border-slate-200 dark:border-slate-700"
               >
                 PDF Tools
               </button>
@@ -193,7 +192,7 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                   setSearchQuery("");
                   setActiveCategoryId("image");
                 }}
-                className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950/60 hover:text-blue-600 dark:hover:text-blue-400 text-slate-700 dark:text-slate-300 transition-colors font-medium text-xs border border-transparent hover:border-blue-200 dark:hover:border-blue-800/80"
+                className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white text-slate-800 dark:text-slate-200 transition-colors font-semibold text-xs border border-slate-200 dark:border-slate-700"
               >
                 Image Tools
               </button>
@@ -203,7 +202,7 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                   setSearchQuery("");
                   setActiveCategoryId("developer");
                 }}
-                className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950/60 hover:text-blue-600 dark:hover:text-blue-400 text-slate-700 dark:text-slate-300 transition-colors font-medium text-xs border border-transparent hover:border-blue-200 dark:hover:border-blue-800/80"
+                className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white text-slate-800 dark:text-slate-200 transition-colors font-semibold text-xs border border-slate-200 dark:border-slate-700"
               >
                 Developer
               </button>
@@ -213,14 +212,14 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                   setSearchQuery("");
                   setActiveCategoryId("calculators");
                 }}
-                className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950/60 hover:text-blue-600 dark:hover:text-blue-400 text-slate-700 dark:text-slate-300 transition-colors font-medium text-xs border border-transparent hover:border-blue-200 dark:hover:border-blue-800/80"
+                className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white text-slate-800 dark:text-slate-200 transition-colors font-semibold text-xs border border-slate-200 dark:border-slate-700"
               >
                 Calculators
               </button>
             </div>
 
             {/* Privacy trust pill */}
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800/80 text-emerald-700 dark:text-emerald-300 font-semibold shadow-2xs ml-auto">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950 border border-emerald-300 dark:border-emerald-700 text-emerald-800 dark:text-emerald-200 font-bold shadow-2xs ml-auto">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
               <span>100% In-Browser Privacy</span>
             </span>
@@ -234,8 +233,8 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
              ========================================================================= */
           <div className="space-y-4 min-h-[380px]">
             {/* Search Header & Category Filters */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-slate-200/70 dark:border-slate-800">
-              <div className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-slate-200 dark:border-slate-800">
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                 Matching Tools for &ldquo;<span className="text-slate-900 dark:text-white font-extrabold">{searchQuery}</span>&rdquo; ({searchedTools.length})
               </div>
 
@@ -248,7 +247,7 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                     className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all shrink-0 ${
                       searchFilterCategory === "all"
                         ? "bg-blue-600 text-white shadow-xs"
-                        : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
+                        : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700"
                     }`}
                   >
                     All ({Array.from(searchCategoryCounts.values()).reduce((a, b) => a + b, 0)})
@@ -264,7 +263,7 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                         className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all shrink-0 ${
                           isSelected
                             ? "bg-blue-600 text-white shadow-xs font-bold"
-                            : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
+                            : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700"
                         }`}
                       >
                         {catObj?.shortName || catObj?.name} ({count})
@@ -278,15 +277,15 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
             {/* Results Grid or Empty State */}
             {searchedTools.length === 0 ? (
               <div className="py-14 text-center space-y-4">
-                <div className="w-12 h-12 mx-auto rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400">
+                <div className="w-12 h-12 mx-auto rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400">
                   <Search className="w-6 h-6" />
                 </div>
                 <div>
                   <h4 className="font-bold text-sm text-slate-900 dark:text-white">
                     No matching tools found
                   </h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-md mx-auto">
-                    We could not find any tools matching &ldquo;{searchQuery}&rdquo;. Try another term or choose one of our most popular tools below.
+                  <p className="text-xs text-slate-600 dark:text-slate-300 mt-1 max-w-md mx-auto">
+                    We could not find any tools matching &ldquo;{searchQuery}&rdquo;. Try another search term or pick a popular tool below.
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center justify-center gap-2 max-w-lg mx-auto pt-2">
@@ -295,7 +294,7 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                       key={sug}
                       type="button"
                       onClick={() => setSearchQuery(sug)}
-                      className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950/60 hover:text-blue-600 dark:hover:text-blue-400 border border-slate-200/80 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition-colors"
+                      className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-800 dark:text-slate-200 transition-colors"
                     >
                       {sug}
                     </button>
@@ -314,21 +313,19 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                       key={tool.slug}
                       href={url}
                       onClick={onClose}
-                      className="group flex items-start gap-3 p-3 rounded-xl bg-slate-50/70 dark:bg-slate-800/60 hover:bg-white dark:hover:bg-slate-800 border border-slate-200/70 dark:border-slate-700/70 hover:border-blue-400/80 dark:hover:border-blue-500/80 hover:shadow-md transition-all"
+                      className="group flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-white dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-md transition-all"
                     >
-                      <div className="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-900/60 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                      <div className="w-9 h-9 rounded-xl bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 border border-slate-200 dark:border-slate-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-2xs">
                         <Icon className="w-4 h-4" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <div className="flex items-center justify-between gap-1">
-                          <span className="font-bold text-xs text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate">
-                            {tool.name}
-                          </span>
+                        <div className="font-bold text-xs text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate">
+                          {tool.name}
                         </div>
-                        <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5 leading-relaxed">
+                        <p className="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-1 mt-0.5 leading-relaxed font-normal">
                           {tool.seo.description}
                         </p>
-                        <span className="inline-block mt-1 text-[10px] font-semibold text-slate-500 dark:text-slate-400 bg-slate-200/60 dark:bg-slate-700/60 px-1.5 py-0.5 rounded">
+                        <span className="inline-block mt-1 text-[10px] font-bold text-slate-700 dark:text-slate-200 bg-slate-200 dark:bg-slate-700 px-1.5 py-0.5 rounded">
                           {cat?.shortName || cat?.name}
                         </span>
                       </div>
@@ -340,16 +337,16 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
           </div>
         ) : (
           /* =========================================================================
-             2. REDESIGNED SPATIAL TWO-PANE WORKSPACE (AIRY, UN-CONGESTED)
+             2. SOLID TWO-PANE WORKSPACE (100% OPAQUE & HIGH CONTRAST)
              ========================================================================= */
           <div className="grid grid-cols-12 gap-6 min-h-[440px]">
             {/* Left Pane: Categories Navigation (3 Cols) */}
-            <div className="col-span-12 md:col-span-4 lg:col-span-3 pr-0 md:pr-4 border-r-0 md:border-r border-slate-200/80 dark:border-slate-800 space-y-1">
-              <div className="flex items-center justify-between px-2.5 pb-2 mb-1">
-                <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-400">
+            <div className="col-span-12 md:col-span-4 lg:col-span-3 pr-0 md:pr-4 border-r-0 md:border-r border-slate-200 dark:border-slate-800 space-y-1">
+              <div className="flex items-center justify-between px-2.5 pb-2 mb-1 border-b border-slate-100 dark:border-slate-800">
+                <span className="text-xs font-extrabold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                   Categories ({CATEGORY_LIST.length})
                 </span>
-                <span className="text-[10px] font-bold text-slate-400 dark:text-slate-400 font-mono">
+                <span className="text-xs font-bold text-slate-700 dark:text-slate-300 font-mono">
                   {TOOLS_COUNT_DISPLAY}
                 </span>
               </div>
@@ -368,29 +365,29 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                       onMouseEnter={() => setActiveCategoryId(cat.id)}
                       className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-all group ${
                         isSelected
-                          ? "bg-blue-50/90 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-bold border border-blue-200/90 dark:border-blue-800/90 shadow-2xs"
-                          : "text-slate-700 dark:text-slate-300 hover:bg-slate-100/80 dark:hover:bg-slate-800/70 hover:text-blue-600 dark:hover:text-blue-400 font-medium border border-transparent"
+                          ? "bg-blue-600 text-white font-bold shadow-sm border border-blue-500"
+                          : "text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-blue-600 dark:hover:text-blue-400 font-semibold border border-transparent"
                       }`}
                     >
                       <div className="flex items-center gap-2.5 truncate">
                         <div
                           className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
                             isSelected
-                              ? "bg-blue-600 text-white shadow-xs"
-                              : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/60 group-hover:text-blue-600 dark:group-hover:text-blue-400"
+                              ? "bg-white/20 text-white"
+                              : "bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 group-hover:bg-blue-100 dark:group-hover:bg-blue-900 group-hover:text-blue-600 dark:group-hover:text-blue-400"
                           }`}
                         >
                           <CatIcon className="w-3.5 h-3.5" />
                         </div>
-                        <span className="text-xs truncate">{cat.name}</span>
+                        <span className="text-xs truncate font-bold">{cat.name}</span>
                       </div>
 
                       <div className="flex items-center gap-1.5 shrink-0 ml-2">
                         <span
-                          className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full ${
+                          className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-bold ${
                             isSelected
-                              ? "bg-blue-200/60 dark:bg-blue-900/80 text-blue-800 dark:text-blue-200 font-bold"
-                              : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400"
+                              ? "bg-white/25 text-white"
+                              : "bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700"
                           }`}
                         >
                           {catToolsCount}
@@ -398,8 +395,8 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                         <ChevronRight
                           className={`w-3.5 h-3.5 transition-transform ${
                             isSelected
-                              ? "text-blue-600 dark:text-blue-400 translate-x-0.5"
-                              : "text-transparent group-hover:text-slate-400"
+                              ? "text-white translate-x-0.5"
+                              : "text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400"
                           }`}
                         />
                       </div>
@@ -412,18 +409,18 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
             {/* Right Pane: Sub-Menu Tools Canvas (9 Cols) */}
             <div className="col-span-12 md:col-span-8 lg:col-span-9 flex flex-col justify-between space-y-4">
               <div className="space-y-4">
-                {/* Active Category Header Banner */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-2xl bg-gradient-to-r from-blue-50/60 via-slate-50/50 to-transparent dark:from-slate-800/80 dark:via-slate-800/40 dark:to-transparent border border-blue-100/70 dark:border-slate-800">
+                {/* Active Category Header Banner - 100% Solid & Opaque */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
                       <h3 className="font-extrabold text-base text-slate-900 dark:text-white">
                         {activeCategory?.name}
                       </h3>
-                      <span className="text-[11px] font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-900/80 px-2 py-0.5 rounded-full">
+                      <span className="text-[11px] font-bold text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 px-2.5 py-0.5 rounded-full">
                         {activeCategoryTools.length} {activeCategoryTools.length === 1 ? "Tool" : "Tools"}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed">
+                    <p className="text-xs text-slate-700 dark:text-slate-300 max-w-xl leading-relaxed font-normal">
                       {activeCategory?.description}
                     </p>
                   </div>
@@ -431,7 +428,7 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                   <Link
                     href={`/tools/${activeCategoryId}`}
                     onClick={onClose}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-blue-600 dark:text-blue-400 bg-white dark:bg-slate-900 hover:bg-blue-50 dark:hover:bg-slate-800 border border-blue-200/90 dark:border-blue-900 hover:border-blue-400 shadow-2xs hover:shadow-xs transition-all shrink-0 self-start sm:self-center"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 border border-blue-600 shadow-sm transition-all shrink-0 self-start sm:self-center"
                   >
                     <span>Explore Category Hub</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -441,7 +438,7 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                 {/* Popular / Featured Row (3 Highlight Cards) */}
                 {featuredTools.length > 0 && (
                   <div className="space-y-2">
-                    <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400">
+                    <div className="flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                       <Zap className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
                       <span>Popular in {activeCategory?.shortName || activeCategory?.name}</span>
                     </div>
@@ -455,13 +452,13 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                             key={tool.slug}
                             href={url}
                             onClick={onClose}
-                            className="group flex flex-col justify-between p-3.5 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-500/80 hover:shadow-md transition-all relative overflow-hidden"
+                            className="group flex flex-col justify-between p-3.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-md transition-all relative overflow-hidden"
                           >
                             <div className="flex items-start justify-between gap-2">
-                              <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-900/60 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                              <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-slate-900 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-slate-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                                 <Icon className="w-4 h-4" />
                               </div>
-                              <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/80 px-2 py-0.5 rounded-full border border-blue-100 dark:border-blue-900">
+                              <span className="text-[10px] font-bold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950 px-2 py-0.5 rounded-full border border-blue-200 dark:border-blue-800">
                                 Popular
                               </span>
                             </div>
@@ -470,12 +467,12 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                               <div className="font-bold text-xs text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate">
                                 {tool.name}
                               </div>
-                              <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5 leading-relaxed">
+                              <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-1 mt-0.5 leading-relaxed font-normal">
                                 {tool.seo.description}
                               </p>
                             </div>
 
-                            <div className="mt-2.5 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] font-bold text-blue-600 dark:text-blue-400">
+                            <div className="mt-2.5 pt-2 border-t border-slate-100 dark:border-slate-700 flex items-center justify-between text-xs font-bold text-blue-600 dark:text-blue-400">
                               <span>Launch tool</span>
                               <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                             </div>
@@ -486,9 +483,9 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                   </div>
                 )}
 
-                {/* All Category Tools Grid (Spacious 3-Column Grid) */}
+                {/* All Category Tools Grid (Solid, High-Contrast 3-Column Grid) */}
                 <div className="space-y-2">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400">
+                  <div className="text-xs font-extrabold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                     All {activeCategory?.name} ({activeCategoryTools.length})
                   </div>
 
@@ -502,20 +499,20 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
                           key={tool.slug}
                           href={url}
                           onClick={onClose}
-                          className="group flex items-start gap-2.5 p-2.5 rounded-xl bg-slate-50/60 dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800 border border-slate-200/60 dark:border-slate-800/80 hover:border-blue-300 dark:hover:border-blue-600/60 hover:shadow-sm transition-all"
+                          className="group flex items-start gap-2.5 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-white dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-400 hover:shadow-sm transition-all"
                         >
-                          <div className="w-7 h-7 rounded-lg bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 border border-slate-200/70 dark:border-slate-700/70 flex items-center justify-center shrink-0 group-hover:scale-105 transition-all shadow-2xs">
+                          <div className="w-7 h-7 rounded-lg bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 border border-slate-200 dark:border-slate-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition-all shadow-2xs">
                             <Icon className="w-3.5 h-3.5" />
                           </div>
                           <div className="min-w-0 flex-1">
-                            <div className="font-bold text-xs text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate">
+                            <div className="font-bold text-xs text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate">
                               {tool.name}
                             </div>
-                            <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5 leading-tight">
+                            <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-1 mt-0.5 leading-tight font-normal">
                               {tool.seo.description}
                             </p>
                           </div>
-                          <ChevronRight className="w-3.5 h-3.5 text-slate-300 dark:text-slate-600 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0 self-center" />
+                          <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all shrink-0 self-center" />
                         </Link>
                       );
                     })}
@@ -527,17 +524,17 @@ export function NavbarMegaMenu({ onClose }: NavbarMegaMenuProps) {
         )}
 
         {/* Mega Menu Footer Bar */}
-        <div className="pt-3.5 border-t border-slate-200/80 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-          <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
+        <div className="pt-3.5 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
             <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
             <span>
-              All <strong className="text-slate-900 dark:text-white">{TOOLS_COUNT_LABEL}</strong> run locally in WebAssembly &amp; JavaScript. No accounts or server uploads.
+              All <strong className="text-slate-900 dark:text-white">{TOOLS_COUNT_LABEL}</strong> run locally in WebAssembly &amp; JavaScript. Zero server uploads.
             </span>
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
-            <span className="hidden md:inline-block text-[11px] text-slate-400 dark:text-slate-400">
-              Press <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">Esc</kbd> to close
+            <span className="hidden md:inline-block text-xs font-semibold text-slate-600 dark:text-slate-400">
+              Press <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-[10px] text-slate-800 dark:text-slate-200 font-bold">Esc</kbd> to close
             </span>
             <Link
               href="/tools"
