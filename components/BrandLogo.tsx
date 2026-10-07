@@ -81,8 +81,8 @@ export interface QwertygenLogoProps {
   variant?: "horizontal" | "icon-only" | "compact" | "stacked" | "umbrella-lockup" | "dark" | "monochrome";
   productTag?: string;
   /**
-   * If true (default), renders "werty" next to the [Q] mark so the entire lockup reads "[Q]wertygen" without a double 'Q'.
-   * If false, renders the full "Qwerty" next to the mark.
+   * If true, renders "werty" next to the [Q] mark.
+   * If false (default), renders the full "Qwerty" next to the mark.
    */
   omitLeadingQ?: boolean;
 }
@@ -95,20 +95,20 @@ export const QwertygenLogo: React.FC<QwertygenLogoProps> = ({
   isLight = false,
   variant = "horizontal",
   productTag,
-  omitLeadingQ = true,
+  omitLeadingQ = false,
 }) => {
   if (variant === "icon-only" || !showText) {
     return <QwertygenIcon size={size} className={className} monochrome={variant === "monochrome"} />;
   }
 
-  // Wordmark colors: werty (#0F172A / white) + gen gradient (#0EA5E9 to #06D6A0)
+  // Wordmark colors: Qwerty (#0F172A / white) + gen gradient (#0EA5E9 to #06D6A0)
   const clearTextColor = isLight || variant === "dark" ? "text-white" : "text-[#0F172A] dark:text-white";
   const isMonochrome = variant === "monochrome";
   const prefixText = omitLeadingQ ? (BRAND.stemPrefix || "werty") : BRAND.brandPrefix;
 
   if (variant === "stacked") {
     return (
-      <div className={`flex flex-col items-center text-center gap-1 ${className}`}>
+      <div className={`flex flex-col items-center text-center gap-1.5 ${className}`}>
         <QwertygenIcon size={Math.round(size * 1.5)} monochrome={isMonochrome} />
         <div className="flex flex-col items-center py-1">
           <div className="flex items-baseline font-headings font-bold tracking-tight text-2xl sm:text-3xl leading-[1.3] pb-1">
@@ -138,7 +138,7 @@ export const QwertygenLogo: React.FC<QwertygenLogoProps> = ({
 
   if (variant === "compact") {
     return (
-      <div className={`inline-flex items-center gap-0 sm:gap-0.5 ${className}`}>
+      <div className={`inline-flex items-center gap-1.5 sm:gap-2 ${className}`}>
         <QwertygenIcon size={size} monochrome={isMonochrome} className="shrink-0 flex items-center justify-center" />
         <div className="flex flex-col text-left justify-center">
           <div className="inline-flex items-baseline font-headings text-base sm:text-lg font-bold tracking-tight leading-normal">
@@ -161,9 +161,9 @@ export const QwertygenLogo: React.FC<QwertygenLogoProps> = ({
     );
   }
 
-  // Default: Horizontal Lockup (Icon + wertygen Wordmark with ultra-tight spacing and exact vertical centering)
+  // Default: Horizontal Lockup (Icon + Qwertygen Wordmark with balanced spacing and vertical alignment)
   return (
-    <div className={`inline-flex items-center gap-0 sm:gap-0.5 ${className}`}>
+    <div className={`inline-flex items-center gap-1.5 sm:gap-2 ${className}`}>
       <QwertygenIcon size={size} className="w-7 h-7 sm:w-[34px] sm:h-[34px] shrink-0 flex items-center justify-center" monochrome={isMonochrome} />
 
       <div className="inline-flex items-center text-left">
