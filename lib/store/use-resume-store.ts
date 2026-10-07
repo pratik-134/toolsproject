@@ -129,36 +129,15 @@ export function calculateCompleteness(data: ResumeData): number {
   return Math.min(100, score);
 }
 
-// Helper to get initial state from localStorage safely
-function getInitialData(): ResumeData {
-  if (typeof window !== "undefined") {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed && parsed.personalInfo && Array.isArray(parsed.sections)) {
-          if (parsed.theme?.accentColor && (parsed.theme.accentColor.toLowerCase() === "#4f46e5" || parsed.theme.accentColor.toLowerCase() === "#16a34a")) {
-            parsed.theme.accentColor = "#2563EB";
-          }
-          return parsed;
-        }
-      }
-    } catch {
-      // Fallback on JSON parse error
-    }
-  }
-  return initialResumeData;
-}
-
 export const useResumeStore = create<ResumeStoreState>((set, get) => ({
-  resumeData: getInitialData(),
+  resumeData: initialResumeData,
   activeResumeId: null,
   isStorageQuotaExceeded: false,
   setStorageQuotaExceeded: (exceeded) => set({ isStorageQuotaExceeded: exceeded }),
   past: [],
   future: [],
   saveStatus: "saved",
-  lastSavedAt: new Date().toLocaleTimeString(),
+  lastSavedAt: null,
   activeSectionId: null,
   zoomLevel: 100,
 

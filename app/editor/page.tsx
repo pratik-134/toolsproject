@@ -21,24 +21,36 @@ function ResumeRouteGuard() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { toast } = useToast();
-  const { loadResume, updateTheme, activeResumeId } = useResumeStore();
-  const { loadIndex, createResume } = useResumeIndexStore();
+  const handledKeyRef = React.useRef<string | null>(null);
 
   useEffect(() => {
-    const indexList = loadIndex();
     const idParam = searchParams.get("id");
     const templateParam = searchParams.get("template");
+    const currentKey = `${idParam ?? ""}_${templateParam ?? ""}`;
+
+    // Prevent redundant execution for the same query parameters
+    if (handledKeyRef.current === currentKey) {
+      return;
+    }
+
+    const { loadIndex, createResume } = useResumeIndexStore.getState();
+    const { loadResume, updateTheme, activeResumeId } = useResumeStore.getState();
+    const indexList = loadIndex();
 
     if (idParam) {
       const exists = indexList.some((r) => r.id === idParam);
       if (exists) {
+        handledKeyRef.current = currentKey;
         if (activeResumeId !== idParam) {
           loadResume(idParam);
         }
         if (templateParam) {
           updateTheme({ templateId: templateParam });
+          // Canonicalize URL to strip templateParam now that theme is applied
+          router.replace(`/editor?id=${idParam}`);
         }
       } else {
+        handledKeyRef.current = currentKey;
         toast({
           title: "Resume Not Found",
           description: "The requested resume does not exist. Redirecting to your dashboard.",
@@ -47,6 +59,7 @@ function ResumeRouteGuard() {
         router.replace("/dashboard");
       }
     } else if (templateParam) {
+      handledKeyRef.current = currentKey;
       const newId = createResume({
         title: "My Resume",
         templateId: templateParam,
@@ -54,6 +67,7 @@ function ResumeRouteGuard() {
       loadResume(newId);
       router.replace(`/editor?id=${newId}`);
     } else {
+      handledKeyRef.current = currentKey;
       if (indexList.length > 0) {
         router.replace("/dashboard");
       } else {
@@ -65,7 +79,7 @@ function ResumeRouteGuard() {
         router.replace(`/editor?id=${newId}`);
       }
     }
-  }, [searchParams, router, loadResume, updateTheme, activeResumeId, loadIndex, createResume, toast]);
+  }, [searchParams, router, toast]);
 
   return null;
 }

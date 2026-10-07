@@ -86,11 +86,19 @@ export const LivePreview: React.FC<LivePreviewProps> = ({ mobileTab }) => {
 
   // Dynamic calculation of page height and page count
   useEffect(() => {
-    if (canvasRef.current) {
-      const actualHeight = canvasRef.current.offsetHeight;
-      setCanvasHeight(actualHeight);
-      const computedPages = Math.max(1, Math.ceil(actualHeight / A4_HEIGHT_PX));
-      setPageCount(computedPages);
+    const measure = () => {
+      if (canvasRef.current) {
+        const actualHeight = Math.max(canvasRef.current.offsetHeight, canvasRef.current.scrollHeight);
+        setCanvasHeight(actualHeight);
+        const computedPages = Math.max(1, Math.ceil(actualHeight / A4_HEIGHT_PX));
+        setPageCount(computedPages);
+      }
+    };
+    measure();
+    if (typeof ResizeObserver !== "undefined" && canvasRef.current) {
+      const ro = new ResizeObserver(measure);
+      ro.observe(canvasRef.current);
+      return () => ro.disconnect();
     }
   }, [resumeData, scale]);
 
@@ -112,7 +120,7 @@ export const LivePreview: React.FC<LivePreviewProps> = ({ mobileTab }) => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-start min-h-full py-4 sm:py-8 px-2 sm:px-6 overflow-y-auto overflow-x-hidden w-full bg-slate-100/70 dark:bg-slate-900/70 pb-24">
+    <div className="relative flex flex-col items-center justify-start h-full py-4 sm:py-8 px-2 sm:px-6 overflow-y-auto overflow-x-hidden w-full bg-slate-100/70 dark:bg-slate-900/70 pb-24">
       {/* Floating Canvas Dock */}
       <div className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border border-slate-200 dark:border-slate-700 shadow-xl no-print select-none transition-all max-w-[calc(100vw-24px)] overflow-x-auto no-scrollbar">
         {/* Zoom Out */}
