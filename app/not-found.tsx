@@ -4,7 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { BRAND } from "@/lib/brand";
-import { FileQuestion, Wrench, Sparkles, Home, ArrowRight } from "lucide-react";
+import { Wrench, Sparkles, Home, ArrowRight } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -12,30 +12,26 @@ export default function NotFound() {
       <Navbar />
 
       <main className="flex-1 flex items-center justify-center px-4 py-16 sm:py-24">
-        <div className="max-w-xl w-full text-center space-y-8">
-          {/* Badge & Icon */}
-          <div className="space-y-4">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200/80 dark:border-blue-900/60 text-blue-600 dark:text-blue-400 shadow-md">
-              <FileQuestion className="w-10 h-10" strokeWidth={1.75} />
-            </div>
-
-            <div className="inline-block px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
-              Error 404
-            </div>
+        <div className="max-w-2xl w-full text-center space-y-8">
+          {/* Big Bold 404 Display */}
+          <div className="relative select-none">
+            <span className="font-headings text-8xl sm:text-9xl md:text-[140px] font-black tracking-tighter leading-none bg-gradient-to-b from-slate-900 via-slate-800 to-slate-400 dark:from-white dark:via-slate-200 dark:to-slate-600 bg-clip-text text-transparent">
+              404
+            </span>
           </div>
 
           {/* Heading & Subtitle */}
           <div className="space-y-3">
-            <h1 className="font-headings text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
+            <h1 className="font-headings text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               Page Not Found
             </h1>
-            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed max-w-md mx-auto font-medium">
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed max-w-lg mx-auto font-medium">
               The page or tool URL you requested does not exist or may have been moved. Everything else on {BRAND.name} remains operational.
             </p>
           </div>
 
           {/* Action CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
             <Link href="/tools" className="w-full sm:w-auto">
               <Button
                 size="lg"

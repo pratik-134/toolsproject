@@ -439,10 +439,31 @@ export const Navbar: React.FC = () => {
                   )}
                 </div>
               ) : (
-                /* Category Pills & Selected Tools */
-                <div className="space-y-2.5">
-                  {/* Category Pills (horizontal scroll) */}
-                  <div className="flex items-center gap-1.5 overflow-x-auto pb-1.5 scrollbar-thin">
+                /* Category Selector & Tools Submenu */
+                <div className="space-y-3 pt-1">
+                  {/* Category Selector Dropdown & Counter */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between text-[11px] font-bold text-slate-500 dark:text-slate-400">
+                      <span className="uppercase tracking-wider">Select Category</span>
+                      <span className="text-blue-600 dark:text-blue-400 font-mono">
+                        {activeCategoryTools.length} tools
+                      </span>
+                    </div>
+                    <select
+                      value={mobileSelectedCategory}
+                      onChange={(e) => setMobileSelectedCategory(e.target.value)}
+                      className="w-full text-xs font-semibold py-2 px-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-2xs"
+                    >
+                      {CATEGORY_LIST.map((cat) => (
+                        <option key={cat.id} value={cat.id}>
+                          {cat.name} ({allTools.filter((t) => t.category === cat.id).length})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Horizontal Category Pills */}
+                  <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-thin">
                     {CATEGORY_LIST.map((cat) => {
                       const isCatActive = mobileSelectedCategory === cat.id;
                       const catCount = allTools.filter((t) => t.category === cat.id).length;
@@ -451,13 +472,13 @@ export const Navbar: React.FC = () => {
                           key={cat.id}
                           type="button"
                           onClick={() => setMobileSelectedCategory(cat.id)}
-                          className={`px-2.5 py-1 rounded-full text-[11px] font-semibold whitespace-nowrap transition-colors shrink-0 flex items-center gap-1.5 ${
+                          className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold whitespace-nowrap transition-colors shrink-0 flex items-center gap-1.5 ${
                             isCatActive
                               ? "bg-blue-600 text-white shadow-xs font-bold"
-                              : "bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700"
+                              : "bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
                           }`}
                         >
-                          <span>{cat.name}</span>
+                          <span>{cat.shortName || cat.name}</span>
                           <span
                             className={`text-[9px] px-1 py-0.2 rounded-full font-mono ${
                               isCatActive
@@ -473,7 +494,7 @@ export const Navbar: React.FC = () => {
                   </div>
 
                   {/* Tools under active category */}
-                  <div className="space-y-1 max-h-52 overflow-y-auto pr-1">
+                  <div className="space-y-1.5 max-h-56 overflow-y-auto pr-1 scrollbar-thin">
                     {activeCategoryTools.map((tool) => {
                       const Icon = getToolIcon(tool);
                       const url = getToolUrl(tool);
@@ -482,26 +503,33 @@ export const Navbar: React.FC = () => {
                           key={tool.slug}
                           href={url}
                           onClick={handleLinkClick}
-                          className="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-700 text-xs hover:border-blue-400 dark:hover:border-cyan-400 transition-colors shadow-2xs"
+                          className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-700 text-xs hover:border-blue-400 dark:hover:border-blue-500 transition-colors shadow-2xs group"
                         >
-                          <div className="flex items-center gap-2 min-w-0">
-                            <Icon className="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400 shrink-0" />
-                            <span className="font-semibold text-slate-900 dark:text-white truncate">
-                              {tool.name}
-                            </span>
+                          <div className="flex items-center gap-2.5 min-w-0">
+                            <div className="w-7 h-7 rounded-lg bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-blue-900/60 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                              <Icon className="w-3.5 h-3.5" />
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <span className="font-bold text-slate-900 dark:text-white truncate block group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                                {tool.name}
+                              </span>
+                              <span className="text-[10px] text-slate-500 dark:text-slate-400 truncate block">
+                                {tool.seo.description}
+                              </span>
+                            </div>
                           </div>
-                          <ChevronRight className="w-3 h-3 text-slate-400 shrink-0" />
+                          <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all shrink-0 ml-2" />
                         </Link>
                       );
                     })}
                   </div>
 
                   {/* Hub Link & Browse All */}
-                  <div className="pt-1.5 flex items-center justify-between text-xs border-t border-slate-200 dark:border-slate-700/80">
+                  <div className="pt-2 flex items-center justify-between text-xs border-t border-slate-200 dark:border-slate-700/80">
                     <Link
                       href={`/tools/${mobileSelectedCategory}`}
                       onClick={handleLinkClick}
-                      className="font-bold text-blue-600 dark:text-cyan-400 hover:underline flex items-center gap-1"
+                      className="font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
                     >
                       <span>Category Hub</span>
                       <ArrowRight className="w-3 h-3" />
