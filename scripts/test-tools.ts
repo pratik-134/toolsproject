@@ -806,7 +806,7 @@ async function main() {
   console.log("✅ [cross-tool-pipeline-handoff] unit tests passed!");
 
   console.log("===============================================");
-  console.log("🎉 ALL TOOL UNIT TESTS PASSED (186/186)!");
+  console.log("🎉 ALL TOOL UNIT TESTS PASSED (194/194)!");
 }
 
 main().catch((err) => {

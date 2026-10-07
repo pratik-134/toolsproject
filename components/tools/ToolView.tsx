@@ -2,17 +2,61 @@
 
 import React from "react";
 import dynamic from "next/dynamic";
-import { CanvasImageEngine } from "@/components/tools/engines/CanvasImageEngine";
-import { ImagesToPdfEngine } from "@/components/tools/engines/ImagesToPdfEngine";
-import { PdfImageEngine } from "@/components/tools/engines/PdfImageEngine";
-import { PdfTextEngine } from "@/components/tools/engines/PdfTextEngine";
-import { HeicEngine } from "@/components/tools/engines/HeicEngine";
-import { IcoEngine } from "@/components/tools/engines/IcoEngine";
-import { FfmpegMediaEngine } from "@/components/tools/engines/FfmpegMediaEngine";
-import { DataTransformEngine } from "@/components/tools/engines/DataTransformEngine";
-import { TextTransformEngine } from "@/components/tools/engines/TextTransformEngine";
-import { ColorConverterEngine } from "@/components/tools/engines/ColorConverterEngine";
-import { OcrEngine } from "@/components/tools/engines/OcrEngine";
+function ToolLoadingState({ name }: { name: string }) {
+  return (
+    <div className="flex flex-col items-center justify-center p-12 space-y-3">
+      <div className="h-6 w-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+      <p className="text-xs text-muted-foreground font-medium">
+        Loading {name} sandbox...
+      </p>
+    </div>
+  );
+}
+
+const CanvasImageEngine = dynamic(
+  () => import("@/components/tools/engines/CanvasImageEngine").then((m) => m.CanvasImageEngine),
+  { ssr: false, loading: () => <ToolLoadingState name="Image Engine" /> }
+);
+const ImagesToPdfEngine = dynamic(
+  () => import("@/components/tools/engines/ImagesToPdfEngine").then((m) => m.ImagesToPdfEngine),
+  { ssr: false, loading: () => <ToolLoadingState name="PDF Engine" /> }
+);
+const PdfImageEngine = dynamic(
+  () => import("@/components/tools/engines/PdfImageEngine").then((m) => m.PdfImageEngine),
+  { ssr: false, loading: () => <ToolLoadingState name="PDF Image Engine" /> }
+);
+const PdfTextEngine = dynamic(
+  () => import("@/components/tools/engines/PdfTextEngine").then((m) => m.PdfTextEngine),
+  { ssr: false, loading: () => <ToolLoadingState name="PDF Text Engine" /> }
+);
+const HeicEngine = dynamic(
+  () => import("@/components/tools/engines/HeicEngine").then((m) => m.HeicEngine),
+  { ssr: false, loading: () => <ToolLoadingState name="HEIC Engine" /> }
+);
+const IcoEngine = dynamic(
+  () => import("@/components/tools/engines/IcoEngine").then((m) => m.IcoEngine),
+  { ssr: false, loading: () => <ToolLoadingState name="ICO Engine" /> }
+);
+const FfmpegMediaEngine = dynamic(
+  () => import("@/components/tools/engines/FfmpegMediaEngine").then((m) => m.FfmpegMediaEngine),
+  { ssr: false, loading: () => <ToolLoadingState name="Media Conversion Engine" /> }
+);
+const DataTransformEngine = dynamic(
+  () => import("@/components/tools/engines/DataTransformEngine").then((m) => m.DataTransformEngine),
+  { ssr: false, loading: () => <ToolLoadingState name="Data Transform Engine" /> }
+);
+const TextTransformEngine = dynamic(
+  () => import("@/components/tools/engines/TextTransformEngine").then((m) => m.TextTransformEngine),
+  { ssr: false, loading: () => <ToolLoadingState name="Text Engine" /> }
+);
+const ColorConverterEngine = dynamic(
+  () => import("@/components/tools/engines/ColorConverterEngine").then((m) => m.ColorConverterEngine),
+  { ssr: false, loading: () => <ToolLoadingState name="Color Engine" /> }
+);
+const OcrEngine = dynamic(
+  () => import("@/components/tools/engines/OcrEngine").then((m) => m.OcrEngine),
+  { ssr: false, loading: () => <ToolLoadingState name="OCR Engine" /> }
+);
 import { getConverterPreset } from "@/lib/registry/converter-presets";
 
 const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
@@ -21,9 +65,17 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
   "webp-to-jpg": () => <CanvasImageEngine preset={getConverterPreset("webp-to-jpg")!} />,
   "png-to-jpg": () => <CanvasImageEngine preset={getConverterPreset("png-to-jpg")!} />,
   "jpg-to-png": () => <CanvasImageEngine preset={getConverterPreset("jpg-to-png")!} />,
+  "png-to-webp": () => <CanvasImageEngine preset={getConverterPreset("png-to-webp")!} />,
+  "jpg-to-webp": () => <CanvasImageEngine preset={getConverterPreset("jpg-to-webp")!} />,
   "svg-to-png": () => <CanvasImageEngine preset={getConverterPreset("svg-to-png")!} />,
+  "svg-to-jpg": () => <CanvasImageEngine preset={getConverterPreset("svg-to-jpg")!} />,
+  "svg-to-webp": () => <CanvasImageEngine preset={getConverterPreset("svg-to-webp")!} />,
+  "gif-to-jpg": () => <CanvasImageEngine preset={getConverterPreset("gif-to-jpg")!} />,
+  "gif-to-webp": () => <CanvasImageEngine preset={getConverterPreset("gif-to-webp")!} />,
+  "bmp-to-webp": () => <CanvasImageEngine preset={getConverterPreset("bmp-to-webp")!} />,
   "image-to-ico": () => <IcoEngine preset={getConverterPreset("image-to-ico")!} />,
   "heic-to-jpg": () => <HeicEngine preset={getConverterPreset("heic-to-jpg")!} />,
+  "heic-to-png": () => <HeicEngine preset={getConverterPreset("heic-to-png")!} />,
   "jpg-to-pdf": () => <ImagesToPdfEngine preset={getConverterPreset("jpg-to-pdf")!} />,
   "pdf-to-jpg": () => <PdfImageEngine preset={getConverterPreset("pdf-to-jpg")!} />,
   "pdf-to-png": () => <PdfImageEngine preset={getConverterPreset("pdf-to-png")!} />,
@@ -664,17 +716,6 @@ const TOOL_COMPONENTS: Record<string, React.ComponentType> = {
     loading: () => <ToolLoadingState name="Offline Language & Text Translator" />,
   }),
 };
-
-function ToolLoadingState({ name }: { name: string }) {
-  return (
-    <div className="flex flex-col items-center justify-center p-12 space-y-3">
-      <div className="h-6 w-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-      <p className="text-xs text-muted-foreground font-medium">
-        Loading {name} sandbox...
-      </p>
-    </div>
-  );
-}
 
 interface ErrorBoundaryProps {
   slug: string;

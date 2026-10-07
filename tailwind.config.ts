@@ -121,9 +121,9 @@ const config: Config = {
         'button-card-grad': 'linear-gradient(135deg, #3B82F6 0%, #0EA5E9 100%)',
       },
       fontFamily: {
-        headings: ['var(--font-manrope)', "Manrope", "sans-serif"],
-        body: ['var(--font-manrope)', "Manrope", "sans-serif"],
-        sans: ['var(--font-manrope)', "Manrope", "sans-serif"],
+        headings: ['var(--font-manrope)', "Manrope"],
+        body: ['var(--font-manrope)', "Manrope"],
+        sans: ['var(--font-manrope)', "Manrope"],
       },
       fontSize: {
         // ── Design System Spec: WebTools Core Modular Scale ───────────────

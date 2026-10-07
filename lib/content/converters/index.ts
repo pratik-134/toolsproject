@@ -162,7 +162,167 @@ export const CONVERTER_CONTENT_REGISTRY: Record<string, ConverterContent> = {
       { q: "Are my personal iPhone photos sent to a remote server?", a: "No. All HEIC decoding takes place 100% inside your browser sandbox." },
       { q: "Does converting HEIC to JPG retain photo detail?", a: "Yes. High JPEG quality settings (92%+) ensure sharp, clear photos with minimal compression loss." }
     ],
-    relatedSlugs: ["webp-to-jpg", "png-to-jpg", "jpg-to-png", "jpg-to-pdf"]
+    relatedSlugs: ["heic-to-png", "webp-to-jpg", "jpg-to-png", "png-to-jpg"]
+  },
+
+  "heic-to-png": {
+    slug: "heic-to-png",
+    seoTitle: "HEIC to PNG Converter — Free Private iPhone Photo Tool",
+    metaDescription: "Convert Apple HEIC photos to lossless PNG graphics in your browser memory. Preserves transparency with zero server uploads.",
+    intro: "Convert Apple iPhone HEIC and HEIF photos into lossless PNG images directly in your browser. Perfect for graphic design, web assets, and print projects that need uncompressed clarity.",
+    howTo: [
+      "Upload or drag & drop HEIC photos into the converter dropzone.",
+      "Click 'Convert HEIC Photos to PNG' to decode images in browser memory.",
+      "Download your converted PNG photos individually or as a single batch ZIP."
+    ],
+    whenToUse: "Ideal for editing iPhone portraits in graphic software or preserving maximum photo detail without compression artifacts.",
+    formatNotes: "Outputs crisp, lossless PNG image files with full color depth.",
+    faqs: [
+      { q: "Does HEIC to PNG maintain original photo quality?", a: "Yes. PNG uses lossless compression, ensuring no additional compression artifacts are introduced." },
+      { q: "Can I convert batches of HEIC photos?", a: "Yes. Drag and drop multiple HEIC files to process them together in browser memory." },
+      { q: "Are my iPhone photos private?", a: "Yes. All processing executes 100% locally in your browser memory with zero network uploads." }
+    ],
+    relatedSlugs: ["heic-to-jpg", "png-to-webp", "jpg-to-png", "webp-to-png"]
+  },
+
+  "png-to-webp": {
+    slug: "png-to-webp",
+    seoTitle: "PNG to WebP Converter — Free High-Efficiency Web Tool",
+    metaDescription: "Convert PNG images to modern WebP format online. Reduce image file size by up to 80% while keeping alpha transparency with zero server uploads.",
+    intro: "Convert PNG images into next-generation WebP files directly in your browser. WebP offers smaller file sizes and faster web page load times while maintaining full alpha transparency support.",
+    howTo: [
+      "Drag and drop PNG images into the converter box.",
+      "Adjust the WebP quality slider to your desired balance of size and sharpness.",
+      "Click 'Convert PNG to WebP' to process images in local memory.",
+      "Download your high-performance WebP images."
+    ],
+    whenToUse: "Essential for web designers and developers optimizing website speed, page weight, and Core Web Vitals.",
+    formatNotes: "WebP provides lossless and lossy compression with native alpha transparency support.",
+    faqs: [
+      { q: "Does WebP preserve PNG transparency?", a: "Yes. WebP natively supports alpha channel transparency." },
+      { q: "How much does WebP reduce image file size compared to PNG?", a: "WebP images are typically 25% to 35% smaller than comparable PNGs at identical visual quality." },
+      { q: "Is WebP supported by all modern browsers?", a: "Yes. WebP is supported across Chrome, Safari, Firefox, Edge, and iOS/Android mobile browsers." }
+    ],
+    relatedSlugs: ["webp-to-png", "jpg-to-webp", "png-to-jpg", "batch-image-compressor"]
+  },
+
+  "jpg-to-webp": {
+    slug: "jpg-to-webp",
+    seoTitle: "JPG to WebP Converter — Boost Web Vitals & Compress Photos",
+    metaDescription: "Convert JPG and JPEG photos to modern WebP format in browser memory. Dramatically reduce page weight and improve LCP with zero server uploads.",
+    intro: "Transform JPG photos into high-efficiency WebP images in your browser. WebP provides superior lossy compression that speeds up website page load times and boosts Core Web Vitals.",
+    howTo: [
+      "Select JPG or JPEG images from your computer or phone.",
+      "Choose your target WebP compression quality level (default 92%).",
+      "Click 'Convert JPG to WebP' to encode images in browser memory.",
+      "Save your optimized WebP image files."
+    ],
+    whenToUse: "Perfect for blogs, e-commerce stores, and portfolios aiming for 100/100 Google PageSpeed scores.",
+    formatNotes: "WebP lossy images produce noticeably smaller files than standard JPEGs at identical perceived quality.",
+    faqs: [
+      { q: "Why convert JPG to WebP for websites?", a: "WebP files are up to 30% smaller than standard JPEGs, speeding up page loading and improving Google Core Web Vitals." },
+      { q: "Can I adjust the WebP compression quality?", a: "Yes. Adjust the slider to set your desired quality level (from 50% to 100%)." },
+      { q: "Are my photos uploaded to external servers?", a: "No. All conversion takes place 100% inside your local web browser sandbox." }
+    ],
+    relatedSlugs: ["png-to-webp", "webp-to-jpg", "jpg-to-png", "batch-image-compressor"]
+  },
+
+  "svg-to-jpg": {
+    slug: "svg-to-jpg",
+    seoTitle: "SVG to JPG Converter — Free In-Browser Vector Rasterizer",
+    metaDescription: "Convert SVG vector files to standard JPEG photos in browser memory. Custom resolution scaling and white background fill with zero uploads.",
+    intro: "Convert SVG vector artwork into standard JPEG images in your web browser. Includes custom resolution scaling and automatic white background fill for transparent areas.",
+    howTo: [
+      "Drop your SVG vector file into the converter workbench.",
+      "Select your target resolution scale multiplier (1x, 2x, 4K).",
+      "Click 'Convert SVG to JPG' and save your rasterized photo."
+    ],
+    whenToUse: "Great for converting vector logos or diagrams into image formats accepted by document systems, marketplaces, and social platforms.",
+    formatNotes: "Transparent SVG backgrounds are automatically filled with clean white in the resulting JPEG.",
+    faqs: [
+      { q: "What happens to transparent backgrounds in SVG?", a: "Because JPEG does not support transparency, transparent areas are cleanly filled with solid white." },
+      { q: "Can I render high-resolution JPEGs from SVG?", a: "Yes. Use the resolution multiplier to generate crisp 2x or 4K JPEG images." },
+      { q: "Are files uploaded to a server?", a: "No. Conversion happens 100% locally inside your browser memory." }
+    ],
+    relatedSlugs: ["svg-to-png", "svg-to-webp", "png-to-jpg", "jpg-to-png"]
+  },
+
+  "svg-to-webp": {
+    slug: "svg-to-webp",
+    seoTitle: "SVG to WebP Converter — Scaled Web Graphics In-Browser",
+    metaDescription: "Convert SVG vector files to high-performance WebP images online. Preserves transparency with customizable resolution scaling and zero uploads.",
+    intro: "Render SVG vectors directly into lightweight WebP graphics for web deployment. Maintain crisp vector sharpness with custom scaling while keeping transparent backgrounds intact.",
+    howTo: [
+      "Select your SVG vector file.",
+      "Choose your desired output resolution scale.",
+      "Click 'Convert SVG to WebP' to render in memory.",
+      "Download your web-optimized graphic."
+    ],
+    whenToUse: "Use when you need transparent raster graphics for browsers where SVG performance is sluggish.",
+    formatNotes: "Maintains transparency and crisp vector lines up to 4K resolution.",
+    faqs: [
+      { q: "Does SVG to WebP keep transparency?", a: "Yes. WebP preserves transparency from the original SVG." },
+      { q: "Can I scale SVG resolution before exporting?", a: "Yes. You can choose 1x, 2x, or higher multipliers for sharp rasterization." },
+      { q: "Is this tool private?", a: "Yes. Zero file uploads; everything runs locally." }
+    ],
+    relatedSlugs: ["svg-to-png", "svg-to-jpg", "png-to-webp", "webp-to-png"]
+  },
+
+  "gif-to-jpg": {
+    slug: "gif-to-jpg",
+    seoTitle: "GIF to JPG Converter — Free In-Browser Image Tool",
+    metaDescription: "Convert GIF images to compact JPEG photos in browser memory. Clean background fill and adjustable quality with zero server uploads.",
+    intro: "Convert GIF images into universally compatible JPEG photos directly in your web browser with custom quality controls.",
+    howTo: [
+      "Select your GIF image.",
+      "Adjust JPEG quality settings.",
+      "Click 'Convert GIF to JPG' and save your file."
+    ],
+    whenToUse: "Extract still images from GIF files to use in documents, emails, and printing.",
+    formatNotes: "Extracts the initial animation frame into standard JPEG pixels.",
+    faqs: [
+      { q: "What happens to animated GIFs?", a: "The first frame of the GIF animation is extracted and rendered into a crisp JPEG photo." },
+      { q: "Does JPG support transparency?", a: "No. Transparent GIF pixels are filled with a clean solid background." }
+    ],
+    relatedSlugs: ["gif-to-png", "gif-to-webp", "png-to-jpg", "webp-to-jpg"]
+  },
+
+  "gif-to-webp": {
+    slug: "gif-to-webp",
+    seoTitle: "GIF to WebP Converter — Lightweight Web Graphics",
+    metaDescription: "Convert GIF graphics to modern WebP format online. Keep transparency and reduce file size with zero server uploads.",
+    intro: "Convert GIF images into modern WebP format in your browser. WebP offers smaller file sizes and superior compression compared to legacy GIF encoding.",
+    howTo: [
+      "Upload your GIF file.",
+      "Click 'Convert GIF to WebP' to process locally.",
+      "Download your compressed WebP image."
+    ],
+    whenToUse: "Perfect for modernizing older website graphics for faster page load times.",
+    formatNotes: "Full support for transparent alpha channels.",
+    faqs: [
+      { q: "Does WebP support transparency like GIF?", a: "Yes. WebP fully supports transparent alpha channels." },
+      { q: "Is WebP smaller than GIF?", a: "Yes. WebP format is substantially smaller than legacy GIF files." }
+    ],
+    relatedSlugs: ["gif-to-png", "gif-to-jpg", "png-to-webp", "webp-to-png"]
+  },
+
+  "bmp-to-webp": {
+    slug: "bmp-to-webp",
+    seoTitle: "BMP to WebP Converter — Ultra-Compressed Web Images",
+    metaDescription: "Convert uncompressed BMP bitmap images to next-gen WebP format. Shrink file sizes by over 90% with zero server uploads.",
+    intro: "Convert heavy Windows Bitmap (.bmp) files into lightweight WebP images directly in your browser.",
+    howTo: [
+      "Drop your BMP image file into the converter.",
+      "Click 'Convert BMP Bitmap to WebP'.",
+      "Download your compressed WebP file instantly."
+    ],
+    whenToUse: "Compress legacy BMP scans and Windows artwork for website publication.",
+    formatNotes: "Drastically cuts file size with no noticeable visual loss.",
+    faqs: [
+      { q: "How much file size reduction can I expect?", a: "Converting raw uncompressed BMP to WebP frequently reduces file size by 90% or more." },
+      { q: "Is my image uploaded anywhere?", a: "No. All conversion takes place in local browser memory." }
+    ],
+    relatedSlugs: ["bmp-to-jpg", "bmp-to-png", "png-to-webp", "jpg-to-webp"]
   },
 
   "jpg-to-pdf": {

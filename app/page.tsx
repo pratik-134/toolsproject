@@ -36,12 +36,22 @@ import {
   FileUp,
 } from "lucide-react";
 
+import type { Metadata } from "next";
+import { BRAND } from "@/lib/brand";
 import { getAllTools } from "@/lib/registry/tools";
 import {
   generateWebApplicationSchema,
   generateFAQPageSchema,
   generateWebsiteOrganizationSchema,
 } from "@/lib/seo/jsonld";
+
+export const metadata: Metadata = {
+  title: `${BRAND.name} — ${BRAND.tagline}`,
+  description: BRAND.description,
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function HomePage() {
   const totalTools = getAllTools().length;

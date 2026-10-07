@@ -1,18 +1,19 @@
 # Qwertygen: Master Project Architecture, Invariants & AI Developer Guide
 
 > **Product:** Qwertygen (`https://qwertygen.com`)  
-> **Umbrella Platform:** Privacy-first, in-browser suite of 172+ tools across all 11 categories  
+> **Umbrella Platform:** Privacy-first, in-browser suite of 194+ tools across all 11 categories  
 > **Flagship Product:** Qwertygen Resume Builder (`/editor`, `/dashboard`) with 20 Vector PDF & Word DOCX templates  
-> **Primary Stack:** Next.js 15.5 (App Router, React 18, TypeScript 5.7, Tailwind CSS 3.4), Zustand 4.5, Zod 3.23, Radix UI primitives (`@radix-ui/react-select`), Lucide Icons  
+> **Primary Stack:** Next.js 15.5 (App Router, React 18, TypeScript 5.7, Tailwind CSS 3.4), Zustand 4.5, Zod 3.23, Radix UI primitives (`@radix-ui/react-select`, `@radix-ui/react-dialog`), Lucide Icons  
 > **AI / Media Boost:** In-browser WebAssembly (Pyodide, Web Workers, Canvas, Web Audio, Web Crypto) + Optional Server Microservice (Python FastAPI for heavyweight Phase 4 models)  
 > **Brand & Storage Configuration:** `lib/brand.ts` (`BRAND` object), `ct_` localStorage prefix with non-destructive fallback migration  
+> **Platform Metrics Source of Truth:** `lib/registry/tools.ts` (`TOOLS_COUNT = 194`, `TOOLS_COUNT_DISPLAY = "194+"`, `TOOLS_COUNT_LABEL = "194+ Tools"`)  
 > **Purpose of this File:** Single source of truth for all architectural invariants, design system guidelines, tool development workflows, resolved gotchas, and verification commands. Every developer and AI assistant working on this codebase must follow the rules in this document without deviation.
 
 ---
 
 ## 1. Core Mission & Non-Negotiable Invariants
 
-Qwertygen is one unified, lightning-fast web platform hosting 172+ everyday tools for PDFs, documents, images, developer utilities, calculators, codes, media, and zero-knowledge cloud sharing. The defining differentiator is **absolute privacy: user files and data are processed directly inside the client browser and never uploaded to any remote server.**
+Qwertygen is one unified, lightning-fast web platform hosting 194+ everyday tools for PDFs, documents, images, developer utilities, calculators, codes, media, and zero-knowledge cloud sharing. The defining differentiator is **absolute privacy: user files and data are processed directly inside the client browser and never uploaded to any remote server.**
 
 ### The 8 Non-Negotiable Invariants (Never Break These):
 
@@ -41,6 +42,7 @@ Qwertygen is one unified, lightning-fast web platform hosting 172+ everyday tool
 5. **Registry-Driven Dynamic Architecture:**
    - All tool pages (`/tools/[category]/[slug]`), category hubs (`/tools/[category]`), tools directory (`/tools`), navigation menus, search palettes, and `sitemap.ts` are generated dynamically from `lib/registry/tools.ts` and `lib/registry/categories.ts`.
    - Never hand-code or hard-code static tool routes.
+   - Always reference the single source of truth constants (`TOOLS_COUNT`, `TOOLS_COUNT_DISPLAY`, `TOOLS_COUNT_LABEL`) for platform statistics.
 
 6. **Mandatory Statutory Disclaimers:**
    - Any tool performing financial or taxation calculations (e.g. mortgage, sales tax, inflation, salary paycheck, loan, salary tax) **must** display the standard statutory financial disclaimer.
@@ -67,7 +69,7 @@ qwertygen/
 │   ├── blog/                               # Career guides and platform documentation
 │   ├── privacy/page.tsx                    # Privacy Policy & 100% client-side execution guarantees
 │   ├── terms/page.tsx                      # Terms of Service
-│   ├── sitemap.ts                          # Automated dynamic sitemap for all 169+ tools and hubs
+│   ├── sitemap.ts                          # Automated dynamic sitemap for all 194 tools and hubs
 │   ├── robots.ts                           # Search engine crawling rules
 │   └── tools/                              # Dynamic Tools Engine
 │       ├── page.tsx                        # Complete tools directory hub (live search + category filters)
@@ -80,8 +82,9 @@ qwertygen/
 │   ├── BrandLogo.tsx                       # Brand logo component (umbrella brand & resume builder)
 │   ├── ThemeToggle.tsx                     # System/Dark/Light theme switch
 │   ├── ui/                                 # Standardized design system component primitives
+│   │   ├── RangeInput.tsx                  # Single source of truth slider primitive with filled track & value badges
 │   │   ├── select.tsx                      # Universal Radix UI Select wrapper (replaces native HTML selects)
-│   │   ├── button.tsx                      # Reusable Button primitive with variants
+│   │   ├── button.tsx                      # Responsive Button primitive with scaled variants (sm, md, lg)
 │   │   ├── input.tsx                       # Input primitive
 │   │   └── dialog.tsx                      # Modal Dialog primitive
 │   ├── tool-shell/                         # Reusable standardized tool UI components
@@ -93,6 +96,7 @@ qwertygen/
 │   └── tools/
 │       ├── ToolView.tsx                    # Dynamic client-side tool loader & RSC boundary
 │       ├── CommandPalette.tsx              # Global Ctrl+K / Cmd+K instant tool search dialog
+│       ├── ToolSearchBar.tsx               # Reusable search bar with smart type auto-detection
 │       ├── engines/                        # Shared multi-tool converter engines (ImagesToPdfEngine, etc.)
 │       ├── pilot/                          # Pilot tools (qr-generator, barcode-generator, etc.)
 │       ├── phase1/                         # Shipped modular tool packages (34 tools)
@@ -105,7 +109,7 @@ qwertygen/
 │   ├── registry/                           # Tool catalog source of truth (pure serializable data)
 │   │   ├── types.ts                        # ToolDefinition, CategoryId, CategoryDefinition
 │   │   ├── categories.ts                   # 11 category definitions with metadata and IDs
-│   │   └── tools.ts                        # Central registry containing all 169 tool definitions
+│   │   └── tools.ts                        # Central registry containing all 194 tool definitions & TOOLS_COUNT
 │   ├── store/                              # State management
 │   │   ├── migrate-brand.ts                # Non-destructive localStorage key migration to ct_ prefix
 │   │   ├── storage-utils.ts                # Safe localStorage wrappers with quota guards
@@ -118,7 +122,7 @@ qwertygen/
 │   ├── brand/                              # Official Qwertygen identity assets (logos, icons)
 │   └── images/samples/                     # Original copyright-free bundled sample photos and assets
 ├── scripts/                                # Verification & Quality Assurance Suite
-│   ├── test-tools.ts                       # Unit test runner executing all 172 tool logic.test.ts suites
+│   ├── test-tools.ts                       # Unit test runner executing all 194 tool logic.test.ts suites
 │   ├── test-registry.ts                    # Schema validator (unique slugs, categories, SEO, FAQs)
 │   ├── test-privacy.ts                     # AST/regex scanner ensuring zero network leaks in client tools
 │   ├── test-docx-templates.ts              # Validates 20 Word template packages
@@ -147,11 +151,12 @@ Every tool in Qwertygen is built using this strict, modular 4-file pattern. Doma
 ### 3. `components/tools/<phase>/<slug>/index.tsx`
 - **Rule:** Starts with `"use client";`.
 - **Features:**
-  - Fully responsive on mobile, tablet, and desktop.
+  - Fully responsive across mobile, tablet, and desktop viewports.
   - High-contrast Dark/Light mode support using standard Tailwind tokens.
   - Universal `@radix-ui/react-select` component wrapper for all dropdown menus.
+  - Universal `RangeInput` component for sliders.
   - Text wrap prevention (`whitespace-nowrap`, `truncate`) on action buttons, chips, and table headers.
-  - Clean layout without redundant badges.
+  - Clean layout without redundant clutter badges.
   - One-click **Copy to Clipboard** with visual checkmark feedback.
   - One-click **Download** button where applicable.
   - Statutory disclaimer box if the tool calculates financial, medical, or legal data.
@@ -165,15 +170,40 @@ Every tool in Qwertygen is built using this strict, modular 4-file pattern. Doma
 
 ## 4. Design System & UI/UX Guidelines
 
+### Single Source of Truth for Platform Counts (`lib/registry/tools.ts`)
+- **`TOOLS_COUNT`**: Computed directly as `tools.length` (currently 194).
+- **`TOOLS_COUNT_DISPLAY`**: Formatted as `"194+"`.
+- **`TOOLS_COUNT_LABEL`**: Formatted as `"194+ Tools"`.
+- Every hero, header, footer, meta tag, SEO snippet, and about description imports these constants to eliminate hardcoded discrepancies.
+
+### Universal Range Slider Component (`components/ui/RangeInput.tsx`)
+- Reusable range slider used across all tools requiring numeric sliding adjustments (image quality, blur radius, tolerance, rotation, scale, padding).
+- Identical track height (`h-2 rounded-full`), dynamic progress fill gradient, styled circular thumb with focus rings, accessible min/max labels, and live value tag with unit formatting.
+- Replaces unstyled native range inputs across the entire site.
+
 ### Unified Select Component (`components/ui/select.tsx`)
 - Standardized wrapper over `@radix-ui/react-select`.
 - Used across the entire site (Passport Photo Generator, Invoice Generator, Estimate Quote Builder, Certificate Generator, Salary Tax Calculator, ImagesToPdfEngine, HTML to PDF, DOCX to PDF, Markdown to PDF, etc.).
 - Eliminates jarring native browser `<select>` controls in favor of accessible, keyboard-navigable, theme-aware dropdown overlays with smooth animations and checkmark indicators.
 
-### Layout, Spacing & Text Wrapping Invariants
-- Action buttons, badges, status chips, and table headers must enforce `whitespace-nowrap` and `truncate` where appropriate to prevent congested or broken multi-line wraps.
-- Save / Favorite tool icon action is positioned in the top-right corner of tool banners (minimalist icon button, no bulky borders or verbose text).
-- Redundant badges (such as "Files never leave your browser • 100% Client-Side") are removed from tool views to keep interfaces uncluttered.
+### Responsive Button System (`components/ui/button.tsx`)
+- Standardized button scaling across mobile, tablet, and desktop:
+  - `sm`: `h-8 px-2.5 text-xs sm:h-9 sm:px-3`
+  - `default`: `h-9 px-3.5 text-xs sm:h-10 sm:px-4 sm:text-sm`
+  - `lg`: `h-10 px-4 text-xs sm:h-11 sm:px-6 sm:text-sm md:h-12 md:text-base`
+- Touch targets on mobile satisfy 44px+ minimum accessibility guidelines without overflowing on smaller screens.
+
+### Mobile Vertical Rhythm & Spacing Standards
+- **Landing Hero Spacing:**
+  - Container vertical gap: `space-y-4 sm:space-y-8`.
+  - Spacing below search bar: 16px on mobile (`pt-0 sm:pt-1` on search, `pt-0 sm:pt-2` on buttons).
+  - Stacked CTA buttons: 12px vertical gap (`gap-3 sm:gap-3.5`).
+  - Spacing below buttons: 16px on mobile (`pt-0 sm:pt-2` on proof pills).
+  - Margin to showcase studio: `mt-8 sm:mt-12`.
+- **Section Heading Typography Clamps:**
+  - Headings: `text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight`.
+  - Descriptions: `text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-400 font-normal`.
+  - Section tops: Eyebrow badges removed for a clean, modern, distraction-free aesthetic.
 
 ### Standard Tailwind Color Tokens
 - **Standard Tailwind Grays Only:** Always use standard Tailwind slate colors:
@@ -200,7 +230,17 @@ Every tool in Qwertygen is built using this strict, modular 4-file pattern. Doma
 
 ## 5. Shipped Flagship Tools & Advanced Features
 
-### 1. Passport Photo Generator (`passport-photo-generator`)
+### 1. Smart Image Background Remover (`image-background-remover`)
+- **Safe 2K Ultra HD Scaling (`calculateSafeDimensions`):** Automatically bounds canvas processing to max 2048px (2K Ultra HD) using high-quality bicubic smoothing. Prevents browser tab Out-Of-Memory (OOM) crashes when users upload massive 12MP–24MP camera/phone images, while delivering razor-sharp export quality.
+- **Dual Segmentation Modes:**
+  - *Smart Subject (Contiguous Flood Fill):* Traverses from outer image borders inward using Breadth-First Search (BFS). Completely prevents internal subject pixels (clothes, skin, jewelry, eyes) from being hollowed out even when their color matches the background.
+  - *Global Color Mode:* Removes matching background colors everywhere across the image (ideal for logos, icons, and isolated vector graphics).
+- **Interactive Eyedropper:** Allows users to click on any point on the image preview to sample custom background colors and add them to the active seed list with live chip management.
+- **Linear $O(N)$ Blur Feathering (`applyAlphaFeather`):** Separable sliding-window box blur algorithm executing in under 20ms without allocating heavy auxiliary buffers.
+- **Debounced Processing:** 180ms debounce with request-ID cancellation guards ensuring rapid slider changes never freeze the UI.
+- **Fill Modes:** Transparent PNG cutout, solid color fill (with hex picker), or two-color linear gradient fill.
+
+### 2. Passport Photo Generator (`passport-photo-generator`)
 - **Biometric Specifications:** Supports 10+ official standards (US 2x2", UK 35x45mm, Schengen/EU 35x45mm, India Passport/Visa, Canada 50x70mm, Australia 35x45mm, Japan 35x45mm, China 33x48mm, UAE 40x50mm, Singapore 35x45mm, PAN Card stamp size).
 - **Multi-up Print Sheet Formats:** Standard 4x6" (10x15cm), 5x7" (13x18cm), A4, US Letter, and Single 1-up cut size at exact 300 DPI physical scale.
 - **Customizable Photo Border:** Toggle border on/off; select thickness (1px Thin, 2px Medium, 3px Thick); select color (Light Gray, Slate, Dark, White).
@@ -209,7 +249,7 @@ Every tool in Qwertygen is built using this strict, modular 4-file pattern. Doma
 - **Retouch & Biometric Guides:** Brightness, contrast, saturation adjustments, 90-degree rotation, horizontal flip, drag/pan, zoom, live webcam snapshot with countdown, and official exam Name & Date strip.
 - **Clean Unbranded Exports:** Zero watermark branding on interactive preview, exported PDF, exported JPG, or browser print dialog.
 
-### 2. Full In-Browser PDF Editor Suite (`pdf-editor`)
+### 3. Full In-Browser PDF Editor Suite (`pdf-editor`)
 - **AcroForm Capabilities:** Create, inspect, and fill interactive text fields, checkboxes, and radio buttons; export form data as FDF and JSON; flatten forms into static page vectors.
 - **Vector Annotations & Redaction:** Freehand drawing, text callouts, shapes, highlighter overlays, whiteout masking, and permanent vector redaction with metadata sanitization.
 - **Document Comparison:** Visual pixel-by-pixel diff engine between two PDF revisions with side-by-side and highlight overlays.
@@ -217,19 +257,19 @@ Every tool in Qwertygen is built using this strict, modular 4-file pattern. Doma
 - **Multi-Format Conversions:** Client-side conversion to Plain Text, HTML, CSV/Excel tabular data, and Word (.docx).
 - **Bates Numbering & Digital Signatures:** Document-wide sequential numbering and cryptographic/drawn signatures.
 
-### 3. Business & Document Builders Suite
+### 4. Business & Document Builders Suite
 - **Invoice & Receipt Generator (`invoice-receipt-generator`):** Professional invoice and receipt builder with line items, tax rates, discounts, custom currency symbols, notes, and print-ready PDF export.
 - **Estimate & Quote Builder (`estimate-quote-builder`):** Quotation and project cost estimates with itemized breakdowns, client terms, and downloadable PDF quotes.
 - **Certificate & Diploma Generator (`certificate-diploma-generator`):** Award certificates and diplomas with multiple frame templates, customizable gold/silver/bronze seals, recipient credentials, and signature lines.
 - **Proposal Builder (`proposal-builder`):** Client project proposals with executive summaries, project scope, deliverable milestones, pricing tables, and formal signature blocks.
 - **Resume Builder (`resume-builder`):** Flagship ATS-compliant builder with 20 distinct design styles, instant preview, import parser, and 3-way DOM/PDF/Word export.
 
-### 4. Video & Screen Capture Suite
+### 5. Video & Screen Capture Suite
 - **Desktop Screen Recorder (`desktop-screen-recorder`):** In-browser screen recording via `navigator.mediaDevices.getDisplayMedia` with microphone audio and WebM/MP4 export.
 - **Web Tab Recorder (`web-tab-recorder`):** Targeted single-browser-tab recording with system audio capture.
 - **Webcam Overlay Recorder (`webcam-overlay-recorder`):** Picture-in-picture draggable circular or rounded webcam overlay recorded simultaneously with desktop video.
 
-### 5. Creative & Social Media Canvas Suite
+### 6. Creative & Social Media Canvas Suite
 - **Social Post Maker (`social-post-maker`):** Square (1:1) and portrait (4:5) social media cards with gradient palettes, typography controls, and category badges.
 - **Story & Reels Maker (`story-reels-maker`):** 9:16 mobile canvas builder for stories and reels with interactive sticker callouts (New Post, Link in Bio, Tap Here, Limited Offer).
 - **Chart & Graph Visualizer (`chart-graph-visualizer`):** In-browser chart builder supporting bar charts, line graphs, pie charts, and radar graphs with instant PNG export.
@@ -239,7 +279,6 @@ Every tool in Qwertygen is built using this strict, modular 4-file pattern. Doma
 - **Interactive JSON/YAML Graph & Tree Visualizer (`json-graph-visualizer`):** In-browser 2D node-tree diagram explorer for complex JSON/YAML schemas with live search filtering, JSONPath copy, and SVG graph export.
 - **Harmonic Color Palette Studio & WCAG Contrast Checker (`color-palette-generator`):** In-browser Coolors/Adobe-grade color palette generator with Complementary, Analogous, Triadic, Monochromatic, Split-Complementary, and Tetradic harmonies, individual color locking, live W3C WCAG 2.1 AA/AAA contrast ratio compliance, Brettel-Viénot color blindness vision simulation (Protanopia, Deuteranopia, Tritanopia, Achromatopsia), and 1-click export to CSS variables, Tailwind configs, and JSON.
 - **CSS Mesh Gradient Studio & Generator (`css-mesh-gradient-generator`):** In-browser Meshgradient/CSS Hero-grade multi-point radial mesh studio with draggable color coordinates, spread radius and blur sliders, aesthetic presets (Aurora, Sunset, Cyberpunk, Spring), and 1-click copy for pure CSS, Tailwind arbitrary classes, and scalable vector SVG wallpaper export.
-- **Smart Image Background Remover (`image-background-remover`):** In-browser Remove.bg/PhotoRoom alternative performing local canvas pixel distance segmentation, edge feathering, and cutouts with transparent, solid, or gradient backgrounds.
 - **Multi-Format Visual Diff Studio (`visual-diff-studio`):** In-browser Diffchecker Pro alternative featuring dual-pane split view, unified patch export, synchronized scrolling, and token-level micro-diff word highlights.
 - **Interactive RegEx Visualizer & Rail Diagram (`regex-visualizer`):** In-browser RegExr railroad diagram visualizer with semantic AST tokens, capture group explanations, and live regex match testing.
 - **PDF Watermark & Page Stamp Studio (`pdf-watermark-stamper`):** In-browser multi-page PDF stamper with vector text watermarks, opacity sliders, diagonal rotation angles, and page range filtering.
@@ -249,7 +288,7 @@ Every tool in Qwertygen is built using this strict, modular 4-file pattern. Doma
 - **Audio Pitch & Tempo Shifter (`audio-pitch-tempo-shifter`):** In-browser Transcribe! alternative with independent Web Audio API pitch shifting (-12 to +12 semitones, fine-tuned cents), variable speed rate playback (0.25x to 2.5x), looping, and instant client-side WAV export.
 - **Offline Language & Text Translator (`language-translator`):** In-browser Google Translate / DeepL alternative supporting 12+ major languages, heuristic script/diacritic/stopword language auto-detection, case & punctuation preservation, native Web Speech API audio pronunciation, and zero-network client privacy.
 
-### 6. 38 Converter Engine Tools
+### 7. 38 Converter Engine Tools
 - **Canvas Image Converters:** WebP to PNG, WebP to JPG, PNG to JPG, JPG to PNG, SVG to PNG, BMP to JPG, BMP to PNG, GIF to PNG, Image to ICO, HEIC to JPG.
 - **Document Converters:** JPG to PDF, PDF to JPG, PDF to PNG, PDF to Text, Image to Text (OCR), DOCX to PDF, HTML to PDF, Markdown to PDF, Excel to PDF, PowerPoint to PDF, PDF to DOCX.
 - **FFmpeg Media Converters:** MP4 to MP3, MOV to MP4, WAV to MP3, WEBM to MP4, M4A to MP3, FLAC to MP3, GIF to MP4, MKV to MP4, AVI to MP4, FLV to MP4, OGG to MP3, AAC to MP3, WMA to MP3.
@@ -257,9 +296,9 @@ Every tool in Qwertygen is built using this strict, modular 4-file pattern. Doma
 
 ---
 
-## 6. The 11 Platform Categories & 186 Shipped Tools
+## 6. The 11 Platform Categories & 194 Shipped Tools
 
-The platform contains 186 registered and fully typed tools across 11 official categories:
+The platform contains 194 registered and fully typed tools across 11 official categories:
 
 ### 1. Document & PDF (`document-pdf` — 38 tools)
 `pdf-editor`, `ats-resume-checker`, `resume-import-viewer`, `pdf-merger`, `pdf-splitter`, `pdf-page-rotator`, `pdf-page-organizer`, `pdf-compressor`, `pdf-bates-stamper`, `pdf-flattener`, `pdf-form-extractor`, `pdf-form-builder`, `pdf-digital-signer`, `markdown-to-pdf`, `html-to-pdf`, `direct-txt-editor`, `direct-markdown-editor`, `direct-html-editor`, `pdf-redaction-tool`, `direct-rtf-creator`, `direct-docx-editor`, `pdf-annotator`, `excel-to-pdf`, `docx-to-pdf`, `pdf-to-docx`, `pdf-encryptor`, `pdf-decryptor`, `powerpoint-to-pdf`, `jpg-to-pdf`, `pdf-to-jpg`, `pdf-to-png`, `pdf-to-text`, `latex-editor`, `camera-to-pdf-scanner`, `job-keyword-matcher`, `pdf-page-numberer`, `pdf-watermark-stamper`, `pdf-to-svg`.
@@ -291,8 +330,8 @@ The platform contains 186 registered and fully typed tools across 11 official ca
 ### 10. Security & Privacy (`security` — 4 tools)
 `file-encryptor`, `file-decryptor`, `steganography-tool`, `metadata-stripper`.
 
-### 11. URL & Cloud (`url-cloud` — planned Phase 5)
-Burn-after-read secret sharer, client pastebin, link protector.
+### 11. URL & Cloud (`url-cloud` — 3 tools)
+`burn-after-read-secret`, `client-pastebin`, `link-protector`.
 
 ---
 
@@ -320,11 +359,18 @@ Any developer or AI modifying this codebase must adhere to these established sol
    - Keep `lib/registry/tools.ts` strictly serializable (no React functions or JSX elements).
    - All dynamic component loading lives in `components/tools/ToolView.tsx`.
 
-6. **PowerShell Script Execution on Windows:**
+6. **Canvas Memory Safety for High-Resolution Imagery:**
+   - Never perform unbounded allocations on user-uploaded camera images (12MP–24MP).
+   - Use `calculateSafeDimensions(width, height, 2048)` to cap working buffers to 2K Ultra HD, preventing Out-Of-Memory browser crashes while maintaining crystal-clear vector/image export quality.
+
+7. **Debounced UI Controls:**
+   - When tools perform CPU-intensive pixel manipulation (such as background removal, blurring, thresholding), debounce range slider changes (150–250ms) and use active request IDs to discard stale executions.
+
+8. **PowerShell Script Execution on Windows:**
    - Windows PowerShell restricts execution of `.ps1` scripts by default.
    - Always execute npm and test scripts via: `cmd /c npm run <command>` or `cmd /c npx <package>`.
 
-7. **Strict Git Invariant:**
+9. **Strict Git Invariant:**
    - Never execute any git command without explicit user permission.
 
 ---
@@ -337,10 +383,10 @@ Execute the verification suite via `cmd /c` on Windows:
 # TypeScript Typecheck (0 errors)
 cmd /c npm run typecheck
 
-# Tool Logic Unit Tests (169 tools passing)
+# Tool Logic Unit Tests (194 tools passing)
 cmd /c npm run test:tools
 
-# Registry & Schema Integrity Check (169 tools, 11 categories)
+# Registry & Schema Integrity Check (194 tools, 11 categories)
 cmd /c npx tsx scripts/test-registry.ts
 
 # Privacy & Zero-Leak Network Scanner
@@ -363,7 +409,7 @@ cmd /c npm run build
 
 ## 9. Progressive Web App (PWA) & Offline Execution Architecture
 
-Qwertygen functions as a fully offline Progressive Web App, enabling all 172+ client-side tools to run without an active internet connection:
+Qwertygen functions as a fully offline Progressive Web App, enabling all 194+ client-side tools to run without an active internet connection:
 
 1. **Service Worker (`public/sw.js`):**
    - **Cache Strategy:** Network-first with cache fallback for navigation HTML requests; Cache-first for static scripts, fonts, stylesheets, and images.
@@ -385,7 +431,7 @@ Qwertygen functions as a fully offline Progressive Web App, enabling all 172+ cl
 Qwertygen enables zero-upload, 100% in-browser data transfer between compatible tools:
 
 1. **Pipeline Engine (`lib/pipeline/handoff.ts`):**
-   - High-affinity tool workflow matrix (`PIPELINE_WORKFLOW_MAP`) defining intelligent downstream targets (e.g. `curl-to-code-converter` -> `client-pastebin` / `burn-after-read-secret`; `json-formatter` -> `json-yaml-converter` / `json-to-typescript`).
+   - High-affinity tool workflow matrix (`PIPELINE_WORKFLOW_MAP`) defining intelligent downstream targets (e.g. `curl-to-code-converter` -> `client-pastebin` / `burn-after-read-secret`; `json-formatter` -> `json-yaml-converter` / `json-to-typescript`; `image-background-remover` -> `canvas-resizer` / `batch-image-compressor` / `image-converter`).
    - Browser storage session buffer (`ct_pipeline_active_handoff`) with 15-minute TTL invalidation.
    - Zero-network privacy: data stays strictly in local browser memory without intermediate server uploads.
 
@@ -394,9 +440,7 @@ Qwertygen enables zero-upload, 100% in-browser data transfer between compatible 
    - Packages text or file data, saves the handoff payload, and navigates seamlessly to the destination tool.
 
 3. **Receiver Component (`components/pipeline/PipelineReceiverBanner.tsx`):**
-   - Mounted globally within `ToolLayout.tsx` above all 172 tool workspaces.
+   - Mounted globally within `ToolLayout.tsx` above all 194 tool workspaces.
    - Detects incoming handoffs targeting the active tool slug.
    - Displays incoming data preview with one-click "Apply Input", "Copy Data", and "Dismiss" controls.
    - Dispatches a `pipeline-apply-data` window event for tools that support direct programmatic state population.
-
-

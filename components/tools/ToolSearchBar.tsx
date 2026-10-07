@@ -17,7 +17,7 @@ import {
   Cloud,
   Zap,
 } from "lucide-react";
-import { getLiveTools, getToolBySlug, getToolUrl, TOOLS_COUNT_LABEL } from "@/lib/registry/tools";
+import { getLiveTools, getToolBySlug, getToolUrl, TOOLS_COUNT_LABEL, TOOLS_COUNT_DISPLAY } from "@/lib/registry/tools";
 import { ToolDefinition, CategoryId } from "@/lib/registry/types";
 import { getCategoryTheme } from "@/lib/category-theme";
 import { KbdShortcut } from "@/components/ui/KbdShortcut";
@@ -457,7 +457,7 @@ export const ToolSearchBar: React.FC<ToolSearchBarProps> = ({
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline"
               >
                 <Sparkles className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
-                <span>Search all 111 tools directory</span>
+                <span>Search all {TOOLS_COUNT_DISPLAY} tools directory</span>
               </Link>
             </div>
           ) : null}

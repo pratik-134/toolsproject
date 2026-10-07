@@ -13,17 +13,17 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/dashboard"],
+        disallow: ["/api/", "/dashboard", "/resumes", "/*?*q=*"],
       },
       {
         userAgent: "Googlebot",
         allow: "/",
-        disallow: ["/api/", "/dashboard"],
+        disallow: ["/api/", "/dashboard", "/resumes", "/*?*q=*"],
       },
       {
         userAgent: "Bingbot",
         allow: "/",
-        disallow: ["/api/", "/dashboard"],
+        disallow: ["/api/", "/dashboard", "/resumes", "/*?*q=*"],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

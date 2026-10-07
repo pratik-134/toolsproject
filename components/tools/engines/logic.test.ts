@@ -297,7 +297,14 @@ export async function runConverterEngineTests(): Promise<boolean> {
     "webp-to-jpg",
     "png-to-jpg",
     "jpg-to-png",
+    "png-to-webp",
+    "jpg-to-webp",
     "svg-to-png",
+    "svg-to-jpg",
+    "svg-to-webp",
+    "gif-to-jpg",
+    "gif-to-webp",
+    "bmp-to-webp",
     "bmp-to-jpg",
     "bmp-to-png",
     "gif-to-png",
@@ -319,8 +326,8 @@ export async function runConverterEngineTests(): Promise<boolean> {
   }
 
   // --------------------------------------------------------------------------
-  // 12. Document & Image Converters (5 tools)
-  // jpg-to-pdf, pdf-to-jpg, pdf-to-png, pdf-to-text, image-to-text, heic-to-jpg
+  // 12. Document & Image Converters (6 tools)
+  // jpg-to-pdf, pdf-to-jpg, pdf-to-png, pdf-to-text, image-to-text, heic-to-jpg, heic-to-png
   // --------------------------------------------------------------------------
   console.log("-> Testing Document & Image Converters...");
   // Test PDF generation via pdf-lib for jpg-to-pdf
@@ -332,7 +339,7 @@ export async function runConverterEngineTests(): Promise<boolean> {
     throw new Error("PDFDocument generation failed for converter engine");
   }
 
-  const docSlugs = ["jpg-to-pdf", "pdf-to-jpg", "pdf-to-png", "pdf-to-text", "image-to-text", "heic-to-jpg"];
+  const docSlugs = ["jpg-to-pdf", "pdf-to-jpg", "pdf-to-png", "pdf-to-text", "image-to-text", "heic-to-jpg", "heic-to-png"];
   for (const slug of docSlugs) {
     const preset = CONVERTER_PRESETS[slug];
     if (!preset) throw new Error(`Missing preset for ${slug}`);

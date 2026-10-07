@@ -55,7 +55,7 @@ export const BLOG_POSTS: BlogPost[] = [
 <ol>
   <li><strong>Standard Heading Taxonomy:</strong> Use universally recognized headings like <em>Experience</em>, <em>Education</em>, <em>Skills</em>, and <em>Certifications</em>. Avoid colloquial headers like "What I've Been Up To" or "My Journey".</li>
   <li><strong>Single or Clean Two-Column Flow:</strong> Multi-column layouts must parse sequentially from top-to-bottom without merging text across column boundaries.</li>
-  <li><strong>Standard Text Fonts:</strong> Use high-legibility web-safe typography like Inter, Roboto, Helvetica, or Georgia. Avoid custom SVG font glyphs or non-standard icon fonts for critical contact data.</li>
+  <li><strong>Standard Text Fonts:</strong> Use high-legibility typography like Manrope, Helvetica, or clean sans-serif. Avoid custom SVG font glyphs or non-standard icon fonts for critical contact data.</li>
   <li><strong>Consistent Date Formats:</strong> Use uniform formats across all items, such as <code>MMM YYYY – Present</code> or <code>YYYY – YYYY</code>.</li>
   <li><strong>Direct Vector Export:</strong> Never export your resume as a flattened raster bitmap inside a PDF. Ensure all text remains highlightable and selectable.</li>
 </ol>

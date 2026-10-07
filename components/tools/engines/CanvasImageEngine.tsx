@@ -108,10 +108,10 @@ export function CanvasImageEngine({ preset }: CanvasImageEngineProps) {
               <span>Conversion Preset Settings</span>
             </div>
 
-            {preset.outputFormat === "jpeg" && (
+            {(preset.outputFormat === "jpeg" || preset.outputFormat === "webp") && (
               <div className="space-y-1">
                 <div className="flex items-center justify-between text-slate-700">
-                  <label className="font-semibold">JPEG Quality: {Math.round(quality * 100)}%</label>
+                  <label className="font-semibold">{preset.outputFormat === "webp" ? "WebP" : "JPEG"} Quality: {Math.round(quality * 100)}%</label>
                 </div>
                 <input
                   type="range"
@@ -125,7 +125,7 @@ export function CanvasImageEngine({ preset }: CanvasImageEngineProps) {
               </div>
             )}
 
-            {preset.slug === "png-to-jpg" || preset.slug === "webp-to-jpg" ? (
+            {preset.outputFormat === "jpeg" ? (
               <div className="space-y-1">
                 <label className="font-semibold text-slate-700 block">
                   Background Fill (For Transparent Pixels)
@@ -159,7 +159,7 @@ export function CanvasImageEngine({ preset }: CanvasImageEngineProps) {
               </div>
             ) : null}
 
-            {preset.slug === "svg-to-png" && (
+            {preset.inputFormats.includes(".svg") && (
               <div className="space-y-1">
                 <label className="font-semibold text-slate-700 block">Resolution Multiplier</label>
                 <div className="flex items-center gap-2">
@@ -225,7 +225,9 @@ async function convertSingleImage(
 
       ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
 
-      const mimeType = outputFormat === "jpeg" ? "image/jpeg" : "image/png";
+      let mimeType = "image/png";
+      if (outputFormat === "jpeg") mimeType = "image/jpeg";
+      else if (outputFormat === "webp") mimeType = "image/webp";
 
       canvas.toBlob(
         (blob) => {

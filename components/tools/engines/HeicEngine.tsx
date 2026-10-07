@@ -29,11 +29,15 @@ export function HeicEngine({ preset }: HeicEngineProps) {
     setFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const convertHeicToJpg = async () => {
+  const convertHeic = async () => {
     if (files.length === 0 || !files[0]) return;
     setIsProcessing(true);
     setProgressPercent(10);
     setErrorMessage(null);
+
+    const isPng = preset.outputFormat === "png";
+    const toType = isPng ? "image/png" : "image/jpeg";
+    const ext = preset.downloadFilenameExtension || (isPng ? ".png" : ".jpg");
 
     try {
       // Dynamic import of heic2any
@@ -43,8 +47,8 @@ export function HeicEngine({ preset }: HeicEngineProps) {
         const file = files[0];
         const conversionResult = await heic2any({
           blob: file,
-          toType: "image/jpeg",
-          quality,
+          toType,
+          quality: isPng ? undefined : quality,
         });
 
         const resultBlob = Array.isArray(conversionResult)
@@ -57,7 +61,7 @@ export function HeicEngine({ preset }: HeicEngineProps) {
         const baseName = file.name.substring(0, file.name.lastIndexOf(".")) || file.name;
 
         setDownloadUrl(url);
-        setDownloadFilename(`${baseName}.jpg`);
+        setDownloadFilename(`${baseName}${ext}`);
       } else {
         // Multi-file HEIC batch
         const JSZip = (await import("jszip")).default;
@@ -68,8 +72,8 @@ export function HeicEngine({ preset }: HeicEngineProps) {
           if (!file) continue;
           const conversionResult = await heic2any({
             blob: file,
-            toType: "image/jpeg",
-            quality,
+            toType,
+            quality: isPng ? undefined : quality,
           });
 
           const resultBlob = Array.isArray(conversionResult)
@@ -78,7 +82,7 @@ export function HeicEngine({ preset }: HeicEngineProps) {
 
           if (resultBlob) {
             const baseName = file.name.substring(0, file.name.lastIndexOf(".")) || file.name;
-            zip.file(`${baseName}.jpg`, resultBlob);
+            zip.file(`${baseName}${ext}`, resultBlob);
           }
 
           setProgressPercent(10 + Math.round(((i + 1) / files.length) * 85));
@@ -88,7 +92,7 @@ export function HeicEngine({ preset }: HeicEngineProps) {
         const url = URL.createObjectURL(zipBlob);
 
         setDownloadUrl(url);
-        setDownloadFilename("heic-converted-photos.zip");
+        setDownloadFilename(`${preset.slug}-converted-photos.zip`);
       }
     } catch (err: any) {
       console.error("[HeicEngine Error]:", err);
@@ -118,7 +122,7 @@ export function HeicEngine({ preset }: HeicEngineProps) {
       onFilesSelected={handleFilesSelected}
       onRemoveFile={handleRemoveFile}
       actionLabel={preset.actionLabel}
-      onAction={convertHeicToJpg}
+      onAction={convertHeic}
       isProcessing={isProcessing}
       progressPercent={progressPercent}
       downloadUrl={downloadUrl}
@@ -126,9 +130,9 @@ export function HeicEngine({ preset }: HeicEngineProps) {
       onReset={handleReset}
       errorMessage={errorMessage}
       isActionDisabled={files.length === 0}
-      dropzoneText="Drag & drop Apple iPhone HEIC/HEIF photos to convert to JPG"
+      dropzoneText={`Drag & drop Apple iPhone HEIC/HEIF photos to convert to ${preset.outputFormat.toUpperCase()}`}
       customControls={
-        files.length > 0 && !downloadUrl ? (
+        files.length > 0 && !downloadUrl && preset.outputFormat !== "png" ? (
           <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/70 space-y-3 text-xs font-body">
             <div className="flex items-center gap-2 font-bold text-slate-800">
               <Sliders className="h-4 w-4 text-blue-600" />

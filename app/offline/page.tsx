@@ -7,6 +7,10 @@ import { BRAND } from "@/lib/brand";
 export const metadata: Metadata = {
   title: "Offline Mode",
   description: "Qwertygen works offline. All client-side tools run in-memory inside your browser with zero network required.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function OfflinePage() {

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { BlogPost } from "@/lib/blog/types";
 import { Calendar, Clock, ArrowRight, Sparkles } from "lucide-react";
 
@@ -32,11 +33,12 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, isFeatured = false }) 
           >
             {/* Cover Image Background */}
             {post.coverImage && (
-              <img
+              <Image
                 src={post.coverImage}
                 alt={post.coverImageAlt || post.title}
-                loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-25 mix-blend-overlay pointer-events-none"
+                fill
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                className="object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-25 mix-blend-overlay pointer-events-none"
               />
             )}
 
@@ -131,11 +133,12 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, isFeatured = false }) 
         } p-5 flex flex-col justify-between relative overflow-hidden text-white`}
       >
         {post.coverImage && (
-          <img
+          <Image
             src={post.coverImage}
             alt={post.coverImageAlt || post.title}
-            loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-30 mix-blend-overlay pointer-events-none"
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-30 mix-blend-overlay pointer-events-none"
           />
         )}
         <div className="relative z-10 flex items-center justify-between">
