@@ -4,84 +4,108 @@ import { CATEGORY_LIST } from "@/lib/registry/categories";
 import { getAllTools } from "@/lib/registry/tools";
 import { getAllPosts } from "@/lib/blog/posts";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const rawDomain = process.env.NEXT_PUBLIC_SITE_URL || BRAND.domain || "https://qwertygen.com";
-  const baseUrl = rawDomain.startsWith("http") ? rawDomain : `https://${rawDomain}`;
-  const currentDate = new Date();
-
-  const coreRoutes: MetadataRoute.Sitemap = [
-    {
-      url: `${baseUrl}`,
-      lastModified: currentDate,
-      changeFrequency: "daily",
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/tools`,
-      lastModified: currentDate,
-      changeFrequency: "daily",
-      priority: 0.95,
-    },
-    {
-      url: `${baseUrl}/editor`,
-      lastModified: currentDate,
-      changeFrequency: "daily",
-      priority: 0.95,
-    },
-    {
-      url: `${baseUrl}/brand`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/privacy`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/terms`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
+export async function generateSitemaps() {
+  return [
+    { id: "pages" },
+    { id: "categories" },
+    { id: "tools" },
+    { id: "blog" },
   ];
+}
 
-  // Category suite pages
-  const categoryRoutes: MetadataRoute.Sitemap = CATEGORY_LIST.map((cat) => ({
-    url: `${baseUrl}/tools/${cat.id}`,
-    lastModified: currentDate,
-    changeFrequency: "weekly",
-    priority: 0.85,
-  }));
+export default async function sitemap({
+  id,
+}: {
+  id: string;
+}): Promise<MetadataRoute.Sitemap> {
+  const rawDomain =
+    process.env.NEXT_PUBLIC_SITE_URL || BRAND.domain || "https://qwertygen.com";
+  const baseUrl = rawDomain.startsWith("http")
+    ? rawDomain
+    : `https://${rawDomain}`;
 
-  // Tool dynamic pages (all 167 in-browser tools)
-  const liveTools = getAllTools().filter(
-    (t) => t.status === "live" && t.slug !== "resume-builder"
-  );
-  const toolRoutes: MetadataRoute.Sitemap = liveTools.map((tool) => ({
-    url: `${baseUrl}/tools/${tool.category}/${tool.slug}`,
-    lastModified: currentDate,
-    changeFrequency: "weekly",
-    priority: 0.85,
-  }));
+  // Stable baseline date for tools and static legal pages
+  const baselineDate = new Date("2026-03-15T00:00:00.000Z");
 
-  // Blog routes
-  const blogRoutes: MetadataRoute.Sitemap = [
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: currentDate,
-      changeFrequency: "daily",
+  if (id === "pages") {
+    return [
+      {
+        url: `${baseUrl}`,
+        lastModified: baselineDate,
+        changeFrequency: "daily",
+        priority: 1.0,
+      },
+      {
+        url: `${baseUrl}/tools`,
+        lastModified: baselineDate,
+        changeFrequency: "daily",
+        priority: 0.95,
+      },
+      {
+        url: `${baseUrl}/editor`,
+        lastModified: baselineDate,
+        changeFrequency: "daily",
+        priority: 0.95,
+      },
+      {
+        url: `${baseUrl}/brand`,
+        lastModified: baselineDate,
+        changeFrequency: "monthly",
+        priority: 0.6,
+      },
+      {
+        url: `${baseUrl}/privacy`,
+        lastModified: baselineDate,
+        changeFrequency: "monthly",
+        priority: 0.5,
+      },
+      {
+        url: `${baseUrl}/terms`,
+        lastModified: baselineDate,
+        changeFrequency: "monthly",
+        priority: 0.5,
+      },
+    ];
+  }
+
+  if (id === "categories") {
+    return CATEGORY_LIST.map((cat) => ({
+      url: `${baseUrl}/tools/${cat.id}`,
+      lastModified: baselineDate,
+      changeFrequency: "weekly",
       priority: 0.85,
-    },
-    ...getAllPosts().map((post) => ({
-      url: `${baseUrl}/blog/${post.slug}`,
-      lastModified: new Date(post.publishedAt),
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    })),
-  ];
+    }));
+  }
 
-  return [...coreRoutes, ...categoryRoutes, ...toolRoutes, ...blogRoutes];
+  if (id === "tools") {
+    const liveTools = getAllTools().filter(
+      (t) => t.status === "live" && t.slug !== "resume-builder"
+    );
+    return liveTools.map((tool) => ({
+      url: `${baseUrl}/tools/${tool.category}/${tool.slug}`,
+      lastModified: baselineDate,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    }));
+  }
+
+  if (id === "blog") {
+    const posts = getAllPosts();
+    return [
+      {
+        url: `${baseUrl}/blog`,
+        lastModified: baselineDate,
+        changeFrequency: "daily",
+        priority: 0.85,
+      },
+      ...posts.map((post) => ({
+        url: `${baseUrl}/blog/${post.slug}`,
+        lastModified: new Date(post.publishedAt),
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      })),
+    ];
+  }
+
+  return [];
 }
