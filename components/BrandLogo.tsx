@@ -167,13 +167,13 @@ export const QwertygenLogo: React.FC<QwertygenLogoProps> = ({
       <QwertygenIcon size={size} className="w-7 h-7 sm:w-[34px] sm:h-[34px] shrink-0 flex items-center justify-center" monochrome={isMonochrome} />
 
       <div className="inline-flex items-center text-left">
-        <span className="inline-flex items-baseline font-headings text-[17px] sm:text-[21px] font-bold tracking-tight leading-normal">
+        <span className="inline-flex items-center font-headings text-[17px] sm:text-[21px] font-bold tracking-tight leading-none">
           <span className={clearTextColor}>{prefixText}</span>
           <span
             className={
               isMonochrome
                 ? clearTextColor
-                : "bg-gradient-to-r from-[#0EA5E9] to-[#06D6A0] bg-clip-text text-transparent inline-block pb-0.5"
+                : "bg-gradient-to-r from-[#0EA5E9] to-[#06D6A0] bg-clip-text text-transparent inline-block"
             }
           >
             {BRAND.brandSuffix}
