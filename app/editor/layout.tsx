@@ -53,12 +53,6 @@ export default function EditorLayout({
           "100% Client-Side Privacy",
           "Zero Watermarks or Paywalls",
         ],
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: "4.95",
-          bestRating: "5",
-          ratingCount: "820",
-        },
       },
       {
         "@type": "BreadcrumbList",

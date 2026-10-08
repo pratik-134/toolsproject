@@ -171,12 +171,6 @@ export function generateToolJsonLd(tool: ToolDefinition) {
         "Zero Paywalls & No Watermarks",
         "Instant Download",
       ],
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "4.9",
-        bestRating: "5",
-        ratingCount: "250",
-      },
     },
     {
       "@type": "BreadcrumbList",
