@@ -85,11 +85,11 @@ export const ResumeSwitcherDropdown: React.FC = () => {
             className="rounded-md border border-blue-300 dark:border-blue-600 bg-white dark:bg-slate-800 px-2 py-1 text-xs sm:text-sm font-bold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 max-w-[80px] xs:max-w-[110px] sm:max-w-[180px]"
           />
         ) : (
-          <div className="flex items-center gap-0.5 sm:gap-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 p-0.5 transition-colors min-w-0">
+          <div className="flex items-center gap-0.5 sm:gap-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 p-0.5 transition-colors min-w-0 h-8.5">
             <button
               type="button"
               onClick={() => setIsEditingTitle(true)}
-              className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate max-w-[80px] xs:max-w-[110px] sm:max-w-[160px] md:max-w-[200px] px-1 py-0.5 text-left"
+              className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate max-w-[90px] xs:max-w-[130px] sm:max-w-[180px] md:max-w-[220px] px-1.5 py-1 text-left"
               title="Click to rename"
             >
               {resumeData.title || "Untitled Resume"}
@@ -101,7 +101,7 @@ export const ResumeSwitcherDropdown: React.FC = () => {
               title="Switch resume"
               aria-label="Switch resume"
             >
-              <ChevronDown className="h-3.5 w-3.5" />
+              <ChevronDown className="h-4 w-4" />
             </button>
           </div>
         )}

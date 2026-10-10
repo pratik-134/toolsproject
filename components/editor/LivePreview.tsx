@@ -49,19 +49,22 @@ export const LivePreview: React.FC<LivePreviewProps> = ({ mobileTab }) => {
   const [pageCount, setPageCount] = useState<number>(1);
   const [canvasHeight, setCanvasHeight] = useState<number>(A4_HEIGHT_PX);
 
+  const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
   const scale = zoomLevel / 100;
 
   const layout = getComputedResumeLayout(resumeData.theme);
 
-  // Auto-fit scale to viewport width on mobile/tablet screens (< 1024px)
+  // Auto-fit scale to available container/viewport width on small/tablet screens
   useEffect(() => {
     const handleAutoFit = () => {
       if (typeof window === "undefined") return;
-      if (window.innerWidth < 1024) {
-        const padding = window.innerWidth < 640 ? 20 : 48;
-        const availableWidth = Math.max(260, window.innerWidth - padding);
-        const targetZoom = Math.max(25, Math.min(100, Math.round((availableWidth / A4_WIDTH_PX) * 100)));
+      const containerWidth = containerRef.current?.clientWidth || window.innerWidth;
+      if (containerWidth < 1024) {
+        // Safe horizontal padding so the A4 preview has breathing room and never gets cut off
+        const padding = containerWidth < 480 ? 16 : containerWidth < 640 ? 24 : 48;
+        const availableWidth = Math.max(200, containerWidth - padding);
+        const targetZoom = Math.max(20, Math.min(100, Math.round((availableWidth / A4_WIDTH_PX) * 100)));
         setZoomLevel(targetZoom);
       }
     };
@@ -78,9 +81,10 @@ export const LivePreview: React.FC<LivePreviewProps> = ({ mobileTab }) => {
 
   const handleFitToScreen = () => {
     if (typeof window === "undefined") return;
-    const padding = window.innerWidth < 640 ? 24 : 64;
-    const availableWidth = window.innerWidth - padding;
-    const targetZoom = Math.max(30, Math.min(120, Math.round((availableWidth / A4_WIDTH_PX) * 100)));
+    const containerWidth = containerRef.current?.clientWidth || window.innerWidth;
+    const padding = containerWidth < 480 ? 16 : containerWidth < 640 ? 24 : 48;
+    const availableWidth = Math.max(200, containerWidth - padding);
+    const targetZoom = Math.max(20, Math.min(120, Math.round((availableWidth / A4_WIDTH_PX) * 100)));
     setZoomLevel(targetZoom);
   };
 
@@ -120,7 +124,10 @@ export const LivePreview: React.FC<LivePreviewProps> = ({ mobileTab }) => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-start h-full py-4 sm:py-8 px-2 sm:px-6 overflow-y-auto overflow-x-hidden w-full bg-slate-100/70 dark:bg-slate-900/70 pb-24">
+    <div
+      ref={containerRef}
+      className="relative flex flex-col items-center justify-start h-full py-4 sm:py-8 px-2 sm:px-6 overflow-y-auto overflow-x-hidden w-full bg-slate-100/70 dark:bg-slate-900/70 pb-24"
+    >
       {/* Floating Canvas Dock */}
       <div className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border border-slate-200 dark:border-slate-700 shadow-xl no-print select-none transition-all max-w-[calc(100vw-24px)] overflow-x-auto no-scrollbar">
         {/* Zoom Out */}
