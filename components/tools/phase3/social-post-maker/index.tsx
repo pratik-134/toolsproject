@@ -139,11 +139,13 @@ export default function SocialPostMakerTool() {
     const file = e.target.files?.[0];
     if (!file) return;
     const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
     img.onload = () => {
+      URL.revokeObjectURL(objectUrl);
       setUploadedBgImg(img);
       setConfig((prev) => ({ ...prev, backgroundType: "image" }));
     };
-    img.src = URL.createObjectURL(file);
+    img.src = objectUrl;
   };
 
   return (

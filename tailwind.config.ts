@@ -124,6 +124,8 @@ const config: Config = {
         headings: ['var(--font-manrope)', "Manrope"],
         body: ['var(--font-manrope)', "Manrope"],
         sans: ['var(--font-manrope)', "Manrope"],
+        mono: ['var(--font-manrope)', "Manrope"],
+        serif: ['var(--font-manrope)', "Manrope"],
       },
       fontSize: {
         // ── Design System Spec: WebTools Core Modular Scale ───────────────

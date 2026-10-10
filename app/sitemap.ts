@@ -48,12 +48,6 @@ export default async function sitemap({
         priority: 0.95,
       },
       {
-        url: `${baseUrl}/brand`,
-        lastModified: baselineDate,
-        changeFrequency: "monthly",
-        priority: 0.6,
-      },
-      {
         url: `${baseUrl}/privacy`,
         lastModified: baselineDate,
         changeFrequency: "monthly",

@@ -8,6 +8,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { getAllPosts, getPostBySlug, getRelatedPosts } from "@/lib/blog/posts";
 import { getToolBySlug } from "@/lib/registry/tools";
+import { getBaseUrl } from "@/lib/seo/metadata";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { ShareButtons } from "@/components/blog/ShareButtons";
 import {
@@ -40,7 +41,7 @@ export async function generateMetadata({
 
   if (!post) return {};
 
-  const baseUrl = BRAND.domain ? `https://${BRAND.domain}` : "https://qwertygen.com";
+  const baseUrl = getBaseUrl();
   const postUrl = `${baseUrl}/blog/${post.slug}`;
 
   return {
@@ -87,7 +88,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     year: "numeric",
   });
 
-  const baseUrl = BRAND.domain ? `https://${BRAND.domain}` : "https://qwertygen.com";
+  const baseUrl = getBaseUrl();
   const articleUrl = `${baseUrl}/blog/${post.slug}`;
 
   // JSON-LD Structured Data

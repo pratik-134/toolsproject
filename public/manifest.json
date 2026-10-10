@@ -1,7 +1,7 @@
 {
   "name": "Qwertygen — 100% In-Browser Privacy Tools & ATS Resume Builder",
   "short_name": "Qwertygen",
-  "description": "169+ free, private in-browser document, developer, media, and calculator tools with zero server file uploads.",
+  "description": "195+ free, private in-browser document, developer, media, and calculator tools with zero server file uploads.",
   "start_url": "/",
   "scope": "/",
   "id": "/",
@@ -37,7 +37,7 @@
     {
       "name": "All Tools Hub",
       "short_name": "Tools",
-      "description": "Browse 169+ free client-side privacy tools.",
+      "description": "Browse 195+ free client-side privacy tools.",
       "url": "/tools",
       "icons": [{ "src": "/icon.png", "sizes": "512x512" }]
     },

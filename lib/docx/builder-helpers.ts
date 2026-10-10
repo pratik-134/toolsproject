@@ -52,18 +52,7 @@ export function ptToTwip(pt: number): number {
  * Microsoft Word, Google Docs, Apple Pages, and LibreOffice.
  */
 export function mapDocxFont(fontName?: string): string {
-  if (!fontName) return "Calibri";
-  const lower = fontName.toLowerCase();
-  if (lower.includes("jetbrains") || lower.includes("mono") || lower.includes("fira")) {
-    return "Consolas";
-  }
-  if (lower.includes("lora") || lower.includes("playfair") || lower.includes("serif") || lower.includes("times")) {
-    return "Georgia";
-  }
-  if (lower.includes("poppins") || lower.includes("sans") || lower.includes("arial")) {
-    return "Arial";
-  }
-  return "Calibri";
+  return "Manrope";
 }
 
 /**

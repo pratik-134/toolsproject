@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { BRAND } from "@/lib/brand";
 import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { FileText, ArrowRight, CheckCircle2 } from "lucide-react";
 
@@ -176,22 +177,7 @@ export default function TermsPage() {
           </div>
         </section>
       </main>
-
-      {/* Streamlined Footer */}
-      <footer className="bg-white dark:bg-slate-950 text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800 py-8 font-body text-xs">
-        <div className="max-w-container mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="font-headings font-bold text-slate-900 dark:text-white">{BRAND.name}</span>
-            <span className="text-slate-500 dark:text-slate-400">— {BRAND.tagline}</span>
-          </div>
-          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-6 gap-y-2">
-            <Link href="/" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home</Link>
-            <Link href="/tools" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Tools</Link>
-            <Link href="/privacy" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Privacy Policy</Link>
-            <Link href="/editor" className="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Resume Builder</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

@@ -9,7 +9,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Merge, split, compress, encrypt, redact, and convert PDFs and office documents 100% locally in your browser sandbox.",
     iconName: "FileText",
-    expectedToolCount: 34,
+    expectedToolCount: 38,
     colorKey: "pdf",
   },
   image: {
@@ -19,7 +19,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Crop, convert, resize, compress, retouch, remove EXIF metadata, and generate app favicons with zero server uploads.",
     iconName: "Image",
-    expectedToolCount: 26,
+    expectedToolCount: 39,
     colorKey: "image",
   },
   security: {
@@ -69,7 +69,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Transcode audio, trim waveforms, record voice memos, boost volume, and edit ID3 tags in your browser memory.",
     iconName: "Mic",
-    expectedToolCount: 6,
+    expectedToolCount: 8,
     colorKey: "audio",
   },
   builders: {
@@ -89,7 +89,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Format, validate, beautify, and convert JSON, XML, YAML, SQL, regex, Base64, and code diffs with complete local secrecy.",
     iconName: "Code2",
-    expectedToolCount: 27,
+    expectedToolCount: 36,
     colorKey: "developer",
   },
   utilities: {
@@ -99,7 +99,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Word counter, case converter, password generator, checksum verifier, unit converter, and duplicate line cleaner.",
     iconName: "Wrench",
-    expectedToolCount: 13,
+    expectedToolCount: 14,
     colorKey: "utility",
   },
   calculators: {
@@ -109,7 +109,7 @@ export const CATEGORIES: Record<CategoryId, CategoryDefinition> = {
     description:
       "Mortgage amortization, compound interest, ROI, BMI, calorie split, date math, subnetting, and unit converters.",
     iconName: "Calculator",
-    expectedToolCount: 33,
+    expectedToolCount: 34,
     colorKey: "calculators",
   },
 };

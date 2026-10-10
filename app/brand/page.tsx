@@ -1,5 +1,6 @@
 import { BrandLogoPresentation } from "@/components/brand/BrandLogoPresentation";
 import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 import { constructToolMetadata } from "@/lib/seo/metadata";
 import type { Metadata } from "next";
@@ -24,6 +25,7 @@ export default function BrandPage() {
       <main className="flex-1">
         <BrandLogoPresentation />
       </main>
+      <Footer />
     </div>
   );
 }

@@ -106,8 +106,12 @@ export default function MemeCaptionGeneratorTool() {
     const file = e.target.files?.[0];
     if (!file) return;
     const img = new Image();
-    img.onload = () => setImageElement(img);
-    img.src = URL.createObjectURL(file);
+    const objectUrl = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      setImageElement(img);
+    };
+    img.src = objectUrl;
   };
 
   const handleClearImage = () => {

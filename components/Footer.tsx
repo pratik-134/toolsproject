@@ -230,11 +230,6 @@ export const Footer: React.FC = () => {
                   Terms of Service
                 </Link>
               </li>
-              <li>
-                <Link href="/brand" className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  Brand Guidelines
-                </Link>
-              </li>
             </ul>
           </div>
         </div>

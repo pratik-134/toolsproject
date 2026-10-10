@@ -506,7 +506,7 @@ input[type="range"]::-moz-range-track,
 }
 
 .blog-prose h2 {
-  font-family: var(--font-headings), system-ui, sans-serif;
+  font-family: var(--font-manrope), "Manrope", sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   color: #0F172A;
@@ -527,7 +527,7 @@ input[type="range"]::-moz-range-track,
 }
 
 .blog-prose h3 {
-  font-family: var(--font-headings), system-ui, sans-serif;
+  font-family: var(--font-manrope), "Manrope", sans-serif;
   font-size: 1.25rem;
   font-weight: 600;
   color: #0F172A;
@@ -571,7 +571,7 @@ input[type="range"]::-moz-range-track,
 }
 
 .blog-prose code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-family: var(--font-manrope), "Manrope", monospace;
   font-size: 0.875em;
   padding: 0.2rem 0.4rem;
   border-radius: 0.375rem;

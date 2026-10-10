@@ -210,7 +210,7 @@ export default function BurnAfterReadSecretTool() {
             <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-amber-500/10 text-amber-600 dark:text-amber-400 ring-1 ring-amber-500/20 mb-2">
               <Flame className="w-7 h-7" />
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight font-heading">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight font-headings">
               Confidential Encrypted Secret
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-md mx-auto">
@@ -401,7 +401,7 @@ export default function BurnAfterReadSecretTool() {
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 ring-1 ring-emerald-500/20 mb-1">
                   <Check className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg font-bold font-heading">
+                <h3 className="text-lg font-bold font-headings">
                   Encrypted Secret Link Ready
                 </h3>
                 <p className="text-xs text-slate-600 dark:text-slate-400 max-w-md mx-auto">

@@ -4,7 +4,7 @@
  * theme toggling, and interactive user flows.
  */
 
-import { TOOLS, getAllTools, getToolBySlug, getToolsByCategory } from "../lib/registry/tools";
+import { TOOLS, TOOLS_COUNT, getAllTools, getToolBySlug, getToolsByCategory } from "../lib/registry/tools";
 import { CATEGORIES, getCategoryById } from "../lib/registry/categories";
 import { CONVERTER_PRESETS } from "../lib/registry/converter-presets";
 import { generateMetadata as generateToolMetadata } from "../app/tools/[category]/[slug]/page";
@@ -38,7 +38,7 @@ async function runE2eTestSuite() {
   // ==========================================================================
   console.log("▶ STAGE 1: Testing Route Integrity & Metadata Generation...");
   const allTools = getAllTools();
-  assert(allTools.length === 186, `Expected 186 tools, found ${allTools.length}`);
+  assert(allTools.length === TOOLS_COUNT, `Expected ${TOOLS_COUNT} tools, found ${allTools.length}`);
 
   let metadataCount = 0;
   for (const tool of allTools) {

@@ -16,10 +16,22 @@ export function registerPdfFonts(): void {
         {
           src: "https://cdn.jsdelivr.net/fontsource/fonts/manrope@latest/latin-400-normal.ttf",
           fontWeight: 400,
+          fontStyle: "normal",
+        },
+        {
+          src: "https://cdn.jsdelivr.net/fontsource/fonts/manrope@latest/latin-400-normal.ttf",
+          fontWeight: 400,
+          fontStyle: "italic",
         },
         {
           src: "https://cdn.jsdelivr.net/fontsource/fonts/manrope@latest/latin-700-normal.ttf",
           fontWeight: 700,
+          fontStyle: "normal",
+        },
+        {
+          src: "https://cdn.jsdelivr.net/fontsource/fonts/manrope@latest/latin-700-normal.ttf",
+          fontWeight: 700,
+          fontStyle: "italic",
         },
       ],
     });
@@ -33,10 +45,22 @@ export function registerPdfFonts(): void {
           {
             src: "https://cdn.jsdelivr.net/fontsource/fonts/manrope@latest/latin-400-normal.ttf",
             fontWeight: 400,
+            fontStyle: "normal",
+          },
+          {
+            src: "https://cdn.jsdelivr.net/fontsource/fonts/manrope@latest/latin-400-normal.ttf",
+            fontWeight: 400,
+            fontStyle: "italic",
           },
           {
             src: "https://cdn.jsdelivr.net/fontsource/fonts/manrope@latest/latin-700-normal.ttf",
             fontWeight: 700,
+            fontStyle: "normal",
+          },
+          {
+            src: "https://cdn.jsdelivr.net/fontsource/fonts/manrope@latest/latin-700-normal.ttf",
+            fontWeight: 700,
+            fontStyle: "italic",
           },
         ],
       });

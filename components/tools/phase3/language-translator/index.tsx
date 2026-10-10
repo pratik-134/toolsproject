@@ -26,7 +26,6 @@ import {
   detectLanguage,
   getLanguageMetadata,
 } from "./logic";
-import { translateAction } from "@/app/actions/translate";
 import { setPipelineHandoff } from "@/lib/pipeline/handoff";
 
 const PINNED_SOURCE_CODES = ["auto", "en", "es", "fr", "de"];
@@ -118,9 +117,9 @@ export default function LanguageTranslatorTool() {
     return getLanguageMetadata(targetLang) || SUPPORTED_LANGUAGES[1]!;
   }, [targetLang]);
 
-  // Execute translation via Google Translate Neural Action with local fallback
+  // Execute 100% in-browser translation via local lexicon engine
   const performTranslation = useCallback(
-    async (text: string, from: string, to: string) => {
+    (text: string, from: string, to: string) => {
       if (!text || !text.trim()) {
         setTranslatedText("");
         setIsTranslating(false);
@@ -129,27 +128,13 @@ export default function LanguageTranslatorTool() {
 
       setIsTranslating(true);
       try {
-        const response = await translateAction(text, from, to);
-        if (response.success && response.translatedText) {
-          setTranslatedText(response.translatedText);
-          if (response.detectedLang) {
-            setDetectedLangCode(response.detectedLang);
-          }
-        } else {
-          // Graceful fallback to local in-browser lexicon engine
-          const localResult = translateText(text, from, to);
-          setTranslatedText(localResult.translatedText);
-          if (localResult.detectedLang) {
-            setDetectedLangCode(localResult.detectedLang);
-          }
-        }
-      } catch {
-        // Local fallback
         const localResult = translateText(text, from, to);
         setTranslatedText(localResult.translatedText);
         if (localResult.detectedLang) {
           setDetectedLangCode(localResult.detectedLang);
         }
+      } catch (err) {
+        console.error("Local translation error:", err);
       } finally {
         setIsTranslating(false);
       }

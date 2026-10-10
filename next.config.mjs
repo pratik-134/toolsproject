@@ -37,6 +37,10 @@ const nextConfig = {
             key: 'Permissions-Policy',
             value: 'camera=(self), microphone=(self), display-capture=(self)',
           },
+          {
+            key: 'Content-Security-Policy',
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' blob: data: https:; media-src 'self' blob: data:; connect-src 'self' blob: data: https://cdn.jsdelivr.net https://huggingface.co https://*.huggingface.co; worker-src 'self' blob:; frame-src 'self' blob:;",
+          },
         ],
       },
       {
@@ -79,6 +83,11 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      {
+        source: '/tools/builders/resume-builder',
+        destination: '/editor',
+        permanent: true,
+      },
       {
         source: '/tools/document-pdf/pdf-to-image',
         destination: '/tools/document-pdf/pdf-to-jpg',

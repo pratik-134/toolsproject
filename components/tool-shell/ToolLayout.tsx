@@ -98,7 +98,6 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
   };
 
   const toolUrl = getToolUrl(tool);
-  const baseUrl = BRAND.domain ? `https://${BRAND.domain}` : "https://qwertygen.com";
   const isStudioWorkspace = tool.slug === "pdf-editor";
 
   if (isZenMode) {
@@ -658,78 +657,6 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({ tool, children }) => {
       </main>
       <Footer />
 
-      {/* Google Structured Data / JSON-LD for SEO (WebApplication + FAQPage + BreadcrumbList) */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@graph": [
-              {
-                "@type": "WebApplication",
-                name: tool.name,
-                url: `${baseUrl}${toolUrl}`,
-                applicationCategory: "UtilityApplication",
-                operatingSystem: "Web Browser",
-                offers: {
-                  "@type": "Offer",
-                  price: "0",
-                  priceCurrency: "USD",
-                },
-                description: tool.seo.description,
-              },
-              {
-                "@type": "BreadcrumbList",
-                itemListElement: [
-                  {
-                    "@type": "ListItem",
-                    position: 1,
-                    name: "Home",
-                    item: `${baseUrl}/`,
-                  },
-                  {
-                    "@type": "ListItem",
-                    position: 2,
-                    name: "Tools",
-                    item: `${baseUrl}/tools`,
-                  },
-                  ...(category
-                    ? [
-                        {
-                          "@type": "ListItem",
-                          position: 3,
-                          name: category.name,
-                          item: `${baseUrl}/tools/${category.id}`,
-                        },
-                      ]
-                    : []),
-                  {
-                    "@type": "ListItem",
-                    position: category ? 4 : 3,
-                    name: tool.name,
-                    item: `${baseUrl}${toolUrl}`,
-                  },
-                ],
-              },
-              ...(tool.seo.faq && tool.seo.faq.length > 0
-                ? [
-                    {
-                      "@type": "FAQPage",
-                      mainEntity: tool.seo.faq.map((item) => ({
-                        "@type": "Question",
-                        name: item.q,
-                        acceptedAnswer: {
-                          "@type": "Answer",
-                          text: item.a,
-                        },
-                      })),
-                    },
-                  ]
-                : []),
-            ],
-          }),
-        }}
-      />
     </div>
   );
 };
